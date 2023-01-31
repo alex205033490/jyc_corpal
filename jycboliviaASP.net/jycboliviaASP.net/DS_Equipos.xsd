@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_Equipos" targetNamespace="http://tempuri.org/DS_Equipos.xsd" xmlns:mstns="http://tempuri.org/DS_Equipos.xsd" xmlns="http://tempuri.org/DS_Equipos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_Equipos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_Equipos" msprop:Generator_UserDSName="DS_Equipos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_CodigoEquipoEdificio" msprop:Generator_TableClassName="DS_CodigoEquipoEdificioDataTable" msprop:Generator_TableVarName="tableDS_CodigoEquipoEdificio" msprop:Generator_TablePropName="DS_CodigoEquipoEdificio" msprop:Generator_RowDeletingName="DS_CodigoEquipoEdificioRowDeleting" msprop:Generator_RowChangingName="DS_CodigoEquipoEdificioRowChanging" msprop:Generator_RowEvHandlerName="DS_CodigoEquipoEdificioRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_CodigoEquipoEdificioRowDeleted" msprop:Generator_UserTableName="DS_CodigoEquipoEdificio" msprop:Generator_RowChangedName="DS_CodigoEquipoEdificioRowChanged" msprop:Generator_RowEvArgName="DS_CodigoEquipoEdificioRowChangeEvent" msprop:Generator_RowClassName="DS_CodigoEquipoEdificioRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Edificio" msprop:Generator_ColumnVarNameInTable="columnEdificio" msprop:Generator_ColumnPropNameInRow="Edificio" msprop:Generator_ColumnPropNameInTable="EdificioColumn" msprop:Generator_UserColumnName="Edificio" type="xs:string" minOccurs="0" />
+              <xs:element name="direccion" msprop:Generator_ColumnVarNameInTable="columndireccion" msprop:Generator_ColumnPropNameInRow="direccion" msprop:Generator_ColumnPropNameInTable="direccionColumn" msprop:Generator_UserColumnName="direccion" type="xs:string" minOccurs="0" />
+              <xs:element name="Exbo" msprop:Generator_ColumnVarNameInTable="columnExbo" msprop:Generator_ColumnPropNameInRow="Exbo" msprop:Generator_ColumnPropNameInTable="ExboColumn" msprop:Generator_UserColumnName="Exbo" type="xs:string" minOccurs="0" />
+              <xs:element name="Vendido" msprop:Generator_ColumnVarNameInTable="columnVendido" msprop:Generator_ColumnPropNameInRow="Vendido" msprop:Generator_ColumnPropNameInTable="VendidoColumn" msprop:Generator_UserColumnName="Vendido" type="xs:string" minOccurs="0" />
+              <xs:element name="Instalado" msprop:Generator_ColumnVarNameInTable="columnInstalado" msprop:Generator_ColumnPropNameInRow="Instalado" msprop:Generator_ColumnPropNameInTable="InstaladoColumn" msprop:Generator_UserColumnName="Instalado" type="xs:string" minOccurs="0" />
+              <xs:element name="Marca" msprop:Generator_ColumnVarNameInTable="columnMarca" msprop:Generator_ColumnPropNameInRow="Marca" msprop:Generator_ColumnPropNameInTable="MarcaColumn" msprop:Generator_UserColumnName="Marca" type="xs:string" minOccurs="0" />
+              <xs:element name="Tipo" msprop:Generator_ColumnVarNameInTable="columnTipo" msprop:Generator_ColumnPropNameInRow="Tipo" msprop:Generator_ColumnPropNameInTable="TipoColumn" msprop:Generator_UserColumnName="Tipo" type="xs:string" minOccurs="0" />
+              <xs:element name="parada" msprop:Generator_ColumnVarNameInTable="columnparada" msprop:Generator_ColumnPropNameInRow="parada" msprop:Generator_ColumnPropNameInTable="paradaColumn" msprop:Generator_UserColumnName="parada" type="xs:string" minOccurs="0" />
+              <xs:element name="pasajero" msprop:Generator_ColumnVarNameInTable="columnpasajero" msprop:Generator_ColumnPropNameInRow="pasajero" msprop:Generator_ColumnPropNameInTable="pasajeroColumn" msprop:Generator_UserColumnName="pasajero" type="xs:string" minOccurs="0" />
+              <xs:element name="velocidad" msprop:Generator_ColumnVarNameInTable="columnvelocidad" msprop:Generator_ColumnPropNameInRow="velocidad" msprop:Generator_ColumnPropNameInTable="velocidadColumn" msprop:Generator_UserColumnName="velocidad" type="xs:string" minOccurs="0" />
+              <xs:element name="modelo" msprop:Generator_ColumnVarNameInTable="columnmodelo" msprop:Generator_ColumnPropNameInRow="modelo" msprop:Generator_ColumnPropNameInTable="modeloColumn" msprop:Generator_UserColumnName="modelo" type="xs:string" minOccurs="0" />
+              <xs:element name="qr_equipo" msprop:Generator_ColumnVarNameInTable="columnqr_equipo" msprop:Generator_ColumnPropNameInRow="qr_equipo" msprop:Generator_ColumnPropNameInTable="qr_equipoColumn" msprop:Generator_UserColumnName="qr_equipo" type="xs:string" minOccurs="0" />
+              <xs:element name="QR_nombreArchivo" msprop:Generator_ColumnVarNameInTable="columnQR_nombreArchivo" msprop:Generator_ColumnPropNameInRow="QR_nombreArchivo" msprop:Generator_ColumnPropNameInTable="QR_nombreArchivoColumn" msprop:Generator_UserColumnName="QR_nombreArchivo" type="xs:string" minOccurs="0" />
+              <xs:element name="QR_DirNombreArchivo" msprop:Generator_ColumnVarNameInTable="columnQR_DirNombreArchivo" msprop:Generator_ColumnPropNameInRow="QR_DirNombreArchivo" msprop:Generator_ColumnPropNameInTable="QR_DirNombreArchivoColumn" msprop:Generator_UserColumnName="QR_DirNombreArchivo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DS_QR_equipos" msprop:Generator_TableClassName="DS_QR_equiposDataTable" msprop:Generator_TableVarName="tableDS_QR_equipos" msprop:Generator_TablePropName="DS_QR_equipos" msprop:Generator_RowDeletingName="DS_QR_equiposRowDeleting" msprop:Generator_RowChangingName="DS_QR_equiposRowChanging" msprop:Generator_RowEvHandlerName="DS_QR_equiposRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_QR_equiposRowDeleted" msprop:Generator_UserTableName="DS_QR_equipos" msprop:Generator_RowChangedName="DS_QR_equiposRowChanged" msprop:Generator_RowEvArgName="DS_QR_equiposRowChangeEvent" msprop:Generator_RowClassName="DS_QR_equiposRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Glosa" msprop:Generator_ColumnVarNameInTable="columnGlosa" msprop:Generator_ColumnPropNameInRow="Glosa" msprop:Generator_ColumnPropNameInTable="GlosaColumn" msprop:Generator_UserColumnName="Glosa" type="xs:string" minOccurs="0" />
+              <xs:element name="edificio" msprop:Generator_ColumnVarNameInTable="columnedificio" msprop:Generator_ColumnPropNameInRow="edificio" msprop:Generator_ColumnPropNameInTable="edificioColumn" msprop:Generator_UserColumnName="edificio" type="xs:string" minOccurs="0" />
+              <xs:element name="exbo" msprop:Generator_ColumnVarNameInTable="columnexbo" msprop:Generator_ColumnPropNameInRow="exbo" msprop:Generator_ColumnPropNameInTable="exboColumn" msprop:Generator_UserColumnName="exbo" type="xs:string" minOccurs="0" />
+              <xs:element name="nro" msprop:Generator_ColumnVarNameInTable="columnnro" msprop:Generator_ColumnPropNameInRow="nro" msprop:Generator_ColumnPropNameInTable="nroColumn" msprop:Generator_UserColumnName="nro" type="xs:string" minOccurs="0" />
+              <xs:element name="detalle" msprop:Generator_ColumnVarNameInTable="columndetalle" msprop:Generator_ColumnPropNameInRow="detalle" msprop:Generator_ColumnPropNameInTable="detalleColumn" msprop:Generator_UserColumnName="detalle" type="xs:string" minOccurs="0" />
+              <xs:element name="mes" msprop:Generator_ColumnVarNameInTable="columnmes" msprop:Generator_ColumnPropNameInRow="mes" msprop:Generator_ColumnPropNameInTable="mesColumn" msprop:Generator_UserColumnName="mes" type="xs:string" minOccurs="0" />
+              <xs:element name="anio" msprop:Generator_ColumnVarNameInTable="columnanio" msprop:Generator_ColumnPropNameInRow="anio" msprop:Generator_ColumnPropNameInTable="anioColumn" msprop:Generator_UserColumnName="anio" type="xs:string" minOccurs="0" />
+              <xs:element name="qr_equipo" msprop:Generator_ColumnVarNameInTable="columnqr_equipo" msprop:Generator_ColumnPropNameInRow="qr_equipo" msprop:Generator_ColumnPropNameInTable="qr_equipoColumn" msprop:Generator_UserColumnName="qr_equipo" type="xs:string" minOccurs="0" />
+              <xs:element name="QR_nombreArchivo" msprop:Generator_ColumnVarNameInTable="columnQR_nombreArchivo" msprop:Generator_ColumnPropNameInRow="QR_nombreArchivo" msprop:Generator_ColumnPropNameInTable="QR_nombreArchivoColumn" msprop:Generator_UserColumnName="QR_nombreArchivo" type="xs:string" minOccurs="0" />
+              <xs:element name="QR_DirNombreArchivo" msprop:Generator_ColumnVarNameInTable="columnQR_DirNombreArchivo" msprop:Generator_ColumnPropNameInRow="QR_DirNombreArchivo" msprop:Generator_ColumnPropNameInTable="QR_DirNombreArchivoColumn" msprop:Generator_UserColumnName="QR_DirNombreArchivo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

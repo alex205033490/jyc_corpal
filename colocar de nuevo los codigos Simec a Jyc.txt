@@ -1,0 +1,33 @@
+  select 
+  eq.`exbo`,
+  eq.`clicodigo`,
+  eq.`monedaprevision_simec`,
+  re.`codcobranza`
+   from
+  `tb_recibopago` re, `tb_seguimiento` seg, `tb_equipo` eq 
+  where
+  re.`codseg` = seg.`codigo` and
+  seg.`cod_equipo` = eq.`codigo` and
+  re.`codcobranza` > 0
+  
+  
+  update `tb_cobranza_recibio` , 
+  (select 
+  eq.`exbo`,
+  eq.`clicodigo`,
+  eq.`monedaprevision_simec`,
+  re.`codcobranza`
+   from
+  `tb_recibopago` re, `tb_seguimiento` seg, `tb_equipo` eq 
+  where
+  re.`codseg` = seg.`codigo` and
+  seg.`cod_equipo` = eq.`codigo` and
+  re.`codcobranza` > 0) as t1
+  set
+  tb_cobranza_recibio.`clicodigo` = t1.clicodigo ,
+  tb_cobranza_recibio.`codmoneda` = t1.monedaprevision_simec,
+  tb_cobranza_recibio.`codvendedor` = 'V'
+  where 
+  tb_cobranza_recibio.`docum` = 'DOCUM' and
+  tb_cobranza_recibio.`vaciarsimec` = 0;
+   

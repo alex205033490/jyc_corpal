@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="D:\WebSite\jyc_naxSnax08" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="fonts/JosefinSans/OFL.txt" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionarEstadoInstalacion.aspx" publishTime="01/08/2020 18:00:11" />
+    <file relUrl="Presentacion/FCorpal_movimientoCheques.aspx" publishTime="12/30/2022 14:21:47" />
+    <file relUrl="Styles/Style_AgendaProyecto.css" publishTime="09/30/2019 09:40:30" />
+    <file relUrl="Images/pie.jpg" publishTime="06/29/2020 21:23:55" />
+    <file relUrl="Styles/Style_ImportacionJYCIA.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionarSeguimiento.aspx" publishTime="06/17/2020 16:27:52" />
+    <file relUrl="img/portfolio/game.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="vendor/animate/animate.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_ImportacionJYCIAGeneral.css" publishTime="03/16/2022 10:46:42" />
+    <file relUrl="Styles/styles_MenuV.css" publishTime="08/19/2022 14:07:07" />
+    <file relUrl="Presentacion/Presentacion old/FA_VaciadoR148.aspx" publishTime="04/23/2020 22:38:58" />
+    <file relUrl="Styles/Style_CargarDocumentos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_EstadoSeguimientoGeneral.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GActividades.css" publishTime="07/10/2019 14:39:39" />
+    <file relUrl="vendor/jquery/jquery-3.2.1.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_CotiEra.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Images/highlight.gif" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_agendanegociacion.aspx" publishTime="12/30/2022 14:25:39" />
+    <file relUrl="Presentacion/Presentacion old/FA_PolizaBoletaLetra.aspx" publishTime="06/25/2019 17:49:02" />
+    <file relUrl="img/icono_contactenos.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GestionarProyEncargadoPago.css" publishTime="08/13/2019 10:03:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_AdicionarCotizacionRepuesto.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_Actualizacion.aspx" publishTime="12/30/2022 14:13:35" />
+    <file relUrl="Styles/Style_CronogramaTecnico.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GProyecto.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FCorpal_GestionarTiendaPropietario.aspx" publishTime="01/28/2023 13:00:25" />
+    <file relUrl="Presentacion/Presentacion old/FA_ImportacionFacturasContenedor_Transporte.aspx" publishTime="02/05/2020 18:05:28" />
+    <file relUrl="Styles/Style_GestionSeguimientoInstalacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Images/Folder.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_GestonarResponsable.aspx" publishTime="12/30/2022 14:20:22" />
+    <file relUrl="Styles/Style_Welcome.css" publishTime="09/23/2022 15:21:36" />
+    <file relUrl="Presentacion/Presentacion old/FA_ReporteCotizacionRepuesto.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Presentacion/Presentacion old/FA_consultaRutas2.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="fonts/font-awesome-4.7.0/HELP-US-OUT.txt" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_GActualizacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GPermisos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Images/FondoMenu.jpg" publishTime="06/29/2020 21:19:48" />
+    <file relUrl="Presentacion/Presentacion old/FA_CronogramaTecnico.aspx" publishTime="05/20/2020 17:35:02" />
+    <file relUrl="img/images.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="vendor/bootstrap/js/bootstrap.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="img/Encuesta1.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Styles_GPagoSeguimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/perfect-scrollbar/perfect-scrollbar.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_GestionarEstadoMantenimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/rh.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_cotiRcc.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ImportacionJYCIA.aspx" publishTime="12/31/2019 15:14:14" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultaEquipo.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="fonts/source-sans-pro/OFL.txt" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/FCorpal_GestionarFormularios.aspx" publishTime="12/30/2022 14:20:53" />
+    <file relUrl="bin/Gma.QrCodeNet.Encoding.xml" publishTime="05/24/2019 15:59:16" />
+    <file relUrl="img/portfolio/cake.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="jquery/bootstrap/css/bootstrap.min.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="vendor/daterangepicker/moment.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_ReciboPago.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_EventoRIN.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_EdificioDeudor.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FCorpal_Facturacion.aspx" publishTime="12/30/2022 14:23:10" />
+    <file relUrl="Styles/Style_RutaBoletaMantenimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_MonitoreoGestionProyecto.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_ReporteCobranza2.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_VistaResponsableProyecto.aspx" publishTime="11/15/2019 16:32:27" />
+    <file relUrl="bin/AjaxControlToolkit.dll" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_ViewCuadroXXX.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_CodigosDeEquipos.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="js/bootstrap.bundle.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultaProyectosInstalacion.aspx" publishTime="08/30/2019 15:22:40" />
+    <file relUrl="fonts/iconic/css/material-design-iconic-font.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_CargaFechaExpedicion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="bin/jycboliviaASP.net.pdb" publishTime="01/31/2023 15:58:49" />
+    <file relUrl="Styles/Style_ConsultaRutas.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FCorpal_AgendaTelefonica.aspx" publishTime="12/30/2022 14:23:46" />
+    <file relUrl="Styles/Style_facturacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/select2/select2.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_GEstadoEquipo.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_CodigosDeEquipos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ReporteChequeBNB.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Presentacion/Presentacion old/FA_RutaMantenimiento.aspx" publishTime="07/19/2022 13:12:17" />
+    <file relUrl="Styles/Style_GSeguimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_EventoCotiRepuesto.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_viewEstadisticaMantenimiento.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Styles/Style_AgendaNegociacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="bin/Gma.QrCodeNet.Encoding.dll" publishTime="05/24/2019 15:59:16" />
+    <file relUrl="fonts/font-awesome-4.7.0/css/font-awesome.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_MonitoreoGestionProyecto210.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="jquery/bootstrap/fonts/glyphicons-halflings-regular.svg" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_ReporteCotizacionRepuesto.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultaMantenimiento.aspx" publishTime="04/14/2020 21:57:29" />
+    <file relUrl="js/main.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/select2/select2.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/css-hamburgers/hamburgers.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="js/bootstrap.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/animsition/css/animsition.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="jquery/css/freelancer.min.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_SeguimientosMorosos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="jquery/font-awesome/css/font-awesome.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="img/profile_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="img/portfolio/submarine.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FEstadisticaInstalacion.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="img/icono_JyC.ico" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FCorpal_ReporteReciboIngreso.aspx" publishTime="12/30/2022 14:09:22" />
+    <file relUrl="jquery/bootstrap/js/bootstrap.min.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Styles_Main.css" publishTime="09/29/2022 10:16:53" />
+    <file relUrl="Presentacion/Presentacion old/FA_CargarDocumentos.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Images/delete.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Images/fondo.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="js/jquery.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FEstadisticaParqueAscensores.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="vendor/bootstrap/css/bootstrap.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/FCorpal_EntregaSolicitudProducto.aspx" publishTime="01/31/2023 15:58:03" />
+    <file relUrl="jquery/font-awesome/fonts/fontawesome-webfont.svg" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_EdificioDeudor.aspx" publishTime="03/24/2020 15:26:10" />
+    <file relUrl="Styles/Style_CallCenter_Rin.css" publishTime="11/12/2020 10:23:34" />
+    <file relUrl="vendor/bootstrap/css/bootstrap-reboot.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_PagoSeguimiento.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_ConsultasCallCenter.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ImportacionDatosGeneral.aspx" publishTime="01/16/2020 10:43:26" />
+    <file relUrl="Presentacion/Presentacion old/FA_CronoRuta.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_CargarFechasBastones.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Web.config" publishTime="01/31/2023 15:58:50" />
+    <file relUrl="Presentacion/Presentacion old/FProyecto.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="img/portfolio/cabin_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionarSeguimiento2.aspx" publishTime="06/17/2020 17:17:45" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultasCallCenter.aspx" publishTime="09/25/2019 12:17:50" />
+    <file relUrl="img/JYC_logo.jpg" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Images/jyc_2.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="vendor/bootstrap/js/bootstrap.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Styles_MenuH.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionArchivosJYC.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_EstadisticaParqueAscensores.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_PagoSeguimiento2.aspx" publishTime="02/07/2020 16:06:22" />
+    <file relUrl="Styles/Style_GTipoPago.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/select2/select2.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionarEstadoEquipo.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Styles_GestionarResp.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/login-box.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_Reporte_R144.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="vendor/select2/select2.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="jquery/js/freelancer.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_RutasMantenimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GestionarEstadoInstalacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GEncargadoPago.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_GEstadisticaInstalacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ReporteCobranza2.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="img/EmailOk.jpg" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_CargaCuadrosXXX.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/portfolio/safe_2.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="fonts/ubuntu/UFL.txt" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_cronogramaRutaVisitaMantenimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_ViewSeguimientoMantenimientoXXX.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_CallCenter.css" publishTime="08/19/2022 16:14:01" />
+    <file relUrl="Styles/Style_callRCC.css" publishTime="08/19/2022 15:41:53" />
+    <file relUrl="Styles/Style_ConciliacionBancaria.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="jquery/js/contact_me.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="jquery/js/freelancer.min.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_CallCenterEstadisticaTecnico.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/portfolio/cabin.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_VaciadoAlSimec.aspx" publishTime="04/21/2020 20:56:03" />
+    <file relUrl="vendor/daterangepicker/daterangepicker.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenterAreaCliente.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_RutaEntrega.aspx" publishTime="01/28/2023 13:00:19" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultaRuta.aspx" publishTime="06/18/2020 18:25:11" />
+    <file relUrl="Presentacion/Presentacion old/FEncargadoPago.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="img/cabin_1.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FCorpal_GestionArchivosSGI.aspx" publishTime="12/30/2022 14:25:12" />
+    <file relUrl="Images/carpetacerrada.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="img/profile.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FEquipo.aspx" publishTime="11/15/2019 10:05:17" />
+    <file relUrl="Images/Good-mark.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="img/JYC.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_EventoRCC.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="vendor/countdowntime/countdowntime.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Default.aspx" publishTime="05/24/2019 15:59:14" />
+    <file relUrl="Presentacion/Presentacion old/FA_CAllCenterEstadisticaTecnico.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_ViewEstadoMantenimiento.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_CallCenterEstadisticaNormal.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/bootstrap/js/popper.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/FCorpal_ConciliacionBancaria.aspx" publishTime="12/30/2022 14:21:29" />
+    <file relUrl="Presentacion/WelcomeJyC.aspx" publishTime="12/22/2022 13:56:17" />
+    <file relUrl="bin/Gma.QrCodeNet.Encoding.pdb" publishTime="05/24/2019 15:59:16" />
+    <file relUrl="Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" publishTime="12/30/2022 14:06:40" />
+    <file relUrl="Styles/Style_Gformulario.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/bootstrap/css/bootstrap.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_ImportacionDatosGeneral_JyCIA.aspx" publishTime="04/23/2020 22:37:25" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_AreaCotiRepuesto.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Site1.Master" publishTime="12/22/2022 14:05:20" />
+    <file relUrl="jquery/font-awesome/css/font-awesome.min.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_CostosPolizasImportacion.css" publishTime="07/26/2019 17:12:09" />
+    <file relUrl="Presentacion/Presentacion old/FA_Importacion_CredinForm.aspx" publishTime="06/17/2020 13:23:19" />
+    <file relUrl="vendor/css-hamburgers/hamburgers.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenterEstadisticaNormal.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="vendor/animsition/js/animsition.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Images/carpetaAbierta.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_VistaResponsableProyecto.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="jquery/jquery/jquery.min.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Styles/Style_GestionArchivosSGI.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="js/bootstrap.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_RutaCobrador.css" publishTime="11/23/2019 11:08:54" />
+    <file relUrl="Images/select.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="img/JYC1.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_GestionarSeguimientoInstalacion.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_PlanPago.css" publishTime="08/19/2022 16:05:38" />
+    <file relUrl="Presentacion/MenuIzquierdo.ascx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Presentacion/FCorpal_SolicitudPedido.aspx" publishTime="01/31/2023 15:40:59" />
+    <file relUrl="Presentacion/Presentacion old/FTipoPago.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="img/portfolio/cake_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="img/JYC_logo_4.jpg" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Images/login-box-backg.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Styles/Style_consultaRutasporDatos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ConsultaCallCenterReporte.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_CostosPolizaImportacion.aspx" publishTime="06/03/2020 18:09:32" />
+    <file relUrl="Presentacion/Presentacion old/FA_GActividades.aspx" publishTime="07/10/2019 14:40:37" />
+    <file relUrl="Styles/Style_Autocompletar.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/FA_Login.aspx" publishTime="06/29/2020 21:37:13" />
+    <file relUrl="Presentacion/Presentacion old/FA_MenuPorArea.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_encuestajyc.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="vendor/bootstrap/js/popper.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="img/portfolio/submarine_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_CuadroXXX3.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_EstadoSeguimientoGeneral.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_CotiEra.aspx" publishTime="11/26/2019 15:03:32" />
+    <file relUrl="Images/JYC_logo.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="jquery/css/freelancer.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="img/CallCenter.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/Comercial.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ReporteChequeBisa.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="vendor/bootstrap/js/tooltip.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/bootstrap/css/bootstrap-grid.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="img/portfolio/safe.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_EncuestaMantenimientoPreguntas.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_ReciboIngreso.aspx" publishTime="01/12/2023 11:50:38" />
+    <file relUrl="Images/login-btn.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="jquery/bootstrap/css/bootstrap.css" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Images/jyc_1.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_ViewCuadroXXX.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Presentacion/Presentacion old/FA_AgendaProyectos.aspx" publishTime="10/08/2019 11:20:32" />
+    <file relUrl="Presentacion/Presentacion old/FA_CargaFechaExpedicion.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_ViewSeguimientoInstalacion.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Styles/Style_GEdificio.css" publishTime="09/29/2022 09:55:34" />
+    <file relUrl="Presentacion/FCorpal_SGI_Actividades.aspx" publishTime="12/30/2022 14:24:13" />
+    <file relUrl="img/portfolio/game_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenterVacio.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="fonts/font-awesome-4.7.0/css/font-awesome.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Styles_GPagoSeguimiento2.css" publishTime="10/03/2022 10:18:13" />
+    <file relUrl="vendor/perfect-scrollbar/perfect-scrollbar.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_AgendaTelefonica.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/animsition/js/animsition.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="img/encuesta.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_AsignarTareas.css" publishTime="07/10/2019 14:40:33" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_EventoNuevo.aspx" publishTime="07/24/2019 10:45:28" />
+    <file relUrl="Presentacion/FCorpal_ReporteReciboEgreso.aspx" publishTime="12/30/2022 14:04:56" />
+    <file relUrl="Styles/Style_fechaContratos.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_chequeBisa.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_movimientoCheques.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/portfolio/circus.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/FCorpal_ReciboEgreso.aspx" publishTime="01/12/2023 14:09:21" />
+    <file relUrl="Styles/Style_Consultas.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="vendor/bootstrap/css/bootstrap-grid.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/daterangepicker/daterangepicker.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/payment.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_saldosCuentasGeneral.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_chequeBNB.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="bin/jycboliviaASP.net.dll" publishTime="01/31/2023 15:58:49" />
+    <file relUrl="Presentacion/Presentacion old/FA_ReciboPago.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Images/cabecera1.jpg" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="img/portfolio/circus_1.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="vendor/bootstrap/css/bootstrap-reboot.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="jquery/jquery/jquery.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="img/mantenimiento.png" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FControlPedido.aspx" publishTime="01/16/2020 15:52:03" />
+    <file relUrl="Presentacion/Presentacion old/FA_mostrarResultado.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Presentacion/Presentacion old/FA_CallCenter_Eventos.aspx" publishTime="07/24/2019 10:34:00" />
+    <file relUrl="Presentacion/Presentacion old/FA_ViewSeguimientoMantenimientoXXX.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Images/JYC_logo.PNG" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_saldosCuentasGeneral.aspx" publishTime="12/30/2022 14:22:24" />
+    <file relUrl="Styles/Style_MenuIzquierdo.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_ImportacionProrrateoCostos_Transporte.aspx" publishTime="02/06/2020 11:56:00" />
+    <file relUrl="vendor/daterangepicker/moment.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="vendor/animsition/css/animsition.min.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="jquery/js/jqBootstrapValidation.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Images/Text.png" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/ControlUser.ascx" publishTime="01/31/2023 15:52:18" />
+    <file relUrl="fonts/iconic/fonts/Material-Design-Iconic-Font.svg" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_CotiRCC.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Images/background.gif" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_GCotizacionRepuesto.aspx" publishTime="06/19/2019 16:14:55" />
+    <file relUrl="jquery/bootstrap/js/bootstrap.js" publishTime="05/24/2019 15:59:21" />
+    <file relUrl="Presentacion/Presentacion old/FA_RutaCobrador_ColocarBancos.aspx" publishTime="02/13/2020 12:21:17" />
+    <file relUrl="Styles/Style_adicionarRepuesto.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Styles/Style_PolizaBoletaLetra.css" publishTime="08/10/2022 13:50:54" />
+    <file relUrl="Presentacion/Presentacion old/FA_FechaContrato.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/Presentacion old/FA_SeguimientosMorosos.aspx" publishTime="05/24/2019 15:59:18" />
+    <file relUrl="Styles/Style_ControlPedido.css" publishTime="03/14/2022 17:03:51" />
+    <file relUrl="js/bootstrap.bundle.min.js" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Presentacion/Presentacion old/FA_RutaBoletaMantenimiento.aspx" publishTime="07/23/2019 16:07:07" />
+    <file relUrl="Styles/Styles_GEncargadoPago.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_EdificioConDeuda.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Images/FondoMenu2.jpg" publishTime="06/29/2020 21:20:12" />
+    <file relUrl="Styles/Style_VistaSeguimientoInstalacion.css" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="img/email.png" publishTime="05/24/2019 15:59:20" />
+    <file relUrl="Presentacion/Presentacion old/FA_DeudaPlanPago.aspx" publishTime="05/24/2019 15:59:17" />
+    <file relUrl="Presentacion/FCorpal_GestionarPermisos.aspx" publishTime="12/30/2022 14:20:38" />
+    <file relUrl="fonts/iconic/css/material-design-iconic-font.css" publishTime="12/17/2021 16:02:43" />
+    <file relUrl="Styles/Style_GcotizacionRepuesto.css" publishTime="09/06/2021 11:01:45" />
+    <file relUrl="Presentacion/Presentacion old/FA_Consulta_Importacion.aspx" publishTime="06/18/2020 20:52:20" />
+  </publishProfile>
+</publishData>

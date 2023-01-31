@@ -1,0 +1,191 @@
+﻿body {
+}
+
+
+.Centrar
+{   
+    text-align:left;
+    float:left;         
+    width:800px;
+    height:auto;
+          
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.cc0 
+{
+    border: double #666666;    
+    height: 70px;  
+    width: 750px;    
+    margin: 0 auto;
+    text-align:center;
+    }
+    
+    .cc0_evento 
+{
+    border: double #666666;    
+    height: 70px;  
+    width: 700px;    
+    margin: 0 auto;
+    text-align:center;
+    }
+    
+    .cc0_Rin
+    {
+        border: double #666666;    
+        height: 70px;  
+        width: 700px;    
+        margin: 0 auto;
+        text-align:center;
+        }
+       
+    .llamadanuevo
+{
+    border: double #666666;    
+    float: left;   
+    height: auto;  
+    width: 750px;
+     
+    }
+    
+
+.llamada 
+{
+    border: double #666666;    
+    float: left;   
+    height: 150px;  
+    width: 700px;
+     
+    }
+ 
+    
+    .llamadaRIN
+{
+    border: double #666666;    
+    float: left;   
+    height: 200px;  
+    width: 700px;     
+    }
+    
+    .cc1 
+{
+    border: double #666666;    
+    float: left;   
+    height: 50px;  
+    width: 700px;    
+    }
+    
+    .cc2 
+{    
+    float: left;   
+    height: 50px;  
+    width: 700px;
+    }
+    
+    .e1
+    {
+    border: double #666666;    
+    float: left;   
+    height: 120px;  
+    width: 700px;    
+        
+        }
+        
+     .eventosRin
+    {
+    border: double #666666;    
+    float: left;   
+    overflow: auto;
+    height: 300px;  
+    width: 700px;            
+        }
+        
+    .repuestoVista
+    {
+        border: double #666666;    
+    float: left;   
+    overflow: auto;
+    height: 150px;  
+    width: 700px;            
+        }
+        
+        
+     .e3
+    {
+    border: double #666666;    
+    float: left;
+    height: 340px;  
+    width: 700px; 
+    margin: 0 auto;
+        text-align:center;   
+        
+        }
+        
+        
+        
+         .e4
+    {
+    border: double #666666;    
+    float: left;
+    height: 200px;  
+    width: 700px;    
+        
+        }
+        
+            .e4RIN
+    {
+    border: double #666666;    
+    float: left;
+    height: 300px;  
+    width: 700px;
+        }
+        
+        .e4_AreCliente        
+    {
+    border: double #666666;    
+    float: left;
+    height: 400px;  
+    width: 700px;   
+        
+        }
+        
+         .ea1
+    {
+    border: double #666666;    
+    float: left;   
+    height: 140px;  
+    width: 700px;    
+        
+        }
+        
+.llamada1 
+{
+    border: double #666666;    
+    float: left;   
+    height: 200px;  
+    width: 700px;     
+    }
+    
+                 
+ 
+  
+.AsignarTecnico
+{
+    border: double #666666;    
+    float: left;   
+    height: 135px;  
+    width: 700px;
+    }
+    
+ .AsignarSupervisor
+ {
+    border: double #666666;    
+    float: left;   
+    height: 100px;  
+    width: 700px;
+     }

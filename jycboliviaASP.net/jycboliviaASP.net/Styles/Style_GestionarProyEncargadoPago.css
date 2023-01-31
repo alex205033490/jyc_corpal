@@ -1,0 +1,40 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+    margin: 0 auto;        
+    width:850px;
+    height:1000px;  
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+ .DatosProyecto
+   {
+     border: double #666666;     
+     float: left;     
+     height:auto;  
+     width: 825px;     
+     margin-top: 7px;
+    }
+    
+    .tablaProyecto
+    {
+     border: double #666666;     
+     float: left;     
+     height:400px;  
+     width: 825px;     
+     overflow: auto;        
+        }
+        
+        .pie
+        {
+     height:40px;  
+     width: 825px;  
+     }

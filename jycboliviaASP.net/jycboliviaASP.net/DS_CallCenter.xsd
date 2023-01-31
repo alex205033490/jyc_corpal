@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_CallCenter" targetNamespace="http://tempuri.org/DS_CallCenter.xsd" xmlns:mstns="http://tempuri.org/DS_CallCenter.xsd" xmlns="http://tempuri.org/DS_CallCenter.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_CallCenter" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_CallCenter" msprop:Generator_UserDSName="DS_CallCenter">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AscensoresParados" msprop:Generator_TableClassName="AscensoresParadosDataTable" msprop:Generator_TableVarName="tableAscensoresParados" msprop:Generator_RowChangedName="AscensoresParadosRowChanged" msprop:Generator_TablePropName="AscensoresParados" msprop:Generator_RowDeletingName="AscensoresParadosRowDeleting" msprop:Generator_RowChangingName="AscensoresParadosRowChanging" msprop:Generator_RowEvHandlerName="AscensoresParadosRowChangeEventHandler" msprop:Generator_RowDeletedName="AscensoresParadosRowDeleted" msprop:Generator_RowClassName="AscensoresParadosRow" msprop:Generator_UserTableName="AscensoresParados" msprop:Generator_RowEvArgName="AscensoresParadosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Unidad_Negocio" msprop:Generator_ColumnVarNameInTable="columnUnidad_Negocio" msprop:Generator_ColumnPropNameInRow="Unidad_Negocio" msprop:Generator_ColumnPropNameInTable="Unidad_NegocioColumn" msprop:Generator_UserColumnName="Unidad_Negocio" type="xs:string" minOccurs="0" />
+              <xs:element name="cantparadoDia" msprop:Generator_ColumnVarNameInTable="columncantparadoDia" msprop:Generator_ColumnPropNameInRow="cantparadoDia" msprop:Generator_ColumnPropNameInTable="cantparadoDiaColumn" msprop:Generator_UserColumnName="cantparadoDia" type="xs:string" minOccurs="0" />
+              <xs:element name="Edificio" msprop:Generator_ColumnVarNameInTable="columnEdificio" msprop:Generator_ColumnPropNameInRow="Edificio" msprop:Generator_ColumnPropNameInTable="EdificioColumn" msprop:Generator_UserColumnName="Edificio" type="xs:string" minOccurs="0" />
+              <xs:element name="dirEdificio" msprop:Generator_ColumnVarNameInTable="columndirEdificio" msprop:Generator_ColumnPropNameInRow="dirEdificio" msprop:Generator_ColumnPropNameInTable="dirEdificioColumn" msprop:Generator_UserColumnName="dirEdificio" type="xs:string" minOccurs="0" />
+              <xs:element name="semana" msprop:Generator_ColumnVarNameInTable="columnsemana" msprop:Generator_ColumnPropNameInRow="semana" msprop:Generator_ColumnPropNameInTable="semanaColumn" msprop:Generator_UserColumnName="semana" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaEvento" msprop:Generator_ColumnVarNameInTable="columnFechaEvento" msprop:Generator_ColumnPropNameInRow="FechaEvento" msprop:Generator_ColumnPropNameInTable="FechaEventoColumn" msprop:Generator_UserColumnName="FechaEvento" type="xs:string" minOccurs="0" />
+              <xs:element name="Ticket" msprop:Generator_ColumnVarNameInTable="columnTicket" msprop:Generator_ColumnPropNameInRow="Ticket" msprop:Generator_ColumnPropNameInTable="TicketColumn" msprop:Generator_UserColumnName="Ticket" type="xs:string" minOccurs="0" />
+              <xs:element name="hora" msprop:Generator_ColumnVarNameInTable="columnhora" msprop:Generator_ColumnPropNameInRow="hora" msprop:Generator_ColumnPropNameInTable="horaColumn" msprop:Generator_UserColumnName="hora" type="xs:string" minOccurs="0" />
+              <xs:element name="cliente" msprop:Generator_ColumnVarNameInTable="columncliente" msprop:Generator_ColumnPropNameInRow="cliente" msprop:Generator_ColumnPropNameInTable="clienteColumn" msprop:Generator_UserColumnName="cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="ascensor" msprop:Generator_ColumnVarNameInTable="columnascensor" msprop:Generator_ColumnPropNameInRow="ascensor" msprop:Generator_ColumnPropNameInTable="ascensorColumn" msprop:Generator_UserColumnName="ascensor" type="xs:string" minOccurs="0" />
+              <xs:element name="ascensorparado" msprop:Generator_ColumnVarNameInTable="columnascensorparado" msprop:Generator_ColumnPropNameInRow="ascensorparado" msprop:Generator_ColumnPropNameInTable="ascensorparadoColumn" msprop:Generator_UserColumnName="ascensorparado" type="xs:string" minOccurs="0" />
+              <xs:element name="Observacion_Evento" msprop:Generator_ColumnVarNameInTable="columnObservacion_Evento" msprop:Generator_ColumnPropNameInRow="Observacion_Evento" msprop:Generator_ColumnPropNameInTable="Observacion_EventoColumn" msprop:Generator_UserColumnName="Observacion_Evento" type="xs:string" minOccurs="0" />
+              <xs:element name="Observacion_CierreEvento" msprop:Generator_ColumnVarNameInTable="columnObservacion_CierreEvento" msprop:Generator_ColumnPropNameInRow="Observacion_CierreEvento" msprop:Generator_ColumnPropNameInTable="Observacion_CierreEventoColumn" msprop:Generator_UserColumnName="Observacion_CierreEvento" type="xs:string" minOccurs="0" />
+              <xs:element name="TipoEvento" msprop:Generator_ColumnVarNameInTable="columnTipoEvento" msprop:Generator_ColumnPropNameInRow="TipoEvento" msprop:Generator_ColumnPropNameInTable="TipoEventoColumn" msprop:Generator_UserColumnName="TipoEvento" type="xs:string" minOccurs="0" />
+              <xs:element name="estadoEvento" msprop:Generator_ColumnVarNameInTable="columnestadoEvento" msprop:Generator_ColumnPropNameInRow="estadoEvento" msprop:Generator_ColumnPropNameInTable="estadoEventoColumn" msprop:Generator_UserColumnName="estadoEvento" type="xs:string" minOccurs="0" />
+              <xs:element name="InicioEvento" msprop:Generator_ColumnVarNameInTable="columnInicioEvento" msprop:Generator_ColumnPropNameInRow="InicioEvento" msprop:Generator_ColumnPropNameInTable="InicioEventoColumn" msprop:Generator_UserColumnName="InicioEvento" type="xs:string" minOccurs="0" />
+              <xs:element name="CierreEvento" msprop:Generator_ColumnVarNameInTable="columnCierreEvento" msprop:Generator_ColumnPropNameInRow="CierreEvento" msprop:Generator_ColumnPropNameInTable="CierreEventoColumn" msprop:Generator_UserColumnName="CierreEvento" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

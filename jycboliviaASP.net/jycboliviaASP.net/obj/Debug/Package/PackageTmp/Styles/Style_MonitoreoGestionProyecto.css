@@ -1,0 +1,57 @@
+﻿body {
+}
+
+
+
+.Centrar
+{       
+    margin: 0 auto;        
+    width:auto;
+    border: double #666666;    
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+.MGP1 
+{
+     
+    height: 380px;  
+    width: 900px;    
+    margin-top:20px;  
+    margin:0 auto;
+    }
+    
+.MGP2
+{
+    border: double #666666;
+    overflow:auto;
+    height: 500px;  
+    width: auto;    
+    margin-top:20px;  
+    margin:0 auto;
+    }
+    
+    
+.MGP3
+{
+      
+    float: left;   
+    height: 45px;  
+    width: 900px;
+    margin-left: 40px;   
+    margin-top:20px;  
+    }
+.MGP4
+{
+      border: double #666666;
+    float: left;   
+    height: 45px;  
+    width: 900px;
+    margin-left: 40px;   
+    margin-top:20px;  
+    }

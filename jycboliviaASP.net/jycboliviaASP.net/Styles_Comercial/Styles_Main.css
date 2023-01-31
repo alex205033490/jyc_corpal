@@ -1,0 +1,38 @@
+﻿body {
+	margin: 0;
+	padding: 0;
+	color: #000;
+	height:auto;
+	background-color:White;	
+}
+
+
+.header {				
+	height: 125px;	
+	background-position: center;
+	margin: 0 auto;
+	text-align:center;
+}
+
+.logo{
+	float: left;
+	height: 125px;
+	/*width: 990px;	*/
+	}
+	
+.menu{
+   
+    }
+    	
+/* ~~ The footer ~~ */
+.footer {
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	height: 150px;
+	width:auto;
+	text-align: center;
+	color: #000;
+	background-image: url(../Images/pie.jpg);
+	background-repeat: repeat;
+	padding: 0px;
+}

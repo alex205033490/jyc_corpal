@@ -1,0 +1,43 @@
+#cssmenuV {
+  margin: 0;
+  padding: 0;
+  margin-top: 60px ;
+  margin-left: 10px ;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+#cssmenuV {
+  width: 193px;
+  height:auto;
+  float:left;
+ 
+}
+#cssmenuV ul {
+  list-style: none;
+  text-indent: 0px;
+}
+#cssmenuV li {
+  margin-top: 3px;
+}
+#cssmenuV a {
+  font: 12px Verdana;
+  padding: 4px;
+  color: #646464;
+  display: block;
+  padding: 6px 30px;
+  height: 20px;
+  text-decoration: none;
+  background: url('../Images/background.gif');
+}
+#cssmenuV a:hover {
+  background: url('../Images/highlight.gif') no-repeat right;
+  padding: 6px 40px;
+}
+
+
+.eventoAbiertos
+{    
+    float: left;   
+    overflow: auto;
+    height:auto;
+    width:auto;  
+    }

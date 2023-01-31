@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:850px;
+    height:750px;  
+    }
+
+
+.GEE2
+{
+   float: left;
+   overflow:auto; 
+   height: 200px;   
+   width: 850px;  
+   border: double #666666;   
+}

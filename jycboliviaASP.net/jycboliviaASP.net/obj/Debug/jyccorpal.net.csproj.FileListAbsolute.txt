@@ -1,0 +1,9 @@
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\jycboliviaASP.net.dll
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\jycboliviaASP.net.pdb
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.dll
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.pdb
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.xml
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.cache
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.compiled
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.dll
+D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.pdb

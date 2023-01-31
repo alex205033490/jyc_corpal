@@ -1,0 +1,1613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2663857B-90A4-484D-9691-71DEAB1E98A6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>jycboliviaASP.net</RootNamespace>
+    <AssemblyName>jycboliviaASP.net</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>Herramientas\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="fonts\JosefinSans\OFL.txt" />
+    <Content Include="fonts\source-sans-pro\OFL.txt" />
+    <Content Include="fonts\ubuntu\UFL.txt" />
+    <Content Include="img\cabin_1.png" />
+    <Content Include="img\CallCenter.png" />
+    <Content Include="img\Comercial.png" />
+    <Content Include="img\email.png" />
+    <Content Include="img\EmailOk.jpg" />
+    <Content Include="img\encuesta.png" />
+    <Content Include="img\Encuesta1.png" />
+    <Content Include="img\icono_contactenos.png" />
+    <Content Include="img\icono_JyC.ico" />
+    <Content Include="img\images.png" />
+    <Content Include="img\JYC.png" />
+    <Content Include="img\JYC1.png" />
+    <Content Include="img\JYC_logo.jpg" />
+    <Content Include="img\JYC_logo_4.jpg" />
+    <Content Include="img\mantenimiento.png" />
+    <Content Include="img\portfolio\cabin.png" />
+    <Content Include="img\portfolio\cabin_1.png" />
+    <Content Include="img\portfolio\cake.png" />
+    <Content Include="img\portfolio\cake_1.png" />
+    <Content Include="img\portfolio\circus.png" />
+    <Content Include="img\portfolio\circus_1.png" />
+    <Content Include="img\portfolio\game.png" />
+    <Content Include="img\portfolio\game_1.png" />
+    <Content Include="img\portfolio\safe.png" />
+    <Content Include="img\portfolio\safe_2.png" />
+    <Content Include="img\portfolio\submarine.png" />
+    <Content Include="img\portfolio\submarine_1.png" />
+    <Content Include="img\profile.png" />
+    <Content Include="img\profile_1.png" />
+    <Content Include="img\rh.png" />
+    <Content Include="jquery\bootstrap\css\bootstrap.css" />
+    <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
+    <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="jquery\bootstrap\js\bootstrap.js" />
+    <Content Include="jquery\bootstrap\js\bootstrap.min.js" />
+    <Content Include="jquery\css\freelancer.css" />
+    <Content Include="jquery\css\freelancer.min.css" />
+    <Content Include="jquery\font-awesome\css\font-awesome.css" />
+    <Content Include="jquery\font-awesome\css\font-awesome.min.css" />
+    <Content Include="jquery\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="jquery\jquery\jquery.js" />
+    <Content Include="jquery\jquery\jquery.min.js" />
+    <Content Include="jquery\js\contact_me.js" />
+    <Content Include="jquery\js\freelancer.js" />
+    <Content Include="jquery\js\freelancer.min.js" />
+    <Content Include="jquery\js\jqBootstrapValidation.js" />
+    <Content Include="js\bootstrap.bundle.js" />
+    <Content Include="js\bootstrap.bundle.min.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\main.js" />
+    <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx" />
+    <Content Include="Presentacion\FCorpal_ReciboEgreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReciboIngreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx" />
+    <Content Include="Presentacion\FCorpal_RutaEntrega.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx" />
+    <Content Include="Styles\Style_AgendaProyecto.css" />
+    <Content Include="Styles\payment.css" />
+    <Content Include="Images\background.gif" />
+    <Content Include="Images\cabecera1.jpg" />
+    <Content Include="Images\carpetaAbierta.jpg" />
+    <Content Include="Images\carpetacerrada.jpg" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\Folder.png" />
+    <Content Include="Images\fondo.png" />
+    <Content Include="Images\FondoMenu.jpg" />
+    <Content Include="Images\FondoMenu2.jpg" />
+    <Content Include="Images\Good-mark.png" />
+    <Content Include="Images\highlight.gif" />
+    <Content Include="Images\jyc_1.jpg" />
+    <Content Include="Images\jyc_2.jpg" />
+    <Content Include="Images\JYC_logo.jpg" />
+    <Content Include="Images\JYC_logo.PNG" />
+    <Content Include="Images\login-box-backg.png" />
+    <Content Include="Images\login-btn.png" />
+    <Content Include="Images\pie.jpg" />
+    <Content Include="Images\select.png" />
+    <Content Include="Images\Text.png" />
+    <Content Include="Presentacion\ControlUser.ascx" />
+    <Content Include="Presentacion\FCorpal_Actualizacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\FCorpal_agendanegociacion.aspx" />
+    <Content Include="Presentacion\FCorpal_AgendaTelefonica.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConciliacionBancaria.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CotiEra.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CotiRCC.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CronoRuta.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_encuestajyc.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx" />
+    <Content Include="Presentacion\FCorpal_Facturacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_FechaContrato.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GActividades.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionArchivosSGI.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarPermisos.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx" />
+    <Content Include="Presentacion\FA_Login.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx" />
+    <Content Include="Presentacion\FCorpal_movimientoCheques.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReciboPago.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx" />
+    <Content Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx" />
+    <Content Include="Presentacion\FCorpal_SGI_Actividades.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FControlPedido.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEncargadoPago.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarFormularios.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx" />
+    <Content Include="Presentacion\Presentacion old\FProyecto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FTipoPago.aspx" />
+    <Content Include="Presentacion\MenuIzquierdo.ascx" />
+    <Content Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx" />
+    <Content Include="Presentacion\WelcomeJyC.aspx" />
+    <Content Include="Styles\Styles_GPagoSeguimiento2.css" />
+    <Content Include="Styles\Style_Autocompletar.css" />
+    <Content Include="Styles\Style_CodigosDeEquipos.css" />
+    <Content Include="Styles\Style_CallCenter_Rin.css" />
+    <Content Include="Styles\Style_AgendaNegociacion.css" />
+    <Content Include="Styles\Style_consultaRutasporDatos.css" />
+    <Content Include="Styles\Style_CostosPolizasImportacion.css" />
+    <Content Include="Styles\Style_CotiEra.css" />
+    <Content Include="Styles\Style_GActividades.css" />
+    <Content Include="Styles\Style_ImportacionJYCIA.css" />
+    <Content Include="Styles\login-box.css" />
+    <Content Include="Styles\Style_adicionarRepuesto.css" />
+    <Content Include="Styles\Style_AgendaTelefonica.css" />
+    <Content Include="Styles\Style_AsignarTareas.css" />
+    <Content Include="Styles\Style_CallCenterEstadisticaNormal.css" />
+    <Content Include="Styles\Style_CallCenterEstadisticaTecnico.css" />
+    <Content Include="Styles\Style_callRCC.css" />
+    <Content Include="Styles\Style_chequeBisa.css" />
+    <Content Include="Styles\Style_chequeBNB.css" />
+    <Content Include="Styles\Style_ConciliacionBancaria.css" />
+    <Content Include="Styles\Style_ConsultaRutas.css" />
+    <Content Include="Styles\Style_Consultas.css" />
+    <Content Include="Styles\Style_ConsultasCallCenter.css" />
+    <Content Include="Styles\Style_cotiRcc.css" />
+    <Content Include="Styles\Style_cronogramaRutaVisitaMantenimiento.css" />
+    <Content Include="Styles\Style_CronogramaTecnico.css" />
+    <Content Include="Styles\styles_MenuV.css" />
+    <Content Include="Styles\Styles_GPagoSeguimiento.css" />
+    <Content Include="Styles\Styles_GEncargadoPago.css" />
+    <Content Include="Styles\Styles_GestionarResp.css" />
+    <Content Include="Styles\Styles_Main.css" />
+    <Content Include="Styles\Styles_MenuH.css" />
+    <Content Include="Styles\Style_CallCenter.css" />
+    <Content Include="Styles\Style_CargaCuadrosXXX.css" />
+    <Content Include="Styles\Style_CargaFechaExpedicion.css" />
+    <Content Include="Styles\Style_CargarDocumentos.css" />
+    <Content Include="Styles\Style_ControlPedido.css" />
+    <Content Include="Styles\Style_EdificioDeudor.css" />
+    <Content Include="Styles\Style_EstadisticaParqueAscensores.css" />
+    <Content Include="Styles\Style_EstadoSeguimientoGeneral.css" />
+    <Content Include="Styles\Style_facturacion.css" />
+    <Content Include="Styles\Style_fechaContratos.css" />
+    <Content Include="Styles\Style_GActualizacion.css" />
+    <Content Include="Styles\Style_GcotizacionRepuesto.css" />
+    <Content Include="Styles\Style_GEdificio.css" />
+    <Content Include="Styles\Style_GEncargadoPago.css" />
+    <Content Include="Styles\Style_GEstadisticaInstalacion.css" />
+    <Content Include="Styles\Style_GEstadoEquipo.css" />
+    <Content Include="Styles\Style_GestionArchivosSGI.css" />
+    <Content Include="Styles\Style_GestionarEstadoInstalacion.css" />
+    <Content Include="Styles\Style_GestionarEstadoMantenimiento.css" />
+    <Content Include="Styles\Style_GestionarProyEncargadoPago.css" />
+    <Content Include="Styles\Style_GestionSeguimientoInstalacion.css" />
+    <Content Include="Styles\Style_Gformulario.css" />
+    <Content Include="Styles\Style_GPermisos.css" />
+    <Content Include="Styles\Style_GProyecto.css" />
+    <Content Include="Styles\Style_GSeguimiento.css" />
+    <Content Include="Styles\Style_GTipoPago.css" />
+    <Content Include="Styles\Style_ImportacionJYCIAGeneral.css" />
+    <Content Include="Styles\Style_MenuIzquierdo.css" />
+    <Content Include="Styles\Style_MonitoreoGestionProyecto.css" />
+    <Content Include="Styles\Style_movimientoCheques.css" />
+    <Content Include="Styles\Style_PlanPago.css" />
+    <Content Include="Styles\Style_PolizaBoletaLetra.css" />
+    <Content Include="Styles\Style_ReciboPago.css" />
+    <Content Include="Styles\Style_ReporteCobranza2.css" />
+    <Content Include="Styles\Style_ReporteCotizacionRepuesto.css" />
+    <Content Include="Styles\Style_RutaBoletaMantenimiento.css" />
+    <Content Include="Styles\Style_RutaCobrador.css" />
+    <Content Include="Styles\Style_RutasMantenimiento.css" />
+    <Content Include="Styles\Style_saldosCuentasGeneral.css" />
+    <Content Include="Styles\Style_SeguimientosMorosos.css" />
+    <Content Include="Styles\Style_ViewCuadroXXX.css" />
+    <Content Include="Styles\Style_ViewEstadoMantenimiento.css" />
+    <Content Include="Styles\Style_ViewSeguimientoMantenimientoXXX.css" />
+    <Content Include="Styles\Style_VistaResponsableProyecto.css" />
+    <Content Include="Styles\Style_VistaSeguimientoInstalacion.css" />
+    <Content Include="Styles\Style_Welcome.css" />
+    <Content Include="vendor\animate\animate.css" />
+    <Content Include="vendor\animsition\css\animsition.css" />
+    <Content Include="vendor\animsition\css\animsition.min.css" />
+    <Content Include="vendor\animsition\js\animsition.js" />
+    <Content Include="vendor\animsition\js\animsition.min.js" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="vendor\bootstrap\js\popper.js" />
+    <Content Include="vendor\bootstrap\js\popper.min.js" />
+    <Content Include="vendor\bootstrap\js\tooltip.js" />
+    <Content Include="vendor\countdowntime\countdowntime.js" />
+    <Content Include="vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="vendor\daterangepicker\moment.js" />
+    <Content Include="vendor\daterangepicker\moment.min.js" />
+    <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="vendor\select2\select2.css" />
+    <Content Include="vendor\select2\select2.js" />
+    <Content Include="vendor\select2\select2.min.css" />
+    <Content Include="vendor\select2\select2.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="Presentacion\FCorpal_GestonarResponsable.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DatosSimec\DA_contabilidad.cs" />
+    <Compile Include="DatosSimec\DA_inventario.cs" />
+    <Compile Include="Datos\DA_AgendaProyecto.cs" />
+    <Compile Include="Datos\DA_ActividadesPersonal.cs" />
+    <Compile Include="Datos\DA_AgendaNegociacion.cs" />
+    <Compile Include="Datos\DA_AgendaTelefonica.cs" />
+    <Compile Include="Datos\Datos old\DA_banco.cs" />
+    <Compile Include="Datos\Datos old\DA_CostosPolizaImportacion.cs" />
+    <Compile Include="Datos\Datos old\DA_CronogramaTecnico.cs" />
+    <Compile Include="Datos\Datos old\DA_CronogramaVisitaRutaManteminieto.cs" />
+    <Compile Include="Datos\Datos old\DA_EncuestaMantenimiento.cs" />
+    <Compile Include="Datos\DA_facturacion.cs" />
+    <Compile Include="Datos\Datos old\DA_fechaContrato.cs" />
+    <Compile Include="Datos\Datos old\DA_Importacion.cs" />
+    <Compile Include="Datos\DA_movimientoCheques.cs" />
+    <Compile Include="Datos\DA_Prioridad.cs" />
+    <Compile Include="Datos\Datos old\DA_Propietario.cs" />
+    <Compile Include="Datos\Datos old\DA_DetalleTecnicoAsignado.cs" />
+    <Compile Include="Datos\Datos old\DA_Detalle_TecnicoEvento.cs" />
+    <Compile Include="Datos\Datos old\DA_Evento.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaEstadoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaEstadoMan.cs" />
+    <Compile Include="Datos\DActualizacion.cs" />
+    <Compile Include="Datos\Datos old\DA_Cargo.cs" />
+    <Compile Include="Datos\Datos old\DA_CuadrosXXX.cs" />
+    <Compile Include="Datos\DA_DetallePermiso.cs" />
+    <Compile Include="Datos\Datos old\DA_DetalleSeguimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_Equipo.cs" />
+    <Compile Include="Datos\Datos old\DA_EstadoMantenimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaExpedicion.cs" />
+    <Compile Include="Datos\DA_Formularios.cs" />
+    <Compile Include="Datos\DA_Historial.cs" />
+    <Compile Include="Datos\DA_Marca.cs" />
+    <Compile Include="Datos\Datos old\DA_R155_InspeccionySeguimientoObra.cs" />
+    <Compile Include="Datos\DA_ReciboPago.cs" />
+    <Compile Include="Datos\DA_Recibo_IngresoEgreso.cs" />
+    <Compile Include="Datos\Datos old\DA_Repuesto.cs" />
+    <Compile Include="Datos\DA_Responsable.cs" />
+    <Compile Include="Datos\Datos old\DA_RutaCobrador.cs" />
+    <Compile Include="Datos\Datos old\DA_RutaMantenimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_Seguimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_SeguimientoInstalacion.cs" />
+    <Compile Include="Datos\DA_tareasTecnicos.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoEvento.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoPago.cs" />
+    <Compile Include="Datos\Datos old\DA_Zona.cs" />
+    <Compile Include="Datos\Datos old\DCargaCuadroXXXa.cs" />
+    <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
+    <Compile Include="Datos\DCorpal_SolicitudEntregaProducto.cs" />
+    <Compile Include="Datos\DCorpal_Tienda.cs" />
+    <Compile Include="Datos\Datos old\DEncargadoPago.cs" />
+    <Compile Include="Datos\Datos old\DEquipo.cs" />
+    <Compile Include="Datos\Datos old\DEstadisticaInstalacion.cs" />
+    <Compile Include="Datos\Datos old\DEstadisticaParqueAscensores.cs" />
+    <Compile Include="Datos\Datos old\DEstadoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DFechaExpedicion.cs" />
+    <Compile Include="Datos\Datos old\DMeses.cs" />
+    <Compile Include="Datos\Datos old\DProyecto.cs" />
+    <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="DS_CallCenter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Equipos.cs">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS_Equipos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Importacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Mantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Proyectos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReciboIngresoEgreso.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReporteRepuesto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Rutas.cs">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS_Rutas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Negocio\conexionMySql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
+    <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
+    <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
+    <Compile Include="Negocio\NA_AgendaProyectos.cs" />
+    <Compile Include="Negocio\NA_ActividadesPersonal.cs" />
+    <Compile Include="Negocio\NA_AgendaNegociacion.cs" />
+    <Compile Include="Negocio\NA_AgendaTelefonica.cs" />
+    <Compile Include="Negocio\NA_banco.cs" />
+    <Compile Include="Negocio\NA_CostosPolizaImportacion.cs" />
+    <Compile Include="Negocio\NA_CronogramaTecnico.cs" />
+    <Compile Include="Negocio\NA_CronogramaVisitaRutaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_EncuestaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_EnvioCorreo.cs" />
+    <Compile Include="Negocio\NA_Facturacion.cs" />
+    <Compile Include="Negocio\NA_fechaContrato.cs" />
+    <Compile Include="Negocio\NA_Importacion.cs" />
+    <Compile Include="Negocio\NA_movimientoCheques.cs" />
+    <Compile Include="Negocio\NA_Prioridad.cs" />
+    <Compile Include="Negocio\NA_Propietario.cs" />
+    <Compile Include="Negocio\NActualizacion.cs" />
+    <Compile Include="Negocio\NA_Cargo.cs" />
+    <Compile Include="Negocio\NA_CuadrosXXX.cs" />
+    <Compile Include="Negocio\NA_DetalleEventoTecnico.cs" />
+    <Compile Include="Negocio\NA_DetallePermiso.cs" />
+    <Compile Include="Negocio\NA_DetalleSeguimiento.cs" />
+    <Compile Include="Negocio\NA_DetalleTecnicoAsignado.cs" />
+    <Compile Include="Negocio\NA_Equipo.cs" />
+    <Compile Include="Negocio\NA_EstadoMantenimiento.cs" />
+    <Compile Include="Negocio\NA_Evento.cs" />
+    <Compile Include="Negocio\NA_FechaEstadoEquipo.cs" />
+    <Compile Include="Negocio\NA_FechaEstadoMan.cs" />
+    <Compile Include="Negocio\NA_FechaExpedicion.cs" />
+    <Compile Include="Negocio\NA_Formularios.cs" />
+    <Compile Include="Negocio\NA_Historial.cs" />
+    <Compile Include="Negocio\NA_Marca.cs" />
+    <Compile Include="Negocio\NA_R155_InspeccionySeguimientoObra.cs" />
+    <Compile Include="Negocio\NA_ReciboPago.cs" />
+    <Compile Include="Negocio\NA_Reportes_Download.cs" />
+    <Compile Include="Negocio\NA_Repuesto.cs" />
+    <Compile Include="Negocio\NA_Responsables.cs" />
+    <Compile Include="Negocio\NA_RutaCobrador.cs" />
+    <Compile Include="Negocio\NA_RutaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_Seguimiento.cs" />
+    <Compile Include="Negocio\NA_SeguimientoInstalacion.cs" />
+    <Compile Include="Negocio\NA_tareasTecnico.cs" />
+    <Compile Include="Negocio\NA_TipoEquipo.cs" />
+    <Compile Include="Negocio\NA_TipoEvento.cs" />
+    <Compile Include="Negocio\NA_TipoPago.cs" />
+    <Compile Include="Negocio\NA_VariablesGlobales.cs" />
+    <Compile Include="Negocio\NA_Zona.cs" />
+    <Compile Include="Negocio\NCargaCuadroXXX.cs" />
+    <Compile Include="Negocio\NCargaFechaExpedicion.cs" />
+    <Compile Include="Negocio\NCorpal_SolicitudEntregaProducto.cs" />
+    <Compile Include="Negocio\NCorpal_Tienda.cs" />
+    <Compile Include="Negocio\NEncargadoPago.cs" />
+    <Compile Include="Negocio\NEquipo.cs" />
+    <Compile Include="Negocio\NEstadisticaInstalacion.cs" />
+    <Compile Include="Negocio\NEstadisticaParqueAscensores.cs" />
+    <Compile Include="Negocio\NEstadoEquipo.cs" />
+    <Compile Include="Negocio\NFechaExpedicion.cs" />
+    <Compile Include="Negocio\NMeses.cs" />
+    <Compile Include="Negocio\NProyecto.cs" />
+    <Compile Include="Negocio\NTipoPago.cs" />
+    <Compile Include="Negocio\N_numLetra.cs" />
+    <Compile Include="Presentacion\ControlUser.ascx.cs">
+      <DependentUpon>ControlUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\ControlUser.ascx.designer.cs">
+      <DependentUpon>ControlUser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DS_R-144.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.cs">
+      <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_AdicionarCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_AdicionarCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_agendanegociacion.aspx.cs">
+      <DependentUpon>FCorpal_agendanegociacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_agendanegociacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_agendanegociacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx.cs">
+      <DependentUpon>FA_AgendaProyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx.designer.cs">
+      <DependentUpon>FA_AgendaProyectos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AgendaTelefonica.aspx.cs">
+      <DependentUpon>FCorpal_AgendaTelefonica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AgendaTelefonica.aspx.designer.cs">
+      <DependentUpon>FCorpal_AgendaTelefonica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx.cs">
+      <DependentUpon>FA_CallCenterAreaCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterAreaCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx.cs">
+      <DependentUpon>FA_CallCenterEstadisticaNormal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterEstadisticaNormal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx.cs">
+      <DependentUpon>FA_CAllCenterEstadisticaTecnico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx.designer.cs">
+      <DependentUpon>FA_CAllCenterEstadisticaTecnico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx.cs">
+      <DependentUpon>FA_CallCenterVacio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterVacio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx.cs">
+      <DependentUpon>FA_CallCenter_AreaCotiRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_AreaCotiRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoCotiRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoCotiRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoRIN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoRIN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoNuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoRCC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoRCC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx.cs">
+      <DependentUpon>FA_CallCenter_Eventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_Eventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.cs">
+      <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.designer.cs">
+      <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.cs">
+      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.designer.cs">
+      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.cs">
+      <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.designer.cs">
+      <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx.cs">
+      <DependentUpon>FA_CodigosDeEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx.designer.cs">
+      <DependentUpon>FA_CodigosDeEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConciliacionBancaria.aspx.cs">
+      <DependentUpon>FCorpal_ConciliacionBancaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConciliacionBancaria.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConciliacionBancaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx.cs">
+      <DependentUpon>FA_ConsultaCallCenterReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaCallCenterReporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx.cs">
+      <DependentUpon>FA_ConsultaEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx.cs">
+      <DependentUpon>FA_ConsultaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx.cs">
+      <DependentUpon>FA_ConsultaProyectosInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaProyectosInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaIngresoEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaIngresoEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx.cs">
+      <DependentUpon>FA_ConsultaRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx.cs">
+      <DependentUpon>FA_consultaRutas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx.designer.cs">
+      <DependentUpon>FA_consultaRutas2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx.cs">
+      <DependentUpon>FA_ConsultasCallCenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx.designer.cs">
+      <DependentUpon>FA_ConsultasCallCenter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx.cs">
+      <DependentUpon>FA_Consulta_Importacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx.designer.cs">
+      <DependentUpon>FA_Consulta_Importacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx.cs">
+      <DependentUpon>FA_CostosPolizaImportacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx.designer.cs">
+      <DependentUpon>FA_CostosPolizaImportacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiEra.aspx.cs">
+      <DependentUpon>FA_CotiEra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiEra.aspx.designer.cs">
+      <DependentUpon>FA_CotiEra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiRCC.aspx.cs">
+      <DependentUpon>FA_CotiRCC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiRCC.aspx.designer.cs">
+      <DependentUpon>FA_CotiRCC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx.cs">
+      <DependentUpon>FA_CronogramaTecnico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx.designer.cs">
+      <DependentUpon>FA_CronogramaTecnico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronoRuta.aspx.cs">
+      <DependentUpon>FA_CronoRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronoRuta.aspx.designer.cs">
+      <DependentUpon>FA_CronoRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx.cs">
+      <DependentUpon>FA_CuadroXXX3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx.designer.cs">
+      <DependentUpon>FA_CuadroXXX3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx.cs">
+      <DependentUpon>FA_DeudaPlanPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx.designer.cs">
+      <DependentUpon>FA_DeudaPlanPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx.cs">
+      <DependentUpon>FA_EdificioConDeuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx.designer.cs">
+      <DependentUpon>FA_EdificioConDeuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx.cs">
+      <DependentUpon>FA_EdificioDeudor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx.designer.cs">
+      <DependentUpon>FA_EdificioDeudor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_encuestajyc.aspx.cs">
+      <DependentUpon>FA_encuestajyc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_encuestajyc.aspx.designer.cs">
+      <DependentUpon>FA_encuestajyc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx.cs">
+      <DependentUpon>FA_EncuestaMantenimientoPreguntas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx.designer.cs">
+      <DependentUpon>FA_EncuestaMantenimientoPreguntas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx.cs">
+      <DependentUpon>FA_EstadoSeguimientoGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx.designer.cs">
+      <DependentUpon>FA_EstadoSeguimientoGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Facturacion.aspx.cs">
+      <DependentUpon>FCorpal_Facturacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Facturacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_Facturacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_FechaContrato.aspx.cs">
+      <DependentUpon>FA_FechaContrato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_FechaContrato.aspx.designer.cs">
+      <DependentUpon>FA_FechaContrato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GActividades.aspx.cs">
+      <DependentUpon>FA_GActividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GActividades.aspx.designer.cs">
+      <DependentUpon>FA_GActividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_GCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_GCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx.cs">
+      <DependentUpon>FA_GestionArchivosJYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx.designer.cs">
+      <DependentUpon>FA_GestionArchivosJYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionArchivosSGI.aspx.cs">
+      <DependentUpon>FCorpal_GestionArchivosSGI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionArchivosSGI.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionArchivosSGI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx.cs">
+      <DependentUpon>FA_GestionarEstadoEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx.designer.cs">
+      <DependentUpon>FA_GestionarEstadoEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx.cs">
+      <DependentUpon>FA_GestionarEstadoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_GestionarEstadoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarPermisos.aspx.cs">
+      <DependentUpon>FCorpal_GestionarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarPermisos.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ReciboEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReciboEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboIngreso.aspx.cs">
+      <DependentUpon>FCorpal_ReciboIngreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboIngreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReciboIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ReporteReciboEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteReciboEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx.cs">
+      <DependentUpon>FCorpal_ReporteReciboIngreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteReciboIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx.cs">
+      <DependentUpon>FCorpal_GestionarTiendaPropietario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarTiendaPropietario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimiento2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimiento2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimientoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimientoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral_JyCIA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral_JyCIA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx.cs">
+      <DependentUpon>FA_ImportacionFacturasContenedor_Transporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionFacturasContenedor_Transporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx.cs">
+      <DependentUpon>FA_ImportacionJYCIA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionJYCIA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx.cs">
+      <DependentUpon>FA_ImportacionProrrateoCostos_Transporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionProrrateoCostos_Transporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx.cs">
+      <DependentUpon>FA_Importacion_CredinForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx.designer.cs">
+      <DependentUpon>FA_Importacion_CredinForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_Login.aspx.cs">
+      <DependentUpon>FA_Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_Login.aspx.designer.cs">
+      <DependentUpon>FA_Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx.cs">
+      <DependentUpon>FA_MenuPorArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx.designer.cs">
+      <DependentUpon>FA_MenuPorArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx.cs">
+      <DependentUpon>FA_MonitoreoGestionProyecto210.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx.designer.cs">
+      <DependentUpon>FA_MonitoreoGestionProyecto210.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx.cs">
+      <DependentUpon>FA_mostrarResultado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx.designer.cs">
+      <DependentUpon>FA_mostrarResultado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_movimientoCheques.aspx.cs">
+      <DependentUpon>FCorpal_movimientoCheques.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_movimientoCheques.aspx.designer.cs">
+      <DependentUpon>FCorpal_movimientoCheques.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx.cs">
+      <DependentUpon>FA_PagoSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx.designer.cs">
+      <DependentUpon>FA_PagoSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx.cs">
+      <DependentUpon>FA_PagoSeguimiento2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx.designer.cs">
+      <DependentUpon>FA_PagoSeguimiento2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx.cs">
+      <DependentUpon>FA_PolizaBoletaLetra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx.designer.cs">
+      <DependentUpon>FA_PolizaBoletaLetra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReciboPago.aspx.cs">
+      <DependentUpon>FA_ReciboPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReciboPago.aspx.designer.cs">
+      <DependentUpon>FA_ReciboPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx.cs">
+      <DependentUpon>FA_ReporteChequeBisa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx.designer.cs">
+      <DependentUpon>FA_ReporteChequeBisa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx.cs">
+      <DependentUpon>FA_ReporteChequeBNB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx.designer.cs">
+      <DependentUpon>FA_ReporteChequeBNB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx.cs">
+      <DependentUpon>FA_ReporteCobranza2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx.designer.cs">
+      <DependentUpon>FA_ReporteCobranza2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_ReporteCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_ReporteCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx.cs">
+      <DependentUpon>FA_RutaBoletaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_RutaBoletaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RutaEntrega.aspx.cs">
+      <DependentUpon>FCorpal_RutaEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RutaEntrega.aspx.designer.cs">
+      <DependentUpon>FCorpal_RutaEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx.cs">
+      <DependentUpon>FA_RutaCobrador_ColocarBancos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx.designer.cs">
+      <DependentUpon>FA_RutaCobrador_ColocarBancos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx.cs">
+      <DependentUpon>FA_RutaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_RutaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx.cs">
+      <DependentUpon>FCorpal_saldosCuentasGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx.designer.cs">
+      <DependentUpon>FCorpal_saldosCuentasGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx.cs">
+      <DependentUpon>FA_SeguimientosMorosos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx.designer.cs">
+      <DependentUpon>FA_SeguimientosMorosos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SGI_Actividades.aspx.cs">
+      <DependentUpon>FCorpal_SGI_Actividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SGI_Actividades.aspx.designer.cs">
+      <DependentUpon>FCorpal_SGI_Actividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx.cs">
+      <DependentUpon>FA_VaciadoAlSimec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx.designer.cs">
+      <DependentUpon>FA_VaciadoAlSimec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx.cs">
+      <DependentUpon>FA_VaciadoR148.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx.designer.cs">
+      <DependentUpon>FA_VaciadoR148.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx.cs">
+      <DependentUpon>FA_ViewCuadroXXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx.designer.cs">
+      <DependentUpon>FA_ViewCuadroXXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx.cs">
+      <DependentUpon>FA_viewEstadisticaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_viewEstadisticaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx.cs">
+      <DependentUpon>FA_ViewSeguimientoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_ViewSeguimientoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx.cs">
+      <DependentUpon>FA_ViewSeguimientoMantenimientoXXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx.designer.cs">
+      <DependentUpon>FA_ViewSeguimientoMantenimientoXXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx.cs">
+      <DependentUpon>FA_VistaResponsableProyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx.designer.cs">
+      <DependentUpon>FA_VistaResponsableProyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FControlPedido.aspx.cs">
+      <DependentUpon>FControlPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FControlPedido.aspx.designer.cs">
+      <DependentUpon>FControlPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEncargadoPago.aspx.cs">
+      <DependentUpon>FEncargadoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEncargadoPago.aspx.designer.cs">
+      <DependentUpon>FEncargadoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarFormularios.aspx.cs">
+      <DependentUpon>FCorpal_GestionarFormularios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarFormularios.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarFormularios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEquipo.aspx.cs">
+      <DependentUpon>FEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEquipo.aspx.designer.cs">
+      <DependentUpon>FEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx.cs">
+      <DependentUpon>FEstadisticaInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx.designer.cs">
+      <DependentUpon>FEstadisticaInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx.cs">
+      <DependentUpon>FEstadisticaParqueAscensores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx.designer.cs">
+      <DependentUpon>FEstadisticaParqueAscensores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FProyecto.aspx.cs">
+      <DependentUpon>FProyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FProyecto.aspx.designer.cs">
+      <DependentUpon>FProyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FTipoPago.aspx.cs">
+      <DependentUpon>FTipoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FTipoPago.aspx.designer.cs">
+      <DependentUpon>FTipoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\MenuIzquierdo.ascx.cs">
+      <DependentUpon>MenuIzquierdo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\MenuIzquierdo.ascx.designer.cs">
+      <DependentUpon>MenuIzquierdo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx.cs">
+      <DependentUpon>FA_Reporte_R144.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx.designer.cs">
+      <DependentUpon>FA_Reporte_R144.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\WelcomeJyC.aspx.cs">
+      <DependentUpon>WelcomeJyC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\WelcomeJyC.aspx.designer.cs">
+      <DependentUpon>WelcomeJyC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\NA_QRCodeNet.cs" />
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestonarResponsable.aspx.cs">
+      <DependentUpon>FCorpal_GestonarResponsable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestonarResponsable.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestonarResponsable.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site1.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Account\" />
+    <Folder Include="app_code\app_Data\" />
+    <Folder Include="CSS\" />
+    <Folder Include="DocCuadroXXX\" />
+    <Folder Include="DocFechaExp\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ConsultaReciboEgreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_consultaReciboIngreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEgreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionSeguros2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_BoletasMantenimiento.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionCredinForm.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboIngreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ReporteEmergenciaCallCenter.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\detalle_facturaProveedoresComercial.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\detalle_FacturaSeguroEquipo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R-155porCodigo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R155InspeccionySeguimiento.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CodigosEquiposEdificio2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_EncuestasMantenimientoRealizadas.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ReporteMantenimiento_R124.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_Repuesto1.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_Cobranza2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CodigosEquiposEdificio.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta3.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBisa_ok.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBisa_modelo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBNB_ok.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\cotizacionReporte.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBNB_modelo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CallCenter_AscensoresParado.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_LibroDiarioCobranza.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R-144.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DS_CallCenter.xsc">
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </None>
+    <None Include="DS_CallCenter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_CallCenter.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_CallCenter.xss">
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Equipos.xsc">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Equipos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Equipos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Equipos.xss">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Importacion.xsc">
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Importacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Importacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Importacion.xss">
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Mantenimiento.xsc">
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Mantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Mantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Mantenimiento.xss">
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Proyectos.xsc">
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Proyectos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Proyectos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Proyectos.xss">
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xsc">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ReciboIngresoEgreso.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xss">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReporteRepuesto.xsc">
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReporteRepuesto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ReporteRepuesto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_ReporteRepuesto.xss">
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </None>
+    <None Include="DS_R-144.xsc">
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </None>
+    <None Include="DS_R-144.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_R-144.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_R-144.xss">
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Rutas.xsc">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Rutas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Rutas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Rutas.xss">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </None>
+    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <None Include="fonts\font-awesome-4.7.0\less\animated.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\core.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\icons.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\larger.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\list.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\mixins.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\path.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\stacked.less" />
+    <None Include="fonts\font-awesome-4.7.0\less\variables.less" />
+    <None Include="fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="fonts\JosefinSans\JosefinSans-Bold.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-BoldItalic.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-Italic.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-Light.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-LightItalic.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-Regular.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-SemiBold.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-SemiBoldItalic.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-Thin.ttf" />
+    <None Include="fonts\JosefinSans\JosefinSans-ThinItalic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-Black.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-BlackItalic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-Bold.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-BoldItalic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-ExtraLight.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-ExtraLightItalic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-Italic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-Light.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-LightItalic.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-Regular.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-SemiBold.ttf" />
+    <None Include="fonts\source-sans-pro\SourceSansPro-SemiBoldItalic.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-Bold.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-BoldItalic.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-Italic.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-Light.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-LightItalic.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-Medium.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-MediumItalic.ttf" />
+    <None Include="fonts\ubuntu\Ubuntu-Regular.ttf" />
+    <None Include="img\imagenes_Opciones - CallCenter.psd" />
+    <None Include="img\imagenes_Opciones - Copy.psd" />
+    <None Include="img\imagenes_Opciones.psd" />
+    <None Include="img\imagenes_Opciones_Comercial.psd" />
+    <None Include="img\imagenes_Opciones_Encuesta.psd" />
+    <None Include="img\imagenes_Opciones_Mantenimiento.psd" />
+    <None Include="img\jyc_logo.psd" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.eot" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.woff" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="jquery\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="jquery\font-awesome\less\animated.less" />
+    <None Include="jquery\font-awesome\less\bordered-pulled.less" />
+    <None Include="jquery\font-awesome\less\core.less" />
+    <None Include="jquery\font-awesome\less\fixed-width.less" />
+    <None Include="jquery\font-awesome\less\font-awesome.less" />
+    <None Include="jquery\font-awesome\less\icons.less" />
+    <None Include="jquery\font-awesome\less\larger.less" />
+    <None Include="jquery\font-awesome\less\list.less" />
+    <None Include="jquery\font-awesome\less\mixins.less" />
+    <None Include="jquery\font-awesome\less\path.less" />
+    <None Include="jquery\font-awesome\less\rotated-flipped.less" />
+    <None Include="jquery\font-awesome\less\screen-reader.less" />
+    <None Include="jquery\font-awesome\less\stacked.less" />
+    <None Include="jquery\font-awesome\less\variables.less" />
+    <None Include="jquery\font-awesome\scss\font-awesome.scss" />
+    <None Include="jquery\font-awesome\scss\_animated.scss" />
+    <None Include="jquery\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="jquery\font-awesome\scss\_core.scss" />
+    <None Include="jquery\font-awesome\scss\_fixed-width.scss" />
+    <None Include="jquery\font-awesome\scss\_icons.scss" />
+    <None Include="jquery\font-awesome\scss\_larger.scss" />
+    <None Include="jquery\font-awesome\scss\_list.scss" />
+    <None Include="jquery\font-awesome\scss\_mixins.scss" />
+    <None Include="jquery\font-awesome\scss\_path.scss" />
+    <None Include="jquery\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="jquery\font-awesome\scss\_screen-reader.scss" />
+    <None Include="jquery\font-awesome\scss\_stacked.scss" />
+    <None Include="jquery\font-awesome\scss\_variables.scss" />
+    <None Include="js\bootstrap.bundle.js.map" />
+    <None Include="js\bootstrap.bundle.min.js.map" />
+    <None Include="js\bootstrap.js.map" />
+    <None Include="js\bootstrap.min.js.map" />
+    <None Include="vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="vendor\bootstrap\css\bootstrap.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49879</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
