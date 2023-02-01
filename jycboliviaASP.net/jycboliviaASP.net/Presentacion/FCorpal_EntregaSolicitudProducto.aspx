@@ -43,8 +43,7 @@
 
 
 <div class="Centrar">
-<div class="titulo"><h3>Entrega de Solicitud Repuestos</h3>
-    <p>&nbsp;</p></div>
+<div class="titulo"><h3>Entrega de Solicitud Repuestos</h3></div>
 <div class="busqueda">
 <table>
 <tr>
@@ -56,14 +55,9 @@
         <asp:TextBox ID="tx_nrosolicitud" runat="server"></asp:TextBox>
     </td>
     <td>
-        <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
-    </td>
+        &nbsp;</td>
     <td>
-        <asp:DropDownList ID="DropDownList1" runat="server" Width="100px">
-            <asp:ListItem>Abierto</asp:ListItem>
-            <asp:ListItem>Cerrado</asp:ListItem>
-        </asp:DropDownList>
-    </td>
+        &nbsp;</td>
     <td>
     <asp:Button ID="bt_buscar" runat="server" Text="Buscar" Width="100px" 
             onclick="bt_buscar_Click" />
