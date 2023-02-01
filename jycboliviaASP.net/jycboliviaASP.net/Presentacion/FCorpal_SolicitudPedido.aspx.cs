@@ -117,36 +117,40 @@ namespace jycboliviaASP.net.Presentacion
 
         private void adicionar_productos()
         {
-            DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-
-            CheckBox cb = null;
-            for (int i = 0; i < gv_Productos.Rows.Count; i++)
-            {
-                cb = (CheckBox)gv_Productos.Rows[i].Cells[1].FindControl("CheckBox1");
-                if (cb != null && cb.Checked)
+            float cantidad;
+            float.TryParse(tx_cantidadProducto.Text, out cantidad);
+            if(cantidad > 0){
+                DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
+                CheckBox cb = null;
+                for (int i = 0; i < gv_Productos.Rows.Count; i++)
                 {
-                    string codigo = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[1].Text);
-                    string producto = gv_Productos.Rows[i].Cells[2].Text;
-                    string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
-                    float precio; 
-                    float.TryParse(gv_Productos.Rows[i].Cells[4].Text,out precio);
-                    float cantidad ;
-                    float.TryParse(tx_cantidadProducto.Text , out cantidad);
-                    string tipo = dd_tipoSolicitud.SelectedItem.Text;
-                    DataRow tupla = datoRepuesto.NewRow();
-                    tupla["Codigo"] = codigo;
-                    tupla["producto"] = producto;
-                    tupla["Medida"] = Medida;
-                    tupla["Tipo"] = tipo;
-                    tupla["Precio"] = precio;
-                    tupla["Cantidad"] = cantidad;
-                    tupla["PrecioTotal"] = (precio * cantidad);
-                    
-                    datoRepuesto.Rows.Add(tupla);
+                    cb = (CheckBox)gv_Productos.Rows[i].Cells[1].FindControl("CheckBox1");
+                    if (cb != null && cb.Checked)
+                    {
+                        string codigo = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[1].Text);
+                        string producto = gv_Productos.Rows[i].Cells[2].Text;
+                        string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
+                        float precio;
+                        float.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
+                        string tipo = dd_tipoSolicitud.SelectedItem.Text;
+                        DataRow tupla = datoRepuesto.NewRow();
+                        tupla["Codigo"] = codigo;
+                        tupla["producto"] = producto;
+                        tupla["Medida"] = Medida;
+                        tupla["Tipo"] = tipo;
+                        tupla["Precio"] = precio;
+                        tupla["Cantidad"] = cantidad;
+                        tupla["PrecioTotal"] = (precio * cantidad);
+
+                        datoRepuesto.Rows.Add(tupla);
+                    }
                 }
+                gv_adicionados.DataSource = datoRepuesto;
+                gv_adicionados.DataBind();
             }
-            gv_adicionados.DataSource = datoRepuesto;
-            gv_adicionados.DataBind();            
+            else
+                Response.Write("<script type='text/javascript'> alert('Error: Cantidad igual 0') </script>");
+            
         }
 
         protected void bt_guardar_Click(object sender, EventArgs e)
@@ -156,65 +160,71 @@ namespace jycboliviaASP.net.Presentacion
 
         private void guardarSolicitud()
         {
-            NA_Responsables Nresp = new NA_Responsables();
-            string usuarioAux = Session["NameUser"].ToString();
-            string passwordAux = Session["passworuser"].ToString();
-            int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
+            DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
+            if(datoRepuesto.Rows.Count > 0){
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
-            string nroboleta = tx_nrodocumento.Text;
-            string personalsolicitud = tx_solicitante.Text;
-            string fechaentrega = convertidorFecha(tx_fechaEntrega.Text);
-            string horaentrega = tx_horaEntrega.Text;
-                        
+                string nroboleta = tx_nrodocumento.Text;
+                string personalsolicitud = tx_solicitante.Text;
+                string fechaentrega = convertidorFecha(tx_fechaEntrega.Text);
+                string horaentrega = tx_horaEntrega.Text;
 
-            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            if (nss.set_guardarSolicitud( nroboleta,  fechaentrega,  horaentrega,  personalsolicitud,  codpersolicitante, true))
-            {
-                int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
-                DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-                double montoTotal = 0;
-                for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+
+                NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+                if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true))
                 {
-                    int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                    double cantidad = Convert.ToDouble(datoRepuesto.Rows[i]["cantidad"].ToString());
-                    double preciocompra = Convert.ToDouble(datoRepuesto.Rows[i]["Precio"].ToString());
+                    int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
 
-                    string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                    string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                    string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
-                    double total = preciocompra * cantidad;
+                    double montoTotal = 0;
+                    for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                    {
+                        int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
+                        double cantidad = Convert.ToDouble(datoRepuesto.Rows[i]["cantidad"].ToString());
+                        double preciocompra = Convert.ToDouble(datoRepuesto.Rows[i]["Precio"].ToString());
 
-                    nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo,Medida);
-                    montoTotal = montoTotal + total;
+                        string producto = datoRepuesto.Rows[i]["producto"].ToString();
+                        string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
+                        string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
+                        double total = preciocompra * cantidad;
+
+                        nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
+                        montoTotal = montoTotal + total;
+                    }
+
+                    nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
+                    //----------------envio de correo-------------
+                    /*string asunto = "(" + Session["BaseDatos"].ToString() + ")" + " Solicitud de Prestamo de Repuesto Edificio = " + edificio + " del Exbo=" + exbo;
+                    string cuerpo = "Correo Automatico. <br><br>" +
+                                    "Se solicita prestamo de repuesto para : <br>" +
+                                    "El Edifico " + edificio + " con la referencia XBO " + exbo + " <br>" +
+                                    "Solicitante = " + tx_solicitante.Text + "<br>" +
+                                    "Solicitud Entrega Respuesto A = " + solicitudEntregaRepuestoA + " <br>" +
+                                    "Fecha Solicitud = " + DateTime.Now.ToString("MM/dd/yyyy") + " <br>" +
+                                    "Fecha Estimada Devolucion = " + tx_fechaEstimadaDevolucion.Text + " <br><br>" +
+                                    "Repuesto Solicitado: <br>" +
+                                    repuestosSolicitados +
+                                    "<br><br><br>" +
+                                    "Fin de Mensaje.";
+                    NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();
+                    string baseDatos = Session["BaseDatos"].ToString();
+                    ncorreo.enviar_Correo_SolicitudPrestamoRepuesto(asunto, cuerpo, baseDatos, almacenprestante);
+                    //----------------fin envio de correo---------
+                    */
+                    limpiarDatos();
+                    buscarProductos("");
+
+                    Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                 }
+                else
+                    Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");
 
-                nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
-                //----------------envio de correo-------------
-                /*string asunto = "(" + Session["BaseDatos"].ToString() + ")" + " Solicitud de Prestamo de Repuesto Edificio = " + edificio + " del Exbo=" + exbo;
-                string cuerpo = "Correo Automatico. <br><br>" +
-                                "Se solicita prestamo de repuesto para : <br>" +
-                                "El Edifico " + edificio + " con la referencia XBO " + exbo + " <br>" +
-                                "Solicitante = " + tx_solicitante.Text + "<br>" +
-                                "Solicitud Entrega Respuesto A = " + solicitudEntregaRepuestoA + " <br>" +
-                                "Fecha Solicitud = " + DateTime.Now.ToString("MM/dd/yyyy") + " <br>" +
-                                "Fecha Estimada Devolucion = " + tx_fechaEstimadaDevolucion.Text + " <br><br>" +
-                                "Repuesto Solicitado: <br>" +
-                                repuestosSolicitados +
-                                "<br><br><br>" +
-                                "Fin de Mensaje.";
-                NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();
-                string baseDatos = Session["BaseDatos"].ToString();
-                ncorreo.enviar_Correo_SolicitudPrestamoRepuesto(asunto, cuerpo, baseDatos, almacenprestante);
-                //----------------fin envio de correo---------
-                */
-                limpiarDatos();
-                buscarProductos("");
-
-                Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
             }
             else
-                Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");
-
+                Response.Write("<script type='text/javascript'> alert('Error: No tiene pedido') </script>");
+            
         }
 
         protected void gv_adicionados_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)

@@ -95,7 +95,7 @@
             Font-Size="Small"></asp:Label>
         </td>
     <td>
-        <asp:DropDownList ID="dd_tipoSolicitud" runat="server" Width="100px">
+        <asp:DropDownList ID="dd_tipoSolicitud" runat="server" Width="150px">
             <asp:ListItem>VENTA</asp:ListItem>
             <asp:ListItem>DEGUSTACION</asp:ListItem>
             <asp:ListItem>MUESTRA</asp:ListItem>

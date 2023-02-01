@@ -59,5 +59,25 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.get_solicitudesRealizadasProductos( nroSolicitud,  solicitante);
         }
+
+        internal DataSet get_datosSolicitudProductos(int codigoSolicitud)
+        {
+            return dsp.get_datosSolicitudProductos( codigoSolicitud);
+        }
+
+        internal bool eliminarSolicitud(int codigoSolicitud)
+        {
+            return dsp.eliminarSolicitud( codigoSolicitud);
+        }
+
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado)
+        {
+            return dsp.update_cantProductosEntregados(codigoSolicitud, codigoP, cantEntregado);
+        }
+
+        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable)
+        {
+            return dsp.update_cerrarSolicitud( codigoSolicitud,  codresponsable,  nombreResponsable);
+        }
     }
 }

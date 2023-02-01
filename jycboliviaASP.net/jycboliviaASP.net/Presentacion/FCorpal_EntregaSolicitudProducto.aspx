@@ -56,9 +56,14 @@
         <asp:TextBox ID="tx_nrosolicitud" runat="server"></asp:TextBox>
     </td>
     <td>
-        &nbsp;</td>
+        <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
+    </td>
     <td>
-        &nbsp;</td>
+        <asp:DropDownList ID="DropDownList1" runat="server" Width="100px">
+            <asp:ListItem>Abierto</asp:ListItem>
+            <asp:ListItem>Cerrado</asp:ListItem>
+        </asp:DropDownList>
+    </td>
     <td>
     <asp:Button ID="bt_buscar" runat="server" Text="Buscar" Width="100px" 
             onclick="bt_buscar_Click" />
@@ -87,8 +92,7 @@
     
     </td>
 <td>
-    <asp:Button ID="bt_actualizar" runat="server" Text="Actualizar" Width="100px" />
-    </td>
+    &nbsp;</td>
 <td></td>
 <td>
     &nbsp;</td>
@@ -125,6 +129,18 @@
         <td></td>
     </tr>
 </table>
+<table>
+    <tr>
+        <td></td>
+        <td><asp:Button ID="bt_limpiar" runat="server" Text="Limpiar" 
+                onclick="bt_limpiar_Click" /></td>
+        <td><asp:Button ID="bt_actualizar" runat="server" Text="Guardar" Width="100px" 
+                onclick="bt_actualizar_Click" /> </td>
+        <td><asp:Button ID="bt_eliminar" runat="server" Text="Eliminar" 
+                onclick="bt_eliminar_Click" /></td>
+        <td></td>
+    </tr>
+</table>
 </div>
 
 
@@ -133,7 +149,7 @@
     <asp:GridView ID="gv_solicitudesProductos" runat="server" BackColor="White" 
         CssClass="table table-responsive table-striped" 
         BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical"
+        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" onselectedindexchanged="gv_solicitudesProductos_SelectedIndexChanged"
        
         >
         <AlternatingRowStyle BackColor="#CCCCCC" />
@@ -153,7 +169,7 @@
      <Columns>
                 <asp:TemplateField HeaderText="Eliminar">
                     <ItemTemplate>
-                        <asp:CheckBox ID="CheckBox1" runat="server"  />
+                        <asp:CheckBox ID="cbk_eliminar" runat="server"  />
                     </ItemTemplate>
                 </asp:TemplateField>
      </Columns>
@@ -163,7 +179,7 @@
 </div>
 
 <div>
-<h3>Detalle Producto</h3>
+<h3>Detalle Producto
 </div>
 
 <div class="Grepuesto">
@@ -171,8 +187,32 @@
     <asp:GridView ID="gv_detallesolicitud" runat="server" BackColor="White" 
         CssClass="table table-responsive table-striped" 
         BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical">
+        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" 
+        AutoGenerateColumns="False">
         <AlternatingRowStyle BackColor="#CCCCCC" />
+        <Columns>
+            <asp:BoundField DataField="codigo" HeaderText="codigo" 
+                SortExpression="codigo" />
+            <asp:BoundField DataField="producto" HeaderText="producto" 
+                SortExpression="producto" />
+            <asp:BoundField DataField="medida" HeaderText="medida" 
+                SortExpression="medida" />
+            <asp:BoundField DataField="cantSolicitada" HeaderText="cantSolicitada" 
+                SortExpression="cantSolicitada" />
+            <asp:BoundField DataField="tiposolicitud" HeaderText="tiposolicitud" 
+                SortExpression="tiposolicitud" />
+            <asp:TemplateField HeaderText="Cant_Entregada" SortExpression="Cant_Entregada">
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Cant_Entregada") %>' 
+                        Visible="False"></asp:Label>
+                    <asp:TextBox ID="tx_cantentregado" runat="server" 
+                        Text='<%# Bind("Cant_Entregada") %>' BackColor="Yellow"></asp:TextBox>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    
+                </EditItemTemplate>
+            </asp:TemplateField>
+        </Columns>
         <FooterStyle BackColor="#CCCCCC" />
         <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
         <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />

@@ -88,6 +88,10 @@
           <DataField>nrorecibo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="realizadopor">
+          <DataField>realizadopor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DS_ReciboIngresoEgreso</DataSourceName>
@@ -95,7 +99,7 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>DS_ReciboIngresoEgreso</rd:DataSetName>
-        <rd:SchemaPath>D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\DS_ReciboIngresoEgreso.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Alex\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\DS_ReciboIngresoEgreso.xsd</rd:SchemaPath>
         <rd:TableName>DS_ReciboEgreso</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -262,6 +266,9 @@
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
+            <TablixColumn>
+              <Width>0.98425in</Width>
+            </TablixColumn>
             <TablixColumn>
               <Width>0.98425in</Width>
             </TablixColumn>
@@ -827,6 +834,38 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>realizadopor</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -1296,12 +1335,42 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="realizadopor">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!realizadopor.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>realizadopor</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1334,7 +1403,7 @@
         <Top>3.43112cm</Top>
         <Left>0.46778cm</Left>
         <Height>1.2cm</Height>
-        <Width>39.99991cm</Width>
+        <Width>42.49991cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -1360,7 +1429,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>15.93216in</Width>
+  <Width>17.0935in</Width>
   <Page>
     <PageHeight>21.59cm</PageHeight>
     <PageWidth>35.56cm</PageWidth>

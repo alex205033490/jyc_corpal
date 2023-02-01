@@ -24,10 +24,10 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "insert into tbcorpal_solicitudentregaproducto ( "+
                              " nroboleta, fechaGRA, horaGRA, fechaentrega, horaentrega,  personalsolicitud, "+
-                             " codpersolicitante,   estado) " +
+                             " codpersolicitante,   estado, estadosolicitud) " +
                              " values( "+
                              " '"+nroboleta+"', current_date(), current_time(), "+fechaentrega+", '"+horaentrega+"',  '"+personalsolicitud+"',"+
-                              codpersolicitante + ", " + estado + " )";
+                              codpersolicitante + ", " + estado + ", 'Abierto' )";
             return conexion.ejecutarMySql(consulta);
         }
 
@@ -58,7 +58,7 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "insert into tbcorpal_detalle_solicitudproducto( "+
                            " codsolicitud,codproducto,cant,precio,precioTotal,tiposolicitud,medida) "+
-                           " values(" + ultimoinsertado + "," + codProducto + "," + cantidad + "," + preciocompra + "," + total + ",'" + Tipo + "','" + Medida + "')";
+                           " values(" + ultimoinsertado + "," + codProducto + ",'" + cantidad.ToString().Replace(',', '.') + "','" + preciocompra.ToString().Replace(',', '.') + "','" + total.ToString().Replace(',', '.') + "','" + Tipo + "','" + Medida + "')";
             return conexion.ejecutarMySql(consulta);
         }
 
@@ -73,12 +73,62 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante)
         {
             string consulta = "select "+
-                                " codigo, nroboleta, fechaGRA, horaGRA, fechaentrega, "+
-                                " horaentrega, personalsolicitud, montototal "+
+                                " codigo, nroboleta, "+
+                                " date_format(fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', horaGRA, "+
+                                " date_format(fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', horaentrega, "+
+                                " personalsolicitud, montototal "+
                                 " from  tbcorpal_solicitudentregaproducto pp "+
                                 " where "+
+                                " pp.estadosolicitud = 'Abierto' and " +
+                                " pp.estado = true and " +
                                 " pp.nroboleta like '%"+nroSolicitud+"%' and pp.`personalsolicitud` like '%"+solicitante+"%'";
             return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_datosSolicitudProductos(int codigoSolicitud)
+        {
+            string consulta = " select "+
+                                " pp.codigo, pp.producto, pp.medida , dse.cant as 'cantSolicitada', "+
+                                " dse.tiposolicitud, "+
+                                " ifnull(dse.cantentregada,0) as 'Cant_Entregada' "+
+                                " from tbcorpal_solicitudentregaproducto se , "+
+                                " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
+                                " where "+                                
+                                " se.codigo = dse.codsolicitud and "+
+                                " dse.codproducto = pp.codigo and "+
+                                " se.codigo = "+codigoSolicitud;
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal bool eliminarSolicitud(int codigoSolicitud)
+        {
+            string consulta = "update tbcorpal_solicitudentregaproducto " +
+                              " set tbcorpal_solicitudentregaproducto.estado = false, " +
+                              "  tbcorpal_solicitudentregaproducto.estadosolicitud = 'Cerrado' " +
+                              " where tbcorpal_solicitudentregaproducto.codigo = " + codigoSolicitud;
+            return conexion.ejecutarMySql(consulta);
+        }
+
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado)
+        {
+            string consulta = "update tbcorpal_detalle_solicitudproducto "+
+                                " set tbcorpal_detalle_solicitudproducto.cantentregada = '"+cantEntregado.ToString().Replace(',','.')+"'"+
+                                " where "+
+                                " tbcorpal_detalle_solicitudproducto.codsolicitud = "+codigoSolicitud+" and "+
+                                " tbcorpal_detalle_solicitudproducto.codproducto ="+codigoP;
+            return conexion.ejecutarMySql(consulta);
+        }
+
+        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable)
+        {
+            string consulta = "update tbcorpal_solicitudentregaproducto "+
+                                " set tbcorpal_solicitudentregaproducto.estadosolicitud = 'Cerrado' , "+
+                                " tbcorpal_solicitudentregaproducto.fechacierre = current_date(), "+
+                                " tbcorpal_solicitudentregaproducto.horacierre = current_time(), "+
+                                " tbcorpal_solicitudentregaproducto.codperentregoproducto = "+codresponsable+", "+
+                                " tbcorpal_solicitudentregaproducto.personalentregoproducto = '"+nombreResponsable+"' "+
+                                " where tbcorpal_solicitudentregaproducto.codigo =  "+codigoSolicitud ;
+            return conexion.ejecutarMySql(consulta);
         }
     }
 }

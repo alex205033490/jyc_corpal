@@ -200,7 +200,7 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "select  " +
                             " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  cliente, " +
-                            " monto, moneda,  chequenro,  concepto,  detalle, responsable " +
+                            " monto, moneda,  chequenro,  concepto,  detalle, responsable,nrorecibo " +
                             " from tbcorpal_reciboingreso rr " +
                             " where " +
                             " rr.estadoingreso = true and " +
@@ -214,7 +214,8 @@ namespace jycboliviaASP.net.Datos
                                 " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  pagadoha, " +
                                 " monto, moneda,  chequenro, banco, efectivo, " +
                                 " concepto,  detalle, responsable, porcentajeretencioniue, " +
-                                " porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar " +
+                                " porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar," +
+                                "  nrorecibo, responsable as 'realizadopor' "+
                                 " from tbcorpal_reciboegreso rr " +
                                 " where " +
                                 " rr.estadoegreso = true and " +
