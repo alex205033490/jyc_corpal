@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_ProductosAlmacen" targetNamespace="http://tempuri.org/DS_ProductosAlmacen.xsd" xmlns:mstns="http://tempuri.org/DS_ProductosAlmacen.xsd" xmlns="http://tempuri.org/DS_ProductosAlmacen.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_ProductosAlmacen" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_ProductosAlmacen" msprop:Generator_UserDSName="DS_ProductosAlmacen">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ds_PedidoAlmacen" msprop:Generator_TableClassName="ds_PedidoAlmacenDataTable" msprop:Generator_TableVarName="tableds_PedidoAlmacen" msprop:Generator_TablePropName="ds_PedidoAlmacen" msprop:Generator_RowDeletingName="ds_PedidoAlmacenRowDeleting" msprop:Generator_RowChangingName="ds_PedidoAlmacenRowChanging" msprop:Generator_RowEvHandlerName="ds_PedidoAlmacenRowChangeEventHandler" msprop:Generator_RowDeletedName="ds_PedidoAlmacenRowDeleted" msprop:Generator_UserTableName="ds_PedidoAlmacen" msprop:Generator_RowChangedName="ds_PedidoAlmacenRowChanged" msprop:Generator_RowEvArgName="ds_PedidoAlmacenRowChangeEvent" msprop:Generator_RowClassName="ds_PedidoAlmacenRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="producto" msprop:Generator_ColumnVarNameInTable="columnproducto" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_UserColumnName="producto" type="xs:string" minOccurs="0" />
+              <xs:element name="medida" msprop:Generator_ColumnVarNameInTable="columnmedida" msprop:Generator_ColumnPropNameInRow="medida" msprop:Generator_ColumnPropNameInTable="medidaColumn" msprop:Generator_UserColumnName="medida" type="xs:string" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:string" minOccurs="0" />
+              <xs:element name="tiposolicitud" msprop:Generator_ColumnVarNameInTable="columntiposolicitud" msprop:Generator_ColumnPropNameInRow="tiposolicitud" msprop:Generator_ColumnPropNameInTable="tiposolicitudColumn" msprop:Generator_UserColumnName="tiposolicitud" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

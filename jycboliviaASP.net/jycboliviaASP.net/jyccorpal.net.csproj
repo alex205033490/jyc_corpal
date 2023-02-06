@@ -127,6 +127,8 @@
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
@@ -574,6 +576,20 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.cs">
       <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
@@ -1331,6 +1347,7 @@
     <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionSeguros2.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_BoletasMantenimiento.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionCredinForm.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregadoProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboIngreso.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_ReporteEmergenciaCallCenter.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\detalle_facturaProveedoresComercial.rdlc" />
@@ -1356,6 +1373,7 @@
     <EmbeddedResource Include="Reportes\Reportes old\Report_LibroDiarioCobranza.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_R-144.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboPedidoProductos.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DS_CallCenter.xsc">
@@ -1401,6 +1419,13 @@
     </None>
     <None Include="DS_Mantenimiento.xss">
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ProductosAlmacen.xsc">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ProductosAlmacen.xsd" />
+    <None Include="DS_ProductosAlmacen.xss">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
     </None>
     <None Include="DS_Proyectos.xsc">
       <DependentUpon>DS_Proyectos.xsd</DependentUpon>
