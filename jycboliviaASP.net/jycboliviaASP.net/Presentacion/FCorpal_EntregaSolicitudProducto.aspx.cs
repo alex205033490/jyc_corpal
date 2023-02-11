@@ -135,7 +135,6 @@ namespace jycboliviaASP.net.Presentacion
                 if (cerrado == true) {
                     limpiarDatos();
                     buscarDatosSolicitud("", "");
-
                     Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
                     Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
                 }

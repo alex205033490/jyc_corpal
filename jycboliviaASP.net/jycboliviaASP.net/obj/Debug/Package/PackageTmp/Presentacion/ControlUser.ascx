@@ -54,6 +54,7 @@
             <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="A2" runat="server"><span>Ruta Entrega</span></a></li>    -->                                         
             <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><span>Solicitud Productos</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><span>Entrega Solicitud Productos</span></a></li>                                             
+            <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><span>Consulta Solicitud Productos</span></a></li>                                             
             
         </ul>
     </li>

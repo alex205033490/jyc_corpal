@@ -126,6 +126,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
+    <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
@@ -569,6 +570,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.designer.cs">
       <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaProducto_SolicitudEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaProducto_SolicitudEntrega.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.cs">
       <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
@@ -1343,6 +1351,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Reportes\Report_ConsultaReciboEgreso.rdlc" />
     <EmbeddedResource Include="Reportes\Report_consultaReciboIngreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitadosEntregados.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboEgreso.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionSeguros2.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_BoletasMantenimiento.rdlc" />
@@ -1615,7 +1624,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49879</DevelopmentServerPort>
+          <DevelopmentServerPort>55608</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

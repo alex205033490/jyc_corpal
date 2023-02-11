@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
+using jycboliviaASP.net.Negocio;
+using System.Data;
+using Microsoft.Reporting.WebForms;
+using System.Configuration;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -37,7 +41,41 @@ namespace jycboliviaASP.net.Presentacion
 
         private void mostrarSolicitudProducto(int codigoSolicitudProducto)
         {
-            throw new NotImplementedException();
+            NCorpal_SolicitudEntregaProducto nie = new NCorpal_SolicitudEntregaProducto();
+            DataSet datoResult = nie.get_entregaSolicitudProductos(codigoSolicitudProducto);
+                        
+            string nrodocumento = datoResult.Tables[0].Rows[0][1].ToString();
+            string fechasolicitud = datoResult.Tables[0].Rows[0][2].ToString();
+            string horasolicitud = datoResult.Tables[0].Rows[0][3].ToString();
+            string nombresolicitante = datoResult.Tables[0].Rows[0][4].ToString();
+
+
+            DataSet tuplasFilas = nie.get_productosSolicitudProducto(codigoSolicitudProducto);
+            DataTable DSProductosAlmacen = tuplasFilas.Tables[0];
+
+            ReportParameter p_nrocomprobante = new ReportParameter("p_nrodocumento", nrodocumento);
+            ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechasolicitud);
+            ReportParameter p_nombresolicitante = new ReportParameter("p_nombresolicitante", nombresolicitante);
+            ReportParameter p_horasolicitud = new ReportParameter("p_horasolicitud", horasolicitud);
+            ReportDataSource DS_ProductosAlmacen = new ReportDataSource("DS_ProductosAlmacen", DSProductosAlmacen);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_SolicitudProducto"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+
+            ReportViewer1.LocalReport.SetParameters(p_nrocomprobante);
+            ReportViewer1.LocalReport.SetParameters(p_fechasolicitud);
+            ReportViewer1.LocalReport.SetParameters(p_horasolicitud);
+            ReportViewer1.LocalReport.SetParameters(p_nombresolicitante);            
+            ReportViewer1.LocalReport.DataSources.Add(DS_ProductosAlmacen);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+            
         }
     }
 }

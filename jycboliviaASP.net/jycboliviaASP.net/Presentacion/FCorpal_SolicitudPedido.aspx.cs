@@ -215,8 +215,10 @@ namespace jycboliviaASP.net.Presentacion
                     */
                     limpiarDatos();
                     buscarProductos("");
+                    Session["codigoSolicitudProducto"] = ultimoinsertado;
+                    Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
 
-                    Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
+                    //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                 }
                 else
                     Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");

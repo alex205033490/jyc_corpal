@@ -130,5 +130,77 @@ namespace jycboliviaASP.net.Datos
                                 " where tbcorpal_solicitudentregaproducto.codigo =  "+codigoSolicitud ;
             return conexion.ejecutarMySql(consulta);
         }
+
+        internal DataSet get_entregaSolicitudProductos(int codigoEntregaSolicitudProducto)
+        {
+            string consulta = "select "+
+                                " pp.codigo, pp.nroboleta, "+
+                                " date_format(pp.fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', pp.horaentrega, "+
+                                " pp.personalsolicitud, pp.personalentregoproducto "+
+                                " from  tbcorpal_solicitudentregaproducto pp "+
+                                " where "+
+                                " pp.codigo = "+codigoEntregaSolicitudProducto;
+            return conexion.consultaMySql(consulta);
+        }
+
+        
+
+        internal DataSet get_productosEngregaSolicitudProducto(int codigoEntregaSolicitudProducto)
+        {
+            string consulta = "select "+
+                                " pp.producto, pp.medida , "+
+                                " dse.cantentregada as 'cantidad', "+
+                                " dse.tiposolicitud "+
+                                " from tbcorpal_solicitudentregaproducto se , "+
+                                " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
+                                " where "+
+                                " se.codigo = dse.codsolicitud and "+
+                                " dse.codproducto = pp.codigo and "+
+                                " se.codigo = " + codigoEntregaSolicitudProducto;
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_productosSolicitudProducto(int codigoSolicitudProducto)
+        {
+            string consulta = "select " +
+                                " pp.producto, pp.medida , " +
+                                " dse.cant as 'cantidad', " +
+                                " dse.tiposolicitud " +
+                                " from tbcorpal_solicitudentregaproducto se , " +
+                                " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp " +
+                                " where " +
+                                " se.codigo = dse.codsolicitud and " +
+                                " dse.codproducto = pp.codigo and " +
+                                " se.codigo = " + codigoSolicitudProducto;
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta)
+        {
+            string consulta = " select "+
+                                " se.codigo, "+
+                                " se.nroboleta, "+
+                                " date_format(se.fechaGRA,'%d/%m/%Y') as 'fecha_Gra', "+
+                                " se.horaGRA, "+
+                                " date_format(se.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', "+
+                                " se.horaentrega, "+
+                                " se.personalsolicitud, "+ 
+                                " pp.producto, pp.medida , "+ 
+                                " dse.cant as 'cantidad', "+                                 
+                                " dse.tiposolicitud, "+
+                                " se.personalentregoproducto, "+
+                                " date_format(se.fechacierre,'%d/%m/%Y') as 'fecha_Cierre', "+
+                                " se.horacierre, "+
+                                " se.estadosolicitud, "+
+                                " dse.cantentregada " +
+                                " from tbcorpal_solicitudentregaproducto se , "+ 
+                                " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
+                                " where "+
+                                " se.codigo = dse.codsolicitud and "+
+                                " dse.codproducto = pp.codigo and "+
+                                " se.estado = 1 and "+
+                                " se.fechaGRA BETWEEN "+fechadesde+" and "+fechahasta;
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

@@ -14,7 +14,7 @@
            Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
            WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="800px" 
            Height="645px" style="margin-right: 0px">
-           <LocalReport ReportPath="Reportes\Report_ReciboIngreso.rdlc" 
+           <LocalReport ReportPath="Reportes\Report_ReciboEntregadoProductos.rdlc" 
                EnableExternalImages="True">
            </LocalReport>
        </rsweb:ReportViewer>
