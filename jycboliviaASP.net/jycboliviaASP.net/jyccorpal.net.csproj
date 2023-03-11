@@ -1349,6 +1349,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitados_VS_Entregados.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaReciboEgreso.rdlc" />
     <EmbeddedResource Include="Reportes\Report_consultaReciboIngreso.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitadosEntregados.rdlc" />

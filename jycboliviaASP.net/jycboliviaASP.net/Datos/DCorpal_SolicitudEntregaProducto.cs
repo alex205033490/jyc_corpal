@@ -202,5 +202,38 @@ namespace jycboliviaASP.net.Datos
                                 " se.fechaGRA BETWEEN "+fechadesde+" and "+fechahasta;
             return conexion.consultaMySql(consulta);
         }
+
+        internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(string fechadesde, string fechahasta)
+        {
+            string consulta = "select "+ 
+                               " pp.codigo, "+
+                               " pp.producto, "+
+                               " pp.medida, "+
+                               " ifnull(t1.cantidadsolicitado,0) as 'CantidadSolicitada', "+
+                               " ifnull(t1.cantidadEntregada,0) as 'Cantidad_Entregada', "+
+                               " ifnull(t1.precio,0) as 'PrecioUnidad', "+
+                               " ifnull((t1.cantidadsolicitado * t1.precio),0) as 'MontoSolicitado', "+
+                               " ifnull((t1.cantidadEntregada * t1.precio),0) as 'MontoEntregado', "+
+                               " (ifnull((t1.cantidadsolicitado * t1.precio),0) "+
+                               " - "+
+                               " ifnull((t1.cantidadEntregada * t1.precio),0)) as 'Perdida' "+
+                               " from tbcorpal_producto pp "+ 
+                               " LEFT JOIN "+
+                               " ( "+
+                               " select "+  
+                               " dse.codproducto, "+
+                               " sum(dse.cant) as 'cantidadsolicitado' , "+
+                               " sum(dse.precio)  as 'precio', "+
+                               " sum(dse.cantentregada) as 'cantidadEntregada' "+
+                               " from tbcorpal_solicitudentregaproducto se, tbcorpal_detalle_solicitudproducto dse "+
+                               " where "+ 
+                               " se.codigo = dse.codsolicitud and "+
+                               " se.estadosolicitud = 'Cerrado' and "+
+                               " se.fechaentrega BETWEEN "+fechadesde+" and "+fechahasta+
+                               " group by dse.codproducto "+
+                               " )AS t1 "+
+                               " ON  (pp.codigo = t1.codproducto)";
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

@@ -16,3 +16,13 @@ D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net
 D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.compiled
 D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.dll
 D:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.pdb
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\jycboliviaASP.net.dll
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\jycboliviaASP.net.pdb
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.dll
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.pdb
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\bin\Gma.QrCodeNet.Encoding.xml
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jyccorpal.net.csprojResolveAssemblyReference.cache
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.cache
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.compiled
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.dll
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.pdb

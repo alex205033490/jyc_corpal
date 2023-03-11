@@ -33,6 +33,7 @@
 <td>
     <asp:DropDownList ID="dd_consulta" runat="server" Width="350px">
         <asp:ListItem>Detalle de Datos</asp:ListItem>
+        <asp:ListItem>Productos Solicitados Vs Entregados</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td></td>
