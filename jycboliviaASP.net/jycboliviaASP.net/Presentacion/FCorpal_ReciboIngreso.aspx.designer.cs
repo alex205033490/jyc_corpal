@@ -31,6 +31,33 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox tx_nroRecibo;
         
         /// <summary>
+        /// Label37 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label37;
+        
+        /// <summary>
+        /// tx_fechaingreso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_fechaingreso;
+        
+        /// <summary>
+        /// tx_fechaingreso_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender tx_fechaingreso_CalendarExtender;
+        
+        /// <summary>
         /// Label30 control.
         /// </summary>
         /// <remarks>
@@ -191,6 +218,15 @@ namespace jycboliviaASP.net.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_modificar;
+        
+        /// <summary>
+        /// bt_verRecibo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_verRecibo;
         
         /// <summary>
         /// bt_eliminar control.

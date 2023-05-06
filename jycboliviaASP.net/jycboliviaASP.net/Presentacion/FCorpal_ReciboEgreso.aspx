@@ -79,6 +79,21 @@
            </td>
         <td></td>
        </tr>   
+
+        <tr>
+        <td>
+            <asp:Label ID="Label5" runat="server" Text="Fecha:"></asp:Label>
+           </td>
+        <td>
+            <asp:TextBox ID="tx_fechaegreso" class="form-control" runat="server" 
+                Width="150px"></asp:TextBox>
+            <asp:CalendarExtender ID="tx_fechaegreso_CalendarExtender" runat="server" 
+                TargetControlID="tx_fechaegreso">
+            </asp:CalendarExtender>
+           </td>
+        <td></td>
+       </tr>  
+
         <tr>
         <td>
             <asp:Label ID="Label30" runat="server" Font-Size="Small" Text="Pagado ha :"></asp:Label>
@@ -235,10 +250,17 @@
                 <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>
+            
+            <td>
+                <asp:Button ID="bt_verEgreso" class="btn btn-light" runat="server" Text="Ver Egreso" 
+                    onclick="bt_verEgreso_Click" />
+            </td>
+            
             <td>
                 <asp:Button ID="bt_eliminar" class="btn btn-danger" runat="server" 
                     Text="Eliminar" onclick="bt_eliminar_Click" />
             </td>
+            
         </tr>
     </table>
 

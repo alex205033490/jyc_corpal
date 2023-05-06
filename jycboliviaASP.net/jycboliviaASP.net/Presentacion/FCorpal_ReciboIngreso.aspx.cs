@@ -47,6 +47,21 @@ namespace jycboliviaASP.net.Presentacion
             return npermiso.tienePermisoResponsable(permiso, codUser);
         }
 
+        public string convertidorFecha(string fecha)
+        {
+            if (fecha != "")
+            {
+                DateTime fecha_ = Convert.ToDateTime(fecha);
+                int dia = fecha_.Day;
+                int mes = fecha_.Month;
+                int anio = fecha_.Year;
+                string _fecha = anio + "/" + mes + "/" + dia;
+                return "'" + _fecha + "'";
+            }
+            else
+                return "null";
+        }
+
         protected void bt_insertar_Click(object sender, EventArgs e)
         {
             insertarDAtos();
@@ -60,7 +75,8 @@ namespace jycboliviaASP.net.Presentacion
             string  moneda = dd_moneda.SelectedItem.Text; 
             string chequenro = tx_chequenro.Text; 
             string concepto = tx_concepto.Text;
-            string detalle = tx_detalle.Text; 
+            string detalle = tx_detalle.Text;
+            string fechaRecibo = convertidorFecha(tx_fechaingreso.Text);
 
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
@@ -74,7 +90,7 @@ namespace jycboliviaASP.net.Presentacion
             NA_Recibo_IngresoEgreso nrr = new NA_Recibo_IngresoEgreso();
             string NroReciboAux = nrr.get_nroRegistroIngresoSiguiente(codUser);
             string nroRecibo = NroReciboAux;
-            bool bandera = nrr.insertarReciboIngreso(cliente, monto, moneda, chequenro, concepto, detalle, codUser, responsable, facturanro, nroRecibo);
+            bool bandera = nrr.insertarReciboIngreso(cliente, monto, moneda, chequenro, concepto, detalle, codUser, responsable, facturanro, nroRecibo, fechaRecibo);
             if(bandera){
                 limpiarDatos();
                 buscarDatos("", codUser);
@@ -104,6 +120,7 @@ namespace jycboliviaASP.net.Presentacion
                 string chequenro = tx_chequenro.Text;
                 string concepto = tx_concepto.Text;
                 string detalle = tx_detalle.Text;
+                string fecharecibo = convertidorFecha(tx_fechaingreso.Text);
 
                 NA_Responsables Nresp = new NA_Responsables();
                 string usuarioAux = Session["NameUser"].ToString();
@@ -115,7 +132,7 @@ namespace jycboliviaASP.net.Presentacion
                 string facturanro = tx_nroFactura.Text;
 
                 NA_Recibo_IngresoEgreso nrr = new NA_Recibo_IngresoEgreso();
-                bool bandera = nrr.modificarReciboIngreso(codigo, cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro);
+                bool bandera = nrr.modificarReciboIngreso(codigo, cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro, fecharecibo);
                 if (bandera)
                 {
                     limpiarDatos();
@@ -173,6 +190,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_concepto.Text = "";
             tx_detalle.Text = "";
             tx_nroFactura.Text = "";
+            tx_fechaingreso.Text = "";
         }
 
         protected void bt_buscar_Click(object sender, EventArgs e)
@@ -212,7 +230,23 @@ namespace jycboliviaASP.net.Presentacion
                 tx_concepto.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[8].Text;
                 tx_detalle.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[9].Text;
                 tx_nroFactura.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[11].Text;
-                tx_nroFactura.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[12].Text;
+                tx_nroRecibo.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[12].Text;
+                tx_fechaingreso.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[13].Text;
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            VerRecibo();
+        }
+
+        private void VerRecibo()
+        {
+            if(gv_reciboIngresoEgreso.SelectedIndex > -1){
+                int codigo;
+                int.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[1].Text ,out codigo);
+                Session["codigoReciboIngreso"] = codigo;
+                Response.Redirect("../Presentacion/FCorpal_ReporteReciboIngreso.aspx");            
             }
         }
 

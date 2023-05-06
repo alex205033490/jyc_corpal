@@ -13,34 +13,34 @@ namespace jycboliviaASP.net.Datos
 
         public DA_Recibo_IngresoEgreso() { }
 
-        public bool insertarReciboIngreso(string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string nrorecibo)
+        public bool insertarReciboIngreso(string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string nrorecibo, string fecharecibo)
         {
             string consulta = "insert into tbcorpal_reciboingreso ( " +
                              " fechagra,  horagra,  cliente,  monto, "+
                              " moneda,  chequenro,  concepto,  detalle, "+
-                             " fechamod,  horamod,  codrespgra,  responsable,tipo,estadoingreso,facturanro,nrorecibo " + 
+                             " fechamod,  horamod,  codrespgra,  responsable,tipo,estadoingreso,facturanro,nrorecibo,fecharecibo " + 
                               "  ) values( "+
                              " current_date,  current_time,  '" + cliente + "',  '" + monto.ToString().Replace(',', '.') + "', " +
                              " '"+moneda+"',  '"+chequenro+"',  '"+concepto+"',  '"+detalle+"', "+
-                             " current_date,  current_time,  " + codrespgra + ",  '" + responsable + "','Ingreso',1,'" + facturanro + "', '"+nrorecibo+"' )";
+                             " current_date,  current_time,  " + codrespgra + ",  '" + responsable + "','Ingreso',1,'" + facturanro + "', '" + nrorecibo + "' ," + fecharecibo + ")";
                 return ConecRes.ejecutarMySql(consulta);
         }
 
-        public bool insertarReciboEgreso(string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string nrorecibo)
+        public bool insertarReciboEgreso(string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string nrorecibo, string fechaegreso)
         {
             string consulta = "insert into tbcorpal_reciboegreso ( " +
                              " fechagra,  horagra,  pagadoha,  monto, " +
                              " moneda,  chequenro,  concepto,  detalle, " +
-                             " fechamod,  horamod,  codrespgra,  responsable, tipo, estadoegreso, banco, efectivo,porcentajeretencioniue,porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar, facturanro, nrorecibo " +
+                             " fechamod,  horamod,  codrespgra,  responsable, tipo, estadoegreso, banco, efectivo,porcentajeretencioniue,porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar, facturanro, nrorecibo, fechaegreso " +
                               "  ) values( " +
                              " current_date,  current_time,  '" + pagadoha + "',  '" + monto.ToString().Replace(',', '.') + "', " +
                              " '" + moneda + "',  '" + chequenro + "',  '" + concepto + "',  '" + detalle + "', " +
                              " current_date,  current_time,  "+codrespgra+",  '" + responsable + "','Egreso',1 , '" + banco + "', "+efectivo+", "+
-                             " '" + porcentajeretencioniue.ToString().Replace(',', '.') + "','" + porcentajeretencionit.ToString().Replace(',', '.') + "','" + retencioniuebs.ToString().Replace(',', '.') + "','" + retencionitbs.ToString().Replace(',', '.') + "','" + totalapagar.ToString().Replace(',', '.') + "', '" + facturanro + "', '" + nrorecibo + "' )";
+                             " '" + porcentajeretencioniue.ToString().Replace(',', '.') + "','" + porcentajeretencionit.ToString().Replace(',', '.') + "','" + retencioniuebs.ToString().Replace(',', '.') + "','" + retencionitbs.ToString().Replace(',', '.') + "','" + totalapagar.ToString().Replace(',', '.') + "', '" + facturanro + "', '" + nrorecibo + "', " + fechaegreso + " )";
             return ConecRes.ejecutarMySql(consulta);
         }
 
-        public bool modificarReciboIngreso(int codigo, string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro)
+        public bool modificarReciboIngreso(int codigo, string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string fecharecibo)
         {
             string consulta = "update tbcorpal_reciboingreso set " +
                                      " tbcorpal_reciboingreso.cliente = '" + cliente + "', " +
@@ -53,14 +53,15 @@ namespace jycboliviaASP.net.Datos
                                      " tbcorpal_reciboingreso.horamod = current_time, " +
                                      " tbcorpal_reciboingreso.codrespgra = " + codrespgra + ", " +
                                      " tbcorpal_reciboingreso.responsable = '" + responsable + "', " +
-                                     "tbcorpal_reciboingreso.facturanro='" + facturanro + "'  " +
+                                     " tbcorpal_reciboingreso.facturanro='" + facturanro + "',  " +
+                                     " tbcorpal_reciboingreso.fecharecibo=" + fecharecibo + 
                                      " where "+
                                      " tbcorpal_reciboingreso.codigo = " + codigo;
 
                      return ConecRes.ejecutarMySql(consulta);           
         }
 
-        public bool modificarReciboEgreso(int codigo, string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro)
+        public bool modificarReciboEgreso(int codigo, string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string fechaegreso)
         {
             string consulta = "update tbcorpal_reciboegreso set "+
                                 " tbcorpal_reciboegreso.fechamod = current_date(), "+ 
@@ -80,7 +81,8 @@ namespace jycboliviaASP.net.Datos
                                 " tbcorpal_reciboegreso.retencioniuebs = '" + retencioniuebs.ToString().Replace(',', '.') + "', " +
                                 " tbcorpal_reciboegreso.retencionitbs = '" + retencionitbs.ToString().Replace(',', '.') + "', " +
                                 " tbcorpal_reciboegreso.totalapagar = '" + totalapagar.ToString().Replace(',', '.') + "', " +
-                                " tbcorpal_reciboegreso.facturanro = '" + facturanro + "' " +
+                                " tbcorpal_reciboegreso.facturanro = '" + facturanro + "', " +
+                                " tbcorpal_reciboegreso.fechaegreso = " + fechaegreso +
                                 " where "+
                                 " tbcorpal_reciboegreso.codigo = "+codigo;
 
@@ -118,7 +120,8 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = " select  " +
                             " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  cliente, " +
-                            " monto, moneda,  chequenro,  concepto,  detalle, responsable,facturanro,nrorecibo " +
+                            " monto, moneda,  chequenro,  concepto,  detalle, responsable, facturanro, nrorecibo, "+
+                            " date_format(fecharecibo,'%d/%m/%Y') as 'Fecha Recibo' " +
                             " from tbcorpal_reciboingreso rr " +
                             " where "+
                             " rr.estadoingreso = true and "+                                                       
@@ -134,7 +137,8 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select "+ 
                                 " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  pagadoha, "+ 
                                 " monto, moneda,  chequenro, banco, efectivo, "+
-                                " concepto,  detalle, responsable,porcentajeretencioniue,porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar,facturanro, nroRecibo " + 
+                                " concepto,  detalle, responsable,porcentajeretencioniue,porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar,facturanro, nroRecibo, " + 
+                                " date_format(fechaegreso,'%d/%m/%Y') as 'Fecha Egreso' "+
                                 " from tbcorpal_reciboegreso rr "+
                                 " where "+
                                 " rr.estadoegreso = true and "+
@@ -149,7 +153,7 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = " select  " +
                             " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  cliente, " +
-                            " monto, moneda,  chequenro,  concepto,  detalle, responsable,facturanro,nrorecibo " +
+                            " monto, moneda,  chequenro,  concepto,  detalle, responsable, facturanro, nrorecibo, fecharecibo " +
                             " from tbcorpal_reciboingreso rr " +
                             " where " +
                             " rr.estadoingreso = true and " +
@@ -163,7 +167,8 @@ namespace jycboliviaASP.net.Datos
                                 " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  pagadoha, " +
                                 " monto, moneda,  chequenro, banco, efectivo, " +
                                 " concepto,  detalle, responsable, porcentajeretencioniue, " +
-                                " porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar,facturanro,nrorecibo " +
+                                " porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar,facturanro,nrorecibo, " +
+                                " date_format(fechaegreso,'%d/%m/%Y') as 'Fecha Egreso' "+
                                 " from tbcorpal_reciboegreso rr " +
                                 " where " +
                                 " rr.estadoegreso = true and " +

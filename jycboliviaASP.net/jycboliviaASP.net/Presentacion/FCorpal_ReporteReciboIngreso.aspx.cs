@@ -49,7 +49,8 @@ namespace jycboliviaASP.net.Presentacion
             //string nroboleta = datoResult.Tables[0].Rows[0][0].ToString();
             string nroboleta = datoResult.Tables[0].Rows[0][11].ToString();
 
-            string fecha = datoResult.Tables[0].Rows[0][1].ToString();
+            //string fecha = datoResult.Tables[0].Rows[0][1].ToString();
+            string fecha = datoResult.Tables[0].Rows[0][12].ToString();
             string cliente = datoResult.Tables[0].Rows[0][3].ToString();
             float montotal;
             float.TryParse(datoResult.Tables[0].Rows[0][4].ToString(), out montotal);

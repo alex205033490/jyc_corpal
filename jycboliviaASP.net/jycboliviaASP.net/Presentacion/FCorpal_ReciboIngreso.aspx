@@ -82,7 +82,21 @@
                 Width="150px" Enabled="False"></asp:TextBox>
            </td>
         <td></td>
-       </tr>   
+       </tr>  
+       
+       <tr>
+       <td>
+            <asp:Label ID="Label37" runat="server" Text="Fecha:"></asp:Label>
+           </td>
+       <td>
+           <asp:TextBox ID="tx_fechaingreso" runat="server" class="form-control" Width="150px"></asp:TextBox>
+           <asp:CalendarExtender ID="tx_fechaingreso_CalendarExtender" runat="server" 
+               TargetControlID="tx_fechaingreso">
+           </asp:CalendarExtender>
+           </td>
+       <td></td>       
+       </tr> 
+
         <tr>
         <td>
             <asp:Label ID="Label30" runat="server" Font-Size="Small" Text="Cliente :"></asp:Label>
@@ -179,10 +193,17 @@
                 <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>
+
+            <td>
+                <asp:Button ID="bt_verRecibo" class="btn btn-light" runat="server" Text="Ver Recibo" 
+                    onclick="Button1_Click" />
+            </td>
+
             <td>
                 <asp:Button ID="bt_eliminar" class="btn btn-danger" runat="server" 
                     Text="Eliminar" onclick="bt_eliminar_Click" />
             </td>
+            
         </tr>
     </table>
 

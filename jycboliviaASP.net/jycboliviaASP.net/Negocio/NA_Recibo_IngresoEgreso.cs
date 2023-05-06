@@ -12,25 +12,25 @@ namespace jycboliviaASP.net.Negocio
         DA_Recibo_IngresoEgreso nrr = new DA_Recibo_IngresoEgreso();
         public NA_Recibo_IngresoEgreso() { }
 
-        public bool insertarReciboIngreso(string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string nrorecibo)
+        public bool insertarReciboIngreso(string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string nrorecibo, string fecharecibo)
         {
-            return nrr.insertarReciboIngreso(cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro, nrorecibo);
+            return nrr.insertarReciboIngreso(cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro, nrorecibo,  fecharecibo);
         }
 
-        public bool insertarReciboEgreso(string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string nrorecibo)
+        public bool insertarReciboEgreso(string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string nrorecibo, string fechaegreso)
         {
-            return nrr.insertarReciboEgreso(pagadoha, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, banco, efectivo, porcentajeretencioniue, porcentajeretencionit, retencioniuebs, retencionitbs, totalapagar, facturanro, nrorecibo);
+            return nrr.insertarReciboEgreso(pagadoha, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, banco, efectivo, porcentajeretencioniue, porcentajeretencionit, retencioniuebs, retencionitbs, totalapagar, facturanro, nrorecibo, fechaegreso);
         }
 
 
-        public bool modificarReciboIngreso(int codigo, string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro)
+        public bool modificarReciboIngreso(int codigo, string cliente, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string facturanro, string fecharecibo)
         {
-            return nrr.modificarReciboIngreso(codigo, cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro);
+            return nrr.modificarReciboIngreso(codigo, cliente, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, facturanro, fecharecibo);
         }
 
-        public bool modificarReciboEgreso(int codigo, string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro)
+        public bool modificarReciboEgreso(int codigo, string pagadoha, float monto, string moneda, string chequenro, string concepto, string detalle, int codrespgra, string responsable, string banco, bool efectivo, float porcentajeretencioniue, float porcentajeretencionit, float retencioniuebs, float retencionitbs, float totalapagar, string facturanro, string fechaegreso)
         {
-            return nrr.modificarReciboEgreso(codigo, pagadoha, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, banco, efectivo, porcentajeretencioniue, porcentajeretencionit, retencioniuebs, retencionitbs, totalapagar, facturanro);
+            return nrr.modificarReciboEgreso(codigo, pagadoha, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, banco, efectivo, porcentajeretencioniue, porcentajeretencionit, retencioniuebs, retencionitbs, totalapagar, facturanro, fechaegreso);
         }
 
         public bool eliminarIngreso(int codigo)
