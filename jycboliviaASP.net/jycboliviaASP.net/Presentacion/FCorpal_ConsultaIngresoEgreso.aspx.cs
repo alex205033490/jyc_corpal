@@ -8,6 +8,8 @@ using jycboliviaASP.net.Negocio;
 using System.Configuration;
 using Microsoft.Reporting.WebForms;
 using System.Data;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -27,6 +29,26 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        // webservice que me permite la autocompletacion
+        [WebMethod]
+        [ScriptMethod]
+        // se devuelve un arreglo con la informacion
+        public static string[] GetlistaResponsable2(string prefixText, int count)
+        {
+            string nombreResponsable = prefixText;
+
+            NA_Responsables Nrespon = new NA_Responsables();
+            DataSet tuplas = Nrespon.mostrarTodos_AutoComplit(nombreResponsable);
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+            int fin = tuplas.Tables[0].Rows.Count;
+
+            for (int i = 0; i < fin; i++)
+            {
+                lista[i] = tuplas.Tables[0].Rows[i][0].ToString();
+            }
+
+            return lista;
+        }
 
         private bool tienePermisoDeIngreso(int permiso)
         {
@@ -56,13 +78,13 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        private void get_LibroDiarioIngreso(string fecha1, string fecha2 )
+        private void get_LibroDiarioIngreso(string fecha1, string fecha2, string responsable )
         {
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_consultaReciboIngreso.rdlc";
 
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
-            DataSet consulta1 = nre.get_allreciboIngreso(fecha1, fecha2);
+            DataSet consulta1 = nre.get_allreciboIngreso(fecha1, fecha2, responsable);
             DataTable DSconsulta = consulta1.Tables[0];
 
             ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
@@ -86,19 +108,20 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.DataSources.Clear();
             string fechadesde = convertidorFecha(tx_desdeFecha.Text);
             string fechahasta = convertidorFecha(tx_hastaFecha.Text);
-          //  int codigoCobrador = Convert.ToInt32(dd_cobrador.SelectedValue.ToString());
-          //  string nombreCobrador = dd_cobrador.SelectedItem.Text;
+            string responsable = tx_responsable.Text;
+            //  int codigoCobrador = Convert.ToInt32(dd_cobrador.SelectedValue.ToString());
+          
 
             if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null") )
             {
                 if (dd_consulta.SelectedIndex == 0)
                 {
-                    get_LibroDiarioIngreso(fechadesde, fechahasta);
+                    get_LibroDiarioIngreso(fechadesde, fechahasta, responsable);
                 }
 
                 if (dd_consulta.SelectedIndex == 1)
                 {
-                    get_LibroDiarioEgreso(fechadesde, fechahasta);
+                    get_LibroDiarioEgreso(fechadesde, fechahasta, responsable);
                 }
 
             }
@@ -106,13 +129,13 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
         }
 
-        private void get_LibroDiarioEgreso(string fechadesde, string fechahasta)
+        private void get_LibroDiarioEgreso(string fechadesde, string fechahasta, string responsable)
         {
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_ConsultaReciboEgreso.rdlc";
 
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
-            DataSet consulta1 = nre.get_allreciboEgreso(fechadesde, fechahasta);
+            DataSet consulta1 = nre.get_allreciboEgreso(fechadesde, fechahasta, responsable);
             DataTable DSconsulta = consulta1.Tables[0];
 
             ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);

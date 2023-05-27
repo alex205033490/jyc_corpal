@@ -354,6 +354,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnrealizadopor;
             
+            private global::System.Data.DataColumn columnFecha_Recibo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DS_ReciboEgresoDataTable() {
@@ -549,6 +551,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Fecha_ReciboColumn {
+                get {
+                    return this.columnFecha_Recibo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -604,7 +614,8 @@ namespace jycboliviaASP.net {
                         string totalapagar, 
                         string facturanro, 
                         string nrorecibo, 
-                        string realizadopor) {
+                        string realizadopor, 
+                        string Fecha_Recibo) {
                 DS_ReciboEgresoRow rowDS_ReciboEgresoRow = ((DS_ReciboEgresoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -626,7 +637,8 @@ namespace jycboliviaASP.net {
                         totalapagar,
                         facturanro,
                         nrorecibo,
-                        realizadopor};
+                        realizadopor,
+                        Fecha_Recibo};
                 rowDS_ReciboEgresoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_ReciboEgresoRow);
                 return rowDS_ReciboEgresoRow;
@@ -669,6 +681,7 @@ namespace jycboliviaASP.net {
                 this.columnfacturanro = base.Columns["facturanro"];
                 this.columnnrorecibo = base.Columns["nrorecibo"];
                 this.columnrealizadopor = base.Columns["realizadopor"];
+                this.columnFecha_Recibo = base.Columns["Fecha_Recibo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -714,6 +727,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnnrorecibo);
                 this.columnrealizadopor = new global::System.Data.DataColumn("realizadopor", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrealizadopor);
+                this.columnFecha_Recibo = new global::System.Data.DataColumn("Fecha_Recibo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFecha_Recibo);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -871,6 +886,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnnrorecibo;
             
+            private global::System.Data.DataColumn columnFecha_Recibo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DS_RecioIngresoDataTable() {
@@ -1002,6 +1019,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Fecha_ReciboColumn {
+                get {
+                    return this.columnFecha_Recibo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1037,7 +1062,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DS_RecioIngresoRow AddDS_RecioIngresoRow(string codigo, string Fecha_Gra, string horagra, string cliente, string monto, string moneda, string chequenro, string concepto, string detalle, string responsable, string facturanro, string nrorecibo) {
+            public DS_RecioIngresoRow AddDS_RecioIngresoRow(string codigo, string Fecha_Gra, string horagra, string cliente, string monto, string moneda, string chequenro, string concepto, string detalle, string responsable, string facturanro, string nrorecibo, string Fecha_Recibo) {
                 DS_RecioIngresoRow rowDS_RecioIngresoRow = ((DS_RecioIngresoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -1051,7 +1076,8 @@ namespace jycboliviaASP.net {
                         detalle,
                         responsable,
                         facturanro,
-                        nrorecibo};
+                        nrorecibo,
+                        Fecha_Recibo};
                 rowDS_RecioIngresoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_RecioIngresoRow);
                 return rowDS_RecioIngresoRow;
@@ -1086,6 +1112,7 @@ namespace jycboliviaASP.net {
                 this.columnresponsable = base.Columns["responsable"];
                 this.columnfacturanro = base.Columns["facturanro"];
                 this.columnnrorecibo = base.Columns["nrorecibo"];
+                this.columnFecha_Recibo = base.Columns["Fecha_Recibo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1115,6 +1142,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnfacturanro);
                 this.columnnrorecibo = new global::System.Data.DataColumn("nrorecibo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnrorecibo);
+                this.columnFecha_Recibo = new global::System.Data.DataColumn("Fecha_Recibo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFecha_Recibo);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1579,6 +1608,22 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Fecha_Recibo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ReciboEgreso.Fecha_ReciboColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Fecha_Recibo\' in table \'DS_ReciboEgreso\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ReciboEgreso.Fecha_ReciboColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_ReciboEgreso.codigoColumn);
             }
@@ -1816,6 +1861,18 @@ namespace jycboliviaASP.net {
             public void SetrealizadoporNull() {
                 this[this.tableDS_ReciboEgreso.realizadoporColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFecha_ReciboNull() {
+                return this.IsNull(this.tableDS_ReciboEgreso.Fecha_ReciboColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFecha_ReciboNull() {
+                this[this.tableDS_ReciboEgreso.Fecha_ReciboColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -2026,6 +2083,22 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Fecha_Recibo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_RecioIngreso.Fecha_ReciboColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Fecha_Recibo\' in table \'DS_RecioIngreso\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_RecioIngreso.Fecha_ReciboColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_RecioIngreso.codigoColumn);
             }
@@ -2166,6 +2239,18 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetnroreciboNull() {
                 this[this.tableDS_RecioIngreso.nroreciboColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFecha_ReciboNull() {
+                return this.IsNull(this.tableDS_RecioIngreso.Fecha_ReciboColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFecha_ReciboNull() {
+                this[this.tableDS_RecioIngreso.Fecha_ReciboColumn] = global::System.Convert.DBNull;
             }
         }
         

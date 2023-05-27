@@ -87,14 +87,14 @@ namespace jycboliviaASP.net.Negocio
             return nrr.getDatosReciboEgreso( codigoReciboEgreso);
         }
 
-        internal DataSet get_allreciboIngreso(string fecha1, string fecha2)
+        internal DataSet get_allreciboIngreso(string fecha1, string fecha2, string responsable)
         {
-            return nrr.get_allreciboIngreso(fecha1, fecha2);
+            return nrr.get_allreciboIngreso(fecha1, fecha2, responsable);
         }
 
-        internal DataSet get_allreciboEgreso(string fecha1, string fecha2)
+        internal DataSet get_allreciboEgreso(string fecha1, string fecha2, string responsable)
         { 
-            return nrr.get_allreciboEgreso( fecha1,  fecha2);
+            return nrr.get_allreciboEgreso( fecha1,  fecha2, responsable);
         }
 
 

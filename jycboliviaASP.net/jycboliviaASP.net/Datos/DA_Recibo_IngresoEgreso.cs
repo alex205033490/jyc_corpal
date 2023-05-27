@@ -201,30 +201,34 @@ namespace jycboliviaASP.net.Datos
         }
         
 
-        internal DataSet get_allreciboIngreso(string fecha1, string fecha2)
+        internal DataSet get_allreciboIngreso(string fecha1, string fecha2, string responsable)
         {
             string consulta = "select  " +
                             " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  cliente, " +
-                            " monto, moneda,  chequenro,  concepto,  detalle, responsable,nrorecibo " +
+                            " monto, moneda,  chequenro,  concepto,  detalle, responsable,nrorecibo, " +
+                            " date_format(rr.fecharecibo,'%d/%m/%Y') as 'Fecha_Recibo' "+
                             " from tbcorpal_reciboingreso rr " +
                             " where " +
-                            " rr.estadoingreso = true and " +
-                            " rr.fechagra between "+fecha1+" and "+fecha2;
+                            " rr.estadoingreso = true " +
+                            " and rr.responsable like '%"+responsable+"%' "+
+                            " and rr.fecharecibo between " + fecha1 + " and " + fecha2;
             return ConecRes.consultaMySql(consulta);
         }
 
-        internal DataSet get_allreciboEgreso(string fecha1, string fecha2)
+        internal DataSet get_allreciboEgreso(string fecha1, string fecha2, string responsable)
         {
             string consulta = "select " +
                                 " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  pagadoha, " +
                                 " monto, moneda,  chequenro, banco, efectivo, " +
                                 " concepto,  detalle, responsable, porcentajeretencioniue, " +
                                 " porcentajeretencionit,retencioniuebs,retencionitbs,totalapagar," +
-                                "  nrorecibo, responsable as 'realizadopor' "+
+                                " nrorecibo, responsable as 'realizadopor', "+
+                                " date_format(rr.fechaegreso ,'%d/%m/%Y') as 'Fecha_Recibo' "+
                                 " from tbcorpal_reciboegreso rr " +
                                 " where " +
-                                " rr.estadoegreso = true and " +
-                            " rr.fechagra between " + fecha1 + " and " + fecha2;
+                                " rr.estadoegreso = true " +
+                                " and rr.responsable like '%" + responsable + "%' " +
+                                " and rr.fechagra between " + fecha1 + " and " + fecha2;
             return ConecRes.consultaMySql(consulta);
         }
 

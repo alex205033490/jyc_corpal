@@ -6,6 +6,48 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />
+
+     <style type="text/css">
+        
+        .CompletionList
+        {
+            padding: 5px 0 ;
+            margin: 2px 0 0;            
+          /*  position:absolute;  */
+            height:150px;
+            width:200px;
+            background-color: White;
+            cursor: pointer;
+            border: solid ;  
+            border-width: 1px;    
+            font-size:x-small;
+            overflow: auto;
+                        }
+                        
+           .CompletionlistItem
+           {
+               font-size:x-small;           
+            }             
+                        
+        .CompletionListMighlightedItem
+        {
+             background-color: Green;
+             color: White;
+            /* color: Lime;
+            padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/            
+            } 
+        
+        
+         .style8
+         {
+             width: 110px;
+         }
+        </style>
+
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -78,8 +120,19 @@
 <table>
 <tr>
 <td></td><td>
-    &nbsp;</td><td>
-        &nbsp;</td><td></td><td></td><td></td>
+    <asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label>
+    </td><td>
+        <asp:TextBox ID="tx_responsable" runat="server" Width="350px"></asp:TextBox>
+        <asp:AutoCompleteExtender ID="tx_responsable_AutoCompleteExtender" 
+            runat="server" TargetControlID="tx_responsable"
+             ServiceMethod="GetlistaResponsable2" MinimumPrefixLength="1"
+                                    UseContextKey="True"
+                                    CompletionListCssClass="CompletionList" 
+                                    CompletionListItemCssClass="CompletionlistItem"                                     
+                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+
+        </asp:AutoCompleteExtender>
+    </td><td></td><td></td><td></td>
 </tr>
 </table>
 
