@@ -8,6 +8,8 @@ using System.Configuration;
 using jycboliviaASP.net.Negocio;
 using Microsoft.Reporting.WebForms;
 using System.Data;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -25,6 +27,46 @@ namespace jycboliviaASP.net.Presentacion
             {
                 //  cargarCobrador();
             }
+        }
+
+        // webservice que me permite la autocompletacion
+        [WebMethod]
+        [ScriptMethod]
+        // se devuelve un arreglo con la informacion
+        public static string[] GetlistaResponsable2(string prefixText, int count)
+        {
+            string nombreResponsable = prefixText;
+
+            NA_Responsables Nrespon = new NA_Responsables();
+            DataSet tuplas = Nrespon.mostrarTodos_AutoComplit(nombreResponsable);
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+            int fin = tuplas.Tables[0].Rows.Count;
+
+            for (int i = 0; i < fin; i++)
+            {
+                lista[i] = tuplas.Tables[0].Rows[i][0].ToString();
+            }
+
+            return lista;
+        }
+
+        // webservice que me permite la autocompletacion
+        [WebMethod]
+        [ScriptMethod]
+        // se devuelve un arreglo con la informacion
+        public static string[] GetlistaProductos(string prefixText, int count)
+        {
+            string nombreProducto = prefixText;
+
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+            int fin = tuplas.Tables[0].Rows.Count;
+            for (int i = 0; i < fin; i++)
+            {
+                lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
+            }
+            return lista;
         }
 
         private bool tienePermisoDeIngreso(int permiso)
@@ -61,21 +103,48 @@ namespace jycboliviaASP.net.Presentacion
             string fechahasta = convertidorFecha(tx_hastaFecha.Text);
             //  int codigoCobrador = Convert.ToInt32(dd_cobrador.SelectedValue.ToString());
             //  string nombreCobrador = dd_cobrador.SelectedItem.Text;
+            string Responsable = tx_responsable.Text;
+            string producto = tx_producto.Text;
 
             if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null"))
             {
                 if (dd_consulta.SelectedIndex == 0)
                 {
-                    get_datosProductosSolicitados(fechadesde, fechahasta);
+                    get_datosProductosSolicitados(fechadesde, fechahasta, Responsable);
                 }else
                 if (dd_consulta.SelectedIndex == 1)
                 {
                     get_datosProductosSolicitados_VS_entregados(fechadesde, fechahasta);
                 }
+                else
+                    if (dd_consulta.SelectedIndex == 2)
+                    {
+                        get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
+                    }
 
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+        }
+
+        private void get_datosEntregaProduccion(string fechadesde, string fechahasta, string Responsable, string producto)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_ConsultaEntregaProduccion.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_entregasProduccion(fechadesde, fechahasta, Responsable, producto);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_ConsultaEntregaProduccion", DSconsulta);
+
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.DataSources.Add(DS_detalleproductosSolicitados);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void get_datosProductosSolicitados_VS_entregados(string fechadesde, string fechahasta)
@@ -98,13 +167,13 @@ namespace jycboliviaASP.net.Presentacion
             this.ReportViewer1.DataBind();
         }
 
-        private void get_datosProductosSolicitados(string fechadesde, string fechahasta)
+        private void get_datosProductosSolicitados(string fechadesde, string fechahasta, string personalsolicitud)
         {
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_DetalleProductosSolicitadosEntregados.rdlc";
 
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            DataSet consulta1 = nss.get_alldetalleProductoSolicitudEntregado(fechadesde, fechahasta);
+            DataSet consulta1 = nss.get_alldetalleProductoSolicitudEntregado(fechadesde, fechahasta,  personalsolicitud);
             DataTable DSconsulta = consulta1.Tables[0];
 
             ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);

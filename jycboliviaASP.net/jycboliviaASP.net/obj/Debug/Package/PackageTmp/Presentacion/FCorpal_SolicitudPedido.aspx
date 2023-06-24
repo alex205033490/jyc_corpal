@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_SolicitudPedido.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_SolicitudPedido" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Styles/Style_adicionarRepuesto.css" rel="stylesheet" type="text/css" />
+<link href="../Styles/Style_adicionarRepuesto.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
            .CompletionList
         {

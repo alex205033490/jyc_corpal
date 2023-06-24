@@ -50,8 +50,7 @@
                     	<input class="input100" type="text" name="username" placeholder="Username" runat="server" ID="tx_usuario" />                         
 						<span class="focus-input100"></span>
 					</div>
-
-                    
+                                       
 
 					<div class="wrap-input100 validate-input" data-validate = "Please enter password">						
                         <input type="password" class="input100" name="pass" placeholder="Password" runat="server" id="tx_password" /> 

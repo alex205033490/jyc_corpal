@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta)
+        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta, string personalsolicitud)
         {
             string consulta = " select "+
                                 " se.codigo, "+
@@ -199,6 +199,7 @@ namespace jycboliviaASP.net.Datos
                                 " se.codigo = dse.codsolicitud and "+
                                 " dse.codproducto = pp.codigo and "+
                                 " se.estado = 1 and "+
+                                " se.personalsolicitud like '%" + personalsolicitud + "%' and " +
                                 " se.fechaGRA BETWEEN "+fechadesde+" and "+fechahasta;
             return conexion.consultaMySql(consulta);
         }
@@ -209,21 +210,21 @@ namespace jycboliviaASP.net.Datos
                                " pp.codigo, "+
                                " pp.producto, "+
                                " pp.medida, "+
-                               " ifnull(t1.cantidadsolicitado,0) as 'CantidadSolicitada', "+
-                               " ifnull(t1.cantidadEntregada,0) as 'Cantidad_Entregada', "+
-                               " ifnull(t1.precio,0) as 'PrecioUnidad', "+
-                               " ifnull((t1.cantidadsolicitado * t1.precio),0) as 'MontoSolicitado', "+
-                               " ifnull((t1.cantidadEntregada * t1.precio),0) as 'MontoEntregado', "+
-                               " (ifnull((t1.cantidadsolicitado * t1.precio),0) "+
-                               " - "+
-                               " ifnull((t1.cantidadEntregada * t1.precio),0)) as 'Perdida' "+
+                               " format(ifnull(t1.cantidadsolicitado,0),2) as 'CantidadSolicitada', "+
+                               " format(ifnull(t1.cantidadEntregada,0),2) as 'Cantidad_Entregada', "+
+                               "  format(ifnull(t1.precio,0),2) as 'PrecioUnidad', "+
+                               "  format(ifnull((t1.cantidadsolicitado * t1.precio),0),2) as 'MontoSolicitado', "+
+                               "  format(ifnull((t1.cantidadEntregada * t1.precio),0),2) as 'MontoEntregado', "+
+                               "  format((ifnull((t1.cantidadsolicitado * t1.precio),0) "+
+                               "  -  "+
+                               "  ifnull((t1.cantidadEntregada * t1.precio),0)),2) as 'Perdida' "+
                                " from tbcorpal_producto pp "+ 
                                " LEFT JOIN "+
                                " ( "+
                                " select "+  
                                " dse.codproducto, "+
                                " sum(dse.cant) as 'cantidadsolicitado' , "+
-                               " sum(dse.precio)  as 'precio', "+
+                               " dse.precio  as 'precio', "+
                                " sum(dse.cantentregada) as 'cantidadEntregada' "+
                                " from tbcorpal_solicitudentregaproducto se, tbcorpal_detalle_solicitudproducto dse "+
                                " where "+ 
@@ -234,6 +235,14 @@ namespace jycboliviaASP.net.Datos
                                " )AS t1 "+
                                " ON  (pp.codigo = t1.codproducto)";
             return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_CodigoProductos(string producto)
+        {
+            string consulta = "select codigo, producto, medida, precio " +
+                              " from tbcorpal_producto pp where pp.producto = '" + producto + "'";
+            DataSet lista = conexion.consultaMySql(consulta);
+            return lista;
         }
     }
 }

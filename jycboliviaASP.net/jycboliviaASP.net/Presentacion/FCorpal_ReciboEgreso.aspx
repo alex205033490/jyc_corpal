@@ -302,7 +302,7 @@
 
             </div>
             <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server" 
-                    Text="Excel" />
+                    Text="Excel" onclick="bt_excel_Click" />
             </div>
         </div>
     </div>

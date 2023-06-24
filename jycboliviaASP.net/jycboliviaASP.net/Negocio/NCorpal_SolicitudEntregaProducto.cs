@@ -18,6 +18,19 @@ namespace jycboliviaASP.net.Negocio
             return dsp.get_mostrarProductos(producto);
         }
 
+        public int get_CodigoProductos(string producto)
+        {
+            DataSet tupla = dsp.get_CodigoProductos(producto);
+            if (tupla.Tables[0].Rows.Count > 0)
+            {
+                int codigo;
+                int.TryParse(tupla.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo;
+            }
+            else
+                return -1;
+        }
+
         internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado)
         {
             return dsp.set_guardarSolicitud( nroboleta,  fechaentrega,  horaentrega,  personalsolicitud,  codpersolicitante,  estado);
@@ -95,9 +108,9 @@ namespace jycboliviaASP.net.Negocio
             return dsp.get_productosSolicitudProducto( codigoSolicitudProducto);
         }
 
-        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta)
+        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta, string personalsolicitud)
         {
-            return dsp.get_alldetalleProductoSolicitudEntregado( fechadesde,  fechahasta);
+            return dsp.get_alldetalleProductoSolicitudEntregado( fechadesde,  fechahasta,  personalsolicitud);
         }
 
         internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(string fechadesde, string fechahasta)

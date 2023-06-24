@@ -126,9 +126,11 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
+    <Content Include="Presentacion\FA_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
@@ -426,6 +428,7 @@
     <Compile Include="Datos\Datos old\DA_Zona.cs" />
     <Compile Include="Datos\Datos old\DCargaCuadroXXXa.cs" />
     <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
+    <Compile Include="Datos\DCorpal_Produccion.cs" />
     <Compile Include="Datos\DCorpal_SolicitudEntregaProducto.cs" />
     <Compile Include="Datos\DCorpal_Tienda.cs" />
     <Compile Include="Datos\Datos old\DEncargadoPago.cs" />
@@ -490,6 +493,7 @@
     </Compile>
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
+    <Compile Include="Negocio\NCorpal_Produccion.cs" />
     <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_AgendaProyectos.cs" />
     <Compile Include="Negocio\NA_ActividadesPersonal.cs" />
@@ -564,6 +568,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\FA_EntregaProduccion.aspx.cs">
+      <DependentUpon>FA_EntregaProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_EntregaProduccion.aspx.designer.cs">
+      <DependentUpon>FA_EntregaProduccion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.cs">
       <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -591,6 +602,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteGeneral.aspx.cs">
+      <DependentUpon>FCorpal_ReporteGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteGeneral.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteGeneral.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.cs">
       <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
@@ -1349,6 +1367,8 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregaProduccion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitados_VS_Entregados.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaReciboEgreso.rdlc" />
     <EmbeddedResource Include="Reportes\Report_consultaReciboIngreso.rdlc" />
@@ -1625,7 +1645,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55608</DevelopmentServerPort>
+          <DevelopmentServerPort>51048</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
