@@ -53,11 +53,11 @@
            <!-- <li><a href="../Presentacion/FCorpal_GestionarTiendaPropietario.aspx" id="A1" runat="server"><span>G Tienda Propietario</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="A2" runat="server"><span>Ruta Entrega</span></a></li>    -->                                         
             <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><span>Solicitud Productos</span></a></li>                                             
-            <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><span>Entrega Solicitud Productos</span></a></li>                                             
-            <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><span>Consulta Solicitud Productos</span></a></li>                                                         
+            <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><span>Entrega Solicitud Productos</span></a></li>                                                         
             <li role="separator" class="divider"></li>
-            <li><a href="../Presentacion/FA_EntregaProduccion.aspx" id="mn_entregaProd" runat="server"><span>Entrega Produccion</span></a></li>                                             
-            
+            <li><a href="../Presentacion/FA_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><span>Entrega Produccion</span></a></li>                                             
+            <li role="separator" class="divider"></li>
+            <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><span>Consulta Productos</span></a></li>                                                         
         </ul>
     </li>
 

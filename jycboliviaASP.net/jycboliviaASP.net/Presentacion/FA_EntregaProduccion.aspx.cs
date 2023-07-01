@@ -336,5 +336,25 @@ namespace jycboliviaASP.net.Presentacion
                 }
             }   
         }
+
+        protected void bt_verRecibo_Click(object sender, EventArgs e)
+        {
+            verRecibolisto();
+        }
+
+        private void verRecibolisto()
+        {
+            if (gv_EntregasdeProduccion.SelectedIndex >= 0)
+            {
+                int codigo;
+                int.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[1].Text, out codigo);
+
+                Session["codigoEntregaProduccion"] = codigo;
+                Session["ReporteGeneral"] = "Reporte_Entrega_Produccion";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");                
+            }
+            else
+                Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione datos') </script>");
+        }
     }
 }

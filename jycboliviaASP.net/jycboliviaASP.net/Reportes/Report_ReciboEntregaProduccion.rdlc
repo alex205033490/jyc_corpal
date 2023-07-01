@@ -107,7 +107,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>FECHA SOLICITUD: </Value>
+                <Value>FECHA: </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -118,9 +118,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>1.56167cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>13.56466cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.42604cm</Width>
+        <Width>2.79104cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -139,7 +139,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>HORA SOLICITUD:</Value>
+                <Value>HORA:</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -150,70 +150,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
         <Top>2.16167cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>13.56466cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.42604cm</Width>
+        <Width>2.79104cm</Width>
         <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="p_fechasolicitud">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Parameters!p_fechasolicitud.Value</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>p_fechasolicitud</rd:DefaultName>
-        <Top>1.56167cm</Top>
-        <Left>16.3557cm</Left>
-        <Height>0.6cm</Height>
-        <Width>3.83646cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="p_horasolicitud">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Parameters!p_horasolicitud.Value</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>p_horasolicitud</rd:DefaultName>
-        <Top>2.16167cm</Top>
-        <Left>16.3557cm</Left>
-        <Height>0.6cm</Height>
-        <Width>3.83646cm</Width>
-        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -245,7 +185,7 @@
         <Left>2.08174cm</Left>
         <Height>0.6cm</Height>
         <Width>6.91993cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -280,7 +220,7 @@
         <Left>12.47018cm</Left>
         <Height>0.6cm</Height>
         <Width>6.91993cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -315,7 +255,7 @@
         <Left>0.73237cm</Left>
         <Height>1.18208cm</Height>
         <Width>19.45979cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -346,8 +286,8 @@
         <Top>2.76167cm</Top>
         <Left>0.73237cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.35208cm</Width>
-        <ZIndex>10</ZIndex>
+        <Width>5.06645cm</Width>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -377,7 +317,7 @@
         <Left>5.08445cm</Left>
         <Height>0.6cm</Height>
         <Width>5.46333cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -407,7 +347,7 @@
         <Left>5.08445cm</Left>
         <Height>0.6cm</Height>
         <Width>5.46333cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -434,10 +374,10 @@
         </Paragraphs>
         <rd:DefaultName>p_entregaproduccion</rd:DefaultName>
         <Top>2.76167cm</Top>
-        <Left>5.08445cm</Left>
+        <Left>5.79882cm</Left>
         <Height>0.6cm</Height>
         <Width>11.27125cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -469,7 +409,7 @@
         <Left>0.73237cm</Left>
         <Height>0.6cm</Height>
         <Width>5.06645cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -498,8 +438,8 @@
         <Top>3.36167cm</Top>
         <Left>5.79882cm</Left>
         <Height>0.6cm</Height>
-        <Width>10.55688cm</Width>
-        <ZIndex>15</ZIndex>
+        <Width>11.27125cm</Width>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -531,7 +471,7 @@
         <Left>0.73237cm</Left>
         <Height>0.6cm</Height>
         <Width>3.34666cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -561,7 +501,7 @@
         <Left>4.07903cm</Left>
         <Height>0.6cm</Height>
         <Width>7.76521cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -590,10 +530,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox11</rd:DefaultName>
         <Top>4.38312cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>12.47018cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.34666cm</Width>
-        <ZIndex>18</ZIndex>
+        <Width>3.80614cm</Width>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -622,10 +562,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox11</rd:DefaultName>
         <Top>4.98312cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>12.47018cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.34666cm</Width>
-        <ZIndex>19</ZIndex>
+        <Width>3.80614cm</Width>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -654,10 +594,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox11</rd:DefaultName>
         <Top>5.58312cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>12.47018cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.34666cm</Width>
-        <ZIndex>20</ZIndex>
+        <Width>3.80614cm</Width>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -686,10 +626,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox11</rd:DefaultName>
         <Top>6.18312cm</Top>
-        <Left>12.92966cm</Left>
+        <Left>12.47018cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.34666cm</Width>
-        <ZIndex>21</ZIndex>
+        <Width>3.80614cm</Width>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -719,7 +659,7 @@
         <Left>16.27632cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91584cm</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -749,7 +689,7 @@
         <Left>16.27632cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91584cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -779,7 +719,7 @@
         <Left>16.27632cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91584cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -809,6 +749,66 @@
         <Left>16.27632cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91584cm</Width>
+        <ZIndex>23</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="p_fecha">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!p_fecha.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>p_fecha</rd:DefaultName>
+        <Top>1.56167cm</Top>
+        <Left>16.3557cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.83646cm</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="p_hora">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!p_hora.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>p_hora</rd:DefaultName>
+        <Top>2.16167cm</Top>
+        <Left>16.3557cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.83646cm</Width>
         <ZIndex>25</ZIndex>
         <Style>
           <Border>
@@ -837,13 +837,13 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="p_fechasolicitud">
+    <ReportParameter Name="p_fecha">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="p_horasolicitud">
+    <ReportParameter Name="p_hora">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>

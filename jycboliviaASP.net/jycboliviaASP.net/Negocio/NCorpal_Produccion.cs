@@ -52,6 +52,7 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_DatosEntregaProduccion(int codigoEntregaProduccion)
         {
             DataSet tuplas = dproduccion.get_DatosEntregaProduccion(codigoEntregaProduccion);
+            return tuplas;
         }
     }
 }

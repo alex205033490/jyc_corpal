@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using jycboliviaASP.net.Negocio;
 using System.Data;
+using Microsoft.Reporting.WebForms;
+using System.Configuration;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -45,48 +47,35 @@ namespace jycboliviaASP.net.Presentacion
             DataSet datoResult = npro.get_DatosEntregaProduccion(codigoEntregaProduccion);
 
             string ciudad = Session["BaseDatos"].ToString();
-            //string nroboleta = datoResult.Tables[0].Rows[0][0].ToString();
-            string nroboleta = datoResult.Tables[0].Rows[0][18].ToString();
-            string fecha = datoResult.Tables[0].Rows[0][19].ToString();
-            //string fecha = datoResult.Tables[0].Rows[0][1].ToString();
-            string pagadoha = datoResult.Tables[0].Rows[0][3].ToString();
-            float montotal;
-            float.TryParse(datoResult.Tables[0].Rows[0][4].ToString(), out montotal);
-            string moneda = datoResult.Tables[0].Rows[0][5].ToString();
-            string cheque = datoResult.Tables[0].Rows[0][6].ToString();
-            string banco = datoResult.Tables[0].Rows[0][7].ToString();
-            string efectivo = datoResult.Tables[0].Rows[0][8].ToString();
-            string concepto = datoResult.Tables[0].Rows[0][9].ToString();
-            string detalle = datoResult.Tables[0].Rows[0][10].ToString();
-            string responsable = datoResult.Tables[0].Rows[0][11].ToString();
-            string porcentajeretencioniue = datoResult.Tables[0].Rows[0][12].ToString();
-            string porcentajeretencionit = datoResult.Tables[0].Rows[0][13].ToString();
-            string retencioniuebs = datoResult.Tables[0].Rows[0][14].ToString();
-            string retencionitbs = datoResult.Tables[0].Rows[0][15].ToString();
-            string totalapagar = datoResult.Tables[0].Rows[0][16].ToString();
-            string facturanro = datoResult.Tables[0].Rows[0][17].ToString();
 
 
-            ReportParameter p_nrocomprobante = new ReportParameter("p_nrocomprobante", nroboleta);
-            ReportParameter p_fecharecibo = new ReportParameter("p_fecharecibo", fecha);
-            ReportParameter p_pagadoha = new ReportParameter("p_pagadoha", pagadoha);
-            ReportParameter p_facturanro = new ReportParameter("p_facturanro", facturanro);
+            string codigo = datoResult.Tables[0].Rows[0][0].ToString();
+            string fecha = datoResult.Tables[0].Rows[0][1].ToString();
+            string hora = datoResult.Tables[0].Rows[0][2].ToString();
+            string turno = datoResult.Tables[0].Rows[0][3].ToString();
+            string resp_entrega = datoResult.Tables[0].Rows[0][4].ToString();
+            string resp_recepcion = datoResult.Tables[0].Rows[0][5].ToString();
+            string nroorden = datoResult.Tables[0].Rows[0][6].ToString();
+            string productoNax = datoResult.Tables[0].Rows[0][7].ToString();
+            string cantcajas = datoResult.Tables[0].Rows[0][8].ToString();
+            string unidadsuelta = datoResult.Tables[0].Rows[0][9].ToString();
+            string kgrdesperdicio = datoResult.Tables[0].Rows[0][10].ToString();
+            string kgrparamix = datoResult.Tables[0].Rows[0][11].ToString();
+            string codresprecepcion = datoResult.Tables[0].Rows[0][12].ToString();
 
+            ReportParameter p_nroorden = new ReportParameter("p_nroorden", nroorden);
+            ReportParameter p_fecha = new ReportParameter("p_fecha", fecha);
+            ReportParameter p_hora = new ReportParameter("p_hora", hora);
+            ReportParameter p_turno = new ReportParameter("p_turno", turno);
 
-            N_numLetra nl = new N_numLetra();
-            string precioLetras = nl.Convertir(datoResult.Tables[0].Rows[0][4].ToString(), true, moneda);
-            ReportParameter p_montoTotalLetras = new ReportParameter("p_montoTotalLetras", precioLetras);
-            ReportParameter p_montoTotal = new ReportParameter("p_montoTotal", montotal.ToString().Replace('.', ','));
-
-            ReportParameter p_nrocheque = new ReportParameter("p_nrocheque", cheque);
-            ReportParameter p_concepto = new ReportParameter("p_concepto", concepto);
-
-            ReportParameter p_banco = new ReportParameter("p_banco", banco);
-            ReportParameter p_efectivo = new ReportParameter("p_efectivo", efectivo);
-            ReportParameter p_retencionIUE = new ReportParameter("p_retencionIUE", retencioniuebs);
-            ReportParameter p_retencionIT = new ReportParameter("p_retencionIT", retencionitbs);
-            ReportParameter p_totalapagar = new ReportParameter("p_totalapagar", totalapagar);
-
+            ReportParameter p_entregaproduccion = new ReportParameter("p_entregaproduccion", resp_entrega);
+            ReportParameter p_recepcionproduccion = new ReportParameter("p_recepcionproduccion", resp_recepcion);
+            ReportParameter p_produccionnax = new ReportParameter("p_produccionnax", productoNax);
+            ReportParameter p_cantcajas = new ReportParameter("p_cantcajas", cantcajas);
+            ReportParameter p_unidadsuelta = new ReportParameter("p_unidadsuelta", unidadsuelta);
+            ReportParameter p_kgrparamix = new ReportParameter("p_kgrparamix", kgrparamix);
+            ReportParameter p_kgrdesperdicio = new ReportParameter("p_kgrdesperdicio", kgrdesperdicio);
+            
 
             //ReportParameter p_edificio = new ReportParameter("p_edificio", HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][3].ToString()));
             /*
@@ -115,28 +104,25 @@ namespace jycboliviaASP.net.Presentacion
             //  ReportParameter imagen = new ReportParameter("p_logo", "d:/temp/alex.jpg");
             */
 
-            string rutaReciboIngreso = ConfigurationManager.AppSettings["repo_reciboEgreso"];
+            string rutaReciboIngreso = ConfigurationManager.AppSettings["repo_ReciboEntregaProduccion"];
 
             ReportViewer1.LocalReport.ReportPath = rutaReciboIngreso;
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.EnableExternalImages = true;
             //viewer.LocalReport.Refresh();      
 
-            ReportViewer1.LocalReport.SetParameters(p_nrocomprobante);
-            ReportViewer1.LocalReport.SetParameters(p_fecharecibo);
-            ReportViewer1.LocalReport.SetParameters(p_pagadoha);
-            ReportViewer1.LocalReport.SetParameters(p_montoTotalLetras);
-            ReportViewer1.LocalReport.SetParameters(p_montoTotal);
-            ReportViewer1.LocalReport.SetParameters(p_nrocheque);
-            ReportViewer1.LocalReport.SetParameters(p_concepto);
+            ReportViewer1.LocalReport.SetParameters(p_nroorden);
+            ReportViewer1.LocalReport.SetParameters(p_fecha);
+            ReportViewer1.LocalReport.SetParameters(p_hora);
+            ReportViewer1.LocalReport.SetParameters(p_turno);
+            ReportViewer1.LocalReport.SetParameters(p_entregaproduccion);
+            ReportViewer1.LocalReport.SetParameters(p_recepcionproduccion);
+            ReportViewer1.LocalReport.SetParameters(p_produccionnax);
 
-            ReportViewer1.LocalReport.SetParameters(p_banco);
-            ReportViewer1.LocalReport.SetParameters(p_efectivo);
-            ReportViewer1.LocalReport.SetParameters(p_retencionIUE);
-            ReportViewer1.LocalReport.SetParameters(p_retencionIT);
-            ReportViewer1.LocalReport.SetParameters(p_totalapagar);
-            ReportViewer1.LocalReport.SetParameters(p_facturanro);
-
+            ReportViewer1.LocalReport.SetParameters(p_cantcajas);
+            ReportViewer1.LocalReport.SetParameters(p_unidadsuelta);
+            ReportViewer1.LocalReport.SetParameters(p_kgrparamix);
+            ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio);
 
             ReportViewer1.LocalReport.Refresh();
 

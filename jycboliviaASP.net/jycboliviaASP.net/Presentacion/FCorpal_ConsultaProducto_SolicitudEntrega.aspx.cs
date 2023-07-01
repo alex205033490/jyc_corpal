@@ -119,14 +119,40 @@ namespace jycboliviaASP.net.Presentacion
                 else
                     if (dd_consulta.SelectedIndex == 2)
                     {
-                        get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
+                        get_datosSolicitadoEntregadoProducto_porPersona(fechadesde, fechahasta, Responsable, producto);
                     }
+                    else
+                        if (dd_consulta.SelectedIndex == 3)
+                        {
+                            get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
+                        }
 
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
         }
 
+        private void get_datosSolicitadoEntregadoProducto_porPersona(string fechadesde, string fechahasta, string Responsable, string producto)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_Detalle_solicitudEntregaProductoporPersona.rdlc";
+
+            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+            DataSet consulta1 = nss.get_alldetalleProductoSolicitadosyEntregadosporpersona(fechadesde, fechahasta, Responsable);            
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_SolicitudEntregaProducto_PorPersona = new ReportDataSource("DS_SolicitudEntregaProducto_PorPersona", DSconsulta);
+
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.DataSources.Add(DS_SolicitudEntregaProducto_PorPersona);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+       
         private void get_datosEntregaProduccion(string fechadesde, string fechahasta, string Responsable, string producto)
         {
             LocalReport localreport = ReportViewer1.LocalReport;

@@ -44,6 +44,7 @@ namespace jycboliviaASP.net.Presentacion
             mn_solicitudproductos.Visible = false;
             mn_entregaSolicitudProducto.Visible = false;
             mn_detallesolicitudproductos.Visible = false;
+            mn_entregaProduccion.Visible = false;
         }
 
 
@@ -118,6 +119,9 @@ namespace jycboliviaASP.net.Presentacion
                             case 120:
                                 mn_detallesolicitudproductos.Visible = true;
                                 break;
+                            case 121:
+                                mn_entregaProduccion.Visible = true;
+                                break;                                
                                 default:
                                 Console.WriteLine("Default case");
                                 break;

@@ -221,6 +221,8 @@
                     Text="Insertar" onclick="bt_insertar_Click" />
             </td>
             <td>
+                <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-light" 
+                    Text="Ver Recibo" onclick="bt_verRecibo_Click" />
                 <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>

@@ -244,5 +244,48 @@ namespace jycboliviaASP.net.Datos
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
+
+        internal DataSet get_alldetalleProductoSolicitadosyEntregadosporpersona(string fechadesde, string fechahasta, string Responsable)
+        {
+            string consulta = "SELECT SF.personalsolicitud, SF.producto, SF.total_cantSolicitada, SF.total_cantentregada "+
+                               " FROM "+
+                               " ( "+
+                               " SELECT personalsolicitud, producto, SUM(total_cant) AS 'total_cantSolicitada', SUM(total_cantentregada) AS 'total_cantentregada' "+
+                               " FROM ( "+
+                               " SELECT s.personalsolicitud, p.producto, COALESCE(SUM(d.cant), 0) AS total_cant, COALESCE(SUM(d.cantentregada), 0) AS total_cantentregada "+
+                               " FROM tbcorpal_solicitudentregaproducto s "+
+                               " RIGHT JOIN tbcorpal_detalle_solicitudproducto d ON s.codigo = d.codsolicitud "+
+                               " RIGHT JOIN tbcorpal_producto p ON p.codigo = d.codproducto "+
+                               " WHERE s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
+                               " GROUP BY s.personalsolicitud, p.producto "+
+                               " UNION "+
+                               " SELECT s.personalsolicitud, p.producto, 0 AS total_cant, 0 AS total_cantentregada "+
+                               " FROM tbcorpal_producto p "+
+                               " CROSS JOIN ( "+
+                               " SELECT personalsolicitud "+
+                               " FROM tbcorpal_solicitudentregaproducto "+
+                               " GROUP BY personalsolicitud "+
+                               " ) as s "+
+                               " LEFT JOIN tbcorpal_detalle_solicitudproducto d ON p.codigo = d.codproducto "+
+                               " LEFT JOIN tbcorpal_solicitudentregaproducto se ON se.codigo = d.codsolicitud AND se.personalsolicitud = s.personalsolicitud "+
+                               " WHERE se.codigo IS NULL "+
+                               " ) AS result "+
+                               " GROUP BY personalsolicitud, producto "+
+                               " UNION "+
+                               " SELECT res1.nombre AS personalsolicitud, pro1.producto, 0 AS 'total_cantSolicitada', 0 AS 'total_cantentregada' "+
+                               " FROM tb_responsable res1 "+
+                               " CROSS JOIN tbcorpal_producto pro1 "+
+                               " WHERE res1.codigo NOT IN ( "+
+                               " SELECT sol1.codpersolicitante "+
+                               " FROM tbcorpal_solicitudentregaproducto sol1 "+
+                               " WHERE sol1.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+ 
+                               " ) "+
+                               " ORDER BY personalsolicitud, producto "+
+                               " ) AS SF "+
+                               " WHERE "+
+                               " SF.personalsolicitud LIKE '%"+Responsable+"%'";
+            DataSet lista = conexion.consultaMySql(consulta);
+            return lista;
+        }
     }
 }

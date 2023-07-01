@@ -86,11 +86,14 @@ namespace jycboliviaASP.net.Datos
                                " ee.resp_recepcion, "+
                                " ee.nroorden, "+
                                " ee.productoNax, "+
-                               " ee.cantcajas, "+
-                               " ee.unidadsuelta, "+
-                               " ee.kgrdesperdicio, "+
-                               " ee.kgrparamix, "+
-                               " 'Calcular' as 'PesoTotal', "+
+                               " format(ee.cantcajas,2) as 'cantcajas', "+
+                               " format(ee.unidadsuelta,2) as 'unidadsuelta', "+
+                               " format(ee.kgrdesperdicio,2) as 'kgrdesperdicio', "+
+                               " format(ee.kgrparamix, 2) as 'kgrparamix', "+
+                               " format(( "+
+                               " (ifnull(ee.cantcajas,0)* ifnull(cc.pesoporcajakgr,0)) + "+
+                               " (ifnull(ee.unidadsuelta,0)*ifnull(cc.pesounidadgr,0)) "+
+                               " ),2) as 'PesoTotal', "+
                                " 'Objetivo' as 'ObjetivoProduccion', "+
                                " 'Cantidad' as 'CantdeAcuerdoaPlanProduccionUnidades', "+
                                " date_format(ee.fechagra, '%d/%m/%Y') as 'fecha', "+
@@ -130,7 +133,26 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_DatosEntregaProduccion(int codigoEntregaProduccion)
         {
-            
+
+            string consulta = "select " +
+                               " ee.codigo, " +
+                               " date_format(ee.fechagra,'%d/%m/%Y') as 'fecha_gra', " +
+                               " ee.horagra, " +
+                               " ee.turno, " +
+                               " ee.resp_entrega, " +
+                               " ee.resp_recepcion, " +
+                               " ee.nroorden, " +
+                               " ee.productoNax, " +
+                               " ee.cantcajas, " +
+                               " ee.unidadsuelta, " +
+                               " ee.kgrdesperdicio, " +
+                               " ee.kgrparamix, " +
+                               " ee.codresprecepcion " +
+                               " from tbcorpal_entregasordenproduccion ee " +
+                               " where " +
+                               " ee.estado = 1 and " +
+                               " ee.codigo = " + codigoEntregaProduccion;                               
+            return Conx.consultaMySql(consulta);
         }
     }
 }

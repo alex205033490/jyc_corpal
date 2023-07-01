@@ -86,6 +86,7 @@
     <asp:DropDownList ID="dd_consulta" class="form-control" runat="server" Width="350px">
         <asp:ListItem>Detalle de Datos</asp:ListItem>
         <asp:ListItem>Productos Solicitados Vs Entregados</asp:ListItem>
+        <asp:ListItem>Productos Entregados y Solicitados por Persona</asp:ListItem>
         <asp:ListItem>Entrega Produccion</asp:ListItem>
     </asp:DropDownList>
     </td>

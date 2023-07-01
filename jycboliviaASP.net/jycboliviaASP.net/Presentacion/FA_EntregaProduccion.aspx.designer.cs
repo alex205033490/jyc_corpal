@@ -247,6 +247,15 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.Button bt_insertar;
         
         /// <summary>
+        /// bt_verRecibo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_verRecibo;
+        
+        /// <summary>
         /// bt_modificar control.
         /// </summary>
         /// <remarks>

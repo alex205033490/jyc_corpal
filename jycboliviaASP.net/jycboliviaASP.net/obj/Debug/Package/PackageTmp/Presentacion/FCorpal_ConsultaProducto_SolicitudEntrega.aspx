@@ -4,6 +4,58 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+          .CompletionList
+        {
+            padding: 5px 0 ;
+            margin: 2px 0 0;            
+          /*  position:absolute;  */
+            height:150px;
+            width:200px;
+            background-color: White;
+            cursor: pointer;
+            border: solid ;  
+            border-width: 1px;    
+            font-size:x-small;
+            overflow: auto;
+                        }
+                        
+           .CompletionlistItem
+           {
+               font-size:x-small;           
+            }             
+                        
+        .CompletionListMighlightedItem
+        {
+             background-color: Green;
+             color: White;
+            /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/            
+            }     
+        
+        
+    .modalBackground
+    {
+        background-color: Black;
+        filter: alpha(opacity=90);
+        opacity: 0.8;
+    }
+    .modalPopup
+    {
+        background-color: #FFFFFF;
+        border-width: 3px;
+        border-style: solid;
+        border-color: black;
+        padding-top: 10px;
+        padding-left: 10px;
+        width: 300px;
+        height: auto;
+    }
+    
+        </style>
 </asp:Content>
 
 
@@ -31,17 +83,60 @@
     <asp:Label ID="Label2" runat="server" Text="Consulta:"></asp:Label>
     </td>
 <td>
-    <asp:DropDownList ID="dd_consulta" runat="server" Width="350px">
+    <asp:DropDownList ID="dd_consulta" class="form-control" runat="server" Width="350px">
         <asp:ListItem>Detalle de Datos</asp:ListItem>
         <asp:ListItem>Productos Solicitados Vs Entregados</asp:ListItem>
+        <asp:ListItem>Productos Entregados y Solicitados por Persona</asp:ListItem>
+        <asp:ListItem>Entrega Produccion</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td></td>
 <td>
-    <asp:Button ID="bt_buscar" runat="server" Text="Buscar" 
+    <asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar" 
         onclick="bt_buscar_Click" style="height: 26px" />
     </td>
 <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label>
+    </td>
+    <td>
+        <asp:TextBox ID="tx_responsable" class="form-control" runat="server" 
+            Width="400px"></asp:TextBox>
+        <asp:AutoCompleteExtender ID="tx_responsable_AutoCompleteExtender" 
+            runat="server" TargetControlID="tx_responsable"
+             MinimumPrefixLength="1" ServiceMethod="GetlistaResponsable2"
+             CompletionListCssClass="CompletionList"  CompletionListItemCssClass="CompletionlistItem" 
+            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+        </asp:AutoCompleteExtender>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <asp:Label ID="Label6" runat="server" Text="Producto:"></asp:Label>
+    </td>
+    <td>
+        <asp:TextBox ID="tx_producto" class="form-control" runat="server" Width="400px"></asp:TextBox>
+        <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server" 
+            TargetControlID="tx_producto"
+            CompletionSetCount="12" 
+                    MinimumPrefixLength="1" ServiceMethod="GetlistaProductos" 
+                    UseContextKey="True"
+                    CompletionListCssClass="CompletionList" 
+                    CompletionListItemCssClass="CompletionlistItem" 
+                    CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
+            >
+        </asp:AutoCompleteExtender>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
 </tr>
 </table>
 
@@ -52,7 +147,8 @@
     <asp:Label ID="Label3" runat="server" Text="Desde:"></asp:Label>
     </td>
 <td>
-    <asp:TextBox ID="tx_desdeFecha" runat="server"></asp:TextBox>
+    <asp:TextBox ID="tx_desdeFecha" class="form-control" runat="server" 
+        Width="150px"></asp:TextBox>
     <asp:CalendarExtender ID="tx_desdeFecha_CalendarExtender" runat="server" 
         TargetControlID="tx_desdeFecha">
     </asp:CalendarExtender>
@@ -62,7 +158,8 @@
     <asp:Label ID="Label4" runat="server" Text="Hasta:"></asp:Label>
     </td>
 <td>
-    <asp:TextBox ID="tx_hastaFecha" runat="server"></asp:TextBox>
+    <asp:TextBox ID="tx_hastaFecha" class="form-control" runat="server" 
+        Width="150px"></asp:TextBox>
     <asp:CalendarExtender ID="tx_hastaFecha_CalendarExtender" runat="server" 
         TargetControlID="tx_hastaFecha">
     </asp:CalendarExtender>

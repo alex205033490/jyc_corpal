@@ -102,14 +102,40 @@
 
         <tr>
         <td>
-            <asp:Label ID="Label30" runat="server" Font-Size="Small" Text="Entrega :"></asp:Label>
+            <asp:Label ID="Label30" runat="server" Font-Size="Small" 
+                Text="Entrega  Produccion:"></asp:Label>
             </td>
         <td>
             <asp:TextBox ID="tx_responsableEntrega" class="form-control" runat="server" 
-                Font-Size="Small" Width="400px" Enabled="False"></asp:TextBox>
+                Font-Size="Small" Width="400px"></asp:TextBox>           
+            <asp:AutoCompleteExtender ID="tx_responsableEntrega_AutoCompleteExtender" 
+                runat="server" TargetControlID="tx_responsableEntrega"
+                MinimumPrefixLength="1" ServiceMethod="GetlistaResponsable2"
+             CompletionListCssClass="CompletionList"  CompletionListItemCssClass="CompletionlistItem" 
+            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+            </asp:AutoCompleteExtender>
+           
             </td>                    
             <td><asp:Button ID="bt_buscar" class="btn btn-success" runat="server"   
                     onclick="bt_buscar_Click" Text="Buscar" /></td>   
+            <td>&nbsp;</td>
+        </tr>       
+        <tr>
+        <td>
+            <asp:Label ID="Label1" runat="server" Font-Size="Small" 
+                Text="Recepcion  Produccion:"></asp:Label>
+            </td>
+        <td>
+            <asp:TextBox ID="tx_recepcionProduccion" class="form-control" runat="server" 
+                Font-Size="Small" Width="400px"></asp:TextBox>
+            <asp:AutoCompleteExtender ID="tx_recepcionProduccion_AutoCompleteExtender" 
+                runat="server" TargetControlID="tx_recepcionProduccion"
+                MinimumPrefixLength="1" ServiceMethod="GetlistaResponsable2"
+             CompletionListCssClass="CompletionList"  CompletionListItemCssClass="CompletionlistItem" 
+            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+            </asp:AutoCompleteExtender>
+            </td>                    
+            <td>&nbsp;</td>   
             <td>&nbsp;</td>
         </tr>       
         <tr>
@@ -195,6 +221,8 @@
                     Text="Insertar" onclick="bt_insertar_Click" />
             </td>
             <td>
+                <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-light" 
+                    Text="Ver Recibo" onclick="bt_verRecibo_Click" />
                 <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>
