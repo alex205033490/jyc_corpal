@@ -84,7 +84,7 @@ namespace jycboliviaASP.net.Datos
                                " ee.turno, "+
                                " ee.resp_entrega, "+
                                " ee.resp_recepcion, "+
-                               " ee.nroorden, "+
+                               " ee.codigo as 'nroorden', " +
                                " ee.productoNax, "+
                                " format(ee.cantcajas,2) as 'cantcajas', "+
                                " format(ee.unidadsuelta,2) as 'unidadsuelta', "+
@@ -97,7 +97,17 @@ namespace jycboliviaASP.net.Datos
                                " 'Objetivo' as 'ObjetivoProduccion', "+
                                " 'Cantidad' as 'CantdeAcuerdoaPlanProduccionUnidades', "+
                                " date_format(ee.fechagra, '%d/%m/%Y') as 'fecha', "+
-                               " ee.horagra as 'hora' "+
+                               " ee.horagra as 'hora', "+
+                               " ee.detalleentrega, "+
+                               " CASE DAYOFWEEK(ee.fechagra) "+
+                               "    WHEN 1 THEN 'Domingo' "+
+                               "    WHEN 2 THEN 'Lunes' "+
+                               "    WHEN 3 THEN 'Martes' "+
+                               "    WHEN 4 THEN 'Miércoles' "+
+                               "    WHEN 5 THEN 'Jueves' "+
+                               "    WHEN 6 THEN 'Viernes' "+
+                               "    WHEN 7 THEN 'Sábado' "+
+                               "  END AS 'Dia' " +
                                " from tbcorpal_entregasordenproduccion ee "+
                                " left join tbcorpal_producto cc on (ee.codProductonax = cc.codigo) "+
                                " where "+

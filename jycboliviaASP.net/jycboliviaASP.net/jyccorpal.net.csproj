@@ -126,6 +126,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
+    <Content Include="Presentacion\FA_ActivosJYC.aspx" />
     <Content Include="Presentacion\FA_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
@@ -330,6 +331,7 @@
     <Content Include="Styles\Style_RutasMantenimiento.css" />
     <Content Include="Styles\Style_saldosCuentasGeneral.css" />
     <Content Include="Styles\Style_SeguimientosMorosos.css" />
+    <Content Include="Styles\Style_SimecModificar.css" />
     <Content Include="Styles\Style_ViewCuadroXXX.css" />
     <Content Include="Styles\Style_ViewEstadoMantenimiento.css" />
     <Content Include="Styles\Style_ViewSeguimientoMantenimientoXXX.css" />
@@ -381,6 +383,7 @@
   <ItemGroup>
     <Compile Include="DatosSimec\DA_contabilidad.cs" />
     <Compile Include="DatosSimec\DA_inventario.cs" />
+    <Compile Include="Datos\DA_ActivosJyC.cs" />
     <Compile Include="Datos\DA_AgendaProyecto.cs" />
     <Compile Include="Datos\DA_ActividadesPersonal.cs" />
     <Compile Include="Datos\DA_AgendaNegociacion.cs" />
@@ -492,6 +495,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
+    <Compile Include="Negocio\NA_ActivosJyC.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
     <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
@@ -567,6 +571,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_ActivosJYC.aspx.cs">
+      <DependentUpon>FA_ActivosJYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_ActivosJYC.aspx.designer.cs">
+      <DependentUpon>FA_ActivosJYC.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FA_EntregaProduccion.aspx.cs">
       <DependentUpon>FA_EntregaProduccion.aspx</DependentUpon>
