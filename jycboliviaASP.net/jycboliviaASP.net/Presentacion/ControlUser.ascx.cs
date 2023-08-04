@@ -46,6 +46,7 @@ namespace jycboliviaASP.net.Presentacion
             mn_detallesolicitudproductos.Visible = false;
             mn_entregaProduccion.Visible = false;
             mn_activosjyc.Visible = false;
+            mn_consultaActividades.Visible = false;
         }
 
 
@@ -78,6 +79,10 @@ namespace jycboliviaASP.net.Presentacion
                                 mn_gestionarFormularios.Visible = true;
                                 break;                          
                             
+                            case 99:
+                                mn_consultaActividades.Visible = true;
+                                break;                            
+
                             case 34:
                                 mn_SGI.Visible = true;
                                 break;                            

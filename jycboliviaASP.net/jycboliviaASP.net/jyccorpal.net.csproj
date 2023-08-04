@@ -129,6 +129,7 @@
     <Content Include="Presentacion\FA_ActivosJYC.aspx" />
     <Content Include="Presentacion\FA_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
@@ -599,6 +600,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx.designer.cs">
       <DependentUpon>FCorpal_ConsultaProducto_SolicitudEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaSGI.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaSGI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaSGI.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaSGI.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.cs">
       <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
@@ -1378,6 +1386,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ActividadesPersonal.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Detalle_solicitudEntregaProductoporPersona.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccion.rdlc" />

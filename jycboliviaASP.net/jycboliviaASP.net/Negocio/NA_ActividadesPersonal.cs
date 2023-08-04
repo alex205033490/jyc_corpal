@@ -134,7 +134,38 @@ namespace jycboliviaASP.net.Negocio
         }
 
         //--------------nuevo
-       
 
+
+
+        public DataSet get_ActividadesConsultaTodas(string nombreTecnico, string fechaDesde, string fechaHasta)
+        {
+            string consulta = "select t.codigo,date_format(t.fecha,'%d/%m/%y') as 'fecha', " +
+                                " t.hora, t.detalle as 'Actividad',  date_format(da.fechaasig,'%d/%m/%y') as 'FechaAsignacion', " +
+                                " da.horaasig as 'HoraAsignacion', " +
+                                " date_format(da.fechaejecucion,'%d/%m/%y') as 'FechaEjecucion' , " +
+                                " da.horaejecucion as 'HoraEjecucion',  da.detalle as 'Detalle_PersonalAsignado',  res.nombre as 'PersonalAsignado' , " +
+                                " date_format(t.fechaexpiracion,'%d/%m/%y') as 'FechaLimite', " +
+                                " res1.nombre as 'InicioActividad',   t.detallecierre, " +
+                                " res2.nombre as 'CierreActividad', " +
+                                " date_format(t.fechacierre,'%d/%m/%y') as 'CierreFecha',  t.horacierre " +
+                                " ,t.costopasaje as 'Pasaje' " +
+                                " from  " +
+                                " tb_ActividadPersonal t " +
+                                " left join tb_responsable res  on t.coduserultimoasignado = res.codigo " +
+                                " left join tb_responsable res1  on t.coduserinicio = res1.codigo " +
+                                " left join tb_responsable res2  on t.codusercierre = res2.codigo " +
+                                " left join tb_detalle_activiadpersonal da on (da.codact = t.codigo and da.codres = t.coduserultimoasignado) " +
+                                " where " +
+                                " t.fecha between " + fechaDesde + " and " + fechaHasta;
+
+            if (!nombreTecnico.Equals(""))
+            {
+                consulta = consulta + " and res.nombre like '%" + nombreTecnico + "%'";
+            }
+
+            consulta = consulta + " order by t.fecha desc";
+
+            return Dactividad.getDatos(consulta);
+        }
     }
 }

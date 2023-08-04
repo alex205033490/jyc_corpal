@@ -80,6 +80,7 @@
             <li><a href="../Presentacion/FCorpal_AgendaTelefonica.aspx" id="mn_agenda" runat="server"><span>Agenda Telefonica</span></a></li>                               
             <li><a href="../Presentacion/FCorpal_GestionArchivosSGI.aspx" id="mn_SGI" runat="server"><span>Gestion Archivos SGI</span></a></li>                                          
             <li><a href="../Presentacion/FCorpal_SGI_Actividades.aspx" id="mn_actividades" runat="server"><span>Actividades</span></a></li>                               
+            <li><a href="../Presentacion/FCorpal_ConsultaSGI.aspx" id="mn_consultaActividades" runat="server"><span>Consulta SGI Actividades</span></a></li>                               
             <li><a href="../Presentacion/FCorpal_agendanegociacion.aspx" id="mn_agendaTrabajo" runat="server"><span>Agenda de Trabajo</span></a></li>                                   
             <li><a href="../Presentacion/FA_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><span>Activos JYC</span></a></li>                       
         </ul>
