@@ -126,14 +126,17 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
-    <Content Include="Presentacion\FA_ActivosJYC.aspx" />
-    <Content Include="Presentacion\FA_EntregaProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
@@ -265,6 +268,7 @@
     <Content Include="Styles\Style_CodigosDeEquipos.css" />
     <Content Include="Styles\Style_CallCenter_Rin.css" />
     <Content Include="Styles\Style_AgendaNegociacion.css" />
+    <Content Include="Styles\Style_CompradeMaterialeInsumos.css" />
     <Content Include="Styles\Style_consultaRutasporDatos.css" />
     <Content Include="Styles\Style_CostosPolizasImportacion.css" />
     <Content Include="Styles\Style_CotiEra.css" />
@@ -495,8 +499,10 @@
     <Compile Include="Negocio\conexionMySql.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Negocio\DA_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
     <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
@@ -573,19 +579,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FA_ActivosJYC.aspx.cs">
-      <DependentUpon>FA_ActivosJYC.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.cs">
+      <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\FA_ActivosJYC.aspx.designer.cs">
-      <DependentUpon>FA_ActivosJYC.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.designer.cs">
+      <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FA_EntregaProduccion.aspx.cs">
-      <DependentUpon>FA_EntregaProduccion.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.cs">
+      <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\FA_EntregaProduccion.aspx.designer.cs">
-      <DependentUpon>FA_EntregaProduccion.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.designer.cs">
+      <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.cs">
+      <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.cs">
+      <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.designer.cs">
+      <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.cs">
       <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
@@ -635,6 +655,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.cs">
       <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>

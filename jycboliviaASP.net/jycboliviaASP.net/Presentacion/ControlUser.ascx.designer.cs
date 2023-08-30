@@ -121,6 +121,15 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_entregaSolicitudProducto;
         
         /// <summary>
+        /// mn_detallesolicitudproductos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_detallesolicitudproductos;
+        
+        /// <summary>
         /// mn_entregaProduccion control.
         /// </summary>
         /// <remarks>
@@ -130,13 +139,31 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_entregaProduccion;
         
         /// <summary>
-        /// mn_detallesolicitudproductos control.
+        /// mn_solicitudMaterial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_detallesolicitudproductos;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudMaterial;
+        
+        /// <summary>
+        /// mn_compraMaterial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_compraMaterial;
+        
+        /// <summary>
+        /// mn_MaterialRecibido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_MaterialRecibido;
         
         /// <summary>
         /// mn_conciliacionBancaria control.

@@ -122,5 +122,7 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.get_alldetalleProductoSolicitadosyEntregadosporpersona(fechadesde, fechahasta, Responsable);
         }
+
+      
     }
 }
