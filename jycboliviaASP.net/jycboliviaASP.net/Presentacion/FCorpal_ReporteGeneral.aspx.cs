@@ -30,8 +30,14 @@ namespace jycboliviaASP.net.Presentacion
                     case "Reporte_Entrega_Produccion":
                         entregaProduccion();
                         break;
-                    case "otro2":
-                       //number = "Two";
+                    case "Reporte_SolicitudMaterialInsumos":
+                        reporteSolicitudMaterialInsumos();
+                        break;
+                    case "Reporte_CompraMaterialInsumos":
+                        reporteCompraMaterialInsumos();
+                        break;
+                    case "Reporte_RecibidoMaterialInsumos":
+                        reporteRecibidoMaterialInsumos();
                         break;
                     default:
                         //number = "Error";
@@ -39,10 +45,134 @@ namespace jycboliviaASP.net.Presentacion
                 }
         }
 
+        private void reporteRecibidoMaterialInsumos()
+        {
+            int codigoSMI = int.Parse(Session["codigoRecibidoMaterialeInsumos"].ToString());
+            NCorpal_PedidoMaterialeInsumos npp = new NCorpal_PedidoMaterialeInsumos();
+            DataSet datoResult = npp.get_DatosSolicitudMaterialeInsumos(codigoSMI);
+            
+            string codigo = datoResult.Tables[0].Rows[0][0].ToString();
+            string fechaSolicitud = datoResult.Tables[0].Rows[0][1].ToString();
+            string fechaEstimadaEntrega = datoResult.Tables[0].Rows[0][2].ToString();
+            string PersonalSolicitud = datoResult.Tables[0].Rows[0][3].ToString();
+            string PersonalCompra = datoResult.Tables[0].Rows[0][6].ToString();
+
+
+            ReportParameter p_numero = new ReportParameter("p_numero", "Nro. " + codigo.ToString());
+            ReportParameter p_solicitante = new ReportParameter("p_solicitante", PersonalSolicitud);
+            ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechaSolicitud);
+            ReportParameter p_fechaestimadaentrega = new ReportParameter("p_fechaestimadaentrega", fechaEstimadaEntrega);
+            ReportParameter p_personalcomprado = new ReportParameter("p_personalcomprado", PersonalCompra);
+            
+
+            DataSet tuplasFilas = npp.get_todosItemInsumosComprados(codigoSMI);
+            DataTable DSMaterialeInsumosSolicitados = tuplasFilas.Tables[0];
+            ReportDataSource DSRecibidoMaterialInsumos = new ReportDataSource("DSRecibidoMaterialInsumos", DSMaterialeInsumosSolicitados);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_RecibidoMaterialeInsumos"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+
+            ReportViewer1.LocalReport.SetParameters(p_numero);
+            ReportViewer1.LocalReport.SetParameters(p_fechasolicitud);
+            ReportViewer1.LocalReport.SetParameters(p_solicitante);
+            ReportViewer1.LocalReport.SetParameters(p_fechaestimadaentrega);
+            ReportViewer1.LocalReport.SetParameters(p_personalcomprado);
+            ReportViewer1.LocalReport.DataSources.Add(DSRecibidoMaterialInsumos);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void reporteCompraMaterialInsumos()
+        {
+            int codigoSMI = int.Parse(Session["codigoCompraMaterialeInsumos"].ToString());
+            NCorpal_PedidoMaterialeInsumos npp = new NCorpal_PedidoMaterialeInsumos();
+            DataSet datoResult = npp.get_DatosSolicitudMaterialeInsumos(codigoSMI);
+
+            string ciudad = Session["BaseDatos"].ToString();
+
+            string codigo = datoResult.Tables[0].Rows[0][0].ToString();
+            string fechaSolicitud = datoResult.Tables[0].Rows[0][1].ToString();
+            string fechaEstimadaEntrega = datoResult.Tables[0].Rows[0][2].ToString();
+            string PersonalSolicitud = datoResult.Tables[0].Rows[0][3].ToString();
+
+
+            ReportParameter p_numero = new ReportParameter("p_numero", "Nro. " + codigo.ToString());
+            ReportParameter p_solicitante = new ReportParameter("p_solicitante", PersonalSolicitud);
+            ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechaSolicitud);
+            ReportParameter p_fechaestimadaentrega = new ReportParameter("p_fechaestimadaentrega", fechaEstimadaEntrega);
+
+            DataSet tuplasFilas = npp.get_todosItemInsumosPedidos(codigoSMI);
+            DataTable DSMaterialeInsumosSolicitados = tuplasFilas.Tables[0];
+            ReportDataSource DSCompraMaterialeInsumos = new ReportDataSource("DSCompraMaterialeInsumos", DSMaterialeInsumosSolicitados);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_CompradoMaterialeInsumos"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+
+            ReportViewer1.LocalReport.SetParameters(p_numero);
+            ReportViewer1.LocalReport.SetParameters(p_fechasolicitud);
+            ReportViewer1.LocalReport.SetParameters(p_solicitante);
+            ReportViewer1.LocalReport.SetParameters(p_fechaestimadaentrega);
+            ReportViewer1.LocalReport.DataSources.Add(DSCompraMaterialeInsumos);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void reporteSolicitudMaterialInsumos()
+        {
+            int codigoSMI = int.Parse(Session["codigoSolicitudMaterialeInsumos"].ToString());
+            NCorpal_PedidoMaterialeInsumos npp = new NCorpal_PedidoMaterialeInsumos();
+            DataSet datoResult = npp.get_DatosSolicitudMaterialeInsumos(codigoSMI);
+
+            string ciudad = Session["BaseDatos"].ToString();
+
+            string codigo = datoResult.Tables[0].Rows[0][0].ToString();
+            string fechaSolicitud = datoResult.Tables[0].Rows[0][1].ToString();
+            string fechaEstimadaEntrega = datoResult.Tables[0].Rows[0][2].ToString();
+            string PersonalSolicitud = datoResult.Tables[0].Rows[0][3].ToString();
+
+
+            ReportParameter p_numero = new ReportParameter("p_numero", "Nro. "+codigo.ToString());
+            ReportParameter p_solicitante = new ReportParameter("p_solicitante", PersonalSolicitud);
+            ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechaSolicitud);
+            ReportParameter p_fechaestimadaentrega = new ReportParameter("p_fechaestimadaentrega", fechaEstimadaEntrega);
+
+            DataSet tuplasFilas = npp.get_todosItemInsumosPedidos(codigoSMI);
+            DataTable DSMaterialeInsumosSolicitados = tuplasFilas.Tables[0];
+            ReportDataSource DS_MaterialeInsumosSolicitados = new ReportDataSource("DSMaterialeInsumosSolicitados", DSMaterialeInsumosSolicitados);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_SolicitudMaterialeInsumos"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+
+            ReportViewer1.LocalReport.SetParameters(p_numero);
+            ReportViewer1.LocalReport.SetParameters(p_fechasolicitud);
+            ReportViewer1.LocalReport.SetParameters(p_solicitante);
+            ReportViewer1.LocalReport.SetParameters(p_fechaestimadaentrega);
+            ReportViewer1.LocalReport.DataSources.Add(DS_MaterialeInsumosSolicitados);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
         private void entregaProduccion()
         {
             int codigoEntregaProduccion = int.Parse(Session["codigoEntregaProduccion"].ToString());
-
             NCorpal_Produccion npro = new NCorpal_Produccion();
             DataSet datoResult = npro.get_DatosEntregaProduccion(codigoEntregaProduccion);
 

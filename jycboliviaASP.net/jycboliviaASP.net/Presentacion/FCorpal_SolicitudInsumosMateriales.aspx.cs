@@ -45,7 +45,7 @@ namespace jycboliviaASP.net.Presentacion
             NCorpal_SolicitudEntregaProducto ncc = new NCorpal_SolicitudEntregaProducto();            
             tx_solicitante.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-            NA_PedidoMaterialeInsumos pp = new NA_PedidoMaterialeInsumos();
+            NCorpal_PedidoMaterialeInsumos pp = new NCorpal_PedidoMaterialeInsumos();
             int nroCorrelativo = pp.get_CorrelativoSolicitudMaterialInsumos();
             tx_nro.Text = (nroCorrelativo + 1).ToString();
         }
@@ -93,7 +93,7 @@ namespace jycboliviaASP.net.Presentacion
             string Solicitante = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
             int codSolicitante = codUser;
 
-            NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+            NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
             bool bandera = np.insertarSolicitudMaterialInsumos(codSolicitante, Solicitante, fechaEstimada, 0);
             int codSolicitud = np.get_ultimoinsertadoSolicitudMaterialInsumos(codSolicitante,Solicitante);
             DataTable datoSolicitud = Session["listaSolicitudMaterial"] as DataTable;
@@ -119,7 +119,10 @@ namespace jycboliviaASP.net.Presentacion
             if(bandera ==bandera3 == true){
                 limpiarTodos();
                 limpiarItem();
-                Response.Write("<script type='text/javascript'> alert('OK: Guardado') </script>");
+                Session["ReporteGeneral"] = "Reporte_SolicitudMaterialInsumos";
+                Session["codigoSolicitudMaterialeInsumos"] = codSolicitud;                
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                //Response.Write("<script type='text/javascript'> alert('OK: Guardado') </script>");
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Guardado') </script>");
         }
@@ -129,7 +132,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_nro.Text = "";
             tx_fechaestimadaEntrega.Text = "";
 
-            NA_PedidoMaterialeInsumos pp = new NA_PedidoMaterialeInsumos();
+            NCorpal_PedidoMaterialeInsumos pp = new NCorpal_PedidoMaterialeInsumos();
             int nroCorrelativo = pp.get_CorrelativoSolicitudMaterialInsumos();
             tx_nro.Text = (nroCorrelativo + 1).ToString();
 

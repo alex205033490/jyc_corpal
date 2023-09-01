@@ -53,7 +53,7 @@ namespace jycboliviaASP.net.Presentacion
 
         private void mostarlasSolicitudesdeCompradeInsumos(string responsableSolicitud)
         {
-            NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+            NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
             DataSet tuplas = np.get_solicitudesMaterialeseInsumos(responsableSolicitud, "Comprado");
             gv_MaterialSolicitado.DataSource = tuplas;
             gv_MaterialSolicitado.DataBind();
@@ -100,7 +100,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 int codigoPedido;
                 int.TryParse(gv_MaterialSolicitado.SelectedRow.Cells[1].Text, out codigoPedido);
-                NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+                NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
                 DataSet tuplasItem = np.get_todosItemInsumosComprados(codigoPedido);
                 gv_DatosItem.DataSource = tuplasItem;
                 gv_DatosItem.DataBind();
@@ -121,7 +121,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             if (gv_MaterialSolicitado.SelectedIndex > -1)
             {
-                NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+                NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
                 int codigoPedido;
                 int.TryParse(gv_MaterialSolicitado.SelectedRow.Cells[1].Text, out codigoPedido);
                 
@@ -147,6 +147,9 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     mostarlasSolicitudesdeCompradeInsumos("Comprado");
                     limpiarDatos();
+                    Session["ReporteGeneral"] = "Reporte_RecibidoMaterialInsumos";
+                    Session["codigoRecibidoMaterialeInsumos"] = codigoPedido;
+                    Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
                     // Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
                     // Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
                 }

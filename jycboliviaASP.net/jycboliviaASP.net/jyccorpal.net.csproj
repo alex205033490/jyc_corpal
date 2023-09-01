@@ -499,10 +499,10 @@
     <Compile Include="Negocio\conexionMySql.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Negocio\DA_PedidoMaterialeInsumos.cs" />
+    <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
-    <Compile Include="Negocio\NA_PedidoMaterialeInsumos.cs" />
+    <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
     <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
@@ -1400,6 +1400,11 @@
     <Compile Include="Presentacion\FCorpal_GestonarResponsable.aspx.designer.cs">
       <DependentUpon>FCorpal_GestonarResponsable.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DS_MaterialeInsumos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site1.Master" />
@@ -1413,6 +1418,8 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_RecibidoMaterialeInsumos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CompradeMaterialeInsumos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ActividadesPersonal.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Detalle_solicitudEntregaProductoporPersona.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboEntregaProduccion.rdlc" />
@@ -1452,6 +1459,7 @@
     <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos.rdlc" />
     <EmbeddedResource Include="Reportes\Reportes old\Report_R-144.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboPedidoProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_SolicituddeMaterialeInsumos.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DS_CallCenter.xsc">
@@ -1681,6 +1689,17 @@
     <None Include="vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <None Include="vendor\bootstrap\css\bootstrap.css.map" />
     <None Include="vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="DS_MaterialeInsumos.xsc">
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_MaterialeInsumos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_MaterialeInsumos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_MaterialeInsumos.xss">
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

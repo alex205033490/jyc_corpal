@@ -61,7 +61,7 @@ namespace jycboliviaASP.net.Presentacion
 
         private void mostarlasSolicitudesdeCompradeInsumos(string responsableSolicitud, string estadoSolicitud)
         {
-            NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+            NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
             DataSet tuplas = np.get_solicitudesMaterialeseInsumos(responsableSolicitud,estadoSolicitud);
             gv_MaterialSolicitado.DataSource = tuplas;
             gv_MaterialSolicitado.DataBind();
@@ -88,7 +88,7 @@ namespace jycboliviaASP.net.Presentacion
             if(gv_MaterialSolicitado.SelectedIndex > -1){
                 int codigoPedido;
                 int.TryParse(gv_MaterialSolicitado.SelectedRow.Cells[1].Text, out codigoPedido);
-                NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+                NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
                 DataSet tuplasItem = np.get_todosItemInsumosPedidos(codigoPedido);
                 gv_DatosItem.DataSource = tuplasItem;
                 gv_DatosItem.DataBind();
@@ -125,7 +125,7 @@ namespace jycboliviaASP.net.Presentacion
             
             if (gv_MaterialSolicitado.SelectedIndex > -1 )
             {
-                NA_PedidoMaterialeInsumos np = new NA_PedidoMaterialeInsumos();
+                NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
                 int codigoPedido;
                 int.TryParse(gv_MaterialSolicitado.SelectedRow.Cells[1].Text, out codigoPedido);
                 float montoTotalPedidoComprado = 0;
@@ -159,6 +159,10 @@ namespace jycboliviaASP.net.Presentacion
                 {                    
                     mostarlasSolicitudesdeCompradeInsumos("","Abierto");
                     limpiarDatos();
+                    Session["ReporteGeneral"] = "Reporte_CompraMaterialInsumos";
+                    Session["codigoCompraMaterialeInsumos"] = codigoPedido;
+                    Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+
                    // Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
                    // Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
                 }else

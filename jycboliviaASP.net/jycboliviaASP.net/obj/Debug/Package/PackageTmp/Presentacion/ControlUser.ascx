@@ -54,10 +54,29 @@
             <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="A2" runat="server"><span>Ruta Entrega</span></a></li>    -->                                         
             <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><span>Solicitud Productos</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><span>Entrega Solicitud Productos</span></a></li>                                                         
-            <li role="separator" class="divider"></li>
-            <li><a href="../Presentacion/FA_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><span>Entrega Produccion</span></a></li>                                             
-            <li role="separator" class="divider"></li>
+            <li role="separator" class="divider"></li>            
             <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><span>Consulta Productos</span></a></li>                                                         
+            
+        </ul>
+    </li>
+
+    <li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">	
+    Produccion	</a>
+        <ul class="dropdown-menu">
+        <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><span>Entrega Produccion</span></a></li>                                             
+            <li role="separator" class="divider"></li>                        
+        </ul>
+    </li>
+
+     <li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">	
+    Insumos	</a>
+        <ul class="dropdown-menu">
+        <li><a href="../Presentacion/FCorpal_SolicitudInsumosMateriales.aspx" id="mn_solicitudMaterial" runat="server"><span>Solicitud Material</span></a></li>                                                         
+            <li><a href="../Presentacion/FCorpal_CompraDeMaterialeInsumos.aspx" id="mn_compraMaterial" runat="server"><span>Compra Material</span></a></li>                                                         
+            <li><a href="../Presentacion/FCorpal_RecibioMaterialInsumos.aspx" id="mn_MaterialRecibido" runat="server"><span>Material e Insumos Recibidos</span></a></li>
+            <li role="separator" class="divider"></li>            
         </ul>
     </li>
 
@@ -82,7 +101,7 @@
             <li><a href="../Presentacion/FCorpal_SGI_Actividades.aspx" id="mn_actividades" runat="server"><span>Actividades</span></a></li>                               
             <li><a href="../Presentacion/FCorpal_ConsultaSGI.aspx" id="mn_consultaActividades" runat="server"><span>Consulta SGI Actividades</span></a></li>                               
             <li><a href="../Presentacion/FCorpal_agendanegociacion.aspx" id="mn_agendaTrabajo" runat="server"><span>Agenda de Trabajo</span></a></li>                                   
-            <li><a href="../Presentacion/FA_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><span>Activos JYC</span></a></li>                       
+            <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><span>Activos JYC</span></a></li>                       
         </ul>
     </li>
      
