@@ -205,7 +205,7 @@
                         <asp:BoundField DataField="item" HeaderText="item" SortExpression="item" />
                         <asp:BoundField DataField="unidadmedida" HeaderText="unidadmedida" 
                             SortExpression="unidadmedida" />
-                        <asp:BoundField DataField="cantidad" HeaderText="cantidad" 
+                        <asp:BoundField DataField="cantidad" HeaderText="cantidad Solicitada" 
                             SortExpression="cantidad" />
                         <asp:TemplateField HeaderText="cantidadcomprada" 
                             SortExpression="cantidadcomprada">
@@ -216,9 +216,7 @@
                                     Text='<%# Bind("cantidadcomprada") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="montototal" HeaderText="montototal" 
-                            SortExpression="montototal" />
-                        <asp:TemplateField HeaderText="montototalcomprado" 
+                        <asp:TemplateField HeaderText="montototalcomprado (Bs)" 
                             SortExpression="montototalcomprado">
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("montototalcomprado") %>' 
@@ -226,6 +224,48 @@
                                 <asp:TextBox ID="tx_montototalcomprado" runat="server" BackColor="Yellow" 
                                     Text='<%# Bind("montototalcomprado") %>'></asp:TextBox>
                             </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="factura" SortExpression="factura">
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("factura") %>' 
+                                    Visible="False"></asp:Label>
+                                <asp:DropDownList ID="dd_factura" runat="server" BackColor="Yellow" 
+                                    Width="100px">
+                                    <asp:ListItem>Si</asp:ListItem>
+                                    <asp:ListItem>No</asp:ListItem>
+                                </asp:DropDownList>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("factura") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="retencion" SortExpression="retencion">
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("retencion") %>' 
+                                    Visible="False"></asp:Label>
+                                <asp:DropDownList ID="dd_retencion" runat="server" BackColor="Yellow" 
+                                    Width="100px">
+                                    <asp:ListItem>Si</asp:ListItem>
+                                    <asp:ListItem>No</asp:ListItem>
+                                </asp:DropDownList>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("retencion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="tipocompra" SortExpression="tipocompra">
+                            <ItemTemplate>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("tipocompra") %>' 
+                                    Visible="False"></asp:Label>
+                                <asp:DropDownList ID="dd_tipocompra" runat="server" BackColor="Yellow" 
+                                    Width="150px">
+                                    <asp:ListItem>Contado</asp:ListItem>
+                                    <asp:ListItem>Credito</asp:ListItem>
+                                </asp:DropDownList>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("tipocompra") %>'></asp:TextBox>
+                            </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />

@@ -28,10 +28,7 @@ namespace jycboliviaASP.net.Presentacion
                 datoRepuesto.Columns.Add("Proveedor", typeof(string));
                 datoRepuesto.Columns.Add("Descripcion", typeof(string));
                 datoRepuesto.Columns.Add("Medida", typeof(string));
-                datoRepuesto.Columns.Add("Cantidad", typeof(string));
-                datoRepuesto.Columns.Add("Monto Total", typeof(string));
-                datoRepuesto.Columns.Add("Factura", typeof(string));
-                datoRepuesto.Columns.Add("Retencion", typeof(string));
+                datoRepuesto.Columns.Add("Cantidad", typeof(string));                
 
                 gv_MaterialSolicitado.DataSource = datoRepuesto;
                 gv_MaterialSolicitado.DataBind();
@@ -97,28 +94,56 @@ namespace jycboliviaASP.net.Presentacion
             bool bandera = np.insertarSolicitudMaterialInsumos(codSolicitante, Solicitante, fechaEstimada, 0);
             int codSolicitud = np.get_ultimoinsertadoSolicitudMaterialInsumos(codSolicitante,Solicitante);
             DataTable datoSolicitud = Session["listaSolicitudMaterial"] as DataTable;
-            float montoTotalSolicitud = 0;
+
+            string tuplasCorreo = "";
             if(bandera == true && datoSolicitud.Rows.Count > 0){
                 for (int i = 0; i < datoSolicitud.Rows.Count; i++)
                 {
                     string proveedor = datoSolicitud.Rows[i]["Proveedor"].ToString();
                     string item = datoSolicitud.Rows[i]["Descripcion"].ToString();
                     string medida = datoSolicitud.Rows[i]["Medida"].ToString();
-                    string factura = datoSolicitud.Rows[i]["Factura"].ToString();
+                    string factura = "No";
                     float cantidad;
                     float.TryParse(datoSolicitud.Rows[i]["Cantidad"].ToString().Replace('.',','), out cantidad);
-                    float montoTotalBS;
-                    float.TryParse(datoSolicitud.Rows[i]["Monto Total"].ToString().Replace('.', ','), out montoTotalBS);
-                    float retencion;
-                    float.TryParse(datoSolicitud.Rows[i]["Retencion"].ToString().Replace('.', ','), out retencion);
-                    bool bandera2 = np.insertarItemMaterialInsumos(codSolicitud,proveedor,item,medida,cantidad,montoTotalBS,factura,retencion);
-                    montoTotalSolicitud = montoTotalSolicitud + montoTotalBS;
+                    float montoTotalBS = 0;                    
+                    float retencion = 0;                    
+                    bool bandera2 = np.insertarItemMaterialInsumos(codSolicitud,proveedor,item,medida,cantidad,montoTotalBS,factura,retencion);                    
+                    if(bandera2){
+                        tuplasCorreo = tuplasCorreo+ 
+                                       "<tr>" +
+                                       "<td>" + proveedor + "</td>" +
+                                       "<td>" + item + "</td>" +
+                                       "<td>" + medida + "</td>" +
+                                       "<td>" + cantidad + "</td>" +
+                                       "</tr>";
+                    }
                 }
-            }
-           bool bandera3 = np.updateSolicitudMontoTotal(codSolicitud,montoTotalSolicitud);
-            if(bandera ==bandera3 == true){
+            }           
+            if(bandera  == true){
                 limpiarTodos();
                 limpiarItem();
+
+                
+                int coduser_com = Nresp.getCodUsuario(usuarioAux, passwordAux);
+                NA_Historial historial = new NA_Historial();
+                historial.insertar(codUser, "Se ha Creado una Solicitud de Insumos con codigo = " + codSolicitud);
+                string basededatos = Session["BaseDatos"].ToString();
+                string asunto = "(" + basededatos + ") Se ha Creado una Solicitud de Insumos con codigo = " + codSolicitud;
+                string cuerpo = "Se ha realizado la solicitud de Insumos </br> Lista de Insumos: </br></br>";
+                string tablaInicio = "<table BORDER>"+
+                                       "<tr>"+
+									    "<th>Proveedor</th>	"+
+								        "<th>Descripcion</th>"+	
+							            "<th>Medida</th>"+						
+						                "<th>Cantidad</th>"+	
+					                    "</tr> ";
+                string tablaFin = "</table>";
+                string cuerpoFin = tablaInicio + tuplasCorreo + tablaFin + "</br></br>"+
+                    "responsable Solicitud = "+Solicitante;                
+
+                NA_EnvioCorreo correo = new NA_EnvioCorreo();
+                correo.Enviar_SolicitudInsumosMateriales(asunto, cuerpo, basededatos);
+                                
                 Session["ReporteGeneral"] = "Reporte_SolicitudMaterialInsumos";
                 Session["codigoSolicitudMaterialeInsumos"] = codSolicitud;                
                 Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
@@ -141,10 +166,7 @@ namespace jycboliviaASP.net.Presentacion
             datoRepuesto.Columns.Add("Descripcion", typeof(string));
             datoRepuesto.Columns.Add("Medida", typeof(string));
             datoRepuesto.Columns.Add("Cantidad", typeof(string));
-            datoRepuesto.Columns.Add("Monto Total", typeof(string));
-            datoRepuesto.Columns.Add("Factura", typeof(string));
-            datoRepuesto.Columns.Add("Retencion", typeof(string));
-
+            
             gv_MaterialSolicitado.DataSource = datoRepuesto;
             gv_MaterialSolicitado.DataBind();
             Session["listaSolicitudMaterial"] = datoRepuesto;
@@ -156,10 +178,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_proveedor.Text = "";
             tx_descripcion.Text = "";
             tx_unidad.Text = "";
-            tx_cantidad.Text = "";
-            tx_montoTotalbs.Text = "";
-            tx_factura.Text = "";
-            tx_retencion.Text = "";
+            tx_cantidad.Text = "";            
         }
 
         private void adicionar_productos()
@@ -167,15 +186,9 @@ namespace jycboliviaASP.net.Presentacion
             string proveedor = tx_proveedor.Text;
             string item = tx_descripcion.Text;
             string medida = tx_unidad.Text;
-            string factura = tx_factura.Text;
+            
             float cantidad;
             float.TryParse(tx_cantidad.Text.Replace('.',','), out cantidad );
-
-            float montoTotalBS;
-            float.TryParse(tx_montoTotalbs.Text.Replace('.', ','), out montoTotalBS);
-
-            float retencion;
-            float.TryParse(tx_retencion.Text.Replace('.', ','), out retencion);
                         
             if (cantidad > 0)
             {
@@ -184,10 +197,7 @@ namespace jycboliviaASP.net.Presentacion
                 tupla["Proveedor"] = proveedor;
                 tupla["Descripcion"] = item;
                 tupla["Medida"] = medida;
-                tupla["Cantidad"] = cantidad;
-                tupla["Monto Total"] = montoTotalBS;
-                tupla["Factura"] = factura;
-                tupla["Retencion"] = retencion;
+                tupla["Cantidad"] = cantidad;                
                 datoRepuesto.Rows.Add(tupla);
                 gv_MaterialSolicitado.DataSource = datoRepuesto;
                 gv_MaterialSolicitado.DataBind();
@@ -199,30 +209,13 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
-        protected void bt_limpiar_Click(object sender, EventArgs e)
-        {
-
-        }
-
+      
         protected void bt_insertar_Click(object sender, EventArgs e)
         {
             adicionar_productos();
         }
 
-        protected void bt_verRecibo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void bt_modificar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void bt_eliminar_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         protected void gv_MaterialSolicitado_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -235,6 +228,11 @@ namespace jycboliviaASP.net.Presentacion
             Session["listaSolicitudProducto"] = datoRepuesto;
             gv_MaterialSolicitado.DataSource = datoRepuesto;
             gv_MaterialSolicitado.DataBind();       
+        }
+
+        protected void bt_limpiar_Click(object sender, EventArgs e)
+        {
+            limpiarTodos();
         }
 
        

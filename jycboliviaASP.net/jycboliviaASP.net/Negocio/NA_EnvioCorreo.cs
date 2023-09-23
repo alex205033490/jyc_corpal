@@ -71,11 +71,11 @@ namespace jycboliviaASP.net.Negocio
                         smtp.UseDefaultCredentials = false;
                         smtp.Credentials = new NetworkCredential("automail@jycbolivia.com", "alex79016002");
                         smtp.EnableSsl = false;*/
-                        correo.From = new MailAddress("jyc.servidor@gmail.com");
-                        smtp.Host = "smtp.gmail.com";
+                        correo.From = new MailAddress("comercial@jyciabolivia.com");
+                        smtp.Host = "mail.jyciabolivia.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+                        smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
                         smtp.EnableSsl = true;
                         correo.To.Add("sistema@jycbolivia.com");
                     }
@@ -182,11 +182,11 @@ namespace jycboliviaASP.net.Negocio
             smtp.Credentials = new NetworkCredential("repocotirepuesto@jycbolivia.com", "alex79016002");
             smtp.EnableSsl = false;*/
 
-            correo.From = new MailAddress("jyc.servidor@gmail.com");
-            smtp.Host = "smtp.gmail.com";
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
+            smtp.Host = "mail.jyciabolivia.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
-            smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+            smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
             smtp.EnableSsl = true;
 
             try
@@ -253,11 +253,11 @@ namespace jycboliviaASP.net.Negocio
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential("automail@jycbolivia.com", "alex79016002");
             smtp.EnableSsl = false;*/
-            correo.From = new MailAddress("jyc.servidor@gmail.com");
-            smtp.Host = "smtp.gmail.com";
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
+            smtp.Host = "mail.jyciabolivia.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
-            smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+            smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
             smtp.EnableSsl = true;
 
             try
@@ -279,7 +279,7 @@ namespace jycboliviaASP.net.Negocio
         public bool Enviar_Correo_Equipo(string asunto, string cuerpoMensaje, string BaseDeDatos)
         {
             MailMessage correo = new MailMessage();
-            correo.From = new MailAddress("jyc.servidor@gmail.com");
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
             //------------------------------------------------------
             //string baseDatos = Session["BaseDatos"].ToString();
             string baseDatos = BaseDeDatos;
@@ -320,10 +320,10 @@ namespace jycboliviaASP.net.Negocio
             //---------------------------------------------
             // Estos datos debes rellanarlos correctamente
             //---------------------------------------------
-            smtp.Host = "smtp.gmail.com";
+            smtp.Host = "mail.jyciabolivia.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
-            smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+            smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
 
             smtp.EnableSsl = true;
             try
@@ -390,11 +390,11 @@ namespace jycboliviaASP.net.Negocio
                         smtp.Credentials = new NetworkCredential("automail@jycbolivia.com", "alex79016002");
                         smtp.EnableSsl = false;
                         correo.To.Add("sistema@jycbolivia.com");*/
-                        correo.From = new MailAddress("jyc.servidor@gmail.com");
-                        smtp.Host = "smtp.gmail.com";
+                        correo.From = new MailAddress("comercial@jyciabolivia.com");
+                        smtp.Host = "mail.jyciabolivia.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+                        smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
                         smtp.EnableSsl = true;
                     }
 
@@ -471,11 +471,11 @@ namespace jycboliviaASP.net.Negocio
                         smtp.Credentials = new NetworkCredential("automail@jycbolivia.com", "alex79016002");
                         smtp.EnableSsl = false;
                         correo.To.Add("sistema@jycbolivia.com");*/
-                        correo.From = new MailAddress("jyc.servidor@gmail.com");
-                        smtp.Host = "smtp.gmail.com";
+                        correo.From = new MailAddress("comercial@jyciabolivia.com");
+                        smtp.Host = "mail.jyciabolivia.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+                        smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
                         smtp.EnableSsl = true;
                     }
 
@@ -508,7 +508,7 @@ namespace jycboliviaASP.net.Negocio
         public bool enviar_Correo_gestionarEstadoInstalacion(string asunto, string cuerpoMensaje, string BaseDeDatos)
         {
             MailMessage correo = new MailMessage();
-            correo.From = new MailAddress("jyc.servidor@gmail.com");
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
             SmtpClient smtp = new SmtpClient();
             //------------------------------------------------------
             string baseDatos = BaseDeDatos;
@@ -547,11 +547,11 @@ namespace jycboliviaASP.net.Negocio
                     }
                     else
                     {*/
-                        correo.From = new MailAddress("jyc.servidor@gmail.com");
-                        smtp.Host = "smtp.gmail.com";
+                        correo.From = new MailAddress("comercial@jyciabolivia.com");
+                        smtp.Host = "mail.jyciabolivia.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+                        smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
                         smtp.EnableSsl = true;
                                     
                    // }
@@ -673,11 +673,11 @@ namespace jycboliviaASP.net.Negocio
                         smtp.UseDefaultCredentials = false;
                         smtp.Credentials = new NetworkCredential("automail@jycbolivia.com", "alex79016002");
                         smtp.EnableSsl = false;*/
-                        correo.From = new MailAddress("jyc.servidor@gmail.com");
-                        smtp.Host = "smtp.gmail.com";
+                        correo.From = new MailAddress("comercial@jyciabolivia.com");
+                        smtp.Host = "mail.jyciabolivia.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = true;
-                        smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+                        smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
                         smtp.EnableSsl = true;
                     }
 
@@ -757,11 +757,52 @@ namespace jycboliviaASP.net.Negocio
             //---------------------------------------------
             // Estos datos debes rellanarlos correctamente
             //---------------------------------------------
-            correo.From = new MailAddress("jyc.servidor@gmail.com");
-            smtp.Host = "smtp.gmail.com";
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
+            smtp.Host = "mail.jyciabolivia.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
-            smtp.Credentials = new NetworkCredential("jyc.servidor@gmail.com", "alex79016002");
+            smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
+            smtp.EnableSsl = true;
+
+            try
+            {
+                smtp.Send(correo);
+                correo.Dispose();
+                //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
+            }
+            catch (Exception ex)
+            {
+                //  Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
+            }
+        }
+
+        internal void Enviar_SolicitudInsumosMateriales(string asunto, string cuerpo, string basededatos)
+        {
+            MailMessage correo = new MailMessage();
+            
+            correo.To.Add("sistema@jycbolivia.com");
+            //------------------------------------------
+            correo.To.Add("automail@jycbolivia.com");
+            correo.To.Add("administracion@naxsnax.com");
+            correo.To.Add("ventas@naxsnax.com");
+            correo.Subject = asunto;
+            correo.Body = cuerpo;
+            //----------------adjunto--------------
+
+            //--------------------------------
+            correo.IsBodyHtml = true;
+            correo.Priority = MailPriority.Normal;
+            //
+            SmtpClient smtp = new SmtpClient();
+            //
+            //---------------------------------------------
+            // Estos datos debes rellanarlos correctamente
+            //---------------------------------------------
+            correo.From = new MailAddress("comercial@jyciabolivia.com");
+            smtp.Host = "mail.jyciabolivia.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new NetworkCredential("comercial@jyciabolivia.com", "Ph}=VCz%)bk5");
             smtp.EnableSsl = true;
 
             try

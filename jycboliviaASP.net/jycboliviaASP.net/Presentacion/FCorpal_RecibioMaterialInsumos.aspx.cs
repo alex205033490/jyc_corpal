@@ -25,7 +25,7 @@ namespace jycboliviaASP.net.Presentacion
 
             if (!IsPostBack)
             {
-                mostarlasSolicitudesdeCompradeInsumos("");
+                mostarlasSolicitudesdeCompradeInsumos("","Comprado");
             }
 
         }
@@ -51,10 +51,10 @@ namespace jycboliviaASP.net.Presentacion
             return lista;
         }
 
-        private void mostarlasSolicitudesdeCompradeInsumos(string responsableSolicitud)
+        private void mostarlasSolicitudesdeCompradeInsumos(string responsableSolicitud, string estado)
         {
             NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
-            DataSet tuplas = np.get_solicitudesMaterialeseInsumos(responsableSolicitud, "Comprado");
+            DataSet tuplas = np.get_solicitudesMaterialeseInsumos(responsableSolicitud, estado);
             gv_MaterialSolicitado.DataSource = tuplas;
             gv_MaterialSolicitado.DataBind();
         }
@@ -73,7 +73,8 @@ namespace jycboliviaASP.net.Presentacion
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
             string responsable = tx_responsableSolicitud.Text;
-            mostarlasSolicitudesdeCompradeInsumos(responsable);
+            string estadoSolicitud = dd_estadoSolicitud.SelectedItem.Text;
+            mostarlasSolicitudesdeCompradeInsumos(responsable, estadoSolicitud);
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -124,13 +125,22 @@ namespace jycboliviaASP.net.Presentacion
                 NCorpal_PedidoMaterialeInsumos np = new NCorpal_PedidoMaterialeInsumos();
                 int codigoPedido;
                 int.TryParse(gv_MaterialSolicitado.SelectedRow.Cells[1].Text, out codigoPedido);
-                
+                float cantidadCompradaTotal = 0;
+                float cantidadRecibidaTotal = 0;
+
                 foreach (GridViewRow row in gv_DatosItem.Rows)
                 {
                     int codigoItem = int.Parse(row.Cells[0].Text);
+
+                    float cantidadComprada;
+                    float.TryParse(row.Cells[5].Text.Replace('.', ','), out cantidadComprada);
+
                     float cantidadRecibido;
                     TextBox tx_cantidadRecibida = row.Cells[6].FindControl("tx_cantidadRecibida") as TextBox;
                     float.TryParse(tx_cantidadRecibida.Text.Replace('.', ','), out cantidadRecibido);
+
+                    cantidadCompradaTotal = cantidadCompradaTotal + cantidadComprada;
+                    cantidadRecibidaTotal = cantidadRecibidaTotal + cantidadRecibido;
 
                     bool bb = np.update_RecibirInsumosMaterial(codigoItem, cantidadRecibido);                    
                 }
@@ -141,11 +151,14 @@ namespace jycboliviaASP.net.Presentacion
                 int codresponsableRecibido = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 string ResponsableRecibido = Nresp.get_responsable(codresponsableRecibido).Tables[0].Rows[0][1].ToString();
 
-                string estadoCompra = "Cerrado";                
+                string estadoCompra = "Cerrado"; 
+                if(cantidadRecibidaTotal < cantidadCompradaTotal){
+                    estadoCompra = "Entrega Parcial";
+                }
                 bool cerrado = np.update_cerrarMaterialInsumosRecibido(codigoPedido, estadoCompra, codresponsableRecibido, ResponsableRecibido);
                 if (cerrado == true)
                 {
-                    mostarlasSolicitudesdeCompradeInsumos("Comprado");
+                    mostarlasSolicitudesdeCompradeInsumos("",estadoCompra);
                     limpiarDatos();
                     Session["ReporteGeneral"] = "Reporte_RecibidoMaterialInsumos";
                     Session["codigoRecibidoMaterialeInsumos"] = codigoPedido;

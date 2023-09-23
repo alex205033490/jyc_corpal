@@ -94,9 +94,15 @@
                 </asp:AutoCompleteExtender>
             </td>                    
             <td>
-                &nbsp;</td>   
+                <asp:Label ID="Label3" runat="server" Font-Size="Small" Text="Estado:"></asp:Label>
+            </td>   
             <td>
-                &nbsp;</td>
+                <asp:DropDownList ID="dd_estadoSolicitud" runat="server" Width="150px">
+                    <asp:ListItem>Comprado</asp:ListItem>
+                    <asp:ListItem>Entrega Parcial</asp:ListItem>
+                    <asp:ListItem>Cerrado</asp:ListItem>
+                </asp:DropDownList>
+            </td>
         </tr>       
         <tr>
             <td>
@@ -197,7 +203,7 @@
                         <asp:BoundField DataField="item" HeaderText="item" SortExpression="item" />
                         <asp:BoundField DataField="unidadmedida" HeaderText="unidadmedida" 
                             SortExpression="unidadmedida" />
-                        <asp:BoundField DataField="cantidad" HeaderText="cantidad" 
+                        <asp:BoundField DataField="cantidad" HeaderText="cantidad Solicitada" 
                             SortExpression="cantidad" />
                         <asp:BoundField DataField="cantidadcomprada" HeaderText="cantidadcomprada" 
                             SortExpression="cantidadcomprada" />
@@ -213,6 +219,8 @@
                                 
                             </EditItemTemplate>
                         </asp:TemplateField>
+                        <asp:BoundField DataField="tipocompra" HeaderText="tipocompra" 
+                            SortExpression="tipocompra" />
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

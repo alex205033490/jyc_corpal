@@ -94,7 +94,7 @@ namespace jycboliviaASP.net.Presentacion
                 gv_DatosItem.DataBind();
 
                 string responsableSolicitud = gv_MaterialSolicitado.SelectedRow.Cells[4].Text;
-                string estadoSolicitud = gv_MaterialSolicitado.SelectedRow.Cells[6].Text;
+                string estadoSolicitud = gv_MaterialSolicitado.SelectedRow.Cells[5].Text;
                 tx_responsableSolicitud.Text = responsableSolicitud;
                 dd_estadoSolicitud.SelectedValue = estadoSolicitud;
             }
@@ -137,9 +137,19 @@ namespace jycboliviaASP.net.Presentacion
                     TextBox tx_cantComprado = row.Cells[5].FindControl("tx_cantidadComprada") as TextBox;
                     float.TryParse(tx_cantComprado.Text.Replace('.',','), out cantidadComprado);
                     float montoComprado;
-                    TextBox tx_montoComprado = row.Cells[7].FindControl("tx_montototalcomprado") as TextBox;
-                    float.TryParse(tx_montoComprado.Text.Replace('.', ','), out montoComprado);
-                    bool bb = np.update_CompradeInsumos(codigoItem,cantidadComprado,montoComprado);
+                    TextBox tx_montoComprado = row.Cells[6].FindControl("tx_montototalcomprado") as TextBox;
+                    float.TryParse(tx_montoComprado.Text.Replace('.', ','), out montoComprado);                    
+
+                    DropDownList dd_factura = row.Cells[7].FindControl("dd_factura") as DropDownList;
+                    DropDownList dd_retencion = row.Cells[8].FindControl("dd_retencion") as DropDownList;
+                    DropDownList dd_tipocompra = row.Cells[9].FindControl("dd_tipocompra") as DropDownList;
+
+                    string factura = dd_factura.SelectedItem.Text;
+                    string retencion = dd_retencion.SelectedItem.Text;
+                    string tipocompra = dd_tipocompra.SelectedItem.Text;
+
+                    bool bb = np.update_CompradeInsumos(codigoItem, cantidadComprado, montoComprado, factura, retencion, tipocompra);
+
                     montoTotalPedidoComprado = montoTotalPedidoComprado + montoComprado;
                 }
 

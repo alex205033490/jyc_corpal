@@ -184,35 +184,13 @@
                     Width="100px"></asp:TextBox>
             </td>            
             <td>
-                <asp:Label ID="Label38" runat="server" Text="Monto Total BS:" Font-Size="Small"></asp:Label>
-            </td>
+                &nbsp;</td>
             <td></td>
             <td>
-                <asp:TextBox ID="tx_montoTotalbs" class="form-control" runat="server" 
-                    Width="100px"></asp:TextBox>
-            </td>
+                &nbsp;</td>
             <td></td>
         </tr>
-
-        <tr>
-            <td>
-                <asp:Label ID="Label39" runat="server" Text="Factura:" Font-Size="Small"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="tx_factura" class="form-control" runat="server" Width="100px"></asp:TextBox>
-            </td>
-            <td>
-                <asp:Label ID="Label40" runat="server" Text="Retencion:" Font-Size="Small"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="tx_retencion" class="form-control" runat="server" 
-                    Width="100px"></asp:TextBox>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+          
        
     </table>
    

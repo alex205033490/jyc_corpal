@@ -326,9 +326,13 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columncantidadcomprada;
             
-            private global::System.Data.DataColumn columnmontototal;
-            
             private global::System.Data.DataColumn columnmontototalcomprado;
+            
+            private global::System.Data.DataColumn columnfactura;
+            
+            private global::System.Data.DataColumn columnretencion;
+            
+            private global::System.Data.DataColumn columntipocompra;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -413,17 +417,33 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn montototalColumn {
+            public global::System.Data.DataColumn montototalcompradoColumn {
                 get {
-                    return this.columnmontototal;
+                    return this.columnmontototalcomprado;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn montototalcompradoColumn {
+            public global::System.Data.DataColumn facturaColumn {
                 get {
-                    return this.columnmontototalcomprado;
+                    return this.columnfactura;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn retencionColumn {
+                get {
+                    return this.columnretencion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn tipocompraColumn {
+                get {
+                    return this.columntipocompra;
                 }
             }
             
@@ -464,7 +484,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSCompraMaterialeInsumosRow AddDSCompraMaterialeInsumosRow(string codigo, string proveedor, string item, string unidadmedida, string cantidad, string cantidadcomprada, string montototal, string montototalcomprado) {
+            public DSCompraMaterialeInsumosRow AddDSCompraMaterialeInsumosRow(string codigo, string proveedor, string item, string unidadmedida, string cantidad, string cantidadcomprada, string montototalcomprado, string factura, string retencion, string tipocompra) {
                 DSCompraMaterialeInsumosRow rowDSCompraMaterialeInsumosRow = ((DSCompraMaterialeInsumosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -473,8 +493,10 @@ namespace jycboliviaASP.net {
                         unidadmedida,
                         cantidad,
                         cantidadcomprada,
-                        montototal,
-                        montototalcomprado};
+                        montototalcomprado,
+                        factura,
+                        retencion,
+                        tipocompra};
                 rowDSCompraMaterialeInsumosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDSCompraMaterialeInsumosRow);
                 return rowDSCompraMaterialeInsumosRow;
@@ -503,8 +525,10 @@ namespace jycboliviaASP.net {
                 this.columnunidadmedida = base.Columns["unidadmedida"];
                 this.columncantidad = base.Columns["cantidad"];
                 this.columncantidadcomprada = base.Columns["cantidadcomprada"];
-                this.columnmontototal = base.Columns["montototal"];
                 this.columnmontototalcomprado = base.Columns["montototalcomprado"];
+                this.columnfactura = base.Columns["factura"];
+                this.columnretencion = base.Columns["retencion"];
+                this.columntipocompra = base.Columns["tipocompra"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -522,10 +546,14 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columncantidad);
                 this.columncantidadcomprada = new global::System.Data.DataColumn("cantidadcomprada", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncantidadcomprada);
-                this.columnmontototal = new global::System.Data.DataColumn("montototal", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmontototal);
                 this.columnmontototalcomprado = new global::System.Data.DataColumn("montototalcomprado", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmontototalcomprado);
+                this.columnfactura = new global::System.Data.DataColumn("factura", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfactura);
+                this.columnretencion = new global::System.Data.DataColumn("retencion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnretencion);
+                this.columntipocompra = new global::System.Data.DataColumn("tipocompra", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntipocompra);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -673,6 +701,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columncantidadrecibida;
             
+            private global::System.Data.DataColumn columntipocompra;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSRecibidoMaterialInsumosDataTable() {
@@ -764,6 +794,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn tipocompraColumn {
+                get {
+                    return this.columntipocompra;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -799,7 +837,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSRecibidoMaterialInsumosRow AddDSRecibidoMaterialInsumosRow(string codigo, string proveedor, string item, string unidadmedida, string cantidad, string cantidadcomprada, string cantidadrecibida) {
+            public DSRecibidoMaterialInsumosRow AddDSRecibidoMaterialInsumosRow(string codigo, string proveedor, string item, string unidadmedida, string cantidad, string cantidadcomprada, string cantidadrecibida, string tipocompra) {
                 DSRecibidoMaterialInsumosRow rowDSRecibidoMaterialInsumosRow = ((DSRecibidoMaterialInsumosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -808,7 +846,8 @@ namespace jycboliviaASP.net {
                         unidadmedida,
                         cantidad,
                         cantidadcomprada,
-                        cantidadrecibida};
+                        cantidadrecibida,
+                        tipocompra};
                 rowDSRecibidoMaterialInsumosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDSRecibidoMaterialInsumosRow);
                 return rowDSRecibidoMaterialInsumosRow;
@@ -838,6 +877,7 @@ namespace jycboliviaASP.net {
                 this.columncantidad = base.Columns["cantidad"];
                 this.columncantidadcomprada = base.Columns["cantidadcomprada"];
                 this.columncantidadrecibida = base.Columns["cantidadrecibida"];
+                this.columntipocompra = base.Columns["tipocompra"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -857,6 +897,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columncantidadcomprada);
                 this.columncantidadrecibida = new global::System.Data.DataColumn("cantidadrecibida", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncantidadrecibida);
+                this.columntipocompra = new global::System.Data.DataColumn("tipocompra", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntipocompra);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1097,22 +1139,6 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string montototal {
-                get {
-                    try {
-                        return ((string)(this[this.tableDSCompraMaterialeInsumos.montototalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'montototal\' in table \'DSCompraMaterialeInsumos\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDSCompraMaterialeInsumos.montototalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string montototalcomprado {
                 get {
                     try {
@@ -1125,6 +1151,54 @@ namespace jycboliviaASP.net {
                 }
                 set {
                     this[this.tableDSCompraMaterialeInsumos.montototalcompradoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string factura {
+                get {
+                    try {
+                        return ((string)(this[this.tableDSCompraMaterialeInsumos.facturaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'factura\' in table \'DSCompraMaterialeInsumos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDSCompraMaterialeInsumos.facturaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string retencion {
+                get {
+                    try {
+                        return ((string)(this[this.tableDSCompraMaterialeInsumos.retencionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'retencion\' in table \'DSCompraMaterialeInsumos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDSCompraMaterialeInsumos.retencionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string tipocompra {
+                get {
+                    try {
+                        return ((string)(this[this.tableDSCompraMaterialeInsumos.tipocompraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tipocompra\' in table \'DSCompraMaterialeInsumos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDSCompraMaterialeInsumos.tipocompraColumn] = value;
                 }
             }
             
@@ -1202,18 +1276,6 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsmontototalNull() {
-                return this.IsNull(this.tableDSCompraMaterialeInsumos.montototalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetmontototalNull() {
-                this[this.tableDSCompraMaterialeInsumos.montototalColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsmontototalcompradoNull() {
                 return this.IsNull(this.tableDSCompraMaterialeInsumos.montototalcompradoColumn);
             }
@@ -1222,6 +1284,42 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetmontototalcompradoNull() {
                 this[this.tableDSCompraMaterialeInsumos.montototalcompradoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsfacturaNull() {
+                return this.IsNull(this.tableDSCompraMaterialeInsumos.facturaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetfacturaNull() {
+                this[this.tableDSCompraMaterialeInsumos.facturaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsretencionNull() {
+                return this.IsNull(this.tableDSCompraMaterialeInsumos.retencionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetretencionNull() {
+                this[this.tableDSCompraMaterialeInsumos.retencionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstipocompraNull() {
+                return this.IsNull(this.tableDSCompraMaterialeInsumos.tipocompraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettipocompraNull() {
+                this[this.tableDSCompraMaterialeInsumos.tipocompraColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1356,6 +1454,23 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string tipocompra {
+                get {
+                    try {
+                        return ((string)(this[this.tableDSRecibidoMaterialInsumos.tipocompraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tipocompra\' in table \'DSRecibidoMaterialInsumos\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableDSRecibidoMaterialInsumos.tipocompraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDSRecibidoMaterialInsumos.codigoColumn);
             }
@@ -1436,6 +1551,18 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetcantidadrecibidaNull() {
                 this[this.tableDSRecibidoMaterialInsumos.cantidadrecibidaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IstipocompraNull() {
+                return this.IsNull(this.tableDSRecibidoMaterialInsumos.tipocompraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SettipocompraNull() {
+                this[this.tableDSRecibidoMaterialInsumos.tipocompraColumn] = global::System.Convert.DBNull;
             }
         }
         

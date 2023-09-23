@@ -56,7 +56,7 @@ namespace jycboliviaASP.net.Negocio
             string consulta = "select "+ 
                                " pp.codigo,  date_format(pp.fechasolicitud,'%d/%m/%Y') as 'Fecha_Solicitud', "+ 
                                " date_format(pp.fechaesimadaentrega,'%d/%m/%Y') as 'Fecha_EstimadaEntrega', "+ 
-                               " pp.personalsolicitud,  format(pp.montototal,2) as 'Total',  pp.estadosolicitud "+
+                               " pp.personalsolicitud, pp.estadosolicitud "+
                                " from tbcorpal_pedidomateriaprimaeinsumos pp where "+
                                " pp.estadosolicitud = '"+Estado+"'"+
             " and pp.personalsolicitud like '%" + responsableSolicitud + "%' ";
@@ -68,7 +68,7 @@ namespace jycboliviaASP.net.Negocio
             string consulta = "select "+
                                " ii.codigo, ii.proveedor, ii.item, ii.unidadmedida, "+ 
                                " ii.cantidad, ii.cantidadcomprada, "+
-                               " ii.montototal , ii.montototalcomprado "+
+                               " ii.montototalcomprado, ii.factura, ii.retencion, ii.tipocompra "+
                                " from "+
                                " tbcorpal_itempedidomateriaprimaeinsumos ii "+
                                " where "+
@@ -76,11 +76,14 @@ namespace jycboliviaASP.net.Negocio
             return ConecRes.consultaMySql(consulta);
         }
 
-        internal bool update_CompradeInsumos(int codigoItem, float cantidadComprado, float montoComprado)
+        internal bool update_CompradeInsumos(int codigoItem, float cantidadComprado, float montoComprado, string factura, string retencion, string tipocompra)
         {
             string consulta = "update tbcorpal_itempedidomateriaprimaeinsumos set "+
                                " tbcorpal_itempedidomateriaprimaeinsumos.cantidadcomprada = '"+cantidadComprado.ToString().Replace(',','.')+"', "+
-                               " tbcorpal_itempedidomateriaprimaeinsumos.montototalcomprado = '"+montoComprado.ToString().Replace(',','.')+"' "+
+                               " tbcorpal_itempedidomateriaprimaeinsumos.montototalcomprado = '"+montoComprado.ToString().Replace(',','.')+"', "+
+                               " tbcorpal_itempedidomateriaprimaeinsumos.factura = '" + factura + "', " +
+                               " tbcorpal_itempedidomateriaprimaeinsumos.retencion = '" + retencion + "', " +
+                               " tbcorpal_itempedidomateriaprimaeinsumos.tipocompra = '" + tipocompra + "' " +
                                " where " +
                                " tbcorpal_itempedidomateriaprimaeinsumos.codigo = "+codigoItem;
             return ConecRes.ejecutarMySql(consulta);
@@ -105,7 +108,7 @@ namespace jycboliviaASP.net.Negocio
             string consulta = "select " +
                                " ii.codigo, ii.proveedor, ii.item, ii.unidadmedida, " +
                                " ii.cantidad, ii.cantidadcomprada, " +
-                               " ii.cantidadrecibida " +
+                               " ii.cantidadrecibida, '0' as 'montorecibido', ii.tipocompra " +
                                " from " +
                                " tbcorpal_itempedidomateriaprimaeinsumos ii " +
                                " where " +

@@ -60,9 +60,9 @@ namespace jycboliviaASP.net.Negocio
             return dpedido.get_todosItemInsumosPedidos(codigoPedido);
         }
 
-        internal bool update_CompradeInsumos(int codigoItem, float cantidadComprado, float montoComprado)
+        internal bool update_CompradeInsumos(int codigoItem, float cantidadComprado, float montoComprado, string factura, string retencion, string tipocompra)
         {
-            return dpedido.update_CompradeInsumos( codigoItem,  cantidadComprado,  montoComprado);
+            return dpedido.update_CompradeInsumos( codigoItem,  cantidadComprado,  montoComprado, factura, retencion, tipocompra);
         }
 
         internal bool update_cerrarCompraMaterialInsumos(int codigoPedido, string estadoCompra, float montoTotalPedidoComprado, int codresponsableCompra, string ResponsableCompra)

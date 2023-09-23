@@ -21,8 +21,10 @@
               <xs:element name="unidadmedida" msprop:Generator_ColumnVarNameInTable="columnunidadmedida" msprop:Generator_ColumnPropNameInRow="unidadmedida" msprop:Generator_ColumnPropNameInTable="unidadmedidaColumn" msprop:Generator_UserColumnName="unidadmedida" type="xs:string" minOccurs="0" />
               <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:string" minOccurs="0" />
               <xs:element name="cantidadcomprada" msprop:Generator_ColumnVarNameInTable="columncantidadcomprada" msprop:Generator_ColumnPropNameInRow="cantidadcomprada" msprop:Generator_ColumnPropNameInTable="cantidadcompradaColumn" msprop:Generator_UserColumnName="cantidadcomprada" type="xs:string" minOccurs="0" />
-              <xs:element name="montototal" msprop:Generator_ColumnVarNameInTable="columnmontototal" msprop:Generator_ColumnPropNameInRow="montototal" msprop:Generator_ColumnPropNameInTable="montototalColumn" msprop:Generator_UserColumnName="montototal" type="xs:string" minOccurs="0" />
               <xs:element name="montototalcomprado" msprop:Generator_ColumnVarNameInTable="columnmontototalcomprado" msprop:Generator_ColumnPropNameInRow="montototalcomprado" msprop:Generator_ColumnPropNameInTable="montototalcompradoColumn" msprop:Generator_UserColumnName="montototalcomprado" type="xs:string" minOccurs="0" />
+              <xs:element name="factura" msprop:Generator_ColumnVarNameInTable="columnfactura" msprop:Generator_ColumnPropNameInRow="factura" msprop:Generator_ColumnPropNameInTable="facturaColumn" msprop:Generator_UserColumnName="factura" type="xs:string" minOccurs="0" />
+              <xs:element name="retencion" msprop:Generator_ColumnVarNameInTable="columnretencion" msprop:Generator_ColumnPropNameInRow="retencion" msprop:Generator_ColumnPropNameInTable="retencionColumn" msprop:Generator_UserColumnName="retencion" type="xs:string" minOccurs="0" />
+              <xs:element name="tipocompra" msprop:Generator_ColumnVarNameInTable="columntipocompra" msprop:Generator_ColumnPropNameInRow="tipocompra" msprop:Generator_ColumnPropNameInTable="tipocompraColumn" msprop:Generator_UserColumnName="tipocompra" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -36,6 +38,7 @@
               <xs:element name="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_UserColumnName="cantidad" type="xs:string" minOccurs="0" />
               <xs:element name="cantidadcomprada" msprop:Generator_ColumnVarNameInTable="columncantidadcomprada" msprop:Generator_ColumnPropNameInRow="cantidadcomprada" msprop:Generator_ColumnPropNameInTable="cantidadcompradaColumn" msprop:Generator_UserColumnName="cantidadcomprada" type="xs:string" minOccurs="0" />
               <xs:element name="cantidadrecibida" msprop:Generator_ColumnVarNameInTable="columncantidadrecibida" msprop:Generator_ColumnPropNameInRow="cantidadrecibida" msprop:Generator_ColumnPropNameInTable="cantidadrecibidaColumn" msprop:Generator_UserColumnName="cantidadrecibida" type="xs:string" minOccurs="0" />
+              <xs:element name="tipocompra" msprop:Generator_ColumnVarNameInTable="columntipocompra" msprop:Generator_ColumnPropNameInRow="tipocompra" msprop:Generator_ColumnPropNameInTable="tipocompraColumn" msprop:Generator_UserColumnName="tipocompra" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
