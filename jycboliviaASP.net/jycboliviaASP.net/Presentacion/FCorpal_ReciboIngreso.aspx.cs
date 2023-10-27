@@ -91,6 +91,8 @@ namespace jycboliviaASP.net.Presentacion
             string NroReciboAux = nrr.get_nroRegistroIngresoSiguiente(codUser);
             string nroRecibo = NroReciboAux;
             bool bandera = nrr.insertarReciboIngreso(cliente, monto, moneda, chequenro, concepto, detalle, codUser, responsable, facturanro, nroRecibo, fechaRecibo);
+            guardarConciliacion();
+            
             if(bandera){
                 limpiarDatos();
                 buscarDatos("", codUser);
@@ -100,6 +102,58 @@ namespace jycboliviaASP.net.Presentacion
                 //Response.Write("<script type='text/javascript'> alert('GUARDADO: OK!!') </script>");
             }else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Guardado') </script>");
+        }
+
+        private void guardarConciliacion()
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int CodUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            float saldoAnterior;
+            float.TryParse(tx_montototal.Text.Replace('.',','), out saldoAnterior);
+            
+            float extractoBancario;
+            float.TryParse(tx_montototal.Text.Replace('.', ','), out extractoBancario);
+            
+            string  moneda = dd_moneda.SelectedItem.Text;
+            if (moneda.Equals("Dolares"))
+            {
+                saldoAnterior = (saldoAnterior * float.Parse("6,96"));
+                extractoBancario = (extractoBancario * float.Parse("6,96"));
+            }
+
+            int codcuentaBancaria = 0;
+            if (CodUser == 2)
+            {  //julio torrico
+                codcuentaBancaria = 13;
+            }else
+                if (CodUser == 25 || CodUser == 26)     //iver mendosa
+                {
+                    codcuentaBancaria = 14;
+                }      
+                        
+                        NA_banco Nbanco = new NA_banco();
+                        if (!Nbanco.tieneConciliacionBancaria(codcuentaBancaria))
+                        {
+
+                            Nbanco.insertconciliacionBancaria(saldoAnterior.ToString().Replace(',', '.'), extractoBancario.ToString().Replace(',', '.'), codcuentaBancaria, CodUser);
+                            int codultimaConciliacionBancaria = Nbanco.getultimaConciliacion();
+                            //----------------historial-------------
+                            NA_Historial nhistorial = new NA_Historial();
+                            nhistorial.insertar(CodUser, "Se ha creado una Conciliacion Bancaria con codigo " + codultimaConciliacionBancaria);
+                            //--------------------------------------
+                            Response.Write("<script type='text/javascript'> alert('Se ha Guardado Correctamente') </script>");
+                        }
+                        else {
+                            Nbanco.updateconciliacionBancaria(saldoAnterior.ToString().Replace(',', '.'), extractoBancario.ToString().Replace(',', '.'), codcuentaBancaria, CodUser);
+                        }
+                        
+                 
+        
+            
+
         }
 
         protected void bt_modificar_Click(object sender, EventArgs e)
@@ -161,10 +215,15 @@ namespace jycboliviaASP.net.Presentacion
             if(gv_reciboIngresoEgreso.SelectedIndex > -1){
                 int codigo;
                 int.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[1].Text, out codigo);
+
+                int montoRestar;
+                int.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[5].Text, out montoRestar);
+
                 NA_Recibo_IngresoEgreso nrr = new NA_Recibo_IngresoEgreso();
-                bool bandera = nrr.eliminarIngreso(codigo);
+                bool bandera = nrr.eliminarIngreso(codigo);                
                 if (bandera)
-                {                    
+                {
+                    eliminarIngreso(codigo, montoRestar);
                     limpiarDatos();
                     buscarDatos("", codUser);
                     Response.Write("<script type='text/javascript'> alert('ELIMINADO: OK!!') </script>");

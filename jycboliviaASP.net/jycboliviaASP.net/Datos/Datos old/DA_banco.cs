@@ -81,5 +81,16 @@ namespace jycboliviaASP.net.Datos
                                 " where t1.cuenta = '" + cuentaBancoAux + "'";
             return ConecRes.consultaMySql(consulta);
         }
+
+        internal bool updateconciliacionBancaria(string saldoAnterior, string extractoBancario, int codcuentaBancaria, int CodUser)
+        {
+            string consulta = " update tb_conciliacionbancaria set " +
+                             " tb_conciliacionbancaria.extractobancario = tb_conciliacionbancaria.extractobancario + format('" + extractoBancario + "',2) " +
+                             " where " +
+                             " tb_conciliacionbancaria.fecha = current_date() and " +
+                             " tb_conciliacionbancaria. codcuentabanco = " + codcuentaBancaria + " and " +
+                             " tb_conciliacionbancaria. coduser =  " + CodUser;
+            return ConecRes.ejecutarMySql(consulta);
+        }
     }
 }

@@ -48,9 +48,10 @@ namespace jycboliviaASP.net.Presentacion
             for (int i = 0; i < gv_saldosCuentasGeneral.Rows.Count; i++)
             {
                 string banco = gv_saldosCuentasGeneral.Rows[i].Cells[0].Text;
-                if (banco.Equals("Santa Cruz") || banco.Equals("Cochabamba") 
+                if (banco.Equals("Santa Cruz") || banco.Equals("Cochabamba")
                     || banco.Equals("La Paz") || banco.Equals("JyC SRL") ||
-                    banco.Equals("JyCIA SRL") || banco.Equals("Imven"))
+                    banco.Equals("JyCIA SRL") || banco.Equals("Imven") || banco.Equals("Corpal")
+                    || banco.Equals("Paraguay"))
                 {
                     gv_saldosCuentasGeneral.Rows[i].BackColor = Color.Red;
                     gv_saldosCuentasGeneral.Rows[i].ForeColor = Color.White;

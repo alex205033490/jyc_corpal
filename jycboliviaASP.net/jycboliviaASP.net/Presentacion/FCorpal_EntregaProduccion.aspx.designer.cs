@@ -121,22 +121,13 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.Label Label40;
         
         /// <summary>
-        /// tx_productoNax control.
+        /// dd_productosNax control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_productoNax;
-        
-        /// <summary>
-        /// tx_productoNax_AutoCompleteExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender tx_productoNax_AutoCompleteExtender;
+        protected global::System.Web.UI.WebControls.DropDownList dd_productosNax;
         
         /// <summary>
         /// Label31 control.
@@ -166,49 +157,13 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.Label Label32;
         
         /// <summary>
-        /// tx_unidadsuelta control.
+        /// tx_medida control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_unidadsuelta;
-        
-        /// <summary>
-        /// Label38 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label38;
-        
-        /// <summary>
-        /// tx_kgrparamix control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_kgrparamix;
-        
-        /// <summary>
-        /// Label39 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label39;
-        
-        /// <summary>
-        /// tx_kgrdesperdicio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_kgrdesperdicio;
+        protected global::System.Web.UI.WebControls.TextBox tx_medida;
         
         /// <summary>
         /// Label35 control.

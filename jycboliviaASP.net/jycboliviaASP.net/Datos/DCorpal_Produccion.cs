@@ -70,11 +70,54 @@ namespace jycboliviaASP.net.Datos
 
         internal bool eliminarEntregaProduccion(int codigo)
         {
-            string consulta = "update tbcorpal_entregasordenproduccion set " +
-                                " tbcorpal_entregasordenproduccion.estado = 0 "+
-                                " where " +
-                                " tbcorpal_entregasordenproduccion.codigo =" + codigo;
-            return Conx.ejecutarMySql(consulta);
+            string consultaD = "select " +
+                               " pp.codigo, pp.producto, pp.stock, ep.cantcajas " +
+                               " from tbcorpal_producto pp, " +
+                               " tbcorpal_entregasordenproduccion ep " +
+                               " where " +
+                               " ep.codProductonax = pp.codigo and " +
+                               " ep.codigo = " + codigo;
+            DataSet dato = Conx.consultaMySql(consultaD);
+
+            bool banderaResultado = false;
+
+            if (dato.Tables[0].Rows.Count > 0)
+            {
+                float stock;
+                float.TryParse(dato.Tables[0].Rows[0][2].ToString().Replace('.', ','), out stock);
+
+                float cantcajas;
+                float.TryParse(dato.Tables[0].Rows[0][3].ToString().Replace('.', ','), out cantcajas);
+
+                if (cantcajas <= stock)
+                {
+                    string consulta0 = "update tbcorpal_producto , tbcorpal_entregasordenproduccion " +
+                                       " set tbcorpal_producto.stock = (tbcorpal_producto.stock - tbcorpal_entregasordenproduccion.cantcajas)" +
+                                       " where " +
+                                       " tbcorpal_producto.codigo = tbcorpal_entregasordenproduccion.codProductonax and " +
+                        //" tbcorpal_entregasordenproduccion.cantcajas <= tbcorpal_producto.stock and "+
+                                       " tbcorpal_entregasordenproduccion.codigo = " + codigo;
+                    bool bandera = Conx.ejecutarMySql(consulta0);
+
+                    if (bandera)
+                    {
+                        string consulta = "update tbcorpal_entregasordenproduccion set " +
+                                        " tbcorpal_entregasordenproduccion.estado = 0 " +
+                                        " where " +
+                                        " tbcorpal_entregasordenproduccion.codigo =" + codigo;
+                        banderaResultado = Conx.ejecutarMySql(consulta);
+                    }
+                    return banderaResultado;
+                }
+                else
+                    return banderaResultado;
+
+            }
+            else
+                return banderaResultado;
+
+
+            
         }
 
         internal DataSet get_entregasProduccion(string fechadesde, string fechahasta, string Responsable, string producto)

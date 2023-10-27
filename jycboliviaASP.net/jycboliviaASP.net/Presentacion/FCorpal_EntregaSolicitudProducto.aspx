@@ -206,6 +206,8 @@
                     
                 </EditItemTemplate>
             </asp:TemplateField>
+            <asp:BoundField DataField="stock_Almacen" HeaderText="stock_Almacen" 
+                SortExpression="stock_Almacen" />
         </Columns>
         <FooterStyle BackColor="#CCCCCC" />
         <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

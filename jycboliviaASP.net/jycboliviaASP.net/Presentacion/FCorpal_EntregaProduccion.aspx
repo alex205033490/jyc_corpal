@@ -143,57 +143,33 @@
                 <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="tx_productoNax" runat="server" class="form-control" 
-                    Width="400px"></asp:TextBox>
-                <asp:AutoCompleteExtender ID="tx_productoNax_AutoCompleteExtender" 
-                    runat="server" TargetControlID="tx_productoNax"
-                    CompletionSetCount="12" 
-                    MinimumPrefixLength="1" ServiceMethod="GetlistaProductos" 
-                    UseContextKey="True"
-                    CompletionListCssClass="CompletionList" 
-                    CompletionListItemCssClass="CompletionlistItem" 
-                    CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
-            >
-                </asp:AutoCompleteExtender>
+                <asp:DropDownList ID="dd_productosNax" class="form-control" runat="server" 
+                    Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
+                </asp:DropDownList>
             </td>
+            <td></td>
             <td></td>
         </tr>
     </table>
     <table>
         <tr>
             <td>
-                <asp:Label ID="Label31" runat="server" Text="Cant Cajas :"></asp:Label>
+                <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
             </td>
             <td>
                 <asp:TextBox ID="tx_cantcajas" class="form-control" runat="server" 
                     Width="150px"></asp:TextBox>
             </td>
             <td>
-                <asp:Label ID="Label32" runat="server" Text="Unidad Suelta :"></asp:Label>
+                <asp:Label ID="Label32" runat="server" Text="Medida:"></asp:Label>
             </td>
             
             <td>
-                <asp:TextBox ID="tx_unidadsuelta" class="form-control" runat="server" 
+                <asp:TextBox ID="tx_medida" class="form-control" runat="server" 
                     Width="150px"></asp:TextBox>
             </td>            
         </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label38" runat="server" Text="Kgr para Mix :"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="tx_kgrparamix" class="form-control" runat="server" 
-                    Width="150px"></asp:TextBox>
-            </td>
-            
-            <td>
-                <asp:Label ID="Label39" runat="server" Text="Kgr Desperdicio :"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="tx_kgrdesperdicio" class="form-control" runat="server" 
-                    Width="150px"></asp:TextBox>
-            </td>
-        </tr>
+        
     </table>
    
     

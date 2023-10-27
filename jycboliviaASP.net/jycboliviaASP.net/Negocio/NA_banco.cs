@@ -329,120 +329,28 @@ namespace jycboliviaASP.net.Negocio
             dt.Columns.Add("Moneda");
             dt.Columns.Add("NroCuenta");
 
-            //----------- santa Cruz
-            DataRow filaScz = dt.NewRow();
-            filaScz["Banco"] = "Santa Cruz";
-            filaScz["TipoCuenta"] = "";
-            filaScz["Moneda"] = "";
-            filaScz["NroCuenta"] = "";            
-            dt.Rows.Add(filaScz);
 
-            DataSet datosEstadoSCZ = listarCuentasBancariasSantaCruz();
-            for (int k = 0; k < datosEstadoSCZ.Tables[0].Rows.Count; k++)
+            //----------Corpal
+            DataRow filaCorpal = dt.NewRow();
+            filaCorpal["Banco"] = "Corpal";
+            filaCorpal["TipoCuenta"] = "";
+            filaCorpal["Moneda"] = "";
+            filaCorpal["NroCuenta"] = "";
+            dt.Rows.Add(filaCorpal);
+            DataSet datosEstadoCorpal = listarCuentasBancariasCorpal();
+            for (int k = 0; k < datosEstadoCorpal.Tables[0].Rows.Count; k++)
             {
                 DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoSCZ.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoSCZ.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoSCZ.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoSCZ.Tables[0].Rows[k][3].ToString();
+                fila["Banco"] = datosEstadoCorpal.Tables[0].Rows[k][0].ToString();
+                fila["TipoCuenta"] = datosEstadoCorpal.Tables[0].Rows[k][1].ToString();
+                fila["Moneda"] = datosEstadoCorpal.Tables[0].Rows[k][2].ToString();
+                fila["NroCuenta"] = datosEstadoCorpal.Tables[0].Rows[k][3].ToString();
                 dt.Rows.Add(fila);
             }
-
-            //---------end santa cruz
-            //---------cochabamba
-            DataRow filacbba = dt.NewRow();
-            filacbba["Banco"] = "Cochabamba";
-            filacbba["TipoCuenta"] = "";
-            filacbba["Moneda"] = "";
-            filacbba["NroCuenta"] = "";
-            dt.Rows.Add(filacbba);
-            DataSet datosEstadoCbba = listarCuentasBancariasCochabamba();
-            for (int k = 0; k < datosEstadoCbba.Tables[0].Rows.Count; k++)
-            {
-                DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoCbba.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoCbba.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoCbba.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoCbba.Tables[0].Rows[k][3].ToString();
-                dt.Rows.Add(fila);
-            }
-            //---------end Cochabamba
-            //---------- La Paz
-            DataRow filalpz = dt.NewRow();
-            filalpz["Banco"] = "La Paz";
-            filalpz["TipoCuenta"] = "";
-            filalpz["Moneda"] = "";
-            filalpz["NroCuenta"] = "";            
-            dt.Rows.Add(filalpz);
-            DataSet datosEstadoLpz = listarCuentasBancariasLaPaz();
-            for (int k = 0; k < datosEstadoLpz.Tables[0].Rows.Count; k++)
-            {
-                DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoLpz.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoLpz.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoLpz.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoLpz.Tables[0].Rows[k][3].ToString();
-                dt.Rows.Add(fila);
-            }
-
-            //---------en la paz
-            //----------JYC SRL
-            DataRow filajycSrl = dt.NewRow();
-            filajycSrl["Banco"] = "JyC SRL";
-            filajycSrl["TipoCuenta"] = "";
-            filajycSrl["Moneda"] = "";
-            filajycSrl["NroCuenta"] = "";
-            dt.Rows.Add(filajycSrl);
-            DataSet datosEstadoJYCSRL = listarCuentasBancariasJYCSRL();
-            for (int k = 0; k < datosEstadoJYCSRL.Tables[0].Rows.Count; k++)
-            {
-                DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoJYCSRL.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoJYCSRL.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoJYCSRL.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoJYCSRL.Tables[0].Rows[k][3].ToString();
-                dt.Rows.Add(fila);
-            }
-            //----------end JYCSRL
-            //---------- JYCIA SRL
-            DataRow filajyciaSrl = dt.NewRow();
-            filajyciaSrl["Banco"] = "JyCIA SRL";
-            filajyciaSrl["TipoCuenta"] = "";
-            filajyciaSrl["Moneda"] = "";
-            filajyciaSrl["NroCuenta"] = "";
-            dt.Rows.Add(filajyciaSrl);
-            DataSet datosEstadoJYCIASRL = listarCuentasBancariasJYCIASRL();
-            for (int k = 0; k < datosEstadoJYCIASRL.Tables[0].Rows.Count; k++)
-            {
-                DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoJYCIASRL.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoJYCIASRL.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoJYCIASRL.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoJYCIASRL.Tables[0].Rows[k][3].ToString();
-                dt.Rows.Add(fila);
-            }
-
-            //----------end JYCIA SRL
-            //----------Imven
-            DataRow filaImven = dt.NewRow();
-            filaImven["Banco"] = "Imven";
-            filaImven["TipoCuenta"] = "";
-            filaImven["Moneda"] = "";
-            filaImven["NroCuenta"] = "";
-            dt.Rows.Add(filaImven);
-            DataSet datosEstadoImven = listarCuentasBancariasImven();
-            for (int k = 0; k < datosEstadoImven.Tables[0].Rows.Count; k++)
-            {
-                DataRow fila = dt.NewRow();
-                fila["Banco"] = datosEstadoImven.Tables[0].Rows[k][0].ToString();
-                fila["TipoCuenta"] = datosEstadoImven.Tables[0].Rows[k][1].ToString();
-                fila["Moneda"] = datosEstadoImven.Tables[0].Rows[k][2].ToString();
-                fila["NroCuenta"] = datosEstadoImven.Tables[0].Rows[k][3].ToString();
-                dt.Rows.Add(fila);
-            }
-
-            //-----------end Imven
-
+            //-----------end Corpal
+            
+            
+            
 
             for (DateTime i = fecha1_aux; i <= fecha2_aux; i=i.AddDays(1))
             {
@@ -457,72 +365,53 @@ namespace jycboliviaASP.net.Negocio
                 NumberFormatInfo nfi = new CultureInfo("es-BO", false).NumberFormat;
                 
                 //--------------------------------------------------------------------
-
-
-                //---------- santa cruz
-                DataSet datoSCZ = listarSaldosCuentasBancariasSantaCruz(fechaActual);                
-                int cantSCZ = datoSCZ.Tables[0].Rows.Count;
-                for (int j = 0; j < cantSCZ; j++)
+                ///--------------Corpal
+                DataSet datoCorpal = listarSaldosCuentasBancariasCORPAL(fechaActual);
+                int cantCorpal = datoCorpal.Tables[0].Rows.Count;
+                for (int j = 0; j < cantCorpal; j++)
                 {
-                    string tupla = datoSCZ.Tables[0].Rows[j][4].ToString();
-                    dt.Rows[j + 1][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol,"");
+                    string tupla = datoCorpal.Tables[0].Rows[j][4].ToString();
+                    dt.Rows[j + 1][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
                 }
-                //-----------end santa cruz
-                //----------- cochabamba
-                DataSet datocbba = listarSaldosCuentasBancariasCochabamba(fechaActual);
-                int cantcbba = datocbba.Tables[0].Rows.Count;
-                for (int j = 0; j < cantcbba; j++)
-                {
-                    string tupla = datocbba.Tables[0].Rows[j][4].ToString();
-                    int filaktoca = j + (2 + cantSCZ);
-                    dt.Rows[filaktoca][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
-                }
-                //---------- end cochabamba
-                //---------- La PAz
-                DataSet datolpz = listarSaldosCuentasBancariasLaPaz(fechaActual);
-                int cantlpz = datolpz.Tables[0].Rows.Count;
-                for (int j = 0; j < cantlpz; j++)
-                {
-                    string tupla = datolpz.Tables[0].Rows[j][4].ToString();
-                    int filaktoca = j + (3 + cantSCZ+cantcbba);
-                    dt.Rows[filaktoca][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
-                }
-                ///--------------end la paz
-                ///--------------JYC SRL
-                DataSet datoJYCSRL = listarSaldosCuentasBancariasJYCSRL(fechaActual);
-                int cantJYCSRL = datoJYCSRL.Tables[0].Rows.Count;
-                for (int j = 0; j < cantJYCSRL; j++)
-                {
-                    string tupla = datoJYCSRL.Tables[0].Rows[j][4].ToString();
-                    int filaktoca = j + (4 + cantSCZ + cantcbba + cantlpz);
-                    dt.Rows[filaktoca][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
-                }
-                ///-------------End JYC SRL
-                ///-------------JYCIA SRL
-                DataSet datoJYCIASRL = listarSaldosCuentasBancariasJYCIASRL(fechaActual);
-                int cantJYCIASRL = datoJYCIASRL.Tables[0].Rows.Count;
-                for (int j = 0; j < cantJYCIASRL; j++)
-                {
-                    string tupla = datoJYCIASRL.Tables[0].Rows[j][4].ToString();
-                    int filaktoca = j + (5 + cantSCZ + cantcbba + cantlpz + cantJYCSRL);
-                    dt.Rows[filaktoca][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
-                }
-                ///---------------end JYCIA SRL
-                ///--------------Imven
-                DataSet datoImven = listarSaldosCuentasBancariasIMVEN(fechaActual);
-                int cantImven = datoImven.Tables[0].Rows.Count;
-                for (int j = 0; j < cantImven; j++)
-                {
-                    string tupla = datoImven.Tables[0].Rows[j][4].ToString();
-                    int filaktoca = j + (6 + cantSCZ + cantcbba + cantlpz + cantJYCSRL + cantJYCIASRL);
-                    dt.Rows[filaktoca][nombreColumna] = Convert.ToSingle(tupla).ToString("C", nfi).Replace(nfi.CurrencySymbol, "");
-                }
-                ///-------------- end Imven
-
+                ///-------------- end Corpal
+                
 
             }
 
             return ds;
+        }
+
+        private DataSet listarSaldosCuentasBancariasCORPAL(string fechaActual)
+        {
+            string consulta = "select " +
+                                " b.nombre,tc.nombre as 'tipoCuenta',cu.moneda,cu.nrocuenta, " +
+                                " IF(t2.resultado>0,t2.resultado,0) as 'resultado' " +
+                                " from  " +
+                                " db_seguimientocorpal_jyc.tb_banco b, db_seguimientocorpal_jyc.tb_tipocuenta tc, db_seguimientocorpal_jyc.tb_cuentabancaria cu " +
+                                " left join " +
+                                " ( " +
+                                " select con.codcuentabanco,IFNULL((con.extractobancario-t1.montoCheque),con.extractobancario) as 'resultado'  " +
+                                " from db_seguimientocorpal_jyc.tb_conciliacionbancaria con  " +
+                                " left join " +
+                                " (select che.codconciliacionbanco,sum(che.monto)as 'montoCheque' from db_seguimientocorpal_jyc.tb_chequesencirculacion " +
+                                " che group by che.codconciliacionbanco) as t1 " +
+                                " ON con.codigo = t1.codconciliacionbanco " +
+                                " where " +
+                                " con.fecha = '" + fechaActual + "' " +
+                                " ) as t2 " +
+                                " ON cu.codigo = t2.codcuentabanco " +
+                                " where b.codigo = cu.codbanco and " +
+                                " cu.codtipocuenta = tc.codigo  and cu.estado = 1";
+            return Dbanco.getDatos(consulta);
+        }
+
+        private DataSet listarCuentasBancariasCorpal()
+        {
+            string consulta = "select b.nombre as 'banco',tc.nombre as 'tipoCuenta',cu.moneda,cu.nrocuenta " +
+                               " from db_seguimientocorpal_jyc.tb_banco b, db_seguimientocorpal_jyc.tb_cuentabancaria cu , db_seguimientocorpal_jyc.tb_tipocuenta tc " +
+                               " where b.codigo = cu.codbanco and " +
+                               " cu.codtipocuenta = tc.codigo  and cu.estado = 1";
+            return Dbanco.getDatos(consulta);
         }
 
         /// <summary>
@@ -566,5 +455,10 @@ namespace jycboliviaASP.net.Negocio
                 return "Ninguno";
         }
 
+
+        internal bool updateconciliacionBancaria(string saldoAnterior, string extractoBancario, int codcuentaBancaria, int CodUser)
+        {
+            return Dbanco.updateconciliacionBancaria( saldoAnterior,  extractoBancario,  codcuentaBancaria,  CodUser);
+        }
     }
 }

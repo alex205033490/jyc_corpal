@@ -123,6 +123,24 @@ namespace jycboliviaASP.net.Negocio
             return dsp.get_alldetalleProductoSolicitadosyEntregadosporpersona(fechadesde, fechahasta, Responsable);
         }
 
-      
+
+
+        internal bool sumarStockenProducto(int codigoProdNax, float cantcajas)
+        {
+            return dsp.sumarStockenProducto( codigoProdNax,  cantcajas);
+        }
+
+        internal float get_SumStockTotal(int codigoSolicitud)
+        {
+            DataSet dato = dsp.get_SumStockTotal(codigoSolicitud);
+            if (dato.Tables[0].Rows.Count > 0)
+            {
+                float suma;
+                float.TryParse(dato.Tables[0].Rows[0][0].ToString().Replace('.', ','), out suma);
+                return suma;
+            }
+            else
+                return -1;
+        }
     }
 }

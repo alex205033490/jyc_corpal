@@ -115,29 +115,46 @@ namespace jycboliviaASP.net.Presentacion
             if (gv_solicitudesProductos.SelectedIndex > -1)
             {
                 int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
-
+                float sumStock = nss.get_SumStockTotal(codigoSolicitud);
+                float sumaentrega = 0;
                 foreach (GridViewRow row in gv_detallesolicitud.Rows)
                 {
-                    int codigoP = int.Parse(row.Cells[0].Text);
                     float cantEntregado;
                     TextBox tx_cant = row.Cells[5].FindControl("tx_cantentregado") as TextBox;
-                    float.TryParse(tx_cant.Text,out cantEntregado);
-                    bool bb = nss.update_cantProductosEntregados(codigoSolicitud,codigoP,cantEntregado);
+                    float.TryParse(tx_cant.Text, out cantEntregado);
+                    sumaentrega = sumaentrega + cantEntregado;
                 }
 
-                NA_Responsables Nresp = new NA_Responsables();
-                string usuarioAux = Session["NameUser"].ToString();
-                string passwordAux = Session["passworuser"].ToString();
-                int codresponsable = Nresp.getCodUsuario(usuarioAux, passwordAux);
-                string nombreResponsable = Nresp.get_responsable(codresponsable).Tables[0].Rows[0][1].ToString();
+                if(sumaentrega <= sumStock){
+                    foreach (GridViewRow row in gv_detallesolicitud.Rows)
+                    {
+                        int codigoP = int.Parse(row.Cells[0].Text);
+                        float cantEntregado;
+                        TextBox tx_cant = row.Cells[5].FindControl("tx_cantentregado") as TextBox;
+                        float.TryParse(tx_cant.Text, out cantEntregado);
+                        bool bb = nss.update_cantProductosEntregados(codigoSolicitud, codigoP, cantEntregado);
+                    }
 
-                bool cerrado = nss.update_cerrarSolicitud(codigoSolicitud, codresponsable, nombreResponsable);
-                if (cerrado == true) {
-                    limpiarDatos();
-                    buscarDatosSolicitud("", "");
-                    Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
-                    Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
-                }
+                    NA_Responsables Nresp = new NA_Responsables();
+                    string usuarioAux = Session["NameUser"].ToString();
+                    string passwordAux = Session["passworuser"].ToString();
+                    int codresponsable = Nresp.getCodUsuario(usuarioAux, passwordAux);
+                    string nombreResponsable = Nresp.get_responsable(codresponsable).Tables[0].Rows[0][1].ToString();
+
+                    bool cerrado = nss.update_cerrarSolicitud(codigoSolicitud, codresponsable, nombreResponsable);
+                    if (cerrado == true)
+                    {
+                        limpiarDatos();
+                        buscarDatosSolicitud("", "");
+                        Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
+                        Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
+                    }
+
+                }else
+                    Response.Write("<script type='text/javascript'> alert('Error: Suma Entrega mayor a Stock') </script>");
+
+
+                
             }
         }
 
@@ -156,5 +173,7 @@ namespace jycboliviaASP.net.Presentacion
             gv_detallesolicitud.DataSource = null;
             gv_detallesolicitud.DataBind();
         }
+
+        
     }
 }

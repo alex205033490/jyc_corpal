@@ -14,8 +14,8 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_mostrarProductos(string producto)
         {
-            string consulta = "select codigo, producto, medida, precio "+ 
-                               " from tbcorpal_producto pp where pp.`producto` like '%"+producto+"%'";
+            string consulta = "select codigo, producto, medida, precio "+
+                               " from tbcorpal_producto pp where pp.producto like '%" + producto + "%' and pp.estado = 1";
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
@@ -90,7 +90,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = " select "+
                                 " pp.codigo, pp.producto, pp.medida , dse.cant as 'cantSolicitada', "+
                                 " dse.tiposolicitud, "+
-                                " ifnull(dse.cantentregada,0) as 'Cant_Entregada' "+
+                                " ifnull(dse.cantentregada,0) as 'Cant_Entregada', pp.stock as 'stock_Almacen' " +
                                 " from tbcorpal_solicitudentregaproducto se , "+
                                 " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
                                 " where "+                                
@@ -102,21 +102,47 @@ namespace jycboliviaASP.net.Datos
 
         internal bool eliminarSolicitud(int codigoSolicitud)
         {
-            string consulta = "update tbcorpal_solicitudentregaproducto " +
+            bool banderaResultado = false;
+            string consulta0 = "update tbcorpal_producto , tbcorpal_detalle_solicitudproducto "+
+                               " set tbcorpal_producto.stock = (tbcorpal_producto.stock - tbcorpal_detalle_solicitudproducto.cantentregada) " +
+                               " where "+
+                               " tbcorpal_producto.codigo = tbcorpal_detalle_solicitudproducto.codproducto and " +
+                               " tbcorpal_detalle_solicitudproducto.codsolicitud ="+ codigoSolicitud;
+            bool bandera0 = conexion.ejecutarMySql(consulta0);
+
+            if (bandera0)
+            {
+                string consulta = "update tbcorpal_solicitudentregaproducto " +
                               " set tbcorpal_solicitudentregaproducto.estado = false, " +
                               "  tbcorpal_solicitudentregaproducto.estadosolicitud = 'Cerrado' " +
                               " where tbcorpal_solicitudentregaproducto.codigo = " + codigoSolicitud;
-            return conexion.ejecutarMySql(consulta);
+                banderaResultado = conexion.ejecutarMySql(consulta);
+            }
+
+            return banderaResultado;
+            
         }
 
         internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado)
         {
-            string consulta = "update tbcorpal_detalle_solicitudproducto "+
-                                " set tbcorpal_detalle_solicitudproducto.cantentregada = '"+cantEntregado.ToString().Replace(',','.')+"'"+
-                                " where "+
-                                " tbcorpal_detalle_solicitudproducto.codsolicitud = "+codigoSolicitud+" and "+
-                                " tbcorpal_detalle_solicitudproducto.codproducto ="+codigoP;
-            return conexion.ejecutarMySql(consulta);
+            bool banderaResultado = false;
+            string consulta0 = "update tbcorpal_producto "+
+                               " set tbcorpal_producto.stock = tbcorpal_producto.stock - CAST('" + cantEntregado.ToString().Replace(',', '.') + "' AS DECIMAL(10,2))" +
+                               " where "+
+                               " tbcorpal_producto.codigo = "+codigoP;
+
+            bool bandera0 = conexion.ejecutarMySql(consulta0);
+
+            if (bandera0) {
+                string consulta = "update tbcorpal_detalle_solicitudproducto " +
+                                    " set tbcorpal_detalle_solicitudproducto.cantentregada = '" + cantEntregado.ToString().Replace(',', '.') + "'" +
+                                    " where " +
+                                    " tbcorpal_detalle_solicitudproducto.codsolicitud = " + codigoSolicitud + " and " +
+                                    " tbcorpal_detalle_solicitudproducto.codproducto =" + codigoP;
+                banderaResultado = conexion.ejecutarMySql(consulta);            
+            }
+
+            return banderaResultado;
         }
 
         internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable)
@@ -286,6 +312,28 @@ namespace jycboliviaASP.net.Datos
                                " SF.personalsolicitud LIKE '%"+Responsable+"%'";
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
+        }
+
+        internal bool sumarStockenProducto(int codigoProdNax, float cantcajas)
+        {
+            string consulta = " update tbcorpal_producto set "+
+                                " tbcorpal_producto.stock = tbcorpal_producto.stock + '"+cantcajas.ToString().Replace(',','.')+"'"+
+                                " where "+
+                                " tbcorpal_producto.codigo ="+codigoProdNax;
+            return conexion.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_SumStockTotal(int codigoSolicitud)
+        {
+            string consulta = "select "+
+                            " sum(pp.stock ) "+
+                            " from tbcorpal_solicitudentregaproducto se , "+ 
+                            " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp  "+
+                            " where "+ 
+                            " se.codigo = dse.codsolicitud and "+
+                            " dse.codproducto = pp.codigo and "+
+                            " se.codigo = "+codigoSolicitud;
+            return conexion.consultaMySql(consulta);
         }
     }
 }

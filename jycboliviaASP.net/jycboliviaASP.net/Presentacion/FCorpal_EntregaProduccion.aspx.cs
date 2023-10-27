@@ -30,22 +30,37 @@ namespace jycboliviaASP.net.Presentacion
                 string passwordAux = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 tx_responsableEntrega.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
-
+                llenarProductosNax();
+                ponerMedidadelProducto();
                 buscarDatos("","");
             }
 
             permisodemodificaryeliminar();
         }
 
+        private void llenarProductosNax()
+        {
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_mostrarProductos("");
+
+            dd_productosNax.DataSource = tuplas;
+            dd_productosNax.DataValueField = "codigo";
+            dd_productosNax.DataTextField = "producto";            
+            dd_productosNax.AppendDataBoundItems = true;
+            dd_productosNax.SelectedIndex = 1;
+            dd_productosNax.DataBind();
+        }
+
         private void permisodemodificaryeliminar()
         {
+            bt_modificar.Visible = false;
             if (tienePermisoDeIngreso(122) == true)
             {
-                bt_modificar.Visible = true;
+               // bt_modificar.Visible = true;
                 bt_eliminar.Visible = true;
             }
             else {
-                bt_modificar.Visible = false;
+                //bt_modificar.Visible = false;
                 bt_eliminar.Visible = false;
             }
 
@@ -72,7 +87,7 @@ namespace jycboliviaASP.net.Presentacion
             string nombreResponsable = prefixText;
 
             NA_Responsables Nrespon = new NA_Responsables();
-            DataSet tuplas = Nrespon.mostrarTodos_AutoComplit(nombreResponsable);
+            DataSet tuplas = Nrespon.mostrarSoloAutorizados_AutoComplit(nombreResponsable,"2,6,7,9,10,11,13");
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
 
@@ -131,12 +146,12 @@ namespace jycboliviaASP.net.Presentacion
             string turno = dd_turno.SelectedItem.Text;            
             float cantcajas;
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantcajas );
-            float unidadsuelta;
-            float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
-            float kgrdesperdicio;
-            float.TryParse(tx_kgrdesperdicio.Text.Replace('.',','), out kgrdesperdicio);
-            float kgrparamix;
-            float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
+            float unidadsuelta = 0;
+            //float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
+            float kgrdesperdicio = 0;
+            //float.TryParse(tx_kgrdesperdicio.Text.Replace('.',','), out kgrdesperdicio);
+            float kgrparamix = 0;
+            //float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
             string nroorden = tx_nroOrden.Text;
             string detalleentrega = tx_detalle.Text;
             //---------------------------------------
@@ -152,13 +167,15 @@ namespace jycboliviaASP.net.Presentacion
 
 
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            string productoNAX = tx_productoNax.Text;
+            string productoNAX = dd_productosNax.SelectedItem.Text;
             int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
             NCorpal_Produccion npro = new NCorpal_Produccion();
             bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, kgrdesperdicio, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser);
             
             if(bandera){
+                bool banderaP = pp.sumarStockenProducto(codigoProdNax,cantcajas);
+
                 int codigoEntregaProduccion = npro.get_ultimoInsertadoEntregaProduccion(respEntrega);
                 limpiarDatos();
                 Session["codigoEntregaProduccion"] = codigoEntregaProduccion;
@@ -183,12 +200,13 @@ namespace jycboliviaASP.net.Presentacion
             dd_turno.SelectedIndex = -1;
             tx_responsableEntrega.Text = "";
             tx_cantcajas.Text = "";
-            tx_unidadsuelta.Text = "";
-            tx_kgrdesperdicio.Text = "";
-            tx_kgrparamix.Text = "";
+            //tx_unidadsuelta.Text = "";
+            //tx_kgrdesperdicio.Text = "";
+            //tx_kgrparamix.Text = "";
             tx_nroOrden.Text = "";
             tx_detalle.Text = "";
-            tx_productoNax.Text = "";
+            //tx_productoNax.Text = "";
+            tx_medida.Text = "";
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -209,12 +227,12 @@ namespace jycboliviaASP.net.Presentacion
                 string turno = dd_turno.SelectedItem.Text;                
                 float cantcajas;
                 float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantcajas);
-                float unidadsuelta;
-                float.TryParse(tx_unidadsuelta.Text.Replace('.', ','), out unidadsuelta);
-                float kgrdesperdicio;
-                float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
-                float kgrparamix;
-                float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
+                float unidadsuelta = 0;
+                //float.TryParse(tx_unidadsuelta.Text.Replace('.', ','), out unidadsuelta);
+                float kgrdesperdicio = 0;
+                //float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
+                float kgrparamix = 0;
+                //float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
                 string nroorden = tx_nroOrden.Text;
                 string detalleentrega = tx_detalle.Text;
 
@@ -225,7 +243,7 @@ namespace jycboliviaASP.net.Presentacion
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 //---------------------------------------
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                string productoNAX = tx_productoNax.Text;
+                string productoNAX = dd_productosNax.SelectedItem.Text;
                 int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
                 string respEntrega = tx_responsableEntrega.Text;
@@ -262,12 +280,12 @@ namespace jycboliviaASP.net.Presentacion
                 NCorpal_Produccion npro = new NCorpal_Produccion();
                 bool bandera = npro.eliminarEntregaProduccion(codigo);
                 if (bandera)
-                {
+                {                    
                     limpiarDatos();
                     buscarDatos("", "");
                 }
                 else
-                    Response.Write("<script type='text/javascript'> alert('ERROR: Error Guardado') </script>");
+                    Response.Write("<script type='text/javascript'> alert('ERROR: de Stock') </script>");
             }
             else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione datos') </script>");
@@ -288,13 +306,20 @@ namespace jycboliviaASP.net.Presentacion
             dd_turno.SelectedValue = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[2].Text);
             tx_responsableEntrega.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[5].Text);            
             tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);           
-            tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
-            tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
-            tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
+            //tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
+            //tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
+            //tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
             tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[12].Text);
             tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[13].Text);
-            tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
+            int codigo;
+            int.TryParse(HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[15].Text), out codigo);
+            if(codigo >= 0){
+                dd_productosNax.SelectedValue = codigo.ToString();
+            }            
+            //tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
             tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[17].Text);
+            
+
         }
 
         protected void bt_excel_Click(object sender, EventArgs e)
@@ -355,6 +380,20 @@ namespace jycboliviaASP.net.Presentacion
             }
             else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione datos') </script>");
+        }
+
+        protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ponerMedidadelProducto();
+        }
+
+        private void ponerMedidadelProducto()
+        {
+            string producto = dd_productosNax.SelectedItem.Text;
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_mostrarProductos(producto);
+            string medida = tuplas.Tables[0].Rows[0][2].ToString();
+            tx_medida.Text = medida;
         }
     }
 }
