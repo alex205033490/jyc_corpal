@@ -260,5 +260,46 @@ namespace jycboliviaASP.net.Datos
                                " ii.codrespgra = " + codUser;
             return ConecRes.consultaMySql(consulta);
         }
+
+        internal bool insertconciliacionBancaria(string saldoAnterior, string extractoBancario, int codCuentaBanco, int coduser)
+        {
+            string consulta = "insert into tb_conciliacionbancaria " +
+                              " (fecha,saldoAnterior,extractobancario,codcuentabanco,coduser) " +
+                              " values(now(),'" + saldoAnterior.ToString() + "','" + extractoBancario.ToString() + "'," + codCuentaBanco + "," + coduser + ")";
+            return ConecRes.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminarIngresobancarizacion(string fecha, int cuentaBanco, int coduser, float montoRestar)
+        {
+            string consulta = "select codigo,extractobancario "+
+                               " from tb_conciliacionbancaria "+ 
+                               " where  tb_conciliacionbancaria.fecha = "+fecha+
+                               " and  tb_conciliacionbancaria. codcuentabanco = "+cuentaBanco+
+                               " and  tb_conciliacionbancaria. coduser =  "+coduser;
+            DataSet dato = ConecRes.consultaMySql(consulta);
+
+            if (dato.Tables[0].Rows.Count > 0)
+            {
+                float montoActual;
+                float.TryParse(dato.Tables[0].Rows[0][1].ToString().Replace('.', ','), out montoActual);
+                float montoResultado;
+                if (montoRestar <= montoActual)
+                {
+                    montoResultado = montoActual - montoRestar;
+                    string consultaR = "update tb_conciliacionbancaria set "+ 
+                                        " tb_conciliacionbancaria.extractobancario = format('"+montoResultado+"',2) "+ 
+                                        " where  tb_conciliacionbancaria.fecha = current_date() "+
+                                        " and  tb_conciliacionbancaria. codcuentabanco = "+cuentaBanco+ 
+                                        " and  tb_conciliacionbancaria. coduser =  "+coduser;
+                    return ConecRes.ejecutarMySql(consultaR);
+                }
+                else
+                    return false;
+
+            }
+            else
+                return false;
+            
+        }
     }
 }

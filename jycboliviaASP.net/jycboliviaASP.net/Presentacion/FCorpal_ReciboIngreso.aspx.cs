@@ -124,6 +124,9 @@ namespace jycboliviaASP.net.Presentacion
                 extractoBancario = (extractoBancario * float.Parse("6,96"));
             }
 
+            
+            NA_Recibo_IngresoEgreso nrr = new NA_Recibo_IngresoEgreso();
+
             int codcuentaBancaria = 0;
             if (CodUser == 2)
             {  //julio torrico
@@ -136,9 +139,8 @@ namespace jycboliviaASP.net.Presentacion
                         
                         NA_banco Nbanco = new NA_banco();
                         if (!Nbanco.tieneConciliacionBancaria(codcuentaBancaria))
-                        {
-
-                            Nbanco.insertconciliacionBancaria(saldoAnterior.ToString().Replace(',', '.'), extractoBancario.ToString().Replace(',', '.'), codcuentaBancaria, CodUser);
+                        {                            
+                            nrr.insertconciliacionBancaria(saldoAnterior.ToString().Replace(',', '.'), extractoBancario.ToString().Replace(',', '.'), codcuentaBancaria, CodUser);
                             int codultimaConciliacionBancaria = Nbanco.getultimaConciliacion();
                             //----------------historial-------------
                             NA_Historial nhistorial = new NA_Historial();
@@ -148,11 +150,7 @@ namespace jycboliviaASP.net.Presentacion
                         }
                         else {
                             Nbanco.updateconciliacionBancaria(saldoAnterior.ToString().Replace(',', '.'), extractoBancario.ToString().Replace(',', '.'), codcuentaBancaria, CodUser);
-                        }
-                        
-                 
-        
-            
+                        }                 
 
         }
 
@@ -210,22 +208,41 @@ namespace jycboliviaASP.net.Presentacion
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
             string passwordAux = Session["passworuser"].ToString();
-            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+            int CodUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
             if(gv_reciboIngresoEgreso.SelectedIndex > -1){
+
                 int codigo;
                 int.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[1].Text, out codigo);
 
-                int montoRestar;
-                int.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[5].Text, out montoRestar);
+                string fecha = convertidorFecha(gv_reciboIngresoEgreso.SelectedRow.Cells[2].Text);
+                float montoRestar;
+                float.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[5].Text, out montoRestar);
+                                
+                string moneda = dd_moneda.SelectedItem.Text;
+                if (moneda.Equals("Dolares"))
+                {
+                    montoRestar = (montoRestar * float.Parse("6,96"));
+                }
+
+                int codcuentaBancaria = 0;
+                if (CodUser == 2)
+                {  //julio torrico
+                    codcuentaBancaria = 13;
+                }
+                else
+                    if (CodUser == 25 || CodUser == 26)     //iver mendosa
+                    {
+                        codcuentaBancaria = 14;
+                    }  
 
                 NA_Recibo_IngresoEgreso nrr = new NA_Recibo_IngresoEgreso();
-                bool bandera = nrr.eliminarIngreso(codigo);                
+                bool bandera = nrr.eliminarIngreso(codigo);
                 if (bandera)
                 {
-                    eliminarIngreso(codigo, montoRestar);
+                    bool bandera2 = nrr.eliminarIngresobancarizacion(fecha, codcuentaBancaria, CodUser, montoRestar);
                     limpiarDatos();
-                    buscarDatos("", codUser);
+                    buscarDatos("", CodUser);
                     Response.Write("<script type='text/javascript'> alert('ELIMINADO: OK!!') </script>");
                 }
                 else
@@ -234,6 +251,8 @@ namespace jycboliviaASP.net.Presentacion
             else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione un recibo') </script>");
         }
+
+        
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {

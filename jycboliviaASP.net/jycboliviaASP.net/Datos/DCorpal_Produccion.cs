@@ -154,6 +154,7 @@ namespace jycboliviaASP.net.Datos
                                " from tbcorpal_entregasordenproduccion ee "+
                                " left join tbcorpal_producto cc on (ee.codProductonax = cc.codigo) "+
                                " where "+
+                               " cc.estado = 1 and "+
                                " ee.estado = 1 and "+
                                " ee.resp_entrega like '%"+Responsable+"%' and "+
                                " ee.productoNax like '%"+producto+"%' and "+

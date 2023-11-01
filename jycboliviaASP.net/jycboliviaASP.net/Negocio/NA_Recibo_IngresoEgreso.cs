@@ -119,5 +119,15 @@ namespace jycboliviaASP.net.Negocio
             else
                 return "Ninguno";
         }
+
+        internal bool insertconciliacionBancaria(string saldoanterior, string extractobancario, int codcuentaBancaria, int CodUser)
+        {
+            return nrr.insertconciliacionBancaria( saldoanterior,  extractobancario,  codcuentaBancaria,  CodUser);
+        }
+
+        internal bool eliminarIngresobancarizacion(string fecha, int cuentaBanco, int coduser, float montoRestar)
+        {
+            return nrr.eliminarIngresobancarizacion( fecha,  cuentaBanco,  coduser,  montoRestar);
+        }
     }
 }

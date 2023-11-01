@@ -156,10 +156,30 @@ namespace jycboliviaASP.net.Presentacion
 
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
             string nroRecibo = nre.get_nroRegistroEgresoSiguiente(codUser);
-
             bool bandera = nrr.insertarReciboEgreso(pagadoha, monto, moneda, chequenro, concepto, detalle, codrespgra, responsable, banco, efectivo, porcentajeretencioniue, porcentajeretencionit, retencioniuebs, retencionitbs, totalapagar, facturanro, nroRecibo, fechaEgreso);
             if (bandera)
             {
+                string fecha = fechaEgreso;
+                float montoRestar = monto;
+                //float.TryParse(gv_reciboIngresoEgreso.SelectedRow.Cells[5].Text, out montoRestar);                
+                if (moneda.Equals("Dolares"))
+                {
+                    montoRestar = (montoRestar * float.Parse("6,96"));
+                }
+
+                int codcuentaBancaria = 0;
+                if (codUser == 2)
+                {  //julio torrico
+                    codcuentaBancaria = 13;
+                }
+                else
+                    if (codUser == 25 || codUser == 26)     //iver mendosa
+                    {
+                        codcuentaBancaria = 14;
+                    }
+
+                bool bandera2 = nrr.eliminarIngresobancarizacion(fecha, codcuentaBancaria, codUser, montoRestar);
+
                 limpiarDatos();
                 buscarDatos("", codUser);
                 int ultimoinsertado = nrr.get_codigoUltimoInsertadoEgreso(pagadoha);

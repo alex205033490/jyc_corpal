@@ -259,7 +259,8 @@ namespace jycboliviaASP.net.Datos
                                " se.fechaentrega BETWEEN "+fechadesde+" and "+fechahasta+
                                " group by dse.codproducto "+
                                " )AS t1 "+
-                               " ON  (pp.codigo = t1.codproducto)";
+                               " ON  (pp.codigo = t1.codproducto) "+
+                               " where pp.estado = 1;";
             return conexion.consultaMySql(consulta);
         }
 
@@ -282,7 +283,7 @@ namespace jycboliviaASP.net.Datos
                                " FROM tbcorpal_solicitudentregaproducto s "+
                                " RIGHT JOIN tbcorpal_detalle_solicitudproducto d ON s.codigo = d.codsolicitud "+
                                " RIGHT JOIN tbcorpal_producto p ON p.codigo = d.codproducto "+
-                               " WHERE s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
+                               " WHERE p.estado = 1 and s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
                                " GROUP BY s.personalsolicitud, p.producto "+
                                " UNION "+
                                " SELECT s.personalsolicitud, p.producto, 0 AS total_cant, 0 AS total_cantentregada "+
@@ -294,14 +295,14 @@ namespace jycboliviaASP.net.Datos
                                " ) as s "+
                                " LEFT JOIN tbcorpal_detalle_solicitudproducto d ON p.codigo = d.codproducto "+
                                " LEFT JOIN tbcorpal_solicitudentregaproducto se ON se.codigo = d.codsolicitud AND se.personalsolicitud = s.personalsolicitud "+
-                               " WHERE se.codigo IS NULL "+
+                               " WHERE p.estado = 1 and se.codigo IS NULL "+
                                " ) AS result "+
                                " GROUP BY personalsolicitud, producto "+
                                " UNION "+
                                " SELECT res1.nombre AS personalsolicitud, pro1.producto, 0 AS 'total_cantSolicitada', 0 AS 'total_cantentregada' "+
                                " FROM tb_responsable res1 "+
                                " CROSS JOIN tbcorpal_producto pro1 "+
-                               " WHERE res1.codigo NOT IN ( "+
+                               " WHERE pro1.estado = 1 and res1.codigo NOT IN ( " +
                                " SELECT sol1.codpersolicitante "+
                                " FROM tbcorpal_solicitudentregaproducto sol1 "+
                                " WHERE sol1.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+ 
