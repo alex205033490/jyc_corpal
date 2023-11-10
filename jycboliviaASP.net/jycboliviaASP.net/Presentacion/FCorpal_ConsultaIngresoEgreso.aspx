@@ -77,6 +77,7 @@
     <asp:DropDownList ID="dd_consulta" runat="server" Width="350px">
         <asp:ListItem>Libro Diario Ingreso</asp:ListItem>
         <asp:ListItem>Libro Diario Egreso</asp:ListItem>
+        <asp:ListItem>Ingreso Vs Egreso con Saldo Inicial</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td></td>

@@ -106,6 +106,11 @@ namespace jycboliviaASP.net.Presentacion
             string Responsable = tx_responsable.Text;
             string producto = tx_producto.Text;
 
+            if (dd_consulta.SelectedIndex == 4)
+            {
+                get_StockProducctos();
+            }else
+            
             if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null"))
             {
                 if (dd_consulta.SelectedIndex == 0)
@@ -125,11 +130,26 @@ namespace jycboliviaASP.net.Presentacion
                         if (dd_consulta.SelectedIndex == 3)
                         {
                             get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
-                        }
-
+                        }                        
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+        }
+
+        private void get_StockProducctos()
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_StockProductos.rdlc";
+
+            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+            DataSet consulta1 = nss.get_StockProducctos();
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_StockProductos", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void get_datosSolicitadoEntregadoProducto_porPersona(string fechadesde, string fechahasta, string Responsable, string producto)

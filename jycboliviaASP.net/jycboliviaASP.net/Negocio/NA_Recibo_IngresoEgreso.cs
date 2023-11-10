@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using jycboliviaASP.net.Datos;
 using System.Data;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -128,6 +129,88 @@ namespace jycboliviaASP.net.Negocio
         internal bool eliminarIngresobancarizacion(string fecha, int cuentaBanco, int coduser, float montoRestar)
         {
             return nrr.eliminarIngresobancarizacion( fecha,  cuentaBanco,  coduser,  montoRestar);
+        }
+
+        internal DataTable get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, double SaldoInicial, string responsable)
+        {
+           // return nrr.get_allrecibosIngresoVsEgreso( fechadesde,  fechahasta);
+
+            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, responsable);
+
+            DataTable TablaR = Datos.Tables[0];
+            TablaR.Columns.Add("Saldo", typeof(double));
+
+            double SaldoInicialAux = SaldoInicial;
+            for (int i = 0; i < TablaR.Rows.Count; i++)
+            {
+                float montoIngreso;
+                float.TryParse(TablaR.Rows[i][6].ToString(), out montoIngreso);
+                float montoEgreso;
+                float.TryParse(TablaR.Rows[i][7].ToString(), out montoEgreso);
+
+                double saldoR = (SaldoInicialAux + montoIngreso) - montoEgreso;
+                TablaR.Rows[i]["Saldo"] = saldoR;
+                SaldoInicialAux = saldoR;
+            }
+            return TablaR;
+        }
+
+        internal double get_SaldoInicial_IngresoEgreso(string fechadesde)
+        {
+            DataSet datos = nrr.get_SaldoInicial_IngresoEgreso( fechadesde);            
+            string aux = datos.Tables[0].Rows[0][2].ToString();
+            double saldo;            
+            double.TryParse(aux, out saldo);
+            return saldo;
+        }
+
+        internal DataSet get_SaldosInicialesResponsable(string fechadesde, string responsable)
+        {
+            return nrr.get_SaldosInicialesResponsable(fechadesde, responsable);
+        }
+
+        internal DataTable get_allrecibosIngresoVsEgreso2(string fechadesde, string fechahasta, double SaldoInicial, string nameResp)
+        {
+
+            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, nameResp);
+
+            DataTable TablaR = Datos.Tables[0];
+            TablaR.Columns.Add("Saldo", typeof(double));
+            TablaR.Columns.Add("SaldoInicial", typeof(double));
+            TablaR.Columns.Add("fechadesde", typeof(string));
+            TablaR.Columns.Add("fechahasta", typeof(string));
+            TablaR.Columns.Add("RespComprobante", typeof(string));
+
+            double SaldoInicialAux = SaldoInicial;
+            for (int i = 0; i < TablaR.Rows.Count; i++)
+            {
+                float montoIngreso;
+                float.TryParse(TablaR.Rows[i][6].ToString(), out montoIngreso);
+                float montoEgreso;
+                float.TryParse(TablaR.Rows[i][7].ToString(), out montoEgreso);
+
+                double saldoR = (SaldoInicialAux + montoIngreso) - montoEgreso;
+                TablaR.Rows[i]["Saldo"] = saldoR;
+                SaldoInicialAux = saldoR;
+
+                TablaR.Rows[i]["SaldoInicial"] = SaldoInicial;
+                TablaR.Rows[i]["fechadesde"] = fechadesde;
+                TablaR.Rows[i]["fechahasta"] = fechahasta;
+                TablaR.Rows[i]["RespComprobante"] = nameResp;
+            }
+
+            if (TablaR.Rows.Count == 0)
+            {
+                DataRow filanueva = TablaR.NewRow();
+                filanueva["Saldo"] = SaldoInicial;
+                filanueva["SaldoInicial"] = SaldoInicial;
+                filanueva["fechadesde"] = fechadesde;
+                filanueva["fechahasta"] = fechahasta;
+                filanueva["RespComprobante"] = nameResp;
+                TablaR.Rows.Add(filanueva);
+            }
+            
+            return TablaR;
         }
     }
 }

@@ -336,5 +336,14 @@ namespace jycboliviaASP.net.Datos
                             " se.codigo = "+codigoSolicitud;
             return conexion.consultaMySql(consulta);
         }
+
+        internal DataSet get_StockProducctos()
+        {
+            string consulta = "select "+
+                               " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
+				               " from tbcorpal_producto pp "+
+				               " where pp.estado = 1";
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

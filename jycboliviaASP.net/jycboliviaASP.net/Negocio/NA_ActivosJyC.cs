@@ -18,9 +18,9 @@ namespace jycboliviaASP.net.Negocio
             return bandera;
         }
 
-        public DataSet get_allActivos(string detalleActivo, string comprobante, string custodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
+        public DataSet get_allActivos(string detalleActivo, string comprobante, string NombreCustodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
         {
-            DataSet tuplas = dactivos.get_allActivos(detalleActivo, comprobante, custodio, responsableAsignado, estadoActivo, EstadoValorActual);
+            DataSet tuplas = dactivos.get_allActivos(detalleActivo, comprobante, NombreCustodio, responsableAsignado, estadoActivo, EstadoValorActual);
             return tuplas;
         }
 

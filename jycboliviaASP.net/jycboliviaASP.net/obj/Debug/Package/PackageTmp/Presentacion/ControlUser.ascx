@@ -91,8 +91,7 @@
             <li><a href="../Presentacion/FCorpal_Facturacion.aspx" id="mn_facturacion" runat="server"><span>Recopilacion de Bancarizacion</span></a></li>                                             
         </ul>
     </li>
-
-   <!--
+       
      <li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">	SGI 	</a>
         <ul class="dropdown-menu">
@@ -104,7 +103,7 @@
             <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><span>Activos JYC</span></a></li>                       
         </ul>
     </li>
-     -->
+    
     </div>
   </div>
 </nav>

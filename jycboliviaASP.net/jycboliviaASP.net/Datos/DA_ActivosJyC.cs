@@ -69,49 +69,48 @@ namespace jycboliviaASP.net.Datos
             return ConecRes.ejecutarMySql(consulta);
         }
 
-        internal DataSet get_allActivos(string detalleActivo, string comprobante, string custodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
+        internal DataSet get_allActivos(string detalleActivo, string comprobante, string NombreCustodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
         {
-            string consulta = "select " +
-                               " aa.codigo, " +
-                               " ifnull(ee.detalle,'Sin Estado') as 'Estado1', " +
-                               " aa.cuenta,aa.descripcion,aa.comprobante, date_format(aa.fechacompra,'%d/%m/%Y') as 'fecha_Compra', " +
-                               " aa.tipo,aa.ubicacion,aa.custodio,aa.nombrecustodio,aa.var1,aa.Proyecto,aa.var2,aa.financia, " +
-                               " res.nombre as 'Personal_Custodio', " +
-                               " aa.vida,aa.valoractualbs as 'valorActualbs_Simec',aa.valoractualsus as 'Valoractualsus_Simec', " +
-                               " aa.ValorActivo_BS, aa.ValorActivo_SuS, " +
-                               " aa.Tipo_ValorActual, aa.ubicacion_une, " +
-                               " aa.bajaactivo , aa.observaciones, aa.noaplica " +
-                // " TRUNCATE(ifnull((aa.valoractualbs * (ee.valorporcentual/100)),0),2) as 'ValorActivo_BS', "+
-                // " TRUNCATE(ifnull((aa.valoractualsus * (ee.valorporcentual/100)),0),2) as 'ValorActivo_SuS' "+
-                               " from tb_activosjyc aa " +
-
-                               " left join  tb_estadoactivos_simec ee on (aa.cod_estado = ee.codigo) " +
+            string consulta = "select "+
+                               " aa.codigo, "+ 
+                               " ifnull(ee.detalle,'Sin Estado') as 'Estado1', "+
+                               " aa.cuenta,aa.descripcion,aa.comprobante, date_format(aa.fechacompra,'%d/%m/%Y') as 'fecha_Compra', "+
+                               " aa.tipo,aa.ubicacion,aa.custodio,aa.nombrecustodio,aa.var1,aa.Proyecto,aa.var2,aa.financia, "+
+                               " res.nombre as 'Personal_Custodio', "+
+                               " aa.vida,aa.valoractualbs as 'valorActualbs_Simec',aa.valoractualsus as 'Valoractualsus_Simec', "+
+                               " aa.ValorActivo_BS, aa.ValorActivo_SuS, "+
+                               " aa.Tipo_ValorActual, aa.ubicacion_une, "+
+                               " aa.bajaactivo , aa.observaciones, aa.noaplica, aa.insertardatos " +
+                              // " TRUNCATE(ifnull((aa.valoractualbs * (ee.valorporcentual/100)),0),2) as 'ValorActivo_BS', "+
+                              // " TRUNCATE(ifnull((aa.valoractualsus * (ee.valorporcentual/100)),0),2) as 'ValorActivo_SuS' "+
+                               " ,date_format(aa.fechabaja,'%d/%m/%Y') as 'fecha_baja' " +
+                               " ,aa.codigoactivo,if(aa.bajacodigo ='s','Baja', 'Vigente') as 'EstadoBaja' " +
+                               " from tb_activosjyc aa "+                               
+                               " left join  tb_estadoactivos_simec ee on (aa.cod_estado = ee.codigo) "+
                                " left join tb_responsable res on (aa.coduser_custodio = res.codigo) " +
-                               " where " +
-                               " aa.descripcion like '%" + detalleActivo + "%' ";
-            if (string.IsNullOrEmpty(comprobante) == false)
-            {
-                consulta = consulta + " and aa.comprobante like '%" + comprobante + "%'";
+                               " where "+
+                               " aa.descripcion like '%"+detalleActivo+"%' ";
+            if(string.IsNullOrEmpty(comprobante) == false){
+                consulta = consulta + " and aa.comprobante like '%"+comprobante+"%'";
             }
-            if (string.IsNullOrEmpty(custodio) == false)
+            if (string.IsNullOrEmpty(NombreCustodio) == false)
             {
-                consulta = consulta + " and aa.nombrecustodio like '%" + custodio + "%'";
+                consulta = consulta + " and aa.nombrecustodio like '%" + NombreCustodio + "%'";
             }
-            if (string.IsNullOrEmpty(estadoActivo) == false && !estadoActivo.Equals("Sin Estado"))
-            {
-                consulta = consulta + " and ee.detalle like '%" + estadoActivo + "%' ";
-            }
-
-            if (string.IsNullOrEmpty(responsableAsignado) == false)
-            {
-                consulta = consulta + " and res.nombre like '%" + responsableAsignado + "%'";
+             if (string.IsNullOrEmpty(estadoActivo) == false && !estadoActivo.Equals("Sin Estado"))
+             {
+                consulta = consulta + " and ee.detalle like '%"+estadoActivo+"%' ";
+            }                  
+             
+             if(string.IsNullOrEmpty(responsableAsignado) == false){
+                consulta = consulta + " and res.nombre like '%"+responsableAsignado+"%'";
             }
 
-            if (string.IsNullOrEmpty(EstadoValorActual) == false && !EstadoValorActual.Equals("Sin Estado"))
-            {
-                consulta = consulta + " and aa.Tipo_ValorActual like '%" + EstadoValorActual + "%' ";
-            }
-
+             if (string.IsNullOrEmpty(EstadoValorActual) == false && !EstadoValorActual.Equals("Sin Estado"))
+             {
+                 consulta = consulta + " and aa.Tipo_ValorActual like '%" + EstadoValorActual + "%' ";
+             }  
+                              
             return ConecRes.consultaMySql(consulta);
         }
 

@@ -116,10 +116,10 @@ namespace jycboliviaASP.net.Presentacion
             dd_estadoSimec.DataBind();
         }
 
-        private void buscarActivosJYC(string detalleActivo, string comprobante, string custodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
+        private void buscarActivosJYC(string detalleActivo, string comprobante, string NombreCustodio, string responsableAsignado, string estadoActivo, string EstadoValorActual)
         {
             NA_ActivosJyC nactivos = new NA_ActivosJyC();
-            DataSet tuplas = nactivos.get_allActivos(detalleActivo, comprobante, custodio, responsableAsignado, estadoActivo, EstadoValorActual);
+            DataSet tuplas = nactivos.get_allActivos(detalleActivo, comprobante, NombreCustodio, responsableAsignado, estadoActivo, EstadoValorActual);
             gv_activosJyC.DataSource = tuplas;
             gv_activosJyC.DataBind();
         }

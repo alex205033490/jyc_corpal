@@ -477,6 +477,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Proyectos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DS_ReciboIngresoEgreso.cs">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DS_ReciboIngresoEgreso.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1418,6 +1422,8 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_IngresoVsEgreso_SaldoInicial_todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_RecibidoMaterialeInsumos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CompradeMaterialeInsumos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ActividadesPersonal.rdlc" />
@@ -1460,6 +1466,8 @@
     <EmbeddedResource Include="Reportes\Reportes old\Report_R-144.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboPedidoProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_SolicituddeMaterialeInsumos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_StockProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\SubReport_detalleIngresoEgresoResponsable.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DS_CallCenter.xsc">

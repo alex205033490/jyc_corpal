@@ -142,5 +142,11 @@ namespace jycboliviaASP.net.Negocio
             else
                 return -1;
         }
+
+        internal DataSet get_StockProducctos()
+        {
+            DataSet dato = dsp.get_StockProducctos();
+            return dato;
+        }
     }
 }

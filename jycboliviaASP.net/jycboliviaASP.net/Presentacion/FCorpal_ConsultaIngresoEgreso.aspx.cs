@@ -124,9 +124,92 @@ namespace jycboliviaASP.net.Presentacion
                     get_LibroDiarioEgreso(fechadesde, fechahasta, responsable);
                 }
 
+                if (dd_consulta.SelectedIndex == 2)
+                {
+                    get_IngresoVSEgreso_SaldoInicial(fechadesde, fechahasta, responsable);
+                }
+
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+        }
+
+        private void get_IngresoVSEgreso_SaldoInicial(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            //localreport.ReportPath = "Reportes/Report_IngresoVSEgreso_SaldoInicial.rdlc";
+            localreport.ReportPath = "Reportes/Report_IngresoVsEgreso_SaldoInicial_todos.rdlc";
+
+            NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
+            DataSet datosSaldoInicialResp = nre.get_SaldosInicialesResponsable(fechadesde, responsable);
+            
+            DataTable TablaR1 = datosSaldoInicialResp.Tables[0];
+            DataTable TablaResult = new DataTable();
+            TablaResult.Columns.Add("codigo", typeof(string));
+            TablaResult.Columns.Add("Tipo", typeof(string));
+            TablaResult.Columns.Add("Fecha_Gra", typeof(string));
+            TablaResult.Columns.Add("horagra", typeof(string));
+            TablaResult.Columns.Add("ClienteIngreso", typeof(string));
+            TablaResult.Columns.Add("pagadoha_Egreso", typeof(string));
+            TablaResult.Columns.Add("MontoIngreso", typeof(string));
+            TablaResult.Columns.Add("MontoEgreso", typeof(string));
+            TablaResult.Columns.Add("moneda", typeof(string));
+            TablaResult.Columns.Add("chequenro", typeof(string));
+            TablaResult.Columns.Add("concepto", typeof(string));
+            TablaResult.Columns.Add("detalle", typeof(string));
+            TablaResult.Columns.Add("responsable", typeof(string));
+            TablaResult.Columns.Add("nrorecibo", typeof(string));
+            TablaResult.Columns.Add("Fecha_Recibo", typeof(string));
+            TablaResult.Columns.Add("banco", typeof(string));
+            TablaResult.Columns.Add("efectivo", typeof(string));
+            TablaResult.Columns.Add("porcentajeretencioniue", typeof(string));
+            TablaResult.Columns.Add("porcentajeretencionit", typeof(string));
+            TablaResult.Columns.Add("retencioniuebs", typeof(string));
+            TablaResult.Columns.Add("retencionitbs", typeof(string));
+            TablaResult.Columns.Add("totalapagar", typeof(string));
+            TablaResult.Columns.Add("Saldo", typeof(double));
+            TablaResult.Columns.Add("SaldoInicial", typeof(double));
+            TablaResult.Columns.Add("fechadesde", typeof(string));
+            TablaResult.Columns.Add("fechahasta", typeof(string));
+            TablaResult.Columns.Add("RespComprobante", typeof(string));
+
+            for (int i = 0; i < TablaR1.Rows.Count; i++)
+            {
+                string codigoR = TablaR1.Rows[i][0].ToString();
+                string nameResp = TablaR1.Rows[i][1].ToString();
+                double SaldoInicial;
+                double.TryParse(TablaR1.Rows[i][4].ToString(), out SaldoInicial);
+                DataTable DSconsulta = nre.get_allrecibosIngresoVsEgreso2(fechadesde, fechahasta, SaldoInicial, nameResp);
+                               
+                foreach (DataRow fila in DSconsulta.Rows)
+                {
+                    TablaResult.ImportRow(fila);
+                }
+
+            }
+            /*
+            double saldoInicial = nre.get_SaldoInicial_IngresoEgreso(fechadesde);
+            double saldoInicial;
+            double.TryParse("1000", out saldoInicial);
+            string responsable = "Iver Mendoza Calle";
+            DataTable DSconsulta = nre.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, saldoInicial, responsable);         
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportParameter p_responsable = new ReportParameter("p_responsable",responsable);
+            ReportParameter p_saldoInicial = new ReportParameter("p_saldoInicial", saldoInicial.ToString());
+            ReportDataSource DS_IngresoVSEgreso = new ReportDataSource("DS_IngresoVSEgresos", DSconsulta);
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.SetParameters(p_saldoInicial);
+            ReportViewer1.LocalReport.SetParameters(p_responsable);
+            ReportViewer1.LocalReport.DataSources.Add(DS_IngresoVSEgreso);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();*/
+            
+            ReportDataSource DS_IngresoVSEgreso = new ReportDataSource("DS_IngresoVSEgreso2", TablaResult);            
+            ReportViewer1.LocalReport.DataSources.Add(DS_IngresoVSEgreso);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void get_LibroDiarioEgreso(string fechadesde, string fechahasta, string responsable)

@@ -301,5 +301,145 @@ namespace jycboliviaASP.net.Datos
                 return false;
             
         }
+
+        internal DataSet get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, string responsable)
+        {
+            string consulta = "SELECT "+
+                            " t1.codigo, "+
+                            " t1.Tipo, "+  
+                            " t1.Fecha_Gra, "+
+                            " t1.horagra, "+ 
+                            " t1.ClienteIngreso, "+
+                            " t1.pagadoha_Egreso, "+
+                            " cast(t1.MontoIngreso as decimal(10,2)) as 'MontoIngreso', "+ 
+                            " cast(t1.MontoEgreso as decimal(10,2)) as 'MontoEgreso', "+
+                            " t1.moneda, "+ 
+                            " t1.chequenro, "+  
+                            " t1.concepto, "+ 
+                            " t1.detalle, "+
+                            " res.nombre as 'responsable', "+
+                            " t1.nrorecibo, "+
+                            " t1.Fecha_Recibo, "+
+                            " t1.banco, "+
+                            " t1.efectivo, "+ 
+                            " t1.porcentajeretencioniue, "+
+                            " t1.porcentajeretencionit, "+
+                            " t1.retencioniuebs, "+
+                            " t1.retencionitbs, "+
+                            " t1.totalapagar "+
+                            " FROM "+
+                            " ( "+
+                            " select "+ 
+                            " ri.codigo, "+
+                            " 'Ingreso' as 'Tipo', "+ 
+                            " date_format(ri.fechagra,'%d/%m/%Y') as 'Fecha_Gra', "+
+                            " ri.horagra, "+ 
+                            " ri.cliente as 'ClienteIngreso', "+
+                            " '' as 'pagadoha_Egreso', "+
+                            " ri.monto as 'MontoIngreso', "+ 
+                            " '0' as 'MontoEgreso', "+
+                            " ri.moneda, "+ 
+                            " ri.chequenro, "+  
+                            " ri.concepto, "+ 
+                            " ri.detalle, "+
+                            " ri.codrespgra, "+
+                            " ri.nrorecibo, "+
+                            " date_format(ri.fecharecibo,'%d/%m/%Y') as 'Fecha_Recibo', "+
+                            " '' as 'banco', "+
+                            " '' as 'efectivo', "+  
+                            " '' as 'porcentajeretencioniue', "+
+                            " '' as 'porcentajeretencionit', "+
+                            " '' as 'retencioniuebs', "+
+                            " '' as 'retencionitbs', "+
+                            " '' as 'totalapagar'  "+
+                            " from tbcorpal_reciboingreso ri  "+
+                            " where "+
+                            " ri.estadoingreso = true "+
+                            " and ri.fecharecibo between "+fechadesde+" and  "+ fechahasta+
+                            " UNION all "+
+                            " select "+
+                            " re.codigo, "+ 
+                            " 'Egreso' as 'Egreso', "+
+                            " date_format(re.fechagra,'%d/%m/%Y') as 'Fecha_Gra', "+
+                            " re.horagra, "+ 
+                            " '' as 'ClienteIngreso', "+
+                            " re.pagadoha as 'pagadoha_Egreso', "+
+                            " '0' as 'MontoIngreso', "+
+                            " re.monto as 'MontoEgreso', "+ 
+                            " re.moneda, "+ 
+                            " re.chequenro, "+ 
+                            " re.concepto, "+
+                            " re.detalle, "+
+                            " re.codrespgra, "+
+                            " re.nrorecibo, "+
+                            " date_format(re.fechaegreso ,'%d/%m/%Y') as 'Fecha_Recibo', "+
+                            " re.banco, "+
+                            " re.efectivo, "+  
+                            " re.porcentajeretencioniue, "+
+                            " re.porcentajeretencionit, "+
+                            " re.retencioniuebs, "+
+                            " re.retencionitbs, "+
+                            " re.totalapagar "+
+                            " from tbcorpal_reciboegreso re "+
+                            " where "+
+                            " re.estadoegreso = true "+
+                            " and re.fechaegreso between "+fechadesde+" and "+fechahasta+
+                            " ) AS t1, tb_responsable res "+
+                            " where "+
+                            " t1.codrespgra = res.codigo and "+
+                            " res.nombre = '"+responsable+"' "+
+                            " order by t1.Fecha_Recibo asc";
+            return ConecRes.consultaMySql(consulta);
+        }
+
+        internal DataSet get_SaldoInicial_IngresoEgreso(string fechadesde)
+        {
+            string consulta = "select "+
+                                " format(sum(ri.monto),2) as 'ingreso', "+
+                                " format(sum(re.monto),2) as 'egreso', "+
+                                " (sum(ri.monto)-sum(re.monto)) as 'SALDO' "+
+                                " from tbcorpal_reciboingreso ri , tbcorpal_reciboegreso re "+
+                                " where "+
+                                " ri.fecharecibo = re.fechaegreso and "+
+                                " ri.estadoingreso = 1 and "+
+                                " re.estadoegreso = 1 and "+
+                                " ri.fecharecibo < "+fechadesde;
+            return ConecRes.consultaMySql(consulta);
+        }
+
+        internal DataSet get_SaldosInicialesResponsable(string fechadesde, string responsable)
+        {
+            string consulta = " SELECT "+
+                               " t1.codrespgra, "+
+                               " res.nombre as 'responsable', "+
+                               " SUM(t1.ingreso) AS 'Total_ingreso', "+
+                               " SUM(t1.egreso) AS 'Total_egreso', "+
+                               " SUM(t1.ingreso) - SUM(t1.egreso) AS 'SALDO' "+
+                               " FROM ( "+
+                               " SELECT "+
+                               " ri.codrespgra, "+
+                               " SUM(ri.monto) AS ingreso, "+
+                               " '0' AS egreso "+ 
+                               " FROM tbcorpal_reciboingreso ri "+
+                               " WHERE ri.estadoingreso = 1  and "+
+                               " fecharecibo < "+fechadesde+
+                               " GROUP BY ri.codrespgra "+
+                               " UNION ALL "+
+                               " SELECT "+
+                               " re.codrespgra, "+
+                               " '0' AS ingreso, "+
+                               " SUM(re.monto) AS egreso "+    
+                               " FROM tbcorpal_reciboegreso re "+
+                               " WHERE re.estadoegreso = 1 AND "+
+                               " re.fechaegreso < "+fechadesde+
+                               " GROUP BY re.codrespgra "+
+                               " ) AS t1, tb_responsable res "+
+                               " where "+
+                               " t1.codrespgra = res.codigo and "+      
+                               " res.nombre like '%"+responsable+"%' "+
+                               " GROUP BY t1.codrespgra"; 
+
+            return ConecRes.consultaMySql(consulta);
+        }
     }
 }
