@@ -208,5 +208,23 @@ namespace jycboliviaASP.net.Datos
                                " ee.codigo = " + codigoEntregaProduccion;                               
             return Conx.consultaMySql(consulta);
         }
+
+        internal bool set_objetivoProduccion(string fechalimite, int codprod, string producto, float cantidadprod,
+                                           string medida, string detalle, int codusergra, string respgra)
+        {
+            string consulta = "insert into tbcorpal_objetivosproduccion va "+
+                               " tbcorpal_objetivosproduccion.fechagra,tbcorpal_objetivosproduccion.horagra, "+
+                               " tbcorpal_objetivosproduccion.fechalimite,tbcorpal_objetivosproduccion.codprod, "+
+                               " tbcorpal_objetivosproduccion.producto,tbcorpal_objetivosproduccion.cantidadprod, "+
+                               " tbcorpal_objetivosproduccion.medida,tbcorpal_objetivosproduccion.detalle, "+
+                               " tbcorpal_objetivosproduccion.codusergra,tbcorpal_objetivosproduccion.respgra "+
+                               " values( "+
+                               " current_date(), current_time(), "+
+                                fechalimite+", "+codprod+", "+
+                               " '"+producto+"', "+cantidadprod.ToString().Replace(',','.')+", "+
+                               " '"+medida+"','"+detalle+"', "+
+                                codusergra+ " , '"+respgra+"')";
+            return Conx.ejecutarMySql(consulta);
+        }
     }
 }

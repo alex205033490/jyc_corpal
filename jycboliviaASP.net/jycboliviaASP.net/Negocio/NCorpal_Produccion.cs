@@ -54,5 +54,16 @@ namespace jycboliviaASP.net.Negocio
             DataSet tuplas = dproduccion.get_DatosEntregaProduccion(codigoEntregaProduccion);
             return tuplas;
         }
+
+        internal bool set_objetivoProduccion(string fechalimite, int codprod, string producto, float cantidadprod,
+                                           string medida, string detalle, int codusergra, string respgra)
+        {
+            return dproduccion.set_objetivoProduccion( fechalimite,  codprod,  producto,  cantidadprod, medida,  detalle,  codusergra,  respgra);
+        }
+
+        internal DataSet get_objetivosDeProduccion(string fechalimite, string producto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -333,7 +333,7 @@ namespace jycboliviaASP.net.Presentacion
             string respEntrega = tx_responsableEntrega.Text;
 
             NCorpal_Produccion npro = new NCorpal_Produccion();
-            DataSet tupla = npro.mostrarEmpregasProduccion("", respEntrega);
+            DataSet tupla = npro.mostrarEmpregasProduccion("", "");
             
 
             //// Creacion del Excel
