@@ -307,8 +307,8 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "SELECT "+
                             " t1.codigo, "+
-                            " t1.Tipo, "+  
-                            " t1.Fecha_Gra, "+
+                            " t1.Tipo, "+
+                            " date_format(t1.Fecha_Gra,'%d-%m-%Y') as 'Fecha_Gra', " +
                             " t1.horagra, "+ 
                             " t1.ClienteIngreso, "+
                             " t1.pagadoha_Egreso, "+
@@ -320,7 +320,7 @@ namespace jycboliviaASP.net.Datos
                             " t1.detalle, "+
                             " res.nombre as 'responsable', "+
                             " t1.nrorecibo, "+
-                            " t1.Fecha_Recibo, "+
+                            " date_format(t1.Fecha_Recibo,'%d-%m-%Y') as 'Fecha_Recibo', " +
                             " t1.banco, "+
                             " t1.efectivo, "+ 
                             " t1.porcentajeretencioniue, "+
@@ -333,7 +333,7 @@ namespace jycboliviaASP.net.Datos
                             " select "+ 
                             " ri.codigo, "+
                             " 'Ingreso' as 'Tipo', "+ 
-                            " date_format(ri.fechagra,'%d-%m-%Y') as 'Fecha_Gra', "+
+                            " ri.fechagra as 'Fecha_Gra', "+
                             " ri.horagra, "+ 
                             " ri.cliente as 'ClienteIngreso', "+
                             " '' as 'pagadoha_Egreso', "+
@@ -345,7 +345,7 @@ namespace jycboliviaASP.net.Datos
                             " ri.detalle, "+
                             " ri.codrespgra, "+
                             " ri.nrorecibo, "+
-                            " date_format(ri.fecharecibo,'%d-%m-%Y') as 'Fecha_Recibo', "+
+                            " ri.fecharecibo as 'Fecha_Recibo', "+
                             " '' as 'banco', "+
                             " '' as 'efectivo', "+  
                             " '' as 'porcentajeretencioniue', "+
@@ -361,7 +361,7 @@ namespace jycboliviaASP.net.Datos
                             " select "+
                             " re.codigo, "+ 
                             " 'Egreso' as 'Egreso', "+
-                            " date_format(re.fechagra,'%d-%m-%Y') as 'Fecha_Gra', "+
+                            " re.fechagra as 'Fecha_Gra', "+
                             " re.horagra, "+ 
                             " '' as 'ClienteIngreso', "+
                             " re.pagadoha as 'pagadoha_Egreso', "+
@@ -373,7 +373,7 @@ namespace jycboliviaASP.net.Datos
                             " re.detalle, "+
                             " re.codrespgra, "+
                             " re.nrorecibo, "+
-                            " date_format(re.fechaegreso ,'%d-%m-%Y') as 'Fecha_Recibo', "+
+                            " re.fechaegreso as 'Fecha_Recibo', "+
                             " re.banco, "+
                             " re.efectivo, "+  
                             " re.porcentajeretencioniue, "+

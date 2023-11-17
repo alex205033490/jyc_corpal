@@ -63,7 +63,17 @@ namespace jycboliviaASP.net.Negocio
 
         internal DataSet get_objetivosDeProduccion(string fechalimite, string producto)
         {
-            throw new NotImplementedException();
+            return dproduccion.get_objetivosDeProduccion( fechalimite,  producto);
+        }
+
+        internal bool update_objetivoProduccion(int codigo, string fechalimite, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        {
+            return dproduccion.update_objetivoProduccion(codigo, fechalimite, codprod, producto, cantidadprod, medida, detalle, codusergra, respgra);
+        }
+
+        internal bool delete_objetivoProduccion(int codigo, int codUser)
+        {
+            return dproduccion.delete_objetivoProduccion( codigo,  codUser);
         }
     }
 }

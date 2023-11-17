@@ -35,6 +35,7 @@ namespace jycboliviaASP.net.Presentacion
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
             string nroRecibo = nre.get_nroRegistroEgresoSiguiente(codUser);
             tx_nrorecibo.Text = nroRecibo;
+            bt_eliminar.Enabled = false;
         }
 
         private void buscarDatos(string pagadoHA, int coduser)

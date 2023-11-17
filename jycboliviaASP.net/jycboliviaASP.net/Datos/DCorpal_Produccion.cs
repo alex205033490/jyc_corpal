@@ -212,19 +212,71 @@ namespace jycboliviaASP.net.Datos
         internal bool set_objetivoProduccion(string fechalimite, int codprod, string producto, float cantidadprod,
                                            string medida, string detalle, int codusergra, string respgra)
         {
-            string consulta = "insert into tbcorpal_objetivosproduccion va "+
+            string consulta = "insert into tbcorpal_objetivosproduccion("+
                                " tbcorpal_objetivosproduccion.fechagra,tbcorpal_objetivosproduccion.horagra, "+
                                " tbcorpal_objetivosproduccion.fechalimite,tbcorpal_objetivosproduccion.codprod, "+
                                " tbcorpal_objetivosproduccion.producto,tbcorpal_objetivosproduccion.cantidadprod, "+
                                " tbcorpal_objetivosproduccion.medida,tbcorpal_objetivosproduccion.detalle, "+
-                               " tbcorpal_objetivosproduccion.codusergra,tbcorpal_objetivosproduccion.respgra "+
+                               " tbcorpal_objetivosproduccion.codusergra,tbcorpal_objetivosproduccion.respgra, tbcorpal_objetivosproduccion.estado) " +
                                " values( "+
                                " current_date(), current_time(), "+
                                 fechalimite+", "+codprod+", "+
                                " '"+producto+"', "+cantidadprod.ToString().Replace(',','.')+", "+
                                " '"+medida+"','"+detalle+"', "+
-                                codusergra+ " , '"+respgra+"')";
+                                codusergra+ " , '"+respgra+"',1)";
             return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool update_objetivoProduccion(int codigo, string fechalimite, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        {
+            string consulta = "update tbcorpal_objetivosproduccion "+
+                               " set "+
+                               " tbcorpal_objetivosproduccion.fechalimite = "+fechalimite+", "+
+                               " tbcorpal_objetivosproduccion.codprod = "+codprod+", "+
+                               " tbcorpal_objetivosproduccion.producto = '"+producto+"', "+
+                               " tbcorpal_objetivosproduccion.cantidadprod = "+cantidadprod+", "+
+                               " tbcorpal_objetivosproduccion.medida = '"+medida+"', "+
+                               " tbcorpal_objetivosproduccion.detalle = '"+detalle+"', "+
+                               " tbcorpal_objetivosproduccion.codusergra = "+codusergra+", "+
+                               " tbcorpal_objetivosproduccion.respgra = '"+respgra +"' "+
+                               " where "+
+                               " tbcorpal_objetivosproduccion.codigo = " +codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool delete_objetivoProduccion(int codigo, int codUser)
+        {
+            string consulta = "update tbcorpal_objetivosproduccion "+
+                               " set "+
+                               " tbcorpal_objetivosproduccion.estado = false "+
+                               " where "+
+                               " tbcorpal_objetivosproduccion.codigo = " + codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_objetivosDeProduccion(string fechalimite, string producto)
+        {
+            string consulta = "Select "+ 
+                               " op.codigo, "+
+                               " date_format(op.fechalimite, '%d/%m/%Y') as 'fechaLimite', "+
+                               " op.codprod, "+
+                               " op.producto, "+
+                               " op.cantidadprod, "+
+                               " pp.stock as 'stock_Almacen', "+
+                               " (ifnull(pp.stock,0) - ifnull(op.cantidadprod,0)) as 'cant_CompletarObjetivo', " +
+                               " op.medida, "+
+                               " op.detalle "+
+                               " from tbcorpal_objetivosproduccion op, tbcorpal_producto pp "+
+                               " where "+
+                               " op.estado = 1 and "+
+                               " op.codprod = pp.codigo and "+                               
+                               " op.producto like '%%' ";
+
+            if(string.IsNullOrEmpty(fechalimite) == false){
+                consulta = consulta + " and op.fechalimite = " + fechalimite;
+            }
+
+            return Conx.consultaMySql(consulta);
         }
     }
 }
