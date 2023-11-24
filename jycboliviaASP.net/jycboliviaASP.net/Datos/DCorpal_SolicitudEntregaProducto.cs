@@ -72,16 +72,21 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante)
         {
-            string consulta = "select "+
-                                " codigo, nroboleta, "+
-                                " date_format(fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', horaGRA, "+
-                                " date_format(fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', horaentrega, "+
-                                " personalsolicitud, montototal "+
-                                " from  tbcorpal_solicitudentregaproducto pp "+
-                                " where "+
+            string consulta = "select " +
+                                " codigo, nroboleta, " +
+                                " date_format(fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', horaGRA, " +
+                                " date_format(fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', horaentrega, " +
+                                " personalsolicitud, montototal, " +
+                                " estadosolicitud, detallecierre " +
+                                " from  tbcorpal_solicitudentregaproducto pp " +
+                                " where " +
                                 " pp.estadosolicitud = 'Abierto' and " +
                                 " pp.estado = true and " +
-                                " pp.nroboleta like '%"+nroSolicitud+"%' and pp.`personalsolicitud` like '%"+solicitante+"%'";
+                                " pp.nroboleta like '%" + nroSolicitud + "%' ";
+            if(!string.IsNullOrEmpty(solicitante)){
+            consulta = consulta + " and pp.personalsolicitud like '%"+solicitante+"%'";
+            }
+
             return conexion.consultaMySql(consulta);
         }
 
@@ -123,11 +128,11 @@ namespace jycboliviaASP.net.Datos
             
         }
 
-        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado)
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado, float restarStock)
         {
             bool banderaResultado = false;
             string consulta0 = "update tbcorpal_producto "+
-                               " set tbcorpal_producto.stock = tbcorpal_producto.stock - CAST('" + cantEntregado.ToString().Replace(',', '.') + "' AS DECIMAL(10,2))" +
+                               " set tbcorpal_producto.stock = tbcorpal_producto.stock - CAST('" + restarStock.ToString().Replace(',', '.') + "' AS DECIMAL(10,2))" +
                                " where "+
                                " tbcorpal_producto.codigo = "+codigoP;
 
@@ -145,10 +150,13 @@ namespace jycboliviaASP.net.Datos
             return banderaResultado;
         }
 
-        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable)
+        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable, string estadoCierre, string motivoCierre, string fechaEntrega, string horaEntrega)
         {
             string consulta = "update tbcorpal_solicitudentregaproducto "+
-                                " set tbcorpal_solicitudentregaproducto.estadosolicitud = 'Cerrado' , "+
+                                " set tbcorpal_solicitudentregaproducto.estadosolicitud = '"+estadoCierre+"' , "+
+                                " tbcorpal_solicitudentregaproducto.detallecierre = '"+motivoCierre+"', "+
+                                " tbcorpal_solicitudentregaproducto.fechaentrega = " + fechaEntrega + ", " +
+                                " tbcorpal_solicitudentregaproducto.horaEntrega = '" + horaEntrega + "', " +
                                 " tbcorpal_solicitudentregaproducto.fechacierre = current_date(), "+
                                 " tbcorpal_solicitudentregaproducto.horacierre = current_time(), "+
                                 " tbcorpal_solicitudentregaproducto.codperentregoproducto = "+codresponsable+", "+
@@ -343,6 +351,15 @@ namespace jycboliviaASP.net.Datos
                                " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
 				               " from tbcorpal_producto pp "+
 				               " where pp.estado = 1";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_Stock(int codProducto)
+        {
+            string consulta = "select " +
+                               " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
+                               " from tbcorpal_producto pp " +
+                               " where pp.estado = 1 and pp.codigo = "+codProducto;
             return conexion.consultaMySql(consulta);
         }
     }

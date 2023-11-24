@@ -147,11 +147,11 @@ namespace jycboliviaASP.net.Presentacion
             float cantcajas;
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantcajas );
             float unidadsuelta = 0;
-            //float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
+            float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
             float kgrdesperdicio = 0;
-            //float.TryParse(tx_kgrdesperdicio.Text.Replace('.',','), out kgrdesperdicio);
+            float.TryParse(tx_kgrdesperdicio.Text.Replace('.',','), out kgrdesperdicio);
             float kgrparamix = 0;
-            //float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
+            float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
             string nroorden = tx_nroOrden.Text;
             string detalleentrega = tx_detalle.Text;
             //---------------------------------------
@@ -200,9 +200,9 @@ namespace jycboliviaASP.net.Presentacion
             dd_turno.SelectedIndex = -1;
             tx_responsableEntrega.Text = "";
             tx_cantcajas.Text = "";
-            //tx_unidadsuelta.Text = "";
-            //tx_kgrdesperdicio.Text = "";
-            //tx_kgrparamix.Text = "";
+            tx_unidadsuelta.Text = "";
+            tx_kgrdesperdicio.Text = "";
+            tx_kgrparamix.Text = "";
             tx_nroOrden.Text = "";
             tx_detalle.Text = "";
             //tx_productoNax.Text = "";
@@ -228,11 +228,11 @@ namespace jycboliviaASP.net.Presentacion
                 float cantcajas;
                 float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantcajas);
                 float unidadsuelta = 0;
-                //float.TryParse(tx_unidadsuelta.Text.Replace('.', ','), out unidadsuelta);
+                float.TryParse(tx_unidadsuelta.Text.Replace('.', ','), out unidadsuelta);
                 float kgrdesperdicio = 0;
-                //float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
+                float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
                 float kgrparamix = 0;
-                //float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
+                float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
                 string nroorden = tx_nroOrden.Text;
                 string detalleentrega = tx_detalle.Text;
 
@@ -306,9 +306,9 @@ namespace jycboliviaASP.net.Presentacion
             dd_turno.SelectedValue = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[2].Text);
             tx_responsableEntrega.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[5].Text);            
             tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);           
-            //tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
-            //tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
-            //tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
+            tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
+            tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
+            tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
             tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[12].Text);
             tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[13].Text);
             int codigo;

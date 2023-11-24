@@ -83,14 +83,14 @@ namespace jycboliviaASP.net.Negocio
             return dsp.eliminarSolicitud( codigoSolicitud);
         }
 
-        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado)
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoP, float cantEntregado, float restarStock)
         {
-            return dsp.update_cantProductosEntregados(codigoSolicitud, codigoP, cantEntregado);
+            return dsp.update_cantProductosEntregados(codigoSolicitud, codigoP, cantEntregado, restarStock);
         }
 
-        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable)
+        internal bool update_cerrarSolicitud(int codigoSolicitud, int codresponsable, string nombreResponsable, string estadoCierre, string motivoCierre, string fechaEntrega, string horaEntrega)
         {
-            return dsp.update_cerrarSolicitud( codigoSolicitud,  codresponsable,  nombreResponsable);
+            return dsp.update_cerrarSolicitud( codigoSolicitud,  codresponsable,  nombreResponsable, estadoCierre,  motivoCierre,  fechaEntrega,  horaEntrega);
         }
 
         internal DataSet get_entregaSolicitudProductos(int codigoEntregaSolicitudProducto)
@@ -147,6 +147,19 @@ namespace jycboliviaASP.net.Negocio
         {
             DataSet dato = dsp.get_StockProducctos();
             return dato;
+        }
+
+        internal float get_Stock(int codProducto)
+        {
+            DataSet dato = dsp.get_Stock(codProducto);            
+            if (dato.Tables[0].Rows.Count > 0)
+            {
+                float stock;
+                float.TryParse(dato.Tables[0].Rows[0][3].ToString(), out stock);
+                return stock;
+            }
+            else
+                return 0;
         }
     }
 }

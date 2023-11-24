@@ -169,6 +169,30 @@
                     Width="150px"></asp:TextBox>
             </td>            
         </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label41" runat="server" Text="Unidad Suelta :"></asp:Label>
+            </td>
+        <td>
+            <asp:TextBox ID="tx_unidadsuelta" class="form-control" runat="server"></asp:TextBox>
+            </td>
+        <td>
+            <asp:Label ID="Label42" runat="server" Text="Kgr Desperdicio :"></asp:Label>
+            </td>
+        <td>
+            <asp:TextBox ID="tx_kgrdesperdicio" class="form-control" runat="server"></asp:TextBox>
+            </td>        
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label43" runat="server" Text="Kgr para mix :"></asp:Label>
+            </td>
+        <td>
+            <asp:TextBox ID="tx_kgrparamix" class="form-control" runat="server"></asp:TextBox>
+            </td>
+        <td></td>
+        <td></td>
+        </tr>
         
     </table>
    

@@ -263,7 +263,10 @@ namespace jycboliviaASP.net.Datos
                                " op.producto, "+
                                " op.cantidadprod, "+
                                " pp.stock as 'stock_Almacen', "+
-                               " (ifnull(pp.stock,0) - ifnull(op.cantidadprod,0)) as 'cant_CompletarObjetivo', " +
+                               " if( "+
+                               " (ifnull(pp.stock,0) - ifnull(op.cantidadprod,0)) <= 0, "+
+                               " ((ifnull(pp.stock,0) - ifnull(op.cantidadprod,0)) * -1), 0 "+
+                               " ) as 'cant_CompletarObjetivo', " +
                                " op.medida, "+
                                " op.detalle "+
                                " from tbcorpal_objetivosproduccion op, tbcorpal_producto pp "+
