@@ -129,7 +129,7 @@
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
-    <Content Include="Presentacion\FCorpal_ObjetivoProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
@@ -605,12 +605,12 @@
     <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.designer.cs">
       <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FCorpal_ObjetivoProduccion.aspx.cs">
-      <DependentUpon>FCorpal_ObjetivoProduccion.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\FCorpal_ObjetivoProduccion.aspx.designer.cs">
-      <DependentUpon>FCorpal_ObjetivoProduccion.aspx</DependentUpon>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.cs">
       <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>
@@ -1430,6 +1430,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVsEgreso_SaldoInicial_todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_RecibidoMaterialeInsumos.rdlc" />

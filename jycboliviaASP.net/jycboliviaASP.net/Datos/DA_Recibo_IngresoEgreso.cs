@@ -204,10 +204,10 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_allreciboIngreso(string fecha1, string fecha2, string responsable)
         {
             string consulta = "select  " +
-                            " codigo,  date_format(fechagra,'%d-%m-%Y') as 'Fecha_Gra', " +
+                            " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', " +
                             " horagra,  cliente, " +
                             " cast(monto as Decimal(10,2)) as 'monto', moneda,  chequenro,  concepto,  detalle, responsable,nrorecibo, " +
-                            " date_format(rr.fecharecibo,'%d-%m-%Y') as 'Fecha_Recibo' "+
+                            " date_format(rr.fecharecibo,'%d/%m/%Y') as 'Fecha_Recibo' "+
                             " from tbcorpal_reciboingreso rr " +
                             " where " +
                             " rr.estadoingreso = true " +
@@ -219,12 +219,12 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_allreciboEgreso(string fecha1, string fecha2, string responsable)
         {
             string consulta = "select " +
-                                " codigo,  date_format(fechagra,'%d-%m-%Y') as 'Fecha_Gra', horagra,  pagadoha, " +
+                                " codigo,  date_format(fechagra,'%d/%m/%Y') as 'Fecha_Gra', horagra,  pagadoha, " +
                                 " cast(monto as Decimal(10,2)) as 'monto', moneda,  chequenro, banco, efectivo, " +
                                 " concepto,  detalle, responsable, porcentajeretencioniue, " +
                                 " porcentajeretencionit,retencioniuebs,retencionitbs, cast(totalapagar as Decimal(10,2)) as 'totalapagar' ," +
                                 " nrorecibo, responsable as 'realizadopor', "+
-                                " date_format(rr.fechaegreso , '%d-%m-%Y') as 'Fecha_Recibo' " +
+                                " date_format(rr.fechaegreso , '%d/%m/%Y') as 'Fecha_Recibo' " +
                                 " from tbcorpal_reciboegreso rr " +
                                 " where " +
                                 " rr.estadoegreso = true " +
@@ -308,7 +308,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "SELECT "+
                             " t1.codigo, "+
                             " t1.Tipo, "+
-                            " date_format(t1.Fecha_Gra,'%d-%m-%Y') as 'Fecha_Gra', " +
+                            " date_format(t1.Fecha_Gra,'%d/%m/%Y') as 'Fecha_Gra', " +
                             " t1.horagra, "+ 
                             " t1.ClienteIngreso, "+
                             " t1.pagadoha_Egreso, "+
@@ -320,7 +320,7 @@ namespace jycboliviaASP.net.Datos
                             " t1.detalle, "+
                             " res.nombre as 'responsable', "+
                             " t1.nrorecibo, "+
-                            " date_format(t1.Fecha_Recibo,'%d-%m-%Y') as 'Fecha_Recibo', " +
+                            " date_format(t1.Fecha_Recibo,'%d/%m/%Y') as 'Fecha_Recibo', " +
                             " t1.banco, "+
                             " t1.efectivo, "+ 
                             " t1.porcentajeretencioniue, "+

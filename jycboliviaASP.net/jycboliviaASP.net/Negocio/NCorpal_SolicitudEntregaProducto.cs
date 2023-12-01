@@ -143,9 +143,9 @@ namespace jycboliviaASP.net.Negocio
                 return -1;
         }
 
-        internal DataSet get_StockProducctos()
+        internal DataSet get_StockProducctos(string fechaHasta)
         {
-            DataSet dato = dsp.get_StockProducctos();
+            DataSet dato = dsp.get_StockProducctos(fechaHasta);
             return dato;
         }
 
@@ -160,6 +160,11 @@ namespace jycboliviaASP.net.Negocio
             }
             else
                 return 0;
+        }
+
+        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        {
+            return dsp.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
         }
     }
 }

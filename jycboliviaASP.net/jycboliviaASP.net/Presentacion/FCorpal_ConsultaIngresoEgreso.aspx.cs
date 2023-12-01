@@ -140,9 +140,10 @@ namespace jycboliviaASP.net.Presentacion
             //localreport.ReportPath = "Reportes/Report_IngresoVSEgreso_SaldoInicial.rdlc";
             localreport.ReportPath = "Reportes/Report_IngresoVsEgreso_SaldoInicial_todos.rdlc";
 
+
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
             DataSet datosSaldoInicialResp = nre.get_SaldosInicialesResponsable(fechadesde, responsable);
-            
+                        
             DataTable TablaR1 = datosSaldoInicialResp.Tables[0];
             DataTable TablaResult = new DataTable();
             TablaResult.Columns.Add("codigo", typeof(string));
@@ -151,8 +152,8 @@ namespace jycboliviaASP.net.Presentacion
             TablaResult.Columns.Add("horagra", typeof(string));
             TablaResult.Columns.Add("ClienteIngreso", typeof(string));
             TablaResult.Columns.Add("pagadoha_Egreso", typeof(string));
-            TablaResult.Columns.Add("MontoIngreso", typeof(string));
-            TablaResult.Columns.Add("MontoEgreso", typeof(string));
+            TablaResult.Columns.Add("MontoIngreso", typeof(double));
+            TablaResult.Columns.Add("MontoEgreso", typeof(double));
             TablaResult.Columns.Add("moneda", typeof(string));
             TablaResult.Columns.Add("chequenro", typeof(string));
             TablaResult.Columns.Add("concepto", typeof(string));
@@ -206,7 +207,8 @@ namespace jycboliviaASP.net.Presentacion
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();*/
             
-            ReportDataSource DS_IngresoVSEgreso = new ReportDataSource("DS_IngresoVSEgreso2", TablaResult);            
+            ReportDataSource DS_IngresoVSEgreso = new ReportDataSource("DS_IngresoVSEgreso2", TablaResult);
+
             ReportViewer1.LocalReport.DataSources.Add(DS_IngresoVSEgreso);
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();

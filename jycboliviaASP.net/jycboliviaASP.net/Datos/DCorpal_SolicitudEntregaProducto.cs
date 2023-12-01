@@ -92,15 +92,43 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_datosSolicitudProductos(int codigoSolicitud)
         {
+            string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1', "+
+                                   " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'StockAlmacen' "+ 
+                                   " FROM tbcorpal_producto pp "+
+                                   " LEFT JOIN "+ 
+                                   " ( "+
+                                   " select "+ 
+                                   " oo.codProductonax, sum(oo.cantcajas) as 'ingreso' "+  
+                                   " from tbcorpal_entregasordenproduccion oo "+
+                                   " where "+
+                                   " oo.estado = 1 and "+
+                                   " oo.fechagra between '2023-11-01' and current_date() "+
+                                   " group by oo.codProductonax "+
+                                   " ) as t1  ON pp.codigo = t1.codProductonax "+
+                                   " LEFT JOIN "+
+                                   " ( "+
+                                   " select dss.codproducto, sum(dss.cantentregada) as 'salida' "+  
+                                   " from tbcorpal_solicitudentregaproducto ss, "+  
+                                   " tbcorpal_detalle_solicitudproducto dss "+
+                                   " where "+ 
+                                   " ss.codigo = dss.codsolicitud and "+
+                                   " ss.estado = 1 and "+
+                                   " ss.estadosolicitud = 'Cerrado' and "+
+                                   " ss.fechacierre between '2023-11-01' and current_date() " +
+                                   " group by dss.codproducto "+
+                                   " ) as t2 ON pp.codigo = t2.codproducto "+
+                                   " WHERE "+
+                                   " pp.estado = 1"; 
+
             string consulta = " select "+
                                 " pp.codigo, pp.producto, pp.medida , dse.cant as 'cantSolicitada', "+
                                 " dse.tiposolicitud, "+
-                                " ifnull(dse.cantentregada,0) as 'Cant_Entregada', pp.stock as 'stock_Almacen' " +
+                                " ifnull(dse.cantentregada,0) as 'Cant_Entregada', ifnull(pp.StockAlmacen,0) as 'stock_Almacen' " +
                                 " from tbcorpal_solicitudentregaproducto se , "+
-                                " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
+                                " tbcorpal_detalle_solicitudproducto dse "+
+                                " left join (" + consultaStock + ") as pp on dse.codproducto = pp.codigo " +
                                 " where "+                                
-                                " se.codigo = dse.codsolicitud and "+
-                                " dse.codproducto = pp.codigo and "+
+                                " se.codigo = dse.codsolicitud and "+                                
                                 " se.codigo = "+codigoSolicitud;
             return conexion.consultaMySql(consulta);
         }
@@ -345,21 +373,109 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_StockProducctos()
+        internal DataSet get_StockProducctos(string fechaHasta)
         {
-            string consulta = "select "+
+           /* string consulta = "select "+
                                " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
 				               " from tbcorpal_producto pp "+
 				               " where pp.estado = 1";
+            * */
+            string consulta = "SELECT "+
+                               " pp.codigo, pp.producto, pp.medida, "+
+                               " ifnull(t1.ingreso,0) as 'Ingreso1', "+
+                               " ifnull(t2.salida,0) as 'Salida1', "+
+                               " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'Stock' "+ 
+                               " FROM tbcorpal_producto pp "+
+                               " LEFT JOIN "+ 
+                               " ( "+
+                               " select "+ 
+                               " oo.codProductonax, sum(oo.cantcajas) as 'ingreso' "+  
+                               " from tbcorpal_entregasordenproduccion oo "+
+                               " where "+
+                               " oo.estado = 1 and "+
+                               " oo.fechagra between '2023-11-01' and " +fechaHasta+
+                               " group by oo.codProductonax "+
+                               " ) as t1  ON pp.codigo = t1.codProductonax "+
+                               " LEFT JOIN "+
+                               " ( "+
+                               " select dss.codproducto, sum(dss.cantentregada) as 'salida' "+ 
+                               " from tbcorpal_solicitudentregaproducto ss, "+ 
+                               " tbcorpal_detalle_solicitudproducto dss "+
+                               " where "+
+                               " ss.codigo = dss.codsolicitud and "+
+                               " ss.estado = 1 and "+
+                               " ss.estadosolicitud = 'Cerrado' and "+
+                               " ss.fechacierre between '2023-11-01' and " +fechaHasta+
+                               " group by dss.codproducto "+
+                               " ) as t2 ON pp.codigo = t2.codproducto "+
+                               " WHERE "+
+                               " pp.estado = 1";
             return conexion.consultaMySql(consulta);
         }
 
         internal DataSet get_Stock(int codProducto)
         {
-            string consulta = "select " +
+           /* string consulta = "select " +
                                " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
                                " from tbcorpal_producto pp " +
-                               " where pp.estado = 1 and pp.codigo = "+codProducto;
+                               " where pp.estado = 1 and pp.codigo = "+codProducto; */
+            string consulta = "SELECT pp.codigo, pp.producto, pp.medida, "+
+                               " ifnull(t1.ingreso,0) as 'Ingreso1', "+
+                               " ifnull(t2.salida,0) as 'Salida1', "+
+                               " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'StockAlmacen' "+
+                               " FROM tbcorpal_producto pp "+
+                               " LEFT JOIN "+
+                               " ( "+
+                               " select "+
+                               " oo.codProductonax, sum(oo.cantcajas) as 'ingreso' "+  
+                               " from tbcorpal_entregasordenproduccion oo "+
+                               " where "+
+                               " oo.estado = 1 and "+
+                               " oo.fechagra between '2023-11-01' and current_date() " +
+                               " group by oo.codProductonax "+
+                               " ) as t1  ON pp.codigo = t1.codProductonax "+
+                               " LEFT JOIN "+
+                               " ( "+
+                               " select dss.codproducto, sum(dss.cantentregada) as 'salida' "+
+                               " from tbcorpal_solicitudentregaproducto ss, "+
+                               " tbcorpal_detalle_solicitudproducto dss "+
+                               " where "+ 
+                               " ss.codigo = dss.codsolicitud and "+
+                               " ss.estado = 1 and "+
+                               " ss.estadosolicitud = 'Cerrado' and "+
+                               " ss.fechacierre between '2023-11-01' and current_date() " +
+                               " group by dss.codproducto "+
+                               " ) as t2 ON pp.codigo = t2.codproducto "+
+                               " WHERE "+
+                               " pp.estado = 1 and "+
+                               " pp.codigo = "+codProducto;
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        {
+            string consulta = "select "+
+                               " ss.codigo, ss.nroboleta, "+ 
+                               " date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', "+
+                               " ss.horaentrega, "+
+                               " ss.personalsolicitud, "+
+                               " pp.producto, "+
+                               " dss.cant as 'cant_solicitada', "+
+                               " ifnull(dss.cantentregada,0) as 'cant_entregada', "+
+                               " ss.estadosolicitud, "+
+                               " date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', "+
+                               " ss.horacierre, "+
+                               " ss.personalentregoproducto, "+
+                               " ss.detallecierre  "+
+                               " from tbcorpal_solicitudentregaproducto ss, "+ 
+                               " tbcorpal_detalle_solicitudproducto dss, "+
+                               " tbcorpal_producto pp "+
+                               " where "+ 
+                               " ss.codigo = dss.codsolicitud and "+
+                               " dss.codproducto = pp.codigo and "+
+                               " ss.estado = 1 and "+
+                               " ss.fechaentrega between "+fechadesde+" and "+fechahasta+
+                               " group by dss.codproducto";
             return conexion.consultaMySql(consulta);
         }
     }

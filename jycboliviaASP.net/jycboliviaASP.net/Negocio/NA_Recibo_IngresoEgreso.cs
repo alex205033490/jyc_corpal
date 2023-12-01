@@ -192,7 +192,11 @@ namespace jycboliviaASP.net.Negocio
                 double saldoR = (SaldoInicialAux + montoIngreso) - montoEgreso;
                 TablaR.Rows[i]["Saldo"] = saldoR;
                 SaldoInicialAux = saldoR;
-
+               /* DateTime fechadesdeAux = new DateTime();
+                DateTime.TryParseExact(fechadesde, "dd/MM/yy", null, DateTimeStyles.None, out fechadesdeAux);
+                DateTime fechahastaAux = new DateTime();
+                DateTime.TryParseExact(fechahasta, "dd/MM/yy", null, DateTimeStyles.None, out fechahastaAux);
+                */
                 TablaR.Rows[i]["SaldoInicial"] = SaldoInicial;
                 TablaR.Rows[i]["fechadesde"] = fechadesde;
                 TablaR.Rows[i]["fechahasta"] = fechahasta;

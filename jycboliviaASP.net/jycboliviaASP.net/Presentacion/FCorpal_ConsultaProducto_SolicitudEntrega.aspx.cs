@@ -106,9 +106,9 @@ namespace jycboliviaASP.net.Presentacion
             string Responsable = tx_responsable.Text;
             string producto = tx_producto.Text;
 
-            if (dd_consulta.SelectedIndex == 4)
+            if (dd_consulta.SelectedIndex == 4 && !fechahasta.Equals("null"))
             {
-                get_StockProducctos();
+                get_StockProducctos(fechahasta);
             }else
             
             if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null"))
@@ -130,19 +130,45 @@ namespace jycboliviaASP.net.Presentacion
                         if (dd_consulta.SelectedIndex == 3)
                         {
                             get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
-                        }                        
+                        }else
+                            if (dd_consulta.SelectedIndex == 5)
+                            {
+                                get_detalleEntregaSolicitudProductos(fechadesde, fechahasta, Responsable);
+                            }
+                        
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
         }
 
-        private void get_StockProducctos()
+        private void get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta, string Responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_DetalleEntregaSolicitudProductos.rdlc";
+
+            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+            DataSet consulta1 = nss.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_DetalleEntregaSolicitudProductos", DSconsulta);
+
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+
+        }
+
+        private void get_StockProducctos(string fechaHasta)
         {
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_StockProductos.rdlc";
 
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            DataSet consulta1 = nss.get_StockProducctos();
+            DataSet consulta1 = nss.get_StockProducctos(fechaHasta);
             DataTable DSconsulta = consulta1.Tables[0];
 
             ReportDataSource DS_StockProduccto = new ReportDataSource("DS_StockProductos", DSconsulta);

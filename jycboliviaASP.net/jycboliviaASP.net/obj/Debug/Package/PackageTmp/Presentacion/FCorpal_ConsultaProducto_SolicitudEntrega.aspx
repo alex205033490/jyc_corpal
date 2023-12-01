@@ -89,6 +89,7 @@
         <asp:ListItem>Productos Entregados y Solicitados por Persona</asp:ListItem>
         <asp:ListItem>Entrega Produccion</asp:ListItem>
         <asp:ListItem>Stock Producto</asp:ListItem>
+        <asp:ListItem>Detalle Entrega Productos</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td></td>
