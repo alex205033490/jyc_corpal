@@ -268,7 +268,7 @@ namespace jycboliviaASP.net.Datos
                                    " from tbcorpal_entregasordenproduccion oo "+
                                    " where "+
                                    " oo.estado = 1 and "+
-                                   " oo.fechagra between '2023-11-01' and current_date() "+
+                                   " oo.fechagra between "+NA_VariablesGlobales.fechaInicialProduccion+" and current_date() "+
                                    " group by oo.codProductonax "+
                                    " ) as t1  ON pp.codigo = t1.codProductonax "+
                                    " LEFT JOIN "+
@@ -280,7 +280,7 @@ namespace jycboliviaASP.net.Datos
                                    " ss.codigo = dss.codsolicitud and "+
                                    " ss.estado = 1 and "+
                                    " ss.estadosolicitud = 'Cerrado' and "+
-                                   " ss.fechacierre between '2023-11-01' and current_date() "+
+                                   " ss.fechacierre between "+NA_VariablesGlobales.fechaInicialProduccion+" and current_date() "+
                                    " group by dss.codproducto "+
                                    " ) as t2 ON pp.codigo = t2.codproducto "+
                                    " WHERE "+

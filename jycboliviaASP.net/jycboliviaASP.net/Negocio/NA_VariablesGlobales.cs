@@ -20,8 +20,8 @@ namespace jycboliviaASP.net.Negocio
         public static string CiudadParaIngresarDui = "CBBA";
         public static string baseDedatosDui = "db_Cochabamba";
         public static string baseDedatosContenedor = "db_Cochabamba";
-
         public static string baseDedatosImportacion = "db_jyciasrl";
+        public static string fechaInicialProduccion = "'2023-12-01'";
 
         public int get_VCAJAenbasedeDatosActual(string baseDatos)
         {
