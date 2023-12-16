@@ -180,7 +180,8 @@ namespace jycboliviaASP.net.Presentacion
                 limpiarDatos();
                 Session["codigoEntregaProduccion"] = codigoEntregaProduccion;
                 Session["ReporteGeneral"] = "Reporte_Entrega_Produccion";
-                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                Response.Redirect("../Presentacion/FA_DescargarArchivoProduccion.aspx");
                 //buscarDatos(turno,respEntrega);
             }else
                 Response.Write("<script type='text/javascript'> alert('ERROR: No Ingreso Datos') </script>");
@@ -376,7 +377,9 @@ namespace jycboliviaASP.net.Presentacion
 
                 Session["codigoEntregaProduccion"] = codigo;
                 Session["ReporteGeneral"] = "Reporte_Entrega_Produccion";
-                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");                
+                //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                Response.Redirect("../Presentacion/FA_DescargarArchivoProduccion.aspx");
+                                
             }
             else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione datos') </script>");

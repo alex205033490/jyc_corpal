@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="F:\WebSite\jyc_naxSnax66" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+  <publishProfile publishUrl="F:\WebSite\jyc_naxSnax68" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="img/profile_1.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/portfolio/cabin.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/profile.png" publishTime="02/15/2023 12:37:16" />
@@ -51,7 +51,7 @@
     <file relUrl="Images/jyc_1.jpg" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Presentacion/FCorpal_Facturacion.aspx" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Styles/Style_SeguimientosMorosos.css" publishTime="02/15/2023 12:37:15" />
-    <file relUrl="bin/jycboliviaASP.net.dll" publishTime="12/02/2023 12:30:05" />
+    <file relUrl="bin/jycboliviaASP.net.dll" publishTime="12/12/2023 09:43:40" />
     <file relUrl="vendor/select2/select2.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Presentacion/Presentacion old/FA_CargarFechasBastones.aspx" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Presentacion/Presentacion old/FA_VaciadoR148.aspx" publishTime="02/15/2023 12:37:14" />
@@ -132,7 +132,7 @@
     <file relUrl="Styles/Style_chequeBisa.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_movimientoCheques.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_ReporteCotizacionRepuesto.css" publishTime="02/15/2023 12:37:15" />
-    <file relUrl="bin/jycboliviaASP.net.pdb" publishTime="12/02/2023 12:30:05" />
+    <file relUrl="bin/jycboliviaASP.net.pdb" publishTime="12/12/2023 09:43:40" />
     <file relUrl="Styles/Styles_GPagoSeguimiento2.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_cotiRcc.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_ReporteCobranza2.css" publishTime="02/15/2023 12:37:15" />
@@ -297,10 +297,11 @@
     <file relUrl="Presentacion/FCorpal_SolicitudPedido.aspx" publishTime="06/16/2023 10:43:05" />
     <file relUrl="Styles/Style_SimecModificar.css" publishTime="07/17/2023 15:48:34" />
     <file relUrl="jquery/js/jqBootstrapValidation.js" publishTime="02/15/2023 12:37:16" />
-    <file relUrl="Web.config" publishTime="12/02/2023 12:30:11" />
+    <file relUrl="Web.config" publishTime="12/12/2023 09:43:49" />
     <file relUrl="vendor/bootstrap/js/bootstrap.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/JYC1.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Images/delete.png" publishTime="02/15/2023 12:37:14" />
+    <file relUrl="Presentacion/FA_DescargarArchivoProduccion.aspx" publishTime="12/08/2023 16:50:07" />
     <file relUrl="Presentacion/FCorpal_CompraDeMaterialeInsumos.aspx" publishTime="09/04/2023 18:24:45" />
     <file relUrl="img/portfolio/circus_1.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Presentacion/FCorpal_ReporteGeneral.aspx" publishTime="06/23/2023 18:35:24" />

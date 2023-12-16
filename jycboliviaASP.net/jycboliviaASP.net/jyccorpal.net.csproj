@@ -126,6 +126,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\main.js" />
+    <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
@@ -583,6 +584,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.cs">
+      <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.designer.cs">
+      <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.cs">
       <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
@@ -1430,6 +1438,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVsEgreso_SaldoInicial_todos.rdlc" />
