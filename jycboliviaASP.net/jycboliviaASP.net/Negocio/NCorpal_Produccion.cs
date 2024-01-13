@@ -75,5 +75,25 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.delete_objetivoProduccion( codigo,  codUser);
         }
+
+        internal DataSet get_devolucionProductos(string vendedor, string producto)
+        {
+            return dproduccion.get_devolucionProductos( vendedor,  producto);
+        }
+
+        internal bool insertarDevolucionProduccion(string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion)
+        {
+            return dproduccion.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion);
+        }
+
+        internal bool modificarDevolucionProduccion(int codigoD, string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion)
+        {
+            return dproduccion.modificarDevolucionProduccion( codigoD,  fechadevolucion,  vendedor,  codvendedor,  producto,  codproducto,  cantidad,  almacenerorecibe,  motivodevolucion,  seenviaa,  observacionesdevolucion);
+        }
+
+        internal bool eliminarDevolucionProduccion(int codigoD)
+        {
+            return dproduccion.eliminarDevolucionProduccion(codigoD);
+        }
     }
 }
