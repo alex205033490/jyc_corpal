@@ -128,6 +128,7 @@
     <Content Include="js\main.js" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
@@ -599,6 +600,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.designer.cs">
       <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs">
+      <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.designer.cs">
+      <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>

@@ -25,3 +25,4 @@ F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net
 F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\RdlCompile.compiled
 F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.dll
 F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jycboliviaASP.net.pdb
+F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jyccorpal.net.csprojResolveAssemblyReference.cache

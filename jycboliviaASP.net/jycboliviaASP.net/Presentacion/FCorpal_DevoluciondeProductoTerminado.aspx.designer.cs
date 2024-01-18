@@ -85,6 +85,24 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.DropDownList dd_productosNax;
         
         /// <summary>
+        /// Label42 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label42;
+        
+        /// <summary>
+        /// tx_medida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_medida;
+        
+        /// <summary>
         /// Label31 control.
         /// </summary>
         /// <remarks>

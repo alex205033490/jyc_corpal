@@ -81,19 +81,29 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.get_devolucionProductos( vendedor,  producto);
         }
 
-        internal bool insertarDevolucionProduccion(string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion)
+        internal bool insertarDevolucionProduccion(string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion, string medida)
         {
-            return dproduccion.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion);
+            return dproduccion.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
         }
 
-        internal bool modificarDevolucionProduccion(int codigoD, string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion)
+        internal bool modificarDevolucionProduccion(int codigoD, string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion, string medida)
         {
-            return dproduccion.modificarDevolucionProduccion( codigoD,  fechadevolucion,  vendedor,  codvendedor,  producto,  codproducto,  cantidad,  almacenerorecibe,  motivodevolucion,  seenviaa,  observacionesdevolucion);
+            return dproduccion.modificarDevolucionProduccion(codigoD, fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
         }
 
         internal bool eliminarDevolucionProduccion(int codigoD)
         {
             return dproduccion.eliminarDevolucionProduccion(codigoD);
+        }
+
+        internal DataSet get_devolucionProductosNoAprovados(string fechaDevolucion, string Producto)
+        {
+           return dproduccion.get_devolucionProductosNoAprovados( fechaDevolucion,  Producto);
+        }
+
+        internal bool set_AutorizadoDevolucionProducto(int codigoDevolucion, bool marcado, int codUserAutorizado, string nombreAutorizacion)
+        {
+            return dproduccion.set_objetivoProduccion( codigoDevolucion,  marcado,  codUserAutorizado,  nombreAutorizacion);
         }
     }
 }

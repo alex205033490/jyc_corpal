@@ -58,6 +58,8 @@
             <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><span>Consulta Productos</span></a></li>                                                         
         <li role="separator" class="divider"></li>                                
         <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><span>Devolucion Productos</span></a></li>                                                 
+        <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="A11" runat="server"><span>Aprobacion Devolucion Productos</span></a></li>                                                 
+        
         </ul>
     </li>
 

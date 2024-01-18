@@ -104,7 +104,7 @@
            </td>
        <td>
                 <asp:DropDownList ID="dd_productosNax" class="form-control" runat="server" 
-                    Width="350px" 
+                    Width="350px"  onselectedindexchanged="dd_productosNax_SelectedIndexChanged"
                     AutoPostBack="True">
                 </asp:DropDownList>
            </td>
@@ -113,13 +113,23 @@
 
        <tr>
         <td>
-                <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
+                <asp:Label ID="Label42" runat="server" Text="Medida:"></asp:Label>
             </td>
         <td>
+                <asp:TextBox ID="tx_medida" class="form-control" runat="server" Width="150px"></asp:TextBox>
+            </td>
+        <td></td>        
+       </tr>
+
+       <tr>
+            <td>
+                <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
+            </td>
+            <td>
                 <asp:TextBox ID="tx_cantcajas" class="form-control" runat="server" 
                     Width="150px"></asp:TextBox>
             </td>
-        <td></td>        
+            <td></td>
        </tr>
 
         <tr>

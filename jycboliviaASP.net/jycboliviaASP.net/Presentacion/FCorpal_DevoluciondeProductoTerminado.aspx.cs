@@ -91,7 +91,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_cantcajas.Text = "0";
             tx_fechaDevolucion.Text = "";
             tx_MotivoDevolucion.Text = "";
-            tx_nombreVendedor.Text = "";
+           // tx_nombreVendedor.Text = "";
             tx_observacionesDevolucion.Text = "";
             dd_productosNax.SelectedIndex = 0;
             dd_seenviaraa.SelectedIndex = 0;
@@ -135,8 +135,10 @@ namespace jycboliviaASP.net.Presentacion
             string motivodevolucion = tx_MotivoDevolucion.Text;
             string seenviaa = dd_seenviaraa.SelectedItem.Text;       
             string observacionesdevolucion = tx_observacionesDevolucion.Text;
+            string medida = tx_medida.Text;
+
             NCorpal_Produccion Npp = new NCorpal_Produccion();
-            bool bandera = Npp.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion);
+            bool bandera = Npp.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
             if(bandera == true){
                 Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
             }
@@ -188,8 +190,10 @@ namespace jycboliviaASP.net.Presentacion
               string motivodevolucion = tx_MotivoDevolucion.Text;
               string seenviaa = dd_seenviaraa.SelectedItem.Text;
               string observacionesdevolucion = tx_observacionesDevolucion.Text;
+              string medida = tx_medida.Text;
+
               NCorpal_Produccion Npp = new NCorpal_Produccion();
-              bool bandera = Npp.modificarDevolucionProduccion(codigoD,fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion);
+              bool bandera = Npp.modificarDevolucionProduccion(codigoD, fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
               if (bandera == true)
               {
                   Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
@@ -237,6 +241,19 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
+        protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ponerMedidadelProducto();
+        }
+
+        private void ponerMedidadelProducto()
+        {
+            string producto = dd_productosNax.SelectedItem.Text;
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_mostrarProductos(producto);
+            string medida = tuplas.Tables[0].Rows[0][2].ToString();
+            tx_medida.Text = medida;
+        }
        
     }
 }

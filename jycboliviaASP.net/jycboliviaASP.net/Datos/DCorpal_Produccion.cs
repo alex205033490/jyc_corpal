@@ -326,19 +326,20 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
-        internal bool insertarDevolucionProduccion(string fechadevolucion,string vendedor,int codvendedor,string producto,int codproducto,float cantidad,string almacenerorecibe,string motivodevolucion,string seenviaa,string observacionesdevolucion)
+        internal bool insertarDevolucionProduccion(string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion, string medida)
         {
             string consulta = "insert into tbcorpal_devolucionproducto( "+
+                               " fechagra, horagra, estado, " +
                                " fechadevolucion,vendedor,codvendedor, "+
                                " producto, codproducto,cantidad, almacenerorecibe, motivodevolucion, seenviaa, "+
-                               " observacionesdevolucion) "+
-                               " VALUES ("+fechadevolucion+",'"+vendedor+"',"+codvendedor+", "+
+                               " observacionesdevolucion, medida) " +
+                               " VALUES (current_date(), current_time(), 1, " + fechadevolucion + ",'" + vendedor + "'," + codvendedor + ", " +
                                " '"+producto+"', "+codproducto+",'"+cantidad.ToString().Replace(',','.')+"', '"+almacenerorecibe+"', '"+motivodevolucion+"', '"+seenviaa+"', "+
-                               " '"+observacionesdevolucion+"')";
+                               " '" + observacionesdevolucion + "', '"+medida+"')";
             return Conx.ejecutarMySql(consulta);
         }
 
-        internal bool modificarDevolucionProduccion(int codigoD, string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion)
+        internal bool modificarDevolucionProduccion(int codigoD, string fechadevolucion, string vendedor, int codvendedor, string producto, int codproducto, float cantidad, string almacenerorecibe, string motivodevolucion, string seenviaa, string observacionesdevolucion, string medida)
         {
             string consulta = "update tbcorpal_devolucionproducto set " +
                               " tbcorpal_devolucionproducto.fechadevolucion = "+fechadevolucion+" , "+
@@ -350,6 +351,7 @@ namespace jycboliviaASP.net.Datos
                               " tbcorpal_devolucionproducto.almacenerorecibe = '"+almacenerorecibe+"' , "+
                               " tbcorpal_devolucionproducto.motivodevolucion = '"+motivodevolucion+"', "+
                               " tbcorpal_devolucionproducto.seenviaa = '"+seenviaa+"' ," +
+                              " tbcorpal_devolucionproducto.medida = '" + medida + "' ," +
                               " tbcorpal_devolucionproducto.observacionesdevolucion = '"+observacionesdevolucion+"'" +
                               " where tbcorpal_devolucionproducto.codigo = "+codigoD;
             return Conx.ejecutarMySql(consulta);
@@ -360,6 +362,43 @@ namespace jycboliviaASP.net.Datos
             string consulta = "update tbcorpal_devolucionproducto set " +
                              " tbcorpal_devolucionproducto.estado = false " +                             
                              " where tbcorpal_devolucionproducto.codigo = " + codigoD;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_devolucionProductosNoAprovados(string fechaDevolucion, string Producto)
+        {
+            string consulta = "select "+
+                               " dd.autorizado," +
+                               " dd.codigo, "+ 
+                               " date_format(dd.fechadevolucion,'%d%/%m/%Y') as 'fecha_devolucion', "+
+                               " dd.vendedor, "+
+                               " dd.producto, "+
+                               " dd.cantidad, "+
+                               " dd.medida, "+
+                               " dd.almacenerorecibe, "+
+                               " dd.motivodevolucion, "+
+                               " dd.seenviaa "+
+                               " from "+
+                               " tbcorpal_devolucionproducto dd "+
+                               " where "+
+                               " dd.codrespautoriza is null and " +
+                               " dd.autorizadopor is null and "+
+                               " dd.autorizado is null and "+
+                               " dd.producto like '%"+Producto+"%' ";
+            if(!string.IsNullOrEmpty(fechaDevolucion)){
+                consulta = consulta + " and dd.fechadevolucion = " + fechaDevolucion;
+            }
+
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool set_objetivoProduccion(int codigoDevolucion, bool marcado, int codUserAutorizado, string nombreAutorizacion)
+        {
+            string consulta = "update tbcorpal_devolucionproducto set " +
+                              " tbcorpal_devolucionproducto.codrespautoriza = " + codUserAutorizado + " , " +
+                              " tbcorpal_devolucionproducto.autorizadopor = '" + nombreAutorizacion + "', " +
+                              " tbcorpal_devolucionproducto.autorizado = " + marcado +
+                              " where tbcorpal_devolucionproducto.codigo = " + codigoDevolucion;
             return Conx.ejecutarMySql(consulta);
         }
     }
