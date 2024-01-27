@@ -316,11 +316,12 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "select "+
                                " dd.codigo, "+
-                               " date_format(dd.fechadevolucion,'%d/%m/%y') as 'fecha_devolucion', dd.vendedor, dd.codvendedor, "+
-                               " dd.producto, dd.codproducto,dd.cantidad, dd.almacenerorecibe, dd.motivodevolucion, dd.seenviaa, "+
-                               " dd.observacionesdevolucion, dd.codrespautoriza, dd.autorizadopor, dd.observacionesdeautorizacion "+ 
+                               " date_format(dd.fechadevolucion,'%d/%m/%Y') as 'fecha_devolucion', dd.vendedor, "+
+                               " dd.producto, dd.medida, dd.cantidad, dd.almacenerorecibe, dd.motivodevolucion, dd.seenviaa, "+
+                               " dd.observacionesdevolucion "+ 
                                " from tbcorpal_devolucionproducto dd "+
                                " where "+
+                               " dd.estado = true and "+
                                " dd.vendedor like '%"+vendedor+"%' and "+
                                " dd.producto like '%"+producto+"%'";
             return Conx.consultaMySql(consulta);
@@ -385,7 +386,7 @@ namespace jycboliviaASP.net.Datos
                                " dd.autorizadopor is null and "+
                                " dd.autorizado is null and "+
                                " dd.producto like '%"+Producto+"%' ";
-            if(!string.IsNullOrEmpty(fechaDevolucion)){
+            if(!string.IsNullOrEmpty(fechaDevolucion) && !fechaDevolucion.Equals("null")){
                 consulta = consulta + " and dd.fechadevolucion = " + fechaDevolucion;
             }
 

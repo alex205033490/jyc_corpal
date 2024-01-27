@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using jycboliviaASP.net.Negocio;
 using System.Data;
+using System.IO;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -58,7 +59,7 @@ namespace jycboliviaASP.net.Presentacion
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
             string fechaDevolucion = convertidorFecha(tx_fechaDevolucion.Text);
-            string Producto = tx_producto.Text;
+            string Producto = HttpUtility.HtmlDecode(tx_producto.Text);
             buscarDatos(fechaDevolucion, Producto);
         }
 
@@ -105,7 +106,43 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_excel_Click(object sender, EventArgs e)
         {
-
+            descargarExcelDatos();
         }
+
+        private void descargarExcelDatos()
+        {
+            string fechaDevolucion = convertidorFecha(tx_fechaDevolucion.Text);
+            string Producto = HttpUtility.HtmlDecode(tx_producto.Text);
+
+            NCorpal_Produccion pp = new NCorpal_Produccion();
+            DataSet tupla = pp.get_devolucionProductosNoAprovados(fechaDevolucion, Producto);
+
+
+            //// Creacion del Excel
+            HttpResponse response = HttpContext.Current.Response;
+            // first let's clean up the response.object
+            response.Clear();
+            response.Charset = "";
+            // set the response mime type for excel
+            response.ContentType = "application/vnd.ms-excel";
+            string nombre = "Aprobacion de Devolucion de Producto - " + Session["BaseDatos"].ToString();
+            response.AddHeader("Content-Disposition", "attachment;filename=\"" + nombre + ".xls" + "\"");
+
+            // create a string writer
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    // instantiate a datagrid
+                    DataGrid dg = new DataGrid();
+                    dg.DataSource = tupla;
+                    dg.DataBind();
+                    dg.RenderControl(htw);
+                    response.Write(sw.ToString());
+                    response.End();
+                }
+            }
+        }
+
     }
 }

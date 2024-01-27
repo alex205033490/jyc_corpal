@@ -8,6 +8,7 @@ using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
+using System.IO;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -28,10 +29,16 @@ namespace jycboliviaASP.net.Presentacion
                 string passwordAux = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 tx_nombreVendedor.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
-                llenarProductosNax();                
+                llenarProductosNax();
+                negarBotones();
                 buscarDatos("", "");
             }
 
+        }
+
+        private void negarBotones()
+        {
+            bt_verRecibo.Visible = false;
         }
 
         private bool tienePermisoDeIngreso(int permiso)
@@ -99,9 +106,9 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
-            string vendedor = tx_nombreVendedor.Text;
-            string producto = dd_productosNax.SelectedItem.Text;
-            buscarDatos(vendedor, producto);
+            string vendedor = HttpUtility.HtmlDecode(tx_nombreVendedor.Text);
+            string producto = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
+            buscarDatos("", "");
         }
 
         private void buscarDatos(string vendedor, string producto)
@@ -120,26 +127,27 @@ namespace jycboliviaASP.net.Presentacion
         private void guardarDatos()
         {
             string fechadevolucion = convertidorAFecha(tx_fechaDevolucion.Text);
-            string vendedor = tx_nombreVendedor.Text;
+            string vendedor = HttpUtility.HtmlDecode(tx_nombreVendedor.Text);
             //--------------------------------------------
             NA_Responsables Nresp = new NA_Responsables();            
             int codvendedor = Nresp.getCodigo_NombreResponsable(vendedor);
             //--------------------------
-            string producto = dd_productosNax.SelectedItem.Text;
+            string producto = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
             NCorpal_Produccion pp = new NCorpal_Produccion();
             int codproducto;
             int.TryParse(dd_productosNax.SelectedValue.ToString(), out codproducto);
             float cantidad;
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantidad);
-            string almacenerorecibe = tx_almaceneroquerecibe.Text;
-            string motivodevolucion = tx_MotivoDevolucion.Text;
-            string seenviaa = dd_seenviaraa.SelectedItem.Text;       
-            string observacionesdevolucion = tx_observacionesDevolucion.Text;
+            string almacenerorecibe = HttpUtility.HtmlDecode(tx_almaceneroquerecibe.Text);
+            string motivodevolucion = HttpUtility.HtmlDecode(tx_MotivoDevolucion.Text);
+            string seenviaa = HttpUtility.HtmlDecode(dd_seenviaraa.SelectedItem.Text);       
+            string observacionesdevolucion = HttpUtility.HtmlDecode(tx_observacionesDevolucion.Text);
             string medida = tx_medida.Text;
 
             NCorpal_Produccion Npp = new NCorpal_Produccion();
             bool bandera = Npp.insertarDevolucionProduccion( fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
             if(bandera == true){
+                buscarDatos("",producto);
                 Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
             }
 
@@ -175,27 +183,28 @@ namespace jycboliviaASP.net.Presentacion
               int.TryParse(gv_DevoluciondelProduccion.SelectedRow.Cells[1].Text, out codigoD);
 
               string fechadevolucion = convertidorAFecha(tx_fechaDevolucion.Text);
-              string vendedor = tx_nombreVendedor.Text;
+              string vendedor = HttpUtility.HtmlDecode(tx_nombreVendedor.Text);
               //--------------------------------------------
               NA_Responsables Nresp = new NA_Responsables();
               int codvendedor = Nresp.getCodigo_NombreResponsable(vendedor);
               //--------------------------
-              string producto = dd_productosNax.SelectedItem.Text;
+              string producto = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
               NCorpal_Produccion pp = new NCorpal_Produccion();
               int codproducto;
               int.TryParse(dd_productosNax.SelectedValue.ToString(), out codproducto);
               float cantidad;
               float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantidad);
-              string almacenerorecibe = tx_almaceneroquerecibe.Text;
-              string motivodevolucion = tx_MotivoDevolucion.Text;
-              string seenviaa = dd_seenviaraa.SelectedItem.Text;
-              string observacionesdevolucion = tx_observacionesDevolucion.Text;
+              string almacenerorecibe = HttpUtility.HtmlDecode(tx_almaceneroquerecibe.Text);
+              string motivodevolucion = HttpUtility.HtmlDecode(tx_MotivoDevolucion.Text);
+              string seenviaa = HttpUtility.HtmlDecode(dd_seenviaraa.SelectedItem.Text);
+              string observacionesdevolucion = HttpUtility.HtmlDecode(tx_observacionesDevolucion.Text);
               string medida = tx_medida.Text;
 
               NCorpal_Produccion Npp = new NCorpal_Produccion();
               bool bandera = Npp.modificarDevolucionProduccion(codigoD, fechadevolucion, vendedor, codvendedor, producto, codproducto, cantidad, almacenerorecibe, motivodevolucion, seenviaa, observacionesdevolucion, medida);
               if (bandera == true)
               {
+                  buscarDatos("",producto);
                   Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
               } else
                   Response.Write("<script type='text/javascript'> alert('ERROR: Guardado') </script>");
@@ -219,6 +228,7 @@ namespace jycboliviaASP.net.Presentacion
                 bool bandera = Npp.eliminarDevolucionProduccion(codigoD);
                 if (bandera == true)
                 {
+                    buscarDatos("","");
                     Response.Write("<script type='text/javascript'> alert('Eliminado: OK') </script>");
                 }
             }
@@ -233,12 +243,63 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_excel_Click(object sender, EventArgs e)
         {
+            descargarExcelDatos();
+        }
 
+        private void descargarExcelDatos()
+        {
+            string vendedor = HttpUtility.HtmlDecode(tx_nombreVendedor.Text);
+            string producto = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
+
+            NCorpal_Produccion npp = new NCorpal_Produccion();
+            DataSet tupla = npp.get_devolucionProductos(vendedor, producto);
+
+
+            //// Creacion del Excel
+            HttpResponse response = HttpContext.Current.Response;
+            // first let's clean up the response.object
+            response.Clear();
+            response.Charset = "";
+            // set the response mime type for excel
+            response.ContentType = "application/vnd.ms-excel";
+            string nombre = "Devolucion de Producto - " + Session["BaseDatos"].ToString();
+            response.AddHeader("Content-Disposition", "attachment;filename=\"" + nombre + ".xls" + "\"");
+
+            // create a string writer
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    // instantiate a datagrid
+                    DataGrid dg = new DataGrid();
+                    dg.DataSource = tupla;
+                    dg.DataBind();
+                    dg.RenderControl(htw);
+                    response.Write(sw.ToString());
+                    response.End();
+                }
+            }
         }
 
         protected void gv_DevoluciondelProduccion_SelectedIndexChanged(object sender, EventArgs e)
         {
+            seleccionarDatos();
+        }
 
+        private void seleccionarDatos()
+        {
+            tx_fechaDevolucion.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[2].Text;
+            tx_nombreVendedor.Text = HttpUtility.HtmlDecode(gv_DevoluciondelProduccion.SelectedRow.Cells[3].Text);
+            string producto = HttpUtility.HtmlDecode(gv_DevoluciondelProduccion.SelectedRow.Cells[4].Text);
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            int codProducto = pp.get_CodigoProductos(producto);
+            dd_productosNax.SelectedValue = codProducto.ToString();
+            tx_medida.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[5].Text;
+            tx_cantcajas.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[6].Text;
+            tx_almaceneroquerecibe.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[7].Text;
+            tx_MotivoDevolucion.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[8].Text;
+            dd_seenviaraa.SelectedValue = HttpUtility.HtmlDecode(gv_DevoluciondelProduccion.SelectedRow.Cells[9].Text);
+            tx_observacionesDevolucion.Text = gv_DevoluciondelProduccion.SelectedRow.Cells[10].Text;
         }
 
         protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
