@@ -263,6 +263,7 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     listarTiendas("");
                     gv_tablaTienda.SelectedIndex = -1;
+
                     Response.Write("<script type='text/javascript'> alert('Eliminado OK') </script>");
                 }
                 else
