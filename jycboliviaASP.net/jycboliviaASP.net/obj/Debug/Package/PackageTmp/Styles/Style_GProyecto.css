@@ -1,0 +1,41 @@
+﻿body {
+}
+
+
+.Centrar
+{   
+ 
+    margin: 0 auto;        
+    width:700px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+   .GP1
+{    
+    height: 160px;      
+    width:580px;
+    text-align:left;
+    margin-top: 20px;
+    margin-left: 20px;   
+}
+
+      .GP2
+{    
+    height: auto;      
+    width:auto;    
+    text-align:left;    
+    
+}
+
+.GP1_1
+{
+    float: left;
+    height: 50px;       
+    width:900px;
+    }

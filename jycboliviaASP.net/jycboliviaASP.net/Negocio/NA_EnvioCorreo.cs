@@ -823,17 +823,67 @@ namespace jycboliviaASP.net.Negocio
             correo.From = new MailAddress("notificacion@corpal-srl.com");
             //------------------------------------------------------            
 
-            correo.To.Add("sistema@jycbolivia.com");            
+            correo.To.Add("sistema@jycbolivia.com");
+            correo.To.Add("ing.alex.oyola@gmail.com");      
             correo.To.Add("eurquidi@jycbolivia.com");
             correo.To.Add("angel.guidi.dom@gmail.com");
             correo.To.Add("produccion@naxsnax.com");
             correo.To.Add("administracion@naxsnax.com");
-            
+           
             //------------------------------------------
 
             correo.To.Add("notificacion@corpal-srl.com");
             correo.Subject = asunto;
             correo.Body = Cuerpo;
+            //----------------adjunto--------------
+
+            //--------------------------------
+            correo.IsBodyHtml = true;
+            correo.Priority = MailPriority.Normal;
+            //
+            SmtpClient smtp = new SmtpClient();
+            //
+            //---------------------------------------------
+            // Estos datos debes rellanarlos correctamente
+            //---------------------------------------------
+            smtp.Host = "mail.corpal-srl.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new NetworkCredential("notificacion@corpal-srl.com", "Nikilo9H(z*o6fw#2Sc- Boli+");
+
+            smtp.EnableSsl = true;
+            try
+            {
+                smtp.Send(correo);
+                correo.Dispose();
+                //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
+                return false;
+            }
+        }
+
+        internal bool enviar_Correo_SolicitudProducto(string asunto, string cuerpo)
+        {
+            MailMessage correo = new MailMessage();
+            correo.From = new MailAddress("notificacion@corpal-srl.com");
+            //------------------------------------------------------            
+
+            correo.To.Add("sistema@jycbolivia.com");
+            correo.To.Add("eurquidi@jycbolivia.com");
+            correo.To.Add("angel.guidi.dom@gmail.com");
+            correo.To.Add("produccion@naxsnax.com");
+            correo.To.Add("administracion@naxsnax.com");
+            correo.To.Add("almacen@naxsnax.com");
+           
+            //------------------------------------------
+
+            correo.To.Add("notificacion@corpal-srl.com");
+            correo.Subject = asunto;
+            correo.Body = cuerpo;
             //----------------adjunto--------------
 
             //--------------------------------

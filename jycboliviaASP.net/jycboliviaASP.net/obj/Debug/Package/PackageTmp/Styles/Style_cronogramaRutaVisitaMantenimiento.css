@@ -1,0 +1,35 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:800px;
+    height:auto;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+    
+    
+        .vista2
+    {
+    border: double #666666;    
+    float: left;   
+    height: 150px;  
+    width: 500px;    
+        
+        }
+   
+   .blanco  
+   {
+        
+    float: left; 
+    height: 50px;  
+    width: 500px;    
+        
+        }

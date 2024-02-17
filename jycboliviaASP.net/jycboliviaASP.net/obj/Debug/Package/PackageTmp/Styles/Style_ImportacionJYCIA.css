@@ -1,0 +1,64 @@
+﻿body {
+}
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:850px;
+    height:auto;  
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+   .GCP1
+   {
+     border: double #666666;     
+     float: left;
+     border: double #666666;
+     height: auto;  
+     width: auto;     
+     margin-top: 7px;
+    }
+    
+   .GCP2
+   {
+   float: left;
+    border: double #666666;
+   height:215px;  
+   width: 289px;
+   margin-top: 28px;
+   overflow: auto;
+    }
+    
+    .GCP3
+    {
+   border: double #666666;
+   float: left;
+   overflow:auto; 
+   height: 365px;  
+   width: 828px;
+   
+   margin-top:9px;
+    }
+    
+    .GCP_otro
+    {
+        height: 80px;  
+        width: 900px;
+        
+        }
+    
+    .GCP4
+{
+   overflow:auto; 
+   height: 201px;  
+   width: 794px;
+   margin-left: 40px;   
+   margin-top:17px;
+   border: double #666666;
+    }
+    

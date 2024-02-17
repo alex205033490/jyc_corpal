@@ -402,5 +402,70 @@ namespace jycboliviaASP.net.Datos
                               " where tbcorpal_devolucionproducto.codigo = " + codigoDevolucion;
             return Conx.ejecutarMySql(consulta);
         }
+
+        internal DataSet get_objetivosDeProduccionMensual(int Mes, int anio, string producto)
+        {
+            string consulta = "select "+
+                                " oo.codigo, "+
+                                " date_format(oo.fechagra,'%d/%m/%Y') as 'Fecha_Gra', "+ 
+                                " oo.horagra, "+
+                                " oo.mes_texto as 'mes', "+
+                                " oo.anio, "+
+                                " oo.producto, "+
+                                " oo.cantidadprod, "+
+                                " oo.medida, "+
+                                " oo.detalle, "+
+                                " oo.respgra as 'Resp.Grabacion', "+
+                                " oo.estado "+
+                                " from "+ 
+                                " tbcorpal_objetivosproduccionmensual oo "+
+                                " where "+                               
+                                " oo.producto like '%"+producto+"%' and oo.estado = 1 ";
+            if (Mes > 0 && anio > 0) {
+                consulta = consulta + " and oo.mes = " + Mes + " and  oo.anio = " + anio;
+            }
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool update_objetivoProduccionMensual(int  codigo,int codMes, string mesTexto, int anio, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        {
+            string consulta = "update " +
+                               " tbcorpal_objetivosproduccionmensual set " +
+                               " tbcorpal_objetivosproduccionmensual.fechagra = current_date(), " +
+                               " tbcorpal_objetivosproduccionmensual.horagra = current_time(), " +
+                               " tbcorpal_objetivosproduccionmensual.mes = " + codMes + ", " +
+                               " tbcorpal_objetivosproduccionmensual.anio = " + anio + ", " +
+                               " tbcorpal_objetivosproduccionmensual.codprod = " + codprod + ", " +
+                               " tbcorpal_objetivosproduccionmensual.producto = '" + producto + "', " +
+                               " tbcorpal_objetivosproduccionmensual.cantidadprod = " + cantidadprod + ", " +
+                               " tbcorpal_objetivosproduccionmensual.medida = '" + medida + "', " +
+                               " tbcorpal_objetivosproduccionmensual.detalle = '" + detalle + "', " +
+                               " tbcorpal_objetivosproduccionmensual.codusergra = " + codusergra + ", " +
+                               " tbcorpal_objetivosproduccionmensual.respgra = '" + respgra + "', " +
+                               " tbcorpal_objetivosproduccionmensual.estado = 1, " +
+                               " tbcorpal_objetivosproduccionmensual.mes_texto = '" + mesTexto + "' " +
+                               " where " +
+                               " tbcorpal_objetivosproduccionmensual.codigo = " + codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool set_objetivoProduccionMensual( int codMes, string mesTexto, int anio, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        {
+            string consulta = "insert into tbcorpal_objetivosproduccionmensual( "+
+                               " fechagra,horagra,mes,anio,codprod,producto,cantidadprod,medida, "+
+                               " detalle,codusergra,respgra,estado,mes_texto) "+
+                               " values(current_date(),current_time(),"+codMes+","+anio+","+codprod+",'"+producto+"',"+cantidadprod+",'"+medida+"', " +
+                               " '"+detalle+"',"+codusergra+",'"+respgra+"',1,'"+mesTexto+"')";
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool delete_objetivoProduccionMensual(int codigo, int codUser)
+        {
+            string consulta = "update tbcorpal_objetivosproduccionmensual set " +
+                          " tbcorpal_objetivosproduccionmensual.codusergra = "+codUser+"," +
+                          " tbcorpal_objetivosproduccionmensual.estado = false " +
+                          " where tbcorpal_objetivosproduccionmensual.codigo = " + codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
     }
 }

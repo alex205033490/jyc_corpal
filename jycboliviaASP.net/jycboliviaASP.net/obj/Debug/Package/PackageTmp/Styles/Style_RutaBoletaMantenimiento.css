@@ -1,0 +1,50 @@
+﻿body {
+}
+
+
+   
+.RB_central
+{
+     margin: 0 auto;            
+    width:auto;
+    }
+    
+ .RM_equipos
+ {
+    border: double #666666;        
+    overflow: auto;
+    height: 150px;  
+    width: 300px;   
+     }
+     
+     .RB_EquiposAsignados     
+     {
+    border: double #666666;        
+    overflow: auto;
+    height: 150px;  
+    width: 650px;   
+     }
+     
+     .RB_TecnicoAsignados
+     {
+    border: double #666666;        
+    overflow: auto;
+    height: 150px;  
+    width: 650px;   
+         }
+         
+     .RB_Rutas
+     {
+         border: double #666666;            
+        overflow: auto;
+        height: 150px;  
+        width: 650px;   
+         }
+         
+         
+  .RB_Boleta  {
+    border: double #666666;        
+    overflow: auto;
+    height: 150px;  
+    width: 650px;   
+         }

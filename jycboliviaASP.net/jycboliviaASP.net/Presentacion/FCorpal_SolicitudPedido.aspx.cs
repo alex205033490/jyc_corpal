@@ -174,6 +174,7 @@ namespace jycboliviaASP.net.Presentacion
 
 
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+                string repuestosSolicitados = ""; 
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true))
                 {
                     int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
@@ -190,34 +191,32 @@ namespace jycboliviaASP.net.Presentacion
                         string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
                         double total = preciocompra * cantidad;
 
+                        repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
                         nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
                         montoTotal = montoTotal + total;
                     }
 
                     nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
                     //----------------envio de correo-------------
-                    /*string asunto = "(" + Session["BaseDatos"].ToString() + ")" + " Solicitud de Prestamo de Repuesto Edificio = " + edificio + " del Exbo=" + exbo;
+                    string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
                     string cuerpo = "Correo Automatico. <br><br>" +
-                                    "Se solicita prestamo de repuesto para : <br>" +
-                                    "El Edifico " + edificio + " con la referencia XBO " + exbo + " <br>" +
-                                    "Solicitante = " + tx_solicitante.Text + "<br>" +
-                                    "Solicitud Entrega Respuesto A = " + solicitudEntregaRepuestoA + " <br>" +
-                                    "Fecha Solicitud = " + DateTime.Now.ToString("MM/dd/yyyy") + " <br>" +
-                                    "Fecha Estimada Devolucion = " + tx_fechaEstimadaDevolucion.Text + " <br><br>" +
+                                    "Se realizo la solicitud de los siguientes productos : <br>" +
+                                    "Nro Recibo = " + nroboleta + "<br>" +
+                                    "Solicitante = " + personalsolicitud + "<br>" +
+                                    "Fecha Entrega = " + fechaentrega + " <br>" +
+                                    "Hora Entrega = " + horaentrega + " <br>" +                                    
                                     "Repuesto Solicitado: <br>" +
                                     repuestosSolicitados +
                                     "<br><br><br>" +
                                     "Fin de Mensaje.";
                     NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();
-                    string baseDatos = Session["BaseDatos"].ToString();
-                    ncorreo.enviar_Correo_SolicitudPrestamoRepuesto(asunto, cuerpo, baseDatos, almacenprestante);
-                    //----------------fin envio de correo---------
-                    */
+                    //string baseDatos = Session["BaseDatos"].ToString();
+                    bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo);
+                    //----------------fin envio de correo---------                    
                     limpiarDatos();
                     buscarProductos("");
                     Session["codigoSolicitudProducto"] = ultimoinsertado;
                     Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
-
                     //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                 }
                 else

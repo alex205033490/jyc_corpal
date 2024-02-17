@@ -105,5 +105,25 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.set_objetivoProduccion( codigoDevolucion,  marcado,  codUserAutorizado,  nombreAutorizacion);
         }
+
+        internal DataSet get_objetivosDeProduccionMensual(int Mes, int anio, string producto)
+        {
+           return dproduccion.get_objetivosDeProduccionMensual( Mes,  anio,  producto);
+        }
+
+        internal bool update_objetivoProduccionMensual(int codigo, int codMes, string mesTexto, int anio, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        { 
+            return dproduccion.update_objetivoProduccionMensual( codigo,  codMes,  mesTexto,  anio,  codprod,  producto,  cantidadprod,  medida,  detalle,  codusergra,  respgra);
+        }
+
+        internal bool set_objetivoProduccionMensual(int codMes, string mesTexto, int anio, int codprod, string producto, float cantidadprod, string medida, string detalle, int codusergra, string respgra)
+        {
+           return dproduccion.set_objetivoProduccionMensual( codMes,  mesTexto,  anio,  codprod,  producto,  cantidadprod,  medida,  detalle,  codusergra,  respgra);
+        }
+
+        internal bool delete_objetivoProduccionMensual(int codigo, int codUser)
+        {
+            return dproduccion.delete_objetivoProduccionMensual( codigo,  codUser);
+        }
     }
 }

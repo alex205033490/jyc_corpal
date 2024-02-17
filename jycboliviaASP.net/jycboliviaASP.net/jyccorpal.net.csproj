@@ -133,6 +133,7 @@
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
     <Content Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
@@ -635,6 +636,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.designer.cs">
       <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccionMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx.designer.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccionMensual.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.cs">
       <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>

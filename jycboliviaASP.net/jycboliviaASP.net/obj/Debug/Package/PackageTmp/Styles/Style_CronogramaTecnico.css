@@ -1,0 +1,65 @@
+﻿body {
+}
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:850px;
+    height:auto;  
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+   .GCP1
+   {
+     border: double #666666;     
+     float: left;
+     border: double #666666;
+     height:230px;  
+     width: 825px;     
+     margin-top: 7px;
+     border: double #666666;  
+    }
+
+.crono1
+{
+     height:auto;  
+     width: 825px; 
+     border: double #666666;  
+    }
+    
+    .CronoEquipos
+    {
+        margin-top:20px;  
+        height:300px;  
+        width: 825px; 
+        border: double #666666;  
+        overflow : auto;
+        }
+        
+        .Cronotabla
+        {
+        margin-top:20px;    
+        height:400px;  
+        width: 825px; 
+        border: double #666666;  
+        overflow : auto;
+            }
+            
+            
+        .excelCrono
+        {             
+             width: 825px; 
+             height:auto; 
+            }    
+            
+            
+        .final
+        {
+            width: 825px; 
+             height:20px; 
+            }    

@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="jycboliviaASP.net.Site1" %>
+<%@ Register TagPrefix="inmoInfo" TagName="menu" Src="~/Presentacion/ControlUser.ascx" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>JyC Bolivia</title>    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap > -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">       
+        <link href="Styles/Styles_Main.css" rel="stylesheet" type="text/css" />       
+        <link href="Styles/styles_MenuV.css" rel="stylesheet" type="text/css" />            
+    <!-- -->    
+    <link rel="Shortcut Icon" href="~/Images/jyc_icono.ico" />
+    
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"  EnableScriptGlobalization="True">
+    </asp:ScriptManager>
+
+    <div class="container"> 
+    
+    <div class="header">  
+        <img src="../Images/cabecera_naxsnax.jpg" class="img-responsive" alt="Chania"> 
+	</div>
+    
+     <div class = "menu">  
+               <inmoInfo:menu ID="Menu1" runat="server"/>
+    </div> 
+    
+    <div class="row">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">         
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    
+    <div class="footer">
+    <br />
+    <br />
+    <br />
+    Design by: <br />
+    JyC - SRL Bolivia   
+    <!-- end .footer--> </div> 
+    <!-- end .container --></div>
+    </form>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed  -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- FIN jQuery (necessary for Bootstrap's JavaScript plugins) -->
+</body>
+</html>

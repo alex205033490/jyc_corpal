@@ -1,0 +1,43 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+  margin: 0 auto;            
+    width:800px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.vista1
+{
+    border: double #666666;  
+    width: 810px;   
+    }
+
+.Grepuesto
+{
+    border: double #666666;  
+     width: 800px;          
+     height: 150px;     
+     overflow: auto;
+    }
+    
+.vista2
+{
+    border: double #666666;  
+    width: 810px;   
+    }    
+    
+ .Gcotizacion
+ {
+     border: double #666666;  
+     width: 800px;          
+     height: 150px;     
+     overflow: auto;
+     }
