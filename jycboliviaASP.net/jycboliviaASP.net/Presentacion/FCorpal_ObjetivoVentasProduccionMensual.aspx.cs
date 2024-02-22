@@ -324,6 +324,14 @@ namespace jycboliviaASP.net.Presentacion
             string producto = dd_productosNax.SelectedItem.Text;
 
             NCorpal_Produccion np = new NCorpal_Produccion();
+            
+            if (! (gv_objetivoProduccion.SelectedIndex >= 0))
+
+            {
+                codMes = 0;
+                anio = 0;
+                producto = "";
+            }
             DataSet datos = np.get_objetivosDeProduccionMensual(codMes,anio, producto);
 
             //// Creacion del Excel
