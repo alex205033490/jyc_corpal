@@ -60,7 +60,7 @@
     <td>
         &nbsp;</td>
     <td>
-    <asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar" Width="100px" 
+    <asp:Button ID="bt_buscar" runat="server" class="btn btn-info" Text="Buscar" Width="100px" 
             onclick="bt_buscar_Click" />
     </td>
     <td></td>
@@ -150,13 +150,17 @@
 <table>
     <tr>
         <td></td>
-        <td><asp:Button ID="bt_limpiar" runat="server" class="btn btn-success" Text="Limpiar" 
+        <td><asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" 
                 onclick="bt_limpiar_Click" /></td>
         <td><asp:Button ID="bt_actualizar" runat="server" class="btn btn-success" Text="Guardar" Width="100px" 
                 onclick="bt_actualizar_Click" /> </td>
-        <td><asp:Button ID="bt_eliminar" runat="server" class="btn btn-success" Text="Eliminar" 
+        <td>
+            <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-warning" 
+                Text="Ver Recibo" onclick="bt_verRecibo_Click" />
+        </td>
+        <td><asp:Button ID="bt_eliminar" runat="server" class="btn btn-danger" Text="Eliminar" 
                 onclick="bt_eliminar_Click" /></td>
-        <td></td>
+        
     </tr>
 </table>
 </div>

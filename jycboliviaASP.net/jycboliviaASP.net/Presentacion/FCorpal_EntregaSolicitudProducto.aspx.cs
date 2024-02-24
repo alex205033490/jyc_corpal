@@ -22,7 +22,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             if (!IsPostBack)
             {
-                buscarDatosSolicitud("","");
+                buscarDatosSolicitud("","","Abierto");
             }
 
             NA_Responsables Nresp = new NA_Responsables();
@@ -47,13 +47,14 @@ namespace jycboliviaASP.net.Presentacion
         {
             string nroSolicitud = tx_nrosolicitud.Text;
             string solicitante = tx_SolicitanteProducto.Text;
-            buscarDatosSolicitud(nroSolicitud, solicitante);
+            string estado = dd_estadoCierre.SelectedItem.Text;
+            buscarDatosSolicitud(nroSolicitud, solicitante, estado);
         }
 
-        private void buscarDatosSolicitud(string nroSolicitud, string solicitante)
+        private void buscarDatosSolicitud(string nroSolicitud, string solicitante, string estadoSolicitud)
         {
             NCorpal_SolicitudEntregaProducto ncc = new NCorpal_SolicitudEntregaProducto();
-            DataSet datos = ncc.get_solicitudesRealizadasProductos(nroSolicitud, solicitante);
+            DataSet datos = ncc.get_solicitudesRealizadasProductos(nroSolicitud, solicitante, estadoSolicitud);
             gv_solicitudesProductos.DataSource = datos;
             gv_solicitudesProductos.DataBind();
         }
@@ -112,7 +113,7 @@ namespace jycboliviaASP.net.Presentacion
                     bool bandera = nss.eliminarSolicitud(codigoSolicitud);
                 }
             }
-            buscarDatosSolicitud("", "");
+            buscarDatosSolicitud("", "", "Abierto");
         }
 
         protected void bt_actualizar_Click(object sender, EventArgs e)
@@ -192,7 +193,7 @@ namespace jycboliviaASP.net.Presentacion
                     if (cerrado == true)
                     {
                         limpiarDatos();
-                        buscarDatosSolicitud("", "");
+                        buscarDatosSolicitud("", "", estadoCierre);
                         Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
                         Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
                     }
@@ -223,6 +224,23 @@ namespace jycboliviaASP.net.Presentacion
         protected void gv_detallesolicitud_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void bt_verRecibo_Click(object sender, EventArgs e)
+        {
+            verReciboSeleccionado();
+        }
+
+        private void verReciboSeleccionado()
+        {
+            if(gv_solicitudesProductos.SelectedIndex >= 0){
+                int codigoSolicitud;
+                int.TryParse(gv_solicitudesProductos.SelectedRow.Cells[2].Text, out codigoSolicitud);
+                Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
+                Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
+            }else
+                Response.Write("<script type='text/javascript'> alert('Error: Seleccionar Entrega') </script>");
+            
         }
 
         

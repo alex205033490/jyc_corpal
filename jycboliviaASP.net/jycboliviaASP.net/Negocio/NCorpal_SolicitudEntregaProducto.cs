@@ -68,9 +68,9 @@ namespace jycboliviaASP.net.Negocio
             return dsp.actualizarmontoTotal( ultimoinsertado,  montoTotal);
         }
 
-        internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante)
+        internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
         {
-            return dsp.get_solicitudesRealizadasProductos( nroSolicitud,  solicitante);
+            return dsp.get_solicitudesRealizadasProductos( nroSolicitud,  solicitante,  estadoSolicitud);
         }
 
         internal DataSet get_datosSolicitudProductos(int codigoSolicitud)

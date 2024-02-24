@@ -70,7 +70,7 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);
         }
 
-        internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante)
+        internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
         {
             string consulta = "select " +
                                 " codigo, nroboleta, " +
@@ -80,7 +80,7 @@ namespace jycboliviaASP.net.Datos
                                 " estadosolicitud, detallecierre " +
                                 " from  tbcorpal_solicitudentregaproducto pp " +
                                 " where " +
-                                " pp.estadosolicitud = 'Abierto' and " +
+                                " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
                                 " pp.nroboleta like '%" + nroSolicitud + "%' ";
             if(!string.IsNullOrEmpty(solicitante)){
