@@ -295,6 +295,12 @@ namespace jycboliviaASP.net.Presentacion
             string producto = dd_productosNax.SelectedItem.Text;
 
             NCorpal_Produccion np = new NCorpal_Produccion();
+            if (!(gv_objetivoProduccion.SelectedIndex >= 0))
+            {
+                fechalimite = "";
+                producto = "";
+            }
+
             DataSet datos = np.get_objetivosDeProduccion(fechalimite, producto);
 
             //// Creacion del Excel
