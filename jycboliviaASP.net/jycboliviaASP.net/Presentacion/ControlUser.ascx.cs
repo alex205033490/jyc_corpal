@@ -53,6 +53,9 @@ namespace jycboliviaASP.net.Presentacion
             mn_MaterialRecibido.Visible = false;
             mn_objetivoProduccion.Visible = false;
             mn_objetivoProduccionMensual.Visible = false;
+
+            mn_devolucionProductoTerminado.Visible = false;
+            mn_AprobaciondevolucionProductoTerminado.Visible = false;
             
         }
 
@@ -152,6 +155,12 @@ namespace jycboliviaASP.net.Presentacion
                                 break;
                             case 128:
                                 mn_objetivoProduccionMensual.Visible = true;
+                                break;
+                            case 129:
+                                mn_devolucionProductoTerminado.Visible = true;
+                                break;
+                            case 130:
+                                mn_AprobaciondevolucionProductoTerminado.Visible = true;
                                 break;
                                 default:
                                 Console.WriteLine("Default case");

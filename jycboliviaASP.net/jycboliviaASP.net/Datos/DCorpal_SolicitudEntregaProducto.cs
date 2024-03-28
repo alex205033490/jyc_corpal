@@ -290,6 +290,7 @@ namespace jycboliviaASP.net.Datos
                                " sum(dse.cantentregada) as 'cantidadEntregada' "+
                                " from tbcorpal_solicitudentregaproducto se, tbcorpal_detalle_solicitudproducto dse "+
                                " where "+ 
+                               " se.estado = 1 and "+
                                " se.codigo = dse.codsolicitud and "+
                                " se.estadosolicitud = 'Cerrado' and "+
                                " se.fechaentrega BETWEEN "+fechadesde+" and "+fechahasta+
@@ -319,7 +320,7 @@ namespace jycboliviaASP.net.Datos
                                " FROM tbcorpal_solicitudentregaproducto s "+
                                " RIGHT JOIN tbcorpal_detalle_solicitudproducto d ON s.codigo = d.codsolicitud "+
                                " RIGHT JOIN tbcorpal_producto p ON p.codigo = d.codproducto "+
-                               " WHERE p.estado = 1 and s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
+                               " WHERE s.estado = 1 and p.estado = 1 and s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
                                " GROUP BY s.personalsolicitud, p.producto "+
                                " UNION "+
                                " SELECT s.personalsolicitud, p.producto, 0 AS total_cant, 0 AS total_cantentregada "+
@@ -341,7 +342,7 @@ namespace jycboliviaASP.net.Datos
                                " WHERE pro1.estado = 1 and res1.codigo NOT IN ( " +
                                " SELECT sol1.codpersolicitante "+
                                " FROM tbcorpal_solicitudentregaproducto sol1 "+
-                               " WHERE sol1.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+ 
+                               " WHERE sol1.estado = 1 and sol1.fechaGRA BETWEEN " + fechadesde + " AND " + fechahasta + 
                                " ) "+
                                " ORDER BY personalsolicitud, producto "+
                                " ) AS SF "+
@@ -405,7 +406,7 @@ namespace jycboliviaASP.net.Datos
                                " ss.codigo = dss.codsolicitud and "+
                                " ss.estado = 1 and "+
                                " ss.estadosolicitud = 'Cerrado' and "+
-                               " ss.fechacierre between "+NA_VariablesGlobales.fechaInicialProduccion+" and " +fechaHasta+
+                               " ss.fechaentrega between " + NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta +
                                " group by dss.codproducto "+
                                " ) as t2 ON pp.codigo = t2.codproducto "+
                                " WHERE "+
@@ -443,7 +444,7 @@ namespace jycboliviaASP.net.Datos
                                " ss.codigo = dss.codsolicitud and "+
                                " ss.estado = 1 and "+
                                " ss.estadosolicitud = 'Cerrado' and "+
-                               " ss.fechacierre between "+NA_VariablesGlobales.fechaInicialProduccion+" and current_date() " +
+                               " ss.fechaentrega between " + NA_VariablesGlobales.fechaInicialProduccion + " and current_date() " +
                                " group by dss.codproducto "+
                                " ) as t2 ON pp.codigo = t2.codproducto "+
                                " WHERE "+
@@ -474,6 +475,7 @@ namespace jycboliviaASP.net.Datos
                                " ss.codigo = dss.codsolicitud and " +
                                " dss.codproducto = pp.codigo and " +
                                " ss.estado = 1 and " +
+                               " pp.estado = 1 and "+
                                " ss.fechaentrega between " + fechadesde + " and " + fechahasta;
                                
             return conexion.consultaMySql(consulta);

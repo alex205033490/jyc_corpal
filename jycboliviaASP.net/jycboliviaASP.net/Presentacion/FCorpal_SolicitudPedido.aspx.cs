@@ -172,7 +172,6 @@ namespace jycboliviaASP.net.Presentacion
                 string fechaentrega = convertidorFecha(tx_fechaEntrega.Text);
                 string horaentrega = tx_horaEntrega.Text;
 
-
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
                 string repuestosSolicitados = ""; 
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true))
@@ -198,7 +197,7 @@ namespace jycboliviaASP.net.Presentacion
 
                     nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
                     //----------------envio de correo-------------
-                    string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
+                   /* string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
                     string cuerpo = "Correo Automatico. <br><br>" +
                                     "Se realizo la solicitud de los siguientes productos : <br>" +
                                     "Nro Recibo = " + nroboleta + "<br>" +
@@ -209,9 +208,8 @@ namespace jycboliviaASP.net.Presentacion
                                     repuestosSolicitados +
                                     "<br><br><br>" +
                                     "Fin de Mensaje.";
-                    NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();
-                    //string baseDatos = Session["BaseDatos"].ToString();
-                    bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo);
+                    NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();                    
+                    bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
                     //----------------fin envio de correo---------                    
                     limpiarDatos();
                     buscarProductos("");

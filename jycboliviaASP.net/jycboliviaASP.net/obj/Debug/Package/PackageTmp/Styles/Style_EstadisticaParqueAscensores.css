@@ -1,0 +1,37 @@
+﻿body {
+}
+
+    
+   .GPA1
+{
+    overflow: auto;
+    margin-top: 50px;
+    float:left;
+    width: 380px;
+    text-align: left;
+    height: 500px;
+    font-size:x-small;
+    margin-left: 40px;    
+    }
+    
+    
+    .GPA2
+{
+    float:left;
+    width: auto;    
+    text-align: left;
+    height: 450px;
+    font-size:x-small;
+    margin-left: 20px;
+    margin-top: 53px;
+    overflow: auto;
+}
+
+    .GPA3
+{
+    float:left;
+    width: 800px;
+    height: 40px;    
+    margin-left: 36px;
+    margin-top: 53px;
+    }

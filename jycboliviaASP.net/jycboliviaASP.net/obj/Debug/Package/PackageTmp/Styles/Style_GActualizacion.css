@@ -1,0 +1,35 @@
+﻿body {
+}
+
+.Centrar
+{
+    
+    margin: 0 auto;            
+    width:500px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top:20px;
+    }
+
+   .GA1
+  {
+     margin-left:20px;     
+     width: 338px;
+     text-align: left;
+     height: 100px;
+     margin-top: 20px;
+     
+   }
+   .GA2
+   {
+     
+     margin-left:20px;     
+     width: 346px;
+     text-align: center;
+     height: 350px;
+     margin-top: 20px;
+     overflow: auto;
+    }

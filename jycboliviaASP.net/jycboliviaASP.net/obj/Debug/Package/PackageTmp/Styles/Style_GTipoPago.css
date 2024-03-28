@@ -1,0 +1,39 @@
+﻿body {
+}
+
+
+.Centrar
+{       
+    margin: 0 auto;        
+    width:400px;
+    height:auto;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+   .GTP1
+  {
+     width: auto;
+     text-align: left;     
+     height: 70px;
+     
+   }
+   
+   .GTP2
+   {
+     
+     width: auto;
+     text-align: center;     
+     height: auto;
+     
+}
+
+.GTP3
+{
+    margin-top:40px;
+    height:20px;
+    }

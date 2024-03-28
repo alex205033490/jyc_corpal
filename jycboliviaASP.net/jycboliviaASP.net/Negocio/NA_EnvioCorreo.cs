@@ -873,6 +873,7 @@ namespace jycboliviaASP.net.Negocio
             //------------------------------------------------------            
 
             correo.To.Add("sistema@jycbolivia.com");
+            correo.To.Add("fdd3@jycbolivia.com");
             correo.To.Add("eurquidi@jycbolivia.com");
             correo.To.Add("angel.guidi.dom@gmail.com");
             correo.To.Add("produccion@naxsnax.com");

@@ -1,0 +1,48 @@
+﻿body {
+}
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:500px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.GF1
+{   
+   /*   float: left; */
+   height: auto;     
+   margin: 0 auto;   
+   text-align:center;
+   margin-top:20px;
+    }
+    
+    
+.GF2
+{   
+   
+   /*overflow:auto; */
+   margin: 0 auto;   
+   text-align: center;   
+   height: 400px;  
+   height:auto;
+   margin-top:20px;
+    }
+    
+    .GF3
+   {     
+        
+        margin-top: 20px;      
+        text-align: center;
+       }
+       
+    .GF4
+    {   
+        height: 40px;
+        width:auto;
+        }

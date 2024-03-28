@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.IO;
+using System.Configuration;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -16,12 +17,12 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
 
-           /* if (tienePermisoDeIngreso(115) == false)
+            if (tienePermisoDeIngreso(130) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
             }
-            */
+           
             if (!IsPostBack)
             {
                 buscarDatos("","");

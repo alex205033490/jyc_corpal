@@ -14,18 +14,18 @@ namespace jycboliviaASP.net.Datos
 
 
 
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite)
         {
             string consulta = "insert into tbcorpal_entregasordenproduccion( "+
                                " fechagra,horagra,turno,resp_entrega, "+
                                " cantcajas,unidadsuelta,kgrdesperdicio,kgrparamix, "+
                                " codorden,codrespentrega,detalleentrega,nroorden, "+
-                               " productoNax,codProductonax, estado,codresprecepcion,resp_recepcion,cod_respgra " +
+                               " productoNax,codProductonax, estado,codresprecepcion,resp_recepcion,cod_respgra, kgrdesperdicio_conaceite, kgrdesperdicio_sinaceite  " +
                                " ) values( "+
                                " current_date(), current_time(), '" + turno + "', '" + respEntrega + "', " +
                                " '"+cantcajas.ToString().Replace(',','.')+"', '"+unidadsuelta.ToString().Replace(',','.')+"', '"+kgrdesperdicio.ToString().Replace(',','.')+"', '"+kgrparamix.ToString().Replace(',','.')+"', "+
                                " null, " + codusuario + ", '" + detalleentrega + "', '" + nroorden + "', " +
-                               " '" + productoNax + "', " + codProdNax + ", 1, "+codresprecepcion+",'"+resp_recepcion+"',"+cod_respgra+")";
+                               " '" + productoNax + "', " + codProdNax + ", 1, " + codresprecepcion + ",'" + resp_recepcion + "'," + cod_respgra + ", '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "')";
             return Conx.ejecutarMySql(consulta);
         }
 
@@ -59,7 +59,8 @@ namespace jycboliviaASP.net.Datos
                                " aa.horagra as 'hora', "+
                                " aa.resp_entrega, aa.cantcajas, aa.unidadsuelta, aa.kgrdesperdicio, aa.kgrparamix, "+
                                " aa.codorden, aa.codrespentrega, aa.detalleentrega, aa.nroorden, "+
-                               " aa.productoNax, aa.codProductonax, aa.codresprecepcion, aa.resp_recepcion " +
+                               " aa.productoNax, aa.codProductonax, aa.codresprecepcion, aa.resp_recepcion, " +
+                               " aa.kgrdesperdicio_conaceite, aa.kgrdesperdicio_sinaceite "+
                                " from "+
                                " tbcorpal_entregasordenproduccion aa "+
                                " where "+

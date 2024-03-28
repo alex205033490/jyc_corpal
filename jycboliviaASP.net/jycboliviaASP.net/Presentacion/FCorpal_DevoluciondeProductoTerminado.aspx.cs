@@ -9,6 +9,7 @@ using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.IO;
+using System.Configuration;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -17,11 +18,11 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = Session["BaseDatos"].ToString();
-           /* if (tienePermisoDeIngreso(121) == false)
+            if (tienePermisoDeIngreso(129) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
-            }*/
+            }
             if (!IsPostBack)
             {
                 NA_Responsables Nresp = new NA_Responsables();

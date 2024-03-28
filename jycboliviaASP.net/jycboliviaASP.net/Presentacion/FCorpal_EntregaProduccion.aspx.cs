@@ -148,12 +148,17 @@ namespace jycboliviaASP.net.Presentacion
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantcajas );
             float unidadsuelta = 0;
             float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
-            float kgrdesperdicio = 0;
-            float.TryParse(tx_kgrdesperdicio.Text.Replace('.',','), out kgrdesperdicio);
+            
             float kgrparamix = 0;
             float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
             string nroorden = tx_nroOrden.Text;
             string detalleentrega = tx_detalle.Text;
+
+            float kgrdesperdicio_conaceite;
+            float.TryParse(tx_kgrdesperdicio_conaceite.Text.Replace('.', ','), out kgrdesperdicio_conaceite);
+            float kgrdesperdicio_Sinaceite;
+            float.TryParse(tx_kgrdesperdicio_SinAceite.Text.Replace('.', ','), out kgrdesperdicio_Sinaceite);
+
             //---------------------------------------
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
@@ -171,7 +176,7 @@ namespace jycboliviaASP.net.Presentacion
             int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
             NCorpal_Produccion npro = new NCorpal_Produccion();
-            bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, kgrdesperdicio, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser);
+            bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser,  kgrdesperdicio_conaceite,  kgrdesperdicio_Sinaceite);
             
             if(bandera){
                 bool banderaP = pp.sumarStockenProducto(codigoProdNax,cantcajas);
@@ -201,13 +206,16 @@ namespace jycboliviaASP.net.Presentacion
             dd_turno.SelectedIndex = -1;
             tx_responsableEntrega.Text = "";
             tx_cantcajas.Text = "";
-            tx_unidadsuelta.Text = "";
-            tx_kgrdesperdicio.Text = "";
+            tx_unidadsuelta.Text = "";            
             tx_kgrparamix.Text = "";
             tx_nroOrden.Text = "";
             tx_detalle.Text = "";
             //tx_productoNax.Text = "";
             tx_medida.Text = "";
+
+            tx_kgrdesperdicio_conaceite.Text = "";
+            tx_kgrdesperdicio_SinAceite.Text = "";
+
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -230,8 +238,8 @@ namespace jycboliviaASP.net.Presentacion
                 float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantcajas);
                 float unidadsuelta = 0;
                 float.TryParse(tx_unidadsuelta.Text.Replace('.', ','), out unidadsuelta);
-                float kgrdesperdicio = 0;
-                float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
+               // float kgrdesperdicio = 0;
+               // float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
                 float kgrparamix = 0;
                 float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
                 string nroorden = tx_nroOrden.Text;
@@ -254,7 +262,7 @@ namespace jycboliviaASP.net.Presentacion
 
 
                 NCorpal_Produccion npro = new NCorpal_Produccion();
-                bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, kgrdesperdicio, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser);
+                bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser);
                 if (bandera)
                 {
                     limpiarDatos();
@@ -308,7 +316,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_responsableEntrega.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[5].Text);            
             tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);           
             tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
-            tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
+            //tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
             tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
             tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[12].Text);
             tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[13].Text);
@@ -319,7 +327,13 @@ namespace jycboliviaASP.net.Presentacion
             }            
             //tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
             tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[17].Text);
-            
+            float kgrdesperdicio_conaceite;
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[18].Text.Replace('.', ','), out kgrdesperdicio_conaceite);
+            tx_kgrdesperdicio_conaceite.Text = kgrdesperdicio_conaceite.ToString();
+
+            float kgrdesperdicio_sinaceite;
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text.Replace('.', ','), out kgrdesperdicio_sinaceite);
+            tx_kgrdesperdicio_SinAceite.Text = kgrdesperdicio_sinaceite.ToString();
 
         }
 

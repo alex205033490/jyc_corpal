@@ -1,0 +1,44 @@
+﻿body {
+}
+
+.Centrar
+{   
+    margin: 0 auto;        
+    width:800px;
+    height:auto;
+          
+    }
+    
+ 
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+    
+.buscador
+{
+     border: double #666666;     
+     float: left;     
+     height:70px;  
+     width: 750px;     
+     margin-top: 7px;
+    
+    }    
+    
+ .EquiposEstados
+ {
+     border: double #666666;     
+     float: left;     
+     height:350px;  
+     width: 750px;     
+     margin-top: 7px;    
+     overflow : auto; 
+     }   
+     
+  .pieEstado
+  {
+      float: left;     
+     height:50px;  
+     width: 750px;     
+      }
