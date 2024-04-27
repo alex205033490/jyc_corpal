@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="F:\WebSite\jyc_naxSnax80" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+  <publishProfile publishUrl="F:\WebSite\jyc_naxSnax82" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="img/profile_1.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/portfolio/cabin.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/profile.png" publishTime="02/15/2023 12:37:16" />
@@ -51,7 +51,7 @@
     <file relUrl="Images/jyc_1.jpg" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Presentacion/FCorpal_Facturacion.aspx" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Styles/Style_SeguimientosMorosos.css" publishTime="02/15/2023 12:37:15" />
-    <file relUrl="bin/jycboliviaASP.net.dll" publishTime="03/26/2024 15:38:21" />
+    <file relUrl="bin/jycboliviaASP.net.dll" publishTime="04/24/2024 17:56:11" />
     <file relUrl="vendor/select2/select2.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Presentacion/Presentacion old/FA_CargarFechasBastones.aspx" publishTime="02/15/2023 12:37:14" />
     <file relUrl="Presentacion/Presentacion old/FA_VaciadoR148.aspx" publishTime="02/15/2023 12:37:14" />
@@ -133,7 +133,7 @@
     <file relUrl="Styles/Style_chequeBisa.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_movimientoCheques.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_ReporteCotizacionRepuesto.css" publishTime="02/15/2023 12:37:15" />
-    <file relUrl="bin/jycboliviaASP.net.pdb" publishTime="03/26/2024 15:38:20" />
+    <file relUrl="bin/jycboliviaASP.net.pdb" publishTime="04/24/2024 17:56:11" />
     <file relUrl="Styles/Styles_GPagoSeguimiento2.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_cotiRcc.css" publishTime="02/15/2023 12:37:15" />
     <file relUrl="Styles/Style_ReporteCobranza2.css" publishTime="02/15/2023 12:37:15" />
@@ -174,7 +174,7 @@
     <file relUrl="vendor/bootstrap/js/bootstrap.min.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Presentacion/Presentacion old/FA_FechaContrato.aspx" publishTime="02/15/2023 12:37:14" />
     <file relUrl="img/mantenimiento.png" publishTime="02/15/2023 12:37:16" />
-    <file relUrl="Presentacion/FCorpal_ActivosJYC.aspx" publishTime="08/30/2023 18:17:01" />
+    <file relUrl="Presentacion/FCorpal_ActivosJYC.aspx" publishTime="04/19/2024 10:51:06" />
     <file relUrl="jquery/js/freelancer.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Styles/Style_CompradeMaterialeInsumos.css" publishTime="08/28/2023 12:22:50" />
     <file relUrl="Presentacion/FCorpal_AgendaTelefonica.aspx" publishTime="02/15/2023 12:37:14" />
@@ -300,7 +300,7 @@
     <file relUrl="Presentacion/FCorpal_SolicitudPedido.aspx" publishTime="06/16/2023 10:43:05" />
     <file relUrl="Styles/Style_SimecModificar.css" publishTime="07/17/2023 15:48:34" />
     <file relUrl="jquery/js/jqBootstrapValidation.js" publishTime="02/15/2023 12:37:16" />
-    <file relUrl="Web.config" publishTime="03/26/2024 15:38:36" />
+    <file relUrl="Web.config" publishTime="04/24/2024 17:56:22" />
     <file relUrl="vendor/bootstrap/js/bootstrap.js" publishTime="02/15/2023 12:37:16" />
     <file relUrl="img/JYC1.png" publishTime="02/15/2023 12:37:16" />
     <file relUrl="Images/delete.png" publishTime="02/15/2023 12:37:14" />

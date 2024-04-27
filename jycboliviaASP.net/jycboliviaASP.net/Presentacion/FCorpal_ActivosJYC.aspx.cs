@@ -10,6 +10,7 @@ using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.IO;
+using jycboliviaASP.net.Reportes;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -327,7 +328,48 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        protected void bt_qrgenerar_Click(object sender, EventArgs e)
+        {
+            GenerarCodigosQR("");
+            descargarCodigosQR();
+        }
 
+        private void GenerarCodigosQR(string activo)
+        {
+
+            string baseDatos = Session["BaseDatos"].ToString();
+            NA_ActivosJyC aa = new NA_ActivosJyC();
+            bool bandera = aa.generarCodigosQR(baseDatos);
+            DataSet tuplas = aa.get_datos_QR(activo);
+
+            string ruta = ConfigurationManager.AppSettings["qr_codeActivo"] + Session["BaseDatos"].ToString() + "/";
+            if (!Directory.Exists(ruta))
+            {
+                Console.WriteLine("Creando el directorio: {0}", ruta);
+                DirectoryInfo di = Directory.CreateDirectory(ruta);
+            }
+
+            int cant = tuplas.Tables[0].Rows.Count;
+            for (int i = 0; i < cant; i++)
+            {
+                string contendidoQR = tuplas.Tables[0].Rows[i][2].ToString();
+                string nombreArchivo = tuplas.Tables[0].Rows[i][0].ToString() + "_" + tuplas.Tables[0].Rows[i][3].ToString();
+                string DirArchivo = ruta + nombreArchivo;
+
+                // if (!System.IO.File.Exists(DirArchivo + ".jpg"))
+                // {
+                NA_QRCodeNet qr = new NA_QRCodeNet();
+                qr.CrearImagenQR(DirArchivo, contendidoQR, 5);
+                // }
+            }
+            Response.Write("<script type='text/javascript'> alert('Generado: OK!!') </script>");
+        }
+
+        private void descargarCodigosQR()
+        {
+            Session["ReporteGeneral"] = "Reporte_QRActivos";
+            Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+        }
 
     }
 }

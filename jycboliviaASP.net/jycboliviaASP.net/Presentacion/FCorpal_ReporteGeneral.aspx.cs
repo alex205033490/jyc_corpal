@@ -27,6 +27,9 @@ namespace jycboliviaASP.net.Presentacion
             string reporte = Session["ReporteGeneral"].ToString();
                 switch (reporte)
                 {
+                    case "Reporte_QRActivos":
+                        qr_activos();
+                        break;
                     case "Reporte_Entrega_Produccion":
                         entregaProduccion();
                         break;
@@ -43,6 +46,51 @@ namespace jycboliviaASP.net.Presentacion
                         //number = "Error";
                         break;
                 }
+        }
+
+        private void qr_activos()
+        {
+            string baseDatos = Session["BaseDatos"].ToString();
+            NA_ActivosJyC aa = new NA_ActivosJyC();
+            string ruta = ConfigurationManager.AppSettings["qr_codeActivo"] + Session["BaseDatos"].ToString() + "/";
+            DataSet tuplas = aa.get_direccionQRActivos(ruta);
+
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_QRActivos.rdlc";
+            DataTable DSconsulta = tuplas.Tables[0];
+
+            string rutaLogo = ConfigurationManager.AppSettings["image_logo"];
+            string nombreImagen = "jyc";
+
+
+            if (baseDatos.Equals("La Paz"))
+            {
+                nombreImagen = "elevamerica";
+            }
+            else
+                if (baseDatos.Equals("Cochabamba"))
+                {
+                    nombreImagen = "melevar";
+                }
+                else
+                    if (baseDatos.Equals("Santa Cruz"))
+                    {
+                        nombreImagen = "interlogy";
+                    }
+
+            string direccionImagen = rutaLogo + nombreImagen;
+
+            ReportParameter imagen = new ReportParameter("p_logo", @"file:\" + direccionImagen + ".jpg");
+
+            ReportDataSource DS_Activos_QR = new ReportDataSource("DS_Activos", DSconsulta);
+
+
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            ReportViewer1.LocalReport.SetParameters(imagen);
+            ReportViewer1.LocalReport.DataSources.Add(DS_Activos_QR);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void reporteRecibidoMaterialInsumos()

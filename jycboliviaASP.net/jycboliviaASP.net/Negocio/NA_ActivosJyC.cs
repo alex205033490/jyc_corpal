@@ -52,5 +52,20 @@ namespace jycboliviaASP.net.Negocio
         {
             return dactivos.mostrarResponsableSimec(nombreResponsable);
         }
+
+        internal bool generarCodigosQR(string baseDatos)
+        {
+            return dactivos.generarCodigosQR(baseDatos);
+        }
+
+        internal DataSet get_datos_QR(string activo)
+        {
+            return dactivos.get_datos_QR(activo);
+        }
+
+        internal DataSet get_direccionQRActivos(string ruta)
+        {
+            return dactivos.get_direccionQRActivos(ruta);
+        }
     }
 }

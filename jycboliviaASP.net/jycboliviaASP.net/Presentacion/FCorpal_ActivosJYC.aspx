@@ -323,6 +323,10 @@
             </div>
                 <asp:Button ID="bt_excel" class="btn btn-success" runat="server" Text="Excel" 
                     onclick="bt_excel_Click" />
+
+                <asp:Button ID="bt_qrgenerar" class="btn btn-success" runat="server" 
+                    Text="Generar QR" onclick="bt_qrgenerar_Click" />
+
             </div>
         </div>
     </div>

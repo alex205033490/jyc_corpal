@@ -453,6 +453,11 @@
     <Compile Include="Datos\Datos old\DMeses.cs" />
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="DS_Activos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_CallCenter.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1462,6 +1467,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />
@@ -1512,6 +1518,17 @@
     <EmbeddedResource Include="Reportes\SubReport_detalleIngresoEgresoResponsable.rdlc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DS_Activos.xsc">
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Activos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Activos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DS_Activos.xss">
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </None>
     <None Include="DS_CallCenter.xsc">
       <DependentUpon>DS_CallCenter.xsd</DependentUpon>
     </None>

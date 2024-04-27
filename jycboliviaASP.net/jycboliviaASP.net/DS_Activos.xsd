@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_Activos" targetNamespace="http://tempuri.org/DS_Activos.xsd" xmlns:mstns="http://tempuri.org/DS_Activos.xsd" xmlns="http://tempuri.org/DS_Activos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_Activos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_Activos" msprop:Generator_UserDSName="DS_Activos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_Activos" msprop:Generator_TableClassName="DS_ActivosDataTable" msprop:Generator_TableVarName="tableDS_Activos" msprop:Generator_RowChangedName="DS_ActivosRowChanged" msprop:Generator_TablePropName="_DS_Activos" msprop:Generator_RowDeletingName="DS_ActivosRowDeleting" msprop:Generator_RowChangingName="DS_ActivosRowChanging" msprop:Generator_RowEvHandlerName="DS_ActivosRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_ActivosRowDeleted" msprop:Generator_RowClassName="DS_ActivosRow" msprop:Generator_UserTableName="DS_Activos" msprop:Generator_RowEvArgName="DS_ActivosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo" msprop:Generator_ColumnVarNameInTable="columncodigo" msprop:Generator_ColumnPropNameInRow="codigo" msprop:Generator_ColumnPropNameInTable="codigoColumn" msprop:Generator_UserColumnName="codigo" type="xs:string" minOccurs="0" />
+              <xs:element name="descripcion" msprop:Generator_ColumnVarNameInTable="columndescripcion" msprop:Generator_ColumnPropNameInRow="descripcion" msprop:Generator_ColumnPropNameInTable="descripcionColumn" msprop:Generator_UserColumnName="descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="Tipo_ValorActual" msprop:Generator_ColumnVarNameInTable="columnTipo_ValorActual" msprop:Generator_ColumnPropNameInRow="Tipo_ValorActual" msprop:Generator_ColumnPropNameInTable="Tipo_ValorActualColumn" msprop:Generator_UserColumnName="Tipo_ValorActual" type="xs:string" minOccurs="0" />
+              <xs:element name="DireccionArchivo" msprop:Generator_ColumnVarNameInTable="columnDireccionArchivo" msprop:Generator_ColumnPropNameInRow="DireccionArchivo" msprop:Generator_ColumnPropNameInTable="DireccionArchivoColumn" msprop:Generator_UserColumnName="DireccionArchivo" type="xs:string" minOccurs="0" />
+              <xs:element name="Codigo2" msprop:Generator_ColumnVarNameInTable="columnCodigo2" msprop:Generator_ColumnPropNameInRow="Codigo2" msprop:Generator_ColumnPropNameInTable="Codigo2Column" msprop:Generator_UserColumnName="Codigo2" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

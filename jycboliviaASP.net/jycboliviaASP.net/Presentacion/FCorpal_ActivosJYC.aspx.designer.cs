@@ -290,5 +290,14 @@ namespace jycboliviaASP.net.Presentacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_excel;
+        
+        /// <summary>
+        /// bt_qrgenerar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_qrgenerar;
     }
 }

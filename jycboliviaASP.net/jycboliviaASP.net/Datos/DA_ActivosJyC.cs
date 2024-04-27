@@ -138,5 +138,40 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select aa.nombrecustodio as 'nombre' from tb_activosjyc aa where aa.nombrecustodio like '%" + nombreResponsable + "%' group by aa.nombrecustodio";
             return ConecRes.consultaMySql(consulta);
         }
+
+        internal bool generarCodigosQR(string baseDatos)
+        {
+            string consulta = "update tb_activosjyc set " +
+                               " tb_activosjyc.qr_activo = concat(ifnull(tb_activosjyc.codigoactivo,'Ninguno'),'|', " +
+                               " tb_activosjyc.descripcion,'|', " +
+                               " '" + baseDatos + "','|'," +
+                               " tb_activosjyc.codigo)";
+            return ConecRes.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_datos_QR(string activo)
+        {
+            string consulta = "select " +
+                             " aa.codigo, " +
+                             " aa.descripcion, " +
+                             " aa.qr_activo ," +
+                             " ifnull(aa.codigoactivo,'Ninguno') as 'codSimecActivo' " +
+                             " from tb_activosjyc aa " +
+                             " where " +
+                             " aa.descripcion like '%" + activo + "%'";
+            return ConecRes.consultaMySql(consulta);
+        }
+
+        internal DataSet get_direccionQRActivos(string ruta)
+        {
+            string consulta = "select " +
+                                " aa.codigoactivo as 'codigo', " +
+                                " aa.descripcion, " +
+                                " aa.Tipo_ValorActual, " +
+                                " CAST(concat('" + ruta + "',aa.codigo,'_',ifnull(aa.codigoactivo,'Ninguno'),'.jpg') AS CHAR) as 'DireccionArchivo' " +
+                                " ,aa.codigo as 'Codigo2' "+
+                                " from tb_activosjyc aa";
+            return ConecRes.consultaMySql(consulta);
+        }
     }
 }
