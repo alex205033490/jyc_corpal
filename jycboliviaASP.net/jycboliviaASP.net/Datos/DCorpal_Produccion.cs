@@ -468,5 +468,66 @@ namespace jycboliviaASP.net.Datos
                           " where tbcorpal_objetivosproduccionmensual.codigo = " + codigo;
             return Conx.ejecutarMySql(consulta);
         }
+
+        internal DataSet get_datosOrdenProduccion(string Producto)
+        {
+            string consulta = "select "+
+                              " oo.codigo, "+  
+                              " date_format(oo.fechaproduccion,'%d/%m/%Y') as 'fecha_produccion', "+
+                              " oo.horaproduccion, "+
+                              " oo.productoNax, "+
+                              " oo.cantcajasproduccion, "+
+                              " oo.medida, "+  
+                              " oo.detalleproduccion, "+
+                              " oo.responsable "+
+                              " from "+
+                              " tbcorpal_ordenproduccion oo "+
+                              " where "+
+                              " oo.productoNax like '%"+Producto+"%' order by oo.codigo desc";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool insertarOrdenProduccion( string fechaproduccion,int codProductonax,string productoNax,float cantcajasproduccion,
+                                               string medida,string detalleproduccion,int cod_respgra,string responsable)
+        {
+            string consulta = "insert into tbcorpal_ordenproduccion( "+
+                                " fechagra, "+
+                                " horagra, "+
+                                " fechaproduccion, "+
+                                " horaproduccion, "+
+                                " codProductonax, "+
+                                " productoNax, "+
+                                " cantcajasproduccion, "+
+                                " medida, "+  
+                                " detalleproduccion, "+
+                                " estado, "+
+                                " estadoorden, "+
+                                " cod_respgra, "+
+                                " responsable) "+
+                                " values( "+
+                                " current_date(), "+
+                                " current_time(), "+
+                                 fechaproduccion+", "+
+                                " current_time(), "+
+                                 codProductonax+", "+
+                                " '"+productoNax+"', "+
+                                 cantcajasproduccion.ToString().Replace(',','.')+", "+
+                                " '"+medida+"',  "+
+                                " '"+detalleproduccion+"', "+
+                                " 1, "+
+                                " 'Abierto', "+
+                                 cod_respgra+", "+
+                                " '"+responsable+"')";
+            return Conx.ejecutarMySql (consulta);
+        }
+
+        internal bool eliminar_ordenProduccion(int codigoOrden)
+        {
+            string consulta = "update tbcorpal_ordenproduccion set " +
+                               " tbcorpal_ordenproduccion.estado = 0, " +
+                               " tbcorpal_ordenproduccion.estadoorden = 'Eliminado' " +
+                               " where tbcorpal_ordenproduccion.codigo = "+codigoOrden;
+            return Conx.ejecutarMySql(consulta);
+        }
     }
 }
