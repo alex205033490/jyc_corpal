@@ -483,6 +483,7 @@ namespace jycboliviaASP.net.Datos
                               " from "+
                               " tbcorpal_ordenproduccion oo "+
                               " where "+
+                              " oo.estado = 1 and "+
                               " oo.productoNax like '%"+Producto+"%' order by oo.codigo desc";
             return Conx.consultaMySql(consulta);
         }
@@ -528,6 +529,31 @@ namespace jycboliviaASP.net.Datos
                                " tbcorpal_ordenproduccion.estadoorden = 'Eliminado' " +
                                " where tbcorpal_ordenproduccion.codigo = "+codigoOrden;
             return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable)
+        {
+            string consulta = "update tbcorpal_ordenproduccion set " +
+                                " tbcorpal_ordenproduccion.fechaproduccion = "+fechaProduccion+", " +
+                                " tbcorpal_ordenproduccion.codProductonax = "+codProducto+", " +
+                                " tbcorpal_ordenproduccion.productoNax = '"+producto+"', " +
+                                " tbcorpal_ordenproduccion.cantcajasproduccion = "+cantcajas+", " +
+                                " tbcorpal_ordenproduccion.medida = '"+medidaProduccion+"', " +
+                                " tbcorpal_ordenproduccion.detalleproduccion = '"+detalleProduccion+"', " +
+                                " tbcorpal_ordenproduccion.cod_respgra = "+codUser+", " +
+                                " tbcorpal_ordenproduccion.responsable= '"+responsable+"' " +
+                                " where tbcorpal_ordenproduccion.codigo = "+codigoOrden;
+                                
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_codigoCorrelativoOrdenProduccion()
+        {
+            string consulta = "select " +
+                            " max(oo.codigo) " +                          
+                             " from " +
+                             " tbcorpal_ordenproduccion oo " ;
+            return Conx.consultaMySql(consulta);
         }
     }
 }

@@ -51,7 +51,8 @@
     Productos 	</a>
         <ul class="dropdown-menu">
            <!-- <li><a href="../Presentacion/FCorpal_GestionarTiendaPropietario.aspx" id="A1" runat="server"><span>G Tienda Propietario</span></a></li>                                             
-            <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="A2" runat="server"><span>Ruta Entrega</span></a></li>    -->                                         
+            <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="A2" runat="server"><span>Ruta Entrega</span></a></li>    -->                                                    
+            
             <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><span>Solicitud Productos</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><span>Entrega Solicitud Productos</span></a></li>                                                         
             <li role="separator" class="divider"></li>            
@@ -67,6 +68,8 @@
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">	
     Produccion	</a>
         <ul class="dropdown-menu">
+        <li><a href="../Presentacion/FCorpal_OrdenProduccion.aspx" id="mn_ordendeProduccion" runat="server"><span>Orden Produccion</span></a></li>    
+            <li role="separator" class="divider"></li> 
         <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><span>Entrega Produccion</span></a></li>                                             
         <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><span>Objetivo Ventas Produccion</span></a></li>                                             
         <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             

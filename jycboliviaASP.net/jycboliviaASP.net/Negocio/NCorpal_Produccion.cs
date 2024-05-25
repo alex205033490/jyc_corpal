@@ -147,5 +147,19 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.modificarOrdenProduccion( codigoOrden,  fechaProduccion,  codProducto,  producto,  cantcajas, medidaProduccion, detalleProduccion, codUser, responsable);
         }
+
+        internal int get_codigoCorrelativoOrdenProduccion()
+        {
+            DataSet datoPP = dproduccion.get_codigoCorrelativoOrdenProduccion();
+            if (datoPP.Tables[0].Rows.Count > 0)
+            {
+                int codigo;
+                int.TryParse(datoPP.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo+1;
+            }
+            else
+                return 0;
+
+        }
     }
 }

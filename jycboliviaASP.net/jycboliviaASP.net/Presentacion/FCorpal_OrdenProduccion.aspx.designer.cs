@@ -76,6 +76,15 @@ namespace jycboliviaASP.net.Presentacion {
         protected global::System.Web.UI.WebControls.TextBox tx_fechaProduccion;
         
         /// <summary>
+        /// tx_fechaProduccion_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender tx_fechaProduccion_CalendarExtender;
+        
+        /// <summary>
         /// Label31 control.
         /// </summary>
         /// <remarks>
