@@ -27,7 +27,7 @@ namespace jycboliviaASP.net.Presentacion
                    Session["DB"] = "db_seguimientoprueba_jyc";
                    Session["ID_UNE"] = "Prueba SRL";
                    break;
-               case "Santa Cruz":                  
+          /*     case "Santa Cruz":                  
                    Session["NombreBaseDatos"] = "db_SantaCruz";
                    Session["BaseDatos"] = "Santa Cruz";
                    Session["DB"] = "db_seguimientoscz_jyc";
@@ -128,7 +128,7 @@ namespace jycboliviaASP.net.Presentacion
                    Session["BaseDatos"] = "Equipo_Stock";
                    Session["DB"] = "db_equipostock_jyc";
                    Session["ID_UNE"] = "JyC SRL";
-                   break;
+                   break;*/
                case "Corpal":
                    Session["NombreBaseDatos"] = "db_corpal";
                    Session["BaseDatos"] = "Corpal";
@@ -136,7 +136,7 @@ namespace jycboliviaASP.net.Presentacion
                    Session["ID_UNE"] = "Corpal";
                    break;
 
-               case "Prueba Santa Cruz":
+           /*    case "Prueba Santa Cruz":
                    Session["NombreBaseDatos"] = "db_SantaCruzprueba";
                    Session["BaseDatos"] = "Prueba Santa Cruz";
                    Session["DB"] = "db_seguimientosczprueba";
@@ -154,7 +154,7 @@ namespace jycboliviaASP.net.Presentacion
                    Session["DB"] = "db_seguimientocbbaprueba";
                    Session["ID_UNE"] = "Melevar SRL";
                    break;
-               
+               */
                default:
                    Console.WriteLine("Default case");
                    break;
