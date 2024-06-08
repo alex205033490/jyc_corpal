@@ -1940,7 +1940,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 return Convert.ToInt32(datos.Tables[0].Rows[0][0].ToString());
             }
-            catch (IOException e) {
+            catch (IOException  ) {
                 return resultado;            
             }
                     

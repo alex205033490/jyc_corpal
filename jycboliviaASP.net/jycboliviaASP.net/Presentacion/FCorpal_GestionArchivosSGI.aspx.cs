@@ -122,7 +122,7 @@ namespace jycboliviaASP.net.Presentacion
                 // Enviamos todo el encabezado ahora
                 Response.End();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
               //  Response.Write("<script type='text/javascript'> alert('ERROR: " + ex.Message + "') </script>");
             }

@@ -96,7 +96,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return false;
             }
@@ -196,7 +196,7 @@ namespace jycboliviaASP.net.Negocio
                 //Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
                 return false;
@@ -267,7 +267,7 @@ namespace jycboliviaASP.net.Negocio
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
                 return false;
@@ -333,7 +333,7 @@ namespace jycboliviaASP.net.Negocio
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
                 return false;
@@ -416,7 +416,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -496,7 +496,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -616,7 +616,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -725,7 +725,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -770,7 +770,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //  Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
             }
@@ -811,7 +811,7 @@ namespace jycboliviaASP.net.Negocio
                 correo.Dispose();
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //  Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
             }
@@ -859,7 +859,7 @@ namespace jycboliviaASP.net.Negocio
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
                 return false;
@@ -909,7 +909,7 @@ namespace jycboliviaASP.net.Negocio
                 //  Response.Write("<script type='text/javascript'> alert('Envio ok') </script>");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Response.Write("<script type='text/javascript'> alert('Error: " + ex.Message + "') </script>");
                 return false;

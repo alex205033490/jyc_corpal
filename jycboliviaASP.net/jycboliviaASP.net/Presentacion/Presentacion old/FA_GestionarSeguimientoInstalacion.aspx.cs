@@ -340,7 +340,7 @@ namespace jycboliviaASP.net.Presentacion
                 int cantDiasAux = cantDias + cantidadSabados;
                 return cantDiasAux;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }
@@ -370,7 +370,7 @@ namespace jycboliviaASP.net.Presentacion
                 int cantDiasAux = cantDias + sabadoAdicional;
                 return cantDiasAux;
             }
-            catch (Exception e) {
+            catch (Exception) {
                 return 0;
             }
         }

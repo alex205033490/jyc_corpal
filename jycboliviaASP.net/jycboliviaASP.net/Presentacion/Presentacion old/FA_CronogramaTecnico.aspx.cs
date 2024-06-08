@@ -269,7 +269,7 @@ namespace jycboliviaASP.net.Presentacion
                // e.Row.Cells[10].Controls.Add(diaskTarda);
                 
 
-                }catch(Exception ex){
+                }catch(Exception){
                 parada = 0;
                 e.Row.Cells[10].Text = "0";
                 e.Row.Cells[11].Text = "";
@@ -289,7 +289,7 @@ namespace jycboliviaASP.net.Presentacion
                     DateTime fechafin2 = ncrono.calcularFechaFinalizacionCronograma(fechaIni2, cantDiasAux2);
                     e.Row.Cells[14].Text = fechafin2.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-                }catch(Exception ex){
+                }catch(Exception){
                 parada2 = 0;
                 e.Row.Cells[13].Text = "0";
                 e.Row.Cells[14].Text = "";

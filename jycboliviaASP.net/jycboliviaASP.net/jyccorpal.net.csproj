@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,7 +12,15 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>jycboliviaASP.net</RootNamespace>
     <AssemblyName>jycboliviaASP.net</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=4.1.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
@@ -38,72 +48,66 @@
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>Herramientas\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=111.2.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.111.2.0\lib\net48\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
-    <Content Include="fonts\iconic\css\material-design-iconic-font.css" />
-    <Content Include="fonts\iconic\css\material-design-iconic-font.min.css" />
-    <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="fonts\JosefinSans\OFL.txt" />
-    <Content Include="fonts\source-sans-pro\OFL.txt" />
-    <Content Include="fonts\ubuntu\UFL.txt" />
-    <Content Include="img\cabin_1.png" />
-    <Content Include="img\CallCenter.png" />
-    <Content Include="img\Comercial.png" />
-    <Content Include="img\email.png" />
-    <Content Include="img\EmailOk.jpg" />
-    <Content Include="img\encuesta.png" />
-    <Content Include="img\Encuesta1.png" />
-    <Content Include="img\icono_contactenos.png" />
-    <Content Include="img\icono_JyC.ico" />
-    <Content Include="img\images.png" />
-    <Content Include="img\JYC.png" />
-    <Content Include="img\JYC1.png" />
-    <Content Include="img\JYC_logo.jpg" />
-    <Content Include="img\JYC_logo_4.jpg" />
-    <Content Include="img\mantenimiento.png" />
-    <Content Include="img\portfolio\cabin.png" />
-    <Content Include="img\portfolio\cabin_1.png" />
-    <Content Include="img\portfolio\cake.png" />
-    <Content Include="img\portfolio\cake_1.png" />
-    <Content Include="img\portfolio\circus.png" />
-    <Content Include="img\portfolio\circus_1.png" />
-    <Content Include="img\portfolio\game.png" />
-    <Content Include="img\portfolio\game_1.png" />
-    <Content Include="img\portfolio\safe.png" />
-    <Content Include="img\portfolio\safe_2.png" />
-    <Content Include="img\portfolio\submarine.png" />
-    <Content Include="img\portfolio\submarine_1.png" />
-    <Content Include="img\profile.png" />
-    <Content Include="img\profile_1.png" />
-    <Content Include="img\rh.png" />
     <Content Include="jquery\bootstrap\css\bootstrap.css" />
     <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
     <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -163,26 +167,6 @@
     <Content Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx" />
     <Content Include="Styles\Style_AgendaProyecto.css" />
     <Content Include="Styles\payment.css" />
-    <Content Include="Images\background.gif" />
-    <Content Include="Images\cabecera1.jpg" />
-    <Content Include="Images\carpetaAbierta.jpg" />
-    <Content Include="Images\carpetacerrada.jpg" />
-    <Content Include="Images\delete.png" />
-    <Content Include="Images\Folder.png" />
-    <Content Include="Images\fondo.png" />
-    <Content Include="Images\FondoMenu.jpg" />
-    <Content Include="Images\FondoMenu2.jpg" />
-    <Content Include="Images\Good-mark.png" />
-    <Content Include="Images\highlight.gif" />
-    <Content Include="Images\jyc_1.jpg" />
-    <Content Include="Images\jyc_2.jpg" />
-    <Content Include="Images\JYC_logo.jpg" />
-    <Content Include="Images\JYC_logo.PNG" />
-    <Content Include="Images\login-box-backg.png" />
-    <Content Include="Images\login-btn.png" />
-    <Content Include="Images\pie.jpg" />
-    <Content Include="Images\select.png" />
-    <Content Include="Images\Text.png" />
     <Content Include="Presentacion\ControlUser.ascx" />
     <Content Include="Presentacion\FCorpal_Actualizacion.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx" />
@@ -349,36 +333,6 @@
     <Content Include="Styles\Style_VistaResponsableProyecto.css" />
     <Content Include="Styles\Style_VistaSeguimientoInstalacion.css" />
     <Content Include="Styles\Style_Welcome.css" />
-    <Content Include="vendor\animate\animate.css" />
-    <Content Include="vendor\animsition\css\animsition.css" />
-    <Content Include="vendor\animsition\css\animsition.min.css" />
-    <Content Include="vendor\animsition\js\animsition.js" />
-    <Content Include="vendor\animsition\js\animsition.min.js" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap.min.css" />
-    <Content Include="vendor\bootstrap\js\bootstrap.js" />
-    <Content Include="vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="vendor\bootstrap\js\popper.js" />
-    <Content Include="vendor\bootstrap\js\popper.min.js" />
-    <Content Include="vendor\bootstrap\js\tooltip.js" />
-    <Content Include="vendor\countdowntime\countdowntime.js" />
-    <Content Include="vendor\css-hamburgers\hamburgers.css" />
-    <Content Include="vendor\css-hamburgers\hamburgers.min.css" />
-    <Content Include="vendor\daterangepicker\daterangepicker.css" />
-    <Content Include="vendor\daterangepicker\daterangepicker.js" />
-    <Content Include="vendor\daterangepicker\moment.js" />
-    <Content Include="vendor\daterangepicker\moment.min.js" />
-    <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.css" />
-    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
-    <Content Include="vendor\select2\select2.css" />
-    <Content Include="vendor\select2\select2.js" />
-    <Content Include="vendor\select2\select2.min.css" />
-    <Content Include="vendor\select2\select2.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -392,6 +346,7 @@
     <Content Include="Presentacion\FCorpal_GestonarResponsable.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiRest\DBApi.cs" />
     <Compile Include="DatosSimec\DA_contabilidad.cs" />
     <Compile Include="DatosSimec\DA_inventario.cs" />
     <Compile Include="Datos\DA_ActivosJyC.cs" />
@@ -466,7 +421,6 @@
     </Compile>
     <Compile Include="DS_Equipos.cs">
       <DependentUpon>DS_Equipos.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DS_Equipos.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -490,7 +444,6 @@
     </Compile>
     <Compile Include="DS_ReciboIngresoEgreso.cs">
       <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DS_ReciboIngresoEgreso.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -504,7 +457,6 @@
     </Compile>
     <Compile Include="DS_Rutas.cs">
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DS_Rutas.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -517,6 +469,7 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
@@ -1467,11 +1420,6 @@
     <Content Include="Site1.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Account\" />
-    <Folder Include="app_code\app_Data\" />
-    <Folder Include="CSS\" />
-    <Folder Include="DocCuadroXXX\" />
-    <Folder Include="DocFechaExp\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
@@ -1643,80 +1591,6 @@
     <None Include="DS_Rutas.xss">
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
     </None>
-    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <None Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <None Include="fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <None Include="fonts\font-awesome-4.7.0\less\animated.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\core.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\fixed-width.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\font-awesome.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\icons.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\larger.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\list.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\mixins.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\path.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\screen-reader.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\stacked.less" />
-    <None Include="fonts\font-awesome-4.7.0\less\variables.less" />
-    <None Include="fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_animated.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_core.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_icons.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_larger.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_list.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_mixins.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_path.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
-    <None Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
-    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
-    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
-    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
-    <None Include="fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
-    <None Include="fonts\JosefinSans\JosefinSans-Bold.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-BoldItalic.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-Italic.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-Light.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-LightItalic.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-Regular.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-SemiBold.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-SemiBoldItalic.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-Thin.ttf" />
-    <None Include="fonts\JosefinSans\JosefinSans-ThinItalic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-Black.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-BlackItalic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-Bold.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-BoldItalic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-ExtraLight.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-ExtraLightItalic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-Italic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-Light.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-LightItalic.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-Regular.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-SemiBold.ttf" />
-    <None Include="fonts\source-sans-pro\SourceSansPro-SemiBoldItalic.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-Bold.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-BoldItalic.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-Italic.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-Light.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-LightItalic.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-Medium.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-MediumItalic.ttf" />
-    <None Include="fonts\ubuntu\Ubuntu-Regular.ttf" />
-    <None Include="img\imagenes_Opciones - CallCenter.psd" />
-    <None Include="img\imagenes_Opciones - Copy.psd" />
-    <None Include="img\imagenes_Opciones.psd" />
-    <None Include="img\imagenes_Opciones_Comercial.psd" />
-    <None Include="img\imagenes_Opciones_Encuesta.psd" />
-    <None Include="img\imagenes_Opciones_Mantenimiento.psd" />
-    <None Include="img\jyc_logo.psd" />
     <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -1758,12 +1632,7 @@
     <None Include="js\bootstrap.bundle.min.js.map" />
     <None Include="js\bootstrap.js.map" />
     <None Include="js\bootstrap.min.js.map" />
-    <None Include="vendor\bootstrap\css\bootstrap-grid.css.map" />
-    <None Include="vendor\bootstrap\css\bootstrap-grid.min.css.map" />
-    <None Include="vendor\bootstrap\css\bootstrap-reboot.css.map" />
-    <None Include="vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
-    <None Include="vendor\bootstrap\css\bootstrap.css.map" />
-    <None Include="vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="packages.config" />
     <None Include="DS_MaterialeInsumos.xsc">
       <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
     </None>
