@@ -28,6 +28,7 @@
             <li><a href="../Presentacion/FCorpal_GestonarResponsable.aspx" id="mn_gestionarResponsable" runat="server" ><span>Gestionar Responsable</span></a></li>         
             <li><a href="../Presentacion/FCorpal_GestionarPermisos.aspx" id="mn_gestionarPermisos" runat="server" ><span>Gestionar Permisos</span></a></li>       
             <li><a href="../Presentacion/FCorpal_GestionarFormularios.aspx" id="mn_gestionarFormularios" runat="server" ><span>Gestionar Formularios</span></a></li>       
+            <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><span>Prueba</span></a></li>       
 		 <li role="separator" class="divider"></li>
 		</ul>
 	</li>

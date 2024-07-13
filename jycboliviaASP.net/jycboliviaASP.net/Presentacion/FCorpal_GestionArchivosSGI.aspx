@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_GestionArchivosSGI.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_GestionArchivosSGI" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_GestionArchivosSGI.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_GestionArchivosSGI" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_GestionArchivosSGI.css" rel="stylesheet" type="text/css" />

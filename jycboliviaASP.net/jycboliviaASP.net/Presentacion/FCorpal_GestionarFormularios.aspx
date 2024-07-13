@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_GestionarFormularios.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_GestionarFormularios.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.WebForm1" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

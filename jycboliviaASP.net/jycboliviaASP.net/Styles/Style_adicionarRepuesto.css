@@ -23,7 +23,7 @@
 .Grepuesto
 {
     border: double #666666;  
-     width: 800px;          
+     width: auto;          
      height: 150px;     
      overflow: auto;
     }
@@ -36,8 +36,7 @@
     
  .Gcotizacion
  {
-     border: double #666666;  
-     width: 800px;          
+     border: double #666666;             
      height: 150px;     
      overflow: auto;
      }

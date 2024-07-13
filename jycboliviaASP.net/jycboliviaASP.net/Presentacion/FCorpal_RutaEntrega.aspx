@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_RutaEntrega.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_RutaCobrador" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_RutaEntrega.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_RutaCobrador" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

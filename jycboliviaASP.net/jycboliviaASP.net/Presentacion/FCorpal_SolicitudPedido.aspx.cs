@@ -10,6 +10,8 @@ using System.Configuration;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.Drawing;
+using jycboliviaASP.net.NegocioApi;
+using Newtonsoft.Json.Linq;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -69,15 +71,30 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] GetlistaProductos(string prefixText, int count)
         {
             string nombreProducto = prefixText;
-
+            /*
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
             DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
+         
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
             for (int i = 0; i < fin; i++)
             {
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
+            return lista;
+            */
+
+            NA_endpoints napi = new NA_endpoints();
+            dynamic tuplas = napi.get_productoAlmacen(nombreProducto, "adm", "123");            
+            JArray rowsArray = (JArray)tuplas["Resultado"];
+            string[] lista = new string[rowsArray.Count];
+            int i = 0;
+            foreach (JObject obj in rowsArray)
+            {
+                lista[i] = obj["Descripcion"].ToString() ;
+                i++;
+            }
+
             return lista;
         }
 
@@ -344,6 +361,18 @@ namespace jycboliviaASP.net.Presentacion
             tx_solicitante.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
         }
 
-       
+        protected void bt_prueba_Click(object sender, EventArgs e)
+        {
+            NA_endpoints napi = new NA_endpoints();
+            dynamic tuplas = napi.get_productoAlmacen("Nax","adm","123");
+            string dato = "";
+            JArray rowsArray = (JArray)tuplas["Resultado"];
+            foreach (JObject obj in rowsArray)
+            { 
+                dato = dato + obj["Descripcion"].ToString()+";";
+            }
+
+                tx_cantidadProducto.Text = rowsArray.Count.ToString();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_SolicitudInsumosMateriales.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_SolicitudInsumosMateriales" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_SolicitudInsumosMateriales.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_SolicitudInsumosMateriales" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title=" " Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="WelcomeJyC.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.WelcomeJyC" %>
+﻿<%@ Page Title=" " Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="WelcomeJyC.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.WelcomeJyC" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

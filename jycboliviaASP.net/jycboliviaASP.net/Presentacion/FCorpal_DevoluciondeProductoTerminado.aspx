@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_DevoluciondeProductoTerminado.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_DevoluciondeProductoTerminado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_DevoluciondeProductoTerminado.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_DevoluciondeProductoTerminado" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

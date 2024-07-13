@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_AprobacionDevolucionProductoTerminado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_AprobacionDevolucionProductoTerminado" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 

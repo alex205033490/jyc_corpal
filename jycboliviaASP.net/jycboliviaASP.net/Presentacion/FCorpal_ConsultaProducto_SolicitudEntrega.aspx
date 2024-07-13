@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaProducto_SolicitudEntrega.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_ConsultaProducto_SolicitudEntrega" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaProducto_SolicitudEntrega.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_ConsultaProducto_SolicitudEntrega" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 

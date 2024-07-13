@@ -250,6 +250,11 @@ namespace jycboliviaASP.net.Negocio
             else
                 return -1;
         }
+
+        internal DataSet get_datosUpon(string usuario, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
