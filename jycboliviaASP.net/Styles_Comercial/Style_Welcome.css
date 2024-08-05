@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.welcome {				
+	height: 125px;
+	background-image: url(../Images/JYC_logo.jpg); 
+	background-repeat :no-repeat;
+	background-position: center;
+	margin: 0 auto;
+	text-align:center;
+	height:330px;
+	width:500px;
+}

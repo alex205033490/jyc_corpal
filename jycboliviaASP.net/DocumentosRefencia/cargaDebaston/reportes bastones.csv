@@ -1,0 +1,1209 @@
+Guard;Station;ArriveTime;ArriveDate;Incident
+10;432;Missing;2017-01-06;Mantenimiento Preventivo
+10;511;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-06;Instrucción de Trabajo
+10;513;Missing;2017-01-06;Inspeccion
+10;265;Missing;2017-01-06;Otros
+10;266;Missing;2017-01-06;Mantenimiento Preventivo
+10;267;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-06;Instrucción de Trabajo
+10;109;Missing;2017-01-06;Inspeccion
+10;110;Missing;2017-01-06;Otros
+10;111;Missing;2017-01-06;Mantenimiento Preventivo
+10;409;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-06;Instrucción de Trabajo
+10;411;Missing;2017-01-06;Inspeccion
+10;515;Missing;2017-01-06;Otros
+10;530;Missing;2017-01-06;Mantenimiento Preventivo
+10;503;18:34:36;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;504;18:34:39;2017-01-06;Instrucción de Trabajo
+10;218;18:34:42;2017-01-06;Inspeccion
+10;259;18:34:45;2017-01-06;Otros
+10;260;18:34:48;2017-01-06;Mantenimiento Preventivo
+10;461;18:34:51;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;323;18:34:55;2017-01-06;Instrucción de Trabajo
+10;51;Missing;2017-01-06;Inspeccion
+10;52;Missing;2017-01-06;Otros
+10;53;Missing;2017-01-06;Mantenimiento Preventivo
+10;544;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-06;Instrucción de Trabajo
+10;546;Missing;2017-01-06;Inspeccion
+10;131;Missing;2017-01-06;Otros
+10;43;Missing;2017-01-06;Mantenimiento Preventivo
+10;464;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-06;Instrucción de Trabajo
+10;402;Missing;2017-01-06;Inspeccion
+10;536;Missing;2017-01-06;Otros
+10;381;Missing;2017-01-06;Mantenimiento Preventivo
+10;257;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-06;Instrucción de Trabajo
+10;283;Missing;2017-01-06;Inspeccion
+10;1;Missing;2017-01-06;Otros
+10;276;Missing;2017-01-06;Mantenimiento Preventivo
+10;277;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-06;Instrucción de Trabajo
+10;279;Missing;2017-01-06;Inspeccion
+10;282;Missing;2017-01-06;Otros
+10;324;Missing;2017-01-06;Mantenimiento Preventivo
+10;325;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-06;Instrucción de Trabajo
+10;425;Missing;2017-01-06;Inspeccion
+10;161;Missing;2017-01-06;Otros
+10;230;Missing;2017-01-06;Mantenimiento Preventivo
+10;455;18:37:38;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;241;18:37:42;2017-01-06;Instrucción de Trabajo
+10;433;18:37:47;2017-01-06;Inspeccion
+10;532;18:37:49;2017-01-06;Otros
+10;590;18:37:52;2017-01-06;Mantenimiento Preventivo
+10;591;18:37:55;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;273;18:37:57;2017-01-06;Instrucción de Trabajo
+10;117;Missing;2017-01-06;Inspeccion
+10;119;Missing;2017-01-06;Otros
+10;573;Missing;2017-01-06;Mantenimiento Preventivo
+10;574;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-06;Instrucción de Trabajo
+10;101;Missing;2017-01-06;Inspeccion
+10;102;Missing;2017-01-06;Otros
+10;432;Missing;2017-01-06;Mantenimiento Preventivo
+10;511;Missing;2017-01-06;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-06;Instrucción de Trabajo
+10;513;Missing;2017-01-06;Inspeccion
+10;265;Missing;2017-01-06;Otros
+10;266;Missing;2017-01-09;Mantenimiento Preventivo
+10;267;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-09;Instrucción de Trabajo
+10;109;Missing;2017-01-09;Inspeccion
+10;110;Missing;2017-01-09;Otros
+10;111;Missing;2017-01-09;Mantenimiento Preventivo
+10;409;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-09;Instrucción de Trabajo
+10;411;Missing;2017-01-09;Inspeccion
+10;515;Missing;2017-01-09;Otros
+10;530;Missing;2017-01-09;Mantenimiento Preventivo
+10;503;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-09;Instrucción de Trabajo
+10;218;Missing;2017-01-09;Inspeccion
+10;259;Missing;2017-01-09;Otros
+10;260;Missing;2017-01-09;Mantenimiento Preventivo
+10;461;17:50:07;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;323;17:50:10;2017-01-09;Instrucción de Trabajo
+10;51;17:50:13;2017-01-09;Inspeccion
+10;52;17:50:16;2017-01-09;Otros
+10;53;17:50:19;2017-01-09;Mantenimiento Preventivo
+10;544;17:50:22;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;545;17:50:26;2017-01-09;Instrucción de Trabajo
+10;546;Missing;2017-01-09;Inspeccion
+10;131;Missing;2017-01-09;Otros
+10;43;Missing;2017-01-09;Mantenimiento Preventivo
+10;464;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-09;Instrucción de Trabajo
+10;402;Missing;2017-01-09;Inspeccion
+10;536;Missing;2017-01-09;Otros
+10;381;Missing;2017-01-09;Mantenimiento Preventivo
+10;257;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-09;Instrucción de Trabajo
+10;283;Missing;2017-01-09;Inspeccion
+10;1;Missing;2017-01-09;Otros
+10;276;Missing;2017-01-09;Mantenimiento Preventivo
+10;277;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-09;Instrucción de Trabajo
+10;279;Missing;2017-01-09;Inspeccion
+10;282;Missing;2017-01-09;Otros
+10;324;Missing;2017-01-09;Mantenimiento Preventivo
+10;325;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-09;Instrucción de Trabajo
+10;425;Missing;2017-01-09;Inspeccion
+10;161;Missing;2017-01-09;Otros
+10;230;Missing;2017-01-09;Mantenimiento Preventivo
+10;455;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-09;Instrucción de Trabajo
+10;433;Missing;2017-01-09;Inspeccion
+10;532;Missing;2017-01-09;Otros
+10;590;Missing;2017-01-09;Mantenimiento Preventivo
+10;591;17:57:53;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-09;Instrucción de Trabajo
+10;117;Missing;2017-01-09;Inspeccion
+10;119;Missing;2017-01-09;Otros
+10;573;Missing;2017-01-09;Mantenimiento Preventivo
+10;574;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-09;Instrucción de Trabajo
+10;101;Missing;2017-01-09;Inspeccion
+10;102;Missing;2017-01-09;Otros
+10;432;Missing;2017-01-09;Mantenimiento Preventivo
+10;511;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-09;Instrucción de Trabajo
+10;513;Missing;2017-01-09;Inspeccion
+10;265;Missing;2017-01-09;Otros
+10;266;Missing;2017-01-09;Mantenimiento Preventivo
+10;267;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-09;Instrucción de Trabajo
+10;109;Missing;2017-01-09;Inspeccion
+10;110;Missing;2017-01-09;Otros
+10;111;Missing;2017-01-09;Mantenimiento Preventivo
+10;409;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-09;Instrucción de Trabajo
+10;411;Missing;2017-01-09;Inspeccion
+10;515;Missing;2017-01-09;Otros
+10;530;Missing;2017-01-09;Mantenimiento Preventivo
+10;503;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-09;Instrucción de Trabajo
+10;218;Missing;2017-01-09;Inspeccion
+10;259;Missing;2017-01-09;Otros
+10;260;18:29:11;2017-01-09;Mantenimiento Preventivo
+10;461;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-09;Instrucción de Trabajo
+10;51;Missing;2017-01-09;Inspeccion
+10;52;Missing;2017-01-09;Otros
+10;53;Missing;2017-01-09;Mantenimiento Preventivo
+10;544;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-09;Instrucción de Trabajo
+10;546;Missing;2017-01-09;Inspeccion
+10;131;Missing;2017-01-09;Otros
+10;43;Missing;2017-01-09;Mantenimiento Preventivo
+10;464;Missing;2017-01-09;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-09;Instrucción de Trabajo
+10;402;Missing;2017-01-11;Inspeccion
+10;536;Missing;2017-01-11;Otros
+10;381;Missing;2017-01-11;Mantenimiento Preventivo
+10;257;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-11;Instrucción de Trabajo
+10;283;Missing;2017-01-11;Inspeccion
+10;1;Missing;2017-01-11;Otros
+10;276;Missing;2017-01-11;Mantenimiento Preventivo
+10;277;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-11;Instrucción de Trabajo
+10;279;Missing;2017-01-11;Inspeccion
+10;282;Missing;2017-01-11;Otros
+10;324;Missing;2017-01-11;Mantenimiento Preventivo
+10;325;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-11;Instrucción de Trabajo
+10;425;Missing;2017-01-11;Inspeccion
+10;161;18:42:04;2017-01-11;Otros
+10;230;18:42:09;2017-01-11;Mantenimiento Preventivo
+10;455;18:42:13;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;241;18:42:16;2017-01-11;Instrucción de Trabajo
+10;433;18:42:19;2017-01-11;Inspeccion
+10;532;18:42:22;2017-01-11;Otros
+10;590;18:42:25;2017-01-11;Mantenimiento Preventivo
+10;591;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-11;Instrucción de Trabajo
+10;117;Missing;2017-01-11;Inspeccion
+10;119;Missing;2017-01-11;Otros
+10;573;Missing;2017-01-11;Mantenimiento Preventivo
+10;574;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-11;Instrucción de Trabajo
+10;101;Missing;2017-01-11;Inspeccion
+10;102;Missing;2017-01-11;Otros
+10;432;Missing;2017-01-11;Mantenimiento Preventivo
+10;511;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-11;Instrucción de Trabajo
+10;513;Missing;2017-01-11;Inspeccion
+10;265;Missing;2017-01-11;Otros
+10;266;Missing;2017-01-11;Mantenimiento Preventivo
+10;267;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-11;Instrucción de Trabajo
+10;109;Missing;2017-01-11;Inspeccion
+10;110;Missing;2017-01-11;Otros
+10;111;Missing;2017-01-11;Mantenimiento Preventivo
+10;409;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-11;Instrucción de Trabajo
+10;411;Missing;2017-01-11;Inspeccion
+10;515;Missing;2017-01-11;Otros
+10;530;Missing;2017-01-11;Mantenimiento Preventivo
+10;503;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-11;Instrucción de Trabajo
+10;218;Missing;2017-01-11;Inspeccion
+10;259;18:49:58;2017-01-11;Otros
+10;260;18:50:01;2017-01-11;Mantenimiento Preventivo
+10;461;18:50:04;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-11;Instrucción de Trabajo
+10;51;Missing;2017-01-11;Inspeccion
+10;52;Missing;2017-01-11;Otros
+10;53;Missing;2017-01-11;Mantenimiento Preventivo
+10;544;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-11;Instrucción de Trabajo
+10;546;Missing;2017-01-11;Inspeccion
+10;131;Missing;2017-01-11;Otros
+10;43;Missing;2017-01-11;Mantenimiento Preventivo
+10;464;Missing;2017-01-11;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-11;Instrucción de Trabajo
+10;402;Missing;2017-01-11;Inspeccion
+10;536;Missing;2017-01-12;Otros
+10;381;Missing;2017-01-12;Mantenimiento Preventivo
+10;257;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-12;Instrucción de Trabajo
+10;283;Missing;2017-01-12;Inspeccion
+10;1;Missing;2017-01-12;Otros
+10;276;Missing;2017-01-12;Mantenimiento Preventivo
+10;277;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-12;Instrucción de Trabajo
+10;279;Missing;2017-01-12;Inspeccion
+10;282;Missing;2017-01-12;Otros
+10;324;Missing;2017-01-12;Mantenimiento Preventivo
+10;325;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-12;Instrucción de Trabajo
+10;425;Missing;2017-01-12;Inspeccion
+10;161;Missing;2017-01-12;Otros
+10;230;11:28:09;2017-01-12;Mantenimiento Preventivo
+10;455;11:28:13;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;241;11:28:16;2017-01-12;Instrucción de Trabajo
+10;433;11:28:19;2017-01-12;Inspeccion
+10;532;11:28:21;2017-01-12;Otros
+10;590;11:28:24;2017-01-12;Mantenimiento Preventivo
+10;591;11:28:27;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-12;Instrucción de Trabajo
+10;117;Missing;2017-01-12;Inspeccion
+10;119;Missing;2017-01-12;Otros
+10;573;Missing;2017-01-12;Mantenimiento Preventivo
+10;574;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-12;Instrucción de Trabajo
+10;101;Missing;2017-01-12;Inspeccion
+10;102;Missing;2017-01-12;Otros
+10;432;Missing;2017-01-12;Mantenimiento Preventivo
+10;511;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-12;Instrucción de Trabajo
+10;513;Missing;2017-01-12;Inspeccion
+10;265;Missing;2017-01-12;Otros
+10;266;Missing;2017-01-12;Mantenimiento Preventivo
+10;267;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-12;Instrucción de Trabajo
+10;109;Missing;2017-01-12;Inspeccion
+10;110;Missing;2017-01-12;Otros
+10;111;Missing;2017-01-12;Mantenimiento Preventivo
+10;409;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-12;Instrucción de Trabajo
+10;411;Missing;2017-01-12;Inspeccion
+10;515;Missing;2017-01-12;Otros
+10;530;Missing;2017-01-12;Mantenimiento Preventivo
+10;503;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-12;Instrucción de Trabajo
+10;218;Missing;2017-01-12;Inspeccion
+10;259;Missing;2017-01-12;Otros
+10;260;12:35:58;2017-01-12;Mantenimiento Preventivo
+10;461;12:36:01;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;323;12:36:03;2017-01-12;Instrucción de Trabajo
+10;51;12:36:06;2017-01-12;Inspeccion
+10;52;12:36:10;2017-01-12;Otros
+10;53;12:36:13;2017-01-12;Mantenimiento Preventivo
+10;544;12:36:16;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-12;Instrucción de Trabajo
+10;546;Missing;2017-01-12;Inspeccion
+10;131;Missing;2017-01-12;Otros
+10;43;Missing;2017-01-12;Mantenimiento Preventivo
+10;464;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-12;Instrucción de Trabajo
+10;402;Missing;2017-01-12;Inspeccion
+10;536;Missing;2017-01-12;Otros
+10;381;Missing;2017-01-12;Mantenimiento Preventivo
+10;257;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-12;Instrucción de Trabajo
+10;283;Missing;2017-01-12;Inspeccion
+10;1;Missing;2017-01-12;Otros
+10;276;Missing;2017-01-12;Mantenimiento Preventivo
+10;277;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-12;Instrucción de Trabajo
+10;279;Missing;2017-01-12;Inspeccion
+10;282;Missing;2017-01-12;Otros
+10;324;Missing;2017-01-12;Mantenimiento Preventivo
+10;325;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-12;Instrucción de Trabajo
+10;425;Missing;2017-01-12;Inspeccion
+10;161;Missing;2017-01-12;Otros
+10;230;Missing;2017-01-12;Mantenimiento Preventivo
+10;455;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-12;Instrucción de Trabajo
+10;433;Missing;2017-01-12;Inspeccion
+10;532;Missing;2017-01-12;Otros
+10;590;12:52:52;2017-01-12;Mantenimiento Preventivo
+10;591;12:52:55;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;273;12:52:58;2017-01-12;Instrucción de Trabajo
+10;117;12:53:01;2017-01-12;Inspeccion
+10;119;12:53:04;2017-01-12;Otros
+10;573;12:53:07;2017-01-12;Mantenimiento Preventivo
+10;574;12:53:11;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-12;Instrucción de Trabajo
+10;101;Missing;2017-01-12;Inspeccion
+10;102;Missing;2017-01-12;Otros
+10;432;Missing;2017-01-12;Mantenimiento Preventivo
+10;511;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-12;Instrucción de Trabajo
+10;513;Missing;2017-01-12;Inspeccion
+10;265;Missing;2017-01-12;Otros
+10;266;Missing;2017-01-12;Mantenimiento Preventivo
+10;267;Missing;2017-01-12;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-12;Instrucción de Trabajo
+10;109;Missing;2017-01-12;Inspeccion
+10;110;Missing;2017-01-13;Otros
+10;111;Missing;2017-01-13;Mantenimiento Preventivo
+10;409;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-13;Instrucción de Trabajo
+10;411;Missing;2017-01-13;Inspeccion
+10;515;Missing;2017-01-13;Otros
+10;530;Missing;2017-01-13;Mantenimiento Preventivo
+10;503;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-13;Instrucción de Trabajo
+10;218;Missing;2017-01-13;Inspeccion
+10;259;Missing;2017-01-13;Otros
+10;260;Missing;2017-01-13;Mantenimiento Preventivo
+10;461;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-13;Instrucción de Trabajo
+10;51;Missing;2017-01-13;Inspeccion
+10;52;Missing;2017-01-13;Otros
+10;53;17:56:12;2017-01-13;Mantenimiento Preventivo
+10;544;17:56:15;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;545;17:56:22;2017-01-13;Instrucción de Trabajo
+10;546;17:56:25;2017-01-13;Inspeccion
+10;131;17:56:28;2017-01-13;Otros
+10;43;17:56:31;2017-01-13;Mantenimiento Preventivo
+10;464;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-13;Instrucción de Trabajo
+10;402;Missing;2017-01-13;Inspeccion
+10;536;Missing;2017-01-13;Otros
+10;381;Missing;2017-01-13;Mantenimiento Preventivo
+10;257;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-13;Instrucción de Trabajo
+10;283;Missing;2017-01-13;Inspeccion
+10;1;Missing;2017-01-13;Otros
+10;276;Missing;2017-01-13;Mantenimiento Preventivo
+10;277;Missing;2017-01-13;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-13;Instrucción de Trabajo
+10;279;Missing;2017-01-14;Inspeccion
+10;282;Missing;2017-01-14;Otros
+10;324;Missing;2017-01-14;Mantenimiento Preventivo
+10;325;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-14;Instrucción de Trabajo
+10;425;Missing;2017-01-14;Inspeccion
+10;161;Missing;2017-01-14;Otros
+10;230;Missing;2017-01-14;Mantenimiento Preventivo
+10;455;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-14;Instrucción de Trabajo
+10;433;Missing;2017-01-14;Inspeccion
+10;532;08:59:05;2017-01-14;Otros
+10;590;Missing;2017-01-14;Mantenimiento Preventivo
+10;591;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-14;Instrucción de Trabajo
+10;117;Missing;2017-01-14;Inspeccion
+10;119;Missing;2017-01-14;Otros
+10;573;Missing;2017-01-14;Mantenimiento Preventivo
+10;574;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-14;Instrucción de Trabajo
+10;101;Missing;2017-01-14;Inspeccion
+10;102;Missing;2017-01-14;Otros
+10;432;Missing;2017-01-14;Mantenimiento Preventivo
+10;511;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-14;Instrucción de Trabajo
+10;513;Missing;2017-01-14;Inspeccion
+10;265;Missing;2017-01-14;Otros
+10;266;Missing;2017-01-14;Mantenimiento Preventivo
+10;267;Missing;2017-01-14;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-18;Instrucción de Trabajo
+10;109;Missing;2017-01-18;Inspeccion
+10;110;Missing;2017-01-18;Otros
+10;111;Missing;2017-01-18;Mantenimiento Preventivo
+10;409;Missing;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-18;Instrucción de Trabajo
+10;411;Missing;2017-01-18;Inspeccion
+10;515;Missing;2017-01-18;Otros
+10;530;Missing;2017-01-18;Mantenimiento Preventivo
+10;503;Missing;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-18;Instrucción de Trabajo
+10;218;Missing;2017-01-18;Inspeccion
+10;259;Missing;2017-01-18;Otros
+10;260;09:48:38;2017-01-18;Mantenimiento Preventivo
+10;461;Missing;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-18;Instrucción de Trabajo
+10;51;Missing;2017-01-18;Inspeccion
+10;52;Missing;2017-01-18;Otros
+10;53;Missing;2017-01-18;Mantenimiento Preventivo
+10;544;Missing;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-18;Instrucción de Trabajo
+10;546;Missing;2017-01-18;Inspeccion
+10;131;Missing;2017-01-18;Otros
+10;43;Missing;2017-01-18;Mantenimiento Preventivo
+10;464;Missing;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-18;Instrucción de Trabajo
+10;402;Missing;2017-01-18;Inspeccion
+10;536;Missing;2017-01-18;Otros
+10;381;Missing;2017-01-18;Mantenimiento Preventivo
+10;257;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-21;Instrucción de Trabajo
+10;283;Missing;2017-01-21;Inspeccion
+10;1;Missing;2017-01-21;Otros
+10;276;Missing;2017-01-21;Mantenimiento Preventivo
+10;277;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-21;Instrucción de Trabajo
+10;279;Missing;2017-01-21;Inspeccion
+10;282;09:41:49;2017-01-21;Otros
+10;324;Missing;2017-01-21;Mantenimiento Preventivo
+10;325;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-21;Instrucción de Trabajo
+10;425;Missing;2017-01-21;Inspeccion
+10;161;Missing;2017-01-21;Otros
+10;230;Missing;2017-01-21;Mantenimiento Preventivo
+10;455;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-21;Instrucción de Trabajo
+10;433;Missing;2017-01-21;Inspeccion
+10;532;Missing;2017-01-21;Otros
+10;590;Missing;2017-01-21;Mantenimiento Preventivo
+10;591;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-21;Instrucción de Trabajo
+10;117;Missing;2017-01-21;Inspeccion
+10;119;Missing;2017-01-21;Otros
+10;573;Missing;2017-01-21;Mantenimiento Preventivo
+10;574;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-21;Instrucción de Trabajo
+10;101;Missing;2017-01-21;Inspeccion
+10;102;Missing;2017-01-21;Otros
+10;432;Missing;2017-01-21;Mantenimiento Preventivo
+10;511;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-21;Instrucción de Trabajo
+10;513;Missing;2017-01-21;Inspeccion
+10;265;Missing;2017-01-21;Otros
+10;266;Missing;2017-01-21;Mantenimiento Preventivo
+10;267;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-21;Instrucción de Trabajo
+10;109;Missing;2017-01-21;Inspeccion
+10;110;Missing;2017-01-21;Otros
+10;111;Missing;2017-01-21;Mantenimiento Preventivo
+10;409;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-21;Instrucción de Trabajo
+10;411;Missing;2017-01-21;Inspeccion
+10;515;11:06:07;2017-01-21;Otros
+10;530;11:40:25;2017-01-21;Mantenimiento Preventivo
+10;503;11:40:32;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;504;12:16:25;2017-01-21;Instrucción de Trabajo
+10;218;Missing;2017-01-21;Inspeccion
+10;259;Missing;2017-01-21;Otros
+10;260;Missing;2017-01-21;Mantenimiento Preventivo
+10;461;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-21;Instrucción de Trabajo
+10;51;Missing;2017-01-21;Inspeccion
+10;52;Missing;2017-01-21;Otros
+10;53;Missing;2017-01-21;Mantenimiento Preventivo
+10;544;Missing;2017-01-21;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-21;Instrucción de Trabajo
+10;546;Missing;2017-01-21;Inspeccion
+10;131;Missing;2017-01-21;Otros
+10;43;Missing;2017-01-21;Mantenimiento Preventivo
+10;464;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-25;Instrucción de Trabajo
+10;402;Missing;2017-01-25;Inspeccion
+10;536;09:46:19;2017-01-25;Otros
+10;381;Missing;2017-01-25;Mantenimiento Preventivo
+10;257;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-25;Instrucción de Trabajo
+10;283;Missing;2017-01-25;Inspeccion
+10;1;Missing;2017-01-25;Otros
+10;276;Missing;2017-01-25;Mantenimiento Preventivo
+10;277;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-25;Instrucción de Trabajo
+10;279;Missing;2017-01-25;Inspeccion
+10;282;Missing;2017-01-25;Otros
+10;324;Missing;2017-01-25;Mantenimiento Preventivo
+10;325;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-25;Instrucción de Trabajo
+10;425;Missing;2017-01-25;Inspeccion
+10;161;Missing;2017-01-25;Otros
+10;230;Missing;2017-01-25;Mantenimiento Preventivo
+10;455;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-25;Instrucción de Trabajo
+10;433;Missing;2017-01-25;Inspeccion
+10;532;Missing;2017-01-25;Otros
+10;590;Missing;2017-01-25;Mantenimiento Preventivo
+10;591;Missing;2017-01-25;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-25;Instrucción de Trabajo
+10;117;Missing;2017-01-25;Inspeccion
+10;119;Missing;2017-01-25;Otros
+10;573;Missing;2017-01-27;Mantenimiento Preventivo
+10;574;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-27;Instrucción de Trabajo
+10;101;Missing;2017-01-27;Inspeccion
+10;102;Missing;2017-01-27;Otros
+10;432;Missing;2017-01-27;Mantenimiento Preventivo
+10;511;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-27;Instrucción de Trabajo
+10;513;Missing;2017-01-27;Inspeccion
+10;265;Missing;2017-01-27;Otros
+10;266;Missing;2017-01-27;Mantenimiento Preventivo
+10;267;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-27;Instrucción de Trabajo
+10;109;Missing;2017-01-27;Inspeccion
+10;110;Missing;2017-01-27;Otros
+10;111;Missing;2017-01-27;Mantenimiento Preventivo
+10;409;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-27;Instrucción de Trabajo
+10;411;Missing;2017-01-27;Inspeccion
+10;515;Missing;2017-01-27;Otros
+10;530;Missing;2017-01-27;Mantenimiento Preventivo
+10;503;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-27;Instrucción de Trabajo
+10;218;Missing;2017-01-27;Inspeccion
+10;259;Missing;2017-01-27;Otros
+10;260;Missing;2017-01-27;Mantenimiento Preventivo
+10;461;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-27;Instrucción de Trabajo
+10;51;11:34:44;2017-01-27;Inspeccion
+10;52;Missing;2017-01-31;Otros
+10;53;Missing;2017-01-31;Mantenimiento Preventivo
+10;544;Missing;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-31;Instrucción de Trabajo
+10;546;09:33:55;2017-01-31;Inspeccion
+10;131;12:00:39;2017-01-31;Otros
+10;43;12:00:44;2017-01-31;Mantenimiento Preventivo
+10;464;12:00:49;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;212;12:00:54;2017-01-31;Instrucción de Trabajo
+10;402;12:00:58;2017-01-31;Inspeccion
+10;536;Missing;2017-01-31;Otros
+10;381;Missing;2017-01-31;Mantenimiento Preventivo
+10;257;Missing;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-31;Instrucción de Trabajo
+10;283;Missing;2017-01-31;Inspeccion
+10;1;Missing;2017-01-31;Otros
+10;276;Missing;2017-01-31;Mantenimiento Preventivo
+10;277;Missing;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-31;Instrucción de Trabajo
+10;279;Missing;2017-01-31;Inspeccion
+10;282;Missing;2017-01-31;Otros
+10;324;Missing;2017-01-31;Mantenimiento Preventivo
+10;325;Missing;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-31;Instrucción de Trabajo
+10;425;Missing;2017-01-31;Inspeccion
+10;161;Missing;2017-01-31;Otros
+10;230;Missing;2017-01-31;Mantenimiento Preventivo
+10;455;Missing;2017-01-31;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-31;Instrucción de Trabajo
+10;433;Missing;2017-01-31;Inspeccion
+10;532;Missing;2017-01-31;Otros
+10;590;Missing;2017-01-31;Mantenimiento Preventivo
+10;591;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-02-01;Instrucción de Trabajo
+10;117;Missing;2017-02-01;Inspeccion
+10;119;Missing;2017-02-01;Otros
+10;573;Missing;2017-02-01;Mantenimiento Preventivo
+10;574;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-02-01;Instrucción de Trabajo
+10;101;Missing;2017-02-01;Inspeccion
+10;102;Missing;2017-02-01;Otros
+10;432;Missing;2017-02-01;Mantenimiento Preventivo
+10;511;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-02-01;Instrucción de Trabajo
+10;513;Missing;2017-02-01;Inspeccion
+10;265;12:23:42;2017-02-01;Otros
+10;266;12:56:35;2017-02-01;Mantenimiento Preventivo
+10;267;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-02-01;Instrucción de Trabajo
+10;109;Missing;2017-02-01;Inspeccion
+10;110;Missing;2017-02-01;Otros
+10;111;Missing;2017-02-01;Mantenimiento Preventivo
+10;409;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-02-01;Instrucción de Trabajo
+10;411;Missing;2017-02-01;Inspeccion
+10;515;Missing;2017-02-01;Otros
+10;530;Missing;2017-02-01;Mantenimiento Preventivo
+10;503;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-01;Instrucción de Trabajo
+10;218;Missing;2017-02-01;Inspeccion
+10;259;Missing;2017-02-01;Otros
+10;260;Missing;2017-02-01;Mantenimiento Preventivo
+10;461;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-02-04;Instrucción de Trabajo
+10;51;Missing;2017-02-04;Inspeccion
+10;52;Missing;2017-02-04;Otros
+10;53;Missing;2017-02-04;Mantenimiento Preventivo
+10;544;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-02-04;Instrucción de Trabajo
+10;546;Missing;2017-02-04;Inspeccion
+10;131;09:58:45;2017-02-04;Otros
+10;43;Missing;2017-02-04;Mantenimiento Preventivo
+10;464;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-04;Instrucción de Trabajo
+10;402;Missing;2017-02-04;Inspeccion
+10;536;Missing;2017-02-04;Otros
+10;381;Missing;2017-02-04;Mantenimiento Preventivo
+10;257;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-02-04;Instrucción de Trabajo
+10;283;Missing;2017-02-04;Inspeccion
+10;1;Missing;2017-02-04;Otros
+10;276;Missing;2017-02-04;Mantenimiento Preventivo
+10;277;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-02-04;Instrucción de Trabajo
+10;279;Missing;2017-02-04;Inspeccion
+10;282;Missing;2017-02-04;Otros
+10;324;Missing;2017-02-04;Mantenimiento Preventivo
+10;325;Missing;2017-02-04;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-02-04;Instrucción de Trabajo
+10;425;Missing;2017-02-04;Inspeccion
+10;161;Missing;2017-02-04;Otros
+10;230;Missing;2017-02-18;Mantenimiento Preventivo
+10;455;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-02-18;Instrucción de Trabajo
+10;433;Missing;2017-02-18;Inspeccion
+10;532;Missing;2017-02-18;Otros
+10;590;Missing;2017-02-18;Mantenimiento Preventivo
+10;591;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-02-18;Instrucción de Trabajo
+10;117;10:14:41;2017-02-18;Inspeccion
+10;119;Missing;2017-02-18;Otros
+10;573;Missing;2017-02-18;Mantenimiento Preventivo
+10;574;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-02-18;Instrucción de Trabajo
+10;101;Missing;2017-02-18;Inspeccion
+10;102;Missing;2017-02-18;Otros
+10;432;Missing;2017-02-18;Mantenimiento Preventivo
+10;511;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-02-18;Instrucción de Trabajo
+10;513;Missing;2017-02-18;Inspeccion
+10;265;Missing;2017-02-18;Otros
+10;266;Missing;2017-02-18;Mantenimiento Preventivo
+10;267;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-02-18;Instrucción de Trabajo
+10;109;Missing;2017-02-18;Inspeccion
+10;110;Missing;2017-02-18;Otros
+10;111;Missing;2017-02-18;Mantenimiento Preventivo
+10;409;Missing;2017-02-18;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-02-18;Instrucción de Trabajo
+10;411;Missing;2017-02-18;Inspeccion
+10;515;Missing;2017-03-04;Otros
+10;530;Missing;2017-03-04;Mantenimiento Preventivo
+10;503;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-03-04;Instrucción de Trabajo
+10;218;Missing;2017-03-04;Inspeccion
+10;259;Missing;2017-03-04;Otros
+10;260;Missing;2017-03-04;Mantenimiento Preventivo
+10;461;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-03-04;Instrucción de Trabajo
+10;51;Missing;2017-03-04;Inspeccion
+10;52;Missing;2017-03-04;Otros
+10;53;Missing;2017-03-04;Mantenimiento Preventivo
+10;544;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-03-04;Instrucción de Trabajo
+10;546;Missing;2017-03-04;Inspeccion
+10;131;Missing;2017-03-04;Otros
+10;43;Missing;2017-03-04;Mantenimiento Preventivo
+10;464;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-03-04;Instrucción de Trabajo
+10;402;Missing;2017-03-04;Inspeccion
+10;536;21:19:29;2017-03-04;Otros
+10;381;21:19:42;2017-03-04;Mantenimiento Preventivo
+10;257;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-03-04;Instrucción de Trabajo
+10;283;Missing;2017-03-04;Inspeccion
+10;1;Missing;2017-03-04;Otros
+10;276;Missing;2017-03-04;Mantenimiento Preventivo
+10;277;Missing;2017-03-04;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-03-04;Instrucción de Trabajo
+10;279;Missing;2017-03-04;Inspeccion
+10;282;Missing;2017-01-04;Otros
+10;324;Missing;2017-01-04;Mantenimiento Preventivo
+10;325;Missing;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-04;Instrucción de Trabajo
+10;425;Missing;2017-01-04;Inspeccion
+10;161;Missing;2017-01-04;Otros
+10;230;Missing;2017-01-04;Mantenimiento Preventivo
+10;455;Missing;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-04;Instrucción de Trabajo
+10;433;Missing;2017-01-04;Inspeccion
+10;532;Missing;2017-01-04;Otros
+10;590;Missing;2017-01-04;Mantenimiento Preventivo
+10;591;Missing;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-04;Instrucción de Trabajo
+10;117;Missing;2017-01-04;Inspeccion
+10;119;Missing;2017-01-04;Otros
+10;573;Missing;2017-01-04;Mantenimiento Preventivo
+10;574;Missing;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-04;Instrucción de Trabajo
+10;101;Missing;2017-01-04;Inspeccion
+10;102;Missing;2017-01-04;Otros
+10;432;Missing;2017-01-04;Mantenimiento Preventivo
+10;511;13:46:49;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-04;Instrucción de Trabajo
+10;513;Missing;2017-01-04;Inspeccion
+10;265;Missing;2017-01-04;Otros
+10;266;Missing;2017-01-04;Mantenimiento Preventivo
+10;267;Missing;2017-01-04;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-04;Instrucción de Trabajo
+10;109;Missing;2017-01-04;Inspeccion
+10;110;Missing;2017-01-04;Otros
+10;111;Missing;2017-01-04;Mantenimiento Preventivo
+10;409;08:58:42;2017-01-18;Mantenimiento Correctivo/Emergencia
+10;410;09:34:43;2017-01-18;Instrucción de Trabajo
+10;411;09:34:48;2017-01-18;Inspeccion
+10;515;Missing;2017-01-16;Otros
+10;530;Missing;2017-01-16;Mantenimiento Preventivo
+10;503;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-16;Instrucción de Trabajo
+10;218;Missing;2017-01-16;Inspeccion
+10;259;Missing;2017-01-16;Otros
+10;260;09:18:36;2017-01-16;Mantenimiento Preventivo
+10;461;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-01-16;Instrucción de Trabajo
+10;51;Missing;2017-01-16;Inspeccion
+10;52;Missing;2017-01-16;Otros
+10;53;Missing;2017-01-16;Mantenimiento Preventivo
+10;544;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-16;Instrucción de Trabajo
+10;546;Missing;2017-01-16;Inspeccion
+10;131;Missing;2017-01-16;Otros
+10;43;Missing;2017-01-16;Mantenimiento Preventivo
+10;464;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-16;Instrucción de Trabajo
+10;402;Missing;2017-01-16;Inspeccion
+10;536;Missing;2017-01-16;Otros
+10;381;08:58:22;2017-01-19;Mantenimiento Preventivo
+10;257;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-16;Instrucción de Trabajo
+10;283;14:44:00;2017-01-19;Inspeccion
+10;1;Missing;2017-01-16;Otros
+10;276;Missing;2017-01-16;Mantenimiento Preventivo
+10;277;Missing;2017-01-16;Mantenimiento Correctivo/Emergencia
+10;278;08:42:03;2017-01-17;Instrucción de Trabajo
+10;279;10:10:41;2017-01-17;Inspeccion
+10;282;10:10:52;2017-01-17;Otros
+10;324;11:40:35;2017-01-17;Mantenimiento Preventivo
+10;325;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-01-20;Instrucción de Trabajo
+10;425;Missing;2017-01-20;Inspeccion
+10;161;Missing;2017-01-20;Otros
+10;230;Missing;2017-01-20;Mantenimiento Preventivo
+10;455;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-20;Instrucción de Trabajo
+10;433;Missing;2017-01-20;Inspeccion
+10;532;Missing;2017-01-20;Otros
+10;590;Missing;2017-01-20;Mantenimiento Preventivo
+10;591;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-20;Instrucción de Trabajo
+10;117;Missing;2017-01-20;Inspeccion
+10;119;09:04:35;2017-01-20;Otros
+10;573;09:34:02;2017-01-20;Mantenimiento Preventivo
+10;574;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-01-20;Instrucción de Trabajo
+10;101;Missing;2017-01-20;Inspeccion
+10;102;Missing;2017-01-20;Otros
+10;432;Missing;2017-01-20;Mantenimiento Preventivo
+10;511;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-20;Instrucción de Trabajo
+10;513;Missing;2017-01-20;Inspeccion
+10;265;Missing;2017-01-20;Otros
+10;266;Missing;2017-01-20;Mantenimiento Preventivo
+10;267;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-20;Instrucción de Trabajo
+10;109;Missing;2017-01-20;Inspeccion
+10;110;Missing;2017-01-20;Otros
+10;111;Missing;2017-01-20;Mantenimiento Preventivo
+10;409;Missing;2017-01-20;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-20;Instrucción de Trabajo
+10;411;Missing;2017-01-20;Inspeccion
+10;515;Missing;2017-01-24;Otros
+10;530;Missing;2017-01-24;Mantenimiento Preventivo
+10;503;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-01-24;Instrucción de Trabajo
+10;218;Missing;2017-01-24;Inspeccion
+10;259;Missing;2017-01-24;Otros
+10;260;Missing;2017-01-24;Mantenimiento Preventivo
+10;461;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;323;09:23:53;2017-01-25;Instrucción de Trabajo
+10;51;09:33:23;2017-01-25;Inspeccion
+10;52;09:33:33;2017-01-25;Otros
+10;53;Missing;2017-01-24;Mantenimiento Preventivo
+10;544;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-01-24;Instrucción de Trabajo
+10;546;Missing;2017-01-24;Inspeccion
+10;131;Missing;2017-01-24;Otros
+10;43;Missing;2017-01-24;Mantenimiento Preventivo
+10;464;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-01-24;Instrucción de Trabajo
+10;402;Missing;2017-01-24;Inspeccion
+10;536;Missing;2017-01-24;Otros
+10;381;Missing;2017-01-24;Mantenimiento Preventivo
+10;257;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-01-24;Instrucción de Trabajo
+10;283;Missing;2017-01-24;Inspeccion
+10;1;Missing;2017-01-24;Otros
+10;276;Missing;2017-01-24;Mantenimiento Preventivo
+10;277;Missing;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-01-24;Instrucción de Trabajo
+10;279;Missing;2017-01-24;Inspeccion
+10;282;Missing;2017-01-24;Otros
+10;324;09:10:12;2017-01-24;Mantenimiento Preventivo
+10;325;10:20:33;2017-01-24;Mantenimiento Correctivo/Emergencia
+10;424;10:20:39;2017-01-24;Instrucción de Trabajo
+10;425;Missing;2017-01-27;Inspeccion
+10;161;Missing;2017-01-27;Otros
+10;230;Missing;2017-01-27;Mantenimiento Preventivo
+10;455;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-01-27;Instrucción de Trabajo
+10;433;Missing;2017-01-27;Inspeccion
+10;532;Missing;2017-01-27;Otros
+10;590;Missing;2017-01-27;Mantenimiento Preventivo
+10;591;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-01-27;Instrucción de Trabajo
+10;117;Missing;2017-01-27;Inspeccion
+10;119;Missing;2017-01-27;Otros
+10;573;Missing;2017-01-27;Mantenimiento Preventivo
+10;574;08:44:49;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;31;09:10:55;2017-01-27;Instrucción de Trabajo
+10;101;Missing;2017-01-27;Inspeccion
+10;102;Missing;2017-01-27;Otros
+10;432;Missing;2017-01-27;Mantenimiento Preventivo
+10;511;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-01-27;Instrucción de Trabajo
+10;513;Missing;2017-01-27;Inspeccion
+10;265;Missing;2017-01-27;Otros
+10;266;Missing;2017-01-27;Mantenimiento Preventivo
+10;267;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-01-27;Instrucción de Trabajo
+10;109;Missing;2017-01-27;Inspeccion
+10;110;Missing;2017-01-27;Otros
+10;111;Missing;2017-01-27;Mantenimiento Preventivo
+10;409;Missing;2017-01-27;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-01-27;Instrucción de Trabajo
+10;411;Missing;2017-01-27;Inspeccion
+10;515;Missing;2017-01-27;Otros
+10;530;Missing;2017-01-27;Mantenimiento Preventivo
+10;503;09:31:33;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-01;Instrucción de Trabajo
+10;218;Missing;2017-02-01;Inspeccion
+10;259;Missing;2017-02-01;Otros
+10;260;Missing;2017-02-01;Mantenimiento Preventivo
+10;461;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-02-01;Instrucción de Trabajo
+10;51;Missing;2017-02-01;Inspeccion
+10;52;Missing;2017-02-01;Otros
+10;53;Missing;2017-02-01;Mantenimiento Preventivo
+10;544;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-02-01;Instrucción de Trabajo
+10;546;Missing;2017-02-01;Inspeccion
+10;131;Missing;2017-02-01;Otros
+10;43;Missing;2017-02-01;Mantenimiento Preventivo
+10;464;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-01;Instrucción de Trabajo
+10;402;Missing;2017-02-01;Inspeccion
+10;536;Missing;2017-02-01;Otros
+10;381;Missing;2017-02-01;Mantenimiento Preventivo
+10;257;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-02-01;Instrucción de Trabajo
+10;283;Missing;2017-02-01;Inspeccion
+10;1;Missing;2017-02-01;Otros
+10;276;Missing;2017-02-01;Mantenimiento Preventivo
+10;277;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-02-01;Instrucción de Trabajo
+10;279;Missing;2017-02-01;Inspeccion
+10;282;Missing;2017-02-01;Otros
+10;324;Missing;2017-02-01;Mantenimiento Preventivo
+10;325;Missing;2017-02-01;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-02-01;Instrucción de Trabajo
+10;425;Missing;2017-02-09;Inspeccion
+10;161;Missing;2017-02-09;Otros
+10;230;Missing;2017-02-09;Mantenimiento Preventivo
+10;455;Missing;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-02-09;Instrucción de Trabajo
+10;433;Missing;2017-02-09;Inspeccion
+10;532;Missing;2017-02-09;Otros
+10;590;Missing;2017-02-09;Mantenimiento Preventivo
+10;591;Missing;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-02-09;Instrucción de Trabajo
+10;117;Missing;2017-02-09;Inspeccion
+10;119;Missing;2017-02-09;Otros
+10;573;Missing;2017-02-09;Mantenimiento Preventivo
+10;574;Missing;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-02-09;Instrucción de Trabajo
+10;101;Missing;2017-02-09;Inspeccion
+10;102;Missing;2017-02-09;Otros
+10;432;Missing;2017-02-09;Mantenimiento Preventivo
+10;511;Missing;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-02-09;Instrucción de Trabajo
+10;513;Missing;2017-02-09;Inspeccion
+10;265;Missing;2017-02-09;Otros
+10;266;Missing;2017-02-09;Mantenimiento Preventivo
+10;267;08:33:51;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;408;09:33:34;2017-02-09;Instrucción de Trabajo
+10;109;09:33:42;2017-02-09;Inspeccion
+10;110;16:31:35;2017-02-09;Otros
+10;111;17:47:38;2017-02-09;Mantenimiento Preventivo
+10;409;14:41:21;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;410;16:30:23;2017-02-09;Instrucción de Trabajo
+10;411;Missing;2017-02-09;Inspeccion
+10;515;Missing;2017-02-09;Otros
+10;530;Missing;2017-02-09;Mantenimiento Preventivo
+10;503;Missing;2017-02-09;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-09;Instrucción de Trabajo
+10;218;Missing;2017-02-10;Inspeccion
+10;259;Missing;2017-02-10;Otros
+10;260;Missing;2017-02-10;Mantenimiento Preventivo
+10;461;Missing;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-02-10;Instrucción de Trabajo
+10;51;Missing;2017-02-10;Inspeccion
+10;52;Missing;2017-02-10;Otros
+10;53;Missing;2017-02-10;Mantenimiento Preventivo
+10;544;Missing;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-02-10;Instrucción de Trabajo
+10;546;Missing;2017-02-10;Inspeccion
+10;131;Missing;2017-02-10;Otros
+10;43;Missing;2017-02-10;Mantenimiento Preventivo
+10;464;08:57:25;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-10;Instrucción de Trabajo
+10;402;Missing;2017-02-10;Inspeccion
+10;536;Missing;2017-02-10;Otros
+10;381;Missing;2017-02-10;Mantenimiento Preventivo
+10;257;Missing;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-02-10;Instrucción de Trabajo
+10;283;Missing;2017-02-10;Inspeccion
+10;1;Missing;2017-02-10;Otros
+10;276;Missing;2017-02-10;Mantenimiento Preventivo
+10;277;Missing;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-02-10;Instrucción de Trabajo
+10;279;Missing;2017-02-10;Inspeccion
+10;282;Missing;2017-02-10;Otros
+10;324;Missing;2017-02-10;Mantenimiento Preventivo
+10;325;Missing;2017-02-10;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-02-10;Instrucción de Trabajo
+10;425;Missing;2017-02-10;Inspeccion
+10;161;Missing;2017-02-10;Otros
+10;230;09:17:24;2017-02-15;Mantenimiento Preventivo
+10;455;09:47:30;2017-02-15;Mantenimiento Correctivo/Emergencia
+10;241;09:47:36;2017-02-15;Instrucción de Trabajo
+10;433;10:19:35;2017-02-15;Inspeccion
+10;532;10:20:11;2017-02-15;Otros
+10;590;10:47:27;2017-02-15;Mantenimiento Preventivo
+10;591;10:48:56;2017-02-15;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-02-14;Instrucción de Trabajo
+10;117;Missing;2017-02-14;Inspeccion
+10;119;Missing;2017-02-14;Otros
+10;573;Missing;2017-02-14;Mantenimiento Preventivo
+10;574;Missing;2017-02-14;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-02-14;Instrucción de Trabajo
+10;101;Missing;2017-02-14;Inspeccion
+10;102;Missing;2017-02-14;Otros
+10;432;Missing;2017-02-14;Mantenimiento Preventivo
+10;511;Missing;2017-02-14;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-02-14;Instrucción de Trabajo
+10;513;Missing;2017-02-14;Inspeccion
+10;265;Missing;2017-02-14;Otros
+10;266;Missing;2017-02-14;Mantenimiento Preventivo
+10;267;Missing;2017-02-14;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-02-14;Instrucción de Trabajo
+10;109;Missing;2017-02-14;Inspeccion
+10;110;Missing;2017-02-14;Otros
+10;111;14:57:58;2017-02-14;Mantenimiento Preventivo
+10;409;16:43:05;2017-02-14;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-02-14;Instrucción de Trabajo
+10;411;Missing;2017-02-14;Inspeccion
+10;515;Missing;2017-02-14;Otros
+10;530;Missing;2017-02-14;Mantenimiento Preventivo
+10;503;Missing;2017-02-14;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-14;Instrucción de Trabajo
+10;218;Missing;2017-02-14;Inspeccion
+10;259;Missing;2017-02-14;Otros
+10;260;Missing;2017-02-14;Mantenimiento Preventivo
+10;461;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-02-17;Instrucción de Trabajo
+10;51;Missing;2017-02-17;Inspeccion
+10;52;Missing;2017-02-17;Otros
+10;53;Missing;2017-02-17;Mantenimiento Preventivo
+10;544;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-02-17;Instrucción de Trabajo
+10;546;Missing;2017-02-17;Inspeccion
+10;131;Missing;2017-02-17;Otros
+10;43;Missing;2017-02-17;Mantenimiento Preventivo
+10;464;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-17;Instrucción de Trabajo
+10;402;Missing;2017-02-17;Inspeccion
+10;536;08:54:38;2017-02-17;Otros
+10;381;09:12:28;2017-02-17;Mantenimiento Preventivo
+10;257;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-02-17;Instrucción de Trabajo
+10;283;Missing;2017-02-17;Inspeccion
+10;1;Missing;2017-02-17;Otros
+10;276;Missing;2017-02-17;Mantenimiento Preventivo
+10;277;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-02-17;Instrucción de Trabajo
+10;279;Missing;2017-02-17;Inspeccion
+10;282;Missing;2017-02-17;Otros
+10;324;Missing;2017-02-17;Mantenimiento Preventivo
+10;325;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-02-17;Instrucción de Trabajo
+10;425;Missing;2017-02-17;Inspeccion
+10;161;Missing;2017-02-17;Otros
+10;230;Missing;2017-02-17;Mantenimiento Preventivo
+10;455;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-02-17;Instrucción de Trabajo
+10;433;Missing;2017-02-17;Inspeccion
+10;532;09:03:24;2017-02-17;Otros
+10;590;09:38:53;2017-02-17;Mantenimiento Preventivo
+10;591;09:38:58;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;273;10:13:26;2017-02-17;Instrucción de Trabajo
+10;117;10:14:02;2017-02-17;Inspeccion
+10;119;Missing;2017-02-17;Otros
+10;573;Missing;2017-02-17;Mantenimiento Preventivo
+10;574;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-02-17;Instrucción de Trabajo
+10;101;Missing;2017-02-17;Inspeccion
+10;102;Missing;2017-02-17;Otros
+10;432;Missing;2017-02-17;Mantenimiento Preventivo
+10;511;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-02-17;Instrucción de Trabajo
+10;513;Missing;2017-02-17;Inspeccion
+10;265;Missing;2017-02-17;Otros
+10;266;Missing;2017-02-17;Mantenimiento Preventivo
+10;267;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-02-17;Instrucción de Trabajo
+10;109;Missing;2017-02-17;Inspeccion
+10;110;Missing;2017-02-17;Otros
+10;111;Missing;2017-02-17;Mantenimiento Preventivo
+10;409;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-02-17;Instrucción de Trabajo
+10;411;Missing;2017-02-17;Inspeccion
+10;515;Missing;2017-02-17;Otros
+10;530;Missing;2017-02-17;Mantenimiento Preventivo
+10;503;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-17;Instrucción de Trabajo
+10;218;Missing;2017-02-17;Inspeccion
+10;259;Missing;2017-02-17;Otros
+10;260;Missing;2017-02-17;Mantenimiento Preventivo
+10;461;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-02-17;Instrucción de Trabajo
+10;51;08:58:46;2017-02-22;Inspeccion
+10;52;09:34:59;2017-02-22;Otros
+10;53;09:35:06;2017-02-22;Mantenimiento Preventivo
+10;544;10:02:58;2017-02-22;Mantenimiento Correctivo/Emergencia
+10;545;10:03:30;2017-02-22;Instrucción de Trabajo
+10;546;10:33:56;2017-02-22;Inspeccion
+10;131;10:34:35;2017-02-22;Otros
+10;43;11:02:26;2017-02-22;Mantenimiento Preventivo
+10;464;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-17;Instrucción de Trabajo
+10;402;Missing;2017-02-17;Inspeccion
+10;536;Missing;2017-02-17;Otros
+10;381;15:49:10;2017-02-17;Mantenimiento Preventivo
+10;257;16:51:47;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;66;16:51:53;2017-02-17;Instrucción de Trabajo
+10;283;Missing;2017-02-17;Inspeccion
+10;1;Missing;2017-02-17;Otros
+10;276;Missing;2017-02-17;Mantenimiento Preventivo
+10;277;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-02-17;Instrucción de Trabajo
+10;279;Missing;2017-02-17;Inspeccion
+10;282;Missing;2017-02-17;Otros
+10;324;Missing;2017-02-17;Mantenimiento Preventivo
+10;325;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-02-17;Instrucción de Trabajo
+10;425;Missing;2017-02-17;Inspeccion
+10;161;Missing;2017-02-17;Otros
+10;230;15:21:28;2017-02-21;Mantenimiento Preventivo
+10;455;16:15:45;2017-02-21;Mantenimiento Correctivo/Emergencia
+10;241;16:35:50;2017-02-21;Instrucción de Trabajo
+10;433;17:18:56;2017-02-21;Inspeccion
+10;532;08:37:03;2017-02-23;Otros
+10;590;09:33:07;2017-02-23;Mantenimiento Preventivo
+10;591;10:10:29;2017-02-23;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-02-17;Instrucción de Trabajo
+10;117;15:01:04;2017-02-23;Inspeccion
+10;119;Missing;2017-02-17;Otros
+10;573;Missing;2017-02-17;Mantenimiento Preventivo
+10;574;Missing;2017-02-17;Mantenimiento Correctivo/Emergencia
+10;31;09:02:17;2017-02-21;Instrucción de Trabajo
+10;101;09:58:32;2017-02-21;Inspeccion
+10;102;08:50:47;2017-02-24;Otros
+10;432;10:23:43;2017-02-24;Mantenimiento Preventivo
+10;511;09:58:47;2017-02-21;Mantenimiento Correctivo/Emergencia
+10;512;11:30:49;2017-02-21;Instrucción de Trabajo
+10;513;Missing;2017-02-28;Inspeccion
+10;265;Missing;2017-02-28;Otros
+10;266;Missing;2017-02-28;Mantenimiento Preventivo
+10;267;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-02-28;Instrucción de Trabajo
+10;109;Missing;2017-02-28;Inspeccion
+10;110;Missing;2017-02-28;Otros
+10;111;Missing;2017-02-28;Mantenimiento Preventivo
+10;409;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-02-28;Instrucción de Trabajo
+10;411;Missing;2017-02-28;Inspeccion
+10;515;Missing;2017-02-28;Otros
+10;530;Missing;2017-02-28;Mantenimiento Preventivo
+10;503;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-02-28;Instrucción de Trabajo
+10;218;16:41:06;2017-02-28;Inspeccion
+10;259;16:56:14;2017-02-28;Otros
+10;260;Missing;2017-02-28;Mantenimiento Preventivo
+10;461;16:56:31;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;323;17:00:23;2017-02-28;Instrucción de Trabajo
+10;51;Missing;2017-02-28;Inspeccion
+10;52;Missing;2017-02-28;Otros
+10;53;Missing;2017-02-28;Mantenimiento Preventivo
+10;544;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-02-28;Instrucción de Trabajo
+10;546;Missing;2017-02-28;Inspeccion
+10;131;Missing;2017-02-28;Otros
+10;43;Missing;2017-02-28;Mantenimiento Preventivo
+10;464;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-02-28;Instrucción de Trabajo
+10;402;Missing;2017-02-28;Inspeccion
+10;536;Missing;2017-02-28;Otros
+10;381;Missing;2017-02-28;Mantenimiento Preventivo
+10;257;Missing;2017-02-28;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-03-03;Instrucción de Trabajo
+10;283;Missing;2017-03-03;Inspeccion
+10;1;Missing;2017-03-03;Otros
+10;276;Missing;2017-03-03;Mantenimiento Preventivo
+10;277;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;278;Missing;2017-03-03;Instrucción de Trabajo
+10;279;Missing;2017-03-03;Inspeccion
+10;282;Missing;2017-03-03;Otros
+10;324;Missing;2017-03-03;Mantenimiento Preventivo
+10;325;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;424;Missing;2017-03-03;Instrucción de Trabajo
+10;425;Missing;2017-03-03;Inspeccion
+10;161;Missing;2017-03-03;Otros
+10;230;06:33:09;2017-03-03;Mantenimiento Preventivo
+10;455;07:01:02;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;241;Missing;2017-03-03;Instrucción de Trabajo
+10;433;Missing;2017-03-03;Inspeccion
+10;532;Missing;2017-03-03;Otros
+10;590;Missing;2017-03-03;Mantenimiento Preventivo
+10;591;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;273;Missing;2017-03-03;Instrucción de Trabajo
+10;117;Missing;2017-03-03;Inspeccion
+10;119;Missing;2017-03-03;Otros
+10;573;Missing;2017-03-03;Mantenimiento Preventivo
+10;574;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;31;Missing;2017-03-03;Instrucción de Trabajo
+10;101;Missing;2017-03-03;Inspeccion
+10;102;Missing;2017-03-03;Otros
+10;432;Missing;2017-03-03;Mantenimiento Preventivo
+10;511;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;512;Missing;2017-03-03;Instrucción de Trabajo
+10;513;Missing;2017-03-03;Inspeccion
+10;265;Missing;2017-03-03;Otros
+10;266;Missing;2017-03-03;Mantenimiento Preventivo
+10;267;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;408;Missing;2017-03-03;Instrucción de Trabajo
+10;109;Missing;2017-03-03;Inspeccion
+10;110;Missing;2017-03-03;Otros
+10;111;Missing;2017-03-03;Mantenimiento Preventivo
+10;409;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;410;Missing;2017-03-03;Instrucción de Trabajo
+10;411;08:38:41;2017-03-03;Inspeccion
+10;515;08:58:24;2017-03-03;Otros
+10;530;Missing;2017-03-03;Mantenimiento Preventivo
+10;503;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;504;Missing;2017-03-03;Instrucción de Trabajo
+10;218;Missing;2017-03-03;Inspeccion
+10;259;Missing;2017-03-03;Otros
+10;260;Missing;2017-03-03;Mantenimiento Preventivo
+10;461;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;323;Missing;2017-03-03;Instrucción de Trabajo
+10;51;Missing;2017-03-03;Inspeccion
+10;52;Missing;2017-03-03;Otros
+10;53;Missing;2017-03-03;Mantenimiento Preventivo
+10;544;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;545;Missing;2017-03-03;Instrucción de Trabajo
+10;546;Missing;2017-03-03;Inspeccion
+10;131;Missing;2017-03-03;Otros
+10;43;Missing;2017-03-03;Mantenimiento Preventivo
+10;464;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;212;Missing;2017-03-03;Instrucción de Trabajo
+10;402;Missing;2017-03-03;Inspeccion
+10;536;Missing;2017-03-03;Otros
+10;381;Missing;2017-03-03;Mantenimiento Preventivo
+10;257;Missing;2017-03-03;Mantenimiento Correctivo/Emergencia
+10;66;Missing;2017-03-03;Instrucción de Trabajo

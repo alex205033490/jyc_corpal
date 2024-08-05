@@ -1,0 +1,47 @@
+﻿body {
+}
+
+.Centrar
+{   
+    margin: 0 auto;            
+    width:900px;
+          
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.busqueda 
+{
+    border: double #666666;    
+    height: 50px;  
+    width: 700px;    
+    margin: 0 auto;
+    text-align:center;
+    }
+    
+.TablaVista
+{
+    border: double #666666;    
+    height: 300px;  
+    width: 900px;    
+    overflow: auto;    
+    }
+    
+.pie1
+{
+    height: 50px;  
+    width: 700px;    
+    }
+        
+    .busqueda2 
+{
+    border: double #666666;    
+    height: 70px;  
+    width: 900px;    
+    margin: 0 auto;
+    text-align:center;
+    }
