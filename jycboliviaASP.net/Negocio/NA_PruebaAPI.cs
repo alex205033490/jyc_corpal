@@ -17,7 +17,7 @@ namespace jycboliviaASP.net.Negocio
         DBApi api = new DBApi();
         public NA_PruebaAPI() { }
 
-        public string pruebaProducto() {
+        public string get_personal() {
             Persona datoP = new Persona
             {
                 Username = "adm",
@@ -36,7 +36,24 @@ namespace jycboliviaASP.net.Negocio
         public static void Main()
         {
            NA_PruebaAPI nA_Pru = new NA_PruebaAPI();
-            nA_Pru.pruebaProducto();
+            nA_Pru.get_personal();
+        }
+
+        internal string get_producto(string usuario, string pass, string producto)
+        {
+            Persona datoP = new Persona
+            {
+                Username = usuario,
+                Password = pass
+            };
+            string json = JsonConvert.SerializeObject(datoP);
+            dynamic DatosResponsable = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
+            string Token = DatosResponsable.Resultado.Token.ToString();
+
+            dynamic resultProducto = api.Get_2("http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar//" + usuario + "//" + producto, Token);
+            return resultProducto.Resultado[0].Nombre.ToString();
+           // return resultProducto.ToString();
+
         }
     }
 }

@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{2663857B-90A4-484D-9691-71DEAB1E98A6}|jycboliviaASP.net\\jyccorpal.net.csproj|solutionrelative:jycboliviaasp.net\\negocio\\na_pruebaapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2663857B-90A4-484D-9691-71DEAB1E98A6}|jycboliviaASP.net\\jyccorpal.net.csproj|f:\\users\\sistema\\documents\\github\\jyc_corpal\\jycboliviaasp.net\\presentacion\\fcorpal_prueba.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2663857B-90A4-484D-9691-71DEAB1E98A6}|jycboliviaASP.net\\jyccorpal.net.csproj|solutionrelative:jycboliviaasp.net\\presentacion\\fcorpal_prueba.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2663857B-90A4-484D-9691-71DEAB1E98A6}|jycboliviaASP.net\\jyccorpal.net.csproj|F:\\Users\\SISTEMA\\Documents\\GitHub\\jyc_corpal\\jycboliviaasp.net\\presentacion\\fcorpal_prueba.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{2663857B-90A4-484D-9691-71DEAB1E98A6}|jycboliviaASP.net\\jyccorpal.net.csproj|solutionrelative:jycboliviaasp.net\\presentacion\\fcorpal_prueba.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -32,13 +36,27 @@
               "RelativeDocumentMoniker": "jycboliviaASP.net\\Negocio\\NA_PruebaAPI.cs",
               "ToolTip": "F:\\Users\\SISTEMA\\Documents\\GitHub\\jyc_corpal\\jycboliviaASP.net\\Negocio\\NA_PruebaAPI.cs",
               "RelativeToolTip": "jycboliviaASP.net\\Negocio\\NA_PruebaAPI.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAIAxwB4AAAANAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAADUAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T21:31:26.273Z"
+              "WhenOpened": "2024-08-05T21:31:26.273Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "FCorpal_prueba.aspx.cs",
+              "DocumentMoniker": "F:\\Users\\SISTEMA\\Documents\\GitHub\\jyc_corpal\\jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx.cs",
+              "RelativeDocumentMoniker": "jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx.cs",
+              "ToolTip": "F:\\Users\\SISTEMA\\Documents\\GitHub\\jyc_corpal\\jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx.cs",
+              "RelativeToolTip": "jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAASwBYAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T15:22:58.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "FCorpal_prueba.aspx",
               "DocumentMoniker": "F:\\Users\\SISTEMA\\Documents\\GitHub\\jyc_corpal\\jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx",
               "RelativeDocumentMoniker": "jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx",
@@ -46,7 +64,8 @@
               "RelativeToolTip": "jycboliviaASP.net\\Presentacion\\FCorpal_prueba.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-05T21:27:47.097Z"
+              "WhenOpened": "2024-08-05T21:27:47.097Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

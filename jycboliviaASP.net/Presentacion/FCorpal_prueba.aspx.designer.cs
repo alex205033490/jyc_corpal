@@ -24,13 +24,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label Label46;
 
         /// <summary>
-        /// Control tx_nroproduccion.
+        /// Control tx_producto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_nroproduccion;
+        protected global::System.Web.UI.WebControls.TextBox tx_producto;
 
         /// <summary>
         /// Control Label35.
@@ -42,13 +42,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label Label35;
 
         /// <summary>
-        /// Control tx_detalle.
+        /// Control tx_resultado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_detalle;
+        protected global::System.Web.UI.WebControls.TextBox tx_resultado;
 
         /// <summary>
         /// Control bt_insertar.

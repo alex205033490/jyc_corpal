@@ -20,11 +20,11 @@
        <table>             
        <tr>        
         <td>
-            <asp:Label ID="Label46" runat="server" Text="Prueba:"></asp:Label>
+            <asp:Label ID="Label46" runat="server" Text="Producto:"></asp:Label>
            </td>                    
         <td>
-            <asp:TextBox ID="tx_nroproduccion" class="form-control"  runat="server" 
-                Width="150px"></asp:TextBox>
+            <asp:TextBox ID="tx_producto" class="form-control" runat="server"
+                Width="300px"></asp:TextBox>
            </td>   
         
        </tr>       
@@ -64,7 +64,7 @@
                 <asp:Label ID="Label35" runat="server" Text="Resultado :"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="tx_detalle" class="form-control" runat="server" Height="100px" TextMode="MultiLine" 
+                <asp:TextBox ID="tx_resultado" class="form-control" runat="server" Height="100px" TextMode="MultiLine"
                     Width="500px"></asp:TextBox>
             </td>
             <td></td>

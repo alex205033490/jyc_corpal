@@ -33,8 +33,7 @@
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li><a href="../Presentacion/FCorpal_GestonarResponsable.aspx" id="mn_gestionarResponsable" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Responsable</span></a></li>
           <li><a href="../Presentacion/FCorpal_GestionarPermisos.aspx" id="mn_gestionarPermisos" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Permisos</span></a></li>
-          <li><a href="../Presentacion/FCorpal_GestionarFormularios.aspx" id="mn_gestionarFormularios" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Formularios</span></a></li>
-          <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>Prueba</span></a></li>
+          <li><a href="../Presentacion/FCorpal_GestionarFormularios.aspx" id="mn_gestionarFormularios" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Formularios</span></a></li>          
         </ul>
       </li><!-- End Components Nav -->
 
@@ -104,8 +103,8 @@
           </ul>
         </li><!-- End Tables Nav -->
 
-         <li class="nav-heading">SGI</li>
 
+        <li class="nav-heading">SGI</li>
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#sgi-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>SGI</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -119,8 +118,15 @@
                 <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><i class="bi bi-circle"></i><span>Activos JYC</span></a></li>                       
             </ul>
         </li><!-- End Tables Nav -->
-                  
-
+                
+      <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#prueba-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>PRUEBA</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+        <ul id="prueba-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>Prueba</span></a></li>
+        </ul>
+        </li>
     </ul>
 
   </aside><!-- End Sidebar-->
