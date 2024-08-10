@@ -18,7 +18,6 @@ namespace jycboliviaASP.net.Presentacion
         protected void bt_insertar_Click(object sender, EventArgs e)
         {
             string producto = tx_producto.Text;
-
             NA_PruebaAPI pp = new NA_PruebaAPI();
             string resultado = pp.get_producto("adm","123",producto);
             tx_resultado.Text = resultado;
