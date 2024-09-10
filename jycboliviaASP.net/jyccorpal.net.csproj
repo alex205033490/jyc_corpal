@@ -470,6 +470,7 @@
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_APIClientes.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
@@ -831,6 +832,7 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_APIclientes.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
@@ -930,6 +932,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.designer.cs">
       <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_APIClientes.aspx.cs">
+      <DependentUpon>FCorpal_APIClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_APIClientes.aspx.designer.cs">
+      <DependentUpon>FCorpal_APIClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs">
       <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
