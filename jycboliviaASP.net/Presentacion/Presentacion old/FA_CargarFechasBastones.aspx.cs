@@ -13,5 +13,10 @@ namespace jycboliviaASP.net.Presentacion
         {
 
         }
+
+        protected void bt_cargarDocumentos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,56 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+    margin: 0 auto;        
+    width:1100px;    
+    }
+
+
+.titulo
+{        
+   
+   
+    }
+    
+     .DatosProyecto
+ {
+     border: double #666666;  
+     width: 500px;          
+     height: 150px;     
+     overflow: auto;
+     }
+     
+      .ProyectosView
+ {
+     border: double #666666;  
+     width: 600px;          
+     height: 150px;     
+     overflow: auto;
+ }
+     
+  .Cliente
+ {
+     border: double #666666;  
+     width: 500px;          
+     height: 300px;     
+     overflow: auto;
+     }
+
+.datosCliente
+ {
+     border: double #666666;  
+     width: 600px;          
+     height: 300px;
+     overflow: auto;
+     }
+     
+     
+
+     
+     .blanco
+     {         
+         height: 50px; 
+         }

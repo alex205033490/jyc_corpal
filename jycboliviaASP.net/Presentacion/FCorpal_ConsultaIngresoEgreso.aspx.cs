@@ -17,6 +17,7 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
             this.Title = Session["BaseDatos"].ToString();
             if (tienePermisoDeIngreso(117) == false)
             {
@@ -26,7 +27,7 @@ namespace jycboliviaASP.net.Presentacion
             if (!IsPostBack)
             {
               //  cargarCobrador();
-            }
+            }*/
         }
 
         // webservice que me permite la autocompletacion

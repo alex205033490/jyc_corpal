@@ -1,0 +1,36 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:800px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+    
+     .datoscheques
+ {
+     border: double #666666;  
+     width: 600px;          
+     height: 200px;     
+     overflow: auto;
+     }
+     
+ .datosSuma
+ {
+     border: double #666666;  
+     width: 600px;          
+     height: 100px;     
+     overflow: auto;
+     }
+     
+     .blanco
+     {         
+         height: 50px; 
+         }

@@ -24,7 +24,7 @@ namespace jycboliviaASP.net.Presentacion
                case "Prueba":                
                    Session["NombreBaseDatos"] = "db_prueba";
                    Session["BaseDatos"] = "Prueba";
-                   Session["DB"] = "db_seguimientoprueba_jyc";
+                   Session["DB"] = "db_prueba";
                    Session["ID_UNE"] = "Prueba SRL";
                    break;
           

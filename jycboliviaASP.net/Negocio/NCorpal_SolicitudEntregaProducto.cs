@@ -149,13 +149,18 @@ namespace jycboliviaASP.net.Negocio
             return dato;
         }
 
-        internal float get_Stock(int codProducto)
+        internal float get_Stock(int codProducto, string tipoSolicitud)
         {
             DataSet dato = dsp.get_Stock(codProducto);            
             if (dato.Tables[0].Rows.Count > 0)
             {
                 float stock;
-                float.TryParse(dato.Tables[0].Rows[0][3].ToString(), out stock);
+                if (tipoSolicitud.Equals("ITEM PACK FERIAL")) {
+                    float.TryParse(dato.Tables[0].Rows[0][6].ToString(), out stock);
+                }
+                else
+                    float.TryParse(dato.Tables[0].Rows[0][5].ToString(), out stock);
+
                 return stock;
             }
             else

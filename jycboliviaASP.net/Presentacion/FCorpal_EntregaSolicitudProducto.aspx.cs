@@ -151,7 +151,8 @@ namespace jycboliviaASP.net.Presentacion
                 {                    
                     int codProducto ;
                     int.TryParse(row.Cells[0].Text, out codProducto);
-                    float StockProductos = nss.get_Stock(codProducto );
+                    string tipoSolicitud = row.Cells[4].Text;
+                    float StockProductos = nss.get_Stock(codProducto, tipoSolicitud);
 
                     float cantAentregar;
                     TextBox tx_cant2 = row.Cells[6].FindControl("tx_cantidadEntregarOK") as TextBox;

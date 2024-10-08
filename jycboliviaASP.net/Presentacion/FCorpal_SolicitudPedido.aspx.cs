@@ -37,6 +37,7 @@ namespace jycboliviaASP.net.Presentacion
                 datoRepuesto.Columns.Add("Precio", typeof(string));
                 datoRepuesto.Columns.Add("Cantidad", typeof(string));
                 datoRepuesto.Columns.Add("PrecioTotal", typeof(string));
+                datoRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
 
                 gv_adicionados.DataSource = datoRepuesto;
                 gv_adicionados.DataBind();
@@ -71,7 +72,7 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] GetlistaProductos(string prefixText, int count)
         {
             string nombreProducto = prefixText;
-            /*
+            
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
             DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
          
@@ -82,8 +83,8 @@ namespace jycboliviaASP.net.Presentacion
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
             return lista;
-            */
-
+            
+            /*
             NA_endpoints napi = new NA_endpoints();
             dynamic tuplas = napi.get_productoAlmacen(nombreProducto, "adm", "123");            
             JArray rowsArray = (JArray)tuplas["Resultado"];
@@ -94,8 +95,9 @@ namespace jycboliviaASP.net.Presentacion
                 lista[i] = obj["Descripcion"].ToString() ;
                 i++;
             }
-
+            
             return lista;
+            */
         }
 
         public string convertidorFecha(string fecha)
@@ -135,7 +137,9 @@ namespace jycboliviaASP.net.Presentacion
         private void adicionar_productos()
         {
             float cantidad;
-            float.TryParse(tx_cantidadProducto.Text, out cantidad);
+            float.TryParse(tx_cantidadProducto.Text, out cantidad);            
+            bool itemPackFerial = cb_itemPackFerial.Checked;
+
             if(cantidad > 0){
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 CheckBox cb = null;
@@ -150,16 +154,40 @@ namespace jycboliviaASP.net.Presentacion
                         float precio;
                         float.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
                         string tipo = dd_tipoSolicitud.SelectedItem.Text;
-                        DataRow tupla = datoRepuesto.NewRow();
-                        tupla["Codigo"] = codigo;
-                        tupla["producto"] = producto;
-                        tupla["Medida"] = Medida;
-                        tupla["Tipo"] = tipo;
-                        tupla["Precio"] = precio;
-                        tupla["Cantidad"] = cantidad;
-                        tupla["PrecioTotal"] = (precio * cantidad);
+                        float StockProducto;
+                        float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
+                        float StockPackFerial;
+                        float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
+                        /*
+                        float StockLimite = 0;
 
-                        datoRepuesto.Rows.Add(tupla);
+                        if (itemPackFerial == true)
+                        {
+                            StockLimite = StockPackFerial;
+                        }else
+                            StockLimite = StockProducto;
+                        
+                        if (cantidad <= StockLimite) {  */
+                            DataRow tupla = datoRepuesto.NewRow();
+                            tupla["Codigo"] = codigo;
+                            tupla["producto"] = producto;
+                            tupla["Medida"] = Medida;
+                            tupla["Tipo"] = tipo;
+                            tupla["Precio"] = precio;
+                            tupla["Cantidad"] = cantidad;
+                            tupla["PrecioTotal"] = (precio * cantidad);
+
+                            if (itemPackFerial == true)
+                            {
+                                tupla["ItemPackFerial"] = itemPackFerial;
+                                tupla["Medida"] = "UNIDAD";
+                                tupla["Tipo"] = "ITEM PACK FERIAL";
+                            }
+                            else
+                                tupla["ItemPackFerial"] = false;
+
+                            datoRepuesto.Rows.Add(tupla);
+                      //  }                        
                     }
                 }
                 gv_adicionados.DataSource = datoRepuesto;
@@ -346,6 +374,7 @@ namespace jycboliviaASP.net.Presentacion
             datoRepuesto.Columns.Add("Precio", typeof(string));
             datoRepuesto.Columns.Add("Cantidad", typeof(string));
             datoRepuesto.Columns.Add("PrecioTotal", typeof(string));
+            datoRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
 
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();

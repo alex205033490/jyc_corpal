@@ -240,8 +240,13 @@ namespace jycboliviaASP.net.Presentacion
             string kgrdesperdicio = datoResult.Tables[0].Rows[0][10].ToString();
             string kgrparamix = datoResult.Tables[0].Rows[0][11].ToString();
             string codresprecepcion = datoResult.Tables[0].Rows[0][12].ToString();
+            string medidaentregada = datoResult.Tables[0].Rows[0][13].ToString();
+            string kgrdesperdicio_conaceite = datoResult.Tables[0].Rows[0][14].ToString();            
+            string kgrdesperdicio_sinaceite = datoResult.Tables[0].Rows[0][15].ToString();
+            string pack_ferial = datoResult.Tables[0].Rows[0][16].ToString();
 
-            ReportParameter p_nroorden = new ReportParameter("p_nroorden", nroorden);
+
+            ReportParameter p_nroorden = new ReportParameter("p_nroorden", codigo);
             ReportParameter p_fecha = new ReportParameter("p_fecha", fecha);
             ReportParameter p_hora = new ReportParameter("p_hora", hora);
             ReportParameter p_turno = new ReportParameter("p_turno", turno);
@@ -253,7 +258,11 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_unidadsuelta = new ReportParameter("p_unidadsuelta", unidadsuelta);
             ReportParameter p_kgrparamix = new ReportParameter("p_kgrparamix", kgrparamix);
             ReportParameter p_kgrdesperdicio = new ReportParameter("p_kgrdesperdicio", kgrdesperdicio);
-            
+
+            ReportParameter p_medidaentregada = new ReportParameter("p_medidaCajas", medidaentregada);
+            ReportParameter p_kgrdesperdicio_conaceite = new ReportParameter("p_kgrDesperdicioConAceite", kgrdesperdicio_conaceite);
+            ReportParameter p_kgrdesperdicio_sinaceite = new ReportParameter("p_kgrDesperdicioSinAceite", kgrdesperdicio_sinaceite);
+            ReportParameter p_pack_ferial = new ReportParameter("p_PackFerial", pack_ferial);
 
             //ReportParameter p_edificio = new ReportParameter("p_edificio", HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][3].ToString()));
             /*
@@ -301,6 +310,12 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.SetParameters(p_unidadsuelta);
             ReportViewer1.LocalReport.SetParameters(p_kgrparamix);
             ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio);
+
+            ReportViewer1.LocalReport.SetParameters(p_medidaentregada);
+             ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio_conaceite);
+            ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio_sinaceite);
+            ReportViewer1.LocalReport.SetParameters(p_pack_ferial);
+
 
             ReportViewer1.LocalReport.Refresh();
 

@@ -1,56 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DS_ProductosAlmacen">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>294371dc-bcb3-4f05-aefe-c8fdfc2211a7</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DS_StockProductos">
-      <Fields>
-        <Field Name="codigo">
-          <DataField>codigo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="producto">
-          <DataField>producto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="medida">
-          <DataField>medida</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="stock">
-          <DataField>stock</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ingreso1">
-          <DataField>ingreso1</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="salida1">
-          <DataField>salida1</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DS_ProductosAlmacen</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DS_ProductosAlmacen</rd:DataSetName>
-        <rd:SchemaPath>F:\Users\SISTEMA\Documents\GitHub\jyc_corpal\jycboliviaASP.net\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
-        <rd:TableName>DS_StockProduccto</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="Textbox1">
@@ -91,27 +40,30 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.80717in</Width>
+              <Width>2.05021cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.31759in</Width>
+              <Width>5.88668cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.31759in</Width>
+              <Width>3.34668cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.13009in</Width>
+              <Width>2.87043cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.66417cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -292,7 +244,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Stock</Value>
+                              <Value>Stock Almacen</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -317,10 +269,44 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Stock Pack Ferial</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -411,21 +397,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ingreso1">
+                    <Textbox Name="Ingreso1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ingreso1.Value</Value>
+                              <Value>=Fields!Ingreso1.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ingreso1</rd:DefaultName>
+                      <rd:DefaultName>Ingreso1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -440,21 +426,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="salida1">
+                    <Textbox Name="Salida1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!salida1.Value</Value>
+                              <Value>=Fields!Salida1.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>salida1</rd:DefaultName>
+                      <rd:DefaultName>Salida1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -469,21 +455,50 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="stock">
+                    <Textbox Name="StockAlmacen">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!stock.Value</Value>
+                              <Value>=Fields!StockAlmacen.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>stock</rd:DefaultName>
+                      <rd:DefaultName>StockAlmacen</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="StockPackFerial">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!StockPackFerial.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>StockPackFerial</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -508,6 +523,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -524,7 +540,7 @@
         <Top>2.76966cm</Top>
         <Left>1.28799cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.154cm</Width>
+        <Width>22.81815cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -536,7 +552,7 @@
     <Height>3.53125in</Height>
     <Style />
   </Body>
-  <Width>8.39178in</Width>
+  <Width>11.08436in</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21.59cm</PageWidth>
@@ -547,6 +563,62 @@
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>001d70ed-fef5-450b-8861-b469c60a407f</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DS_ProductosAlmacen">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>294371dc-bcb3-4f05-aefe-c8fdfc2211a7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DS_StockProductos">
+      <Query>
+        <DataSourceName>DS_ProductosAlmacen</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="codigo">
+          <DataField>codigo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="producto">
+          <DataField>producto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="medida">
+          <DataField>medida</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Ingreso1">
+          <DataField>Ingreso1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salida1">
+          <DataField>Salida1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StockAlmacen">
+          <DataField>StockAlmacen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StockPackFerial">
+          <DataField>StockPackFerial</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DS_ProductosAlmacen</rd:DataSetName>
+        <rd:SchemaPath>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
+        <rd:TableName>DS_StockProduccto</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>001d70ed-fef5-450b-8861-b469c60a407f</rd:ReportID>
 </Report>

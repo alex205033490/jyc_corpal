@@ -1,0 +1,24 @@
+﻿body {
+}
+.Centrar
+{    
+    margin: 0 auto;            
+    width:950px;
+    height:auto;  
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+    
+     .TablaEdificios
+   {
+
+   border: double #666666;
+   height:300px;  
+   width: 800px;   
+   overflow: auto;
+    }
+

@@ -10,6 +10,7 @@ using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.IO;
+using System.Windows.Documents;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -34,7 +35,6 @@ namespace jycboliviaASP.net.Presentacion
                 ponerMedidadelProducto();
                 buscarDatos("","");
             }
-
             permisodemodificaryeliminar();
         }
 
@@ -56,11 +56,11 @@ namespace jycboliviaASP.net.Presentacion
             bt_modificar.Visible = false;
             if (tienePermisoDeIngreso(122) == true)
             {
-               // bt_modificar.Visible = true;
+                bt_modificar.Visible = true;
                 bt_eliminar.Visible = true;
             }
             else {
-                //bt_modificar.Visible = false;
+                bt_modificar.Visible = false;
                 bt_eliminar.Visible = false;
             }
 
@@ -159,6 +159,13 @@ namespace jycboliviaASP.net.Presentacion
             float kgrdesperdicio_Sinaceite;
             float.TryParse(tx_kgrdesperdicio_SinAceite.Text.Replace('.', ','), out kgrdesperdicio_Sinaceite);
 
+            float packFerial;
+            float.TryParse(tx_packFerial.Text.Replace('.', ','), out packFerial);
+
+            decimal kgrdesperdiciobobina;
+            decimal.TryParse(tx_KgrDesperdicioBOBINA.Text.Replace('.', ','), out kgrdesperdiciobobina);
+
+
             //---------------------------------------
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
@@ -169,27 +176,39 @@ namespace jycboliviaASP.net.Presentacion
             int codrespEntrega = Nresp.getCodigo_NombreResponsable(respEntrega);
             string respRecepcion = tx_recepcionProduccion.Text;
             int codRespRecepcionProduccion = Nresp.getCodigo_NombreResponsable(respRecepcion);
-
-
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            string productoNAX = dd_productosNax.SelectedItem.Text;
-            int codigoProdNax = pp.get_CodigoProductos(productoNAX);
-
-            NCorpal_Produccion npro = new NCorpal_Produccion();
-            bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser,  kgrdesperdicio_conaceite,  kgrdesperdicio_Sinaceite);
             
-            if(bandera){
-                bool banderaP = pp.sumarStockenProducto(codigoProdNax,cantcajas);
+            string medidaentregada  = tx_medida.Text;
+            string medidapackferial = tx_medidaPackFerial.Text;
+                       
 
-                int codigoEntregaProduccion = npro.get_ultimoInsertadoEntregaProduccion(respEntrega);
-                limpiarDatos();
-                Session["codigoEntregaProduccion"] = codigoEntregaProduccion;
-                Session["ReporteGeneral"] = "Reporte_Entrega_Produccion";
-                //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-                Response.Redirect("../Presentacion/FA_DescargarArchivoProduccion.aspx");
-                //buscarDatos(turno,respEntrega);
+            if (kgrdesperdicio_conaceite > 0 && kgrdesperdicio_Sinaceite > 0) {
+                NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+                string productoNAX = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
+                int codigoProdNax = pp.get_CodigoProductos(productoNAX);
+
+                NCorpal_Produccion npro = new NCorpal_Produccion();
+                bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser, kgrdesperdicio_conaceite, kgrdesperdicio_Sinaceite, packFerial, medidaentregada, medidapackferial, kgrdesperdiciobobina);
+
+                if (bandera)
+                {
+                    bool banderaP = pp.sumarStockenProducto(codigoProdNax, cantcajas);
+                    int codigoEntregaProduccion = npro.get_ultimoInsertadoEntregaProduccion(respEntrega);
+                    limpiarDatos();
+                    Session["codigoEntregaProduccion"] = codigoEntregaProduccion;
+                    Session["ReporteGeneral"] = "Reporte_Entrega_Produccion";
+                    //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                    Response.Redirect("../Presentacion/FA_DescargarArchivoProduccion.aspx");
+                    //buscarDatos(turno,respEntrega);
+                }
+                else
+                    Response.Write("<script type='text/javascript'> alert('ERROR: No Ingreso Datos') </script>");
             }else
-                Response.Write("<script type='text/javascript'> alert('ERROR: No Ingreso Datos') </script>");
+                Response.Write("<script type='text/javascript'> alert('ERROR: Rellenar campos de desperdicio') </script>");
+
+
+
+
+
         }
 
         private void buscarDatos(string turno, string respEntrega)
@@ -215,7 +234,7 @@ namespace jycboliviaASP.net.Presentacion
 
             tx_kgrdesperdicio_conaceite.Text = "";
             tx_kgrdesperdicio_SinAceite.Text = "";
-
+            tx_packFerial.Text = "";
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -252,7 +271,7 @@ namespace jycboliviaASP.net.Presentacion
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 //---------------------------------------
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                string productoNAX = dd_productosNax.SelectedItem.Text;
+                string productoNAX = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
                 int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
                 string respEntrega = tx_responsableEntrega.Text;
@@ -260,17 +279,34 @@ namespace jycboliviaASP.net.Presentacion
                 string respRecepcion = tx_recepcionProduccion.Text;
                 int codRespRecepcionProduccion = Nresp.getCodigo_NombreResponsable(respRecepcion);
 
+                float kgrdesperdicio_conaceite;
+                float.TryParse(tx_kgrdesperdicio_conaceite.Text.Replace('.', ','), out kgrdesperdicio_conaceite);
+                float kgrdesperdicio_Sinaceite;
+                float.TryParse(tx_kgrdesperdicio_SinAceite.Text.Replace('.', ','), out kgrdesperdicio_Sinaceite);
+                float packFerial;
+                float.TryParse(tx_packFerial.Text.Replace('.', ','), out packFerial);
 
-                NCorpal_Produccion npro = new NCorpal_Produccion();
-                bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser);
-                if (bandera)
-                {
-                    limpiarDatos();
-                    buscarDatos(turno, respEntrega);
-                }
-                else
-                    Response.Write("<script type='text/javascript'> alert('ERROR: No Ingreso Datos') </script>");            
-            }else
+                string medidaentregada = tx_medida.Text; 
+                string medidapackferial = tx_medidaPackFerial.Text;
+
+                decimal kgrdesperdiciobobina;
+                decimal.TryParse(tx_KgrDesperdicioBOBINA.Text.Replace('.', ','), out kgrdesperdiciobobina);
+
+                if (kgrdesperdicio_conaceite > 0 && kgrdesperdicio_Sinaceite > 0) {
+                    NCorpal_Produccion npro = new NCorpal_Produccion();
+                    bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser,kgrdesperdicio_Sinaceite,kgrdesperdicio_conaceite,packFerial,  medidaentregada,  medidapackferial, kgrdesperdiciobobina);
+                    if (bandera)
+                    {
+                        limpiarDatos();
+                        buscarDatos(turno, respEntrega);
+                        Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
+                    }
+                    else
+                        Response.Write("<script type='text/javascript'> alert('ERROR: No Ingreso Datos') </script>");
+                }else
+                    Response.Write("<script type='text/javascript'> alert('ERROR: Campos Desperdicio Vacios') </script>");
+            }
+            else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Seleccione datos') </script>");
         }
 
@@ -334,6 +370,14 @@ namespace jycboliviaASP.net.Presentacion
             float kgrdesperdicio_sinaceite;
             float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text.Replace('.', ','), out kgrdesperdicio_sinaceite);
             tx_kgrdesperdicio_SinAceite.Text = kgrdesperdicio_sinaceite.ToString();
+
+            float packFerial;
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[20].Text.Replace('.', ','), out packFerial);
+            tx_packFerial.Text = packFerial.ToString();
+
+            decimal kgrdesperdiciobobina;
+            decimal.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[21].Text.Replace('.', ','), out kgrdesperdiciobobina);
+            tx_KgrDesperdicioBOBINA.Text = kgrdesperdiciobobina.ToString();
 
         }
 

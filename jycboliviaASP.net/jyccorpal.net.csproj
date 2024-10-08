@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -57,16 +58,35 @@
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>Herramientas\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="RestSharp, Version=106.15.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
@@ -86,19 +106,19 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Json.4.7.0\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
@@ -119,6 +139,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="jquery\bootstrap\css\bootstrap.css" />
     <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
     <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -149,6 +170,7 @@
     <Content Include="NegocioPlantilla\assets\img\messages-1.jpg" />
     <Content Include="NegocioPlantilla\assets\img\messages-2.jpg" />
     <Content Include="NegocioPlantilla\assets\img\messages-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\naxsnax.png" />
     <Content Include="NegocioPlantilla\assets\img\news-1.jpg" />
     <Content Include="NegocioPlantilla\assets\img\news-2.jpg" />
     <Content Include="NegocioPlantilla\assets\img\news-3.jpg" />
@@ -451,6 +473,7 @@
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
@@ -466,6 +489,7 @@
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
+    <Content Include="Presentacion\FUpon_CargaVentas.aspx" />
     <Content Include="Presentacion\index.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
@@ -502,7 +526,7 @@
     <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx" />
-    <Content Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx" />
+    <Content Include="Presentacion\FUpon_CargaCompras.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx" />
     <Content Include="Presentacion\FCorpal_ConciliacionBancaria.aspx" />
@@ -728,6 +752,8 @@
     <Compile Include="Datos\Datos old\DMeses.cs" />
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="Datos\DUpon_compras.cs" />
+    <Compile Include="Datos\DUpon_Ventas.cs" />
     <Compile Include="DS_Activos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -782,6 +808,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="NegocioApi\J_Compras.cs" />
+    <Compile Include="NegocioApi\J_Ventas.cs" />
     <Compile Include="NegocioApi\NA_endpoints.cs" />
     <Compile Include="NegocioPlantilla\Footer_Plantillanew.ascx.cs">
       <DependentUpon>Footer_Plantillanew.ascx</DependentUpon>
@@ -810,6 +838,7 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
@@ -875,6 +904,8 @@
     <Compile Include="Negocio\NMeses.cs" />
     <Compile Include="Negocio\NProyecto.cs" />
     <Compile Include="Negocio\NTipoPago.cs" />
+    <Compile Include="Negocio\NUpon_compras.cs" />
+    <Compile Include="Negocio\NUpon_Ventas.cs" />
     <Compile Include="Negocio\N_numLetra.cs" />
     <Compile Include="PlantillaNew.Master.cs">
       <DependentUpon>PlantillaNew.Master</DependentUpon>
@@ -922,6 +953,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.designer.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsutaProduccion.aspx.cs">
+      <DependentUpon>FCorpal_ConsutaProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsutaProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsutaProduccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx.cs">
       <DependentUpon>FCorpal_DevoluciondeProductoTerminado.aspx</DependentUpon>
@@ -1035,6 +1073,13 @@
     <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.designer.cs">
       <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\FUpon_CargaVentas.aspx.cs">
+      <DependentUpon>FUpon_CargaVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FUpon_CargaVentas.aspx.designer.cs">
+      <DependentUpon>FUpon_CargaVentas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1147,12 +1192,12 @@
     <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.designer.cs">
       <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.cs">
-      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    <Compile Include="Presentacion\FUpon_CargaCompras.aspx.cs">
+      <DependentUpon>FUpon_CargaCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.designer.cs">
-      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    <Compile Include="Presentacion\FUpon_CargaCompras.aspx.designer.cs">
+      <DependentUpon>FUpon_CargaCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.cs">
       <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
@@ -1785,6 +1830,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
@@ -2213,7 +2259,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v17.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -2237,6 +2283,7 @@
     <PropertyGroup>
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>

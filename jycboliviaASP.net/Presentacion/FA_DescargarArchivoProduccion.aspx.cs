@@ -47,7 +47,13 @@ namespace jycboliviaASP.net.Presentacion
             string kgrparamix = datoResult.Tables[0].Rows[0][11].ToString();
             string codresprecepcion = datoResult.Tables[0].Rows[0][12].ToString();
 
-            ReportParameter p_nroorden = new ReportParameter("p_nroorden", nroorden);
+            string medidaentregada = datoResult.Tables[0].Rows[0][13].ToString();
+            string kgrdesperdicio_conaceite = datoResult.Tables[0].Rows[0][14].ToString();
+            string kgrdesperdicio_sinaceite = datoResult.Tables[0].Rows[0][15].ToString();
+            string pack_ferial = datoResult.Tables[0].Rows[0][16].ToString();
+
+
+            ReportParameter p_nroorden = new ReportParameter("p_nroorden", codigo);
             ReportParameter p_fecha = new ReportParameter("p_fecha", fecha);
             ReportParameter p_hora = new ReportParameter("p_hora", hora);
             ReportParameter p_turno = new ReportParameter("p_turno", turno);
@@ -59,7 +65,11 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_unidadsuelta = new ReportParameter("p_unidadsuelta", unidadsuelta);
             ReportParameter p_kgrparamix = new ReportParameter("p_kgrparamix", kgrparamix);
             ReportParameter p_kgrdesperdicio = new ReportParameter("p_kgrdesperdicio", kgrdesperdicio);
-            
+
+            ReportParameter p_kgrdesperdicioconaceite = new ReportParameter("p_kgrdesperdicioconaceite", kgrdesperdicio_conaceite);
+            ReportParameter p_kgrdesperdiciosinaceite = new ReportParameter("p_kgrdesperdiciosinaceite", kgrdesperdicio_sinaceite);
+            ReportParameter p_packferial = new ReportParameter("p_packferial", pack_ferial);
+
             string rutaReciboIngreso = ConfigurationManager.AppSettings["repo_ReciboEntregaProduccion_Voucher"];
             LocalReport ReportViewer1 = new LocalReport();
             ReportViewer1.ReportPath = rutaReciboIngreso;
@@ -80,7 +90,11 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.SetParameters(p_unidadsuelta);
             ReportViewer1.SetParameters(p_kgrparamix);
             ReportViewer1.SetParameters(p_kgrdesperdicio);
-            
+
+            ReportViewer1.SetParameters(p_kgrdesperdicioconaceite);
+            ReportViewer1.SetParameters(p_kgrdesperdiciosinaceite);
+            ReportViewer1.SetParameters(p_packferial);
+
             ReportViewer1.Refresh();
 
             Warning[] warnings;
