@@ -294,6 +294,51 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_prueba;
 
         /// <summary>
+        /// Control mn_apiclientes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_apiclientes;
+
+        /// <summary>
+        /// Control mn_apiproductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_apiproductos;
+
+        /// <summary>
+        /// Control mn_apiinventariosingresos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_apiinventariosingresos;
+
+        /// <summary>
+        /// Control mn_apiinventariosegresos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_apiinventariosegresos;
+
+        /// <summary>
+        /// Control mn_apiinventariostraspasos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_apiinventariostraspasos;
+
+        /// <summary>
         /// Control A1.
         /// </summary>
         /// <remarks>
@@ -310,5 +355,23 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A2;
+
+        /// <summary>
+        /// Control A3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
+
+        /// <summary>
+        /// Control A4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A4;
     }
 }

@@ -1,0 +1,96 @@
+﻿
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+
+/*  POST - INPUT text number */
+.inputText {
+    width: 130px; /* Ajusta el tamaño según tus necesidades */
+    padding: 4px; /* Añade un poco de espacio interno */
+    font-size: 14px; /* Cambia el tamaño de la fuente */
+}
+.inputNumber {
+    width: 80px; /* Ajusta el tamaño según tus necesidades */
+    padding: 4px; /* Añade un poco de espacio interno */
+    font-size: 14px; /* Cambia el tamaño de la fuente */
+}
+td {
+    padding: 10px; /* Ajusta el padding de las celdas */
+}
+th{
+    padding: 10px;
+}
+
+/*
+
+.panel-body {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    min-width: 300px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #ff9800; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #e68a00; 
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #ff9800; 
+    color: white;
+}
+
+
+*/
