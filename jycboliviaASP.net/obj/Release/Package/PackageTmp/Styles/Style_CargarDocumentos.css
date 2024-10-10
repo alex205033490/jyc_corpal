@@ -13,50 +13,30 @@
 
 .titulo
 {        
-<<<<<<< HEAD
     height:auto;    
-=======
-    height:40px;
-    margin-top: 20px;
->>>>>>> origin/modulo3
     }
 
 .datosEdificio 
 {
    border: double #666;           
-<<<<<<< HEAD
     height: auto;  
     width: auto;        
-=======
-    height: 70px;  
-    width: 700px;        
->>>>>>> origin/modulo3
     }
 
 
 .edificios
 {
     border: double #666;           
-<<<<<<< HEAD
     height: 350px;  
     width: auto;  
-=======
-    height: 300px;  
-    width: 700px;  
->>>>>>> origin/modulo3
     overflow:auto;      
     }
 
 .documentos
 {
     border: double #666;           
-<<<<<<< HEAD
     height: 350px;  
     width: auto;
-=======
-    height: 200px;  
-    width: 700px;
->>>>>>> origin/modulo3
     overflow: auto;        
    }
 

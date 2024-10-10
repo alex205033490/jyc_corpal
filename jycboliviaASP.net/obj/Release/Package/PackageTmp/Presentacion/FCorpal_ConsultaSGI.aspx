@@ -1,10 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaSGI.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_ConsultaSGI" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
-<<<<<<< HEAD
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
-=======
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DD5DCD8D9C" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
->>>>>>> origin/modulo3
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />   
        <style type="text/css">

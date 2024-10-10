@@ -158,11 +158,7 @@
             <div class="panel-body">
             <div class="DatosProyecto">
                 <asp:GridView ID="gv_MaterialSolicitado" 
-<<<<<<< HEAD
                      runat="server" BackColor="White" 
-=======
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
->>>>>>> origin/modulo3
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onselectedindexchanged="gv_MaterialSolicitado_SelectedIndexChanged">
@@ -196,11 +192,7 @@
             <div class="panel-body">
             <div class="DatosItem">
                 <asp:GridView ID="gv_DatosItem" 
-<<<<<<< HEAD
                      runat="server" BackColor="White" 
-=======
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
->>>>>>> origin/modulo3
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     AutoGenerateColumns="False">
