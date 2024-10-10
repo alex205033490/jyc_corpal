@@ -1,0 +1,2251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2663857B-90A4-484D-9691-71DEAB1E98A6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>jycboliviaASP.net</RootNamespace>
+    <AssemblyName>jycboliviaASP.net</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>Herramientas\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RestSharp, Version=106.15.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.15.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="jquery\bootstrap\css\bootstrap.css" />
+    <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
+    <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="jquery\bootstrap\js\bootstrap.js" />
+    <Content Include="jquery\bootstrap\js\bootstrap.min.js" />
+    <Content Include="jquery\css\freelancer.css" />
+    <Content Include="jquery\css\freelancer.min.css" />
+    <Content Include="jquery\font-awesome\css\font-awesome.css" />
+    <Content Include="jquery\font-awesome\css\font-awesome.min.css" />
+    <Content Include="jquery\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="jquery\jquery\jquery.js" />
+    <Content Include="jquery\jquery\jquery.min.js" />
+    <Content Include="jquery\js\contact_me.js" />
+    <Content Include="jquery\js\freelancer.js" />
+    <Content Include="jquery\js\freelancer.min.js" />
+    <Content Include="jquery\js\jqBootstrapValidation.js" />
+    <Content Include="js\bootstrap.bundle.js" />
+    <Content Include="js\bootstrap.bundle.min.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\main.js" />
+    <Content Include="NegocioPlantilla\assets\css\style.css" />
+    <Content Include="NegocioPlantilla\assets\img\apple-touch-icon.png" />
+    <Content Include="NegocioPlantilla\assets\img\card.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\favicon.png" />
+    <Content Include="NegocioPlantilla\assets\img\logo.png" />
+    <Content Include="NegocioPlantilla\assets\img\messages-1.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\messages-2.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\messages-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\news-1.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\news-2.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\news-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\news-4.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\news-5.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\not-found.svg" />
+    <Content Include="NegocioPlantilla\assets\img\product-1.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\product-2.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\product-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\product-4.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\product-5.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\profile-img.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\slides-1.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\slides-2.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\slides-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\js\main.js" />
+    <Content Include="NegocioPlantilla\assets\scss\Readme.txt" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.amd.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.common.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.esm.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\apexcharts.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\bootstrap-icons.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\bootstrap-icons.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\css\animations.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\css\boxicons.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\css\boxicons.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\css\transformations.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\fonts\boxicons.svg" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.cjs" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.umd.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chunks\helpers.segment.cjs" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chunks\helpers.segment.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\helpers.cjs" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\helpers.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.common.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.common.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.min.mjs" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.mjs" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.simple.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.simple.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\bmap.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\bmap.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\dataTool.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\dataTool.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\php-email-form\validate.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.bubble.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.core.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.core.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.core.js.LICENSE.txt" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.js.LICENSE.txt" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.snow.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.svg" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.symbol.svg" />
+    <Content Include="NegocioPlantilla\assets\vendor\simple-datatables\simple-datatables.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\simple-datatables\style.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\icons\default\icons.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\icons\default\icons.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\icons\default\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\models\dom\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\models\dom\model.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\models\dom\model.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\accordion\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\accordion\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\accordion\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\advlist\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\anchor\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autolink\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autoresize\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autosave\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\charmap\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\codesample\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\code\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\code\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\directionality\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\fullscreen\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ar.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\bg_BG.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ca.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\cs.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\da.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\de.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\el.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\en.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\es.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\eu.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\fa.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\fi.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\fr_FR.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\he_IL.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\hi.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\hr.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\hu_HU.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\id.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\it.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ja.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\kk.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ko_KR.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ms.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\nb_NO.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\nl.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\pl.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\pt_BR.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\pt_PT.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ro.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\ru.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\sk.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\sl_SI.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\sv_SE.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\th_TH.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\tr.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\uk.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\vi.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\zh_CN.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\js\i18n\keynav\zh_TW.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\image\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\image\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\importcss\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\insertdatetime\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\link\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\link\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\lists\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\lists\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\media\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\media\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\nonbreaking\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\pagebreak\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\preview\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\preview\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\quickbars\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\quickbars\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\save\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\save\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\searchreplace\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\table\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\table\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualblocks\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualchars\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\wordcount\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\dark\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\dark\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\default\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\default\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\default\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\document\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\document\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\document\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5-dark\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5-dark\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5-dark\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\tinymce-5\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\writer\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\writer\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.inline.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.inline.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.shadowdom.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.shadowdom.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.inline.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.inline.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.shadowdom.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.shadowdom.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.inline.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.inline.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.inline.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.inline.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\content.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.shadowdom.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.shadowdom.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\themes\silver\index.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\themes\silver\theme.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\themes\silver\theme.min.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\tinymce.js" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\tinymce.min.js" />
+    <Content Include="NegocioPlantilla\Footer_Plantillanew.ascx" />
+    <Content Include="NegocioPlantilla\forms\contact.php" />
+    <Content Include="NegocioPlantilla\forms\Readme.txt" />
+    <Content Include="NegocioPlantilla\Header_planillanew.ascx" />
+    <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
+    <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
+    <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
+    <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
+    <Content Include="Presentacion\FCorpal_OrdenProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_prueba.aspx" />
+    <Content Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
+    <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
+    <Content Include="Presentacion\index.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx" />
+    <Content Include="Presentacion\FCorpal_ReciboEgreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReciboIngreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx" />
+    <Content Include="Presentacion\FCorpal_RutaEntrega.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx" />
+    <Content Include="Styles\Style_AgendaProyecto.css" />
+    <Content Include="Styles\payment.css" />
+    <Content Include="Presentacion\ControlUser.ascx" />
+    <Content Include="Presentacion\FCorpal_Actualizacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\FCorpal_agendanegociacion.aspx" />
+    <Content Include="Presentacion\FCorpal_AgendaTelefonica.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConciliacionBancaria.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CotiEra.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CotiRCC.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CronoRuta.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_encuestajyc.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx" />
+    <Content Include="Presentacion\FCorpal_Facturacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_FechaContrato.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GActividades.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionArchivosSGI.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarPermisos.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx" />
+    <Content Include="Presentacion\FA_Login.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx" />
+    <Content Include="Presentacion\FCorpal_movimientoCheques.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReciboPago.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx" />
+    <Content Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx" />
+    <Content Include="Presentacion\FCorpal_SGI_Actividades.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx" />
+    <Content Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FControlPedido.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEncargadoPago.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarFormularios.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEquipo.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx" />
+    <Content Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx" />
+    <Content Include="Presentacion\Presentacion old\FProyecto.aspx" />
+    <Content Include="Presentacion\Presentacion old\FTipoPago.aspx" />
+    <Content Include="Presentacion\MenuIzquierdo.ascx" />
+    <Content Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx" />
+    <Content Include="Presentacion\WelcomeJyC.aspx" />
+    <Content Include="Styles\Styles_GPagoSeguimiento2.css" />
+    <Content Include="Styles\Style_Autocompletar.css" />
+    <Content Include="Styles\Style_CodigosDeEquipos.css" />
+    <Content Include="Styles\Style_CallCenter_Rin.css" />
+    <Content Include="Styles\Style_AgendaNegociacion.css" />
+    <Content Include="Styles\Style_CompradeMaterialeInsumos.css" />
+    <Content Include="Styles\Style_consultaRutasporDatos.css" />
+    <Content Include="Styles\Style_CostosPolizasImportacion.css" />
+    <Content Include="Styles\Style_CotiEra.css" />
+    <Content Include="Styles\Style_GActividades.css" />
+    <Content Include="Styles\Style_ImportacionJYCIA.css" />
+    <Content Include="Styles\login-box.css" />
+    <Content Include="Styles\Style_adicionarRepuesto.css" />
+    <Content Include="Styles\Style_AgendaTelefonica.css" />
+    <Content Include="Styles\Style_AsignarTareas.css" />
+    <Content Include="Styles\Style_CallCenterEstadisticaNormal.css" />
+    <Content Include="Styles\Style_CallCenterEstadisticaTecnico.css" />
+    <Content Include="Styles\Style_callRCC.css" />
+    <Content Include="Styles\Style_chequeBisa.css" />
+    <Content Include="Styles\Style_chequeBNB.css" />
+    <Content Include="Styles\Style_ConciliacionBancaria.css" />
+    <Content Include="Styles\Style_ConsultaRutas.css" />
+    <Content Include="Styles\Style_Consultas.css" />
+    <Content Include="Styles\Style_ConsultasCallCenter.css" />
+    <Content Include="Styles\Style_cotiRcc.css" />
+    <Content Include="Styles\Style_cronogramaRutaVisitaMantenimiento.css" />
+    <Content Include="Styles\Style_CronogramaTecnico.css" />
+    <Content Include="Styles\styles_MenuV.css" />
+    <Content Include="Styles\Styles_GPagoSeguimiento.css" />
+    <Content Include="Styles\Styles_GEncargadoPago.css" />
+    <Content Include="Styles\Styles_GestionarResp.css" />
+    <Content Include="Styles\Styles_Main.css" />
+    <Content Include="Styles\Styles_MenuH.css" />
+    <Content Include="Styles\Style_CallCenter.css" />
+    <Content Include="Styles\Style_CargaCuadrosXXX.css" />
+    <Content Include="Styles\Style_CargaFechaExpedicion.css" />
+    <Content Include="Styles\Style_CargarDocumentos.css" />
+    <Content Include="Styles\Style_ControlPedido.css" />
+    <Content Include="Styles\Style_EdificioDeudor.css" />
+    <Content Include="Styles\Style_EstadisticaParqueAscensores.css" />
+    <Content Include="Styles\Style_EstadoSeguimientoGeneral.css" />
+    <Content Include="Styles\Style_facturacion.css" />
+    <Content Include="Styles\Style_fechaContratos.css" />
+    <Content Include="Styles\Style_GActualizacion.css" />
+    <Content Include="Styles\Style_GcotizacionRepuesto.css" />
+    <Content Include="Styles\Style_GEdificio.css" />
+    <Content Include="Styles\Style_GEncargadoPago.css" />
+    <Content Include="Styles\Style_GEstadisticaInstalacion.css" />
+    <Content Include="Styles\Style_GEstadoEquipo.css" />
+    <Content Include="Styles\Style_GestionArchivosSGI.css" />
+    <Content Include="Styles\Style_GestionarEstadoInstalacion.css" />
+    <Content Include="Styles\Style_GestionarEstadoMantenimiento.css" />
+    <Content Include="Styles\Style_GestionarProyEncargadoPago.css" />
+    <Content Include="Styles\Style_GestionSeguimientoInstalacion.css" />
+    <Content Include="Styles\Style_Gformulario.css" />
+    <Content Include="Styles\Style_GPermisos.css" />
+    <Content Include="Styles\Style_GProyecto.css" />
+    <Content Include="Styles\Style_GSeguimiento.css" />
+    <Content Include="Styles\Style_GTipoPago.css" />
+    <Content Include="Styles\Style_ImportacionJYCIAGeneral.css" />
+    <Content Include="Styles\Style_MenuIzquierdo.css" />
+    <Content Include="Styles\Style_MonitoreoGestionProyecto.css" />
+    <Content Include="Styles\Style_movimientoCheques.css" />
+    <Content Include="Styles\Style_PlanPago.css" />
+    <Content Include="Styles\Style_PolizaBoletaLetra.css" />
+    <Content Include="Styles\Style_ReciboPago.css" />
+    <Content Include="Styles\Style_ReporteCobranza2.css" />
+    <Content Include="Styles\Style_ReporteCotizacionRepuesto.css" />
+    <Content Include="Styles\Style_RutaBoletaMantenimiento.css" />
+    <Content Include="Styles\Style_RutaCobrador.css" />
+    <Content Include="Styles\Style_RutasMantenimiento.css" />
+    <Content Include="Styles\Style_saldosCuentasGeneral.css" />
+    <Content Include="Styles\Style_SeguimientosMorosos.css" />
+    <Content Include="Styles\Style_SimecModificar.css" />
+    <Content Include="Styles\Style_ViewCuadroXXX.css" />
+    <Content Include="Styles\Style_ViewEstadoMantenimiento.css" />
+    <Content Include="Styles\Style_ViewSeguimientoMantenimientoXXX.css" />
+    <Content Include="Styles\Style_VistaResponsableProyecto.css" />
+    <Content Include="Styles\Style_VistaSeguimientoInstalacion.css" />
+    <Content Include="Styles\Style_Welcome.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="Presentacion\FCorpal_GestonarResponsable.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiRest\DBApi.cs" />
+    <Compile Include="DatosSimec\DA_contabilidad.cs" />
+    <Compile Include="DatosSimec\DA_inventario.cs" />
+    <Compile Include="Datos\DA_ActivosJyC.cs" />
+    <Compile Include="Datos\DA_AgendaProyecto.cs" />
+    <Compile Include="Datos\DA_ActividadesPersonal.cs" />
+    <Compile Include="Datos\DA_AgendaNegociacion.cs" />
+    <Compile Include="Datos\DA_AgendaTelefonica.cs" />
+    <Compile Include="Datos\Datos old\DA_banco.cs" />
+    <Compile Include="Datos\Datos old\DA_CostosPolizaImportacion.cs" />
+    <Compile Include="Datos\Datos old\DA_CronogramaTecnico.cs" />
+    <Compile Include="Datos\Datos old\DA_CronogramaVisitaRutaManteminieto.cs" />
+    <Compile Include="Datos\Datos old\DA_EncuestaMantenimiento.cs" />
+    <Compile Include="Datos\DA_facturacion.cs" />
+    <Compile Include="Datos\Datos old\DA_fechaContrato.cs" />
+    <Compile Include="Datos\Datos old\DA_Importacion.cs" />
+    <Compile Include="Datos\DA_movimientoCheques.cs" />
+    <Compile Include="Datos\DA_Prioridad.cs" />
+    <Compile Include="Datos\Datos old\DA_Propietario.cs" />
+    <Compile Include="Datos\Datos old\DA_DetalleTecnicoAsignado.cs" />
+    <Compile Include="Datos\Datos old\DA_Detalle_TecnicoEvento.cs" />
+    <Compile Include="Datos\Datos old\DA_Evento.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaEstadoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaEstadoMan.cs" />
+    <Compile Include="Datos\DActualizacion.cs" />
+    <Compile Include="Datos\Datos old\DA_Cargo.cs" />
+    <Compile Include="Datos\Datos old\DA_CuadrosXXX.cs" />
+    <Compile Include="Datos\DA_DetallePermiso.cs" />
+    <Compile Include="Datos\Datos old\DA_DetalleSeguimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_Equipo.cs" />
+    <Compile Include="Datos\Datos old\DA_EstadoMantenimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_FechaExpedicion.cs" />
+    <Compile Include="Datos\DA_Formularios.cs" />
+    <Compile Include="Datos\DA_Historial.cs" />
+    <Compile Include="Datos\DA_Marca.cs" />
+    <Compile Include="Datos\Datos old\DA_R155_InspeccionySeguimientoObra.cs" />
+    <Compile Include="Datos\DA_ReciboPago.cs" />
+    <Compile Include="Datos\DA_Recibo_IngresoEgreso.cs" />
+    <Compile Include="Datos\Datos old\DA_Repuesto.cs" />
+    <Compile Include="Datos\DA_Responsable.cs" />
+    <Compile Include="Datos\Datos old\DA_RutaCobrador.cs" />
+    <Compile Include="Datos\Datos old\DA_RutaMantenimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_Seguimiento.cs" />
+    <Compile Include="Datos\Datos old\DA_SeguimientoInstalacion.cs" />
+    <Compile Include="Datos\DA_tareasTecnicos.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoEvento.cs" />
+    <Compile Include="Datos\Datos old\DA_TipoPago.cs" />
+    <Compile Include="Datos\Datos old\DA_Zona.cs" />
+    <Compile Include="Datos\Datos old\DCargaCuadroXXXa.cs" />
+    <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
+    <Compile Include="Datos\DCorpal_Produccion.cs" />
+    <Compile Include="Datos\DCorpal_SolicitudEntregaProducto.cs" />
+    <Compile Include="Datos\DCorpal_Tienda.cs" />
+    <Compile Include="Datos\Datos old\DEncargadoPago.cs" />
+    <Compile Include="Datos\Datos old\DEquipo.cs" />
+    <Compile Include="Datos\Datos old\DEstadisticaInstalacion.cs" />
+    <Compile Include="Datos\Datos old\DEstadisticaParqueAscensores.cs" />
+    <Compile Include="Datos\Datos old\DEstadoEquipo.cs" />
+    <Compile Include="Datos\Datos old\DFechaExpedicion.cs" />
+    <Compile Include="Datos\Datos old\DMeses.cs" />
+    <Compile Include="Datos\Datos old\DProyecto.cs" />
+    <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="DS_Activos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_CallCenter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Equipos.cs">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Equipos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Importacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Mantenimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Proyectos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReciboIngresoEgreso.cs">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReciboIngresoEgreso.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReporteRepuesto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Rutas.cs">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Rutas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NegocioApi\NA_endpoints.cs" />
+    <Compile Include="NegocioPlantilla\Footer_Plantillanew.ascx.cs">
+      <DependentUpon>Footer_Plantillanew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NegocioPlantilla\Footer_Plantillanew.ascx.designer.cs">
+      <DependentUpon>Footer_Plantillanew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NegocioPlantilla\Header_planillanew.ascx.cs">
+      <DependentUpon>Header_planillanew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NegocioPlantilla\Header_planillanew.ascx.designer.cs">
+      <DependentUpon>Header_planillanew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NegocioPlantilla\Sidebar_Plantillanew.ascx.cs">
+      <DependentUpon>Sidebar_Plantillanew.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NegocioPlantilla\Sidebar_Plantillanew.ascx.designer.cs">
+      <DependentUpon>Sidebar_Plantillanew.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Negocio\conexionMySql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
+    <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
+    <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_PruebaAPI.cs" />
+    <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
+    <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
+    <Compile Include="Negocio\NCorpal_Produccion.cs" />
+    <Compile Include="Negocio\NCorpal_RutaEntrega.cs" />
+    <Compile Include="Negocio\NA_AgendaProyectos.cs" />
+    <Compile Include="Negocio\NA_ActividadesPersonal.cs" />
+    <Compile Include="Negocio\NA_AgendaNegociacion.cs" />
+    <Compile Include="Negocio\NA_AgendaTelefonica.cs" />
+    <Compile Include="Negocio\NA_banco.cs" />
+    <Compile Include="Negocio\NA_CostosPolizaImportacion.cs" />
+    <Compile Include="Negocio\NA_CronogramaTecnico.cs" />
+    <Compile Include="Negocio\NA_CronogramaVisitaRutaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_EncuestaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_EnvioCorreo.cs" />
+    <Compile Include="Negocio\NA_Facturacion.cs" />
+    <Compile Include="Negocio\NA_fechaContrato.cs" />
+    <Compile Include="Negocio\NA_Importacion.cs" />
+    <Compile Include="Negocio\NA_movimientoCheques.cs" />
+    <Compile Include="Negocio\NA_Prioridad.cs" />
+    <Compile Include="Negocio\NA_Propietario.cs" />
+    <Compile Include="Negocio\NActualizacion.cs" />
+    <Compile Include="Negocio\NA_Cargo.cs" />
+    <Compile Include="Negocio\NA_CuadrosXXX.cs" />
+    <Compile Include="Negocio\NA_DetalleEventoTecnico.cs" />
+    <Compile Include="Negocio\NA_DetallePermiso.cs" />
+    <Compile Include="Negocio\NA_DetalleSeguimiento.cs" />
+    <Compile Include="Negocio\NA_DetalleTecnicoAsignado.cs" />
+    <Compile Include="Negocio\NA_Equipo.cs" />
+    <Compile Include="Negocio\NA_EstadoMantenimiento.cs" />
+    <Compile Include="Negocio\NA_Evento.cs" />
+    <Compile Include="Negocio\NA_FechaEstadoEquipo.cs" />
+    <Compile Include="Negocio\NA_FechaEstadoMan.cs" />
+    <Compile Include="Negocio\NA_FechaExpedicion.cs" />
+    <Compile Include="Negocio\NA_Formularios.cs" />
+    <Compile Include="Negocio\NA_Historial.cs" />
+    <Compile Include="Negocio\NA_Marca.cs" />
+    <Compile Include="Negocio\NA_R155_InspeccionySeguimientoObra.cs" />
+    <Compile Include="Negocio\NA_ReciboPago.cs" />
+    <Compile Include="Negocio\NA_Reportes_Download.cs" />
+    <Compile Include="Negocio\NA_Repuesto.cs" />
+    <Compile Include="Negocio\NA_Responsables.cs" />
+    <Compile Include="Negocio\NA_RutaCobrador.cs" />
+    <Compile Include="Negocio\NA_RutaMantenimiento.cs" />
+    <Compile Include="Negocio\NA_Seguimiento.cs" />
+    <Compile Include="Negocio\NA_SeguimientoInstalacion.cs" />
+    <Compile Include="Negocio\NA_tareasTecnico.cs" />
+    <Compile Include="Negocio\NA_TipoEquipo.cs" />
+    <Compile Include="Negocio\NA_TipoEvento.cs" />
+    <Compile Include="Negocio\NA_TipoPago.cs" />
+    <Compile Include="Negocio\NA_VariablesGlobales.cs" />
+    <Compile Include="Negocio\NA_Zona.cs" />
+    <Compile Include="Negocio\NCargaCuadroXXX.cs" />
+    <Compile Include="Negocio\NCargaFechaExpedicion.cs" />
+    <Compile Include="Negocio\NCorpal_SolicitudEntregaProducto.cs" />
+    <Compile Include="Negocio\NCorpal_Tienda.cs" />
+    <Compile Include="Negocio\NEncargadoPago.cs" />
+    <Compile Include="Negocio\NEquipo.cs" />
+    <Compile Include="Negocio\NEstadisticaInstalacion.cs" />
+    <Compile Include="Negocio\NEstadisticaParqueAscensores.cs" />
+    <Compile Include="Negocio\NEstadoEquipo.cs" />
+    <Compile Include="Negocio\NFechaExpedicion.cs" />
+    <Compile Include="Negocio\NMeses.cs" />
+    <Compile Include="Negocio\NProyecto.cs" />
+    <Compile Include="Negocio\NTipoPago.cs" />
+    <Compile Include="Negocio\N_numLetra.cs" />
+    <Compile Include="PlantillaNew.Master.cs">
+      <DependentUpon>PlantillaNew.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PlantillaNew.Master.designer.cs">
+      <DependentUpon>PlantillaNew.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\ControlUser.ascx.cs">
+      <DependentUpon>ControlUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\ControlUser.ascx.designer.cs">
+      <DependentUpon>ControlUser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DS_R-144.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.cs">
+      <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.designer.cs">
+      <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.cs">
+      <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.designer.cs">
+      <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs">
+      <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.designer.cs">
+      <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.cs">
+      <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.designer.cs">
+      <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx.cs">
+      <DependentUpon>FCorpal_DevoluciondeProductoTerminado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx.designer.cs">
+      <DependentUpon>FCorpal_DevoluciondeProductoTerminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.cs">
+      <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccionMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx.designer.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasProduccionMensual.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_OrdenProduccion.aspx.cs">
+      <DependentUpon>FCorpal_OrdenProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_OrdenProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_OrdenProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_prueba.aspx.cs">
+      <DependentUpon>FCorpal_prueba.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_prueba.aspx.designer.cs">
+      <DependentUpon>FCorpal_prueba.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.cs">
+      <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx.designer.cs">
+      <DependentUpon>FCorpal_RecibioMaterialInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.cs">
+      <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Actualizacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_Actualizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaProducto_SolicitudEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaProducto_SolicitudEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaSGI.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaSGI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaSGI.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaSGI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteGeneral.aspx.cs">
+      <DependentUpon>FCorpal_ReporteGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteGeneral.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.cs">
+      <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_AdicionarCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AdicionarCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_AdicionarCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_agendanegociacion.aspx.cs">
+      <DependentUpon>FCorpal_agendanegociacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_agendanegociacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_agendanegociacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx.cs">
+      <DependentUpon>FA_AgendaProyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx.designer.cs">
+      <DependentUpon>FA_AgendaProyectos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AgendaTelefonica.aspx.cs">
+      <DependentUpon>FCorpal_AgendaTelefonica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_AgendaTelefonica.aspx.designer.cs">
+      <DependentUpon>FCorpal_AgendaTelefonica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx.cs">
+      <DependentUpon>FA_CallCenterAreaCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterAreaCliente.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterAreaCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx.cs">
+      <DependentUpon>FA_CallCenterEstadisticaNormal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterEstadisticaNormal.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterEstadisticaNormal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx.cs">
+      <DependentUpon>FA_CAllCenterEstadisticaTecnico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CAllCenterEstadisticaTecnico.aspx.designer.cs">
+      <DependentUpon>FA_CAllCenterEstadisticaTecnico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx.cs">
+      <DependentUpon>FA_CallCenterVacio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenterVacio.aspx.designer.cs">
+      <DependentUpon>FA_CallCenterVacio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx.cs">
+      <DependentUpon>FA_CallCenter_AreaCotiRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_AreaCotiRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_AreaCotiRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoCotiRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoCotiRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoCotiRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoRIN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRIN.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoRIN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoNuevo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoNuevo.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoNuevo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx.cs">
+      <DependentUpon>FA_CallCenter_EventoRCC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_EventoRCC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx.cs">
+      <DependentUpon>FA_CallCenter_Eventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx.designer.cs">
+      <DependentUpon>FA_CallCenter_Eventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.cs">
+      <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.designer.cs">
+      <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.cs">
+      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.designer.cs">
+      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.cs">
+      <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.designer.cs">
+      <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx.cs">
+      <DependentUpon>FA_CodigosDeEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx.designer.cs">
+      <DependentUpon>FA_CodigosDeEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConciliacionBancaria.aspx.cs">
+      <DependentUpon>FCorpal_ConciliacionBancaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConciliacionBancaria.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConciliacionBancaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx.cs">
+      <DependentUpon>FA_ConsultaCallCenterReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaCallCenterReporte.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaCallCenterReporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx.cs">
+      <DependentUpon>FA_ConsultaEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaEquipo.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx.cs">
+      <DependentUpon>FA_ConsultaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx.cs">
+      <DependentUpon>FA_ConsultaProyectosInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaProyectosInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaIngresoEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaIngresoEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaIngresoEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx.cs">
+      <DependentUpon>FA_ConsultaRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultaRuta.aspx.designer.cs">
+      <DependentUpon>FA_ConsultaRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx.cs">
+      <DependentUpon>FA_consultaRutas2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_consultaRutas2.aspx.designer.cs">
+      <DependentUpon>FA_consultaRutas2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx.cs">
+      <DependentUpon>FA_ConsultasCallCenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ConsultasCallCenter.aspx.designer.cs">
+      <DependentUpon>FA_ConsultasCallCenter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx.cs">
+      <DependentUpon>FA_Consulta_Importacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Consulta_Importacion.aspx.designer.cs">
+      <DependentUpon>FA_Consulta_Importacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx.cs">
+      <DependentUpon>FA_CostosPolizaImportacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CostosPolizaImportacion.aspx.designer.cs">
+      <DependentUpon>FA_CostosPolizaImportacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiEra.aspx.cs">
+      <DependentUpon>FA_CotiEra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiEra.aspx.designer.cs">
+      <DependentUpon>FA_CotiEra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiRCC.aspx.cs">
+      <DependentUpon>FA_CotiRCC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CotiRCC.aspx.designer.cs">
+      <DependentUpon>FA_CotiRCC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx.cs">
+      <DependentUpon>FA_CronogramaTecnico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronogramaTecnico.aspx.designer.cs">
+      <DependentUpon>FA_CronogramaTecnico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronoRuta.aspx.cs">
+      <DependentUpon>FA_CronoRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CronoRuta.aspx.designer.cs">
+      <DependentUpon>FA_CronoRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx.cs">
+      <DependentUpon>FA_CuadroXXX3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_CuadroXXX3.aspx.designer.cs">
+      <DependentUpon>FA_CuadroXXX3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx.cs">
+      <DependentUpon>FA_DeudaPlanPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_DeudaPlanPago.aspx.designer.cs">
+      <DependentUpon>FA_DeudaPlanPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx.cs">
+      <DependentUpon>FA_EdificioConDeuda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioConDeuda.aspx.designer.cs">
+      <DependentUpon>FA_EdificioConDeuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx.cs">
+      <DependentUpon>FA_EdificioDeudor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EdificioDeudor.aspx.designer.cs">
+      <DependentUpon>FA_EdificioDeudor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_encuestajyc.aspx.cs">
+      <DependentUpon>FA_encuestajyc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_encuestajyc.aspx.designer.cs">
+      <DependentUpon>FA_encuestajyc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx.cs">
+      <DependentUpon>FA_EncuestaMantenimientoPreguntas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EncuestaMantenimientoPreguntas.aspx.designer.cs">
+      <DependentUpon>FA_EncuestaMantenimientoPreguntas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx.cs">
+      <DependentUpon>FA_EstadoSeguimientoGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_EstadoSeguimientoGeneral.aspx.designer.cs">
+      <DependentUpon>FA_EstadoSeguimientoGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Facturacion.aspx.cs">
+      <DependentUpon>FCorpal_Facturacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_Facturacion.aspx.designer.cs">
+      <DependentUpon>FCorpal_Facturacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_FechaContrato.aspx.cs">
+      <DependentUpon>FA_FechaContrato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_FechaContrato.aspx.designer.cs">
+      <DependentUpon>FA_FechaContrato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GActividades.aspx.cs">
+      <DependentUpon>FA_GActividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GActividades.aspx.designer.cs">
+      <DependentUpon>FA_GActividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_GCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_GCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx.cs">
+      <DependentUpon>FA_GestionArchivosJYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionArchivosJYC.aspx.designer.cs">
+      <DependentUpon>FA_GestionArchivosJYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionArchivosSGI.aspx.cs">
+      <DependentUpon>FCorpal_GestionArchivosSGI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionArchivosSGI.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionArchivosSGI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx.cs">
+      <DependentUpon>FA_GestionarEstadoEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoEquipo.aspx.designer.cs">
+      <DependentUpon>FA_GestionarEstadoEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx.cs">
+      <DependentUpon>FA_GestionarEstadoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarEstadoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_GestionarEstadoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarPermisos.aspx.cs">
+      <DependentUpon>FCorpal_GestionarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarPermisos.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ReciboEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReciboEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboIngreso.aspx.cs">
+      <DependentUpon>FCorpal_ReciboIngreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReciboIngreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReciboIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx.cs">
+      <DependentUpon>FCorpal_ReporteReciboEgreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboEgreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteReciboEgreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx.cs">
+      <DependentUpon>FCorpal_ReporteReciboIngreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteReciboIngreso.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteReciboIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx.cs">
+      <DependentUpon>FCorpal_GestionarTiendaPropietario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarTiendaPropietario.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarTiendaPropietario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimiento2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimiento2.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimiento2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx.cs">
+      <DependentUpon>FA_GestionarSeguimientoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_GestionarSeguimientoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_GestionarSeguimientoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral_JyCIA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionDatosGeneral_JyCIA.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionDatosGeneral_JyCIA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx.cs">
+      <DependentUpon>FA_ImportacionFacturasContenedor_Transporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionFacturasContenedor_Transporte.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionFacturasContenedor_Transporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx.cs">
+      <DependentUpon>FA_ImportacionJYCIA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionJYCIA.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionJYCIA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx.cs">
+      <DependentUpon>FA_ImportacionProrrateoCostos_Transporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ImportacionProrrateoCostos_Transporte.aspx.designer.cs">
+      <DependentUpon>FA_ImportacionProrrateoCostos_Transporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx.cs">
+      <DependentUpon>FA_Importacion_CredinForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Importacion_CredinForm.aspx.designer.cs">
+      <DependentUpon>FA_Importacion_CredinForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_Login.aspx.cs">
+      <DependentUpon>FA_Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_Login.aspx.designer.cs">
+      <DependentUpon>FA_Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx.cs">
+      <DependentUpon>FA_MenuPorArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MenuPorArea.aspx.designer.cs">
+      <DependentUpon>FA_MenuPorArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx.cs">
+      <DependentUpon>FA_MonitoreoGestionProyecto210.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_MonitoreoGestionProyecto210.aspx.designer.cs">
+      <DependentUpon>FA_MonitoreoGestionProyecto210.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx.cs">
+      <DependentUpon>FA_mostrarResultado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_mostrarResultado.aspx.designer.cs">
+      <DependentUpon>FA_mostrarResultado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_movimientoCheques.aspx.cs">
+      <DependentUpon>FCorpal_movimientoCheques.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_movimientoCheques.aspx.designer.cs">
+      <DependentUpon>FCorpal_movimientoCheques.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx.cs">
+      <DependentUpon>FA_PagoSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento.aspx.designer.cs">
+      <DependentUpon>FA_PagoSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx.cs">
+      <DependentUpon>FA_PagoSeguimiento2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PagoSeguimiento2.aspx.designer.cs">
+      <DependentUpon>FA_PagoSeguimiento2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx.cs">
+      <DependentUpon>FA_PolizaBoletaLetra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_PolizaBoletaLetra.aspx.designer.cs">
+      <DependentUpon>FA_PolizaBoletaLetra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReciboPago.aspx.cs">
+      <DependentUpon>FA_ReciboPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReciboPago.aspx.designer.cs">
+      <DependentUpon>FA_ReciboPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx.cs">
+      <DependentUpon>FA_ReporteChequeBisa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBisa.aspx.designer.cs">
+      <DependentUpon>FA_ReporteChequeBisa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx.cs">
+      <DependentUpon>FA_ReporteChequeBNB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteChequeBNB.aspx.designer.cs">
+      <DependentUpon>FA_ReporteChequeBNB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx.cs">
+      <DependentUpon>FA_ReporteCobranza2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCobranza2.aspx.designer.cs">
+      <DependentUpon>FA_ReporteCobranza2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx.cs">
+      <DependentUpon>FA_ReporteCotizacionRepuesto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ReporteCotizacionRepuesto.aspx.designer.cs">
+      <DependentUpon>FA_ReporteCotizacionRepuesto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx.cs">
+      <DependentUpon>FA_RutaBoletaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaBoletaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_RutaBoletaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RutaEntrega.aspx.cs">
+      <DependentUpon>FCorpal_RutaEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_RutaEntrega.aspx.designer.cs">
+      <DependentUpon>FCorpal_RutaEntrega.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx.cs">
+      <DependentUpon>FA_RutaCobrador_ColocarBancos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx.designer.cs">
+      <DependentUpon>FA_RutaCobrador_ColocarBancos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx.cs">
+      <DependentUpon>FA_RutaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_RutaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_RutaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx.cs">
+      <DependentUpon>FCorpal_saldosCuentasGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_saldosCuentasGeneral.aspx.designer.cs">
+      <DependentUpon>FCorpal_saldosCuentasGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx.cs">
+      <DependentUpon>FA_SeguimientosMorosos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_SeguimientosMorosos.aspx.designer.cs">
+      <DependentUpon>FA_SeguimientosMorosos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SGI_Actividades.aspx.cs">
+      <DependentUpon>FCorpal_SGI_Actividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SGI_Actividades.aspx.designer.cs">
+      <DependentUpon>FCorpal_SGI_Actividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx.cs">
+      <DependentUpon>FA_VaciadoAlSimec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoAlSimec.aspx.designer.cs">
+      <DependentUpon>FA_VaciadoAlSimec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx.cs">
+      <DependentUpon>FA_VaciadoR148.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx.designer.cs">
+      <DependentUpon>FA_VaciadoR148.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx.cs">
+      <DependentUpon>FA_ViewCuadroXXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewCuadroXXX.aspx.designer.cs">
+      <DependentUpon>FA_ViewCuadroXXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx.cs">
+      <DependentUpon>FA_viewEstadisticaMantenimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_viewEstadisticaMantenimiento.aspx.designer.cs">
+      <DependentUpon>FA_viewEstadisticaMantenimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx.cs">
+      <DependentUpon>FA_ViewSeguimientoInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoInstalacion.aspx.designer.cs">
+      <DependentUpon>FA_ViewSeguimientoInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx.cs">
+      <DependentUpon>FA_ViewSeguimientoMantenimientoXXX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_ViewSeguimientoMantenimientoXXX.aspx.designer.cs">
+      <DependentUpon>FA_ViewSeguimientoMantenimientoXXX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx.cs">
+      <DependentUpon>FA_VistaResponsableProyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_VistaResponsableProyecto.aspx.designer.cs">
+      <DependentUpon>FA_VistaResponsableProyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FControlPedido.aspx.cs">
+      <DependentUpon>FControlPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FControlPedido.aspx.designer.cs">
+      <DependentUpon>FControlPedido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEncargadoPago.aspx.cs">
+      <DependentUpon>FEncargadoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEncargadoPago.aspx.designer.cs">
+      <DependentUpon>FEncargadoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarFormularios.aspx.cs">
+      <DependentUpon>FCorpal_GestionarFormularios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarFormularios.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarFormularios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEquipo.aspx.cs">
+      <DependentUpon>FEquipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEquipo.aspx.designer.cs">
+      <DependentUpon>FEquipo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx.cs">
+      <DependentUpon>FEstadisticaInstalacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaInstalacion.aspx.designer.cs">
+      <DependentUpon>FEstadisticaInstalacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx.cs">
+      <DependentUpon>FEstadisticaParqueAscensores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FEstadisticaParqueAscensores.aspx.designer.cs">
+      <DependentUpon>FEstadisticaParqueAscensores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FProyecto.aspx.cs">
+      <DependentUpon>FProyecto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FProyecto.aspx.designer.cs">
+      <DependentUpon>FProyecto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FTipoPago.aspx.cs">
+      <DependentUpon>FTipoPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FTipoPago.aspx.designer.cs">
+      <DependentUpon>FTipoPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\MenuIzquierdo.ascx.cs">
+      <DependentUpon>MenuIzquierdo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\MenuIzquierdo.ascx.designer.cs">
+      <DependentUpon>MenuIzquierdo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx.cs">
+      <DependentUpon>FA_Reporte_R144.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx.designer.cs">
+      <DependentUpon>FA_Reporte_R144.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\WelcomeJyC.aspx.cs">
+      <DependentUpon>WelcomeJyC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\WelcomeJyC.aspx.designer.cs">
+      <DependentUpon>WelcomeJyC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\NA_QRCodeNet.cs" />
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestonarResponsable.aspx.cs">
+      <DependentUpon>FCorpal_GestonarResponsable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestonarResponsable.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestonarResponsable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DS_MaterialeInsumos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site1.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
+    <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_IngresoVsEgreso_SaldoInicial_todos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_RecibidoMaterialeInsumos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CompradeMaterialeInsumos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ActividadesPersonal.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_Detalle_solicitudEntregaProductoporPersona.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregaProduccion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitados_VS_Entregados.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaReciboEgreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_consultaReciboIngreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DetalleProductosSolicitadosEntregados.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEgreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionSeguros2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_BoletasMantenimiento.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ImportacionCredinForm.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregadoProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboIngreso.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ReporteEmergenciaCallCenter.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\detalle_facturaProveedoresComercial.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\detalle_FacturaSeguroEquipo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R-155porCodigo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R155InspeccionySeguimiento.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CodigosEquiposEdificio2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_EncuestasMantenimientoRealizadas.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ReporteMantenimiento_R124.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_Repuesto1.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_Cobranza2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CodigosEquiposEdificio.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta3.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_ConsultaRuta2.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBisa_ok.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBisa_modelo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBNB_ok.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\cotizacionReporte.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_chequeBNB_modelo.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_CallCenter_AscensoresParado.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_LibroDiarioCobranza.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_PolizasImportacionCostos.rdlc" />
+    <EmbeddedResource Include="Reportes\Reportes old\Report_R-144.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboPedidoProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_SolicituddeMaterialeInsumos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_StockProductos.rdlc" />
+    <EmbeddedResource Include="Reportes\SubReport_detalleIngresoEgresoResponsable.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DS_Activos.xsc">
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Activos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Activos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DS_Activos.xss">
+      <DependentUpon>DS_Activos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_CallCenter.xsc">
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </None>
+    <None Include="DS_CallCenter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_CallCenter.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_CallCenter.xss">
+      <DependentUpon>DS_CallCenter.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Equipos.xsc">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Equipos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Equipos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Equipos.xss">
+      <DependentUpon>DS_Equipos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Importacion.xsc">
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Importacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Importacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Importacion.xss">
+      <DependentUpon>DS_Importacion.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Mantenimiento.xsc">
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Mantenimiento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Mantenimiento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Mantenimiento.xss">
+      <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ProductosAlmacen.xsc">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ProductosAlmacen.xsd" />
+    <None Include="DS_ProductosAlmacen.xss">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Proyectos.xsc">
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Proyectos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Proyectos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Proyectos.xss">
+      <DependentUpon>DS_Proyectos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xsc">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ReciboIngresoEgreso.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_ReciboIngresoEgreso.xss">
+      <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReporteRepuesto.xsc">
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </None>
+    <None Include="DS_ReporteRepuesto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ReporteRepuesto.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_ReporteRepuesto.xss">
+      <DependentUpon>DS_ReporteRepuesto.xsd</DependentUpon>
+    </None>
+    <None Include="DS_R-144.xsc">
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </None>
+    <None Include="DS_R-144.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_R-144.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_R-144.xss">
+      <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Rutas.xsc">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </None>
+    <None Include="DS_Rutas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Rutas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_Rutas.xss">
+      <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </None>
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.eot" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.woff" />
+    <None Include="jquery\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="jquery\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="jquery\font-awesome\less\animated.less" />
+    <None Include="jquery\font-awesome\less\bordered-pulled.less" />
+    <None Include="jquery\font-awesome\less\core.less" />
+    <None Include="jquery\font-awesome\less\fixed-width.less" />
+    <None Include="jquery\font-awesome\less\font-awesome.less" />
+    <None Include="jquery\font-awesome\less\icons.less" />
+    <None Include="jquery\font-awesome\less\larger.less" />
+    <None Include="jquery\font-awesome\less\list.less" />
+    <None Include="jquery\font-awesome\less\mixins.less" />
+    <None Include="jquery\font-awesome\less\path.less" />
+    <None Include="jquery\font-awesome\less\rotated-flipped.less" />
+    <None Include="jquery\font-awesome\less\screen-reader.less" />
+    <None Include="jquery\font-awesome\less\stacked.less" />
+    <None Include="jquery\font-awesome\less\variables.less" />
+    <None Include="jquery\font-awesome\scss\font-awesome.scss" />
+    <None Include="jquery\font-awesome\scss\_animated.scss" />
+    <None Include="jquery\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="jquery\font-awesome\scss\_core.scss" />
+    <None Include="jquery\font-awesome\scss\_fixed-width.scss" />
+    <None Include="jquery\font-awesome\scss\_icons.scss" />
+    <None Include="jquery\font-awesome\scss\_larger.scss" />
+    <None Include="jquery\font-awesome\scss\_list.scss" />
+    <None Include="jquery\font-awesome\scss\_mixins.scss" />
+    <None Include="jquery\font-awesome\scss\_path.scss" />
+    <None Include="jquery\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="jquery\font-awesome\scss\_screen-reader.scss" />
+    <None Include="jquery\font-awesome\scss\_stacked.scss" />
+    <None Include="jquery\font-awesome\scss\_variables.scss" />
+    <None Include="js\bootstrap.bundle.js.map" />
+    <None Include="js\bootstrap.bundle.min.js.map" />
+    <None Include="js\bootstrap.js.map" />
+    <None Include="js\bootstrap.min.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ar.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\be-cyrl.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\be-latn.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ca.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\cs.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\da.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\de.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\el.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\en.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\es.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\et.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\fa.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\fi.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\fr.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\he.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\hi.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\hr.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\hu.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\hy.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\id.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\it.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ja.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ka.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ko.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\lt.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\lv.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ms.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\nb.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\nl.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\pl.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\pt-br.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\pt.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\rs.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ru.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\se.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\sk.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\sl.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\sq.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\th.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\tr.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\ua.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\vi.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\zh-cn.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\apexcharts\locales\zh-tw.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\bootstrap-icons.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\bootstrap-icons.scss" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\fonts\boxicons.eot" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\fonts\boxicons.ttf" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\fonts\boxicons.woff" />
+    <Content Include="NegocioPlantilla\assets\vendor\boxicons\fonts\boxicons.woff2" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.cjs.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chart.umd.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chunks\helpers.segment.cjs.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\chunks\helpers.segment.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\helpers.cjs.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\chart.js\helpers.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.common.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.esm.mjs.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\echarts.simple.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\bmap.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\extension\dataTool.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\echarts\package.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.bubble.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.core.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.core.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.js.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\quill\quill.snow.css.map" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.eot" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.glyph.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.less" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.ttf" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.woff" />
+    <Content Include="NegocioPlantilla\assets\vendor\remixicon\remixicon.woff2" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\bower.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\CHANGELOG.md" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\composer.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\license.md" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\package.json" />
+    <Content Include="NegocioPlantilla\assets\vendor\tinymce\README.md" />
+    <None Include="packages.config" />
+    <None Include="DS_MaterialeInsumos.xsc">
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </None>
+    <None Include="DS_MaterialeInsumos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_MaterialeInsumos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS_MaterialeInsumos.xss">
+      <DependentUpon>DS_MaterialeInsumos.xsd</DependentUpon>
+    </None>
+    <Content Include="PlantillaNew.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.bar.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.bubble.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.doughnut.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.line.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.pie.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.polarArea.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.radar.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\controller.scatter.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\controllers\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.adapters.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.animation.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.animations.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.animations.defaults.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.animator.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.config.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.controller.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.datasetController.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.defaults.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.element.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.interaction.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.layouts.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.layouts.defaults.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.plugins.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.registry.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.scale.autoskip.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.scale.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.scale.defaults.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.ticks.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\core.typedRegistry.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\core\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\elements\element.arc.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\elements\element.bar.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\elements\element.line.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\elements\element.point.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\elements\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.canvas.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.collection.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.color.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.config.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.config.types.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.core.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.curve.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.dom.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.easing.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.extras.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.interpolation.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.intl.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.math.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.options.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.rtl.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\helpers.segment.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\helpers\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\index.umd.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\platform\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\platform\platform.base.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\platform\platform.basic.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\platform\platform.dom.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.colors.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.decimation.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.drawing.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.helper.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.options.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.segment.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.target.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\filler.target.stack.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.filler\simpleArc.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.legend.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.subtitle.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.title.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\plugins\plugin.tooltip.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.category.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.linear.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.linearbase.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.logarithmic.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.radialLinear.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.time.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\scales\scale.timeseries.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\animation.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\basic.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\color.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\geometric.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\index.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\layout.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\chart.js\types\utils.d.ts" />
+    <TypeScriptCompile Include="NegocioPlantilla\assets\vendor\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v17.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51048</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

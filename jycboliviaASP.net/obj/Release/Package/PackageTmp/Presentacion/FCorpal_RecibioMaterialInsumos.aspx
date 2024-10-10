@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_RecibioMaterialInsumos.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FACorpal_RecibioMaterialInsumos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<<<<<<< HEAD
 
+=======
+<%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
+>>>>>>> origin/modulo3
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
  <link href="../Styles/Style_CompradeMaterialeInsumos.css" rel="stylesheet" type="text/css" />
@@ -156,7 +160,11 @@
             <div class="panel-body">
             <div class="DatosProyecto">
                 <asp:GridView ID="gv_MaterialSolicitado" 
+<<<<<<< HEAD
                     runat="server" BackColor="White" 
+=======
+                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+>>>>>>> origin/modulo3
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onselectedindexchanged="gv_MaterialSolicitado_SelectedIndexChanged">
@@ -190,7 +198,11 @@
             <div class="panel-body">
             <div class="DatosItem">
                 <asp:GridView ID="gv_DatosItem" 
+<<<<<<< HEAD
                     runat="server" BackColor="White" 
+=======
+                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+>>>>>>> origin/modulo3
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     AutoGenerateColumns="False">

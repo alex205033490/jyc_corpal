@@ -118,6 +118,7 @@ C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\bin\pt\Microsof
 C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\bin\ru\Microsoft.SqlServer.Types.resources.dll
 C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+<<<<<<< HEAD
 F:\Users\Sistema\Documents\GitHub\jyc_corpal-modulo3\jycboliviaASP.net\bin\x86\SqlServerSpatial160.dll
 F:\Users\Sistema\Documents\GitHub\jyc_corpal-modulo3\jycboliviaASP.net\bin\x64\SqlServerSpatial160.dll
 F:\Users\Sistema\Documents\GitHub\jyc_corpal-modulo3\jycboliviaASP.net\bin\jycboliviaASP.net.dll.config
@@ -360,3 +361,5 @@ F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\obj\Release\jycco
 F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\obj\Release\jyccorpa.B9D98B97.Up2Date
 F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\obj\Release\jycboliviaASP.net.dll
 F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\obj\Release\jycboliviaASP.net.pdb
+=======
+>>>>>>> origin/modulo3

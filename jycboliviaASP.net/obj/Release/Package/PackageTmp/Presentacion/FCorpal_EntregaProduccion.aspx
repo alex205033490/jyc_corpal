@@ -61,12 +61,27 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+<<<<<<< HEAD
  <div class="card">
   <div class="card-header bg-success text-white">Entrega de Produccion</div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
         <div class="row">
     <div class="col-md-12 col-md-offset-1">
+=======
+    <div class="container" style="padding-top: 1em;">
+   
+
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-success class">
+            <div class="panel-heading">
+            <h3 class="panel-title">Entrega Produccion:</h3>
+            </div>
+            <div class="panel-body">
+            
+>>>>>>> origin/modulo3
        <table>   
        <tr>
         <td>
@@ -84,7 +99,11 @@
             <asp:Label ID="Label37" runat="server" Text="Turno:"></asp:Label>
            </td>
        <td>
+<<<<<<< HEAD
                 <asp:DropDownList ID="dd_turno" class="btn btn-secondary dropdown-toggle" runat="server" 
+=======
+                <asp:DropDownList ID="dd_turno" class="form-control" runat="server" 
+>>>>>>> origin/modulo3
                     Width="150px">
                     <asp:ListItem>Mañana</asp:ListItem>
                     <asp:ListItem>Tarde</asp:ListItem>
@@ -137,7 +156,11 @@
                 <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
             </td>
             <td>
+<<<<<<< HEAD
                 <asp:DropDownList ID="dd_productosNax" class="btn btn-secondary dropdown-toggle" runat="server" 
+=======
+                <asp:DropDownList ID="dd_productosNax" class="form-control" runat="server" 
+>>>>>>> origin/modulo3
                     Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
                 </asp:DropDownList>
             </td>
@@ -145,7 +168,11 @@
             <td></td>
         </tr>
     </table>
+<<<<<<< HEAD
        <table>
+=======
+    <table>
+>>>>>>> origin/modulo3
         <tr>
             <td>
                 <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
@@ -164,6 +191,7 @@
             </td>            
         </tr>
         <tr>
+<<<<<<< HEAD
             <td><asp:Label ID="Label2" runat="server" Text="Pack Ferial:"></asp:Label></td>
             <td>
                 <asp:TextBox ID="tx_packFerial" class="form-control" runat="server" BackColor="Yellow"></asp:TextBox></td>
@@ -172,6 +200,8 @@
                 <asp:TextBox ID="tx_medidaPackFerial" class="form-control" Text="UNIDAD" runat="server"></asp:TextBox></td>            
         </tr>
         <tr>
+=======
+>>>>>>> origin/modulo3
         <td>
             <asp:Label ID="Label41" runat="server" Text="Unidad Suelta :"></asp:Label>
             </td>
@@ -192,6 +222,7 @@
         <td> <asp:TextBox ID="tx_kgrdesperdicio_conaceite" class="form-control" 
                 runat="server"></asp:TextBox>  </td>
         <td>
+<<<<<<< HEAD
             <asp:Label ID="Label45" runat="server" Text="kgr Desperdicio Sin Aceite:"></asp:Label>
             </td>
         <td>
@@ -207,6 +238,20 @@
         </tr>   
     </table>
        <table>
+=======
+            <asp:Label ID="Label45" runat="server" Text="kgr Desperdicio Sin Aceite"></asp:Label>
+            </td>
+        <td>
+            <asp:TextBox ID="tx_kgrdesperdicio_SinAceite" class="form-control" 
+                runat="server"></asp:TextBox>  
+        <td> &nbsp;</td>
+        </td>
+        </tr>        
+    </table>
+   
+    
+    <table>
+>>>>>>> origin/modulo3
         <tr>
             <td>
                 <asp:Label ID="Label35" runat="server" Text="Detalle :"></asp:Label>
@@ -219,10 +264,17 @@
             <td></td>
         </tr>
     </table>
+<<<<<<< HEAD
        <table>
         <tr>
             <td>
                 <asp:Button ID="bt_limpiar" class="btn btn-secondary" runat="server" Text="Limpiar" 
+=======
+    <table>
+        <tr>
+            <td>
+                <asp:Button ID="bt_limpiar" class="btn btn-light" runat="server" Text="Limpiar" 
+>>>>>>> origin/modulo3
                     onclick="bt_limpiar_Click" />
             </td>
             <td>
@@ -230,9 +282,15 @@
                     Text="Insertar" onclick="bt_insertar_Click" />
             </td>
             <td>
+<<<<<<< HEAD
                 <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-info" 
                     Text="Ver Recibo" onclick="bt_verRecibo_Click" />
                 <asp:Button ID="bt_modificar" class="btn btn-secondary" runat="server" 
+=======
+                <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-light" 
+                    Text="Ver Recibo" onclick="bt_verRecibo_Click" />
+                <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
+>>>>>>> origin/modulo3
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>
 
@@ -246,6 +304,7 @@
             
         </tr>
     </table>
+<<<<<<< HEAD
      </div>
 </div>
     </li>
@@ -255,6 +314,27 @@
             <div class="DatosProyecto">                
                 <asp:GridView ID="gv_EntregasdeProduccion" 
                      runat="server" BackColor="White" 
+=======
+
+            </div>
+        </div>
+     </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-success class">
+            <div class="panel-heading">
+            <h3 class="panel-title">Datos:</h3>
+            </div>
+            <div class="panel-body">
+            <div class="DatosProyecto">
+                
+
+                <asp:GridView ID="gv_EntregasdeProduccion" 
+                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+>>>>>>> origin/modulo3
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">
@@ -270,6 +350,7 @@
                     <SortedAscendingHeaderStyle BackColor="#808080" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
                     <SortedDescendingHeaderStyle BackColor="#383838" />
+<<<<<<< HEAD
                 </asp:GridView>                
             </div>            
         <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server"  Text="Excel" onclick="bt_excel_Click" />
@@ -280,6 +361,20 @@
 
     </li>
   </ul>
+=======
+                </asp:GridView>
+                
+
+            </div>
+            <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server" 
+                    Text="Excel" onclick="bt_excel_Click" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+>>>>>>> origin/modulo3
 </div>
 
 
