@@ -4,6 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
+
     <_PublishTargetUrl>C:\Users\atc\Desktop\Nueva carpeta (2)</_PublishTargetUrl>
     <History>True|2024-08-23T14:33:00.0784702Z||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
     <LastFailureDetails />
@@ -14,11 +15,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/ar/AjaxControlToolkit.resources.dll">
       <publishTime>09/20/2012 03:13:04</publishTime>
+
     </File>
     <File Include="bin/BouncyCastle.Cryptography.dll">
       <publishTime>07/05/2024 12:05:28</publishTime>
     </File>
     <File Include="bin/cs/AjaxControlToolkit.resources.dll">
+
       <publishTime>09/20/2012 03:13:04</publishTime>
     </File>
     <File Include="bin/de/AjaxControlToolkit.resources.dll">
@@ -167,11 +170,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/K4os.Compression.LZ4.Streams.dll">
       <publishTime>03/17/2024 17:56:18</publishTime>
+
     </File>
     <File Include="bin/K4os.Hash.xxHash.dll">
       <publishTime>08/11/2022 14:08:14</publishTime>
     </File>
     <File Include="bin/ko/AjaxControlToolkit.resources.dll">
+
       <publishTime>09/20/2012 03:13:04</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.Common.resources.dll">
@@ -215,11 +220,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.SqlServer.Types.dll">
       <publishTime>10/12/2016 11:26:34</publishTime>
+
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>04/11/2022 19:09:46</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
+
       <publishTime>03/23/2018 11:10:12</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
@@ -269,6 +276,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/SanitizerProviders.dll">
       <publishTime>09/20/2012 03:13:04</publishTime>
+
     </File>
     <File Include="bin/SqlServerTypes/x64/msvcr120.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -286,6 +294,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/18/2010 23:21:56</publishTime>
     </File>
     <File Include="bin/System.Buffers.dll">
+
       <publishTime>02/19/2020 06:05:18</publishTime>
     </File>
     <File Include="bin/System.Configuration.ConfigurationManager.dll">
@@ -2060,6 +2069,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Presentacion/WelcomeJyC.aspx">
       <publishTime>05/08/2024 18:15:18</publishTime>
+
     </File>
     <File Include="Reportes/NA_QRCodeNet.cs">
       <publishTime>05/08/2024 18:15:20</publishTime>
@@ -2179,7 +2189,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/08/2024 18:15:20</publishTime>
     </File>
     <File Include="Reportes/Report_PruebaInventarioIngresos.rdlc">
+
       <publishTime>08/16/2024 10:21:25</publishTime>
+
     </File>
     <File Include="Reportes/Report_QRActivos.rdlc">
       <publishTime>05/08/2024 18:15:20</publishTime>
@@ -2215,10 +2227,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/08/2024 18:15:20</publishTime>
     </File>
     <File Include="Site1.Master">
+
       <publishTime>05/08/2024 18:15:20</publishTime>
     </File>
     <File Include="SqlServerTypes/readme.htm">
       <publishTime>08/13/2024 09:13:56</publishTime>
+
     </File>
     <File Include="SqlServerTypes/x64/msvcr120.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -2233,6 +2247,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Styles/login-box.css">
+
       <publishTime>05/08/2024 18:15:20</publishTime>
     </File>
     <File Include="Styles/payment.css">
@@ -2480,6 +2495,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Web.config">
       <publishTime>08/23/2024 10:32:57</publishTime>
+
     </File>
   </ItemGroup>
 </Project>

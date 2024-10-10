@@ -41,10 +41,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-    <div class="Centrar">
-<div class="titulo"><h3>Entrega de Solicitud Productos</h3></div>
-<div class="busqueda">
+<div class="card" >
+  <div class="card-header bg-warning text-black">
+    Entrega de Solicitud Productos
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <div class="col-12">
+            <div class="busqueda">
 <table>
 <tr>
     <td></td>
@@ -89,8 +93,7 @@
 <td>
     <asp:Label ID="Label3" runat="server" Text="Estado:"></asp:Label>  </td>
 <td>
-    <asp:DropDownList ID="dd_estadoCierre" class="form-control" runat="server" 
-        Width="100px">
+    <asp:DropDownList ID="dd_estadoCierre" class="btn btn-secondary dropdown-toggle" runat="server"  >
         <asp:ListItem>Abierto</asp:ListItem>
         <asp:ListItem>Cerrado</asp:ListItem>
     </asp:DropDownList>
@@ -110,7 +113,7 @@
         <asp:Label ID="Label12" runat="server" Text="Motivo Cierre:"></asp:Label>
         </td>
     <td>
-        <asp:DropDownList ID="dd_motivoCierre" class="form-control" runat="server" Width="250px">
+        <asp:DropDownList ID="dd_motivoCierre" class="btn btn-secondary dropdown-toggle" runat="server" >
             <asp:ListItem>Ninguno</asp:ListItem>
             <asp:ListItem>Vendedor Sin Espacio</asp:ListItem>
             <asp:ListItem>Vendedor Redujo Solicitud</asp:ListItem>
@@ -164,15 +167,15 @@
     </tr>
 </table>
 </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col-12">
+            <div class="vista1">
 
-
-<div class="vista1">
-
-    <asp:GridView ID="gv_solicitudesProductos" runat="server" BackColor="White" 
-        CssClass="table table-responsive table-striped" 
+    <asp:GridView ID="gv_solicitudesProductos" runat="server" BackColor="White"         
         BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
         Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" onselectedindexchanged="gv_solicitudesProductos_SelectedIndexChanged"
-       
         >
         <AlternatingRowStyle BackColor="#CCCCCC" />
         <Columns>
@@ -199,15 +202,14 @@
     </asp:GridView>
 
 </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="col-12">
+            <h3>Detalle Producto</h3>
+            <div class="Grepuesto">
 
-<div>
-<h3>Detalle Producto
-</div>
-
-<div class="Grepuesto">
-
-    <asp:GridView ID="gv_detallesolicitud" runat="server" BackColor="White" 
-        CssClass="table table-responsive table-striped" 
+    <asp:GridView ID="gv_detallesolicitud" runat="server" BackColor="White"        
         BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
         Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" 
         AutoGenerateColumns="False" 
@@ -255,45 +257,12 @@
     </asp:GridView>
 
 </div>
-
-
-<div class = "medio">
-<table>
-<tr>
-<td></td>
-<td>
-    &nbsp;</td>
-<td></td>
-<td>
-    &nbsp;</td>
-<td>
-    &nbsp;</td>
-<td>
-    &nbsp;</td>
-
-</tr>
-
-</table>
+        </div>
+    </li>
+  </ul>
 </div>
 
 
-<div class="blanco">
-<table>
-<tr>
-<td></td>
-<td>
-    &nbsp;</td>
-<td></td>
-<td>
-    &nbsp;</td>
-<td></td>
-<td>
-    &nbsp;</td>
-</tr>
-</table>
-</div>
-
-</div>
 
 
 </asp:Content>

@@ -4,11 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-      <title>JyC</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">            
+      <title>JyC</title>      
+      <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />            
       <link href="../Styles/payment.css" rel="stylesheet" type="text/css" />
       <link href="../Styles/Style_Autocompletar.css" rel="stylesheet" type="text/css" />
       <link rel="Shortcut Icon" href="../Images/jyc_icono.ico" />

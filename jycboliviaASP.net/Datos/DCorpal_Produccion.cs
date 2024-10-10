@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
+using jycboliviaASP.net.Presentacion;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -14,22 +15,24 @@ namespace jycboliviaASP.net.Datos
 
 
 
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
         {
             string consulta = "insert into tbcorpal_entregasordenproduccion( "+
                                " fechagra,horagra,turno,resp_entrega, "+
                                " cantcajas,unidadsuelta,kgrdesperdicio,kgrparamix, "+
                                " codorden,codrespentrega,detalleentrega,nroorden, "+
-                               " productoNax,codProductonax, estado,codresprecepcion,resp_recepcion,cod_respgra, kgrdesperdicio_conaceite, kgrdesperdicio_sinaceite  " +
+                               " productoNax,codProductonax, estado,codresprecepcion,resp_recepcion,cod_respgra, kgrdesperdicio_conaceite, kgrdesperdicio_sinaceite , pack_ferial," +
+                               " medidaentregada, medidapackferial, kgrdesperdiciobobina " +
                                " ) values( "+
                                " current_date(), current_time(), '" + turno + "', '" + respEntrega + "', " +
                                " '"+cantcajas.ToString().Replace(',','.')+"', '"+unidadsuelta.ToString().Replace(',','.')+"', '"+kgrdesperdicio.ToString().Replace(',','.')+"', '"+kgrparamix.ToString().Replace(',','.')+"', "+
                                " null, " + codusuario + ", '" + detalleentrega + "', '" + nroorden + "', " +
-                               " '" + productoNax + "', " + codProdNax + ", 1, " + codresprecepcion + ",'" + resp_recepcion + "'," + cod_respgra + ", '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "')";
+                               " '" + productoNax + "', " + codProdNax + ", 1, " + codresprecepcion + ",'" + resp_recepcion + "'," + cod_respgra + ", '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "','"+ pack_ferial.ToString().Replace(',', '.') + "'," +
+                               "'"+medidaentregada+"', '"+medidapackferial+"', '"+ kgrdesperdiciobobina.ToString().Replace(',', '.') + "')";
             return Conx.ejecutarMySql(consulta);
         }
 
-        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra)
+        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
         {
             string consulta = "update tbcorpal_entregasordenproduccion set "+ 
                                " tbcorpal_entregasordenproduccion.turno = '"+turno+"', "+
@@ -45,8 +48,14 @@ namespace jycboliviaASP.net.Datos
                                " tbcorpal_entregasordenproduccion.codProductonax = " + codProdNax + " , "+
                                " tbcorpal_entregasordenproduccion.codresprecepcion = " + codresprecepcion + " , " +
                                " tbcorpal_entregasordenproduccion.resp_recepcion = '" + resp_recepcion + "' , " +
-                               " tbcorpal_entregasordenproduccion.cod_respgra = " + cod_respgra +
-                               " where "+
+                               " tbcorpal_entregasordenproduccion.cod_respgra = " + cod_respgra +", "+
+                               " tbcorpal_entregasordenproduccion.kgrdesperdicio_sinaceite = '"+ kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "', " +
+                               " tbcorpal_entregasordenproduccion.kgrdesperdicio_conaceite = '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', " +
+                               " tbcorpal_entregasordenproduccion.pack_ferial = '" + pack_ferial.ToString().Replace(',', '.') + "', " +
+                               " tbcorpal_entregasordenproduccion.medidaentregada = '"+ medidaentregada + "', " +
+                               " tbcorpal_entregasordenproduccion.medidapackferial = '"+ medidapackferial + "', " +
+                               " tbcorpal_entregasordenproduccion.kgrdesperdiciobobina = '"+ kgrdesperdiciobobina.ToString().Replace(',', '.') + "' "+
+                               " where " +
                                " tbcorpal_entregasordenproduccion.codigo ="+ codigo;
             return Conx.ejecutarMySql(consulta);
         }
@@ -60,12 +69,13 @@ namespace jycboliviaASP.net.Datos
                                " aa.resp_entrega, aa.cantcajas, aa.unidadsuelta, aa.kgrdesperdicio, aa.kgrparamix, "+
                                " aa.codorden, aa.codrespentrega, aa.detalleentrega, aa.nroorden, "+
                                " aa.productoNax, aa.codProductonax, aa.codresprecepcion, aa.resp_recepcion, " +
-                               " aa.kgrdesperdicio_conaceite, aa.kgrdesperdicio_sinaceite "+
+                               " aa.kgrdesperdicio_conaceite, aa.kgrdesperdicio_sinaceite, aa.pack_ferial, aa.kgrdesperdiciobobina " +
                                " from "+
                                " tbcorpal_entregasordenproduccion aa "+
                                " where "+
                                " aa.estado = 1 and "+
-                               " aa.turno like '%"+turno+"%' and aa.resp_entrega like '%"+respEntrega+"%'";
+                               " aa.turno like '%"+turno+"%' and aa.resp_entrega like '%"+respEntrega+"%' "+
+                               " order by aa.codigo desc ";
             return Conx.consultaMySql(consulta);
         }
 
@@ -151,15 +161,27 @@ namespace jycboliviaASP.net.Datos
                                "    WHEN 5 THEN 'Jueves' "+
                                "    WHEN 6 THEN 'Viernes' "+
                                "    WHEN 7 THEN 'Sábado' "+
-                               "  END AS 'Dia' " +
-                               " from tbcorpal_entregasordenproduccion ee "+
+                               "  END AS 'Dia', " +
+                               " CASE " +
+                               " WHEN HOUR(ee.horagra) BETWEEN 0 AND 6 THEN date_format(date_add(ee.fechagra, INTERVAL -1 DAY),'%d/%m/%Y') " +
+                               " ELSE date_format(ee.fechagra,'%d/%m/%Y') " +
+                               " END AS 'FechaSistema', " +
+                               " CASE " +
+                               " WHEN HOUR(ee.horagra) BETWEEN 7 AND 15 THEN 'Mañana' " +
+                               " WHEN HOUR(ee.horagra) BETWEEN 16 AND 23 THEN 'Tarde' " +
+                               " WHEN HOUR(ee.horagra) BETWEEN 0 AND 6 THEN 'Noche' " +
+                               " ELSE 'Noche' " +
+                               " END AS 'TurnoSistema' "+
+
+                               " from tbcorpal_entregasordenproduccion ee " +
                                " left join tbcorpal_producto cc on (ee.codProductonax = cc.codigo) "+
                                " where "+
                                " cc.estado = 1 and "+
                                " ee.estado = 1 and "+
                                " ee.resp_entrega like '%"+Responsable+"%' and "+
                                " ee.productoNax like '%"+producto+"%' and "+
-                               " ee.fechagra between "+fechadesde+" and "+fechahasta;
+                               " ee.fechagra between "+fechadesde+" and "+fechahasta +
+                               " order by TIMESTAMP (ee.fechagra,ee.horagra) desc";
             return Conx.consultaMySql(consulta);
         }
 
@@ -202,7 +224,11 @@ namespace jycboliviaASP.net.Datos
                                " ee.unidadsuelta, " +
                                " ee.kgrdesperdicio, " +
                                " ee.kgrparamix, " +
-                               " ee.codresprecepcion " +
+                               " ee.codresprecepcion, " +
+                               " ee.medidaentregada,"+
+                               " ee.kgrdesperdicio_conaceite,"+                               
+                               " ee.kgrdesperdicio_sinaceite,"+
+                               " ee.pack_ferial "+
                                " from tbcorpal_entregasordenproduccion ee " +
                                " where " +
                                " ee.estado = 1 and " +
@@ -479,8 +505,11 @@ namespace jycboliviaASP.net.Datos
                               " oo.cantcajasproduccion, "+
                               " oo.medida, "+  
                               " oo.detalleproduccion, "+
-                              " oo.responsable "+
-                              " from "+
+                              " oo.responsable, "+
+                              " oo.cantturnodia," +
+                              " oo.cantturnotarde," +
+                              " oo.cantturnonoche " +
+                              " from " +
                               " tbcorpal_ordenproduccion oo "+
                               " where "+
                               " oo.estado = 1 and "+
@@ -489,7 +518,8 @@ namespace jycboliviaASP.net.Datos
         }
 
         internal bool insertarOrdenProduccion( string fechaproduccion,int codProductonax,string productoNax,float cantcajasproduccion,
-                                               string medida,string detalleproduccion,int cod_respgra,string responsable)
+                                               string medida,string detalleproduccion,int cod_respgra,string responsable,
+                                               float cantturnodia, float cantturnotarde, float cantturnonoche)
         {
             string consulta = "insert into tbcorpal_ordenproduccion( "+
                                 " fechagra, "+
@@ -504,7 +534,10 @@ namespace jycboliviaASP.net.Datos
                                 " estado, "+
                                 " estadoorden, "+
                                 " cod_respgra, "+
-                                " responsable) "+
+                                " responsable, " +
+                                " cantturnodia, "+
+                                " cantturnotarde, "+
+                                " cantturnonoche) " +
                                 " values( "+
                                 " current_date(), "+
                                 " current_time(), "+
@@ -518,7 +551,10 @@ namespace jycboliviaASP.net.Datos
                                 " 1, "+
                                 " 'Abierto', "+
                                  cod_respgra+", "+
-                                " '"+responsable+"')";
+                                " '"+responsable+"',"+
+                                "'"+cantturnodia.ToString().Replace(',', '.') + "', "+
+                                "'"+cantturnotarde.ToString().Replace(',', '.') + "', "+
+                                "'"+cantturnonoche.ToString().Replace(',', '.') + "')";
             return Conx.ejecutarMySql (consulta);
         }
 
@@ -531,7 +567,7 @@ namespace jycboliviaASP.net.Datos
             return Conx.ejecutarMySql(consulta);
         }
 
-        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable)
+        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
         {
             string consulta = "update tbcorpal_ordenproduccion set " +
                                 " tbcorpal_ordenproduccion.fechaproduccion = "+fechaProduccion+", " +
@@ -541,8 +577,11 @@ namespace jycboliviaASP.net.Datos
                                 " tbcorpal_ordenproduccion.medida = '"+medidaProduccion+"', " +
                                 " tbcorpal_ordenproduccion.detalleproduccion = '"+detalleProduccion+"', " +
                                 " tbcorpal_ordenproduccion.cod_respgra = "+codUser+", " +
-                                " tbcorpal_ordenproduccion.responsable= '"+responsable+"' " +
-                                " where tbcorpal_ordenproduccion.codigo = "+codigoOrden;
+                                " tbcorpal_ordenproduccion.responsable= '"+responsable+"', " +
+                                " tbcorpal_ordenproduccion.cantturnodia= '"+ cantturnodia.ToString().Replace(',', '.') + "', "+
+                                " tbcorpal_ordenproduccion.cantturnotarde= '"+ cantturnotarde.ToString().Replace(',', '.') + "', "+ 
+                                " tbcorpal_ordenproduccion.cantturnonoche= '"+ cantturnonoche.ToString().Replace(',', '.') + "' "+
+                                " where tbcorpal_ordenproduccion.codigo = " +codigoOrden;
                                 
             return Conx.ejecutarMySql(consulta);
         }
@@ -553,6 +592,59 @@ namespace jycboliviaASP.net.Datos
                             " max(oo.codigo) " +                          
                              " from " +
                              " tbcorpal_ordenproduccion oo " ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
+        {
+            string consulta = "select pp.codigo, pp.producto, " +
+                "date_format(t1.FechaSistema,'%d/%m/%Y') as 'FechaTurno', " +
+                "pp.medida,  " +
+               " sum(ifnull(t1.TurnoDia, 0)) as 'TurnoDia1', "+
+               " sum(ifnull(t1.TurnoTarde, 0)) as 'TurnoTarde1', "+
+               " sum(ifnull(t1.TurnoNoche, 0)) as 'TurnoNoche1', "+
+               " sum(t1.CantCajas1) as 'CantCajas1' , "+
+               " sum(t1.CantSuelta) as 'CantSuelta', "+
+               " FORMAT(sum(t1.PackFerial), 2) AS 'PackFerial1', "+
+               " FORMAT( "+
+               " ((sum(t1.CantCajas1) * pp.pesoporcajakgr) + (sum(t1.CantSuelta) * (pp.pesounidadgr/1000)) + (sum(t1.PackFerial) * (pp.pesounidadgr/1000))+ t1.kgrdesperdicio_conaceite+t1.kgrdesperdicio_sinaceite) " +
+               " , 2) as 'Total_Kgr', "+
+               " sum(t1.kgrdesperdicio_conaceite) as 'kgrdesperdicioconaceite' , sum(t1.kgrdesperdicio_sinaceite) as 'kgrdesperdiciosinaceite' "+
+                "FROM tbcorpal_producto pp " +
+                "LEFT JOIN ( " +
+                "select " +
+                "eo.codProductonax, eo.productoNax,  " +
+                "eo.fechagra, " +
+                "CASE  " +
+                "WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 THEN date_add(eo.fechagra, INTERVAL -1 DAY)  " +
+                "ELSE eo.fechagra  " +
+                "END AS 'FechaSistema', eo.horagra, " +
+                "CASE    " +
+                "WHEN HOUR(eo.horagra) BETWEEN 7 AND 15 THEN sum(ifnull(eo.cantcajas,0))   " +
+                "END AS 'TurnoDia', " +
+                "CASE   " +
+                "WHEN HOUR(eo.horagra) BETWEEN 16 AND 23 THEN sum(ifnull(eo.cantcajas,0)) " +
+                "END AS 'TurnoTarde', " +
+                "CASE   " +
+                "WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 THEN sum(ifnull(eo.cantcajas,0)) " +
+                "END as 'TurnoNoche', " +
+                "sum(ifnull(eo.cantcajas,0)) as 'CantCajas1',  " +
+                "sum(ifnull(eo.unidadsuelta,0)) as 'CantSuelta',  " +
+                "sum(ifnull(eo.pack_ferial,0)) as 'PackFerial' " +
+                ", sum(eo.kgrdesperdicio_conaceite) as 'kgrdesperdicio_conaceite' " +
+                ", sum(eo.kgrdesperdicio_sinaceite) as 'kgrdesperdicio_sinaceite' "+
+                "from  " +
+                "tbcorpal_entregasordenproduccion eo " +
+                "where " +
+                "eo.estado = 1 and " +
+                "eo.fechagra between "+fechadesde+" and " + fechahasta +
+                "group by eo.fechagra, eo.codProductonax ) as t1 ON pp.codigo = t1.codProductonax " +
+                "WHERE " +                
+                "pp.estado = 1 " +
+                " and t1.FechaSistema is not null "+
+                "and pp.producto like '%" +producto+"%' " +
+                " group by  t1.FechaSistema, pp.codigo " +
+                "order by t1.FechaSistema, pp.codigo asc";
             return Conx.consultaMySql(consulta);
         }
     }

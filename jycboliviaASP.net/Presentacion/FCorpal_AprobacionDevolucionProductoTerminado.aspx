@@ -141,7 +141,7 @@
             <div class="panel-body">
             <div class="DatosProyecto">
                 <asp:GridView ID="gv_produccionProducto" 
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+                     runat="server" BackColor="White" 
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     ForeColor="Black" GridLines="Vertical" Font-Size="Small" 
                     AutoGenerateColumns="False">
