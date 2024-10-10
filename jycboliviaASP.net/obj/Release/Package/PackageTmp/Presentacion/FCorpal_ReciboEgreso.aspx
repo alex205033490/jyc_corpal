@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ReciboEgreso.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_ReciboEgreso" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_SimecModificar.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -281,7 +281,7 @@
                 
 
                 <asp:GridView ID="gv_reciboIngresoEgreso" 
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+                    runat="server" BackColor="White" 
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">

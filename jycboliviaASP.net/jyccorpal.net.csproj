@@ -161,7 +161,6 @@
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.js" />
-    <Content Include="js\jsUpon.js" />
     <Content Include="js\main.js" />
     <Content Include="NegocioPlantilla\assets\css\style.css" />
     <Content Include="NegocioPlantilla\assets\img\apple-touch-icon.png" />
@@ -171,6 +170,7 @@
     <Content Include="NegocioPlantilla\assets\img\messages-1.jpg" />
     <Content Include="NegocioPlantilla\assets\img\messages-2.jpg" />
     <Content Include="NegocioPlantilla\assets\img\messages-3.jpg" />
+    <Content Include="NegocioPlantilla\assets\img\naxsnax.png" />
     <Content Include="NegocioPlantilla\assets\img\news-1.jpg" />
     <Content Include="NegocioPlantilla\assets\img\news-2.jpg" />
     <Content Include="NegocioPlantilla\assets\img\news-3.jpg" />
@@ -471,18 +471,9 @@
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
-    <Content Include="Presentacion\FCorpal_APIClientes.aspx" />
-    <Content Include="Presentacion\FCorpal_APICompras.aspx" />
-    <Content Include="Presentacion\FCorpal_APICuentasCobranza.aspx" />
-    <Content Include="Presentacion\FCorpal_APIInventarioEgresos.aspx" />
-    <Content Include="Presentacion\FCorpal_APIInventarioIngresos.aspx" />
-    <Content Include="Presentacion\FCorpal_APIInventarioTraspasos.aspx" />
-    <Content Include="Presentacion\FCorpal_APIPedido.aspx" />
-    <Content Include="Presentacion\FCorpal_APIProduccion.aspx" />
-    <Content Include="Presentacion\FCorpal_APIProductos.aspx" />
-    <Content Include="Presentacion\FCorpal_APIVentas.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
@@ -498,6 +489,7 @@
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
+    <Content Include="Presentacion\FUpon_CargaVentas.aspx" />
     <Content Include="Presentacion\index.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_AgendaProyectos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_ConsultaProyectosInstalacion.aspx" />
@@ -534,7 +526,7 @@
     <Content Include="Presentacion\Presentacion old\FA_CallCenter_EventoRCC.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CallCenter_Eventos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx" />
-    <Content Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx" />
+    <Content Include="Presentacion\FUpon_CargaCompras.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_CodigosDeEquipos.aspx" />
     <Content Include="Presentacion\FCorpal_ConciliacionBancaria.aspx" />
@@ -605,7 +597,6 @@
     <Content Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx" />
     <Content Include="Presentacion\WelcomeJyC.aspx" />
     <Content Include="Styles\Styles_GPagoSeguimiento2.css" />
-    <Content Include="Styles\Style_APIUpon.css" />
     <Content Include="Styles\Style_Autocompletar.css" />
     <Content Include="Styles\Style_CodigosDeEquipos.css" />
     <Content Include="Styles\Style_CallCenter_Rin.css" />
@@ -761,6 +752,8 @@
     <Compile Include="Datos\Datos old\DMeses.cs" />
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="Datos\DUpon_compras.cs" />
+    <Compile Include="Datos\DUpon_Ventas.cs" />
     <Compile Include="DS_Activos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -815,6 +808,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="NegocioApi\J_Compras.cs" />
+    <Compile Include="NegocioApi\J_Ventas.cs" />
     <Compile Include="NegocioApi\NA_endpoints.cs" />
     <Compile Include="NegocioPlantilla\Footer_Plantillanew.ascx.cs">
       <DependentUpon>Footer_Plantillanew.ascx</DependentUpon>
@@ -843,14 +838,6 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
-    <Compile Include="Negocio\NA_APIclientes.cs" />
-    <Compile Include="Negocio\NA_APIcompras.cs" />
-    <Compile Include="Negocio\NA_APICuentasCobranza.cs" />
-    <Compile Include="Negocio\NA_APIinventario.cs" />
-    <Compile Include="Negocio\NA_APIpedido.cs" />
-    <Compile Include="Negocio\NA_APIproduccion.cs" />
-    <Compile Include="Negocio\NA_APIproductos.cs" />
-    <Compile Include="Negocio\NA_APIventas.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
@@ -917,6 +904,8 @@
     <Compile Include="Negocio\NMeses.cs" />
     <Compile Include="Negocio\NProyecto.cs" />
     <Compile Include="Negocio\NTipoPago.cs" />
+    <Compile Include="Negocio\NUpon_compras.cs" />
+    <Compile Include="Negocio\NUpon_Ventas.cs" />
     <Compile Include="Negocio\N_numLetra.cs" />
     <Compile Include="PlantillaNew.Master.cs">
       <DependentUpon>PlantillaNew.Master</DependentUpon>
@@ -951,76 +940,6 @@
     <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.designer.cs">
       <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\FCorpal_APIClientes.aspx.cs">
-      <DependentUpon>FCorpal_APIClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIClientes.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIClientes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APICompras.aspx.cs">
-      <DependentUpon>FCorpal_APICompras.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APICompras.aspx.designer.cs">
-      <DependentUpon>FCorpal_APICompras.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APICuentasCobranza.aspx.cs">
-      <DependentUpon>FCorpal_APICuentasCobranza.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APICuentasCobranza.aspx.designer.cs">
-      <DependentUpon>FCorpal_APICuentasCobranza.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioEgresos.aspx.cs">
-      <DependentUpon>FCorpal_APIInventarioEgresos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioEgresos.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIInventarioEgresos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioIngresos.aspx.cs">
-      <DependentUpon>FCorpal_APIInventarioIngresos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioIngresos.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIInventarioIngresos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioTraspasos.aspx.cs">
-      <DependentUpon>FCorpal_APIInventarioTraspasos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIInventarioTraspasos.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIInventarioTraspasos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIPedido.aspx.cs">
-      <DependentUpon>FCorpal_APIPedido.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIPedido.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIPedido.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIProduccion.aspx.cs">
-      <DependentUpon>FCorpal_APIProduccion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIProduccion.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIProduccion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIProductos.aspx.cs">
-      <DependentUpon>FCorpal_APIProductos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIProductos.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIProductos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIVentas.aspx.cs">
-      <DependentUpon>FCorpal_APIVentas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_APIVentas.aspx.designer.cs">
-      <DependentUpon>FCorpal_APIVentas.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.cs">
       <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1034,6 +953,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.designer.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsutaProduccion.aspx.cs">
+      <DependentUpon>FCorpal_ConsutaProduccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsutaProduccion.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsutaProduccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx.cs">
       <DependentUpon>FCorpal_DevoluciondeProductoTerminado.aspx</DependentUpon>
@@ -1147,6 +1073,13 @@
     <Compile Include="Presentacion\FCorpal_SolicitudPedido.aspx.designer.cs">
       <DependentUpon>FCorpal_SolicitudPedido.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\FUpon_CargaVentas.aspx.cs">
+      <DependentUpon>FUpon_CargaVentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FUpon_CargaVentas.aspx.designer.cs">
+      <DependentUpon>FUpon_CargaVentas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1259,12 +1192,12 @@
     <Compile Include="Presentacion\Presentacion old\FA_CargaFechaExpedicion.aspx.designer.cs">
       <DependentUpon>FA_CargaFechaExpedicion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.cs">
-      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    <Compile Include="Presentacion\FUpon_CargaCompras.aspx.cs">
+      <DependentUpon>FUpon_CargaCompras.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Presentacion\Presentacion old\FA_CargarDocumentos.aspx.designer.cs">
-      <DependentUpon>FA_CargarDocumentos.aspx</DependentUpon>
+    <Compile Include="Presentacion\FUpon_CargaCompras.aspx.designer.cs">
+      <DependentUpon>FUpon_CargaCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Presentacion old\FA_CargarFechasBastones.aspx.cs">
       <DependentUpon>FA_CargarFechasBastones.aspx</DependentUpon>
@@ -1897,6 +1830,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />

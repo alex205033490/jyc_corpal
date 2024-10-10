@@ -81,11 +81,13 @@ namespace jycboliviaASP.net.Presentacion
 
         private void limpiarDatos()
         {
-            tx_nroproduccion.Text = "";
-            tx_cantcajas.Text = "";            
+            tx_nroproduccion.Text = "";            
             tx_detalle.Text = "";            
             tx_medida.Text = "";
-            tx_fechaProduccion.Text = "";            
+            tx_fechaProduccion.Text = "";
+            tx_cantTurnoDia.Text = "";
+            tx_cantTurnoTarde.Text = "";
+            tx_cantTurnoNoche.Text = "";
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -111,9 +113,7 @@ namespace jycboliviaASP.net.Presentacion
 
         private void insertarDatosOrdenProduccion()
         {
-           string nroProduccion = tx_nroproduccion.Text;
-           float cantcajas;
-           float.TryParse(tx_cantcajas.Text.Replace('.',',') , out cantcajas); 
+           string nroProduccion = tx_nroproduccion.Text;           
            string detalleProduccion = tx_detalle.Text;
            string medidaProduccion = tx_medida.Text;
            string fechaProduccion = convertidorFecha(tx_fechaProduccion.Text);           
@@ -127,13 +127,32 @@ namespace jycboliviaASP.net.Presentacion
            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
            string responsable = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-           NCorpal_Produccion nproduccion = new NCorpal_Produccion();
-           bool bandera = nproduccion.insertarOrdenProduccion(fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable);
-           if(bandera == true){
-               buscarDatos("");
-               Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
-           }else
-               Response.Write("<script type='text/javascript'> alert('Error: Error Insertar') </script>");
+            float cantTurnoDia ;
+            float.TryParse(tx_cantTurnoDia.Text.Replace(".",","), out cantTurnoDia);
+            float cantTurnoTarde ;
+            float.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
+            float cantTurnoNoche ;
+            float.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
+
+          //  if (cantTurnoDia > 0 && cantTurnoTarde > 0 && cantTurnoNoche > 0) {
+                NCorpal_Produccion nproduccion = new NCorpal_Produccion();
+                float cantcajas;
+                cantcajas = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
+
+                bool bandera = nproduccion.insertarOrdenProduccion(fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable, cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
+                if (bandera == true)
+                {
+                    buscarDatos("");
+                    limpiarDatos();
+                    Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
+                }
+                else
+                    Response.Write("<script type='text/javascript'> alert('Error: Error Insertar') </script>");
+           /* }else
+                Response.Write("<script type='text/javascript'> alert('Error: Cantidad Turno Vacio') </script>");
+           */
+
+
         }
 
         private string convertidorFecha(string fecha)
@@ -189,9 +208,7 @@ namespace jycboliviaASP.net.Presentacion
             int codigoOrden;
             int.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[1].Text, out codigoOrden);
 
-            string nroProduccion = tx_nroproduccion.Text;
-            float cantcajas;
-            float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantcajas);
+            string nroProduccion = tx_nroproduccion.Text;            
             string detalleProduccion = tx_detalle.Text;
             string medidaProduccion = tx_medida.Text;
             string fechaProduccion = convertidorFecha(tx_fechaProduccion.Text);
@@ -205,14 +222,29 @@ namespace jycboliviaASP.net.Presentacion
             int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
             string responsable = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-            NCorpal_Produccion nproduccion = new NCorpal_Produccion();
-            bool bandera = nproduccion.modificarOrdenProduccion(codigoOrden, fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable);
-            if (bandera == true)
-            {
-                buscarDatos("");
-                Response.Write("<script type='text/javascript'> alert('Modificado: OK!') </script>");
-            }else
-                Response.Write("<script type='text/javascript'> alert('Error: Error Modificacion') </script>");
+            float cantTurnoDia;
+            float.TryParse(tx_cantTurnoDia.Text.Replace(".", ","), out cantTurnoDia);
+            float cantTurnoTarde;
+            float.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
+            float cantTurnoNoche;
+            float.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
+
+          /*  if (cantTurnoDia > 0 && cantTurnoTarde > 0 && cantTurnoNoche > 0)
+            { */
+                NCorpal_Produccion nproduccion = new NCorpal_Produccion();
+                float cantcajas;
+                cantcajas = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
+                bool bandera = nproduccion.modificarOrdenProduccion(codigoOrden, fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable,cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
+                if (bandera == true)
+                {
+                    buscarDatos("");
+                    Response.Write("<script type='text/javascript'> alert('Modificado: OK!') </script>");
+                }
+                else
+                    Response.Write("<script type='text/javascript'> alert('Error: Error Modificacion') </script>");
+          /*  }else
+                Response.Write("<script type='text/javascript'> alert('Error: Cantidad Turno Vacio') </script>");
+            */
         }
 
         protected void gv_reciboIngresoEgreso_SelectedIndexChanged(object sender, EventArgs e)
@@ -226,18 +258,30 @@ namespace jycboliviaASP.net.Presentacion
                 int codigoOrden;
                 int.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[1].Text, out codigoOrden);
                 tx_nroproduccion.Text = codigoOrden.ToString();
-
+                /*
                 float cantcajas;
                 float.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[5].Text, out cantcajas);
                 tx_cantcajas.Text = cantcajas.ToString();
+                */
+                tx_detalle.Text = HttpUtility.HtmlDecode(gv_OrdendeProduccion.SelectedRow.Cells[7].Text);
+                tx_medida.Text = HttpUtility.HtmlDecode(gv_OrdendeProduccion.SelectedRow.Cells[6].Text);
+                tx_fechaProduccion.Text = HttpUtility.HtmlDecode(gv_OrdendeProduccion.SelectedRow.Cells[2].Text);
 
-                tx_detalle.Text = gv_OrdendeProduccion.SelectedRow.Cells[7].Text;
-                tx_medida.Text = gv_OrdendeProduccion.SelectedRow.Cells[6].Text;
-                tx_fechaProduccion.Text = gv_OrdendeProduccion.SelectedRow.Cells[2].Text;
+                float cantturnodia;
+                float.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[9].Text, out cantturnodia);
+                tx_cantTurnoDia.Text = cantturnodia.ToString();
+
+                float cantturnotarde;
+                float.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[10].Text, out cantturnotarde);
+                tx_cantTurnoTarde.Text = cantturnotarde.ToString();
+
+                float cantturnonoche;
+                float.TryParse(gv_OrdendeProduccion.SelectedRow.Cells[11].Text, out cantturnonoche);
+                tx_cantTurnoNoche.Text = cantturnonoche.ToString();
 
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                int codProducto = pp.get_CodigoProductos(gv_OrdendeProduccion.SelectedRow.Cells[4].Text);
-                dd_productosNax.SelectedValue= codProducto.ToString();
+                int codProducto = pp.get_CodigoProductos(HttpUtility.HtmlDecode(gv_OrdendeProduccion.SelectedRow.Cells[4].Text));
+                dd_productosNax.SelectedValue = codProducto.ToString();
                 
             }
         }

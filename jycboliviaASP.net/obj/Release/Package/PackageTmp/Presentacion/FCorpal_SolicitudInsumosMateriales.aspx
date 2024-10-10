@@ -236,7 +236,7 @@
                 
 
                 <asp:GridView ID="gv_MaterialSolicitado" 
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+                    runat="server" BackColor="White" 
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onrowdeleting="gv_MaterialSolicitado_RowDeleting">

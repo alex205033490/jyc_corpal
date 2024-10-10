@@ -13,31 +13,30 @@
 
 .titulo
 {        
-    height:40px;
-    margin-top: 20px;
+    height:auto;    
     }
 
 .datosEdificio 
 {
    border: double #666;           
-    height: 70px;  
-    width: 700px;        
+    height: auto;  
+    width: auto;        
     }
 
 
 .edificios
 {
     border: double #666;           
-    height: 300px;  
-    width: 700px;  
+    height: 350px;  
+    width: auto;  
     overflow:auto;      
     }
 
 .documentos
 {
     border: double #666;           
-    height: 200px;  
-    width: 700px;
+    height: 350px;  
+    width: auto;
     overflow: auto;        
    }
 

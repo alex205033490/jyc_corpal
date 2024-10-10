@@ -61,18 +61,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="container" style="padding-top: 1em;">
-   
-
-
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-success class">
-            <div class="panel-heading">
-            <h3 class="panel-title">Entrega Produccion:</h3>
-            </div>
-            <div class="panel-body">
-            
+ <div class="card">
+  <div class="card-header bg-success text-white">Entrega de Produccion</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <div class="row">
+    <div class="col-md-12 col-md-offset-1">
        <table>   
        <tr>
         <td>
@@ -90,7 +84,7 @@
             <asp:Label ID="Label37" runat="server" Text="Turno:"></asp:Label>
            </td>
        <td>
-                <asp:DropDownList ID="dd_turno" class="form-control" runat="server" 
+                <asp:DropDownList ID="dd_turno" class="btn btn-secondary dropdown-toggle" runat="server" 
                     Width="150px">
                     <asp:ListItem>Mañana</asp:ListItem>
                     <asp:ListItem>Tarde</asp:ListItem>
@@ -143,7 +137,7 @@
                 <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList ID="dd_productosNax" class="form-control" runat="server" 
+                <asp:DropDownList ID="dd_productosNax" class="btn btn-secondary dropdown-toggle" runat="server" 
                     Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
                 </asp:DropDownList>
             </td>
@@ -151,7 +145,7 @@
             <td></td>
         </tr>
     </table>
-    <table>
+       <table>
         <tr>
             <td>
                 <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
@@ -168,6 +162,14 @@
                 <asp:TextBox ID="tx_medida" class="form-control" runat="server" 
                     Width="150px"></asp:TextBox>
             </td>            
+        </tr>
+        <tr>
+            <td><asp:Label ID="Label2" runat="server" Text="Pack Ferial:"></asp:Label></td>
+            <td>
+                <asp:TextBox ID="tx_packFerial" class="form-control" runat="server" BackColor="Yellow"></asp:TextBox></td>
+            <td><asp:Label ID="Label3" runat="server" Text="Medida PackFerial:"></asp:Label></td>
+            <td>
+                <asp:TextBox ID="tx_medidaPackFerial" class="form-control" Text="UNIDAD" runat="server"></asp:TextBox></td>            
         </tr>
         <tr>
         <td>
@@ -190,18 +192,21 @@
         <td> <asp:TextBox ID="tx_kgrdesperdicio_conaceite" class="form-control" 
                 runat="server"></asp:TextBox>  </td>
         <td>
-            <asp:Label ID="Label45" runat="server" Text="kgr Desperdicio Sin Aceite"></asp:Label>
+            <asp:Label ID="Label45" runat="server" Text="kgr Desperdicio Sin Aceite:"></asp:Label>
             </td>
         <td>
             <asp:TextBox ID="tx_kgrdesperdicio_SinAceite" class="form-control" 
-                runat="server"></asp:TextBox>  
-        <td> &nbsp;</td>
+                runat="server"></asp:TextBox>          
         </td>
-        </tr>        
+        </tr>   
+        <tr>
+            <td><asp:Label ID="Label4" runat="server" Text="Kgr Desperdicio de BOBINA"></asp:Label></td>
+            <td><asp:TextBox ID="tx_KgrDesperdicioBOBINA" class="form-control" runat="server"></asp:TextBox></td>
+            <td></td>
+            <td></td>
+        </tr>   
     </table>
-   
-    
-    <table>
+       <table>
         <tr>
             <td>
                 <asp:Label ID="Label35" runat="server" Text="Detalle :"></asp:Label>
@@ -214,10 +219,10 @@
             <td></td>
         </tr>
     </table>
-    <table>
+       <table>
         <tr>
             <td>
-                <asp:Button ID="bt_limpiar" class="btn btn-light" runat="server" Text="Limpiar" 
+                <asp:Button ID="bt_limpiar" class="btn btn-secondary" runat="server" Text="Limpiar" 
                     onclick="bt_limpiar_Click" />
             </td>
             <td>
@@ -225,9 +230,9 @@
                     Text="Insertar" onclick="bt_insertar_Click" />
             </td>
             <td>
-                <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-light" 
+                <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-info" 
                     Text="Ver Recibo" onclick="bt_verRecibo_Click" />
-                <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" 
+                <asp:Button ID="bt_modificar" class="btn btn-secondary" runat="server" 
                     Text="Modificar" onclick="bt_modificar_Click" />
             </td>
 
@@ -241,25 +246,15 @@
             
         </tr>
     </table>
-
-            </div>
-        </div>
      </div>
 </div>
-
-
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-success class">
-            <div class="panel-heading">
-            <h3 class="panel-title">Datos:</h3>
-            </div>
-            <div class="panel-body">
-            <div class="DatosProyecto">
-                
-
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+    <div class="col-md-12 col-md-offset-1">  
+            <div class="DatosProyecto">                
                 <asp:GridView ID="gv_EntregasdeProduccion" 
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+                     runat="server" BackColor="White" 
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
                     onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">
@@ -275,18 +270,16 @@
                     <SortedAscendingHeaderStyle BackColor="#808080" />
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
                     <SortedDescendingHeaderStyle BackColor="#383838" />
-                </asp:GridView>
-                
-
-            </div>
-            <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server" 
-                    Text="Excel" onclick="bt_excel_Click" />
-            </div>
-        </div>
-    </div>
+                </asp:GridView>                
+            </div>            
+        <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server"  Text="Excel" onclick="bt_excel_Click" />
+     </div>     
 </div>
+    </li>
+    <li class="list-group-item">
 
-
+    </li>
+  </ul>
 </div>
 
 

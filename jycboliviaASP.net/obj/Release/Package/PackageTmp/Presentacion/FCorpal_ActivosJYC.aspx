@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ActivosJYC.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_ActivosJYC" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register TagPrefix="inmoInfo" TagName="menu" Src="ControlUser.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_SimecModificar.css" rel="stylesheet" type="text/css" />
@@ -302,7 +301,7 @@
             <div class="panel-body">
             <div class="DatosProyecto">
                 <asp:GridView ID="gv_activosJyC" 
-                    CssClass="table table-responsive table-striped" runat="server" BackColor="White" 
+                     runat="server" BackColor="White" 
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
                     ForeColor="Black" GridLines="Vertical" Font-Size="Small" 
                     onselectedindexchanged="gv_activosJyC_SelectedIndexChanged">

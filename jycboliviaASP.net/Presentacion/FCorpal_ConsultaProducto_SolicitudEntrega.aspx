@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaProducto_SolicitudEntrega.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_ConsultaProducto_SolicitudEntrega" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />
@@ -56,34 +56,25 @@
     }
     
         </style>
+
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-<div class="CR_central">
-
-<table>
-
-<tr>
-<td>
-    <asp:Label ID="Label1" runat="server" Text="Consulta :"></asp:Label>
-</td>
-</tr>
-
-<tr>
-<td>
-<div class="CR_consulta">
+<div class="card">
+  <div class="card-header bg-success text-white"> Consulta </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="CR_consulta">
 
 <table>
 <tr>
-<td></td>
+<td><asp:Label ID="Label2" runat="server" Text="Consulta:"></asp:Label></td>
 <td>
-    <asp:Label ID="Label2" runat="server" Text="Consulta:"></asp:Label>
-    </td>
-<td>
-    <asp:DropDownList ID="dd_consulta" class="form-control" runat="server" Width="350px">
+    <asp:DropDownList ID="dd_consulta" class="btn btn-secondary dropdown-toggle" runat="server" Width="350px">
         <asp:ListItem>Detalle de Datos</asp:ListItem>
         <asp:ListItem>Productos Solicitados Vs Entregados</asp:ListItem>
         <asp:ListItem>Productos Entregados y Solicitados por Persona</asp:ListItem>
@@ -92,39 +83,21 @@
         <asp:ListItem>Detalle Entrega Productos</asp:ListItem>
     </asp:DropDownList>
     </td>
-<td></td>
-<td>
-    <asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar" 
-        onclick="bt_buscar_Click" style="height: 26px" />
-    </td>
-<td></td>
+<td><asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar"  onclick="bt_buscar_Click"  />    </td>
 </tr>
 <tr>
-    <td></td>
-    <td>
-        <asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label>
-    </td>
-    <td>
-        <asp:TextBox ID="tx_responsable" class="form-control" runat="server" 
-            Width="400px"></asp:TextBox>
+ <td><asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label></td>
+ <td><asp:TextBox ID="tx_responsable" class="form-control" runat="server"  Width="400px"></asp:TextBox>
         <asp:AutoCompleteExtender ID="tx_responsable_AutoCompleteExtender" 
             runat="server" TargetControlID="tx_responsable"
              MinimumPrefixLength="1" ServiceMethod="GetlistaResponsable2"
              CompletionListCssClass="CompletionList"  CompletionListItemCssClass="CompletionlistItem" 
             CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-        </asp:AutoCompleteExtender>
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
+        </asp:AutoCompleteExtender> </td>
 </tr>
-<tr>
-    <td></td>
-    <td>
-        <asp:Label ID="Label6" runat="server" Text="Producto:"></asp:Label>
-    </td>
-    <td>
-        <asp:TextBox ID="tx_producto" class="form-control" runat="server" Width="400px"></asp:TextBox>
+<tr>    
+    <td> <asp:Label ID="Label6" runat="server" Text="Producto:"></asp:Label> </td>
+    <td> <asp:TextBox ID="tx_producto" class="form-control" runat="server" Width="400px"></asp:TextBox>
         <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server" 
             TargetControlID="tx_producto"
             CompletionSetCount="12" 
@@ -133,79 +106,48 @@
                     CompletionListCssClass="CompletionList" 
                     CompletionListItemCssClass="CompletionlistItem" 
                     CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
-            >
-        </asp:AutoCompleteExtender>
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
+            ></asp:AutoCompleteExtender> </td>    
 </tr>
 </table>
 
 <table>
 <tr>
-<td></td>
-<td>
-    <asp:Label ID="Label3" runat="server" Text="Desde:"></asp:Label>
-    </td>
-<td>
-    <asp:TextBox ID="tx_desdeFecha" class="form-control" runat="server" 
+<td> <asp:Label ID="Label3" runat="server" Text="Desde:"></asp:Label> </td>
+<td><asp:TextBox ID="tx_desdeFecha" class="form-control" runat="server" 
         Width="150px"></asp:TextBox>
     <asp:CalendarExtender ID="tx_desdeFecha_CalendarExtender" runat="server" 
         TargetControlID="tx_desdeFecha">
-    </asp:CalendarExtender>
-    </td>
-<td></td>
-<td>
-    <asp:Label ID="Label4" runat="server" Text="Hasta:"></asp:Label>
-    </td>
-<td>
-    <asp:TextBox ID="tx_hastaFecha" class="form-control" runat="server" 
-        Width="150px"></asp:TextBox>
+    </asp:CalendarExtender> </td>
+<td> <asp:Label ID="Label4" runat="server" Text="Hasta:"></asp:Label> </td>
+<td> <asp:TextBox ID="tx_hastaFecha" class="form-control" runat="server" Width="150px"></asp:TextBox>
     <asp:CalendarExtender ID="tx_hastaFecha_CalendarExtender" runat="server" 
         TargetControlID="tx_hastaFecha">
-    </asp:CalendarExtender>
-
-    </td>
-<td></td>
-<td></td>
-</tr>
-
-</table>
-
-<table>
-<tr>
-<td></td><td>
-    &nbsp;</td><td>
-        &nbsp;</td><td></td><td></td><td></td>
+    </asp:CalendarExtender> </td>
 </tr>
 </table>
 
 </div>
-</td>
-</tr>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="CR_datos">
+                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="900px" 
+                        Height="900px" Font-Names="Verdana" Font-Size="8pt" 
+                        InteractiveDeviceInfos="(Collection)" WaitMessageFont-Names="Verdana" 
+                        WaitMessageFont-Size="14pt">
 
-<tr>
-<td>
-
-<div class="CR_datos">
-    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="900px" 
-        Height="900px" Font-Names="Verdana" Font-Size="8pt" 
-        InteractiveDeviceInfos="(Collection)" WaitMessageFont-Names="Verdana" 
-        WaitMessageFont-Size="14pt">
-        
-    </rsweb:ReportViewer>
+                    </rsweb:ReportViewer>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">JYC</li>
+  </ul>
 </div>
 
-</td>
-</tr>
 
-<tr>
-<td></td>
-</tr>
-
-</table>
-
-</div>
 
 </asp:Content>

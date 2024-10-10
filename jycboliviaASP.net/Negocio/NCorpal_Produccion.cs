@@ -11,14 +11,14 @@ namespace jycboliviaASP.net.Negocio
     public class NCorpal_Produccion    
     {
         DCorpal_Produccion dproduccion = new DCorpal_Produccion();
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
         {
-            return dproduccion.insertarEntregaProduccion( nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax,  codresprecepcion,  resp_recepcion,  cod_respgra,  kgrdesperdicio_conaceite,  kgrdesperdicio_sinaceite);
+            return dproduccion.insertarEntregaProduccion( nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax,  codresprecepcion,  resp_recepcion,  cod_respgra,  kgrdesperdicio_conaceite,  kgrdesperdicio_sinaceite, pack_ferial, medidaentregada, medidapackferial, kgrdesperdiciobobina);
         }
 
-        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra)
+        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
         {
-            return dproduccion.modificarEntregaProduccion( codigo,  nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax ,  codresprecepcion,  resp_recepcion,  cod_respgra);
+            return dproduccion.modificarEntregaProduccion( codigo,  nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax ,  codresprecepcion,  resp_recepcion,  cod_respgra,  kgrdesperdicio_sinaceite,  kgrdesperdicio_conaceite,  pack_ferial,  medidaentregada,  medidapackferial, kgrdesperdiciobobina);
         }
 
         internal bool eliminarEntregaProduccion(int codigo)
@@ -132,10 +132,10 @@ namespace jycboliviaASP.net.Negocio
         }
 
         internal bool insertarOrdenProduccion(string fechaproduccion, int codProductonax, string productoNax, float cantcajasproduccion,
-                                               string medida, string detalleproduccion,  int cod_respgra, string responsable)
+                                               string medida, string detalleproduccion,  int cod_respgra, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
         {
             return dproduccion.insertarOrdenProduccion( fechaproduccion, codProductonax, productoNax, cantcajasproduccion,
-                                                medida, detalleproduccion,  cod_respgra, responsable);
+                                                medida, detalleproduccion,  cod_respgra, responsable,  cantturnodia,  cantturnotarde,  cantturnonoche);
         }
 
         internal bool eliminar_ordenProduccion(int codigoOrden)
@@ -143,9 +143,9 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.eliminar_ordenProduccion( codigoOrden);
         }
 
-        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable)
+        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
         {
-            return dproduccion.modificarOrdenProduccion( codigoOrden,  fechaProduccion,  codProducto,  producto,  cantcajas, medidaProduccion, detalleProduccion, codUser, responsable);
+            return dproduccion.modificarOrdenProduccion( codigoOrden,  fechaProduccion,  codProducto,  producto,  cantcajas, medidaProduccion, detalleProduccion, codUser, responsable,  cantturnodia,  cantturnotarde,  cantturnonoche);
         }
 
         internal int get_codigoCorrelativoOrdenProduccion()
@@ -160,6 +160,11 @@ namespace jycboliviaASP.net.Negocio
             else
                 return 0;
 
+        }
+
+        internal DataSet get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
+        {
+            return dproduccion.get_datosEntregaProduccionFechaTurno( fechadesde,  fechahasta,  producto);
         }
     }
 }
