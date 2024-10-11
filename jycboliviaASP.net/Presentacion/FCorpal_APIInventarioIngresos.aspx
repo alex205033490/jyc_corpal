@@ -107,6 +107,20 @@
                 <br>
 
                 <!------------------------          API POST INVENTARIO INGRESOS            ------------------------------>
+                <script>
+                    function addRowIngreso() {
+                        var table = document.getElementById("tblDetalleProductosIngresos");
+                        var rowCount = table.rows.length;
+                        var row = table.insertRow(rowCount);
+                        row.innerHTML =
+                            `<td><input type='number' class="inputNumber" name='item${rowCount}' /></td>
+                            <td><input type='text' class="inputText" name='codigoProducto${rowCount}' /></td>
+                            <td><input type='number' class="inputNumber" name='unidadMedida${rowCount}' /></td>
+                            <td><input type='number' class="inputNumber" name='cantidad${rowCount}' /></td>
+                            <td><input type='number' class="inputNumber" name='costoUnitario${rowCount}' /></td>`;
+                                    }
+                </script>
+
 
                 <div class="POST_inventarioIngreso p-4 bg-light border rounded">
                     <h5 class="text-warning">Registro de Inventario Ingreso</h5>
@@ -156,6 +170,7 @@
                                 <th>Unidad Medida</th>
                                 <th>Cantidad</th>
                                 <th>Costo Unitario</th>
+                
                             </tr>
                             <tr>
                                 <td>
@@ -165,9 +180,10 @@
                                 <td>
                                     <input class="inputNumber" type="number" name="unidadMedida0" /></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="cantidad0" /></td>
+                                    <input class="inputNumber" type="number" name="cantidad0" step="0.01"/></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="costoUnitario0" /></td>
+                                    <input class="inputNumber" type="number" name="costoUnitario0" step="0.01"/></td>
+                              
                             </tr>
                         </table>
                         <br />

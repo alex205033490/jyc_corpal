@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -144,9 +145,9 @@ namespace jycboliviaASP.net.Presentacion
                         Item = 0,
                         CodigoProducto = Request.Form["codigoProducto" + i], // no op
                         UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                        Cantidad = decimal.Parse(Request.Form["cantidad" + i]), // no op
-                        CostoUnitario = decimal.Parse(Request.Form["costoUnitario" + i]), // no op
-                        CostoTotal = decimal.Parse(Request.Form["cantidad" + i]) * decimal.Parse(Request.Form["costoUnitario" + i])
+                        Cantidad = decimal.Parse(Request.Form["cantidad" + i],CultureInfo.InvariantCulture), // no op
+                        CostoUnitario = decimal.Parse(Request.Form["costoUnitario" + i], CultureInfo.InvariantCulture), // no op
+                        CostoTotal = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture) * decimal.Parse(Request.Form["costoUnitario" + i], CultureInfo.InvariantCulture)
                     });
                 }
             }
@@ -160,12 +161,12 @@ namespace jycboliviaASP.net.Presentacion
             {
                 var result = await api.PostInventarioIngresoAsync(ingreso, token);
                 lblResult.Text = $"Numero Ingreso: {result}";
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioIngreso registrado exitosamente.');", true);
             }
             catch (Exception ex)
             {
                 Response.Write($"Error: {ex.Message}");
             }
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioIngreso registrado exitosamente.');", true);
         }
     }
 }
