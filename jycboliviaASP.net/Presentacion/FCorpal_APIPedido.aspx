@@ -10,17 +10,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-success class">
-                    <div>
-                        <asp:Label runat="server" Text="Label">API PEDIDO</asp:Label><br />
-                        <br />
-                    </div>
 
 
 <!------------------------          API GET PEDIDO CON CRITERIO DETALLE (numero pedido)          ------------------------------>
 
-                    <div class="get_pedidoDet p-4 bg-light border rounded">
+                    <div class="get_pedidoDet p-2 bg-light border rounded" >
                         <h5 class="text-warning">Ver Pedido con Detalle</h5>
 
                         <div class="mb-3">
@@ -34,7 +30,7 @@
 
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
                                         BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                        CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
+                                        CellSpacing="2" Font-Size="X-Small" ForeColor="Black" >
 
                                         <Columns>
                                             <asp:BoundField DataField="NumeroPedido" HeaderText="numPedido" SortExpression="nPed" />
@@ -77,7 +73,7 @@
                                     </asp:GridView>
                                 </div>
                             </div>
-                        </div>
+                        
                         <br>
 
 
@@ -116,6 +112,23 @@
 
 
 <!------------------------          API POST PEDIDO           ------------------------------>
+                    <script>
+                        function addRowPedido() {
+                            var table = document.getElementById("tblDetalleProductosPedido");
+                            var rowCount = table.rows.length;
+                            var row = table.insertRow(rowCount);
+                            row.innerHTML =
+                                `<td><input class="inputNumber" type='number' name='numeroItem${rowCount}' /></td>
+                                <td><input class="inputText" type='text' name='codigoProducto${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' step="0.01" name='cantidad${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' name='codigoUnidadMedida${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' step="0.01" name='precioUnitario${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' step="0.01" name='importeDescuento${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' step="0.01" name='importeTotal${rowCount}' /></td>`;
+                                                }
+
+
+                    </script>
                 <div class="POST_inventarioIngreso p-4 bg-light border rounded">
                     <h5 class="text-warning">Registro de Pedido</h5>
 
@@ -126,7 +139,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Codigo Cliente:</label>
-                            <asp:TextBox ID="txt_codCliente" runat="server"></asp:TextBox><br />
+                            <asp:TextBox ID="txt_codCliente" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
 
@@ -159,10 +172,10 @@
                                 <th>Numero Item</th>
                                 <th>Codigo Producto</th>
                                 <th>Cantidad</th>
-                                <th>Codigo Unidad Medida</th>
+                                <th>CodUnidad Medida</th>
                                 <th>Precio Unitario</th>
                                 <th>Importe Descuento</th>
-                                <th>ImporteTotal</th>
+                                <th>Importe Total</th>
                             </tr>
                             <tr>
                                 <td>
@@ -170,15 +183,15 @@
                                 <td>
                                     <input class="inputText" type="text" name="codigoProducto0" /></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="cantidad0" /></td>
+                                    <input class="inputNumber" type="number" name="cantidad0" step="0.01"/></td>
                                 <td>
                                     <input class="inputNumber" type="number" name="codigoUnidadMedida0" /></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="precioUnitario0" /></td>
+                                    <input class="inputNumber" type="number" name="precioUnitario0" step="0.01"/></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="importeDescuento0" /></td>
+                                    <input class="inputNumber" type="number" name="importeDescuento0" step="0.01"/></td>
                                 <td>
-                                    <input class="inputNumber" type="number" name="importeTotal0" /></td>
+                                    <input class="inputNumber" type="number" name="importeTotal0" step="0.01"/></td>
                             </tr>
                         </table>
                         <br />
@@ -191,6 +204,7 @@
 
                     <br>
                     <br>
+                    </div>
                 </div>
             </div>
         </div>
