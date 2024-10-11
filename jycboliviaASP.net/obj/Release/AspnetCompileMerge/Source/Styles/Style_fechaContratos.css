@@ -1,0 +1,32 @@
+﻿body {
+}
+
+.Centrar
+{        
+    margin: 0 auto;            
+    width:950px;
+    }
+
+.titulo
+{        
+    height:40px;    
+    margin-top: 20px;
+    }
+    
+ .fc1
+ { 
+   border: double #666;  
+   float: left;   
+   height: auto;  
+   width: 940px;
+     
+     }   
+     
+  .fc2
+ { 
+   border: double #666;  
+   float: left;   
+   height: 300px;  
+   width: 940px;
+   overflow:auto;
+     } 

@@ -1,0 +1,2 @@
+C:\Users\atc\Desktop\repojyc_corpal\backupjyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jyccorpal.net.csproj.AssemblyReference.cache
+C:\Users\atc\Desktop\repojyc_corpal\backupjyc_corpal\jycboliviaASP.net\jycboliviaASP.net\obj\Debug\jyccorpal.net.csproj.CoreCompileInputs.cache

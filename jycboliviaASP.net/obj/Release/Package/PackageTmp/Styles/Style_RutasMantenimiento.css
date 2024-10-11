@@ -1,0 +1,47 @@
+﻿body {
+}
+   
+.RM_central
+{
+     margin: 0 auto;            
+    width:auto;
+    }
+    
+  .RM_rutas
+     {
+        border: double #666666;    
+        float: left;   
+        overflow: auto;
+        height: 150px;  
+        width: 870px;   
+     }
+    
+ .RM_equipos
+ {
+    border: double #666666;    
+    float: left;   
+    overflow: auto;
+    height: 150px;  
+    width: 400px;   
+     }
+     
+     .RM_equiposAsignados     
+     {
+    border: double #666666;    
+    float: left;   
+    overflow: auto;
+    height: 150px;  
+    width: 400px;   
+     }
+     
+     .RM_tecnicosAsignados
+     {
+    border: double #666666;    
+    float: left;   
+    overflow: auto;
+    height: 150px;  
+    width: 870px;   
+         }
+         
+   
+  

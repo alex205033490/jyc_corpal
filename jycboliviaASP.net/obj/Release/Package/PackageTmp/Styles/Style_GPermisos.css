@@ -1,0 +1,98 @@
+﻿body 
+{    
+}
+
+.Centrar
+{    
+    margin: 0 auto;        
+    width:1100px;
+ }
+
+.titulo
+{        
+    height:40px;
+    }
+
+.tituloGP1
+{
+    float: left;
+    width: 900px;
+    height: 80px;      
+    margin-top:20px;
+    }
+    
+.GP1
+{
+   border: double #666;  
+   float: left;
+   overflow:auto; 
+   height: 330px;  
+   width: 1090;
+   
+    }
+    
+.tituloGP2
+{
+    float: left;
+    width: 400px;
+    height: 30px;  
+   
+    margin-top:20px;
+    }
+    
+.GP2
+{
+   border: double #666; 
+   float: left;
+   overflow:auto; 
+   height: 300px;  
+   width: 460px;
+   margin-left: 40px;
+    }
+    
+
+.tituloGP3
+{
+    float: left;
+    width: 400px;
+    height: 30px;  
+    margin-left: 40px;
+    margin-top:20px;
+    }
+.GP3
+{  
+   border: double #666; 
+   float: left;
+   overflow:auto; 
+   height: 300px;  
+   width: 460px;
+   margin-left: 40px;    
+    }
+    
+ .GP4
+ {
+     float: left;
+   overflow:auto; 
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;
+   margin-top:20px;
+     }   
+    
+.botonAccesosResp
+{
+    float: left;
+    width: 400px;
+    height: 40px;  
+    margin-left: 40px;
+    margin-top:10px;
+    }
+    
+.botonAccesosSistema
+{
+    float: left;
+    width: 400px;
+    height: 40px;  
+    margin-left: 40px;
+    margin-top:10px;
+    }

@@ -1,0 +1,51 @@
+﻿body {
+}
+
+
+.Centrar
+{       
+    margin: 0 auto;            
+    width:1200px;
+    height:auto;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+.GE1
+{    
+    height: auto;      
+    width:1200px;
+    margin: 0 auto;
+    text-align: left;   
+  }
+    
+    .GE2
+{    
+    float: left;
+    overflow:auto; 
+    height: 300px;      
+    width:auto ;
+    text-align: left;       
+    }
+ 
+  .DatosProyecto
+ {
+    border: double #666666;        
+    overflow: auto;
+    height: 400px;  
+    width: auto;   
+     }
+    
+.GE3
+{     
+     width: 1200px;
+     text-align: left;
+     height: 40px;              
+    }    
+    
+ 

@@ -1,0 +1,28 @@
+﻿body {
+}
+
+.GR1
+{
+   border-top: double #666;
+   border-right: double #666;   
+   border-bottom: double #666;
+   border-left: double #666;  
+   float: left;
+   height: 250px;  
+   margin-left: 20px;
+   background-color: #D8D8D8;
+    }
+    
+    
+.GR2
+{
+   border-top: double #666;
+   border-right: double #666;   
+   border-bottom: double #666;
+   border-left: double #666;  
+   float: left;
+   overflow: auto;
+   height: 500px;  
+   width: 600px;
+   margin-left: 20px;
+    }

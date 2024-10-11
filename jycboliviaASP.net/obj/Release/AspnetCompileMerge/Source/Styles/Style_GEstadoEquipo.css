@@ -1,0 +1,35 @@
+﻿body {
+}
+
+.Centrar
+{  
+    margin: 0 auto;        
+    width:500px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+ .GEE1
+   {     
+     text-align: left;     
+     height: 90px;
+     margin-left:20px;
+   }
+    
+       .GEE2
+   {     
+     width: 400px;          
+     height: auto;
+     margin-top: 20px;
+     overflow: auto;
+   }
+   
+   .GEE3
+   {
+       width: 800px;
+       height: 40px;
+       }

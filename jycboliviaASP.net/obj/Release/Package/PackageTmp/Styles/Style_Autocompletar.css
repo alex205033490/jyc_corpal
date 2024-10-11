@@ -1,0 +1,183 @@
+﻿body {
+}
+   
+          .CompletionList
+        {
+            padding: 5px 0 ;
+            margin: 2px 0 0;            
+          /*  position:absolute;  */
+            height:150px;
+            width:200px;
+            background-color: White;
+            cursor: pointer;
+            border: solid ;  
+            border-width: 1px;    
+            font-size:x-small;
+            overflow: auto;
+                        }
+                        
+           .CompletionlistItem
+           {
+               font-size:x-small;           
+            }             
+                        
+        .CompletionListMighlightedItem
+        {
+             background-color: Green;
+             color: White;
+            /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/            
+            }     
+        
+        .style1
+        {
+            height: 26px;
+            width: 18px;
+        }
+        .style3
+        {
+            height: 26px;
+            width: 108px;
+        }
+        .style4
+        {
+            width: 108px;
+            height: 30px;
+        }
+        .style5
+        {
+            height: 30px;
+            width: 18px;
+        }
+        .style13
+        {
+            height: 30px;
+            width: 77px;
+        }
+        .style14
+        {
+            height: 26px;
+            width: 77px;
+        }
+        .style15
+        {
+            width: 77px;
+            height: 35px;
+        }
+        .style18
+        {
+            width: 18px;
+            height: 29px;
+        }
+        .style20
+        {
+            width: 49px;
+            height: 29px;
+        }
+        .style21
+        {
+            width: 43px;
+            height: 29px;
+        }
+        .style22
+        {
+            width: 26px;
+            height: 29px;
+        }
+        .style26
+        {
+            height: 30px;
+            width: 10px;
+        }
+        .style27
+        {
+            height: 26px;
+            width: 10px;
+        }
+        .style28
+        {
+            height: 35px;
+            width: 10px;
+        }
+        .style29
+        {
+            width: 108px;
+            height: 35px;
+        }
+        .style33
+        {
+            height: 30px;
+            width: 4px;
+        }
+        .style34
+        {
+            height: 26px;
+            width: 4px;
+        }
+        .style35
+        {
+            height: 35px;
+            width: 4px;
+        }
+        .style36
+        {
+            height: 30px;
+            width: 160px;
+        }
+        .style37
+        {
+            height: 26px;
+            width: 160px;
+        }
+        .style38
+        {
+            height: 35px;
+            width: 160px;
+        }
+        .style39
+        {
+            height: 26px;
+            width: 187px;
+        }
+        .style41
+        {
+            height: 30px;
+            width: 187px;
+        }
+        .style42
+        {
+            height: 30px;
+            width: 103px;
+        }
+        .style43
+        {
+            height: 26px;
+            width: 103px;
+        }
+        .style45
+        {
+            height: 30px;
+            width: 91px;
+        }
+        .style46
+        {
+            height: 26px;
+            width: 91px;
+        }
+        .style47
+        {
+            height: 35px;
+        }
+        .style48
+        {
+            height: 35px;
+            width: 187px;
+        }
+        .style49
+        {
+            width: 187px;
+        }
+    

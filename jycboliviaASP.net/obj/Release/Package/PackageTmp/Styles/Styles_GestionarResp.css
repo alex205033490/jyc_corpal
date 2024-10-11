@@ -1,0 +1,47 @@
+﻿body {
+}
+
+.Centrar
+{
+    margin: 0 auto;
+    width:950px;
+        }
+
+
+.titulo
+{        
+    height:40px; 
+    margin-top:20px;   
+    }
+
+
+
+.GR1
+{   
+   height: auto;  
+   width:auto;   
+   float:left;
+   text-align:left;
+   margin-top:20px;
+    }
+    
+    
+.GR2
+{
+      float:left;
+      margin-top:20px;
+    }
+    
+    .botonEliminar
+    {
+        margin-top:40px;
+        width:800px;
+       float:left;
+        }
+        
+   .espacioBlanco
+   {
+        height:40px;
+        width:800px;
+        float:left;
+       }

@@ -1,0 +1,30 @@
+﻿body {
+}
+
+
+.Centrar
+{    
+    margin: 0 auto;            
+    width:800px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+    
+     .SaldosCuentas
+ {
+     border: double #666666;  
+     width: 700px;          
+     height: 450px;     
+     overflow: auto;
+     }
+     
+
+     
+     .blanco
+     {         
+         height: 50px; 
+         }

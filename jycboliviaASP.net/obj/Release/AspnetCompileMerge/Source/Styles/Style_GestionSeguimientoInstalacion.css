@@ -1,0 +1,77 @@
+﻿body {
+}
+
+.Centrar
+{   
+ 
+    margin: 0 auto;        
+    width:900px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+
+
+
+.GSI1
+{
+   border: double #666666;
+   float: left;   
+   height: auto;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+    }
+    
+.GSI2
+{
+   border: double #666666;
+   float: left;   
+   height: 50px;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+    }
+    
+.GSI3
+{
+   border: double #666666;
+   float: left;   
+   height: 500px;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+   overflow : auto;
+    }
+    
+.GSI4
+{
+   border: double #666666;
+   float: left;   
+   height: 70px;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+    }
+    
+.GSI5
+{
+   border: double #666666;
+   float: left;   
+   height: 70px;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+    }
+    
+  .botonLink
+  {
+      float:left;
+      margin-left: 40px;   
+   margin-top:20px;  
+      }

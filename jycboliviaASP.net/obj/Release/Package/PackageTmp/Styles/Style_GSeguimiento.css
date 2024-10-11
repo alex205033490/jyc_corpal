@@ -1,0 +1,109 @@
+﻿body {
+}
+
+.Centrar
+{   
+    margin: 0 auto;        
+    width:900px;
+    height:auto;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.GS1
+{
+   float: left;   
+   height: auto;  
+   width: auto;
+   text-align:left;
+ }
+    
+ .GSbuscador   
+ {
+   float: left;
+   height: auto;  
+   width: 800px;   
+   text-align:left;
+     }
+    
+.GS2
+{
+   float: left;
+   overflow:auto; 
+   height: 50px;  
+   width: 800px;   
+    }
+    
+.GS2_1
+{
+   border: double #666;
+   float: left;
+   overflow:auto; 
+   height: 650px;  
+   width: 350px;
+   margin-left: 20px;   
+   margin-top:40px;
+   
+}
+.GS2_2
+{
+   border: double #666;   
+   float: left;
+   overflow:auto; 
+   height: 300px;  
+   width: 1140px;
+   margin-left: 20px;   
+   margin-top:40px;
+    }
+    
+.GS2_3
+{
+   border: double #666;   
+   float: left;
+   overflow:auto; 
+   height: 350px;  
+   width: 400px;
+   margin-left: 20px;   
+   margin-top:10px;
+    }
+    
+.GS2_4
+{
+  
+   float: left;
+   overflow:auto; 
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;   
+   
+    }
+ 
+ .PanelAsignarMonto
+ {
+     border-color:Gray;
+     border-style:double;
+     border-width:3px;
+     background-color:Menu;
+     width:300px;
+     height:150px;
+     } 
+     
+.PanelAsignarMonto div
+{
+   text-align:center;
+    }  
+    
+.GS2_5
+{
+  
+   float: left;
+   overflow:auto; 
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;   
+   
+    }

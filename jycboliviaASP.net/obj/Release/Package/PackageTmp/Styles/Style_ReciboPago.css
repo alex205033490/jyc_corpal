@@ -1,0 +1,45 @@
+﻿body 
+{
+    width: 600px;
+    height: auto;
+    margin-left:50px;
+    margin-top:20px;
+}
+
+ .container {
+	width: 600px;	
+    border: double #666;
+	}
+	
+
+.logoIzquierdo
+{
+    height:94px;
+    width: 124px;
+	background-image: url(../Images/jyc_1.jpg);
+    
+    }
+    
+    .logo_Derecho
+    {
+        height:94px;
+    width: 124px;
+	background-image: url('../Images/jyc_1.jpg');    
+        
+        }
+
+   
+	.Titulo_logo
+	{
+	    text-align:center;
+	    }
+	    
+    .fechaRecibo
+    {
+        text-align:center;
+        }
+        
+        .fin
+        {
+            height:50px;
+            }

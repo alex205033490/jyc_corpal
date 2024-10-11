@@ -1,0 +1,74 @@
+﻿body {
+}
+
+.Centrar
+{
+    
+    margin: 0 auto;    
+    width:auto;
+    height: auto;
+        }
+
+
+.titulo
+{        
+    height:40px; 
+    margin-top:20px;   
+    }
+
+
+
+.CargaArchivoXXX
+{     
+   text-align:center;
+   height: 30px;  
+   width: 900px;   
+   margin: 0 auto;
+   
+    }
+    
+    
+       
+ .OpcionesBusquedaXXX
+ {
+   float: left;
+   height:45px;  
+   width: 900px;
+   margin-left: 40px;
+   margin-top: 20px;
+     }
+
+.CFE1XXX
+{
+   border: double #666;   
+   overflow:auto; 
+   height: 600px;  
+   width: auto;
+   margin-top: 20px;
+    }
+    
+.CFE2XXX
+{
+    
+   float: left;
+   overflow:auto; 
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;
+   margin-top: 20px;
+    }
+
+.CFE3XXX
+{
+   border-top: double #666;
+   border-right: double #666;   
+   border-bottom: double #666;
+   border-left: double #666;  
+   float: left;
+   overflow:auto; 
+   height: 500px;  
+   width: 430px;
+   margin-left: 40px;
+   margin-top: 20px;
+    }
+    

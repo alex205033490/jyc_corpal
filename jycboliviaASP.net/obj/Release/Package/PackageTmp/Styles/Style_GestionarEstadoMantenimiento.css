@@ -1,0 +1,77 @@
+﻿body 
+{   
+}
+
+.Centrar
+{    
+    margin: 0 auto;        
+    width:900px;    
+    }
+
+.titulo
+{        
+    height:40px;    
+    }
+
+.titulo2
+{        
+    height:40px;
+    width:800px;        
+    }
+
+.titulo3
+{       
+    height:40px;    
+    width:800px;    
+    }
+    
+.GEE1
+{
+   float: left;
+   height: 45px;  
+   width: 900px;      
+   }
+
+.GEE11
+{
+   float: left;
+   height: 200px;  
+   width: 900px;   
+   border: double #666666;
+   overflow:auto;    
+}
+
+.GEE2
+{
+   float: left;
+   overflow:auto; 
+   height: 350px;  
+   width: 900px;   
+   border: double #666666;   
+}
+
+.GEE3
+{
+   float: left;
+   overflow:auto; 
+   height: 160px;  
+   width: 350px;   
+   border: double #666666;   
+}
+
+.GEE4
+{
+      float: left;
+   overflow:auto; 
+   height: 160px;  
+   width: 500px;   
+   border: double #666666;
+}
+
+.GEE5
+{
+   float: left;   
+   height: 40px;  
+   width: 900px;
+      
+    }

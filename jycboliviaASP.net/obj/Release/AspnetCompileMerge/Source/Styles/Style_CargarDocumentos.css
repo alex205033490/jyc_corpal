@@ -1,0 +1,65 @@
+﻿body {
+}
+
+
+.Centrar
+{   
+    text-align:left;
+    float:left;         
+    width:auto;
+    height:auto;
+    margin: 0 auto;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+.datosEdificio 
+{
+   border: double #666;           
+    height: 70px;  
+    width: 700px;        
+    }
+
+
+.edificios
+{
+    border: double #666;           
+    height: 300px;  
+    width: 700px;  
+    overflow:auto;      
+    }
+
+.documentos
+{
+    border: double #666;           
+    height: 200px;  
+    width: 700px;
+    overflow: auto;        
+   }
+
+.pie
+{           
+    height: 40px;  
+    width: auto;        
+   }
+
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	
+}

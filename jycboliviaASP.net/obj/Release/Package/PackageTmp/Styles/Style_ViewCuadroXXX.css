@@ -1,0 +1,71 @@
+﻿body {
+}
+
+
+.Centrar
+{   
+    
+    margin: 0 auto;        
+    width:900px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+
+.MenuArriba
+{   
+   height: 45px;  
+   width: 900px; 
+   border: double #666666;
+    }
+    
+.CuadroXXX
+{    
+   overflow:auto; 
+   height: 350px;  
+   width: 900px;   
+   border: double #666666;
+    }
+    
+.Encargados
+{
+   overflow:auto; 
+   height: 220px;  
+   width: 400px;   
+   margin-top:40px;
+   border: double #666666;
+    }
+    
+.HistorialEstados
+{
+   float: left;
+   overflow:auto; 
+   height: 220px;  
+   width: 450px;
+   margin-left: 40px;   
+   margin-top:40px;
+   border: double #666666;
+    
+    }
+    
+.Pie1
+{
+     float: left;   
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;   
+   margin-top:20px;   
+    }
+    
+.extraerExcel
+{
+   text-align : left;   
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;
+    }

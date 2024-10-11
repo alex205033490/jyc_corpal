@@ -1,0 +1,73 @@
+﻿body {
+}
+
+.Centrar
+{   
+    margin: 0 auto;            
+    width:950px;
+    }
+
+.titulo
+{        
+    height:40px;
+    margin-top: 20px;
+    }
+
+
+.PS1_busqueda
+{
+   float: left;
+   height: 40px;  
+   width: 900px;
+   margin-left: 40px;
+    }
+    
+.PS1
+{
+   border: double #666;
+   float: left;
+   overflow:auto; 
+   height: 300px;  
+   width: 900px;
+  
+    }
+    
+.PS2
+{
+   border: double #666;
+   float: left;
+   overflow:auto; 
+   height: 350px;  
+   width: 430px;
+   margin-top: 20px;
+    }
+    
+.PS3
+{
+   border: double #666;
+   float: left;
+   overflow:auto; 
+   height: 350px;  
+   width: 430px;   
+   margin-top: 20px;
+   margin-left:20px;
+    }
+    
+.PS4
+{
+   
+  border: double #666;
+   float: left;
+   overflow:auto; 
+   height: 200px;  
+   width: 900px;
+    }
+    
+    .PS5
+{
+   
+   float: left;   
+   height: 40px;  
+   width: 900px;
+   
+    }
