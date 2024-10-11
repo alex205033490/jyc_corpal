@@ -156,7 +156,6 @@
         <li><a href="../Presentacion/FCorpal_APIInventarioEgresos.aspx" id="mn_apiinventariosegresos" runat="server" ><i class="bi bi-circle"></i><span>API Inventario Egresos</span></a></li>
         <li><a href="../Presentacion/FCorpal_APIInventarioTraspasos.aspx" id="mn_apiinventariostraspasos" runat="server" ><i class="bi bi-circle"></i><span>API Inventario Traspasos</span></a></li>
         </ul>
-
         </li>
 
         <li class="nav-item">

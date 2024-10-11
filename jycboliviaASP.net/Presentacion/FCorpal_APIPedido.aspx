@@ -6,8 +6,7 @@
     <script src="../js/jsUpon.js" type="text/javascript"></script>
 </asp:Content>
 
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">   
     <div class="container" style="padding-top: 1em;">
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
