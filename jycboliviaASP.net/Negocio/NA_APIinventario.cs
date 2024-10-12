@@ -22,13 +22,13 @@ namespace jycboliviaASP.net.Negocio
     internal class NA_APIinventario
     {
         private static readonly HttpClient httpClient = new HttpClient();
-        //private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         DBApi api = new DBApi();
 
         public NA_APIinventario()
         {
-            //_httpClient = new HttpClient();
+            _httpClient = new HttpClient();
         }
 
         /////////////////////////   METODO PARA OBTENER TOKEN
@@ -176,13 +176,25 @@ namespace jycboliviaASP.net.Negocio
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos", content);
-            response.EnsureSuccessStatusCode();
+            
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException e)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine($"Error: {e.Message}, Content: {errorContent}");
+                throw; // Puedes manejarlo de otra manera si lo prefieres
+            }
 
             var result = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(result);
+            Debug.WriteLine(result);
 
             var apiresponse2 = JsonConvert.DeserializeObject<ApiResponse2>(result);
             return apiresponse2.Resultado.ToString();
+
+
         }
         public class DetalleProductoIngre
         {

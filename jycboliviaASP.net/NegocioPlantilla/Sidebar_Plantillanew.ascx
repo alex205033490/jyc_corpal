@@ -75,7 +75,7 @@
             <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><i class="bi bi-circle"></i><span>Entrega Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
-              <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="A1" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>                                             
+              <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>                                             
               
             <li role="separator" class="divider"></li>                                
           </ul>
@@ -164,7 +164,7 @@
           <i class="bi bi-layout-text-window-reverse"></i><span>Producción API</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APIproduccion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APIProduccion.aspx" id="A1" runat="server" ><i class="bi bi-circle"></i><span>API Produccion</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APIProduccion.aspx" id="mn_APIProduccion" runat="server" ><i class="bi bi-circle"></i><span>API Produccion</span></a></li>
           </ul>
           </li>
 

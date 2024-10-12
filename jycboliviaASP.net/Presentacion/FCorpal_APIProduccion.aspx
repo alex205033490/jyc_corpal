@@ -16,6 +16,18 @@
                     </div>
 
 <!--------------------------------          API POST PRODUCCION PARTEproduccion  (registra datos vacios - La cadena de entrada no tiene el formato correcto.)       ----------------------->
+                    <script>
+                        function addRowProduccion() {
+                            var table = document.getElementById("tblDetalleProductoProduccion");
+                            var rowCount = table.rows.length;
+                            var row = table.insertRow(rowCount);
+                            row.innerHTML =
+                                `<td><input class="inputText" type='text' name='codigoProducto${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' name='cantidad${rowCount}' /></td>
+                                 <td><input class="inputNumber" type='number' name='unidadMedida${rowCount}' /></td>
+                                 <td><input class="inputText" type='text' name='codigoReceta${rowCount}' /></td>`;
+                                                }
+                    </script>
                     
                         <div class="tb_postInventarioEgreso p-4 bg-light border rounded">
                             <h5 class="text-warning">Registro Produccion (F)</h5>
@@ -58,18 +70,18 @@
 
 
                     <div>
-                        <asp:Label runat="server" Text=" - Detalle - "></asp:Label><br />
+                        <asp:Label runat="server" Text=" Detalle Producto "></asp:Label><br />
 
                         <table id="tblDetalleProductoProduccion" border="1">
                             <tr>
-                                <th>Numero Item</th>
+
                                 <th>Codigo Producto</th>
                                 <th>Cantidad</th>
                                 <th>Unidad Medida</th>
                                 <th>Codigo Receta</th>
                             </tr>
                             <tr>
-                                <td><input class= "inputNumber" type="number" name="item0"/></td>
+
                                 <td><input class= "inputText" type="text" name="codigoProducto0"/></td>
                                 <td><input class= "inputNumber" type="number" name="cantidad0"/></td>
                                 <td><input class= "inputNumber" type="number" name="unidadMedida0"/></td>

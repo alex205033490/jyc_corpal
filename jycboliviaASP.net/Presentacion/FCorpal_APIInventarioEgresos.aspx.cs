@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Controls;
 using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -138,10 +139,10 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     detalles.Add(new DetalleProductoEgre
                     {
-                        Item = int.Parse(Request.Form["item" + i]),
+                        Item = 0,
                         CodigoProducto = Request.Form["codigoProducto" + i], //ob
                         UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                        Cantidad = decimal.Parse(Request.Form["cantidad" + i])
+                        Cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture)
 
                     });
                 }

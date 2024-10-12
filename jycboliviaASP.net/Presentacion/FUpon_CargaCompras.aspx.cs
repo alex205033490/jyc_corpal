@@ -123,7 +123,6 @@ namespace jycboliviaASP.net.Presentacion
             gv_comprasCargadas.DataSource = resultMostrar;
             gv_comprasCargadas.DataBind();            
         }
-
         protected void bt_cargarDocumentos_Click(object sender, EventArgs e)
         {
             cargarDocumentos();            

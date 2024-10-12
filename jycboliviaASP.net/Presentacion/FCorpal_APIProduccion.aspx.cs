@@ -41,7 +41,7 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     detalles.Add(new ProductoParteProduccionDTO
                     {
-                        Item = int.Parse(Request.Form["item" + i]),
+                        Item = 0,
                         CodigoProducto = Request.Form["codigoProducto" + i],
                         Cantidad = int.Parse(Request.Form["cantidad" + i]),
                         UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),

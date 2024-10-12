@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIpedido;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -96,9 +97,9 @@ namespace jycboliviaASP.net.Presentacion
                 Fecha = DateTime.Now,
                 Referencia = txt_Referencia.Text,
                 CodigoCliente = int.Parse(txt_codCliente.Text),
-                ImporteProductos = 30,
+                ImporteProductos = decimal.Parse(txt_impProductos.Text),
                 ImporteDescuentos = decimal.Parse(txt_impDescuentos.Text),
-                ImporteTotal = 30,
+                ImporteTotal = decimal.Parse(txt_impTotal.Text),
                 Glosa = txt_glosa.Text,
                 Usuario = "adm"
             };
@@ -111,21 +112,15 @@ namespace jycboliviaASP.net.Presentacion
             {
                 if (Request.Form["item" + i] != null)
                 {
-                    var cantidad = decimal.Parse(Request.Form["cantidad" + i]);
-                    var precioUnitario = decimal.Parse(Request.Form["precioUnitario" + i]);
-                    var importeDescuento = decimal.Parse(Request.Form["importeDescuento" + i]);
-
-                    var importeTotal = (cantidad * precioUnitario) -importeDescuento;
-
                     detalles.Add(new ItemPedidoDTO
                     {
-                        NumeroItem = 1,
-                        CodigoProducto = "PTMA02001",
-                        Cantidad = 6,
-                        CodigoUnidadMedida = 14,
-                        PrecioUnitario = 5,
-                        ImporteDescuento = 0,
-                        ImporteTotal = 30
+                        NumeroItem = 0,
+                        CodigoProducto = (Request.Form["codigoProducto" + i]),
+                        Cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture),
+                        CodigoUnidadMedida = int.Parse(Request.Form["codigoUnidadMedida" + i]),
+                        PrecioUnitario = decimal.Parse(Request.Form["precioUnitario" + i], CultureInfo.InvariantCulture),
+                        ImporteDescuento = decimal.Parse(Request.Form["importeDescuento" + i], CultureInfo.InvariantCulture),
+                        ImporteTotal = decimal.Parse(Request.Form["importeTotal" + i], CultureInfo.InvariantCulture)
                     });
                 }
             }
