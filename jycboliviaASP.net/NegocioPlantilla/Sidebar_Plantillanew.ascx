@@ -62,7 +62,6 @@
                 <li role="separator" class="divider"></li>                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
-              
           </ul>
         </li><!-- End Forms Nav -->
 
@@ -121,8 +120,13 @@
                 <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><i class="bi bi-circle"></i><span>Activos JYC</span></a></li>                       
             </ul>
         </li><!-- End Tables Nav -->
+<<<<<<< HEAD
    
                      
+=======
+
+      <li class="nav-heading"> APIs</li>          
+>>>>>>> modulo4_2
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#uponweb-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Upon Web</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -136,10 +140,18 @@
 
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#prueba-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Prueba Inventario</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-layout-text-window-reverse"></i><span>Clientes/Productos API</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
         <ul id="prueba-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+<<<<<<< HEAD
         <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>Inventario API</span></a></li>
+=======
+        <!--<li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>API Inventario</span></a></li> -->
+        <li><a href="../Presentacion/FCorpal_APIClientes.aspx" id="mn_apiclientes" runat="server" ><i class="bi bi-circle"></i><span>API Cliente</span></a></li>
+        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>API Productos</span></a></li><!-- -->
+        
+        
+>>>>>>> modulo4_2
         </ul>
         </li>
     </ul>
