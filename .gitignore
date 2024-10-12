@@ -1,3 +1,4 @@
+<<<<<<<< HEAD:.gitignore
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,windows,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,windows,git
 
@@ -436,3 +437,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,windows,git
+========
+.vs/
+>>>>>>>> 282db8958360e3537c3e08febbea25a9d4f124b3:jycboliviaASP.net/.gitignore

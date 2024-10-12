@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_prueba.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_prueba" Async="true"  %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_prueba.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_prueba" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_SimecModificar.css" rel="stylesheet" type="text/css" />
+    
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container" style="padding-top: 1em;">
@@ -13,24 +12,6 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-success class">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!------------------------          API GET OBTENER PRODUCTO            ------------------------------>
             <div class="panel-heading">
             <h3 class="panel-title">Orden Produccion:</h3>
             </div>
@@ -182,5 +163,6 @@
         <div class="row">&nbsp;</div>
 
 </div>
+
 
 </asp:Content>
