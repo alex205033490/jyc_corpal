@@ -838,6 +838,19 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+<<<<<<< HEAD
+=======
+
+    <Compile Include="Negocio\NA_APIclientes.cs" />
+    <Compile Include="Negocio\NA_APIcompras.cs" />
+    <Compile Include="Negocio\NA_APICuentasCobranza.cs" />
+    <Compile Include="Negocio\NA_APIinventario.cs" />
+    <Compile Include="Negocio\NA_APIpedido.cs" />
+    <Compile Include="Negocio\NA_APIproduccion.cs" />
+    <Compile Include="Negocio\NA_APIproductos.cs" />
+    <Compile Include="Negocio\NA_APIventas.cs" />
+
+>>>>>>> modulo4_2
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />

@@ -10,7 +10,13 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+<<<<<<< HEAD
     <NameOfLastUsedPublishProfile>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
+=======
+
+    <NameOfLastUsedPublishProfile>C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\Properties\PublishProfiles\FolderProfile2.pubxml</NameOfLastUsedPublishProfile>
+
+>>>>>>> modulo4_2
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
