@@ -26,36 +26,16 @@
             background-color: Green;
             color: White;
             /* color: Lime;
-           padding: 3px 20px;
-            text-decoration: none;           
-            background-repeat: repeat-x;
-            outline: 0;*/
+   padding: 3px 20px;
+    text-decoration: none;           
+    background-repeat: repeat-x;
+    outline: 0;*/
         }
 
         .style1 {
             height: 26px;
         }
 
-        .Gcuentas {
-            border: double #666666;
-            width: auto; /* O especifica un ancho fijo */
-            height: 300px; /* Ajusta la altura según necesites */
-            overflow: hidden; /* Oculta el scroll horizontal */
-            position: relative; /* Para la posición del contenedor */
-        }
-
-        .grid-container {
-            height: 100%; /* Para que tome el 100% del contenedor */
-            overflow-y: auto; /* Permite scroll vertical */
-            position: relative; /* Posición relativa para el encabezado */
-        }
-
-            .grid-container thead {
-                position: sticky; /* Fija el encabezado */
-                top: 0; /* Coloca el encabezado en la parte superior */
-                background-color: #ffcc00; /* Color de fondo del encabezado */
-                z-index: 1; /* Asegura que esté por encima del resto del contenido */
-            }
     </style>
 
 
@@ -85,10 +65,8 @@
                                 <div class="grid-container">
 
                                     <asp:GridView ID="gv_Cuentas" runat="server" BackColor="White"
-                                        BorderColor="White" BorderStyle="Solid" BorderWidth="5px" CellPadding="10" Cellpaddinng="10"
-                                        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical"
-                                        AllowPaging="True" PageSize="10">
-
+                                        BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
+                                        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical">
                                         <Columns>
 
                                             <asp:BoundField DataField="NumeroCuenta" HeaderText="numCuenta" SortExpression="nCuenta" />
@@ -102,18 +80,7 @@
                                             <asp:BoundField DataField="FechaVencimiento" HeaderText="Fecha Vencimiento" SortExpression="fVenc" />
                                         </Columns>
 
-                                        <AlternatingRowStyle BackColor="#CCCCCC" />
-                                        <FooterStyle BackColor="#CCCCCC" />
 
-                                        <AlternatingRowStyle BackColor="#f8f9fa" />
-                                        <FooterStyle BackColor="#CCCCCC" />
-                                        <HeaderStyle BackColor="#ffcc00" Font-Bold="true" ForeColor="Red" />
-                                        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                        <SelectedRowStyle BackColor="#000099" Font-Bold="true" ForeColor="White" />
-                                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                        <SortedAscendingHeaderStyle BackColor="#808080" />
-                                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                        <SortedDescendingHeaderStyle BackColor="#383838" />
 
                                     </asp:GridView>
                                 </div>
