@@ -46,8 +46,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=4.1.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>Herramientas\AjaxControlToolkit.Binary.NET4\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -791,6 +791,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Produccion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_Proyectos.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1918,6 +1923,7 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
@@ -2025,6 +2031,17 @@
     <None Include="DS_Mantenimiento.xss">
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
     </None>
+    <Content Include="DS_Produccion.xsc">
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_Produccion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Produccion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_Produccion.xss">
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
+    </Content>
     <None Include="DS_ProductosAlmacen.xsc">
       <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
     </None>

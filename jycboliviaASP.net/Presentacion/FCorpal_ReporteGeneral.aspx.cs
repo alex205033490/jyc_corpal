@@ -42,10 +42,91 @@ namespace jycboliviaASP.net.Presentacion
                     case "Reporte_RecibidoMaterialInsumos":
                         reporteRecibidoMaterialInsumos();
                         break;
+                    case "CalcularInsumosPorTurnoDia":
+                        CalcularInsumosPorTurnoDia();
+                        break;
                     default:
                         //number = "Error";
                         break;
                 }
+        }
+
+        private void CalcularInsumosPorTurnoDia()
+        {
+            int codigoOrdenProduccion = int.Parse(Session["codigoOrdenProduccion"].ToString());
+            NCorpal_Produccion npro = new NCorpal_Produccion();
+            DataSet datoGeneral = npro.get_datosOrdenProduccion(codigoOrdenProduccion);
+            
+            string fecha = datoGeneral.Tables[0].Rows[0][1].ToString();
+            string hora= datoGeneral.Tables[0].Rows[0][2].ToString();
+            string producto = datoGeneral.Tables[0].Rows[0][3].ToString();
+            decimal cantcajas;
+            decimal.TryParse(datoGeneral.Tables[0].Rows[0][4].ToString().Replace('.',','), out cantcajas);
+            string medida = datoGeneral.Tables[0].Rows[0][5].ToString();
+            int codNax;
+            int.TryParse(datoGeneral.Tables[0].Rows[0][11].ToString().Replace('.', ','), out codNax);
+
+            decimal cantTurnoDia;
+            decimal.TryParse(datoGeneral.Tables[0].Rows[0][8].ToString().Replace(".", ","), out cantTurnoDia);
+            decimal cantTurnoTarde;
+            decimal.TryParse(datoGeneral.Tables[0].Rows[0][9].ToString().Replace(".", ","), out cantTurnoTarde);
+            decimal cantTurnoNoche;
+            decimal.TryParse(datoGeneral.Tables[0].Rows[0][10].ToString().Replace(".", ","), out cantTurnoNoche);
+
+            
+            DataSet tuplaDia = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoDia);
+            DataSet tuplaTarde = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoTarde);
+            DataSet tuplaNoche = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoNoche);
+
+            DataSet tuplaDiaCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoDia);
+            DataSet tuplaTardeCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoTarde);
+            DataSet tuplaNocheCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoNoche);
+
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_ConsultaListadeInsumosTurnos.rdlc";
+                        
+            DataTable DS_dia = tuplaDia.Tables[0];
+            DataTable DS_tarde = tuplaTarde.Tables[0];
+            DataTable DS_noche = tuplaNoche.Tables[0];
+
+            DataTable DS_diaCreadp = tuplaDiaCreado.Tables[0];
+            DataTable DS_tardeCreado = tuplaTardeCreado.Tables[0];
+            DataTable DS_nocheCreado = tuplaNocheCreado.Tables[0];
+
+            ReportParameter p_fechaproduccion = new ReportParameter("p_fechaproduccion", fecha);
+            ReportParameter p_horaproduccion = new ReportParameter("p_horaproduccion", hora);
+            ReportParameter p_producto = new ReportParameter("p_producto", producto);
+            ReportParameter p_medida = new ReportParameter("p_medida", medida);
+            ReportParameter p_cantDia = new ReportParameter("p_cantDia", cantTurnoDia.ToString().Replace(',','.'));
+            ReportParameter p_canttarde = new ReportParameter("p_canttarde", cantTurnoTarde.ToString().Replace(',', '.'));
+            ReportParameter p_cantnoche = new ReportParameter("p_cantnoche", cantTurnoNoche.ToString().Replace(',', '.'));
+
+            ReportDataSource DS_ListaInsumosTurnoDia = new ReportDataSource("DS_ListaInsumosTurnoDia", DS_dia);
+            ReportDataSource DS_ListaInsumosTurnoTarde = new ReportDataSource("DS_ListaInsumosTurnoTarde", DS_tarde);
+            ReportDataSource DS_ListaInsumosTurnoNoche = new ReportDataSource("DS_ListaInsumosTurnoNoche", DS_noche);
+            
+            ReportDataSource DS_ListaInsumosCreadosDia = new ReportDataSource("DS_ListaInsumosCreadosDia", DS_diaCreadp);
+            ReportDataSource DS_ListaInsumosCreadosTarde = new ReportDataSource("DS_ListaInsumosCreadosTarde", DS_tardeCreado);
+            ReportDataSource DS_ListaInsumosCreadosNoche = new ReportDataSource("DS_ListaInsumosCreadosNoche", DS_nocheCreado);
+
+            ReportViewer1.LocalReport.SetParameters(p_fechaproduccion);
+            ReportViewer1.LocalReport.SetParameters(p_horaproduccion);
+            ReportViewer1.LocalReport.SetParameters(p_producto);
+            ReportViewer1.LocalReport.SetParameters(p_medida);
+            ReportViewer1.LocalReport.SetParameters(p_cantDia);
+            ReportViewer1.LocalReport.SetParameters(p_canttarde);
+            ReportViewer1.LocalReport.SetParameters(p_cantnoche);
+            
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoDia);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoTarde);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoNoche);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosDia);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosTarde);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosNoche);
+
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void qr_activos()

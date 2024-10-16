@@ -8,6 +8,8 @@ using jycboliviaASP.net.Negocio;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Security.Cryptography;
+using Microsoft.Reporting.WebForms;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -142,9 +144,13 @@ namespace jycboliviaASP.net.Presentacion
                 bool bandera = nproduccion.insertarOrdenProduccion(fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable, cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
                 if (bandera == true)
                 {
-                    buscarDatos("");
-                    limpiarDatos();
-                    Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
+                int codigoOrden = nproduccion.get_codigoOrdenProduccionUltimoInsertado(codProducto, codUser);
+                Session["codigoOrdenProduccion"] = codigoOrden;
+                Session["ReporteGeneral"] = "CalcularInsumosPorTurnoDia";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                //buscarDatos("");                
+                //limpiarDatos();
+                //Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
                 }
                 else
                     Response.Write("<script type='text/javascript'> alert('Error: Error Insertar') </script>");
@@ -155,7 +161,9 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
-        private string convertidorFecha(string fecha)
+        
+
+            private string convertidorFecha(string fecha)
         {
             if (fecha == "" || fecha == "&nbsp;")
             {
