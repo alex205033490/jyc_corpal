@@ -20,6 +20,7 @@ namespace jycboliviaASP.net.Presentacion
         //--------------------------- GET - PEDIDO CON CRITERIO
         protected async void btn_buscarPedidoCriterio_Click(object sender, EventArgs e)
         {
+
             string numPedido = (TextBox1.Text.Trim());
             if(string.IsNullOrEmpty(numPedido))
             {
@@ -90,41 +91,67 @@ namespace jycboliviaASP.net.Presentacion
 
         //--------------------------- POST PEDIDO
         protected async void btn_PostPedido_Click(object sender, EventArgs e)
-        { 
+        {
+            string codCliente = txt_codCliente.Text.Trim();
+
+            // Validaciones
+
+            if (string.IsNullOrEmpty(codCliente))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo codigo cliente.');", true);
+                return;
+            }
+
+
             var pedido = new PedidoDTO
             {
                 NumeroPedido = 0,
                 Fecha = DateTime.Now,
                 Referencia = txt_Referencia.Text,
                 CodigoCliente = int.Parse(txt_codCliente.Text),
-                ImporteProductos = decimal.Parse(txt_impProductos.Text),
+                ImporteProductos = 0,
                 ImporteDescuentos = decimal.Parse(txt_impDescuentos.Text),
-                ImporteTotal = decimal.Parse(txt_impTotal.Text),
+                ImporteTotal = 0,
                 Glosa = txt_glosa.Text,
                 Usuario = "adm"
             };
 
             // obtener los detalles de productos
             var detalles = new List<ItemPedidoDTO>();
+            decimal totalImporteProductos = 0;
+
             int rowCount = Request.Form.AllKeys.Length;
 
             for (int i = 0; i < rowCount; i++)
             {
-                if (Request.Form["item" + i] != null)
+                if (Request.Form["codigoProducto" + i] != null)
                 {
-                    detalles.Add(new ItemPedidoDTO
+                    decimal cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture);
+                    decimal precioUnitario = decimal.Parse(Request.Form["precioUnitario" + i], CultureInfo.InvariantCulture);
+                    decimal importeDescuento = decimal.Parse(Request.Form["importeDescuento" + i], CultureInfo.InvariantCulture);
+
+                    decimal importeTotal = (cantidad * precioUnitario)-importeDescuento;
+
+                    var detalle = new ItemPedidoDTO
                     {
                         NumeroItem = 0,
                         CodigoProducto = (Request.Form["codigoProducto" + i]),
-                        Cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture),
+                        Cantidad = cantidad,
                         CodigoUnidadMedida = int.Parse(Request.Form["codigoUnidadMedida" + i]),
-                        PrecioUnitario = decimal.Parse(Request.Form["precioUnitario" + i], CultureInfo.InvariantCulture),
-                        ImporteDescuento = decimal.Parse(Request.Form["importeDescuento" + i], CultureInfo.InvariantCulture),
-                        ImporteTotal = decimal.Parse(Request.Form["importeTotal" + i], CultureInfo.InvariantCulture)
-                    });
+                        PrecioUnitario = precioUnitario,
+                        ImporteDescuento = importeDescuento,
+                        ImporteTotal = importeTotal
+                    };
+                    detalles.Add(detalle);
+                    totalImporteProductos += importeTotal;
                 }
             }
+
             pedido.DetalleProductos = detalles;
+
+            pedido.ImporteProductos = totalImporteProductos;
+            pedido.ImporteTotal = totalImporteProductos - pedido.ImporteDescuentos;
+
 
             //obtener token y enviar datos
             var api = new NA_APIpedido();
@@ -134,14 +161,18 @@ namespace jycboliviaASP.net.Presentacion
             {
                 var result = await api.PostPedidoAsync(pedido, token);
                 lblResult.Text = $"Numero Pedido: {result}";
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Pedido registrado Exitosamente.');", true);
+
+                txt_Referencia.Text = string.Empty;
+                txt_codCliente.Text = string.Empty;
+                txt_impDescuentos.Text = string.Empty; 
+                txt_glosa.Text = string.Empty; 
             }
             catch (Exception ex)
             {
                 Response.Write($"Error: {ex.Message}");
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}')", true);
             }
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Pedido registrado Exitosamente.');", true);
-
         }
     }
 }

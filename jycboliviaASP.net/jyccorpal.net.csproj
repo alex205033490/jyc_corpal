@@ -46,8 +46,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=4.1.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.20.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -57,6 +61,10 @@
     </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>Herramientas\QrCode.Net 0.4 Pre-Release\Gma.QrCodeNet.Encoder\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -607,6 +615,7 @@
     <Content Include="Presentacion\Presentacion old\FA_Reporte_R144.aspx" />
     <Content Include="Presentacion\WelcomeJyC.aspx" />
     <Content Include="Styles\Styles_GPagoSeguimiento2.css" />
+    <Content Include="Styles\Style_APIUpon.css" />
     <Content Include="Styles\Style_Autocompletar.css" />
     <Content Include="Styles\Style_CodigosDeEquipos.css" />
     <Content Include="Styles\Style_CallCenter_Rin.css" />

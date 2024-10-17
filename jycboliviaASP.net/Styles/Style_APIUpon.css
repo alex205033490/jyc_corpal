@@ -2,27 +2,167 @@
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
-    padding: 20px;
+}
+
+/****************************  CUENTAS/COBRANZA    ****************************/
+.container_cuentas {
+    height: 100px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    border: double #666666; /* Bordes del contenedor */
 }
 
 
-/*  POST - INPUT text number */
-.inputText {
-    width: 130px; /* Ajusta el tamaño según tus necesidades */
-    padding: 4px; /* Añade un poco de espacio interno */
-    font-size: 14px; /* Cambia el tamaño de la fuente */
+/****************************   PEDIDO    ****************************/
+.container_gv1 {
+    height: 110px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    font-size: x-small;
+    /* Bordes del contenedor */
 }
-.inputNumber {
-    width: 80px; /* Ajusta el tamaño según tus necesidades */
-    padding: 4px; /* Añade un poco de espacio interno */
-    font-size: 14px; /* Cambia el tamaño de la fuente */
+.container_gv2 {
+    height: 120px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: x-small;
 }
-td {
-    padding: 10px; /* Ajusta el padding de las celdas */
+.container_gv3 {
+    height: 200px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: small;
 }
-th{
-    padding: 10px;
+#tblDetalleProductosPedido tr th {
+    font-size: 0.8rem;
+    color: black;
 }
 
 
-/*      GRIDVIEW    */
+
+
+
+
+
+/*************************   new        **********************************/
+
+
+
+
+
+
+
+
+
+
+/****************************   Btn API    ****************************/
+.container_btn {
+    padding: 10px; /* Espacio alrededor del botón */
+}
+
+.btn-warning {
+    background-color: #ff8000; /* Color de fondo */
+    border: none; /* Eliminar el borde */
+    color: white; /* Color del texto */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+    .btn-warning:hover {
+        background-color: #e67000; /* Color en hover */
+        transform: scale(1.05); /* Efecto de aumento */
+        color: white; /* Color del texto */
+    }
+/**************************     LABEL   ***********************************/
+.text_tittle1 {
+    color: #ff8000; /* Color del texto */
+    font-size: 2rem; /* Tamaño de fuente */
+    font-weight: bold; /* Peso de la fuente */
+    text-align: center; /* Alineación centrada */
+    margin: 20px 0; /* Margen superior e inferior */
+}
+
+
+.text_tittle2 {
+    color: black; /* Color del texto */
+    font-size: 1.5rem; /* Tamaño de fuente */
+    font-weight: normal; /* Peso de la fuente */
+    margin: 10px 0; /* Margen superior e inferior */
+    text-align: left; /* Alineación a la izquierda */
+    opacity: 0.8; /* Leve transparencia para un efecto sutil */
+}
+
+
+/******************    TextBox API         *****************************/
+.form-control {
+    border: 1px solid #ccc; /* Borde inicial */
+    transition: border-color 0.3s; /* Transición suave */
+}
+
+    .form-control:focus {
+        border-color: #ff8000; /* Color de borde en enfoque */
+        box-shadow: 0 0 5px rgba(255, 128, 0, 0.5); /* Sombra suave en enfoque */
+    }
+
+    .form-control:hover {
+        border-color: #ffcc80; /* Color de borde en hover */
+    }
+
+
+
+/************************    Gv API         *****************************/
+
+.gridview {
+    border-color: #FA9A2D; /* Color del borde */
+    border-style: solid; /* Estilo del borde */
+    border-width: 1px; /* Grosor del borde */
+     /* Tamaño de fuente */
+    color: black; /* Color de texto */
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes */
+}
+
+    .gridview th {
+        background-color: #ff8000; /* Fondo del encabezado */
+        font-weight: bold; /* Negrita */
+        color: white; /* Color del texto en encabezado */
+        padding: 10px; /* Espaciado en celdas del encabezado */
+    }
+
+    .gridview td {
+        padding: 3px; /* Espaciado en celdas */
+        border: 1px solid #dddddd; /* Borde de las celdas */
+    }
+
+    .gridview .alternating-row {
+        background-color: #CCCCCC; /* Color de las filas alternas */
+    }
+
+    .gridview .footer {
+        background-color: #CCCCCC; /* Fondo del pie */
+    }
+
+    .gridview .pager {
+        background-color: #999999; /* Fondo del paginador */
+        color: black; /* Color de texto en el paginador */
+        text-align: center; /* Alineación centrada */
+    }
+
+    .gridview .selected-row {
+        background-color: #000099; /* Fondo de la fila seleccionada */
+        font-weight: bold; /* Negrita */
+        color: white; /* Color del texto en fila seleccionada */
+    }
+
+    .gridview .sorted-asc-cell {
+        background-color: #F1F1F1; /* Color de celdas ordenadas ascendentemente */
+    }
+
+    .gridview .sorted-asc-header {
+        background-color: #808080; /* Color del encabezado ordenado ascendentemente */
+    }
+
+    .gridview .sorted-desc-cell {
+        background-color: #CAC9C9; /* Color de celdas ordenadas descendentemente */
+    }
+
+    .gridview .sorted-desc-header {
+        background-color: #383838; /* Color del encabezado ordenado descendentemente */
+    }
