@@ -131,6 +131,11 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.get_datosOrdenProduccion(Producto);
         }
 
+        internal DataSet get_datosOrdenProduccion(int codigoOrden)
+        {
+            return dproduccion.get_datosOrdenProduccion(codigoOrden);
+        }
+
         internal bool insertarOrdenProduccion(string fechaproduccion, int codProductonax, string productoNax, float cantcajasproduccion,
                                                string medida, string detalleproduccion,  int cod_respgra, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
         {
@@ -165,6 +170,78 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
         {
             return dproduccion.get_datosEntregaProduccionFechaTurno( fechadesde,  fechahasta,  producto);
+        }
+
+        internal DataSet get_insumosporProductoNormal(int codNax, string nameProd, decimal cantidadNecesitada)
+        {
+            return dproduccion.get_insumosporProductoNormal(codNax, nameProd, cantidadNecesitada);
+        }
+
+        internal DataSet get_insumosCreadosporProducto(int codNax,  decimal cantidadNecesitada)
+        {
+            DataSet listInsumosCreados = dproduccion.get_insumosCreadosporProducto(codNax, cantidadNecesitada);
+            string consultaArmada = "";
+            if (listInsumosCreados.Tables[0].Rows.Count > 0)
+            {
+                int cantFilas = listInsumosCreados.Tables[0].Rows.Count;
+                for (int i = 0; i < cantFilas; i++)
+                {
+                    int codigoInsumoCreado;
+                    int.TryParse(listInsumosCreados.Tables[0].Rows[i][0].ToString(), out codigoInsumoCreado);
+                    string insumoCreado = listInsumosCreados.Tables[0].Rows[i][1].ToString();
+                    decimal cantidad;
+                    decimal.TryParse(listInsumosCreados.Tables[0].Rows[i][2].ToString().Replace('.', ','), out cantidad);
+                    consultaArmada = consultaArmada +
+                        "select " +
+                        " ins.codigo," +
+                        " ii.nombre as 'insumoCreado'," +
+                        " ins.nombre as 'insumo'," +
+                        " (dins.cantidad * '" + cantidad.ToString().Replace(',', '.') + "') as 'cantidad'," +
+                        " ins.Medida, " +                        
+                        " '"+cantidad+"' as 'cantidaInsumoCreado'"+
+                        " from" +
+                        " tbcorpal_insumoscreados ii," +
+                        " tbcorpal_detinsumocreado dins," +
+                        " tbcorpal_insumo ins" +
+                        " where" +
+                        " ii.codigo = dins.codinsumocreado and" +
+                        " dins.codinsumo = ins.codigo and " +
+                        " ii.codigo = " + codigoInsumoCreado;
+                    if (i < cantFilas - 1)
+                    {
+                        consultaArmada = consultaArmada + " UNION ";
+                    }
+                }
+                DataSet resultDatos = dproduccion.get_consultaMySql(consultaArmada);
+                return resultDatos;
+            }
+            else {
+                string consultaVacia = "select  ins.codigo, ii.nombre as 'insumoCreado', ins.nombre as 'insumo', (dins.cantidad * 0) as 'cantidad', ins.Medida  from tbcorpal_insumoscreados ii, tbcorpal_detinsumocreado dins, tbcorpal_insumo ins where ii.codigo = dins.codinsumocreado and dins.codinsumo = ins.codigo and ii.codigo = 0";
+                return dproduccion.get_consultaMySql(consultaVacia); ;
+            }
+            
+        }
+
+        internal int get_codigoOrdenProduccionUltimoInsertado(int codProducto, int codUser)
+        {
+            DataSet datoPP = dproduccion.get_codigoOrdenProduccionUltimoInsertado(codProducto, codUser);
+            if (datoPP.Tables[0].Rows.Count > 0)
+            {
+                int codigo;
+                int.TryParse(datoPP.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo;
+            }
+            else
+                return 0;
+        }
+
+        internal bool get_tieneRecetaelProducto(int codProducto)
+        {
+            DataSet receta = dproduccion.get_tieneRecetaProducto(codProducto);
+            if (receta.Tables[0].Rows.Count > 0) {
+                return true;
+            }else
+                return false;
         }
     }
 }

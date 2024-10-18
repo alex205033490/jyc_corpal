@@ -517,6 +517,29 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
+        internal DataSet get_datosOrdenProduccion(int codigoOrden)
+        {
+            string consulta = "select " +
+                              " oo.codigo, " +
+                              " date_format(oo.fechaproduccion,'%d/%m/%Y') as 'fecha_produccion', " +
+                              " oo.horaproduccion, " +
+                              " oo.productoNax, " +
+                              " oo.cantcajasproduccion, " +
+                              " oo.medida, " +
+                              " oo.detalleproduccion, " +
+                              " oo.responsable, " +
+                              " oo.cantturnodia," +
+                              " oo.cantturnotarde," +
+                              " oo.cantturnonoche, " +
+                              " oo.codProductonax "+
+                              " from " +
+                              " tbcorpal_ordenproduccion oo " +
+                              " where " +
+                              " oo.estado = 1 and " +
+                              " oo.codigo = "+codigoOrden+" order by oo.codigo desc";
+            return Conx.consultaMySql(consulta);
+        }
+
         internal bool insertarOrdenProduccion( string fechaproduccion,int codProductonax,string productoNax,float cantcajasproduccion,
                                                string medida,string detalleproduccion,int cod_respgra,string responsable,
                                                float cantturnodia, float cantturnotarde, float cantturnonoche)
@@ -645,6 +668,70 @@ namespace jycboliviaASP.net.Datos
                 "and pp.producto like '%" +producto+"%' " +
                 " group by  t1.FechaSistema, pp.codigo " +
                 "order by t1.FechaSistema, pp.codigo asc";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_codigoOrdenProduccionUltimoInsertado(int codProducto, int codUser)
+        {
+            string consulta = "select " +
+                            " max(oo.codigo) " +                            
+                            " from " +
+                            " tbcorpal_ordenproduccion oo " +
+                            " where " +
+                            " oo.estado = 1 and " +
+                            " oo.codProductonax = " + codProducto + " and oo.cod_respgra = "+ codUser;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosporProductoNormal(int codNax, string nameProd, decimal cantidadNecesitada)
+        {
+            string consulta = " select ii.codigo,ii.nombre as 'insumo'," +
+                            " (di.cantidad * '" + cantidadNecesitada.ToString().Replace(',', '.') + "') as 'cantidad'," +
+                            " ii.medida,'" + codNax + "' as 'codigonax'," +
+                            " '" + nameProd + "' as 'productonax' " +
+                            " from tbcorpal_receta re, " +
+                            " tbcorpal_detingredienteinsumocreado di," +
+                            " tbcorpal_insumoscreados ii " +
+                            " where re.codigo = di.codreceta and " +
+                            " di.codinsumocreado = ii.codigo and " +
+                            " ii.estado = 1  and " +
+                            " re.estado = 1 and " +
+                            " re.codproducto = " + codNax +
+                            " UNION " +
+                            "select ii.codigo,ii.nombre as 'insumo', " +
+                            "(di.cantidad * '" + cantidadNecesitada.ToString().Replace(',', '.') + "') as 'cantidad'," +
+                            " ii.Medida,'" + codNax + "' as 'codigonax'," +
+                            " '" + nameProd + "' as 'productonax' " +
+                            " from tbcorpal_receta re, " +
+                            " tbcorpal_detingredienteinsumo di," +
+                            " tbcorpal_insumo ii " +
+                            " where re.codigo = di.codreceta and " +
+                            " di.codinsumo = ii.codigo and " +
+                            " ii.estado = 1  and re.estado = 1 and " +
+                            " re.codproducto = " + codNax;                            
+                            
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosCreadosporProducto(int codNax, decimal cantidadNecesitada)
+        {
+            string consulta = "select ic.codigo,ic.nombre," +
+                " (dic.cantidad * '"+cantidadNecesitada.ToString().Replace(',','.')+"') as 'cantidad'" +
+                " from tbcorpal_receta re,tbcorpal_detingredienteinsumocreado dic, " +
+                " tbcorpal_insumoscreados ic" +
+                " where re.codigo = dic.codreceta and " +
+                " dic.codinsumocreado = ic.codigo and re.estado = 1 and " +
+                " re.codproducto = " + codNax;
+            return Conx.consultaMySql(consulta);
+        }
+
+        public DataSet get_consultaMySql(string consulta) {            
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_tieneRecetaProducto(int codProducto)
+        {
+            string consulta = "select * from tbcorpal_receta re where re.codproducto = "+codProducto;
             return Conx.consultaMySql(consulta);
         }
     }
