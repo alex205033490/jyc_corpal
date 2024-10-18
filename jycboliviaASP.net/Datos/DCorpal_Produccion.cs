@@ -728,5 +728,11 @@ namespace jycboliviaASP.net.Datos
         public DataSet get_consultaMySql(string consulta) {            
             return Conx.consultaMySql(consulta);
         }
+
+        internal DataSet get_tieneRecetaProducto(int codProducto)
+        {
+            string consulta = "select * from tbcorpal_receta re where re.codproducto = "+codProducto;
+            return Conx.consultaMySql(consulta);
+        }
     }
 }

@@ -234,5 +234,14 @@ namespace jycboliviaASP.net.Negocio
             else
                 return 0;
         }
+
+        internal bool get_tieneRecetaelProducto(int codProducto)
+        {
+            DataSet receta = dproduccion.get_tieneRecetaProducto(codProducto);
+            if (receta.Tables[0].Rows.Count > 0) {
+                return true;
+            }else
+                return false;
+        }
     }
 }

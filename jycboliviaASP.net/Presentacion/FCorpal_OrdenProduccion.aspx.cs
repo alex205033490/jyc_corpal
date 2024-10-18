@@ -144,14 +144,22 @@ namespace jycboliviaASP.net.Presentacion
                 bool bandera = nproduccion.insertarOrdenProduccion(fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable, cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
                 if (bandera == true)
                 {
-                int codigoOrden = nproduccion.get_codigoOrdenProduccionUltimoInsertado(codProducto, codUser);
-                Session["codigoOrdenProduccion"] = codigoOrden;
-                Session["ReporteGeneral"] = "CalcularInsumosPorTurnoDia";
-                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-                //buscarDatos("");                
-                //limpiarDatos();
-                //Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
+                bool ban_tieneReceta = nproduccion.get_tieneRecetaelProducto(codProducto);
+
+                if (ban_tieneReceta == true)
+                {
+                    int codigoOrden = nproduccion.get_codigoOrdenProduccionUltimoInsertado(codProducto, codUser);
+                    Session["codigoOrdenProduccion"] = codigoOrden;
+                    Session["ReporteGeneral"] = "CalcularInsumosPorTurnoDia";
+                    Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
                 }
+                else {
+                    buscarDatos("");                
+                    limpiarDatos();
+                    Response.Write("<script type='text/javascript'> alert('Guardado: OK!') </script>");
+                }
+
+            }
                 else
                     Response.Write("<script type='text/javascript'> alert('Error: Error Insertar') </script>");
            /* }else
