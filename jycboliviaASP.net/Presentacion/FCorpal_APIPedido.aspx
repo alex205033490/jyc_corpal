@@ -183,7 +183,7 @@
                         <label class="form-label">Detalle Producto</label>
 
                         <div class="table-detProducto">
-                            <table id="tblDetalleProductosPedido" class=" table table-bordered table-striped">
+                            <table id="tblDetalleProductosPedido" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Codigo Producto</th>

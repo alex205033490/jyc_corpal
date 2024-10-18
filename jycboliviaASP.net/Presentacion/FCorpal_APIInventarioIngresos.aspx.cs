@@ -110,13 +110,13 @@ namespace jycboliviaASP.net.Presentacion
 
             if (string.IsNullOrEmpty(MotivoMovimiento))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo motivoMovimiento.');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo motivo Movimiento.');", true);
                 return;
             }
 
             if (string.IsNullOrEmpty(ItemAnalisis))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo ItemAnalisis.');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo Item Analisis.');", true);
                 return;
             }// sub
 
@@ -135,22 +135,32 @@ namespace jycboliviaASP.net.Presentacion
 
             //obtener los detalles de productos
             var detalles = new List<DetalleProductoIngre>();
+
             int rowCount = Request.Form.AllKeys.Length;
+
             for (int i = 0; i < rowCount; i++)
             {
-                if (Request.Form["item" + i] != null)
+                if (Request.Form["codigoProducto" + i] != null)
                 {
-                    detalles.Add(new DetalleProductoIngre
+                    decimal cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture);
+                    decimal costoUnitario = decimal.Parse(Request.Form["costoUnitario"+ i],CultureInfo.InvariantCulture);
+                    decimal costoTotal = (cantidad * costoUnitario);
+
+
+
+                    var detalle = new DetalleProductoIngre
                     {
                         Item = 0,
                         CodigoProducto = Request.Form["codigoProducto" + i], // no op
                         UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                        Cantidad = decimal.Parse(Request.Form["cantidad" + i],CultureInfo.InvariantCulture), // no op
-                        CostoUnitario = decimal.Parse(Request.Form["costoUnitario" + i], CultureInfo.InvariantCulture), // no op
-                        CostoTotal = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture) * decimal.Parse(Request.Form["costoUnitario" + i], CultureInfo.InvariantCulture)
-                    });
+                        Cantidad = cantidad,
+                        CostoUnitario = costoUnitario, // no op
+                        CostoTotal = costoTotal
+                    };
+                    detalles.Add(detalle);  
                 }
             }
+
             ingreso.DetalleProductos = detalles;
 
             // obtener token y enviar datos

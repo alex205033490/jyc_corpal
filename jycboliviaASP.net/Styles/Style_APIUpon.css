@@ -37,13 +37,17 @@
 }
 
 
-
-
-
-
-
-/*************************   new        **********************************/
-
+/*************************   Inventario Ingresos    **********************************/
+.container_gvIi {
+    height: 200px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: small;
+}
+#tblDetalleProductosIngresos tr th {
+    font-size: 0.8rem;
+    color: black;
+}
 
 
 
@@ -105,15 +109,33 @@
         border-color: #ffcc80; /* Color de borde en hover */
     }
 
+/************************      DROPDOWNLIST      **************************/
+
+.custom-dropdown {
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 40px; /* Ajusta la altura */
+    font-size: 1rem; /* Tamaño de la fuente */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Color del borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: white; /* Color de fondo */
+    color: #333; /* Color del texto */
+    outline: none; /* Elimina el contorno al seleccionar */
+    transition: border-color 0.3s; /* Transición suave */
+}
+
+    .custom-dropdown:focus {
+        border-color: #ff8000; /* Color del borde al enfocar */
+        box-shadow: 0 0 5px rgba(255, 128, 0, 0.5);
+    }
 
 
 /************************    Gv API         *****************************/
-
 .gridview {
     border-color: #FA9A2D; /* Color del borde */
     border-style: solid; /* Estilo del borde */
     border-width: 1px; /* Grosor del borde */
-     /* Tamaño de fuente */
+    /* Tamaño de fuente */
     color: black; /* Color de texto */
     width: 100%; /* Ancho completo */
     border-collapse: collapse; /* Colapsar bordes */

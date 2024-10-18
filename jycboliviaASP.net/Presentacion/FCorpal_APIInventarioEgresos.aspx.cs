@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Controls;
-using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
 using System.Globalization;
 
@@ -127,15 +126,17 @@ namespace jycboliviaASP.net.Presentacion
                 MotivoMovimiento = TextBoxMotivoMovimiento.Text,
                 ItemAnalisis = int.Parse(TextBoxItemAnalisis.Text),
                 Glosa = TextBoxGlosa.Text,
-                Usuario = "adm"
+                Usuario = "ADM"
             };
 
             // Obtener los detalles de productos
             var detalles = new List<DetalleProductoEgre>();
+
             int rowCount = Request.Form.AllKeys.Length;
+
             for (int i = 0; i < rowCount; i++)
             {
-                if (Request.Form["item" + i] != null)
+                if (Request.Form["codigoProducto" + i] != null)
                 {
                     detalles.Add(new DetalleProductoEgre
                     {
@@ -157,13 +158,13 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 var result = await api.PostInventarioEgresoAsync(egreso, token);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioEgreso registrado exitosamente.');", true);
                 lblResult.Text = $"Numero Egreso: {result}";
             }
             catch (Exception ex)
             {
                 lblResult.Text = $"Error: {ex.Message}";
             }
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioEgreso registrado exitosamente.');", true);
         }
     }
 }
