@@ -31,7 +31,7 @@
     /* Bordes del contenedor */
     font-size: small;
 }
-#tblDetalleProductosPedido tr th {
+#tblDetalleProductosPedido, #tblAddInsumo tr th {
     font-size: 0.8rem;
     color: black;
 }

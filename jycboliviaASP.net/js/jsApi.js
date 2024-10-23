@@ -21,3 +21,5 @@ function addRowEgreso() {
          <td><input type='number' class="form-control" name='unidadMedida${rowCount}' /></td>
          <td><input type='number' class="form-control" step="0.01" name='cantidad${rowCount}' /></td>`;
 }
+
+
