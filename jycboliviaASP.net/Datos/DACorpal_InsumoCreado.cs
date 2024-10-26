@@ -7,6 +7,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using static AjaxControlToolkit.AsyncFileUpload.Constants;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -68,11 +69,27 @@ namespace jycboliviaASP.net.Datos
                 return false;
             }
         }
+
+
+        // CONSULTA 
         public DataSet getDatos(string consulta)
         {
             DataSet datosI = ConecIns.consultaMySql(consulta);
             return datosI;
         }
+        public bool ModificarDetInsumoCreado(int codInsumoCreado, string cantidadInsumo, int codInsumo)
+        {
+            if (!decimal.TryParse(cantidadInsumo, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal cantidadDecimal))
+            {
+                throw new ArgumentException("Cantidad no es un valor decimal válido.");
+            }
+
+                string update = "CALL UpdateCantidadInsumo(" + codInsumoCreado + ", " + cantidadInsumo + ", " + codInsumo + ");";
+            MySqlCommand comando = new MySqlCommand(update);
+            return ConecIns.ejecutarMySql2(comando);
+
+        }
+
 
     }
 }

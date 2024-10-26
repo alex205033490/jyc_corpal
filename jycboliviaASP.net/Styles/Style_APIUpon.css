@@ -141,50 +141,106 @@
     border-collapse: collapse; /* Colapsar bordes */
 }
 
-    .gridview th {
-        background-color: #ff8000; /* Fondo del encabezado */
-        font-weight: bold; /* Negrita */
-        color: white; /* Color del texto en encabezado */
-        padding: 10px; /* Espaciado en celdas del encabezado */
-    }
+.gridview th {
+    background-color: #ff8000; /* Fondo del encabezado */
+    font-weight: bold; /* Negrita */
+    color: white; /* Color del texto en encabezado */
+    padding: 10px; /* Espaciado en celdas del encabezado */
+}
 
-    .gridview td {
-        padding: 3px; /* Espaciado en celdas */
-        border: 1px solid #dddddd; /* Borde de las celdas */
-    }
+.gridview td {
+    padding: 3px; /* Espaciado en celdas */
+    border: 1px solid #dddddd; /* Borde de las celdas */
+}
 
-    .gridview .alternating-row {
-        background-color: #CCCCCC; /* Color de las filas alternas */
-    }
+.gridview .alternating-row {
+    background-color: #CCCCCC; /* Color de las filas alternas */
+}
 
-    .gridview .footer {
-        background-color: #CCCCCC; /* Fondo del pie */
-    }
+.gridview .footer {
+    background-color: #CCCCCC; /* Fondo del pie */
+}
 
-    .gridview .pager {
-        background-color: #999999; /* Fondo del paginador */
-        color: black; /* Color de texto en el paginador */
-        text-align: center; /* Alineación centrada */
-    }
+.gridview .pager {
+    background-color: #999999; /* Fondo del paginador */
+    color: black; /* Color de texto en el paginador */
+    text-align: center; /* Alineación centrada */
+}
 
-    .gridview .selected-row {
-        background-color: #000099; /* Fondo de la fila seleccionada */
-        font-weight: bold; /* Negrita */
-        color: white; /* Color del texto en fila seleccionada */
-    }
+.gridview .selected-row {
+    background-color: #000099; /* Fondo de la fila seleccionada */
+    font-weight: bold; /* Negrita */
+    color: white; /* Color del texto en fila seleccionada */
+}
 
-    .gridview .sorted-asc-cell {
-        background-color: #F1F1F1; /* Color de celdas ordenadas ascendentemente */
-    }
+.gridview .sorted-asc-cell {
+    background-color: #F1F1F1; /* Color de celdas ordenadas ascendentemente */
+}
 
-    .gridview .sorted-asc-header {
-        background-color: #808080; /* Color del encabezado ordenado ascendentemente */
-    }
+.gridview .sorted-asc-header {
+    background-color: #808080; /* Color del encabezado ordenado ascendentemente */
+}
 
-    .gridview .sorted-desc-cell {
-        background-color: #CAC9C9; /* Color de celdas ordenadas descendentemente */
-    }
+.gridview .sorted-desc-cell {
+    background-color: #CAC9C9; /* Color de celdas ordenadas descendentemente */
+}
 
     .gridview .sorted-desc-header {
-        background-color: #383838; /* Color del encabezado ordenado descendentemente */
+        background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important; /* Color del encabezado ordenado descendentemente */
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    FCORPAL INSUMO-CREADO      */
+
+.container_tittle {
+    background-color: #146c43;
+}
+
+/*                  autocomplet                  */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListMighlightedItem {
+    background-color: Green;
+    color: White;
+    /* color: Lime;
+          padding: 3px 20px;
+          text-decoration: none;           
+          background-repeat: repeat-x;
+          outline: 0;*/
+}
+
+
+/*       custom-width form-text       */
+.custom-width-text{
+    width:180px;
+}
+.custom-width-number {
+    width:20px;
+}
