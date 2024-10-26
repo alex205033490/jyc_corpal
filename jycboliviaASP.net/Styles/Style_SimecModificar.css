@@ -14,5 +14,26 @@
     height: 400px;  
     width: auto;   
      }
+
+.gv_recetas {
+    border: double #666666;
+    overflow: auto;
+    height: 100px;
+    width: auto;
+}
+
+.DatosRecetaInsumos {
+    border: double #666666;
+    overflow: auto;
+    height: 150px;
+    width: auto;
+}
+
+.DatosRecetaInsumosCompuesto {
+    border: double #666666;
+    overflow: auto;
+    height: 150px;
+    width: auto;
+}
      
  
