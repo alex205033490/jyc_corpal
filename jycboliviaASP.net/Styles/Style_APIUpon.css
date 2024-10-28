@@ -201,7 +201,15 @@
 
 
 
-/*    FCORPAL INSUMO-CREADO      */
+/**********************    FCORPAL INSUMO-CREADO      *******************/
+.container-ICreadoADD {
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+}
+.container-ICreadoUpdate {
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+}
 
 .container_tittle {
     background-color: #146c43;
@@ -238,9 +246,18 @@
 
 
 /*       custom-width form-text       */
-.custom-width-text{
-    width:180px;
+.custom-width-text {
+    width: 180px;
+
 }
 .custom-width-number {
     width:20px;
 }
+.container-ICreadoC2, .container-ICreadoC1 {
+    border: 2px solid #00000026; /* Cambia el color y el grosor del borde aquí */
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 10px; /* Espacio interno */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+

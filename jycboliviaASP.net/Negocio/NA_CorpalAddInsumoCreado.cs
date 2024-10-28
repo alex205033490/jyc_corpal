@@ -35,7 +35,8 @@ namespace jycboliviaASP.net.Negocio
                     foreach (GridViewRow row in gv_insumoCreado.Rows)
                     {
                         int codInsumo = int.Parse(row.Cells[0].Text);
-                        string cantidad = row.Cells[2].Text;
+                         
+                        string cantidad = (row.Cells[2].Text);
                         string medidaDetalle = row.Cells[3].Text;
 
                         bool resultado = DatosIC.insertarDetInsumoCreado(codInsumo, codinsumocreado, cantidad, medidaDetalle);

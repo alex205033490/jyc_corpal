@@ -18,38 +18,51 @@ namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_AgregarInsumoCreado : System.Web.UI.Page
     {
-
         private DataTable insumosTable
         {
             get
             {
-                if (Session["Insumos"] == null)
+                if (ViewState["Insumos"] == null)
                 {
                     DataTable dt = new DataTable();
                     dt.Columns.Add("CodInsumo");
                     dt.Columns.Add("Nombre");
                     dt.Columns.Add("Cantidad");
                     dt.Columns.Add("Medida");
-                    Session["Insumos"] = dt;
+                    ViewState["Insumos"] = dt;
                 }
-                return (DataTable)Session["Insumos"];
+                return (DataTable)ViewState["Insumos"];
+
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(!IsPostBack)
+            {
+                gv_insumoCreado.DataSource = insumosTable;
+                gv_insumoCreado.DataBind();
+            }
         }
+       
+        // ELIMINAR FILA DEL GV
         protected void gv_insumoCreado_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Eliminar")
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
-                insumosTable.Rows.RemoveAt(rowIndex);
-                gv_insumoCreado.DataSource = insumosTable;
-                gv_insumoCreado.DataBind();
+
+                DataTable insumosTable = this.insumosTable;
+
+                if (insumosTable.Rows.Count > rowIndex)
+                {
+                    insumosTable.Rows.RemoveAt(rowIndex);
+                    gv_insumoCreado.DataSource = insumosTable;
+                    gv_insumoCreado.DataBind();
+                }
             }
         }
 
+        // AUTOCOMPLETAR INSUMOS 
         [WebMethod]
         [ScriptMethod]
         // devuelve cod, insumo y medida 
@@ -71,6 +84,7 @@ namespace jycboliviaASP.net.Presentacion
             return lista;
         }
 
+        // AUTOCOMPLETAR INSUMOS CREADOS
         [WebMethod]
         [ScriptMethod]
         public static string[] GetListaInsumoCreado(string prefixText, int count)
@@ -88,28 +102,39 @@ namespace jycboliviaASP.net.Presentacion
             }
             return lista;
         }
-
+        // BOTON PARA AGREGAR INSUMO AL GV
         protected void btn_ADD_Click(object sender, EventArgs e)
         {
             DataRow newRow = insumosTable.NewRow();
- 
-            newRow["CodInsumo"] = (txt_codInsumo.Text);
-            newRow["Nombre"] = txt_Nombre.Text;  
-            newRow["Cantidad"] = (txt_Cantidad.Text); 
-            newRow["Medida"] = (txt_Medida.Text); 
 
-            insumosTable.Rows.Add(newRow);
-            gv_insumoCreado.DataSource = insumosTable;
-            gv_insumoCreado.DataBind();
+            if (!string.IsNullOrEmpty(txt_codInsumo.Text) &&
+                !string.IsNullOrEmpty(txt_Nombre.Text) &&
+                !string.IsNullOrEmpty(txt_Cantidad.Text) &&
+                !string.IsNullOrEmpty(txt_Medida.Text))
+            {
+                newRow["CodInsumo"] = (txt_codInsumo.Text);
+                newRow["Nombre"] = txt_Nombre.Text;
+                newRow["Cantidad"] = (txt_Cantidad.Text);
+                newRow["Medida"] = (txt_Medida.Text);
 
-            txt_codInsumo.Text = "";
-            txt_Nombre.Text = "";
-            txt_Cantidad.Text = "";
-            txt_Medida.Text = "";
+                insumosTable.Rows.Add(newRow);
+                ViewState["Insumos"] = insumosTable;
 
+                gv_insumoCreado.DataSource = insumosTable;
+                gv_insumoCreado.DataBind();
 
+                txt_codInsumo.Text = "";
+                txt_Nombre.Text = "";
+                txt_Cantidad.Text = "";
+                txt_Medida.Text = "";
+            }
+            else
+            {
+                Response.Write("<script>alert('Por favor, complete los campos para añadir un insumo.');</script>");
+            }
         }
-        //-------------- MOSTRAR DETINSUMOCREADO
+
+        //-------------- MOSTRAR TABLA DetInsumoCreado
         public void MostrarInsumosPorCodigo(int codigo)
         {
             try
@@ -148,37 +173,44 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(medida))
                 {
-                    NA_CorpalAddInsumoCreado neg = new NA_CorpalAddInsumoCreado();
-                    bool codinsumocreado = neg.InsertarInsumoYDetalles(nombre, medida, gv_insumoCreado);
-
-                    if (codinsumocreado)
+                    if (gv_insumoCreado.Rows.Count > 0)
                     {
-                        Response.Write("<script>alert('InsumoCreado Registrado.');</script>");
+                        NA_CorpalAddInsumoCreado neg = new NA_CorpalAddInsumoCreado();
+                        bool codinsumocreado = neg.InsertarInsumoYDetalles(nombre, medida, gv_insumoCreado);
 
-                        txt_nomInsumoCreado.Text = string.Empty;
-                        txt_medidaInsumoCreado.Text = string.Empty;
+                        if (codinsumocreado)
+                        {
+                            Response.Write("<script>alert('Insumo Registrado.');</script>");
 
-                        gv_insumoCreado.DataSource = null;
-                        gv_insumoCreado.DataBind();
-                        
+                            txt_nomInsumoCreado.Text = string.Empty;
+                            txt_medidaInsumoCreado.Text = string.Empty;
+
+                            gv_insumoCreado.DataSource = null;
+                            gv_insumoCreado.DataBind();
+
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Error al insertar el insumo.');</script>");
+                        }
                     }
                     else
                     {
-                        Response.Write("<script>alert('Error al insertar el insumo.');</script>");
+                        Response.Write("<script>alert('Por favor, realice al menos una inserción de un insumo.')</script>");
                     }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Por Favor, Complete todos los campos.');</script>");
-                } 
-
+                        Response.Write("<script>alert('Por Favor, Complete todos los campos.');</script>");
+                }
+                       
             }
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Ocurrio un error inesperado: " + ex.Message + "');</script>");
             }
         }
-        // -------------------------  EDITAR INSUMO CREADO (cant insumo)
+        // -------------------------  MODIFICAR INSUMO CREADO (cant insumo)
         // ----------------  BUSCAR INSUMOCREADO
         protected void btn_BuscarInsumoCreado_Click(object sender, EventArgs e)
         {
@@ -188,7 +220,7 @@ namespace jycboliviaASP.net.Presentacion
             DataSet resultado = negocio.MostrarDetInsumoCreado(NomInsumoCreado);
             try
             {
-                if (resultado != null && resultado.Tables.Count > 0 && resultado.Tables[0].Rows.Count > 0)
+                if (resultado != null && resultado.Tables.Count > 0 )
                 {
                     // asignar valores
                     DataRow insumoCreado = resultado.Tables[0].Rows[0];
@@ -264,11 +296,41 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        //     BTN INSERTAR NUEVO INSUMO A INSUMOCREADO EXISTENTE
+        //     BTN AÑADIR NUEVO INSUMO A INSUMOCREADO EXISTENTE
         protected void btn_InsertarInsumo_Click(object sender, EventArgs e)
         {
             try
             {
+
+                // Verificar campos
+                if (string.IsNullOrEmpty(txt_MInsumoCodigo.Text) ||
+                    string.IsNullOrEmpty(txt_MCodICreado.Text) ||
+                    string.IsNullOrEmpty(txt_MInsumoCantidad.Text) ||
+                    string.IsNullOrEmpty(txt_MInsumoMedida.Text))
+                {
+                    Response.Write("<script>alert('Por favor, complete todos los campos requeridos.');</script>");
+                    return;
+                }
+
+                int codinsumo2;
+                int codinsumoCreado2;
+
+                if (!int.TryParse(txt_MInsumoCodigo.Text, out codinsumo2))
+                {
+                    Response.Write("<script>alert('El codigo de insumo es incorrecto');</script>");
+                    return;
+                }
+                if (!int.TryParse(txt_MCodICreado.Text, out codinsumoCreado2))
+                {
+                    Response.Write("<script>alert('El codigo de insumo creado es incorrecto.');</script>");
+                    return;
+                }
+                if (!decimal.TryParse(txt_MInsumoCantidad.Text, out _))
+                {
+                    Response.Write("<script>alert('Por favor, ingrese una cantidad valida.');</script>");
+                }
+
+
                 int codinsumo = int.Parse(txt_MInsumoCodigo.Text);
                 int codinsumoCreado = int.Parse(txt_MCodICreado.Text);
                 string cantidad = txt_MInsumoCantidad.Text;
@@ -287,10 +349,10 @@ namespace jycboliviaASP.net.Presentacion
                     Response.Write("<script>alert('Error al insertar el insumo');</script>");
                 }
             }
-            catch (FormatException)
+            /*catch (FormatException)
             {
                 Response.Write("<script>alert('Por favor, Ingresa valores válidos.');</script>");
-            }
+            }*/
             catch (Exception ex)
             {
                 Response.Write($"<script>alert('Ocurrio un error: {ex.Message}');</script>");

@@ -53,7 +53,7 @@
                     </script>
 
                     <!------------------------          Form agregar nuevo insumo creado          ------------------------------>
-                    <div class="POST_inventarioIngreso p-2 bg-light border rounded ">
+                    <div class="container-ICreadoADD p-2 bg-light rounded ">
                         <div class="container_tittle col-md-12 col-lg-12 mb-4 rounded">
                             <h2 class="text_tittle2 rounded p-3">Registro Nuevo InsumoCreado</h2>
                         </div>
@@ -86,13 +86,13 @@
                                             <th class="custom-width-text">Nombre</th>
                                             <th class="custom-width-number">Cantidad</th>
                                             <th class="custom-width-number">Medida</th>
-                                            <th class="custom-width-number">Agregar</th>
+                                            <th class="custom-width-number">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <asp:TextBox ID="txt_codInsumo" runat="server" CssClass="form-control " Font-Size="Small"></asp:TextBox></td>
+                                                <asp:TextBox ID="txt_codInsumo" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>
                                             <td>
                                                 <asp:TextBox ID="txt_Nombre" runat="server" CssClass="form-control "></asp:TextBox>
                                                 <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server"
@@ -104,11 +104,11 @@
                                                 </asp:AutoCompleteExtender>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txt_Cantidad" runat="server" CssClass="form-control" Font-Size="Small"></asp:TextBox></td>
+                                                <asp:TextBox ID="txt_Cantidad" runat="server" CssClass="form-control" Font-Size="Small" TextMode="Number" step="0.0001"></asp:TextBox></td>
                                             <td>
-                                                <asp:TextBox ID="txt_Medida" runat="server" CssClass="form-control" Font-Size="Small"></asp:TextBox></td>
+                                                <asp:TextBox ID="txt_Medida" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>
                                             <td>
-                                                <asp:Button ID="btn_ADD" runat="server" Text="añadir" CssClass="btn btn-warning" OnClick="btn_ADD_Click" />
+                                                <asp:Button ID="btn_ADD" runat="server" Text="añadir" CssClass="btn btn-success" OnClick="btn_ADD_Click" />
 
                                             </td>
                                         </tr>
@@ -140,7 +140,7 @@
 
 
                     <!------------------------          FORMULARIO MODIFICAR INSUMO CREADO          ------------------------------>
-                    <div class="POST_inventarioIngreso p-4 bg-light border rounded">
+                    <div class="container-ICreadoUpdate p-4 bg-light">
                         <div class="container_tittle col-md-12 col-lg-12 mb-4 rounded">
                             <h2 class="text_tittle2 rounded p-3 rounded">Modificar Insumo Creado</h2>
                         </div>
@@ -148,10 +148,9 @@
                         <div class="container">
                             <div class="row mb-3">
                                 <!-- Columna 1 -->
-                                <div class="col-sm-12 col-md-6">
-                                   <div class="col-md-12 col-lg-12 border">
-                                        <label class="form-label col-12">Nombre Del Insumo Creado:</label>
-                                        <asp:TextBox ID="txt_MInsumoCreado" runat="server" CssClass="form-control custom-width-text" AutoComplete="off" class="col-2"></asp:TextBox>
+                                <div class="col-sm-12 col-md-12 col-lg-7">
+                                   <div class="col-md-12 col-lg-12 mb-3 d-flex align-items-center">
+                                        <asp:TextBox ID="txt_MInsumoCreado" runat="server" CssClass="form-control custom-width-text me-2" placeholder="Ingrese un nombre" AutoComplete="off" class="col-3 me-2"></asp:TextBox>
                                         <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server"
                                             TargetControlID="txt_MInsumoCreado" CompletionSetCount="12" MinimumPrefixLength="1"
                                             ServiceMethod="GetListaInsumoCreado" UseContextKey="True" CompletionListCssClass="CompletionList"
@@ -159,14 +158,15 @@
                                             CompletionListHighlightedItemCssClass="CompletionListMighlightedItem"
                                             CompletionInterval="10">
                                         </asp:AutoCompleteExtender>
-                                        <asp:Button ID="btn_BuscarInsumoCreado" runat="server" Text="Buscar" CssClass="mt-2 btn btn-success" OnClick="btn_BuscarInsumoCreado_Click" />
+                                       
+                                            <asp:Button ID="btn_BuscarInsumoCreado" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_BuscarInsumoCreado_Click" />
+                                       
                                    </div>
                                     <!--  formulario para insertar  -->
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="form_insumo col-xs-12 col-sm-12 col-md-9 col-lg-12">
-                                            <h5 class="form-label mt-4">Formulario para agregar nuevo insumo</h5>
-                                            <div class="container_insumos">
-                                                <table id="tblAddInsumo2" class="table table-bordered table-striped col-xs-12 col-sm-8 col-md-8 col-lg-12">
+                                        <div class="container-ICreadoC1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h5 class="form-label">Formulario para agregar nuevo insumo</h5>
+                                            <div class="container_insumos" >
+                                                <table id="tblAddInsumo2"  class="table table-bordered table-striped col-xs-12 col-sm-8 col-md-8 col-lg-12">
                                                     <thead>
                                                         <tr>
                                                             <th class="custom-width-number">Codigo</th>
@@ -178,9 +178,9 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                <asp:TextBox ID="txt_MInsumoCodigo" runat="server" CssClass="form-control " Font-Size="Small"></asp:TextBox></td>
+                                                                <asp:TextBox ID="txt_MInsumoCodigo" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>
                                                             <td>
-                                                                <asp:TextBox ID="txt_MInsumoNombre" runat="server" CssClass="form-control "></asp:TextBox>
+                                                                <asp:TextBox ID="txt_MInsumoNombre" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                                                                 <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server"
                                                                     TargetControlID="txt_MInsumoNombre" CompletionSetCount="12" MinimumPrefixLength="1"
                                                                     ServiceMethod="GetListaInsumo" UseContextKey="True" CompletionListCssClass="CompletionList"
@@ -192,20 +192,21 @@
                                                             <td>
                                                                 <asp:TextBox ID="txt_MInsumoCantidad" runat="server" CssClass="form-control" Font-Size="Small" TextMode="Number" step="0.0001"></asp:TextBox></td>
                                                             <td>
-                                                                <asp:TextBox ID="txt_MInsumoMedida" runat="server" CssClass="form-control" Font-Size="Small"></asp:TextBox></td>                                                            
+                                                                <asp:TextBox ID="txt_MInsumoMedida" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>                                                            
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <asp:Button ID="btn_InsertarInsumo" runat="server" Text="Añadir Insumo" CssClass="btn btn-success mt-2 " OnClick="btn_InsertarInsumo_Click" />
+                                            <div class="container-btn mb-3">
+                                                <asp:Button ID="btn_InsertarInsumo" runat="server" Text="Añadir Insumo" CssClass="btn btn-success mt-2 " OnClick="btn_InsertarInsumo_Click" />
+                                            </div>
                                         </div>
-                                    </div>
 
                                 </div>
 
 
                                 <!-- Columna 2 -->
-                                <div class="col-12 col-md-6 border">
+                                <div class="container-ICreadoC2 col-12 col-md-12 col-lg-5 mt-3">
                                     <h4 class="form-label">Datos del Insumo Creado</h4>
                                     <table id="tblModInsumoCreado" class="table table-bordered table-striped ">
                                         <thead>
@@ -244,8 +245,9 @@
                                             <asp:BoundField DataField="medida" HeaderText="Medida" />
                                         </Columns>
                                     </asp:GridView>
-                                    <asp:Button ID="btn_ModificarInsumoCreado" runat="server" Text="Actualizar Datos" CssClass="btn btn-success mt-2" OnClick="btn_ModificarInsumoCreado_Click" />
-                                    <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
+                                    <div class="btn-container">
+                                        <asp:Button ID="btn_ModificarInsumoCreado" runat="server" Text="Actualizar Datos" CssClass="btn btn-info mt-2 mb-3" OnClick="btn_ModificarInsumoCreado_Click" />
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
