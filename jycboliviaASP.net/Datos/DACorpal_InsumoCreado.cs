@@ -77,6 +77,14 @@ namespace jycboliviaASP.net.Datos
             DataSet datosI = ConecIns.consultaMySql(consulta);
             return datosI;
         }
+
+        public bool UpdateEstadoInsumoCreado(int codInsumoCreado)
+        {
+            string update = "UPDATE tbcorpal_insumoscreados as ic set ic.estado = 0 where ic.codigo = " + codInsumoCreado + ";";
+            MySqlCommand comando = new MySqlCommand(update);
+            return ConecIns.ejecutarMySql2(comando);
+        }
+
         public bool ModificarDetInsumoCreado(int codInsumoCreado, string cantidadInsumo, int codInsumo)
         {
             if (!decimal.TryParse(cantidadInsumo, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal cantidadDecimal))
@@ -87,6 +95,23 @@ namespace jycboliviaASP.net.Datos
                 string update = "CALL UpdateCantidadInsumo(" + codInsumoCreado + ", " + cantidadInsumo + ", " + codInsumo + ");";
             MySqlCommand comando = new MySqlCommand(update);
             return ConecIns.ejecutarMySql2(comando);
+            /*
+             DELIMITER //
+                CREATE PROCEDURE UpdateCantidadInsumo(
+                    IN p_codICreado INT,
+                    IN p_nuevaCantidad DECIMAL(10, 6),
+                    IN p_codInsumo INT
+                )
+                BEGIN
+                    UPDATE tbcorpal_insumo as ins
+                    INNER JOIN tbcorpal_detinsumocreado AS dic ON ins.codigo = dic.codinsumo
+                    INNER JOIN tbcorpal_insumoscreados AS ic ON ic.codigo = dic.codinsumocreado
+                    SET dic.cantidad = p_nuevaCantidad
+                    WHERE ic.codigo = p_codICreado
+                    AND ins.codigo = p_codInsumo;
+                END //
+                DELIMITER ;
+            */
 
         }
 

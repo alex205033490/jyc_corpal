@@ -69,7 +69,7 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] GetListaInsumo(string prefixText, int count)
         {
             string nombreInsumo = prefixText;
-            NA_CorpalAddInsumoCreado NinsumoC = new NA_CorpalAddInsumoCreado();
+            NCorpal_AddInsumoCreado NinsumoC = new NCorpal_AddInsumoCreado();
             DataSet tuplas = NinsumoC.mostrarTodos_AutoComplitInsumo(nombreInsumo);
 
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
@@ -90,7 +90,7 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] GetListaInsumoCreado(string prefixText, int count)
         {
             string NInsumoCreado = prefixText;
-            NA_CorpalAddInsumoCreado Icreado = new NA_CorpalAddInsumoCreado();
+            NCorpal_AddInsumoCreado Icreado = new NCorpal_AddInsumoCreado();
             DataSet tuplas = Icreado.mostrarInsumoCreado_Autocomplit(NInsumoCreado);
 
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
@@ -139,7 +139,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                NA_CorpalAddInsumoCreado negocio = new NA_CorpalAddInsumoCreado();
+                NCorpal_AddInsumoCreado negocio = new NCorpal_AddInsumoCreado();
                 DataSet datosI = negocio.mostrarDetInsumoCreado(codigo);
 
                 if (datosI != null && datosI.Tables.Count > 0 && datosI.Tables[0].Rows.Count > 0) 
@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     if (gv_insumoCreado.Rows.Count > 0)
                     {
-                        NA_CorpalAddInsumoCreado neg = new NA_CorpalAddInsumoCreado();
+                        NCorpal_AddInsumoCreado neg = new NCorpal_AddInsumoCreado();
                         bool codinsumocreado = neg.InsertarInsumoYDetalles(nombre, medida, gv_insumoCreado);
 
                         if (codinsumocreado)
@@ -214,7 +214,7 @@ namespace jycboliviaASP.net.Presentacion
         // ----------------  BUSCAR INSUMOCREADO
         protected void btn_BuscarInsumoCreado_Click(object sender, EventArgs e)
         {
-            NA_CorpalAddInsumoCreado negocio = new NA_CorpalAddInsumoCreado();
+            NCorpal_AddInsumoCreado negocio = new NCorpal_AddInsumoCreado();
             string NomInsumoCreado = txt_MInsumoCreado.Text;
 
             DataSet resultado = negocio.MostrarDetInsumoCreado(NomInsumoCreado);
@@ -243,22 +243,25 @@ namespace jycboliviaASP.net.Presentacion
                     Response.Write($"<script>alert('Error insumoCreado: {NomInsumoCreado} no existe');</script>");
                 }
 
-            }catch(Exception ex)
+            }catch(Exception )
             {
-                Response.Write($"<script>alert('Ocurrio un error: {ex.Message}');</script>");
+                Response.Write($"<script>alert('Error no existe el Insumo. ');</script>");
             }
         }
 
         //-----------------------   MODIFICAR CANTIDAD INSUMO DEL INSUMOCREADO
         protected void btn_ModificarInsumoCreado_Click(object sender, EventArgs e)
         {
-            NA_CorpalAddInsumoCreado negocioIC = new NA_CorpalAddInsumoCreado();
+            NCorpal_AddInsumoCreado negocioIC = new NCorpal_AddInsumoCreado();
             bool resultadoGeneral = true;
 
             try
             {
-                if (gv_MODInsumoCreado.Rows.Count > 0)
+                if (gv_MODInsumoCreado.Rows.Count == 0)
                 {
+                    Response.Write($"<script>alert('No actualizado. No hay registros para modificar')</script>");
+                    return;
+                }
                     foreach (GridViewRow row in gv_MODInsumoCreado.Rows)
                     {
                         int codInsumo = Convert.ToInt32(row.Cells[0].Text);
@@ -281,10 +284,7 @@ namespace jycboliviaASP.net.Presentacion
                             return;
                         }
                     }
-
                     Response.Write($"<script>alert('Registro Actualizado')</script>");
-
-                }
             }
             catch (FormatException)
             {
@@ -296,7 +296,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        //     BTN AÑADIR NUEVO INSUMO A INSUMOCREADO EXISTENTE
+        //  BTN AÑADIR NUEVO INSUMO A INSUMOCREADO EXISTENTE
         protected void btn_InsertarInsumo_Click(object sender, EventArgs e)
         {
             try
@@ -336,7 +336,7 @@ namespace jycboliviaASP.net.Presentacion
                 string cantidad = txt_MInsumoCantidad.Text;
                 string medida = txt_MInsumoMedida.Text;
 
-                NA_CorpalAddInsumoCreado negocio = new NA_CorpalAddInsumoCreado();
+                NCorpal_AddInsumoCreado negocio = new NCorpal_AddInsumoCreado();
                 bool resultado = negocio.InsertarInsumoNuevoIC(codinsumo, codinsumoCreado, cantidad, medida);
 
                 if (resultado)
@@ -357,6 +357,39 @@ namespace jycboliviaASP.net.Presentacion
             {
                 Response.Write($"<script>alert('Ocurrio un error: {ex.Message}');</script>");
             }
+        }
+
+        // BTN CAMBIAR ESTADO DE UN INSUMO CREADO
+        protected void btn_DeleteIC_Click(object sender, EventArgs e)
+        {
+            int codInsumoCreado;
+            
+            if (int.TryParse(txt_MCodICreado.Text, out codInsumoCreado))
+            {
+                NCorpal_AddInsumoCreado negocioIC = new NCorpal_AddInsumoCreado();
+                bool resultado = negocioIC.ActualizarEstadoInsumoCreado(codInsumoCreado);
+
+                if (resultado)
+                {
+                    Response.Write($"<script>alert('Insumo Eliminado.');</script>");
+                    txt_MCodICreado.Text = string.Empty;
+                    txt_MMedida.Text = string.Empty;
+                    txt_MNombre.Text = string.Empty;
+                    txt_MInsumoCreado.Text = string.Empty;
+
+                    gv_MODInsumoCreado.DataSource = null;
+                    gv_MODInsumoCreado.DataBind();
+                }
+                else
+                {
+                    Response.Write($"<script>alert('Error al eliminar el Insumo.');</script>");
+                }
+            }
+            else
+            {
+                Response.Write($"<script>alert('Por Favor, Ingrese un valor valido a Eliminar.');</script>");
+            }
+
         }
     }
 }

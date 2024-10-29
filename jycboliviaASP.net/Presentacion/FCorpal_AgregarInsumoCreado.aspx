@@ -197,7 +197,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="container-btn mb-3">
+                                            <div class="container-btn mb-2">
                                                 <asp:Button ID="btn_InsertarInsumo" runat="server" Text="Añadir Insumo" CssClass="btn btn-success mt-2 " OnClick="btn_InsertarInsumo_Click" />
                                             </div>
                                         </div>
@@ -230,6 +230,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div class="btn-container mb-3 col-lg-12">
+                                        <asp:Button ID="btn_DeleteIC" runat="server" Text="Eliminar Insumo Creado" CssClass="btn btn-danger mt-2 mb-3 align-items-center" OnClick="btn_DeleteIC_Click" />
+                                    </div>
 
                                     <h6 class="form-label">Lista de Insumos</h6>
                                     <!-- GV ver insumos -->

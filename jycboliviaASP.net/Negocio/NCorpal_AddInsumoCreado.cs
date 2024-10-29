@@ -10,7 +10,7 @@ using System.Net;
 
 namespace jycboliviaASP.net.Negocio
 {
-    public class NA_CorpalAddInsumoCreado
+    public class NCorpal_AddInsumoCreado
     {
         DACorpal_InsumoCreado DatosIC = new DACorpal_InsumoCreado();
 
@@ -23,7 +23,40 @@ namespace jycboliviaASP.net.Negocio
             return datosI;
         }
       
-        //  INSERTAR INSUMOCREADO tbcorpal_insumoscreados, tbcorpal_detinsumocreado (2 tablas)    
+        // TEXTBOX INSUMOS AUTOCOMPLETAR
+        public DataSet mostrarInsumoCreado_Autocomplit(string insumoCreado)
+        {
+            string consulta = "SELECT ic.`nombre` FROM tbcorpal_insumoscreados as ic WHERE ic.estado = 1 AND ic.nombre like '%" + insumoCreado + "%'";
+
+            DataSet datosI = DatosIC.getDatos(consulta);
+            return datosI;
+        }
+
+        // SELECT MOSTRAR LISTA INSUMOS DE UN INSUMOCREADO
+        public DataSet mostrarDetInsumoCreado(int codigo)
+        {
+            string consulta = "SELECT ins.codigo, ins.`nombre`, dic.cantidad, dic.medida " +
+                "FROM tbcorpal_detinsumocreado as dic INNER JOIN tbcorpal_insumo as ins " +
+                "ON dic.`codinsumo` = ins.`codigo` WHERE dic.codinsumocreado = "+ codigo +";";
+
+            DataSet datosI = DatosIC.getDatos(consulta);
+            return datosI;
+        }
+
+        // SELECT InsumoCreado, DetInsumoCreado, Insumo
+        public DataSet MostrarDetInsumoCreado(string InsumoCreado)
+        {
+            string consulta = "SELECT ic.codigo as 'CodigoIC', ic.nombre as 'NombreIC', ic.medida as 'MedidaIC',ins.`codigo` ,ins.`nombre`, dic.`cantidad`, dic.`medida`" +
+                "FROM tbcorpal_insumoscreados as ic " +
+                "INNER JOIN tbcorpal_detinsumocreado as dic ON ic.codigo = dic.codinsumocreado " +
+                "INNER JOIN tbcorpal_insumo as ins ON dic.`codinsumo` = ins.`codigo` " +
+                "WHERE ic.estado=1 AND ic.`nombre` = '"+InsumoCreado+"'";
+
+            DataSet datosI = DatosIC.getDatos(consulta);
+            return datosI;
+        }
+
+        //  INSERTAR INSUMOCREADO tbcorpal_insumoscreados, tbcorpal_detinsumocreado (2 tablas)
         public bool InsertarInsumoYDetalles(string nombre, string medida, GridView gv_insumoCreado)
         {
             try
@@ -55,6 +88,7 @@ namespace jycboliviaASP.net.Negocio
                 return false;
             }   
         }
+
         // INSERTAR NUEVO INSUMO EN INSUMOCREADO EXISTENTE
         public bool InsertarInsumoNuevoIC(int codinsumo, int codinsumocreado, string cantidad, string medida)
         {
@@ -71,45 +105,14 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
-
-        // SELECT INSUMO CREADO
-        public DataSet mostrarInsumoCreado_Autocomplit(string insumoCreado)
-        {
-            string consulta = "SELECT ic.`nombre` FROM tbcorpal_insumoscreados as ic WHERE ic.nombre like '%" + insumoCreado + "%'";
-
-            DataSet datosI = DatosIC.getDatos(consulta);
-            return datosI;
-        }
-        // SELECT MOSTRAR LISTA INSUMOS DE UN INSUMOCREADO
-        public DataSet mostrarDetInsumoCreado(int codigo)
-        {
-            string consulta = "SELECT ins.codigo, ins.`nombre`, dic.cantidad, dic.medida " +
-                "FROM tbcorpal_detinsumocreado as dic INNER JOIN tbcorpal_insumo as ins " +
-                "ON dic.`codinsumo` = ins.`codigo` WHERE dic.codinsumocreado = "+ codigo +";";
-
-            DataSet datosI = DatosIC.getDatos(consulta);
-            return datosI;
-        }
-
-        // SELECT InsumoCreado, DetInsumoCreado, Insumo
-        public DataSet MostrarDetInsumoCreado(string InsumoCreado)
-        {
-            string consulta = "SELECT ic.codigo as 'CodigoIC', ic.nombre as 'NombreIC', ic.medida as 'MedidaIC',ins.`codigo` ,ins.`nombre`, dic.`cantidad`, dic.`medida`" +
-                "FROM tbcorpal_insumoscreados as ic " +
-                "INNER JOIN tbcorpal_detinsumocreado as dic ON ic.codigo = dic.codinsumocreado " +
-                "INNER JOIN tbcorpal_insumo as ins ON dic.`codinsumo` = ins.`codigo` " +
-                "WHERE ic.`nombre` = '"+InsumoCreado+"'";
-
-            DataSet datosI = DatosIC.getDatos(consulta);
-            return datosI;
-        }
-
         // MODIFICAR DetInsumoCreado
         public bool ModificarDetInsumoCreado(int codInsumoCreado, string cantidadInsumo, int codInsumo)
         {
-            
-
             return DatosIC.ModificarDetInsumoCreado(codInsumoCreado, cantidadInsumo, codInsumo);
+        }
+        public bool ActualizarEstadoInsumoCreado(int codInsumoCreado)
+        {
+            return DatosIC.UpdateEstadoInsumoCreado(codInsumoCreado);
         }
 
 
