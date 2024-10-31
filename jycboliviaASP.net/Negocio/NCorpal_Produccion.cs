@@ -387,5 +387,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.update_recetaProducto( codigoReceta,  receta,  cantpordia,  condicionante);
         }
+
+        internal DataSet get_Receta(int codigoReceta)
+        {
+            return dproduccion.get_Receta(codigoReceta);
+        }
     }
 }

@@ -915,5 +915,47 @@ namespace jycboliviaASP.net.Negocio
                 return false;
             }
         }
+
+        internal bool Enviar_CorreoRecetaInsumo(string Asunto, string CuerpoMensaje, string direccionArchivo, string nombreArchivo)
+        {
+            MailMessage correo = new MailMessage();
+                        
+            correo.To.Add("sistema@jycbolivia.com");            
+            correo.To.Add("almacen@naxsnax.com");
+            
+            string direccionGuardarR102 = direccionArchivo+"//"+nombreArchivo;
+            correo.Subject = Asunto;
+            correo.Body = CuerpoMensaje;
+            //----------------adjunto--------------
+            Attachment data = new Attachment(@direccionGuardarR102 + ".xls");
+            data.Name = nombreArchivo.Replace('Ñ', 'N').Replace('ñ', 'n') + ".xls";
+            correo.Attachments.Add(data);
+            //--------------------------------
+            correo.IsBodyHtml = true;
+            correo.Priority = MailPriority.Normal;
+            //
+            SmtpClient smtp = new SmtpClient();
+            //
+            //---------------------------------------------
+            // Estos datos debes rellanarlos correctamente
+            //---------------------------------------------
+            
+            correo.From = new MailAddress("notificacion@corpal-srl.com");
+            smtp.Host = "mail.corpal-srl.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = new NetworkCredential("notificacion@corpal-srl.com", "Nikilo9H(z*o6fw#2Sc- Boli+");
+            smtp.EnableSsl = true;
+            try
+            {
+                smtp.Send(correo);
+                correo.Dispose();
+                return true;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
+        }
     }
 }

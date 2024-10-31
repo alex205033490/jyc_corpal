@@ -149,8 +149,10 @@ namespace jycboliviaASP.net.Presentacion
                 if (ban_tieneReceta == true)
                 {
                     int codigoOrden = nproduccion.get_codigoOrdenProduccionUltimoInsertado(codProducto, codUser);
+                                        
                     Session["codigoOrdenProduccion"] = codigoOrden;
                     Session["ReporteGeneral"] = "CalcularInsumosPorTurnoDia";
+                    Session["EnvioCorreoCalculoInsumo"] = true;
                     Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
                 }
                 else {

@@ -139,7 +139,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="jquery\bootstrap\css\bootstrap.css" />
     <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
     <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />

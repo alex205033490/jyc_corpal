@@ -402,14 +402,17 @@ namespace jycboliviaASP.net.Presentacion
             decimal candidaPorDia;
             decimal.TryParse(gv_recetasCreada.SelectedRow.Cells[5].Text.Replace(".",","), out candidaPorDia);
             tx_cantidadPorDia.Text = candidaPorDia.ToString();
-            bool condicionante = Convert.ToBoolean(gv_recetasCreada.SelectedRow.Cells[6].Text);
-            cbx_condicionante.Checked = condicionante;
-
+            
+            NCorpal_Produccion pp = new NCorpal_Produccion();
+            DataSet ddss = pp.get_Receta(codigoReceta);
+            string prueba = ddss.Tables[0].Rows[0][5].ToString();
+            bool banderaPP;
+            bool.TryParse(prueba, out banderaPP);
+            cbx_condicionante.Checked = banderaPP;
 
             tx_nameReceta.Text = nombreReceta;
             dd_productosNax.SelectedValue = codigoProductoAsignado.ToString();
-
-            NCorpal_Produccion pp = new NCorpal_Produccion();
+                        
             DataSet tuplasInsumos = pp.get_insumosdeReceta(codigoReceta);
             DataTable datoInsumo = Session["listaInsumo"] as DataTable;
             datoInsumo = tuplasInsumos.Tables[0];

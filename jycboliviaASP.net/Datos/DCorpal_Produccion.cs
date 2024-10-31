@@ -870,10 +870,17 @@ namespace jycboliviaASP.net.Datos
         internal bool update_recetaProducto(int codigoReceta, string receta, decimal cantpordia ,  bool condicionante)
         {
             string consulta = "update tbcorpal_receta set tbcorpal_receta.nombre = '"+receta+"', " +
-                " tbcorpal_receta set tbcorpal_receta.cantpordia = '"+cantpordia.ToString().Replace(",",".")+"', " +
-                " tbcorpal_receta set tbcorpal_receta.condicionante = " + condicionante +
+                " tbcorpal_receta.cantpordia = '"+cantpordia.ToString().Replace(",",".")+"', " +
+                " tbcorpal_receta.condicionante = " + condicionante +
                 " where tbcorpal_receta.codigo = " +codigoReceta;
             return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_Receta(int codigoReceta)
+        {
+            string consulta = "select  rr.codigo, rr.nombre as 'Receta', rr.codproducto, pp.producto as 'Producto_Asociado',cantpordia, condicionante " +
+                 " from tbcorpal_receta rr, tbcorpal_producto pp  where  rr.codproducto = pp.codigo and rr.estado = 1 and pp.estado=1 and rr.codigo = "+codigoReceta;
+            return Conx.consultaMySql(consulta);
         }
     }
 }

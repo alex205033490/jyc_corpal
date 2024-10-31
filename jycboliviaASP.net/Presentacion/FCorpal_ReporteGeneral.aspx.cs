@@ -8,6 +8,8 @@ using jycboliviaASP.net.Negocio;
 using System.Data;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
+using jycboliviaASP.net.Datos;
+using System.IO;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -17,7 +19,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
             if (!IsPostBack)
-            {                
+            {
                 mostrarReporteGeneral();
             }
         }
@@ -25,30 +27,30 @@ namespace jycboliviaASP.net.Presentacion
         private void mostrarReporteGeneral()
         {
             string reporte = Session["ReporteGeneral"].ToString();
-                switch (reporte)
-                {
-                    case "Reporte_QRActivos":
-                        qr_activos();
-                        break;
-                    case "Reporte_Entrega_Produccion":
-                        entregaProduccion();
-                        break;
-                    case "Reporte_SolicitudMaterialInsumos":
-                        reporteSolicitudMaterialInsumos();
-                        break;
-                    case "Reporte_CompraMaterialInsumos":
-                        reporteCompraMaterialInsumos();
-                        break;
-                    case "Reporte_RecibidoMaterialInsumos":
-                        reporteRecibidoMaterialInsumos();
-                        break;
-                    case "CalcularInsumosPorTurnoDia":
-                        CalcularInsumosPorTurnoDia();
-                        break;
-                    default:
-                        //number = "Error";
-                        break;
-                }
+            switch (reporte)
+            {
+                case "Reporte_QRActivos":
+                    qr_activos();
+                    break;
+                case "Reporte_Entrega_Produccion":
+                    entregaProduccion();
+                    break;
+                case "Reporte_SolicitudMaterialInsumos":
+                    reporteSolicitudMaterialInsumos();
+                    break;
+                case "Reporte_CompraMaterialInsumos":
+                    reporteCompraMaterialInsumos();
+                    break;
+                case "Reporte_RecibidoMaterialInsumos":
+                    reporteRecibidoMaterialInsumos();
+                    break;
+                case "CalcularInsumosPorTurnoDia":
+                    CalcularInsumosPorTurnoDia();
+                    break;
+                default:
+                    //number = "Error";
+                    break;
+            }
         }
 
         private void CalcularInsumosPorTurnoDia()
@@ -56,12 +58,12 @@ namespace jycboliviaASP.net.Presentacion
             int codigoOrdenProduccion = int.Parse(Session["codigoOrdenProduccion"].ToString());
             NCorpal_Produccion npro = new NCorpal_Produccion();
             DataSet datoGeneral = npro.get_datosOrdenProduccion(codigoOrdenProduccion);
-            
+
             string fecha = datoGeneral.Tables[0].Rows[0][1].ToString();
-            string hora= datoGeneral.Tables[0].Rows[0][2].ToString();
+            string hora = datoGeneral.Tables[0].Rows[0][2].ToString();
             string producto = datoGeneral.Tables[0].Rows[0][3].ToString();
             decimal cantcajas;
-            decimal.TryParse(datoGeneral.Tables[0].Rows[0][4].ToString().Replace('.',','), out cantcajas);
+            decimal.TryParse(datoGeneral.Tables[0].Rows[0][4].ToString().Replace('.', ','), out cantcajas);
             string medida = datoGeneral.Tables[0].Rows[0][5].ToString();
             int codNax;
             int.TryParse(datoGeneral.Tables[0].Rows[0][11].ToString().Replace('.', ','), out codNax);
@@ -72,42 +74,50 @@ namespace jycboliviaASP.net.Presentacion
             decimal.TryParse(datoGeneral.Tables[0].Rows[0][9].ToString().Replace(".", ","), out cantTurnoTarde);
             decimal cantTurnoNoche;
             decimal.TryParse(datoGeneral.Tables[0].Rows[0][10].ToString().Replace(".", ","), out cantTurnoNoche);
+            decimal canttotal = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
 
-            
             DataSet tuplaDia = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoDia);
             DataSet tuplaTarde = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoTarde);
             DataSet tuplaNoche = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoNoche);
+            DataSet tuplaTOTAL = npro.get_insumosporProductoNormal(codNax, producto, canttotal);
 
             DataSet tuplaDiaCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoDia);
             DataSet tuplaTardeCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoTarde);
             DataSet tuplaNocheCreado = npro.get_insumosCreadosporProducto(codNax, cantTurnoNoche);
+            DataSet tuplaCreadoTOTAL = npro.get_insumosCreadosporProducto(codNax, canttotal);
 
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_ConsultaListadeInsumosTurnos.rdlc";
-                        
+
             DataTable DS_dia = tuplaDia.Tables[0];
             DataTable DS_tarde = tuplaTarde.Tables[0];
             DataTable DS_noche = tuplaNoche.Tables[0];
+            DataTable DS_TOTAL = tuplaTOTAL.Tables[0];
 
             DataTable DS_diaCreadp = tuplaDiaCreado.Tables[0];
             DataTable DS_tardeCreado = tuplaTardeCreado.Tables[0];
             DataTable DS_nocheCreado = tuplaNocheCreado.Tables[0];
+            DataTable DS_CreadoTOTAL = tuplaCreadoTOTAL.Tables[0];
 
             ReportParameter p_fechaproduccion = new ReportParameter("p_fechaproduccion", fecha);
             ReportParameter p_horaproduccion = new ReportParameter("p_horaproduccion", hora);
             ReportParameter p_producto = new ReportParameter("p_producto", producto);
             ReportParameter p_medida = new ReportParameter("p_medida", medida);
-            ReportParameter p_cantDia = new ReportParameter("p_cantDia", cantTurnoDia.ToString().Replace(',','.'));
+            ReportParameter p_cantDia = new ReportParameter("p_cantDia", cantTurnoDia.ToString().Replace(',', '.'));
             ReportParameter p_canttarde = new ReportParameter("p_canttarde", cantTurnoTarde.ToString().Replace(',', '.'));
             ReportParameter p_cantnoche = new ReportParameter("p_cantnoche", cantTurnoNoche.ToString().Replace(',', '.'));
+
+            ReportParameter p_canttotal = new ReportParameter("p_canttotal", canttotal.ToString().Replace(',', '.'));
 
             ReportDataSource DS_ListaInsumosTurnoDia = new ReportDataSource("DS_ListaInsumosTurnoDia", DS_dia);
             ReportDataSource DS_ListaInsumosTurnoTarde = new ReportDataSource("DS_ListaInsumosTurnoTarde", DS_tarde);
             ReportDataSource DS_ListaInsumosTurnoNoche = new ReportDataSource("DS_ListaInsumosTurnoNoche", DS_noche);
-            
+            ReportDataSource DS_ListaInsumosTurnoTOTAL = new ReportDataSource("DS_ListaInsumosTurnoTotal", DS_TOTAL);
+
             ReportDataSource DS_ListaInsumosCreadosDia = new ReportDataSource("DS_ListaInsumosCreadosDia", DS_diaCreadp);
             ReportDataSource DS_ListaInsumosCreadosTarde = new ReportDataSource("DS_ListaInsumosCreadosTarde", DS_tardeCreado);
             ReportDataSource DS_ListaInsumosCreadosNoche = new ReportDataSource("DS_ListaInsumosCreadosNoche", DS_nocheCreado);
+            ReportDataSource DS_ListaInsumosCreadosTOTAL = new ReportDataSource("DS_ListaInsumosCreadosTotal", DS_CreadoTOTAL);
 
             ReportViewer1.LocalReport.SetParameters(p_fechaproduccion);
             ReportViewer1.LocalReport.SetParameters(p_horaproduccion);
@@ -116,18 +126,62 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.SetParameters(p_cantDia);
             ReportViewer1.LocalReport.SetParameters(p_canttarde);
             ReportViewer1.LocalReport.SetParameters(p_cantnoche);
-            
+            ReportViewer1.LocalReport.SetParameters(p_canttotal);
+
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoDia);
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoTarde);
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoNoche);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosTurnoTOTAL);
 
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosDia);
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosTarde);
             ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosNoche);
+            ReportViewer1.LocalReport.DataSources.Add(DS_ListaInsumosCreadosTOTAL);
 
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();
+
+            /*-------------------------------------------*/
+            bool envioCorreoOK = Convert.ToBoolean(Session["EnvioCorreoCalculoInsumo"].ToString());
+            if (envioCorreoOK == true) {
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+                string NombreUsuario = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
+
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+                byte[] bytes = ReportViewer1.LocalReport.Render("Excel", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                string rutaGuardar = ConfigurationManager.AppSettings["Guardar_RecetaInsumo"];
+                if (!Directory.Exists(rutaGuardar))
+                    Directory.CreateDirectory(rutaGuardar);
+
+                string nombreArchivo = "Report_RecetaInsumo_Produccion_Nro_" + codigoOrdenProduccion;
+                string direccionGuardar = rutaGuardar + nombreArchivo;
+
+                using (FileStream fs = new FileStream(direccionGuardar + "." + extension, FileMode.Create))
+                {
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+
+                NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();
+                string Asunto = "(Corpal) Orden de Produccion Nro." + codigoOrdenProduccion;
+                string CuerpoMensaje = "Se ha creado una Orden de Produccion con numero " + codigoOrdenProduccion + "<br>" +
+                               "Del producto " + producto + ", <br>" +
+                               "Realizado por el Usuario " + NombreUsuario;
+                bool banderaOk = ncorreo.Enviar_CorreoRecetaInsumo(Asunto, CuerpoMensaje, rutaGuardar, nombreArchivo);
+                if (banderaOk==true) {
+                    Session["EnvioCorreoCalculoInsumo"] = false;
+                }
+            }
         }
+    
 
         private void qr_activos()
         {
