@@ -2,181 +2,186 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="../js/jsUpon.js" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class=" col-sm-12 col-md-11 col-lg-11 col-md-offset-1">
                 <div class="panel panel-success class">
 
                     <!------------------------          API GET INVENTARIO EGRESO CON DETALLES          ------------------------------>
-                    <div class="tb_getInventarioEgresoDet p-4 bg-light border rounded">
-                        <h5 class="text-warning">Ver Inventario Egresos Detalle</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="TextBox2">Numero de Egreso:</label>
-                            <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                    <div class="container-GETIEgresoDet p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Vista Detalles de Inventario Egresos</h3>
                         </div>
 
-                        <asp:Button ID="BuscarEgresoInventarioDetalle" runat="server" Text="Buscar Egreso" CssClass="btn btn-warning" OnClick="BuscarEgresoInventarioDetalle_Click" />
+                        <div class="container_input row mb-4">
+                            <div class="col-sm-8 col-md-6 col-lg-4 mb-2">
+                                <label class="form-label" for="TextBox1">Numero de Egreso:</label>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de egreso"></asp:TextBox>
+                            </div>
+                            <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
+                                <asp:Button ID="BuscarEgresoInventarioDetalle" autocomplete="off" runat="server" Text="Buscar Registro" CssClass="btn btn-info" OnClick="BuscarEgresoInventarioDetalle_Click" title="Deje el campo vacío para mostrar todos los registros o ingrese un número" />
+                            </div>
+                        </div>
 
-                        <div class="mt-4">
-
-                            <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
-
+                        <div class="container_gv1 col-sm-12 col-md-12 col-lg-9 mb-2">
+                            <asp:GridView ID="GridView1" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="NumeroEgreso" HeaderText="NumEgreso" SortExpression="numEgr" />
+                                    <asp:BoundField DataField="NumeroEgreso" HeaderText="Numero Egreso" SortExpression="numEgr" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
                                     <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
-                                    <asp:BoundField DataField="CodigoAlmacen" HeaderText="CodAlmacen" SortExpression="cAlm" />
-                                    <asp:BoundField DataField="MotivoMovimiento" HeaderText="MotMovimiento" SortExpression="mMov" />
-                                    <asp:BoundField DataField="ItemAnalisis" HeaderText="ItemAnalisis" SortExpression="iAnali" />
+                                    <asp:BoundField DataField="CodigoAlmacen" HeaderText="Codigo Almacen" SortExpression="cAlm" />
+                                    <asp:BoundField DataField="MotivoMovimiento" HeaderText="Motivo Movimiento" SortExpression="mMov" />
+                                    <asp:BoundField DataField="ItemAnalisis" HeaderText="Item Analisis" SortExpression="iAnali" />
                                     <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glo" />
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
                                 </Columns>
-
-                                <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
-                                <RowStyle BackColor="white" />
-                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                                <AlternatingRowStyle CssClass="alternating-row" />
+                                <FooterStyle CssClass="footer" />
+                                <HeaderStyle CssClass="header" />
+                                <PagerStyle CssClass="pager" />
+                                <SelectedRowStyle CssClass="selected-row" />
+                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                             </asp:GridView>
                         </div>
-                        <div class="mt-4">
 
-                            <asp:GridView ID="GridView2" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
-
+                        <div class="container_gv2 col-sm-12 col-md-10 col-lg-8">
+                            <asp:GridView ID="GridView2" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="codProducto" SortExpression="codProd" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="uMedida" SortExpression="uMed" />
-                                    <asp:BoundField DataField="Cantidad" HeaderText="cantidad" SortExpression="cant" />
+                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo Producto" SortExpression="codProd" />
+                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="uMed" />
+                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="cant" />
                                 </Columns>
-
-                                <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
-                                <RowStyle BackColor="white" />
-                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                                <AlternatingRowStyle CssClass="alternating-row" />
+                                <FooterStyle CssClass="footer" />
+                                <HeaderStyle CssClass="header" />
+                                <PagerStyle CssClass="pager" />
+                                <SelectedRowStyle CssClass="selected-row" />
+                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                             </asp:GridView>
                         </div>
                     </div>
-                    <br>
+                    <br />
 
-                    <!------------------------          API GET INVENTARIO EGRESO            ------------------------------>
-                    <div class="tb_getInventarioEgreso p-4 bg-light border rounded">
-                        <h5 class="text-warning">Ver Inventario Egresos</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="TextBox2">Numero de transacción:</label>
-                            <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control"></asp:TextBox>
+                    <!------------------------          API GET INVENTARIO EGRESO C/S CRITERIO        ------------------------------>
+                    <div class="container-GETIEgreso p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Vista Inventario Egresos</h3>
                         </div>
 
-                        <asp:Button ID="btn_BuscarEgresoInventario" runat="server" Text="Buscar Transaccion" CssClass="btn btn-warning" OnClick="BuscarEgresoInventario_Click" />
+                        <div class="container_input row mb-4">
+                            <div class="col-sm-8 col-md-6 col-lg-4 mb-2">
+                                <label class="form-label" for="TextBox2">Numero de transacción:</label>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un codigo o deje vacio."></asp:TextBox>
+                            </div>
+                            <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
+                                <asp:Button ID="btn_BuscarEgresoInventario" runat="server" Text="Buscar" CssClass="btn btn-info" OnClick="BuscarEgresoInventario_Click" />
+                            </div>
+                        </div>
 
-                        <div class="mt-4">
-
-                            <asp:GridView ID="GridView3" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
-
+                        <div class="container_gv3 col-xs-12 col-sm-12 col-md-12 col-lg-9">
+                            <asp:GridView ID="GridView3" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="NumeroTransaccion" HeaderText="numTransacción" SortExpression="numTrans" />
+                                    <asp:BoundField DataField="NumeroTransaccion" HeaderText="Numero de Transacción" SortExpression="numTrans" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
                                     <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
                                     <asp:BoundField DataField="Almacen" HeaderText="Almacen" SortExpression="alm" />
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
                                 </Columns>
-
-                                <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
-                                <RowStyle BackColor="white" />
-                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                                <AlternatingRowStyle CssClass="alternating-row" />
+                                <FooterStyle CssClass="footer" />
+                                <HeaderStyle CssClass="header" />
+                                <PagerStyle CssClass="pager" />
+                                <SelectedRowStyle CssClass="selected-row" />
+                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                             </asp:GridView>
                         </div>
                     </div>
-                    <br>
+                    <br />
 
                     <!------------------------          API POST INVENTARIO EGRESO            ------------------------------>
-                    <script>
-                        function addRowEgreso() {
-                            var table = document.getElementById("tblDetalleProductosEgresos");
-                            var rowCount = table.rows.length;
-                            var row = table.insertRow(rowCount);
-                            row.innerHTML =
-                                `<td><input type='number' class="inputNumber" name='item${rowCount}' /></td>
-                                <td><input type='text' class="inputText" name='codigoProducto${rowCount}' /></td>
-                                 <td><input type='number' class="inputNumber" name='unidadMedida${rowCount}' /></td>
-                                 <td><input type='number' class="inputNumber" step="0.01" name='cantidad${rowCount}' /></td>`;
-                                                }
 
-                    </script>
+                    <div class="container-POSTIEgreso p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Registro Inventario Egreso</h3>
+                        </div>
 
-                    <div class="tb_postInventarioEgreso p-4 bg-light border rounded">
-                        <h5 class="text-warning">Registro Inventario Egresos</h5>
+                        <div class="row mb-3 col-xs-12 col-sm-12 col-ms-12 col-lg-12">
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-5 col-lg-3">
                                 <label class="form-label">Referencia:</label>
                                 <asp:TextBox ID="TextBoxReferencia" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-3 col-lg-2">
                                 <label class="form-label">Codigo Almacen:</label>
                                 <asp:TextBox ID="TextBoxCodigoAlmacen" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-4 col-lg-3">
                                 <label class="form-label">Motivo Movimiento:</label>
                                 <asp:TextBox ID="TextBoxMotivoMovimiento" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-4 col-lg-3">
                                 <label class="form-label">Item Analisis:</label>
                                 <asp:TextBox ID="TextBoxItemAnalisis" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-5 col-lg-3">
                                 <label class="form-label">Glosa:</label>
                                 <asp:TextBox ID="TextBoxGlosa" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                   
-                    <div>
-                        <br />
-                        <div class="column">
-                            <label>Detalle Productos</label>
-                            <table id="tblDetalleProductosEgresos">
-                                <tr>
-                                    <th>Numero Item</th>
-                                    <th>Codigo Producto</th>
-                                    <th>Unidad Medida</th>
-                                    <th>Cantidad</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="number" class="inputNumber" name="item0" /></td>
-                                    <td>
-                                        <input type="text" class="inputText" name="codigoProducto0" /></td>
-                                    <td>
-                                        <input type="number" class="inputNumber" name="unidadMedida0" /></td>
-                                    <td>
-                                        <input type="number" class="inputNumber" name="cantidad0" step="0.01"/></td>
-                                </tr>
-                            </table>
-                            <br />
-                            <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-warning" OnClientClick="addRowEgreso(); return false;" />
-                            <asp:Button ID="btn_InventarioEgresoPost2" runat="server" Text="Registrar Egreso" CssClass="btn btn-warning" OnClick="btn_InventarioEgresoPost2_Click" />
+                        <!-- DETALLE PRODUCTO -->
+                        <div class="form_prod row">
+
+                            <div class="form_detproducto col-md-8 border">
+                                <h3 class="form-label">Detalle Productos</h3>
+                                <div class="table-detProducto col-sm-12 col-md-12 col-lg-12">
+                                    <table id="tblDetalleProductosEgresos" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo Producto</th>
+                                                <th>Unidad Medida</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" name="codigoProducto0" /></td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="unidadMedida0" /></td>
+                                                <td>
+                                                    <input type="number" class="form-control" name="cantidad0" step="0.01" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="form_btn border col-md-3 d-flex flex-column align-items-center">
+                                <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-success mb-2 mt-4" OnClientClick="addRowEgreso(); return false;" />
+                                <asp:Button ID="btn_InventarioEgresoPost2" runat="server" Text="Registrar Egreso" CssClass="btn btn-success" OnClick="btn_InventarioEgresoPost2_Click" />
+                                <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                            </div>
+
                         </div>
-                        <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
-                    </div>
+                        <br />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="../js/jsApi.js" type="text/javascript"></script>
 </asp:Content>

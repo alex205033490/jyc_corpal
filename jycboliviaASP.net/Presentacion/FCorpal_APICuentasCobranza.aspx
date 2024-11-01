@@ -1,93 +1,57 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FCorpal_APICuentasCobranza.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APICuentasCobranza" Async="true" MasterPageFile="~/PlantillaNew.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
-
-    <style type="text/css">
-        .CompletionList {
-            padding: 5px 0;
-            margin: 2px 0 0;
-            /*  position:absolute;  */
-            height: 150px;
-            width: 200px;
-            background-color: White;
-            cursor: pointer;
-            border: solid;
-            border-width: 1px;
-            font-size: x-small;
-            overflow: auto;
-        }
-
-        .CompletionlistItem {
-            font-size: x-small;
-        }
-
-        .CompletionListMighlightedItem {
-            background-color: Green;
-            color: White;
-            /* color: Lime;
-   padding: 3px 20px;
-    text-decoration: none;           
-    background-repeat: repeat-x;
-    outline: 0;*/
-        }
-
-        .style1 {
-            height: 26px;
-        }
-
-    </style>
-
-
+     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+        <div class="">
+            <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-success class">
                     <div>
-                        <asp:Label runat="server" Text="Label">API INVENTARIO INGRESOS</asp:Label><br />
+                        <asp:Label runat="server" Text="Label">CUENTAS / COBRANZA</asp:Label><br />
                         <br />
                     </div>
 
-
                     <!------------------------          API GET CUENTAS         ------------------------------>
-                    <div class="get_cuentas p-4 bg-light border rounded">
-                        <h5 class="text-warning">Ver Cuentas</h5>
+                    <div class="form_getCuentas p-4 bg-light border rounded col-md-12 col-12">
 
                         <div class="mb-3">
                             <asp:Button ID="btn_getCuentas" runat="server" Text="Ver Cuentas" CssClass="btn btn-warning" OnClick="btn_getCuentas_Click" />
-                        </div>
-                        <div class="row">
+                        </div> 
 
-                            <div class="Gcuentas">
-                                <div class="grid-container">
-
+                            <div class="container_cuentas col-md-12 col-12">
+                                <div class="container_gv">
                                     <asp:GridView ID="gv_Cuentas" runat="server" BackColor="White"
-                                        BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-                                        Font-Size="X-Small" ForeColor="Black" GridLines="Vertical">
+                                        BorderColor="#FA9A2D" BorderStyle="Solid" BorderWidth="3px" CellPadding="3" 
+                                        Font-Size="X-Small" ForeColor="Black" GridLines="Horizontal" AutoGenerateColumns="false">
                                         <Columns>
 
-                                            <asp:BoundField DataField="NumeroCuenta" HeaderText="numCuenta" SortExpression="nCuenta" />
+                                            <asp:BoundField DataField="NumeroCuenta" HeaderText="Numero Cuenta" SortExpression="nCuenta" />
                                             <asp:BoundField DataField="ContactoContacto" HeaderText="Contacto" SortExpression="contac" />
                                             <asp:BoundField DataField="ImporteTotal" HeaderText="Importe Total" SortExpression="iTotal" />
                                             <asp:BoundField DataField="ImporteSaldo" HeaderText="Importe Saldo" SortExpression="iSaldo" />
                                             <asp:BoundField DataField="ImporteVencido" HeaderText="Importe Vencido" SortExpression="iVenc" />
-                                            <asp:BoundField DataField="CodigoMoneda" HeaderText="codMoneda" SortExpression="cMoneda" />
-                                            <asp:BoundField DataField="CodigoModulo" HeaderText="codModulo" SortExpression="cModulo" />
+                                            <asp:BoundField DataField="CodigoMoneda" HeaderText="Codigo Moneda" SortExpression="cMoneda" />
+                                            <asp:BoundField DataField="CodigoModulo" HeaderText="Codigo Modulo" SortExpression="cModulo" />
                                             <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="Glos" />
                                             <asp:BoundField DataField="FechaVencimiento" HeaderText="Fecha Vencimiento" SortExpression="fVenc" />
                                         </Columns>
-
-
+                                        <AlternatingRowStyle BackColor="#CCCCCC" />
+                                        <FooterStyle BackColor="#CCCCCC" />
+                                        <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                        <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                        <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                        <SortedAscendingHeaderStyle BackColor="#808080" />
+                                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                        <SortedDescendingHeaderStyle BackColor="#383838" />
 
                                     </asp:GridView>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                   
                     <br />
 
                     <!------------------------          API GET CUENTAS COBRANZAS         ------------------------------>

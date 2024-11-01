@@ -2,27 +2,284 @@
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
-    padding: 20px;
+}
+
+/********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
+.container-GETIIngresoDet, .container-GETIIngreso, container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+#tblDetalleProductosIngresos tr th {
+    font-size: 0.8rem;
+    color: black;
 }
 
 
-/*  POST - INPUT text number */
-.inputText {
-    width: 130px; /* Ajusta el tamaño según tus necesidades */
-    padding: 4px; /* Añade un poco de espacio interno */
-    font-size: 14px; /* Cambia el tamaño de la fuente */
-}
-.inputNumber {
-    width: 80px; /* Ajusta el tamaño según tus necesidades */
-    padding: 4px; /* Añade un poco de espacio interno */
-    font-size: 14px; /* Cambia el tamaño de la fuente */
-}
-td {
-    padding: 10px; /* Ajusta el padding de las celdas */
-}
-th{
-    padding: 10px;
+
+
+
+/****************************  CUENTAS/COBRANZA    ****************************/
+.container_cuentas {
+    height: 100px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    border: double #666666; /* Bordes del contenedor */
 }
 
 
-/*      GRIDVIEW    */
+/****************************   PEDIDO    ****************************/
+.container_gv1 {
+    height: 110px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    font-size: x-small;
+    /* Bordes del contenedor */
+}
+.container_gv2 {
+    height: 120px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: x-small;
+}
+.container_gv3 {
+    height: 200px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: small;
+}
+#tblDetalleProductosPedido, #tblAddInsumo tr th {
+    font-size: 0.8rem;
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************   Btn API    ****************************/
+.container_btn {
+    padding: 10px; /* Espacio alrededor del botón */
+    color:white;
+}
+.btn-info{
+    color:white;
+}
+    .btn-info:hover {
+        color:white;
+        background-color: #359eb4;
+        transform: scale(1.05)
+    }
+    .btn-info:active {
+        box-shadow: 0 0 5px #359eb4, 0 0 10px #359eb4; /* Sombra más sutil al hacer clic */
+        transform: scale(1.02); /* Efecto de pulsación */
+    }
+
+.btn-warning {
+    background-color: #ff8000; /* Color de fondo */
+    border: none; /* Eliminar el borde */
+    color: white; /* Color del texto */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+    .btn-warning:hover {
+        background-color: #e67000; /* Color en hover */
+        transform: scale(1.05); /* Efecto de aumento */
+        color: white; /* Color del texto */
+    }
+
+
+/******************    TextBox API         *****************************/
+.form-control {
+    
+    border: 1px solid #ccc; /* Borde inicial */
+    transition: border-color 0.3s; /* Transición suave */
+}
+.form-control:focus {
+    border-color: #ff8000; /* Color de borde en enfoque */
+    box-shadow: 0 0 5px rgba(255, 128, 0, 0.5); /* Sombra suave en enfoque */
+}
+.form-control:hover {
+     border-color: #ffcc80; /* Color de borde en hover */
+}
+.form-control::placeholder {
+    font-size: small; /* Cambia el tamaño de la letra del placeholder */
+    color: #6c757d; /* Color del placeholder (opcional) */
+}
+
+/************************      DROPDOWNLIST      **************************/
+
+.custom-dropdown {
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 40px; /* Ajusta la altura */
+    font-size: 1rem; /* Tamaño de la fuente */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Color del borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    background-color: white; /* Color de fondo */
+    color: #333; /* Color del texto */
+    outline: none; /* Elimina el contorno al seleccionar */
+    transition: border-color 0.3s; /* Transición suave */
+}
+
+    .custom-dropdown:focus {
+        border-color: #ff8000; /* Color del borde al enfocar */
+        box-shadow: 0 0 5px rgba(255, 128, 0, 0.5);
+    }
+
+
+/************************    Gv API         *****************************/
+.gridview {
+    border-color: white; /* Color del borde */
+    border-style: solid; /* Estilo del borde */
+    border-width: 1px; /* Grosor del borde */
+    /* Tamaño de fuente */
+    color: black; /* Color de texto */
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes */
+}
+
+    .gridview th {
+        background-color: #678d57db; /* Fondo del encabezado */
+        font-weight: bold; /* Negrita */
+        color: white; /* Color del texto en encabezado */
+        padding: 10px; /* Espaciado en celdas del encabezado */
+    }
+
+.gridview td {
+    padding: 3px; /* Espaciado en celdas */
+    border: 1px solid #dddddd; /* Borde de las celdas */
+}
+
+.gridview .alternating-row {
+    background-color: #CCCCCC; /* Color de las filas alternas */
+}
+
+.gridview .footer {
+    background-color: #CCCCCC; /* Fondo del pie */
+}
+
+.gridview .pager {
+    background-color: #999999; /* Fondo del paginador */
+    color: black; /* Color de texto en el paginador */
+    text-align: center; /* Alineación centrada */
+}
+
+.gridview .selected-row {
+    background-color: #000099; /* Fondo de la fila seleccionada */
+    font-weight: bold; /* Negrita */
+    color: white; /* Color del texto en fila seleccionada */
+}
+
+.gridview .sorted-asc-cell {
+    background-color: #F1F1F1; /* Color de celdas ordenadas ascendentemente */
+}
+
+.gridview .sorted-asc-header {
+    background-color: #808080; /* Color del encabezado ordenado ascendentemente */
+}
+
+.gridview .sorted-desc-cell {
+    background-color: #CAC9C9; /* Color de celdas ordenadas descendentemente */
+}
+
+    .gridview .sorted-desc-header {
+        background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important; /* Color del encabezado ordenado descendentemente */
+    }
+
+
+
+
+
+
+/*################################################          API          ################################################*/
+
+/********************************   FCORPAL APIClientes  ********************************/
+.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+/********************************   FCORPAL APIProductos  ********************************/
+.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
+.container-GETProductosCodigo {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+
+
+
+/********************************    FCORPAL INSUMO-CREADO      ********************************/
+.container-ICreadoADD {
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+}
+.container-ICreadoUpdate {
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+}
+
+.container_tittle {
+    background-color: #146c43;
+    color:white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style:normal;
+    
+}
+.text-tittle{
+    text-align:center;
+    display:inline-block;
+}
+/*                  autocomplet                  */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+.CompletionlistItem {
+    font-size: x-small;
+}
+.CompletionListMighlightedItem {
+    background-color: Green;
+    color: White;
+    /* color: Lime;
+          padding: 3px 20px;
+          text-decoration: none;           
+          background-repeat: repeat-x;
+          outline: 0;*/
+}
+/*       custom-width form-text       */
+.custom-width-text {
+    width: 180px;
+}
+.custom-width-number {
+    width:20px;
+}
+.container-ICreadoC2, .container-ICreadoC1 {
+    border: 2px solid #00000026; /* Cambia el color y el grosor del borde aquí */
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 10px; /* Espacio interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+

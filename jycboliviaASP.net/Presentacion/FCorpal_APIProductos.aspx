@@ -9,23 +9,27 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="Container" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
-                    <div>
-                        <asp:Label runat="server" Text="Label">API Productos</asp:Label><br />
-                        <br />
-                    </div>
+                    
 
                     <!-- GET PRODUCTOS/BUSCAR -->
-                    <div class="get_productosNombre p-4 bg-light border rounded">
-                        <h5 class="text-warning">Buscar Producto por Nombre</h5>
+                    <div class="container-GETProductosNombre p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Busqueda de Producto por Nombre</h3>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="txt_nomProducto">Nombre del Producto:</label>
-                            <asp:TextBox ID="txt_nomProducto" runat="server" CssClass="form-control" placeholder="Ingrese el nombre del producto"></asp:TextBox>
                         </div>
 
-                        <asp:Button ID="btn_nomProducto" runat="server" Text="Buscar Producto" CssClass="btn btn-warning" OnClick="btn_buscarProdNombre_Click" />
+                        <div class="mb-3 row">
+                            <label class="form-label" for="txt_nomProducto">Nombre del Producto:</label>
+                            <div class="col-sm-5 col-md-4 col-lg-4">
+                                <asp:TextBox ID="txt_nomProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <asp:Button ID="btn_nomProducto" runat="server" Text="Buscar Producto" CssClass="btn btn-success" OnClick="btn_buscarProdNombre_Click" />
+                            </div>
+                        </div>
+
 
                         <div class="mt-4">
                             <asp:GridView ID="gv_prodNombre" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
@@ -49,17 +53,25 @@
                                 <AlternatingRowStyle BackColor="#f8f9fa" />
                             </asp:GridView>
                         </div>
-                    </div><br />
-                    <!-- GET PRODUCTOS/VENTAS/BUSCAR -->
-                    <div class="get_productosVentas p-4 bg-light border rounded">
-                        <h5 class="text-warning">Ventas de Productos</h5>
+                    </div>
+                    <br />
 
-                        <div class="mb-3">
-                            <label class="form-label" for="txt_ventProducto">Nombre del Producto:</label>
-                            <asp:TextBox ID="txt_ventProducto" runat="server" CssClass="form-control" placeholder="Ingrese el nombre del producto"></asp:TextBox>
+                    <!-- GET PRODUCTOS/VENTAS/BUSCAR -->
+                    <div class="container-GETProductosVentas p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Ver Ventas de Productos</h3>
                         </div>
 
-                        <asp:Button ID="btn_ventProducto" runat="server" Text="Buscar Ventas" CssClass="btn btn-warning" OnClick="btn_BuscarventProducto_Click" />
+                        <div class="mb-3 row col-lg-12">
+                            <label class="form-label" for="txt_ventProducto">Nombre del Producto:</label>
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <asp:TextBox ID="txt_ventProducto" runat="server" CssClass="form-control" ></asp:TextBox>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-3">
+                                <asp:Button ID="btn_ventProducto" runat="server" Text="Buscar Ventas" CssClass="btn btn-success" OnClick="btn_BuscarventProducto_Click" />
+                            </div>
+                        </div>
+
 
                         <div class="mt-4">
                             <asp:GridView ID="gv_prodVenta" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
@@ -84,20 +96,28 @@
                         </div>
 
                     </div><br />
+
                     <!-- GET PRODUCTOS/COMPRAS/BUSCAR -->
-
-                    <div class="get_productosCompras p-4 bg-light border rounded">
-                        <h5 class="text-warning">Compras de Productos</h5>
-
-                        <div class="mb-2">
-                            <label class="form-label" for="txt_codProductoComp">Codigo del producto:</label>
-                            <asp:TextBox ID="txt_codProductoComp" runat="server" CssClass="form-control" placeholder="Ingrese el codigo del producto"></asp:TextBox>
-                            
-                            <label class="form-label" for="txt_codProveedorComp">Codigo del Proveedor:</label>
-                            <asp:TextBox ID="txt_codProveedorComp" runat="server" CssClass="form-control" placeholder="Ingrese el codigo del proveedor"></asp:TextBox>
+                    <div class="container-GETProductosCompras p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Compras de Productos</h3>
                         </div>
 
-                        <asp:Button ID="btn_buscarCompras" runat="server" Text="Buscar Compras" CssClass="btn btn-warning" OnClick="btn_buscarCompras_Click" />
+                        <div class="mb-2 row col-lg-12">
+                            <div class="col-sm-5 col-md-4 col-lg-4">
+                                <label class="form-label" for="txt_codProductoComp">Codigo del producto:</label>
+                                <asp:TextBox ID="txt_codProductoComp" runat="server" CssClass="form-control" ></asp:TextBox>
+                            </div>
+
+                            <div class=" col-sm-5 col-md-4 col-lg-4">
+                                <label class="form-label" for="txt_codProveedorComp">Codigo del Proveedor:</label>
+                                <asp:TextBox ID="txt_codProveedorComp" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+
+                            <div class="col-sm-2 col-md-3 col-lg-4 d-flex align-items-end">
+                                <asp:Button ID="btn_buscarCompras" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="btn_buscarCompras_Click" />
+                            </div>
+                        </div>
 
                         <div class="mt-4">
                             <asp:GridView ID="gv_prodCompras" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
@@ -124,17 +144,24 @@
 
 
                     <!-- GET PRODUCTOS/codProducto  -->
-                    <div class="get_productosCodigo p-4 bg-light border rounded">
-                        <h5 class="text-warning">Buscar Productos por Código</h5>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="txt_codProducto">Código del Producto:</label>
-                            <asp:TextBox ID="txt_codProducto" runat="server" CssClass="form-control" placeholder="Ingrese el código del producto"></asp:TextBox>
+                    <div class="container-GETProductosCodigo p-4 rounded">
+                        <div class="container_tittle rounded mb-3">
+                            <h3 class="text-tittle p-3">Buqueda de Productos por Código</h3>
                         </div>
 
-                        <asp:Button ID="btn_BuscarcodProducto" runat="server" Text="Buscar Producto" CssClass="btn btn-warning" OnClick="btn_BuscarcodProducto_Click" />
+                        <div class="mb-3 row col-lg-10">
+                            <div class="col-sm-5 col-md-4 col-lg-4">
+                                <label class="form-label" for="txt_codProducto">Código del Producto:</label>
+                                <asp:TextBox ID="txt_codProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
 
-                        <div class=" tablaProyecto" >
+                            <div class="col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
+                                <asp:Button ID="btn_BuscarcodProducto" runat="server" Text="Buscar Producto" CssClass="btn btn-success" OnClick="btn_BuscarcodProducto_Click" />
+                            </div>
+                        </div>
+
+
+                        <div class="tablaProyecto" >
                             <asp:GridView ID="gv_prodCod" runat="server" CssClass="table table-striped table-hover"
                                 BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
                                 CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
