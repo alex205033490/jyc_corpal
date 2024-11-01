@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="../js/jsUpon.js" type="text/javascript"></script>
+    
 </asp:Content>
 
 <asp:Content ID="Contentn2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -11,113 +11,118 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-success class">
-                    <div>
-                        <asp:Label runat="server" Text="Label"> API PRODUCCION PARTE PRODUCCION </asp:Label><br /><br />
-                    </div>
 
-<!--------------------------------          API POST PRODUCCION PARTEproduccion  (registra datos vacios - La cadena de entrada no tiene el formato correcto.)       ----------------------->
-                    <script>
-                        function addRowProduccion() {
-                            var table = document.getElementById("tblDetalleProductoProduccion");
-                            var rowCount = table.rows.length;
-                            var row = table.insertRow(rowCount);
-                            row.innerHTML =
-                                `<td><input class="inputText" type='text' name='codigoProducto${rowCount}' /></td>
-                                 <td><input class="inputNumber" type='number' name='cantidad${rowCount}' /></td>
-                                 <td><input class="inputNumber" type='number' name='unidadMedida${rowCount}' /></td>
-                                 <td><input class="inputText" type='text' name='codigoReceta${rowCount}' /></td>`;
-                                                }
-                    </script>
-                    
-                        <div class="tb_postInventarioEgreso p-4 bg-light border rounded">
-                            <h5 class="text-warning">Registro Produccion (F)</h5>
+                    <!--------------------------------          API POST PRODUCCION PARTEproduccion  (registra datos vacios - La cadena de entrada no tiene el formato correcto.)       ----------------------->
 
-                            <div class="row mb-3">
-                                <div class="col-md-6">
+                    <div class="container-POSTProduccion p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Registro Produccion (F)</h3>
+                        </div>
+
+                        <div class="form_col1 row">
+
+                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                                <div class="col-9 col-sm-12 col-md-12 col-lg-9">
                                     <label class="form-label">Referencia:</label>
                                     <asp:TextBox ID="txt_referencia" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Codigo Responsable:</label>
-                                    <asp:TextBox ID="txt_codResponsable" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Item Analisis:</label>
-                                    <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-8 col-md-10 col-lg-7">
                                     <label class="form-label">Linea Produccion:</label>
                                     <asp:TextBox ID="txt_lineaProduccion" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
+                                    <div class="col-6 col-md-10 col-lg-5">
+                                        <label class="form-label">Item Analisis:</label>
+                                        <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <div class="col-md-6">
+                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-6">
+                                <div class="col-6 col-sm-10 col-md-10 col-lg-7">
+                                    <label class="form-label">Codigo Responsable:</label>
+                                    <asp:TextBox ID="txt_codResponsable" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                
+                                <div class="col-4 col-sm-9 col-md-10 col-lg-5">
                                     <label class="form-label">Realizar Descarga:</label>
-                                    <asp:DropDownList ID="dd_realDescarga" runat="server">
+                                    <asp:DropDownList ID="dd_realDescarga" runat="server" CssClass="form-select">
                                         <asp:ListItem Text="Si" Value="true" />
                                         <asp:ListItem Text="No" Value="false" />
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-10 col-md-12 col-lg-9">
                                     <label class="form-label">Glosa:</label>
                                     <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
 
+                        </div>
 
-                    <div>
-                        <asp:Label runat="server" Text=" Detalle Producto "></asp:Label><br />
 
-                        <table id="tblDetalleProductoProduccion" border="1">
-                            <tr>
+                        <div class="container_formADDProducto col-lg-12">
+                            <div class="container_subtittle mb-2">
+                                <asp:Label CssClass="text_tittle" runat="server" Text=" Detalle Producto "></asp:Label><br />
+                            </div>
+                            
+                            <div class="row col-lg-12">
+                                <div class="table-responsive col-sm-8 col-md-8 col-lg-8">
+                                    <table id="tblDetalleProductoProduccion" border="1" class="table_ADDProd table-bordered table-striped col-sm-12 col-md-10 col-lg-12">
+                                        <thead class="table_tr">
+                                            <tr>
+                                                <th class="th_cprod">Codigo Producto</th>
+                                                <th class="th_cant">Cantidad</th>
+                                                <th class="th_umed">Unidad Medida</th>
+                                                <th class="th_crec">Codigo Receta</th>
+                                            </tr>
+                                        </thead>
+                                        <tr>
 
-                                <th>Codigo Producto</th>
-                                <th>Cantidad</th>
-                                <th>Unidad Medida</th>
-                                <th>Codigo Receta</th>
-                            </tr>
-                            <tr>
+                                            <td>
+                                                <input class="inputText" type="text" name="codigoProducto0" /></td>
+                                            <td>
+                                                <input class="inputNumber" type="number" name="cantidad0" /></td>
+                                            <td>
+                                                <input class="inputNumber" type="number" name="unidadMedida0" /></td>
+                                            <td>
+                                                <input class="inputText" type="text" name="codigoReceta0" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="container_btn col-sm-4 col-md-4 col-lg-4 d-flex flex-column align-items-center">
+                                    <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-secondary mb-2" OnClientClick="addRowProduccion(); return false" />
+                                    <asp:Button ID="btn_Prod_parteProd" runat="server" Text="Registrar Produccion" CssClass="btn btn-success" OnClick="btn_Insert_parteProd_Click" />
 
-                                <td><input class= "inputText" type="text" name="codigoProducto0"/></td>
-                                <td><input class= "inputNumber" type="number" name="cantidad0"/></td>
-                                <td><input class= "inputNumber" type="number" name="unidadMedida0"/></td>
-                                <td><input class= "inputText" type="text" name="codigoReceta0"/></td>
-                            </tr>
-                        </table>
-                        <br />
-                        <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-warning" onClientClick="addRowProduccion(); return false"  />
-                        <asp:Button ID="btn_Prod_parteProd" runat="server" Text="Registrar Produccion" CssClass="btn btn-warning" OnClick="btn_Insert_parteProd_Click" />
-                                            
-                        <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                                    <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                                </div>
+
+
+
+                            </div>
+
+                            <br />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">&nbsp;</div>
-    </div>
 
-    <!---------------------------------------       API GET PRODUCCION DETALLE  (Muestra datos vacios)  ------------------------------------------------->
-    <div class="tb_getProduccionDet p-4 bg-light border rounded">
-        <h5 class="text-warning">Ver Produccion Detalle (F)</h5>
+        <!---------------------------------------       API GET PRODUCCION DETALLE  (Muestra datos vacios)  ------------------------------------------------->
+        <div class="container_GETProduccionDet p-4 rounded">
+            <div>
+                <h3 class="text-warning">Vista Produccion Detalle (F)</h3>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Numero Parte de Produccion:</label>
-            <asp:TextBox ID="txt_numProduccion1" runat="server" CssClass="form-control"></asp:TextBox>
-        </div>
+            <div class="container_input mb-3">
+                <label class="form-label">Numero Parte de Produccion:</label>
+                <asp:TextBox ID="txt_numProduccion1" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:Button ID="btn_buscProduccion" runat="server" Text="Buscar Produccion" CssClass="btn btn-warning" OnClick="btn_buscProduccion_Click" />
+            </div>
 
-        <asp:Button ID="btn_buscProduccion" runat="server" Text="Buscar Produccion" CssClass="btn btn-warning" OnClick="btn_buscProduccion_Click" />
 
 
-            <div class="mt-4">
-
-        <asp:GridView ID="gv_produccion" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
+            <div class="container_gv1">
+                <asp:GridView ID="gv_1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
                     CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
-
                     <Columns>
                         <asp:BoundField DataField="NumeroParteProduccion" HeaderText="numPartProduccion" SortExpression="nPartProd" />
                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
@@ -129,14 +134,13 @@
                         <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glo" />
                         <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
                     </Columns>
-
                     <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
                     <RowStyle BackColor="white" />
                     <AlternatingRowStyle BackColor="#f8f9fa" />
                 </asp:GridView>
             </div>
-            <div class="mt-4">
 
+            <div class="container_gv2">
                 <asp:GridView ID="gv_detalle" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
                     CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
@@ -155,7 +159,7 @@
                 </asp:GridView>
             </div>
         </div>
-        <br/>
-
-
+        </div>
+        <br />
+        <script src="../js/jsApi.js" type="text/javascript"></script>
 </asp:Content>

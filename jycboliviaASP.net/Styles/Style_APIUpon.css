@@ -4,6 +4,23 @@
     margin: 0;
 }
 
+/********************************   FCORPAL APIClientes  ********************************/
+.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+/********************************   FCORPAL APIProductos  ********************************/
+.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
+.container-GETProductosCodigo {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
 /********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
 .container-GETIIngresoDet, .container-GETIIngreso, container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet {
     background-color: #ff75000a;
@@ -12,11 +29,40 @@
     font-size: small;
 }
 
-#tblDetalleProductosIngresos tr th {
-    font-size: 0.8rem;
-    color: black;
+/********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
+.container-POSTProduccion {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
 }
-
+.table_tr {
+    color: #ffffff;
+    background-color: #375d4ba8;
+    text-align: center; /* Centra el texto horizontalmente */
+    font-family: 'Arial', sans-serif; /* Cambia la fuente a Arial (puedes cambiarla a la que desees) */
+    padding: 10px; /* Espaciado interno para mejor apariencia */
+}
+.table_ADDProd {
+    width: 100%;
+    margin-bottom: 1rem;
+    
+}
+.th_cprod {
+    width: 15%;
+}
+.th_cant {
+    width: 15%;
+}
+.th_umed {
+    width: 15%;
+}
+.th_crec {
+    width: 15%;
+}
+input.inputText, input.inputNumber {
+    width: 100%; /* Para que los inputs ocupen todo el ancho de la celda */
+}
 
 
 
@@ -202,22 +248,7 @@
 
 /*################################################          API          ################################################*/
 
-/********************************   FCORPAL APIClientes  ********************************/
-.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
-    background-color: #ff75000a;
-    border: 2px solid #7D7D7D; /* Color plomo */
-    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
-    font-size: small;
-}
 
-/********************************   FCORPAL APIProductos  ********************************/
-.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
-.container-GETProductosCodigo {
-    background-color: #ff75000a;
-    border: 2px solid #7D7D7D; /* Color plomo */
-    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
-    font-size: small;
-}
 
 
 

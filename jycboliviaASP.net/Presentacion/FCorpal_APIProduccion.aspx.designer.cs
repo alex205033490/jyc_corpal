@@ -24,13 +24,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_referencia;
 
         /// <summary>
-        /// Control txt_codResponsable.
+        /// Control txt_lineaProduccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codResponsable;
+        protected global::System.Web.UI.WebControls.TextBox txt_lineaProduccion;
 
         /// <summary>
         /// Control txt_itemAnalisis.
@@ -42,13 +42,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_itemAnalisis;
 
         /// <summary>
-        /// Control txt_lineaProduccion.
+        /// Control txt_codResponsable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_lineaProduccion;
+        protected global::System.Web.UI.WebControls.TextBox txt_codResponsable;
 
         /// <summary>
         /// Control dd_realDescarga.
@@ -114,13 +114,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_buscProduccion;
 
         /// <summary>
-        /// Control gv_produccion.
+        /// Control gv_1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_produccion;
+        protected global::System.Web.UI.WebControls.GridView gv_1;
 
         /// <summary>
         /// Control gv_detalle.
