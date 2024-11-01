@@ -4,6 +4,23 @@
     margin: 0;
 }
 
+/********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
+.container-GETIIngresoDet, .container-GETIIngreso, container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+#tblDetalleProductosIngresos tr th {
+    font-size: 0.8rem;
+    color: black;
+}
+
+
+
+
+
 /****************************  CUENTAS/COBRANZA    ****************************/
 .container_cuentas {
     height: 100px; /* Altura del contenedor */
@@ -37,17 +54,8 @@
 }
 
 
-/*************************   Inventario Ingresos    **********************************/
-.container_gvIi {
-    height: 200px; /* Altura del contenedor */
-    overflow: auto; /* Barra de desplazamiento */
-    /* Bordes del contenedor */
-    font-size: small;
-}
-#tblDetalleProductosIngresos tr th {
-    font-size: 0.8rem;
-    color: black;
-}
+
+
 
 
 
@@ -60,7 +68,20 @@
 /****************************   Btn API    ****************************/
 .container_btn {
     padding: 10px; /* Espacio alrededor del botón */
+    color:white;
 }
+.btn-info{
+    color:white;
+}
+    .btn-info:hover {
+        color:white;
+        background-color: #359eb4;
+        transform: scale(1.05)
+    }
+    .btn-info:active {
+        box-shadow: 0 0 5px #359eb4, 0 0 10px #359eb4; /* Sombra más sutil al hacer clic */
+        transform: scale(1.02); /* Efecto de pulsación */
+    }
 
 .btn-warning {
     background-color: #ff8000; /* Color de fondo */
@@ -74,40 +95,25 @@
         transform: scale(1.05); /* Efecto de aumento */
         color: white; /* Color del texto */
     }
-/**************************     LABEL   ***********************************/
-.text_tittle1 {
-    color: #ff8000; /* Color del texto */
-    font-size: 2rem; /* Tamaño de fuente */
-    font-weight: bold; /* Peso de la fuente */
-    text-align: center; /* Alineación centrada */
-    margin: 20px 0; /* Margen superior e inferior */
-}
-
-
-.text_tittle2 {
-    color: black; /* Color del texto */
-    font-size: 1.5rem; /* Tamaño de fuente */
-    font-weight: normal; /* Peso de la fuente */
-    margin: 10px 0; /* Margen superior e inferior */
-    text-align: left; /* Alineación a la izquierda */
-    opacity: 0.8; /* Leve transparencia para un efecto sutil */
-}
 
 
 /******************    TextBox API         *****************************/
 .form-control {
+    
     border: 1px solid #ccc; /* Borde inicial */
     transition: border-color 0.3s; /* Transición suave */
 }
-
-    .form-control:focus {
-        border-color: #ff8000; /* Color de borde en enfoque */
-        box-shadow: 0 0 5px rgba(255, 128, 0, 0.5); /* Sombra suave en enfoque */
-    }
-
-    .form-control:hover {
-        border-color: #ffcc80; /* Color de borde en hover */
-    }
+.form-control:focus {
+    border-color: #ff8000; /* Color de borde en enfoque */
+    box-shadow: 0 0 5px rgba(255, 128, 0, 0.5); /* Sombra suave en enfoque */
+}
+.form-control:hover {
+     border-color: #ffcc80; /* Color de borde en hover */
+}
+.form-control::placeholder {
+    font-size: small; /* Cambia el tamaño de la letra del placeholder */
+    color: #6c757d; /* Color del placeholder (opcional) */
+}
 
 /************************      DROPDOWNLIST      **************************/
 
@@ -132,7 +138,7 @@
 
 /************************    Gv API         *****************************/
 .gridview {
-    border-color: #FA9A2D; /* Color del borde */
+    border-color: white; /* Color del borde */
     border-style: solid; /* Estilo del borde */
     border-width: 1px; /* Grosor del borde */
     /* Tamaño de fuente */
@@ -141,12 +147,12 @@
     border-collapse: collapse; /* Colapsar bordes */
 }
 
-.gridview th {
-    background-color: #ff8000; /* Fondo del encabezado */
-    font-weight: bold; /* Negrita */
-    color: white; /* Color del texto en encabezado */
-    padding: 10px; /* Espaciado en celdas del encabezado */
-}
+    .gridview th {
+        background-color: #678d57db; /* Fondo del encabezado */
+        font-weight: bold; /* Negrita */
+        color: white; /* Color del texto en encabezado */
+        padding: 10px; /* Espaciado en celdas del encabezado */
+    }
 
 .gridview td {
     padding: 3px; /* Espaciado en celdas */
@@ -194,14 +200,29 @@
 
 
 
+/*################################################          API          ################################################*/
+
+/********************************   FCORPAL APIClientes  ********************************/
+.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+/********************************   FCORPAL APIProductos  ********************************/
+.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
+.container-GETProductosCodigo {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
 
 
 
 
-
-
-
-/**********************    FCORPAL INSUMO-CREADO      *******************/
+/********************************    FCORPAL INSUMO-CREADO      ********************************/
 .container-ICreadoADD {
     border: 2px solid #7D7D7D; /* Color plomo */
     box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
@@ -213,8 +234,15 @@
 
 .container_tittle {
     background-color: #146c43;
+    color:white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style:normal;
+    
 }
-
+.text-tittle{
+    text-align:center;
+    display:inline-block;
+}
 /*                  autocomplet                  */
 .CompletionList {
     padding: 5px 0;
@@ -229,11 +257,9 @@
     font-size: x-small;
     overflow: auto;
 }
-
 .CompletionlistItem {
     font-size: x-small;
 }
-
 .CompletionListMighlightedItem {
     background-color: Green;
     color: White;
@@ -243,12 +269,9 @@
           background-repeat: repeat-x;
           outline: 0;*/
 }
-
-
 /*       custom-width form-text       */
 .custom-width-text {
     width: 180px;
-
 }
 .custom-width-number {
     width:20px;
@@ -257,7 +280,6 @@
     border: 2px solid #00000026; /* Cambia el color y el grosor del borde aquí */
     border-radius: 25px; /* Bordes redondeados */
     padding: 10px; /* Espacio interno */
-
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
