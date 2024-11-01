@@ -734,5 +734,153 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select * from tbcorpal_receta re where re.codproducto = "+codProducto;
             return Conx.consultaMySql(consulta);
         }
+
+        internal DataSet get_insumosNormal(string nombreInsumo)
+        {
+            string consulta = "select ii.codigo, ii.nombre , ii.Medida from tbcorpal_insumo ii where ii.nombre like '%" + nombreInsumo + "%' and ii.estado = 1;";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosCompuesto(string nombreInsumo)
+        {
+            string consulta = "select ii.codigo, ii.nombre , ii.Medida from tbcorpal_insumoscreados ii where ii.nombre like '%" + nombreInsumo + "%' and ii.estado = 1;";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosNormalExacto(string insumos)
+        {
+            string consulta = "select ii.codigo, ii.nombre , ii.Medida from tbcorpal_insumo ii where ii.nombre = '" + insumos + "' and ii.estado = 1;";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet buscarRecetas(string receta)
+        {
+            string consulta = "select  rr.codigo, rr.nombre as 'Receta', rr.codproducto, pp.producto as 'Producto_Asociado',cantpordia, condicionante  " +
+                " from tbcorpal_receta rr, tbcorpal_producto pp  where  rr.codproducto = pp.codigo and rr.estado = 1 and pp.estado=1 and rr.nombre like '%"+receta+"%'";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosCompuestoExacto(string insumosCompuesto)
+        {
+            string consulta = "select ii.codigo, ii.nombre , ii.Medida from tbcorpal_insumoscreados ii where ii.nombre = '" + insumosCompuesto + "' and ii.estado = 1;";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_productoAsignar(int codigoProductoAsignado)
+        {
+            string consulta = "select * from tbcorpal_producto pp where pp.codigo = "+codigoProductoAsignado;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosdeReceta(int codigoReceta)
+        {
+            string consulta = "select  insumo.codigo as 'Codigo', insumo.nombre as 'Insumo', ii.cantidad as 'Cantidad' from tbcorpal_receta rr , tbcorpal_detingredienteinsumo ii, tbcorpal_insumo insumo where  rr.codigo = ii.codreceta and ii.codinsumo = insumo.codigo and rr.codigo = "+codigoReceta;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_insumosCompuestodeReceta(int codigoReceta)
+        {
+            string consulta = "select  insumo.codigo as 'Codigo', insumo.nombre as 'Insumo', ii.cantidad as 'Cantidad' from tbcorpal_receta rr ,  tbcorpal_detingredienteinsumocreado ii,  tbcorpal_insumoscreados insumo where  rr.codigo = ii.codreceta and ii.codinsumocreado = insumo.codigo and rr.codigo = "+codigoReceta;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool insertarReceta(string receta, int codigoProducto, int coduser, decimal cantpordia, bool condicionante)
+        {
+            string consulta = "insert into tbcorpal_receta( tbcorpal_receta.nombre,tbcorpal_receta.fecha, " +
+                " tbcorpal_receta.hora, tbcorpal_receta.codproducto," +
+                " tbcorpal_receta.coduser,tbcorpal_receta.estado," +
+                " tbcorpal_receta.cantpordia, tbcorpal_receta.condicionante) " +
+                " values( '" + receta+"', current_date() , current_time(), "+codigoProducto+","+coduser+",1 , '"+cantpordia.ToString().Replace(",",".")+"',"+condicionante+")";
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_codigoRecetaUltima(string receta, int codigoProducto)
+        {
+            string consulta = "select max(re.codigo) from tbcorpal_receta re where re.codproducto = "+codigoProducto+ " and re.nombre = '" + receta+"'";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool insertarInsumoNormalReceta(int codigoReceta, int codigoInsumo, decimal cantidad, int coduser)
+        {
+            string consulta = "insert into tbcorpal_detingredienteinsumo( tbcorpal_detingredienteinsumo.codreceta,tbcorpal_detingredienteinsumo.codinsumo, tbcorpal_detingredienteinsumo.cantidad," +
+                " tbcorpal_detingredienteinsumo.estado, tbcorpal_detingredienteinsumo.fechagra," +
+                " tbcorpal_detingredienteinsumo.horagra, tbcorpal_detingredienteinsumo.coduser) " +
+                " values( "+codigoReceta+", "+codigoInsumo+", '"+cantidad.ToString().Replace(",",".")+"', 1, " +
+                " current_date(), current_time(), "+coduser+")";
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool insertarInsumoCompuestoReceta(int codigoReceta, int codigoInsumoCompuesto, decimal cantidad, object coduser)
+        {
+            string consulta = "insert into tbcorpal_detingredienteinsumocreado( " +
+                " tbcorpal_detingredienteinsumocreado.codreceta,tbcorpal_detingredienteinsumocreado.codinsumocreado, " +
+                " tbcorpal_detingredienteinsumocreado.cantidad,tbcorpal_detingredienteinsumocreado.estado, " +
+                " tbcorpal_detingredienteinsumocreado.fechagra,tbcorpal_detingredienteinsumocreado.horagra, " +
+                " tbcorpal_detingredienteinsumocreado.coduser) " +
+                " values( "+codigoReceta+", "+codigoInsumoCompuesto+", '"+cantidad.ToString().Replace(",",".")+"', 1, " +
+                " current_date(), current_time(), "+coduser+")";
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminarInsumosNormalesAgregados(int codigoReceta)
+        {
+            string consulta = "delete from tbcorpal_detingredienteinsumo where tbcorpal_detingredienteinsumo.codreceta ="+codigoReceta;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminarInsumosCompuestosAgregados(int codigoReceta)
+        {
+            string consulta = "delete from tbcorpal_detingredienteinsumocreado where tbcorpal_detingredienteinsumocreado.codreceta =" + codigoReceta;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminar_Receta(int codigoReceta, int codUser)
+        {
+            string consulta = "update tbcorpal_receta set  " +
+                " tbcorpal_receta.estado = 0 , " +
+                " tbcorpal_receta.fecha = current_date(), " +
+                " tbcorpal_receta.hora = current_time(), " +
+                " tbcorpal_receta.coduser =  " +codUser+
+                " where tbcorpal_receta.codigo =" + codigoReceta;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet existeProductoAsignadoaReceta(int codigoProducto)
+        {
+            string consulta = "select * from tbcorpal_receta rr where rr.estado = 1 and rr.codproducto = "+codigoProducto;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool eliminar_insumoReceta(int codigoReceta, int codigoInsumo)
+        {
+            string consulta = "delete from tbcorpal_detingredienteinsumo " +
+                " where tbcorpal_detingredienteinsumo.codreceta =" + codigoReceta+" and "+
+                " tbcorpal_detingredienteinsumo.codinsumo = "+codigoInsumo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminar_insumoCompuestoReceta(int codigoReceta, int codigoInsumoCompuesto)
+        {
+            string consulta = "delete from tbcorpal_detingredienteinsumo " +
+                " where tbcorpal_detingredienteinsumo.codreceta =" + codigoReceta + " and "+
+                " tbcorpal_detingredienteinsumo.codinsumocreado = " + codigoInsumoCompuesto;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool update_recetaProducto(int codigoReceta, string receta, decimal cantpordia ,  bool condicionante)
+        {
+            string consulta = "update tbcorpal_receta set tbcorpal_receta.nombre = '"+receta+"', " +
+                " tbcorpal_receta.cantpordia = '"+cantpordia.ToString().Replace(",",".")+"', " +
+                " tbcorpal_receta.condicionante = " + condicionante +
+                " where tbcorpal_receta.codigo = " +codigoReceta;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_Receta(int codigoReceta)
+        {
+            string consulta = "select  rr.codigo, rr.nombre as 'Receta', rr.codproducto, pp.producto as 'Producto_Asociado',cantpordia, condicionante " +
+                 " from tbcorpal_receta rr, tbcorpal_producto pp  where  rr.codproducto = pp.codigo and rr.estado = 1 and pp.estado=1 and rr.codigo = "+codigoReceta;
+            return Conx.consultaMySql(consulta);
+        }
     }
 }

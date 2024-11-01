@@ -87,7 +87,8 @@ namespace jycboliviaASP.net.Presentacion
             string nombreResponsable = prefixText;
 
             NA_Responsables Nrespon = new NA_Responsables();
-            DataSet tuplas = Nrespon.mostrarSoloAutorizados_AutoComplit(nombreResponsable,"2,6,7,9,10,11,13");
+            //      DataSet tuplas = Nrespon.mostrarSoloAutorizados_AutoComplit(nombreResponsable,"2,6,7,9,10,11,13");
+            DataSet tuplas = Nrespon.mostrarTodos_AutoComplit(nombreResponsable);
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
 

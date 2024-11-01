@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using jycboliviaASP.net.Datos;
 using System.Data;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -207,7 +208,7 @@ namespace jycboliviaASP.net.Negocio
                         " ii.codigo = dins.codinsumocreado and" +
                         " dins.codinsumo = ins.codigo and " +
                         " ii.codigo = " + codigoInsumoCreado;
-                    if (i < cantFilas - 1)
+                    if (i < (cantFilas-1))
                     {
                         consultaArmada = consultaArmada + " UNION ";
                     }
@@ -242,6 +243,154 @@ namespace jycboliviaASP.net.Negocio
                 return true;
             }else
                 return false;
+        }
+
+        internal DataSet get_insumosNormal(string nombreInsumo)
+        {
+            return dproduccion.get_insumosNormal( nombreInsumo);
+        }
+
+        internal DataSet get_insumosCompuesto(string nombreInsumo)
+        {
+            return dproduccion.get_insumosCompuesto(nombreInsumo);
+        }
+
+        internal bool existeInsumo(string insumos)
+        {
+            DataSet tuplas = dproduccion.get_insumosNormalExacto(insumos);
+            if (tuplas.Tables[0].Rows.Count>0) {
+                return true;
+            }else
+                return false;
+        }
+
+        internal int get_codigoInsumo(string insumos)
+        {
+            DataSet tuplas = dproduccion.get_insumosNormalExacto(insumos);
+            if (tuplas.Tables[0].Rows.Count > 0)
+            {
+                int codigo;
+                int.TryParse(tuplas.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo;
+            }
+            else
+                return 0;
+        }
+
+        internal DataSet buscarRecetas(string receta)
+        {
+            return dproduccion.buscarRecetas( receta);
+        }
+
+        internal bool existeInsumoCompuesto(string insumosCompuesto)
+        {
+            DataSet tuplas = dproduccion.get_insumosCompuestoExacto(insumosCompuesto);
+            if (tuplas.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal int get_codigoInsumoCompuesto(string insumosCompuesto)
+        {
+            DataSet tuplas = dproduccion.get_insumosCompuestoExacto(insumosCompuesto);
+            if (tuplas.Tables[0].Rows.Count > 0)
+            {
+                int codigoInsumo;
+                int.TryParse(tuplas.Tables[0].Rows[0][0].ToString(), out codigoInsumo);
+                return codigoInsumo;
+            }
+            else
+                return 0;
+        }
+
+        internal DataSet get_productoAsignar(int codigoProductoAsignado)
+        {
+            return dproduccion.get_productoAsignar(codigoProductoAsignado);
+        }
+
+        internal DataSet get_insumosdeReceta(int codigoReceta)
+        {
+            return dproduccion.get_insumosdeReceta( codigoReceta);
+        }
+
+        internal DataSet get_insumosCompuestodeReceta(int codigoReceta)
+        {
+           return dproduccion.get_insumosCompuestodeReceta(codigoReceta);
+        }
+
+       
+
+        internal bool existeProductoAsignadoaReceta(int codigoProducto)
+        {
+            DataSet tupla = dproduccion.existeProductoAsignadoaReceta( codigoProducto);
+            if (tupla.Tables[0].Rows.Count > 0 ) { 
+                return true;
+            }else
+                return false;
+        }
+
+        internal bool insertarReceta(string receta, int codigoProducto, int coduser, decimal cantpordia, bool condicionante)
+        {
+            return dproduccion.insertarReceta( receta,  codigoProducto,  coduser,  cantpordia,  condicionante);
+        }
+
+        internal int get_codigoRecetaUltima(string receta, int codigoProducto)
+        {
+            DataSet tupla = dproduccion.get_codigoRecetaUltima( receta,  codigoProducto);
+            if (tupla.Tables[0].Rows.Count > 0) {
+                int codigo;
+                int.TryParse(tupla.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo;
+            }else
+                return 0;
+        }
+
+        internal bool insertarInsumoNormalReceta(int codigoReceta, int codigoInsumo, decimal cantidad, int coduser)
+        {
+            return dproduccion.insertarInsumoNormalReceta( codigoReceta, codigoInsumo, cantidad, coduser);
+        }
+
+        internal bool insertarInsumoCompuestoReceta(int codigoReceta, int codigoInsumoCompuesto, decimal cantidad , int coduser)
+        {
+            return dproduccion.insertarInsumoCompuestoReceta( codigoReceta, codigoInsumoCompuesto, cantidad, coduser);
+        }
+
+        internal bool eliminarInsumosNormalesAgregados(int codigoReceta)
+        {
+            return dproduccion.eliminarInsumosNormalesAgregados(codigoReceta);            
+        }
+
+        internal bool eliminarInsumosCompuestosAgregados(int codigoReceta)
+        {
+            return dproduccion.eliminarInsumosCompuestosAgregados(codigoReceta);
+        }
+
+        internal bool eliminar_Receta(int codigoReceta, int codUser)
+        {
+            return dproduccion.eliminar_Receta(codigoReceta, codUser);
+        }
+
+        internal bool eliminar_insumoReceta(int codigoReceta, int codigoInsumo)
+        {
+            return dproduccion.eliminar_insumoReceta( codigoReceta,  codigoInsumo);
+        }
+
+        internal bool eliminar_insumoCompuestoReceta(int codigoReceta, int codigoInsumoCompuesto)
+        {
+            return dproduccion.eliminar_insumoCompuestoReceta(codigoReceta, codigoInsumoCompuesto);
+        }
+
+        internal bool update_recetaProducto(int codigoReceta, string receta, decimal cantpordia, bool condicionante)
+        {
+            return dproduccion.update_recetaProducto( codigoReceta,  receta,  cantpordia,  condicionante);
+        }
+
+        internal DataSet get_Receta(int codigoReceta)
+        {
+            return dproduccion.get_Receta(codigoReceta);
         }
     }
 }
