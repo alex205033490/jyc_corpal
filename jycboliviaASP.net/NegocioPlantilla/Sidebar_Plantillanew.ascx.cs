@@ -60,7 +60,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_devolucionProductoTerminado.Visible = true;
             mn_AprobaciondevolucionProductoTerminado.Visible = true;
             mn_ordendeProduccion.Visible = true;
-
+            mn_recetas.Visible = true;
         }
 
 
@@ -170,6 +170,9 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 break;
                             case 131:
                                 mn_ordendeProduccion.Visible = true;
+                                break;
+                            case 132:
+                                mn_recetas.Visible = true;
                                 break;
                             default:
                                 Console.WriteLine("Default case");

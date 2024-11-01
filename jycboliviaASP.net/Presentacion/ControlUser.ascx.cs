@@ -58,6 +58,8 @@ namespace jycboliviaASP.net.Presentacion
             mn_AprobaciondevolucionProductoTerminado.Visible = false;
             mn_ordendeProduccion.Visible = false;
             
+
+
         }
 
 

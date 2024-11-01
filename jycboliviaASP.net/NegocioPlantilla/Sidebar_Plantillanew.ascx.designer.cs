@@ -132,13 +132,13 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_AprobaciondevolucionProductoTerminado;
 
         /// <summary>
-        /// Control A1.
+        /// Control mn_recetas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_recetas;
 
         /// <summary>
         /// Control mn_ordendeProduccion.

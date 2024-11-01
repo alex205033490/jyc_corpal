@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>F:\WebSite\jyc_naxSnax_New2</_PublishTargetUrl>
-    <History>True|2024-10-31T19:15:03.3483723Z||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
+    <History>True|2024-11-01T14:24:20.6660563Z||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -193,10 +193,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.dll">
-      <publishTime>10/31/2024 15:14:53</publishTime>
+      <publishTime>11/01/2024 10:24:17</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.pdb">
-      <publishTime>10/31/2024 15:14:53</publishTime>
+      <publishTime>11/01/2024 10:24:17</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1768,7 +1768,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/12/2024 09:46:49</publishTime>
     </File>
     <File Include="NegocioPlantilla/Sidebar_Plantillanew.ascx">
-      <publishTime>10/30/2024 16:47:25</publishTime>
+      <publishTime>11/01/2024 10:06:45</publishTime>
     </File>
     <File Include="PlantillaNew.Master">
       <publishTime>10/12/2024 09:46:49</publishTime>
