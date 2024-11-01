@@ -78,7 +78,7 @@
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
 
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
-            <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="A1" runat="server"><i class="bi bi-circle"></i><span>Agregar Nuevo Insumo Creado</span></a></li>
+            <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="A5" runat="server"><i class="bi bi-circle"></i><span>Agregar Nuevo Insumo Creado</span></a></li>
               
 
 
