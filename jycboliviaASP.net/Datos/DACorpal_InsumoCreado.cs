@@ -92,27 +92,24 @@ namespace jycboliviaASP.net.Datos
                 throw new ArgumentException("Cantidad no es un valor decimal válido.");
             }
 
-                string update = "CALL UpdateCantidadInsumo(" + codInsumoCreado + ", " + cantidadInsumo + ", " + codInsumo + ");";
-            MySqlCommand comando = new MySqlCommand(update);
-            return ConecIns.ejecutarMySql2(comando);
-            /*
-             DELIMITER //
-                CREATE PROCEDURE UpdateCantidadInsumo(
-                    IN p_codICreado INT,
-                    IN p_nuevaCantidad DECIMAL(10, 6),
-                    IN p_codInsumo INT
-                )
-                BEGIN
-                    UPDATE tbcorpal_insumo as ins
-                    INNER JOIN tbcorpal_detinsumocreado AS dic ON ins.codigo = dic.codinsumo
-                    INNER JOIN tbcorpal_insumoscreados AS ic ON ic.codigo = dic.codinsumocreado
-                    SET dic.cantidad = p_nuevaCantidad
-                    WHERE ic.codigo = p_codICreado
-                    AND ins.codigo = p_codInsumo;
-                END //
-                DELIMITER ;
-            */
+            // Usamos parámetros para prevenir inyección SQL
+            string update2 = @"
+                UPDATE tbcorpal_detinsumocreado AS dic
+                INNER JOIN tbcorpal_insumoscreados AS ic ON ic.codigo = dic.codinsumocreado
+                INNER JOIN tbcorpal_insumo AS ins ON ins.codigo = dic.codinsumo
+                SET dic.cantidad = @nuevaCantidad
+                WHERE ic.codigo = @codICreado AND ins.codigo = @codInsumo;";
 
+            using (MySqlCommand comando = new MySqlCommand(update2))
+            {
+                // Agregar parámetros a la consulta
+                comando.Parameters.AddWithValue("@nuevaCantidad", cantidadDecimal);
+                comando.Parameters.AddWithValue("@codICreado", codInsumoCreado);
+                comando.Parameters.AddWithValue("@codInsumo", codInsumo);
+
+                // Ejecutar la consulta
+                return ConecIns.ejecutarMySql2(comando);
+            }
         }
 
 
