@@ -305,7 +305,7 @@ namespace jycboliviaASP.net.Presentacion
                     string producto = dd_productosNax.SelectedItem.Text;
                     string Receta = tx_nameReceta.Text;
                     decimal cantidadPorDia;
-                    decimal.TryParse(tx_cantidadPorDia.Text.Replace(".", "."), out cantidadPorDia);
+                    decimal.TryParse(tx_cantidadPorDia.Text.Replace(".", ","), out cantidadPorDia);
                     bool consicionante = cbx_condicionante.Checked;
 
                     bool banderaUpdateReceta = pp.update_recetaProducto(codigoReceta, Receta, cantidadPorDia, consicionante);

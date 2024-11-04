@@ -129,16 +129,24 @@ namespace jycboliviaASP.net.Presentacion
            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
            string responsable = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-            float cantTurnoDia ;
-            float.TryParse(tx_cantTurnoDia.Text.Replace(".",","), out cantTurnoDia);
-            float cantTurnoTarde ;
-            float.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
-            float cantTurnoNoche ;
-            float.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
+            decimal cantTurnoDia ;
+            decimal.TryParse(tx_cantTurnoDia.Text.Replace(".",","), out cantTurnoDia);
+            decimal cantTurnoTarde ;
+            decimal.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
+            decimal cantTurnoNoche ;
+            decimal.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
 
           //  if (cantTurnoDia > 0 && cantTurnoTarde > 0 && cantTurnoNoche > 0) {
-                NCorpal_Produccion nproduccion = new NCorpal_Produccion();
-                float cantcajas;
+            NCorpal_Produccion nproduccion = new NCorpal_Produccion();
+            bool condicion = nproduccion.tieneCondidion_porProducto(codProducto);
+            if (condicion) {
+                decimal cantidadporDia = nproduccion.get_cantidadporDia_porProducto(codProducto);
+                cantTurnoDia = cantidadporDia * Math.Ceiling(cantTurnoDia/ cantidadporDia);
+                cantTurnoTarde = cantidadporDia * Math.Ceiling(cantTurnoTarde / cantidadporDia);
+                cantTurnoNoche = cantidadporDia * Math.Ceiling(cantTurnoNoche / cantidadporDia);
+            }
+
+                decimal cantcajas;
                 cantcajas = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
 
                 bool bandera = nproduccion.insertarOrdenProduccion(fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable, cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
@@ -240,17 +248,26 @@ namespace jycboliviaASP.net.Presentacion
             int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
             string responsable = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-            float cantTurnoDia;
-            float.TryParse(tx_cantTurnoDia.Text.Replace(".", ","), out cantTurnoDia);
-            float cantTurnoTarde;
-            float.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
-            float cantTurnoNoche;
-            float.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
+            decimal cantTurnoDia;
+            decimal.TryParse(tx_cantTurnoDia.Text.Replace(".", ","), out cantTurnoDia);
+            decimal cantTurnoTarde;
+            decimal.TryParse(tx_cantTurnoTarde.Text.Replace(".", ","), out cantTurnoTarde);
+            decimal cantTurnoNoche;
+            decimal.TryParse(tx_cantTurnoNoche.Text.Replace(".", ","), out cantTurnoNoche);
 
           /*  if (cantTurnoDia > 0 && cantTurnoTarde > 0 && cantTurnoNoche > 0)
             { */
                 NCorpal_Produccion nproduccion = new NCorpal_Produccion();
-                float cantcajas;
+            bool condicion = nproduccion.tieneCondidion_porProducto(codProducto);
+            if (condicion)
+            {
+                decimal cantidadporDia = nproduccion.get_cantidadporDia_porProducto(codProducto);
+                cantTurnoDia = cantidadporDia * Math.Ceiling(cantTurnoDia / cantidadporDia);
+                cantTurnoTarde = cantidadporDia * Math.Ceiling(cantTurnoTarde / cantidadporDia);
+                cantTurnoNoche = cantidadporDia * Math.Ceiling(cantTurnoNoche / cantidadporDia);
+            }
+
+            decimal cantcajas;
                 cantcajas = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
                 bool bandera = nproduccion.modificarOrdenProduccion(codigoOrden, fechaProduccion, codProducto, producto, cantcajas, medidaProduccion, detalleProduccion, codUser, responsable,cantTurnoDia,cantTurnoTarde,cantTurnoNoche);
                 if (bandera == true)

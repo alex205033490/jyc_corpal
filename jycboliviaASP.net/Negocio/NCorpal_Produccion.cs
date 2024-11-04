@@ -137,8 +137,8 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.get_datosOrdenProduccion(codigoOrden);
         }
 
-        internal bool insertarOrdenProduccion(string fechaproduccion, int codProductonax, string productoNax, float cantcajasproduccion,
-                                               string medida, string detalleproduccion,  int cod_respgra, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
+        internal bool insertarOrdenProduccion(string fechaproduccion, int codProductonax, string productoNax, decimal cantcajasproduccion,
+                                               string medida, string detalleproduccion,  int cod_respgra, string responsable, decimal cantturnodia, decimal cantturnotarde, decimal cantturnonoche)
         {
             return dproduccion.insertarOrdenProduccion( fechaproduccion, codProductonax, productoNax, cantcajasproduccion,
                                                 medida, detalleproduccion,  cod_respgra, responsable,  cantturnodia,  cantturnotarde,  cantturnonoche);
@@ -149,7 +149,7 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.eliminar_ordenProduccion( codigoOrden);
         }
 
-        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
+        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, decimal cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, decimal cantturnodia, decimal cantturnotarde, decimal cantturnonoche)
         {
             return dproduccion.modificarOrdenProduccion( codigoOrden,  fechaProduccion,  codProducto,  producto,  cantcajas, medidaProduccion, detalleProduccion, codUser, responsable,  cantturnodia,  cantturnotarde,  cantturnonoche);
         }
@@ -391,6 +391,85 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_Receta(int codigoReceta)
         {
             return dproduccion.get_Receta(codigoReceta);
+        }
+
+        internal bool tieneCondidion(int codigoOrdenProduccion)
+        {
+            DataSet tuplas = dproduccion.tieneCondidion(codigoOrdenProduccion);
+            try
+            {
+                if (tuplas.Tables[0].Rows.Count > 0) {
+                    bool tieneCondicion = Convert.ToBoolean(tuplas.Tables[0].Rows[0][2].ToString());
+                    return tieneCondicion;
+                }else
+                    return false;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
+
+        }
+
+        internal bool tieneCondidion_porProducto(int codigoOrdenProduccion)
+        {
+            DataSet tuplas = dproduccion.tieneCondidion_porProducto(codigoOrdenProduccion);
+            try
+            {
+                if (tuplas.Tables[0].Rows.Count > 0)
+                {
+                    bool tieneCondicion = Convert.ToBoolean(tuplas.Tables[0].Rows[0][2].ToString());
+                    return tieneCondicion;
+                }
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        internal decimal get_cantidadporDia(int codigoOrdenProduccion)
+        {
+            DataSet tuplas = dproduccion.tieneCondidion(codigoOrdenProduccion);
+            try
+            {
+                if (tuplas.Tables[0].Rows.Count > 0)
+                {
+                    decimal cantidadDias;
+                    decimal.TryParse(tuplas.Tables[0].Rows[0][3].ToString().Replace(".",","), out cantidadDias);
+                    return cantidadDias;
+                }
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        internal decimal get_cantidadporDia_porProducto(int codProducto)
+        {
+
+            DataSet tuplas = dproduccion.tieneCondidion_porProducto(codProducto);
+            try
+            {
+                if (tuplas.Tables[0].Rows.Count > 0)
+                {
+                    decimal cantidadDias;
+                    decimal.TryParse(tuplas.Tables[0].Rows[0][3].ToString().Replace(".", ","), out cantidadDias);
+                    return cantidadDias;
+                }
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
     }
 }

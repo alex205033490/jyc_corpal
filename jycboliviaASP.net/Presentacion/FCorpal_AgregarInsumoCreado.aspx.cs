@@ -13,6 +13,7 @@ using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using jycboliviaASP.net.DatosSimec;
+using System.Configuration;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -21,7 +22,8 @@ namespace jycboliviaASP.net.Presentacion
         private DataTable insumosTable
         {
             get
-            {
+            {               
+
                 if (ViewState["Insumos"] == null)
                 {
                     DataTable dt = new DataTable();
@@ -32,18 +34,36 @@ namespace jycboliviaASP.net.Presentacion
                     ViewState["Insumos"] = dt;
                 }
                 return (DataTable)ViewState["Insumos"];
-
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            this.Title = Session["BaseDatos"].ToString();
+            if (tienePermisoDeIngreso(133) == false)
+            {
+                string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+            }
+
+            if (!IsPostBack)
             {
                 gv_insumoCreado.DataSource = insumosTable;
                 gv_insumoCreado.DataBind();
             }
         }
-       
+
+
+        private bool tienePermisoDeIngreso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            NA_DetallePermiso npermiso = new NA_DetallePermiso();
+            return npermiso.tienePermisoResponsable(permiso, codUser);
+        }
+
         // ELIMINAR FILA DEL GV
         protected void gv_insumoCreado_RowCommand(object sender, GridViewCommandEventArgs e)
         {

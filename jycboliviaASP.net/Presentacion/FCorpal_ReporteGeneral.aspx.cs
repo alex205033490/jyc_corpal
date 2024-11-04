@@ -75,7 +75,7 @@ namespace jycboliviaASP.net.Presentacion
             decimal cantTurnoNoche;
             decimal.TryParse(datoGeneral.Tables[0].Rows[0][10].ToString().Replace(".", ","), out cantTurnoNoche);
             decimal canttotal = cantTurnoDia + cantTurnoTarde + cantTurnoNoche;
-
+                        
             DataSet tuplaDia = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoDia);
             DataSet tuplaTarde = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoTarde);
             DataSet tuplaNoche = npro.get_insumosporProductoNormal(codNax, producto, cantTurnoNoche);

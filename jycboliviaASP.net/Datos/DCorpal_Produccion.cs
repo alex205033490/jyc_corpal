@@ -540,9 +540,9 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
-        internal bool insertarOrdenProduccion( string fechaproduccion,int codProductonax,string productoNax,float cantcajasproduccion,
+        internal bool insertarOrdenProduccion( string fechaproduccion,int codProductonax,string productoNax, decimal cantcajasproduccion,
                                                string medida,string detalleproduccion,int cod_respgra,string responsable,
-                                               float cantturnodia, float cantturnotarde, float cantturnonoche)
+                                               decimal cantturnodia, decimal cantturnotarde, decimal cantturnonoche)
         {
             string consulta = "insert into tbcorpal_ordenproduccion( "+
                                 " fechagra, "+
@@ -590,7 +590,7 @@ namespace jycboliviaASP.net.Datos
             return Conx.ejecutarMySql(consulta);
         }
 
-        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, float cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, float cantturnodia, float cantturnotarde, float cantturnonoche)
+        internal bool modificarOrdenProduccion(int codigoOrden, string fechaProduccion, int codProducto, string producto, decimal cantcajas, string medidaProduccion, string detalleProduccion, int codUser, string responsable, decimal cantturnodia, decimal cantturnotarde, decimal cantturnonoche)
         {
             string consulta = "update tbcorpal_ordenproduccion set " +
                                 " tbcorpal_ordenproduccion.fechaproduccion = "+fechaProduccion+", " +
@@ -880,6 +880,23 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "select  rr.codigo, rr.nombre as 'Receta', rr.codproducto, pp.producto as 'Producto_Asociado',cantpordia, condicionante " +
                  " from tbcorpal_receta rr, tbcorpal_producto pp  where  rr.codproducto = pp.codigo and rr.estado = 1 and pp.estado=1 and rr.codigo = "+codigoReceta;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet tieneCondidion(int codigoOrdenProduccion)
+        {
+            string consulta = "select  re.codigo, re.nombre, re.condicionante, re.cantpordia " +
+                " from tbcorpal_ordenproduccion oo, tbcorpal_producto pp ,  tbcorpal_receta re " +
+                " where  oo.codProductonax = pp.codigo and re.codproducto = pp.codigo and oo.codigo = "+codigoOrdenProduccion;
+            return Conx.consultaMySql(consulta);
+
+        }
+
+        internal DataSet tieneCondidion_porProducto(int codigoProducto)
+        {
+            string consulta = "select  re.codigo, re.nombre, re.condicionante, re.cantpordia " +
+                 " from  tbcorpal_producto pp ,  tbcorpal_receta re " +
+                 " where re.codproducto = pp.codigo and pp.codigo = " + codigoProducto;
             return Conx.consultaMySql(consulta);
         }
     }
