@@ -8,7 +8,7 @@
 
 <asp:Content ID="Contentn2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
-        <div class="row">
+        <div class="">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-success class">
 
@@ -19,8 +19,8 @@
                             <h3 class="text_tittle p-3">Registro Produccion (F)</h3>
                         </div>
 
+                        <!--  FORMULARIO PARA REGISTRAR PRODUCCION  -->
                         <div class="form_col1 row">
-
                             <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-5 col-lg-5">
                                 <div class="col-9 col-sm-12 col-md-12 col-lg-9">
                                     <label class="form-label">Referencia:</label>
@@ -54,28 +54,28 @@
                                     <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
-
                         </div>
 
-
+                        <!--  lista add productos  -->
                         <div class="container_formADDProducto col-lg-12">
                             <div class="container_subtittle mb-2">
-                                <asp:Label CssClass="text_tittle" runat="server" Text=" Detalle Producto "></asp:Label><br />
+                                
+                                <h5 CssClass="text_tittle" runat="server">Detalle Producto</h5>
                             </div>
                             
                             <div class="row col-lg-12">
+                                <!--  columna 1  -->
                                 <div class="table-responsive col-sm-8 col-md-8 col-lg-8">
                                     <table id="tblDetalleProductoProduccion" border="1" class="table_ADDProd table-bordered table-striped col-sm-12 col-md-10 col-lg-12">
                                         <thead class="table_tr">
                                             <tr>
-                                                <th class="th_cprod">Codigo Producto</th>
-                                                <th class="th_cant">Cantidad</th>
-                                                <th class="th_umed">Unidad Medida</th>
-                                                <th class="th_crec">Codigo Receta</th>
+                                                <th class="th_cprod txt-center">Codigo Producto</th>
+                                                <th class="th_cant txt-center">Cantidad</th>
+                                                <th class="th_umed txt-center">Unidad Medida</th>
+                                                <th class="th_crec txt-center">Codigo Receta</th>
                                             </tr>
                                         </thead>
                                         <tr>
-
                                             <td>
                                                 <input class="inputText" type="text" name="codigoProducto0" /></td>
                                             <td>
@@ -87,34 +87,31 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <!--  columna 2  -->
                                 <div class="container_btn col-sm-4 col-md-4 col-lg-4 d-flex flex-column align-items-center">
-                                    <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-secondary mb-2" OnClientClick="addRowProduccion(); return false" />
-                                    <asp:Button ID="btn_Prod_parteProd" runat="server" Text="Registrar Produccion" CssClass="btn btn-success" OnClick="btn_Insert_parteProd_Click" />
-
-                                    <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                                    <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-secondary mb-2 btn-sm" OnClientClick="addRowProduccion(); return false" />
+                                    <asp:Button ID="btn_Prod_parteProd" runat="server" Text="Registrar Produccion" CssClass="btn btn-success btn-sm" OnClick="btn_Insert_parteProd_Click" />
                                 </div>
-
-
-
                             </div>
-
-                            <br />
                         </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
-
+                <br />
         <!---------------------------------------       API GET PRODUCCION DETALLE  (Muestra datos vacios)  ------------------------------------------------->
-        <div class="container_GETProduccionDet p-4 rounded">
-            <div>
-                <h3 class="text-warning">Vista Produccion Detalle (F)</h3>
+        <div class="container-GETProduccionDet p-4 rounded">
+            <div class="container_tittle rounded">
+                <h3 class="text_tittle p-3">Vista Produccion Detalle (F)</h3>
             </div>
 
-            <div class="container_input mb-3">
-                <label class="form-label">Numero Parte de Produccion:</label>
-                <asp:TextBox ID="txt_numProduccion1" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:Button ID="btn_buscProduccion" runat="server" Text="Buscar Produccion" CssClass="btn btn-warning" OnClick="btn_buscProduccion_Click" />
+            <div class="container_input mb-3 row">
+                <div class="container_textbox col-6 col-sm-4 col-md-4 col-lg-4">
+                    <label class="form-label">Numero Parte de Produccion:</label>
+                    <asp:TextBox ID="txt_numProduccion1" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col-4 col-sm-4 col-md-2 align-items-end d-flex">
+                    <asp:Button ID="btn_buscProduccion" runat="server" Text="Buscar Produccion" CssClass="btn btn-dark btn-sm" OnClick="btn_buscProduccion_Click" />
+                </div>
             </div>
 
 
@@ -159,6 +156,9 @@
                 </asp:GridView>
             </div>
         </div>
+            </div>
+        </div>
+
         </div>
         <br />
         <script src="../js/jsApi.js" type="text/javascript"></script>
