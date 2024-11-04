@@ -120,7 +120,7 @@
 
 
             <div class="container_gv1">
-                <asp:GridView ID="gv_1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
+                <asp:GridView ID="gv_produccion" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
                     CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
                     <Columns>

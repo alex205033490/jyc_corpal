@@ -391,5 +391,10 @@ namespace jycboliviaASP.net.Presentacion
             }
 
         }
+
+        protected void txt_Nombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
