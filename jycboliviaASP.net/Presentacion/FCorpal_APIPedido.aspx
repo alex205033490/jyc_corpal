@@ -9,32 +9,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
-                    <div>
-                        <asp:Label CssClass="text_tittle1" runat="server" Text="Label"> PEDIDOS </asp:Label><br />
-                        <br />
-                    </div>
 
 <!------------------------          API GET PEDIDO CON CRITERIO DETALLE (numero pedido)          ------------------------------>
                     
-                    <div class="form_getPedidoDet p-4 bg-light border rounded col-md-12 col-lg-12" >
-                        <h2 class="text_tittle2">Detalles del Pedido</h2>
-                        <div class="container_pedidos col-md-12 col-lg-12">
+                    <div class="container-GETPedidoDet p-4 rounded col-md-12 col-lg-12">
+                        <div class="container_tittle rounded">
+                            <h5 class="text_tittle p-3">Vista Detalles del Pedido</h5>
+                        </div>
+                    
 
                         <div class="container_input row mb-4">
 
-                            <div class="col-md-6 col-lg-6 mb-2">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                 <label class="form-label" for="TextBox1">Numero de Pedido:</label>
                                 <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de pedido"></asp:TextBox>
                             </div>
 
-                            <div class="container_btn col-md-6 col-lg-6 d-flex align-items-end">
-                                <asp:Button ID="btn_buscarPedidoCriterio" runat="server" Text="Buscar Pedido" CssClass="btn btn-warning" OnClick="btn_buscarPedidoCriterio_Click" />
+                            <div class="col-4 col-sm-5 col-md-3 col-lg-3 d-flex align-items-end">
+                                <asp:Button ID="btn_buscarPedidoCriterio" runat="server" Text="Buscar Pedido" CssClass="btn btn-dark btn-sm" OnClick="btn_buscarPedidoCriterio_Click" />
                             </div>
 
                         </div>
-
+                        <!--  container gv1  -->
                                 <div class="container_gv1 col-sm-12 col-md-12 col-lg-12 mb-2">
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                         <Columns>
@@ -59,7 +57,7 @@
                                         <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                                     </asp:GridView>
                                 </div>
-
+                        <!--  container gv2  -->
                                 <div class="container_gv2 col-sm-12 col-md-10 col-lg-12">
                                     <asp:GridView ID="gv_detalleProd" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
@@ -85,32 +83,31 @@
                                         <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                                     </asp:GridView>
                                 </div>
-                            </div>
-                            </div>
-                        
-                        <br>
+                            </div>                        
+                        <br/>
 
 
 <!------------------------          API GET PEDIDO C/S CRITERIO          ------------------------------>
                
-                <div class="form_getPedido p-4 bg-light border rounded col-md-12 col-lg-12">
-                    <h5 class="text_tittle2">Ver Pedidos</h5>
-
-                    <div class="container_input row mb-4">
-                    <div class="col-md-6 col-lg-6 mb-2"> 
-                        <label class="form-label" for="TextBox2">Numero de Pedido:</label>
-                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todos los registros."></asp:TextBox>
-                        <small class="form-text text-muted"></small>
+                <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
+                    <div class="container_tittle rounded">
+                        <h5 class="text_tittle2 p-3">Vista de Pedidos</h5>
                     </div>
 
-                    <div class="container_btn col-md-6 d-flex col-lg-6 align-items-end">
-                        <asp:Button ID="btn_buscarPedido" runat="server" Text="Buscar" CssClass="btn btn-warning" OnClick="btn_buscarPedido_Click" />
+                    <div class="container_input row mb-4">
+                    <div class=" col-7 col-sm-6 col-md-5 col-lg-4 mb-2"> 
+                        <label class="form-label" for="TextBox2">Numero de Pedido:</label>
+                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío."></asp:TextBox>
+                    </div>
+
+                    <div class="container_btn col-4 col-sm-3 col-md-3 col-lg-3 d-flex align-items-end">
+                        <asp:Button ID="btn_buscarPedido" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarPedido_Click" />
                     </div>
 
                         </div>
                         <div class="container_gv3">
 
-                            <asp:GridView ID="gv_pedido" runat="server" CssClass="gridview" AutoGenerateColumns="false">
+                            <asp:GridView ID="gv_pedido" runat="server" CssClass="gridview" AutoGenerateColumns="false" >
 
                                 <Columns>
                                     <asp:BoundField DataField="NumeroPedido" HeaderText="Numero Pedido" SortExpression="nPed" />
@@ -137,51 +134,32 @@
 
 
 <!------------------------          API POST PEDIDO           ------------------------------>
-                    <script>
-                        function addRowPedido() {
-                            var table = document.getElementById("tblDetalleProductosPedido");
-                            var rowCount = table.rows.length;
-                            var row = table.insertRow(rowCount);
-                            row.innerHTML =
-                                `
-                                <td><input class="form-control" type='text' name='codigoProducto${rowCount}' /></td>
-                                 <td><input class="form-control" type='number' step="0.01" name='cantidad${rowCount}' /></td>
-                                 <td><input class="form-control" type='number' name='codigoUnidadMedida${rowCount}' /></td>
-                                 <td><input class="form-control" type='number' step="0.01" name='precioUnitario${rowCount}' /></td>
-                                 <td><input class="form-control" type='number' step="0.01" name='importeDescuento${rowCount}' /></td>
-                                 `;
-                        }
-                    </script>
-
-                <div class="POST_inventarioIngreso p-4 bg-light border rounded">
-                    <h5 class="text_tittle2">Formulario Registro De Pedido</h5>
-                    
-
-                    <div class="row mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="col-md-4">
-                            <label class="form-label">Referencia:</label>
-                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Codigo Cliente:</label>
-                            <asp:TextBox ID="txt_codCliente" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
+                <div class="container-POSTPedido p-4 rounded">
+                    <div class="container_tittle rounded">
+                        <h5 class="text_tittle p-3">Formulario Registro De Pedido</h5>
                     </div>
 
                     <div class="row mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="col-md-4">
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <label class="form-label">Referencia:</label>
+                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <label class="form-label">Codigo Cliente:</label>
+                            <asp:TextBox ID="txt_codCliente" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-3">
                             <label class="form-label" >Importe Descuentos:</label>
                             <asp:TextBox ID="txt_impDescuentos" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-6 col-sm-6 col-md-3">
                             <label class="form-label" ">Glosa:</label>
                             <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                         </div>
                     </div>
-
-                    <div class="form_detalleProducto col-md-12">
-                        <label class="form-label">Detalle Producto</label>
-
+                    <!--  Detalle Productos  -->
+                    <div class="form_detalleProducto  col-md-8">
+                        <h5 runat="server" > Detalle Productos</h5>
                         <div class="table-detProducto">
                             <table id="tblDetalleProductosPedido" class="table table-bordered table-striped">
                                 <thead>
@@ -209,19 +187,15 @@
                                 </tbody>
                             </table>
                         </div>
-                        <br />
-                        <asp:Button ID="Button1" runat="server" Text="Agregar Fila" CssClass="btn btn-warning" OnClientClick="addRowPedido(); return false;" />
-                        <asp:Button ID="btn_PostPedido" runat="server" Text="Registrar Pedido " CssClass="btn btn-warning" OnClick="btn_PostPedido_Click" />
-                        <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                        <asp:Button ID="Button1" runat="server" Text="Agregar Fila" CssClass="btn btn-success btn-sm" OnClientClick="addRowPedido(); return false;" />
+                        <asp:Button ID="btn_PostPedido" runat="server" Text="Registrar Pedido " CssClass="btn btn-success btn-sm" OnClick="btn_PostPedido_Click" />
+                        
                     </div>
 
-                    
                 </div>
-                    <br>
-                    <br>
                 </div>
             </div>
         </div>
     </div>
-
+        <script src="../js/jsApi.js" type="text/javascript"></script>
 </asp:Content>

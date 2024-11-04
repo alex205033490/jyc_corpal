@@ -58,11 +58,11 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 var result = await api.PostParteProduccionAsync(parteProd, token);
-                lblResult.Text = $"Numero Produccion: {result}";
+                
             }
             catch (Exception ex) 
             {
-                lblResult.Text = $"Error: {ex.Message}";
+                Console.WriteLine("Error: " + ex);
             }
             ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Produccion registrado exitosamente.');", true);
         }
