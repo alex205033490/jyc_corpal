@@ -362,7 +362,13 @@ namespace jycboliviaASP.net.Presentacion
                 if (resultado)
                 {
                     Response.Write("<script>alert('Insumo Insertado Correctamente');</script>");
+
                     MostrarInsumosPorCodigo(codinsumoCreado);
+
+                    txt_MInsumoCodigo.Text = "";
+                    txt_MInsumoNombre.Text = "";
+                    txt_MInsumoCantidad.Text = "";
+                    txt_MInsumoMedida.Text = "";
                 }
                 else
                 {
@@ -410,6 +416,27 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Write($"<script>alert('Por Favor, Ingrese un valor valido a Eliminar.');</script>");
             }
 
+        }
+
+        protected void txt_Nombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            txt_MInsumoCodigo.Text = "";
+            txt_MInsumoNombre.Text = "";
+            txt_MInsumoCantidad.Text = "";
+            txt_MInsumoMedida.Text = "";
+
+            txt_MCodICreado.Text = string.Empty;
+            txt_MMedida.Text = string.Empty;
+            txt_MNombre.Text = string.Empty;
+            txt_MInsumoCreado.Text = string.Empty;
+
+            gv_MODInsumoCreado.DataSource = null;
+            gv_MODInsumoCreado.DataBind();
         }
     }
 }

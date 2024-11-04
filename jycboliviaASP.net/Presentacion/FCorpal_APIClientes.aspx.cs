@@ -153,7 +153,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             try
             {
-                await RegisterClienteAsync();
+                await RegisterEmpresaAsync();
             }
             catch(Exception ex)
             {
@@ -226,19 +226,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected async void btn_buscar_CliEmpr_Click(object sender, EventArgs e)
         {
-            string criterioBusqueda = txt_filtroBusqueda.Text;
-            if (string.IsNullOrEmpty(criterioBusqueda)) 
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "aler('Por favor, ingrese un valor para realizar su busqueda ');", true);
-                return;
-            }
-            NA_APIclientes pp = new NA_APIclientes();
-            List<ClienteEmpresaGetDTO> personas = await pp.get_ClientesPersonasAsync("adm", "123", criterioBusqueda);
 
-            GridView1.DataSource = personas;
-            GridView1.DataBind();
-
-            /*
             string criterioBusqueda = txt_filtroBusqueda.Text;
             NA_APIclientes pp = new NA_APIclientes();
 
@@ -262,7 +250,7 @@ namespace jycboliviaASP.net.Presentacion
                 // Muestra un mensaje de error o maneja la validación
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese un valor para realizar su busqueda.');", true);
                 return;
-            }*/
+            }
 
         }
     }
