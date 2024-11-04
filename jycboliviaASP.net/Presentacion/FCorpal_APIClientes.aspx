@@ -133,7 +133,7 @@
                                 <asp:TextBox ID="txt_filtroBusqueda" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <asp:Button ID="btn_buscar_CliEmpr" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="btn_buscar_CliEmpr_Click" />
+                                <asp:Button ID="btn_buscar_CliEmpr" runat="server" Text="Buscar" CssClass="btn btn-info" OnClick="btn_buscar_CliEmpr_Click" />
                             </div>
                         </div>
                         <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">

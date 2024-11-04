@@ -4,6 +4,23 @@
     margin: 0;
 }
 
+/********************************   FCORPAL APIClientes  ********************************/
+.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
+/********************************   FCORPAL APIProductos  ********************************/
+.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
+.container-GETProductosCodigo {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
+
 /********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
 .container-GETIIngresoDet, .container-GETIIngreso, container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet {
     background-color: #ff75000a;
@@ -12,11 +29,40 @@
     font-size: small;
 }
 
-#tblDetalleProductosIngresos tr th {
-    font-size: 0.8rem;
-    color: black;
+/********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
+.container-POSTProduccion {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
 }
-
+.table_tr {
+    color: #ffffff;
+    background-color: #375d4ba8;
+    text-align: center; /* Centra el texto horizontalmente */
+    font-family: 'Arial', sans-serif; /* Cambia la fuente a Arial (puedes cambiarla a la que desees) */
+    padding: 10px; /* Espaciado interno para mejor apariencia */
+}
+.table_ADDProd {
+    width: 100%;
+    margin-bottom: 1rem;
+    
+}
+.th_cprod {
+    width: 15%;
+}
+.th_cant {
+    width: 15%;
+}
+.th_umed {
+    width: 15%;
+}
+.th_crec {
+    width: 15%;
+}
+input.inputText, input.inputNumber {
+    width: 100%; /* Para que los inputs ocupen todo el ancho de la celda */
+}
 
 
 
@@ -48,7 +94,7 @@
     /* Bordes del contenedor */
     font-size: small;
 }
-#tblDetalleProductosPedido, #tblAddInsumo tr th {
+#tblDetalleProductosPedido {
     font-size: 0.8rem;
     color: black;
 }
@@ -70,6 +116,7 @@
     padding: 10px; /* Espacio alrededor del botón */
     color:white;
 }
+
 .btn-info{
     color:white;
 }
@@ -83,18 +130,51 @@
         transform: scale(1.02); /* Efecto de pulsación */
     }
 
-.btn-warning {
-    background-color: #ff8000; /* Color de fondo */
-    border: none; /* Eliminar el borde */
-    color: white; /* Color del texto */
-    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+.btn-success {
+    color: white;
 }
 
-    .btn-warning:hover {
-        background-color: #e67000; /* Color en hover */
-        transform: scale(1.05); /* Efecto de aumento */
-        color: white; /* Color del texto */
+    .btn-success:hover {
+        color: white;
+        background-color: #1e7e34; /* Un poco más oscuro que el original */
+        transform: scale(1.05); /* Efecto de ampliación al pasar el mouse */
     }
+
+    .btn-success:active {
+        box-shadow: 0 0 5px #1e7e34, 0 0 10px #1e7e34; /* Sombra al hacer clic */
+        transform: scale(1.02); /* Efecto de pulsación */
+    }
+
+.btn-danger {
+    color: white;
+}
+
+    .btn-danger:hover {
+        color: white;
+        background-color: #c82333; /* Un poco más oscuro que el original */
+        transform: scale(1.05); /* Efecto de ampliación al pasar el mouse */
+    }
+
+    .btn-danger:active {
+        box-shadow: 0 0 5px #c82333, 0 0 10px #c82333; /* Sombra al hacer clic */
+        transform: scale(1.02); /* Efecto de pulsación */
+    }
+
+.btn-dark {
+    color: white;
+}
+
+    .btn-dark:hover {
+        color: white;
+        background-color: #343a40; /* Un poco más oscuro que el original */
+        transform: scale(1.05); /* Efecto de ampliación al pasar el mouse */
+    }
+
+    .btn-dark:active {
+        box-shadow: 0 0 5px #343a40, 0 0 10px #343a40; /* Sombra al hacer clic */
+        transform: scale(1.02); /* Efecto de pulsación */
+    }
+
 
 
 /******************    TextBox API         *****************************/
@@ -136,7 +216,7 @@
     }
 
 
-/************************    Gv API         *****************************/
+/************************        GRIDVIEW         *****************************/
 .gridview {
     border-color: white; /* Color del borde */
     border-style: solid; /* Estilo del borde */
@@ -195,33 +275,12 @@
         background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important; /* Color del encabezado ordenado descendentemente */
     }
 
-
-
-
-
-
-/*################################################          API          ################################################*/
-
-/********************************   FCORPAL APIClientes  ********************************/
-.container-POSTPersona, .container-POSTEmpresa, .container-GETClientes {
-    background-color: #ff75000a;
-    border: 2px solid #7D7D7D; /* Color plomo */
-    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
-    font-size: small;
-}
-
-/********************************   FCORPAL APIProductos  ********************************/
-.container-GETProductosNombre, .container-GETProductosVentas, .container-GETProductosCompras,
-.container-GETProductosCodigo {
-    background-color: #ff75000a;
-    border: 2px solid #7D7D7D; /* Color plomo */
-    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
-    font-size: small;
+#tblAddInsumo tr th{
+    color:white;
 }
 
 
-
-
+/*################################################         ################################################*/
 /********************************    FCORPAL INSUMO-CREADO      ********************************/
 .container-ICreadoADD {
     border: 2px solid #7D7D7D; /* Color plomo */
@@ -272,14 +331,25 @@
 /*       custom-width form-text       */
 .custom-width-text {
     width: 180px;
+    color:white;
+}
+.custom-width-textBuscardor {
+    width: 220px;
 }
 .custom-width-number {
+    color:white;
     width:20px;
 }
-.container-ICreadoC2, .container-ICreadoC1 {
+.container-ICreadoModf1, .container-ICreadoModf2 {
     border: 2px solid #00000026; /* Cambia el color y el grosor del borde aquí */
     border-radius: 25px; /* Bordes redondeados */
     padding: 10px; /* Espacio interno */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
+.table thead th {
+    background-color: #678d57db;
+    font-family: "Nunito", sans-serif;
+    font-size: small;
+    color:white;
+}

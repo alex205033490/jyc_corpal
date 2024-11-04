@@ -15,6 +15,15 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
+        /// Control Panel_INSERTIC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_INSERTIC;
+
+        /// <summary>
         /// Control txt_nomInsumoCreado.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_registrarICreado2;
+
+        /// <summary>
+        /// Control Panel_ADDInsumo2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_ADDInsumo2;
 
         /// <summary>
         /// Control txt_codInsumo.
@@ -105,6 +123,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_insumoCreado;
 
         /// <summary>
+        /// Control Panel_BuscarIC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_BuscarIC;
+
+        /// <summary>
         /// Control txt_MInsumoCreado.
         /// </summary>
         /// <remarks>
@@ -130,6 +157,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_BuscarInsumoCreado;
+
+        /// <summary>
+        /// Control Panel_ADDINuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_ADDINuevo;
 
         /// <summary>
         /// Control txt_MInsumoCodigo.
@@ -220,6 +256,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_DeleteIC;
+
+        /// <summary>
+        /// Control Panel_ICUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_ICUpdate;
 
         /// <summary>
         /// Control gv_MODInsumoCreado.
