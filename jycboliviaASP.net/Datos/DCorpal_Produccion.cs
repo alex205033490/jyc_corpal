@@ -5,6 +5,7 @@ using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using jycboliviaASP.net.Presentacion;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -897,6 +898,48 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select  re.codigo, re.nombre, re.condicionante, re.cantpordia " +
                  " from  tbcorpal_producto pp ,  tbcorpal_receta re " +
                  " where re.codproducto = pp.codigo and pp.codigo = " + codigoProducto;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal bool insertarInsumoSolo(string insumos, string codigoGrupo, string codigoUpon, string medida, string detalle, int codUser)
+        {
+            string consulta = "insert into tbcorpal_insumo(nombre,descripcion,Medida,codgrupo,codigoupon,estado,fechagra,horagra,coduser) " +
+                " values('"+insumos+"','"+detalle+"','"+medida+"','"+codigoGrupo+"','"+codigoUpon+"',1, current_date(), current_time(), "+codUser+");";
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool modificarInsumoSolo(int codigo, string insumos, string codigoGrupo, string codigoUpon, string medida, string detalle, int codUser)
+        {
+            string consulta = "update tbcorpal_insumo set " +
+                              " tbcorpal_insumo.nombre = '"+insumos+"', " +
+                              " tbcorpal_insumo.descripcion = '"+detalle+"', " +
+                              " tbcorpal_insumo.Medida = '"+medida+"'," +
+                              " tbcorpal_insumo.codgrupo = '"+codigoGrupo+"'," +
+                              " tbcorpal_insumo.codigoupon = '"+codigoUpon+"'," +
+                              " tbcorpal_insumo.fechagra = current_date()," +
+                              " tbcorpal_insumo.horagra = current_time()," +
+                              " tbcorpal_insumo.coduser = " +codUser +
+                              " where " +
+                              " tbcorpal_insumo.codigo = "+codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal bool eliminarInsumoSolo(int codigo, int codUser)
+        {
+            string consulta = "update tbcorpal_insumo set " +                              
+                              " tbcorpal_insumo.fechagra = current_date()," +
+                              " tbcorpal_insumo.horagra = current_time()," +
+                              " tbcorpal_insumo.estado = 0," +
+                              " tbcorpal_insumo.coduser = " + codUser +
+                              " where " +
+                              " tbcorpal_insumo.codigo = " + codigo;
+            return Conx.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_insumosCodigo(int codigo)
+        {
+            string consulta = "select  codigo,  nombre,  descripcion,  Medida,   codgrupo,  codigoupon " +
+                " from tbcorpal_insumo ii where ii.codigo = "+codigo;
             return Conx.consultaMySql(consulta);
         }
     }

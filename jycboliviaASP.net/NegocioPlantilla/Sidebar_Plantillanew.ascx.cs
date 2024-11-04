@@ -24,43 +24,45 @@ namespace jycboliviaASP.net.NegocioPlantilla
         public void negarTodo()
         {
 
-            mn_gestionarFormularios.Visible = true;
-            mn_gestionarPermisos.Visible = true;
-            mn_gestionarResponsable.Visible = true;
+            mn_gestionarFormularios.Visible = false;
+            mn_gestionarPermisos.Visible = false;
+            mn_gestionarResponsable.Visible = false;
 
-            mn_SGI.Visible = true;
-            mn_agenda.Visible = true;
-            mn_conciliacionBancaria.Visible = true;
-            mn_movimientoCheques.Visible = true;
-            mn_saldosCuentasGeneral.Visible = true;
-            mn_facturacion.Visible = true;
-            mn_agendaTrabajo.Visible = true;
-            mn_actividades.Visible = true;
+            mn_SGI.Visible = false;
+            mn_agenda.Visible = false;
+            mn_conciliacionBancaria.Visible = false;
+            mn_movimientoCheques.Visible = false;
+            mn_saldosCuentasGeneral.Visible = false;
+            mn_facturacion.Visible = false;
+            mn_agendaTrabajo.Visible = false;
+            mn_actividades.Visible = false;
             //--------------------------------            
 
-            mn_gestionarTiendaPropietario.Visible = true;
-            mn_rutaEntrega.Visible = true;
-            mn_regiboIngreso.Visible = true;
-            mn_regiboEgreso.Visible = true;
+            mn_gestionarTiendaPropietario.Visible = false;
+            mn_rutaEntrega.Visible = false;
+            mn_regiboIngreso.Visible = false;
+            mn_regiboEgreso.Visible = false;
 
-            mn_consultaIngresoEgreso.Visible = true;
-            mn_solicitudproductos.Visible = true;
-            mn_entregaSolicitudProducto.Visible = true;
-            mn_detallesolicitudproductos.Visible = true;
-            mn_entregaProduccion.Visible = true;
-            mn_activosjyc.Visible = true;
-            mn_consultaActividades.Visible = true;
+            mn_consultaIngresoEgreso.Visible = false;
+            mn_solicitudproductos.Visible = false;
+            mn_entregaSolicitudProducto.Visible = false;
+            mn_detallesolicitudproductos.Visible = false;
+            mn_entregaProduccion.Visible = false;
+            mn_activosjyc.Visible = false;
+            mn_consultaActividades.Visible = false;
             //------------------------------
-            mn_solicitudMaterial.Visible = true;
-            mn_compraMaterial.Visible = true;
-            mn_MaterialRecibido.Visible = true;
-            mn_objetivoProduccion.Visible = true;
-            mn_objetivoProduccionMensual.Visible = true;
+            mn_solicitudMaterial.Visible = false;
+            mn_compraMaterial.Visible = false;
+            mn_MaterialRecibido.Visible = false;
+            mn_objetivoProduccion.Visible = false;
+            mn_objetivoProduccionMensual.Visible = false;
 
-            mn_devolucionProductoTerminado.Visible = true;
-            mn_AprobaciondevolucionProductoTerminado.Visible = true;
-            mn_ordendeProduccion.Visible = true;
-            mn_recetas.Visible = true;
+            mn_devolucionProductoTerminado.Visible = false;
+            mn_AprobaciondevolucionProductoTerminado.Visible = false;
+            mn_ordendeProduccion.Visible = false;
+            mn_recetas.Visible = false;
+            mn_Insumos.Visible = false;
+            mn_InsumosCompuesto.Visible = false;
         }
 
 
@@ -174,6 +176,13 @@ namespace jycboliviaASP.net.NegocioPlantilla
                             case 132:
                                 mn_recetas.Visible = true;
                                 break;
+                            case 133:
+                                mn_Insumos.Visible = true;
+                                break;
+                            case 134:
+                                mn_InsumosCompuesto.Visible = true;
+                                break;
+
                             default:
                                 Console.WriteLine("Default case");
                                 break;

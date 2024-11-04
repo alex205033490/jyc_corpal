@@ -495,6 +495,7 @@
     <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
     <Content Include="Presentacion\FCorpal_OrdenProduccion.aspx" />
@@ -1083,6 +1084,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.designer.cs">
       <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarInsumos.aspx.cs">
+      <DependentUpon>FCorpal_GestionarInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarInsumos.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarInsumos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.cs">
       <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>

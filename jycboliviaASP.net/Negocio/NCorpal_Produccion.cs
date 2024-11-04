@@ -471,5 +471,25 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
             }
         }
+
+        internal bool insertarInsumoSolo(string insumos, string codigoGrupo, string codigoUpon, string medida, string detalle, int codUser)
+        {
+            return dproduccion.insertarInsumoSolo( insumos,  codigoGrupo,  codigoUpon,  medida,  detalle, codUser);
+        }
+
+        internal bool modificarInsumoSolo(int codigo, string insumos, string codigoGrupo, string codigoUpon, string medida, string detalle, int codUser)
+        {
+            return dproduccion.modificarInsumoSolo( codigo,  insumos,  codigoGrupo,  codigoUpon,  medida,  detalle,  codUser);
+        }
+
+        internal bool eliminarInsumoSolo(int codigo, int codUser)
+        {
+            return dproduccion.eliminarInsumoSolo( codigo,  codUser);
+        }
+
+        internal DataSet get_insumosCodigo(int codigo)
+        {
+            return dproduccion.get_insumosCodigo( codigo);
+        }
     }
 }
