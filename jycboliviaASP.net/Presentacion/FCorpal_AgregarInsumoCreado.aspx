@@ -161,7 +161,8 @@
                                         CompletionListHighlightedItemCssClass="CompletionListMighlightedItem"
                                         CompletionInterval="10">
                                     </asp:AutoCompleteExtender>
-                                    <asp:Button ID="btn_BuscarInsumoCreado" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_BuscarInsumoCreado_Click" />
+                                    <asp:Button ID="btn_BuscarInsumoCreado" runat="server" Text="Buscar" CssClass="btn btn-dark me-2" OnClick="btn_BuscarInsumoCreado_Click" />
+                                    <asp:Button ID="btn_limpiar" runat="server" Text="Limpiar" CssClass="btn btn-info" OnClick="btn_limpiar_Click" />
                             </div>
                                 </asp:Panel>
 
@@ -210,7 +211,7 @@
                             <!-- Datos Insumo Creado -->
                             <div class="container-ICreadoModf2 col-12 col-md-12 col-lg-12 mt-3 row">
                                 <div class="ICreadoModC1 col-sm-8 col-md-7 col-lg-6">
-                                    <h4 class="form-label">Datos del Insumo Creado</h4>
+                                    <h5 class="form-label">Datos del Insumo Creado</h5>
                                     <table id="tblModInsumoCreado" class="table table-bordered gridview" Font-Size="Small">
                                         <thead>
                                             <tr>
