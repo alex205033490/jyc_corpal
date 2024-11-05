@@ -136,20 +136,22 @@
                                 <asp:Button ID="btn_buscar_CliEmpr" runat="server" Text="Buscar" CssClass="btn btn-info" OnClick="btn_buscar_CliEmpr_Click" />
                             </div>
                         </div>
-                        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">
-                            <Columns>
-                                <asp:BoundField DataField="CodigoContacto" HeaderText="CodContacto" SortExpression="ClienteID" />
-                                <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="Nombre" />
-                                <asp:BoundField DataField="CodigoDocumentoIdentidad" HeaderText="Cod Documento Identidad" SortExpression="codDocIdentidad" />
-                                <asp:BoundField DataField="NumeroDocumentoIdentidad" HeaderText="Numero de Identidad" SortExpression="numDocIdentidad" />
-                                <asp:BoundField DataField="Complemento" HeaderText="Complemento" SortExpression="complemento" />
-                                <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
-                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" SortExpression="Telefono" />
-                            </Columns>
-                            <HeaderStyle BackColor="#28a745" ForeColor="white" />
-                            <RowStyle BackColor="white" />
-                            <AlternatingRowStyle BackColor="#f8f9fa" />
-                        </asp:GridView>
+                        <div class="container_gv1">
+                            <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField DataField="CodigoContacto" HeaderText="CodContacto" SortExpression="ClienteID" />
+                                    <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="Nombre" />
+                                    <asp:BoundField DataField="CodigoDocumentoIdentidad" HeaderText="Cod Documento Identidad" SortExpression="codDocIdentidad" />
+                                    <asp:BoundField DataField="NumeroDocumentoIdentidad" HeaderText="Numero de Identidad" SortExpression="numDocIdentidad" />
+                                    <asp:BoundField DataField="Complemento" HeaderText="Complemento" SortExpression="complemento" />
+                                    <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
+                                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" SortExpression="Telefono" />
+                                </Columns>
+                                <HeaderStyle BackColor="#28a745" ForeColor="white" />
+                                <RowStyle BackColor="white" />
+                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                            </asp:GridView>
+                        </div>
                     </div>
                     <br />
                 </div>

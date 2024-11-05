@@ -117,9 +117,7 @@
 
 
             <div class="container_gv1">
-                <asp:GridView ID="gv_produccion" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                    BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                    CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
+                <asp:GridView ID="gv_produccion" runat="server" AutoGenerateColumns="false">
                     <Columns>
                         <asp:BoundField DataField="NumeroParteProduccion" HeaderText="numPartProduccion" SortExpression="nPartProd" />
                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
@@ -138,9 +136,7 @@
             </div>
 
             <div class="container_gv2">
-                <asp:GridView ID="gv_detalle" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                    BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                    CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
+                <asp:GridView ID="gv_detalle" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">
 
                     <Columns>
                         <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />

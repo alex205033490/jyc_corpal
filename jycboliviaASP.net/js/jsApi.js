@@ -45,3 +45,11 @@ function addRowPedido() {
          <td><input class="form-control" type='number' step="0.01" name='importeDescuento${rowCount}' /></td>`;
 }
 
+function addRowCobranza() {
+    var table = document.getElementById("tblDetalleCuentas");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+    row.innerHTML =
+        `<td><input type='number' name='numeroCuenta${rowCount}' /></td>
+        <td><input type='number' name='importeCapital${rowCount}' /></td>`;
+}

@@ -45,7 +45,13 @@
     font-size: small;
 }
 
-
+/****************************  CUENTAS/COBRANZA    ****************************/
+.container-POSTCCobranza, .container-GETCCobranzaDet, .container-GETCCobranzas {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
 
 
 
@@ -80,36 +86,10 @@ input.inputText, input.inputNumber {
 
 
 
-/****************************  CUENTAS/COBRANZA    ****************************/
-.container_cuentas {
-    height: 100px; /* Altura del contenedor */
-    overflow: auto; /* Barra de desplazamiento */
-    border: double #666666; /* Bordes del contenedor */
-}
 
 
-/****************************   PEDIDO    ****************************/
-.container_gv1 {
-    height: 110px; /* Altura del contenedor */
-    overflow: auto; /* Barra de desplazamiento */
-    font-size: x-small;
-    /* Bordes del contenedor */
-}
-.container_gv2 {
-    height: 120px; /* Altura del contenedor */
-    overflow: auto; /* Barra de desplazamiento */
-    /* Bordes del contenedor */
-    font-size: x-small;
-}
-.container_gv3 {
-    height: 200px; /* Altura del contenedor */
-    overflow: auto; /* Barra de desplazamiento */
-    /* Bordes del contenedor */
-    font-size: x-small;
-}
-#tblDetalleProductosPedido {
-    font-size: 0.8rem;
-    color: black;
+
+
 }
 
 
@@ -230,6 +210,28 @@ input.inputText, input.inputNumber {
 
 
 /************************        GRIDVIEW         *****************************/
+/****************************   GRIDVIEW 1 2 3     ****************************/
+.container_gv1 {
+    height: 110px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    font-size: x-small;
+    /* Bordes del contenedor */
+}
+
+.container_gv2 {
+    height: 120px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: x-small;
+}
+
+.container_gv3 {
+    height: 200px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    /* Bordes del contenedor */
+    font-size: x-small;
+}
+
 .gridview {
     border-color: white; /* Color del borde */
     border-style: solid; /* Estilo del borde */
@@ -239,8 +241,8 @@ input.inputText, input.inputNumber {
     width: 100%; /* Ancho completo */
     border-collapse: collapse; /* Colapsar bordes */
 }
-
-    .gridview th {
+ 
+.gridview th {
         background-color: #678d57db; /* Fondo del encabezado */
         font-weight: bold; /* Negrita */
         color: white; /* Color del texto en encabezado */
@@ -295,8 +297,8 @@ input.inputText, input.inputNumber {
 /*********************   CSS TABLE       ***********************/
 
 .th_cprod, .th_cant, .th_umed, .th_crec {
-    word-wrap: break-word; /* Permite que el texto se ajuste a varias líneas */
-    max-width: 150px; /* Ajusta el ancho máximo de las columnas según sea necesario */
+    word-wrap: break-word; 
+    max-width: 150px; 
     font-size:small;
 }
 #tblDetalleProductoProduccion th {
