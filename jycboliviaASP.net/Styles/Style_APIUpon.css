@@ -66,42 +66,9 @@
 
 
 
-.table_tr {
-    color: #ffffff;
-    background-color: #375d4ba8;
-    /* Centra el texto horizontalmente */
-    font-family: 'Arial', sans-serif; /* Cambia la fuente a Arial (puedes cambiarla a la que desees) */
-    padding: 10px; /* Espaciado interno para mejor apariencia */
-}
-.table_ADDProd {
-    width: 100%;
-    margin-bottom: 1rem;
-    
-}
-
 input.inputText, input.inputNumber {
     width: 100%; /* Para que los inputs ocupen todo el ancho de la celda */
 }
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 /****************************   Btn API    ****************************/
@@ -187,6 +154,13 @@ input.inputText, input.inputNumber {
     font-size: small; /* Cambia el tamaño de la letra del placeholder */
     color: #6c757d; /* Color del placeholder (opcional) */
 }
+.form-select:focus {
+    border-color: #ff8000; /* Color de borde en enfoque */
+    box-shadow: 0 0 5px rgba(255, 128, 0, 0.5); /* Sombra suave en enfoque */
+}
+.form-select:hover {
+    border-color: #ffcc80;
+}
 
 /************************      DROPDOWNLIST      **************************/
 
@@ -219,7 +193,7 @@ input.inputText, input.inputNumber {
 }
 
 .container_gv2 {
-    height: 120px; /* Altura del contenedor */
+    height: 160px; /* Altura del contenedor */
     overflow: auto; /* Barra de desplazamiento */
     /* Bordes del contenedor */
     font-size: x-small;
@@ -294,7 +268,10 @@ input.inputText, input.inputNumber {
     color:white;
 }
 
-/*********************   CSS TABLE       ***********************/
+/*********************    TABLE       ***********************/
+.table td{
+
+}
 
 .th_cprod, .th_cant, .th_umed, .th_crec {
     word-wrap: break-word; 

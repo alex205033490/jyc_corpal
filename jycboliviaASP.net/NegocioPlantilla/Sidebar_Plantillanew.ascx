@@ -141,12 +141,12 @@
 
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#prueba-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Clientes/Productos API</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-layout-text-window-reverse"></i><span>Clientes y Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
         <ul id="prueba-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <!--<li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>API Inventario</span></a></li> -->
-        <li><a href="../Presentacion/FCorpal_APIClientes.aspx" id="mn_apiclientes" runat="server" ><i class="bi bi-circle"></i><span>API Cliente</span></a></li>
-        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>API Productos</span></a></li><!-- -->
+        <li><a href="../Presentacion/FCorpal_APIClientes.aspx" id="mn_apiclientes" runat="server" ><i class="bi bi-circle"></i><span>Cliente/Proveedor Upon</span></a></li>
+        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>Productos Upon</span></a></li><!-- -->
         
         
         </ul>

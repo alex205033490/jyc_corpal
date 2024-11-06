@@ -81,18 +81,19 @@ namespace jycboliviaASP.net.Negocio
         {
             var json = JsonConvert.SerializeObject(empresa);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/clientes/empresas", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var result = await response.Content.ReadAsStringAsync();
-                dynamic data = JsonConvert.DeserializeObject(result);
-
-                return data.Resultado != null && data.Resultado.Count > 0;
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/clientes/empresas", content);
+                return response.IsSuccessStatusCode;
             }
-            return false;
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Error en la comunicación con el servidor", ex);
+            }
+
         }
 
         public class clienteEmpresaDTO
@@ -116,30 +117,10 @@ namespace jycboliviaASP.net.Negocio
             public List<ClienteEmpresaGetDTO> Resultado { get; set; }
         }
 
-        internal async Task<List<ClienteEmpresaGetDTO>> get_ClientesPersonasAsync(string usu, string pass, string criterio)
+        public async Task<List<ClienteEmpresaGetDTO>> get_ClientesPersonasAsync(string token, string criterio)
         {
-
-
-
-            
             try
             {
-                // Obtener el token de autenticación
-                Persona datoP = new Persona
-                {
-                    Username = usu,
-                    Password = pass
-                };
-
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
                 string url = $"http://192.168.11.62/ServcioUponApi/api/v1/clientes/buscar/{Uri.EscapeDataString(criterio)}";
 
                 // Configurar el encabezado de autorización
@@ -150,53 +131,45 @@ namespace jycboliviaASP.net.Negocio
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-                Console.WriteLine("Response Body: " + searchResponseBody);
-
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(searchResponseBody);
-                
+
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<ClienteEmpresaGetDTO>();
             }
             catch (Exception ex)
             {
                 // Manejar errores y registrar información
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Error en la búsqueda: {ex.Message}");
                 return new List<ClienteEmpresaGetDTO>();
             }
         }
-        private async Task<string> ObtenerTokenAsync(string usu, string pass)
+        public async Task<string> ObtenerTokenAsync(string usu, string pass)
         {
-            var datoP = new Persona
+            try
             {
-                Username = usu,
-                Password = pass
-            };
-            string json = JsonConvert.SerializeObject(datoP);
-            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-            response.EnsureSuccessStatusCode();
+                var datoP = new Persona
+                {
+                    Username = usu,
+                    Password = pass
+                };
+                string json = JsonConvert.SerializeObject(datoP);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-            var responseBody = await response.Content.ReadAsStringAsync();
-            var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-            return loginResponse.Resultado.Token.ToString();
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+                response.EnsureSuccessStatusCode();
+
+                var responseBody = await response.Content.ReadAsStringAsync();
+                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
+
+                return loginResponse.Resultado?.Token?.ToString() ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error de autenticación: {ex.Message}");
+                return string.Empty;
+            }
         
         }
-        private async Task<List<ClienteEmpresaGetDTO>> BuscarClienteAsync(string token, string criterio)
-        {
-            string url = $"http://192.168.11.62/ServcioUponApi/api/v1/clientes/buscar/{Uri.EscapeDataString(criterio)}";
-            
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-            var searchResponse = await httpClient.GetAsync(url);
-            searchResponse.EnsureSuccessStatusCode();
-
-            var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-            Console.WriteLine("Response Body: " + searchResponseBody);
-
-            var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(searchResponseBody);
-            return apiResponse.EsValido ? apiResponse.Resultado: new List<ClienteEmpresaGetDTO>();
-
-        }
-
+       
         public class ClienteEmpresaGetDTO
         {
             public int CodigoContacto { get; set; }
