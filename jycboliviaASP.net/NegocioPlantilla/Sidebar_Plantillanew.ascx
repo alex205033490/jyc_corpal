@@ -196,11 +196,13 @@
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIVentas-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Ventas API</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Compras/Ventas Upon</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APIVentas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APIVentas.aspx" id="A4" runat="server" ><i class="bi bi-circle"></i><span>Ventas GET/POST</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APIVentas.aspx" id="A4" runat="server" ><i class="bi bi-circle"></i><span>Ventas Upon</span></a></li>
+            <li><a href="../Presentacion/FCorpal_APICompras.aspx" id="A1" runat="server" ><i class="bi bi-circle"></i><span>Compras Upon</span></a></li>
           </ul>
+            
           </li>
 
 

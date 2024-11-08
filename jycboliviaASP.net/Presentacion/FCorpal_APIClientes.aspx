@@ -10,7 +10,7 @@
             <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-success class">
                     <!---------------- POST clientesPersona ---------------->
-                    <div class="container-POSTPersona p-4 rounded col-lg-12">
+                    <div class="container-POSTPehrsona p-4 rounded col-lg-12">
 
                         <div class="container_tittle rounded">
                             <h3 class="text_tittle p-3">Formulario Registro de Clientes</h3>
