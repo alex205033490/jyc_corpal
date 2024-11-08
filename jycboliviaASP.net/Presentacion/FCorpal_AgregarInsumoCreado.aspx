@@ -43,8 +43,8 @@
                                 var nombre = parts[1];
                                 var medida = parts[2];
 
-                                document.getElementById('<%= txt_MInsumoNombre.ClientID %>').value = nombre;
                                 document.getElementById('<%= txt_MInsumoCodigo.ClientID %>').value = codigo;
+                                document.getElementById('<%= txt_MInsumoNombre.ClientID %>').value = nombre;
                                 document.getElementById('<%= txt_MInsumoMedida.ClientID %>').value = medida;
                             }
                         }
@@ -53,7 +53,7 @@
                     <!------------------------          FORMULARIO INSERTAR INSUMOCREADO       ------------------------------>
                     <div class="container-ICreadoADD p-2 bg-light rounded ">
                         <div class="container_tittle col-md-12 col-lg-12 mb-4 rounded">
-                            <h2 class="text_tittle2 rounded p-3">Registro Nuevo InsumoCreado</h2>
+                            <h2 class="text_tittle2 rounded p-3">Registro Nuevo Insumo Creado</h2>
                         </div>
                         
                         <asp:Panel ID="Panel_INSERTIC" runat="server" DefaultButton="btn_registrarICreado2">
@@ -180,9 +180,10 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox ID="txt_MInsumoCodigo" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>
+                                               
+                                                    <asp:TextBox ID="txt_MInsumoCodigo" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td> 
                                                 <td>
-                                                    <asp:TextBox ID="txt_MInsumoNombre" runat="server" CssClass="form-control" AutoComplete="off" Font-Size="Small"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_MInsumoNombre" runat="server" CssClass="form-control" AutoComplete="off" Font-Size="Small" placeholder="Ingrese un nombre"></asp:TextBox>
                                                     <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server"
                                                         TargetControlID="txt_MInsumoNombre" CompletionSetCount="12" MinimumPrefixLength="1"
                                                         ServiceMethod="GetListaInsumo" UseContextKey="True" CompletionListCssClass="CompletionList"
@@ -194,7 +195,7 @@
                                                 <td>
                                                     <asp:TextBox ID="txt_MInsumoCantidad" runat="server" CssClass="form-control" Font-Size="Small" TextMode="Number" step="0.0001"></asp:TextBox></td>
                                                 <td>
-                                                    <asp:TextBox ID="txt_MInsumoMedida" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"></asp:TextBox></td>
+                                                    <asp:TextBox ID="txt_MInsumoMedida" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off" ></asp:TextBox></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -220,13 +221,14 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox ID="txt_MCodICreado" runat="server" CssClass="form-control" Enabled="False" Font-Size="Small" />
+                                                    
+                                                    <asp:TextBox ID="txt_MCodICreado" runat="server" CssClass="form-control" Font-Size="Small" ReadOnly="true" />
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="txt_MNombre" runat="server" CssClass="form-control" Enabled="False" Font-Size="Small" />
+                                                    <asp:TextBox ID="txt_MNombre" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"/>
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="txt_MMedida" runat="server" CssClass="form-control" Enabled="False" Font-Size="Small" />
+                                                    <asp:TextBox ID="txt_MMedida" runat="server" CssClass="form-control" Font-Size="Small" AutoComplete="off"/>
                                                 </td>
                                             </tr>
                                         </tbody>

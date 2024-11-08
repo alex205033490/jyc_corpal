@@ -110,6 +110,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return DatosIC.ModificarDetInsumoCreado(codInsumoCreado, cantidadInsumo, codInsumo);
         }
+        public bool ModificarInsumoCreado(string nombre, string medida, int codigo)
+        {
+            return DatosIC.ModificarInsumoCreado(nombre, medida, codigo);
+        }
         public bool ActualizarEstadoInsumoCreado(int codInsumoCreado)
         {
             return DatosIC.UpdateEstadoInsumoCreado(codInsumoCreado);
