@@ -29,57 +29,77 @@ namespace jycboliviaASP.net.Presentacion
             string criterioBusqueda = txt_nomProducto.Text.Trim();
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese el nombre del producto.');", true);
+                ShowAlert("Por favor, ingrese el nombre del producto.");
                 return;
             }
-            string usuario = "adm";
-            string password = "123";
-
-            var BuscProducto = new NA_APIproductos();
-            List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
-
-            if (productos.Count > 0)
+            try
             {
-                gv_prodNombre.DataSource = productos;
-                gv_prodNombre.DataBind();
+                string usuario = "adm";
+                string password = "123";
+
+                var BuscProducto = new NA_APIproductos();
+                List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
+
+                if (productos.Count > 0)
+                {
+                    gv_prodNombre.DataSource = productos;
+                    gv_prodNombre.DataBind();
+                }
+                else
+                {
+                    gv_prodNombre.DataSource = null;
+                    gv_prodNombre.DataBind();
+                    ShowAlert("No se encontraron registros con el nombre proporcionado.");
+                }
             }
-            else
+            catch(ApplicationException ex)
             {
-                gv_prodNombre.DataSource= null;
-                gv_prodNombre.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron productos con el nombre proporcionado. ');", true);
-
+                ShowAlert($"Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Ha ocurrido un error inesperado. {ex.Message}");
             }
         }
-
 
 /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_ventProducto.Text.Trim();
-
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingresa el nombre de un producto');", true);
+                ShowAlert("Por favor, ingresa el nombre de un producto");
                 return;
             }
-            string usuario = "adm";
-            string password = "123";
-            var BuscCodProd = new NA_APIproductos();
-            List<productoCriterioGet> egresos = await BuscCodProd.get_ProductoVentasCriterioAsync(usuario, password, criterioBusqueda);
-            
-            if(egresos.Count > 0)
-            {
-                gv_prodVenta.DataSource = egresos;
-                gv_prodVenta.DataBind();
-            }
-            else
-            {
-                gv_prodVenta.DataSource = null;
-                gv_prodVenta.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron ventas con ese nombre')", true);
-            }
 
+            try
+            {
+                string usuario = "adm";
+                string password = "123";
+
+                var BuscCodProd = new NA_APIproductos();
+                List<productoCriterioGet> egresos = await BuscCodProd.get_ProductoVentasCriterioAsync(usuario, password, criterioBusqueda);
+
+                if (egresos.Count > 0)
+                {
+                    gv_prodVenta.DataSource = egresos;
+                    gv_prodVenta.DataBind();
+                }
+                else
+                {
+                    gv_prodVenta.DataSource = null;
+                    gv_prodVenta.DataBind();
+                    ShowAlert("No se encontraron registros del producto proporcionado");
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                ShowAlert($"Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Ha ocurrido un error inesperado. {ex.Message}");
+            }
         }
 
 
@@ -91,33 +111,43 @@ namespace jycboliviaASP.net.Presentacion
 
             if (string.IsNullOrEmpty(criterioCodProducto))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingrese un codigo de producto valido.');", true);
+                ShowAlert("Por favor, ingrese un codigo de producto válido.");
                 return;
             }
             if (string.IsNullOrEmpty(criterioProveedor))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingrese un codigo proveedor valido.');", true);
+                ShowAlert("Por favor, ingrese un codigo proveedor válido.");
                 return;
             }
 
-            string usuario = "adm";
-            string password = "123";
-            var buscarCompra = new NA_APIproductos();
-            List<productoComprasDTO> compras = await buscarCompra.get_prodComprasAsync(usuario, password, criterioCodProducto, criterioProveedor);
-
-            if (compras.Count > 0)
+            try
             {
-                gv_prodCompras.DataSource = compras;
-                gv_prodCompras.DataBind();
+                string usuario = "adm";
+                string password = "123";
+
+                var buscarCompra = new NA_APIproductos();
+                List<productoComprasDTO> compras = await buscarCompra.get_prodComprasAsync(usuario, password, criterioCodProducto, criterioProveedor);
+
+                if (compras.Count > 0)
+                {
+                    gv_prodCompras.DataSource = compras;
+                    gv_prodCompras.DataBind();
+                }
+                else
+                {
+                    gv_prodCompras.DataSource = null;
+                    gv_prodCompras.DataBind();
+                    ShowAlert("No se encontraron compras con ese criterio de busqueda.");
+                }
             }
-            else
+            catch (ApplicationException ex)
             {
-                gv_prodCompras.DataSource = null;
-                gv_prodCompras.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron compras con ese criterio de busqueda.')", true);
+                ShowAlert($"Error: {ex.Message}");
             }
-
-
+            catch (Exception ex)
+            {
+                ShowAlert($"Ha ocurrido un error inesperado. {ex.Message}");
+            }
         }
 
 
@@ -126,27 +156,30 @@ namespace jycboliviaASP.net.Presentacion
         protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_codProducto.Text.Trim();
-
             if (string.IsNullOrEmpty(criterioBusqueda)) 
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingresa el codigo de un producto valido.');", true);
+                ShowAlert("Por favor, ingresa el codigo de un producto válido.");
                 return;            
             }
+
             try
             {
-                var apiProd = new NA_APIproductos();
-                productoCodigoGet prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
+                string usuario = "adm";
+                string password = "123";
 
-                if (prodCodigo != null)
+
+                var apiProd = new NA_APIproductos();
+                List<productoCodigoGet> prodCodigo = await apiProd.get_ProductoCodigoAsync(usuario, password, criterioBusqueda);
+
+                if (prodCodigo != null && prodCodigo.Any())
                 {
                     // encapsulamiento
-                    var productos = new List<productoCodigoGet> { prodCodigo };
-                    gv_prodCod.DataSource =  productos ;
+                    gv_prodCod.DataSource =  prodCodigo;
                     gv_prodCod.DataBind();
 
-                    if (prodCodigo.DetalleUnidadesMedida != null && prodCodigo.DetalleUnidadesMedida.Count > 0)
+                    if (prodCodigo[0].DetalleUnidadesMedida != null && prodCodigo[0].DetalleUnidadesMedida.Count > 0)
                     {
-                        gv_prodCodDet.DataSource = prodCodigo.DetalleUnidadesMedida;
+                        gv_prodCodDet.DataSource = prodCodigo[0].DetalleUnidadesMedida;
                         gv_prodCodDet.DataBind();
                     }
                     else
@@ -161,16 +194,18 @@ namespace jycboliviaASP.net.Presentacion
                     gv_prodCod.DataBind();
                     gv_prodCodDet.DataSource = null;
                     gv_prodCodDet.DataBind();
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron productos con ese codigo');", true);
+                    ShowAlert("No se encontraron productos con ese codigo");
                 }
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
-            }
-            
+                ShowAlert($"Error: {ex.Message }");
+            }  
         }
 
-        
+        private void ShowAlert(string message)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+        }
     }
 }
