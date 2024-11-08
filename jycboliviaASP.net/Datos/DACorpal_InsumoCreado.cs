@@ -70,14 +70,14 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-
-        // CONSULTA 
+        // CONSULTA
         public DataSet getDatos(string consulta)
         {
             DataSet datosI = ConecIns.consultaMySql(consulta);
             return datosI;
         }
 
+        // ELIMINAR INSUMOCREADO (ESTADO = 0)
         public bool UpdateEstadoInsumoCreado(int codInsumoCreado)
         {
             string update = "UPDATE tbcorpal_insumoscreados as ic set ic.estado = 0 where ic.codigo = " + codInsumoCreado + ";";
@@ -85,6 +85,7 @@ namespace jycboliviaASP.net.Datos
             return ConecIns.ejecutarMySql2(comando);
         }
 
+        //UPDATE CANTIDAD DE INSUMO
         public bool ModificarDetInsumoCreado(int codInsumoCreado, string cantidadInsumo, int codInsumo)
         {
             if (!decimal.TryParse(cantidadInsumo, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal cantidadDecimal))
@@ -92,7 +93,6 @@ namespace jycboliviaASP.net.Datos
                 throw new ArgumentException("Cantidad no es un valor decimal válido.");
             }
 
-            // Usamos parámetros para prevenir inyección SQL
             string update2 = @"
                 UPDATE tbcorpal_detinsumocreado AS dic
                 INNER JOIN tbcorpal_insumoscreados AS ic ON ic.codigo = dic.codinsumocreado
@@ -108,6 +108,25 @@ namespace jycboliviaASP.net.Datos
                 comando.Parameters.AddWithValue("@codInsumo", codInsumo);
 
                 // Ejecutar la consulta
+                return ConecIns.ejecutarMySql2(comando);
+            }
+        }
+
+        // UPDATE INSUMOCREADO
+        public bool ModificarInsumoCreado(string nombre, string medida, int codigo)
+        {
+            string update = @"
+               UPDATE tbcorpal_insumoscreados AS ic
+                SET ic.nombre = @pnombre,
+                ic.medida = @pmedida
+               WHERE ic.codigo = @pcodigo";
+            using (MySqlCommand comando = new MySqlCommand(update))
+            {
+                // agregar parametros a la consulta
+                comando.Parameters.AddWithValue("@pnombre", nombre);
+                comando.Parameters.AddWithValue("@pmedida", medida);
+                comando.Parameters.AddWithValue("@pcodigo", codigo);
+
                 return ConecIns.ejecutarMySql2(comando);
             }
         }

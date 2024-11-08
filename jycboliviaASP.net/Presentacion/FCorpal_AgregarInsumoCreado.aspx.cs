@@ -269,7 +269,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        //-----------------------   MODIFICAR CANTIDAD INSUMO DEL INSUMOCREADO
+        //-----------------------   MODIFICAR CANTIDAD INSUMO DE TBCORPAL_DETINSUMOCREADO
         protected void btn_ModificarInsumoCreado_Click(object sender, EventArgs e)
         {
             NCorpal_AddInsumoCreado negocioIC = new NCorpal_AddInsumoCreado();
@@ -287,16 +287,22 @@ namespace jycboliviaASP.net.Presentacion
                         int codInsumo = Convert.ToInt32(row.Cells[0].Text);
 
                         TextBox txtCantidad = (TextBox)row.FindControl("txt_NewCantidad");
-
                         string cantidadTexto = txtCantidad.Text.Replace(",", ".");
                         decimal nuevaCantidad;
 
                         if (decimal.TryParse(cantidadTexto, NumberStyles.Any, CultureInfo.InvariantCulture, out nuevaCantidad))
                         {
+                            string nombre = txt_MNombre.Text; 
+                            string medida = txt_MMedida.Text;
+                            int codigo = Convert.ToInt32(txt_MCodICreado.Text);
+
                             int codInsumoCreado = Convert.ToInt32(txt_MCodICreado.Text);
 
+                            bool resultadoIC = negocioIC.ModificarInsumoCreado(nombre, medida, codigo);
+
                             bool resultado = negocioIC.ModificarDetInsumoCreado(codInsumoCreado, nuevaCantidad.ToString(CultureInfo.InvariantCulture), codInsumo);
-                            resultadoGeneral &= resultado;
+                            
+                            resultadoGeneral &= resultado && resultadoIC;
                         }
                         else
                         {
@@ -304,7 +310,15 @@ namespace jycboliviaASP.net.Presentacion
                             return;
                         }
                     }
-                    Response.Write($"<script>alert('Registro Actualizado')</script>");
+
+                if (resultadoGeneral)
+                {
+                    Response.Write("<script>alert('Registro Actualizado exitosamente.');</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Ocurrio un error al Actualizar los registros');</script>");
+                }
             }
             catch (FormatException)
             {
