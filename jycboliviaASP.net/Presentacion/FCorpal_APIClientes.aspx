@@ -5,12 +5,12 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="col-md-12 col-lg-12" style="padding-top: 1em;">
+    <div class="col-md-12 col-lg-10" style="padding-top: 1em;">
         <div class="row">
             <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-success class">
                     <!---------------- POST clientesPersona ---------------->
-                    <div class="container-POSTPehrsona p-4 rounded col-lg-12">
+                    <div class="container-POSTPersona p-4 rounded col-lg-12">
 
                         <div class="container_tittle rounded">
                             <h3 class="text_tittle p-3">Formulario Registro de Clientes</h3>
@@ -128,13 +128,13 @@
                     <!--------------- GET clientes/buscar con filtro --------------->
                     <div class="container-GETClientes p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Vista de Clientes - Proveedores</h3>
+                            <h3 class="text_tittle p-3">Vista de Clientes/Proveedores</h3>
                         </div>
 
                         <asp:Panel runat="server" DefaultButton="btn_buscar_CliEmpr">
                         <div class="mb-3 col-lg-5 row">
                             <div class="col-8 col-sm-5 col-md-3 col-lg-8 mb-1">
-                                <label class="form-label">Ingrese un Valor: </label>
+                                <label class="form-label">Ingrese un valor: </label>
                                 <asp:TextBox ID="txt_filtroBusqueda" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                             </div>
                             <div class="col-4 col-sm-2 col-md-2 d-flex align-items-end">

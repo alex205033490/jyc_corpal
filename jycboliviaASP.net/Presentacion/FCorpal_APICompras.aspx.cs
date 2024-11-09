@@ -17,10 +17,6 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
-        protected void btn_registrarCompra_Click(object sender, EventArgs e)
-        {
-            
 
-        }
     }
 }

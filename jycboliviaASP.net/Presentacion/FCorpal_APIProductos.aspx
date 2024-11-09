@@ -6,9 +6,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="Container" style="padding-top: 1em;">
+    <div class="col-md-12 col-lg-10" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-11 col-md-offset-1">
+            <div class="col-md-12 col-md-offset-1">
                 <div class="panel panel-success class">
                     
 
@@ -68,7 +68,7 @@
                     <!------------------------- GET PRODUCTOS/VENTAS/BUSCAR ------------------------->
                     <div class="container-GETProductosVentas p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Vista Ventas de Productos</h3>
+                            <h3 class="text_tittle p-3">Ventas de Productos</h3>
                         </div>
 
                         <asp:Panel id="panel_vwVentasProductos" runat="server" DefaultButton="btn_nomProducto">
@@ -82,10 +82,9 @@
                             <div class="col-4 col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
                                 <asp:Button ID="btn_ventProducto" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_BuscarventProducto_Click" />
                             </div>
-                            <input type="image" class="close-button banner-element" name="close-button" alt="text" src="http://localhost:58557/49dc35553eb24a4b92bbcb4af4f83b26/images/CloseButtonHover_Dark">
+
                         </div>
                             </asp:Panel>
-
 
                         <div class="container_gv2">
                             <asp:GridView ID="gv_prodVenta" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
@@ -119,7 +118,7 @@
                     <!------------------------- GET PRODUCTOS/COMPRAS/BUSCAR ------------------------->
                     <div class="container-GETProductosCompras p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Vista Compras de Productos</h3>
+                            <h3 class="text_tittle p-3">Compras de Productos</h3>
                         </div>
 
                         <asp:Panel id="panel_vwcComprasProductos" runat="server" DefaultButton="btn_buscarCompras">
@@ -172,7 +171,7 @@
                     <!-- GET PRODUCTOS/codProducto  -->
                     <div class="container-GETProductosCodigo p-4 rounded">
                         <div class="container_tittle rounded mb-3">
-                            <h3 class="text-tittle p-3">Búsqueda de Productos por Codigo</h3>
+                            <h3 class="text-tittle p-3">Búsqueda De Productos Por Codigo</h3>
                         </div>
 
                         <asp:Panel id="panel_vwCodProductos" runat="server" DefaultButton="btn_BuscarcodProducto">
