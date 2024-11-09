@@ -69,11 +69,7 @@
           <a class="nav-link collapsed" data-bs-target="#produccion-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>Produccion</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="produccion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">              
-            
-            <li><a href="../Presentacion/FCorpal_GestionarInsumos.aspx" id="mn_Insumos" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo</span></a></li>
-            <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="mn_InsumosCompuesto" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo Compuesto</span></a></li>
-            <li><a href="../Presentacion/FCorpal_Recetas.aspx" id="mn_recetas" runat="server"><i class="bi bi-circle"></i><span>Gestionar Receta</span></a></li>    
+          <ul id="produccion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">                                      
             <li><a href="../Presentacion/FCorpal_OrdenProduccion.aspx" id="mn_ordendeProduccion" runat="server"><i class="bi bi-circle"></i><span>Orden Produccion</span></a></li>    
             <li role="separator" class="divider"></li> 
             <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><i class="bi bi-circle"></i><span>Entrega Produccion</span></a></li>                                             
@@ -91,13 +87,16 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#insumos-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-layout-text-window-reverse"></i><span>Insumos</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-layout-text-window-reverse"></i><span>Insumos y Recetas</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li><a href="../Presentacion/FCorpal_SolicitudInsumosMateriales.aspx" id="mn_solicitudMaterial" runat="server"><i class="bi bi-circle"></i><span>Solicitud Material</span></a></li>                                                         
-                <li><a href="../Presentacion/FCorpal_CompraDeMaterialeInsumos.aspx" id="mn_compraMaterial" runat="server"><i class="bi bi-circle"></i><span>Compra Material</span></a></li>                                                         
-                <li><a href="../Presentacion/FCorpal_RecibioMaterialInsumos.aspx" id="mn_MaterialRecibido" runat="server"><i class="bi bi-circle"></i><span>Material e Insumos Recibidos</span></a></li>
-                <li role="separator" class="divider"></li>            
+              <li><a href="../Presentacion/FCorpal_GestionarInsumos.aspx" id="mn_Insumos" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo</span></a></li>
+              <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="mn_InsumosCompuesto" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo Compuesto</span></a></li>
+              <li><a href="../Presentacion/FCorpal_Recetas.aspx" id="mn_recetas" runat="server"><i class="bi bi-circle"></i><span>Gestionar Receta</span></a></li>    
+              <li><a href="../Presentacion/FCorpal_SolicitudInsumosMateriales.aspx" id="mn_solicitudMaterial" runat="server"><i class="bi bi-circle"></i><span>Solicitud Material</span></a></li>                                                         
+              <li><a href="../Presentacion/FCorpal_CompraDeMaterialeInsumos.aspx" id="mn_compraMaterial" runat="server"><i class="bi bi-circle"></i><span>Compra Material</span></a></li>                                                         
+              <li><a href="../Presentacion/FCorpal_RecibioMaterialInsumos.aspx" id="mn_MaterialRecibido" runat="server"><i class="bi bi-circle"></i><span>Material e Insumos Recibidos</span></a></li>
+              <li role="separator" class="divider"></li>            
           </ul>
         </li><!-- End Tables Nav -->
 

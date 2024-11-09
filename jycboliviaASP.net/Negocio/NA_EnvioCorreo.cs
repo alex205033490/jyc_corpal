@@ -922,7 +922,10 @@ namespace jycboliviaASP.net.Negocio
                         
             correo.To.Add("sistema@jycbolivia.com");            
             correo.To.Add("almacen@naxsnax.com");
+            correo.To.Add("produccion@naxsnax.com");
             
+
+
             string direccionGuardarR102 = direccionArchivo+"//"+nombreArchivo;
             correo.Subject = Asunto;
             correo.Body = CuerpoMensaje;

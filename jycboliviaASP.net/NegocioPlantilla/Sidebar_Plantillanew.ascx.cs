@@ -177,10 +177,10 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 mn_recetas.Visible = true;
                                 break;
                             case 133:
-                                mn_Insumos.Visible = true;
+                                mn_InsumosCompuesto.Visible = true;
                                 break;
                             case 134:
-                                mn_InsumosCompuesto.Visible = true;
+                                mn_Insumos.Visible = true;
                                 break;
 
                             default:
