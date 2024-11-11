@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -15,42 +14,50 @@
 
                     <!-- GET PRODUCTOS/BUSCAR -->
                     <div class="container-GETProductosNombre p-4 rounded">
+                        
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Busqueda de Producto por Nombre</h3>
-
+                            <h3 class="text_tittle p-3">Búsqueda De Productos </h3>
                         </div>
 
                         <div class="mb-3 row">
-                            <label class="form-label" for="txt_nomProducto">Nombre del Producto:</label>
-                            <div class="col-sm-5 col-md-4 col-lg-4">
-                                <asp:TextBox ID="txt_nomProducto" runat="server" CssClass="form-control"></asp:TextBox>
+
+                            <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+                                <label class="form-label" for="txt_nomProducto">Nombre del Producto:</label>
+                                <asp:TextBox ID="txt_nomProducto" runat="server" CssClass="form-control" placeholder="Ingrese el nombre del producto" AutoComplete="off"></asp:TextBox>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3">
-                                <asp:Button ID="btn_nomProducto" runat="server" Text="Buscar Producto" CssClass="btn btn-success" OnClick="btn_buscarProdNombre_Click" />
+
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 d-flex align-items-end">
+                                <asp:Button ID="btn_nomProducto" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="btn_buscarProdNombre_Click" />
                             </div>
+
                         </div>
 
 
-                        <div class="mt-4">
-                            <asp:GridView ID="gv_prodNombre" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
+                        <div class="container_gv2">
+                            <asp:GridView ID="gv_prodNombre" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
                                 
                                 <Columns>
                                     <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="cod" />
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
                                     <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CodMedida" SortExpression="codUniMedida" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="UnidadMedida" SortExpression="UniMedida" />
+                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CodUMedida" SortExpression="codUniMedida" />
+                                    <asp:BoundField DataField="UnidadMedida" HeaderText="UMedida" SortExpression="UniMedida" />
                                     <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
                                     <asp:BoundField DataField="PrecioUnitario" HeaderText="PrecioUnitario" SortExpression="PrecUnitario" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento" SortExpression="Descuento"/>
+                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="DescuentoPermitido" SortExpression="Descuento"/>
                                     <asp:BoundField DataField="CostoUnitario" HeaderText="CostoUnitario" SortExpression="CosUnitario"/>
                                 </Columns>
 
-                                <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
-                                <RowStyle BackColor="white" />
-                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                                    <AlternatingRowStyle CssClass="alternating-row" />
+                                    <FooterStyle CssClass="footer" />
+                                    <HeaderStyle CssClass="header" />
+                                    <PagerStyle CssClass="pager" />
+                                    <SelectedRowStyle CssClass="selected-row" />
+                                    <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                    <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                    <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                    <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                            
                             </asp:GridView>
                         </div>
                     </div>
@@ -59,39 +66,44 @@
                     <!-- GET PRODUCTOS/VENTAS/BUSCAR -->
                     <div class="container-GETProductosVentas p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Ver Ventas de Productos</h3>
+                            <h3 class="text_tittle p-3">Vista Ventas de Productos</h3>
                         </div>
 
                         <div class="mb-3 row col-lg-12">
-                            <label class="form-label" for="txt_ventProducto">Nombre del Producto:</label>
-                            <div class="col-sm-6 col-md-4 col-lg-4">
-                                <asp:TextBox ID="txt_ventProducto" runat="server" CssClass="form-control" ></asp:TextBox>
+                            <div class="col-8 col-sm-6 col-md-4 col-lg-4">
+                                <label class="form-label" for="txt_ventProducto">Nombre del Producto:</label>
+                                <asp:TextBox ID="txt_ventProducto" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Ingrese el nombre del producto"></asp:TextBox>
                             </div>
-                            <div class="col-sm-4 col-md-3 col-lg-3">
-                                <asp:Button ID="btn_ventProducto" runat="server" Text="Buscar Ventas" CssClass="btn btn-success" OnClick="btn_BuscarventProducto_Click" />
+                            <div class="col-4 col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
+                                <asp:Button ID="btn_ventProducto" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="btn_BuscarventProducto_Click" />
                             </div>
                         </div>
 
 
-                        <div class="mt-4">
-                            <asp:GridView ID="gv_prodVenta" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4"
-                                CellSpacing="2" Font-Size="X-Small" ForeColor="Black">
+                        <div class="container_gv2">
+                            <asp:GridView ID="gv_prodVenta" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="cod" />
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
                                     <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CodMedida" SortExpression="codUniMedida" />
+                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CodUMedida" SortExpression="codUniMedida" />
                                     <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
                                     <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
                                     <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento" SortExpression="Descuento"/>
-                                    <asp:BoundField DataField="CostoUnitario" HeaderText="CostoUnitario" SortExpression="CosUnitario"/>
+                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="Descuento"/>
+                                    <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario"/>
                                 </Columns>
 
-                                <HeaderStyle BackColor="#ffcc00" ForeColor="black" />
-                                <RowStyle BackColor="white" />
-                                <AlternatingRowStyle BackColor="#f8f9fa" />
+                                    <AlternatingRowStyle CssClass="alternating-row" />
+                                    <FooterStyle CssClass="footer" />
+                                    <HeaderStyle CssClass="header" />
+                                    <PagerStyle CssClass="pager" />
+                                    <SelectedRowStyle CssClass="selected-row" />
+                                    <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                    <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                    <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                    <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+
                             </asp:GridView>
                         </div>
 
@@ -100,21 +112,21 @@
                     <!-- GET PRODUCTOS/COMPRAS/BUSCAR -->
                     <div class="container-GETProductosCompras p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Compras de Productos</h3>
+                            <h3 class="text_tittle p-3">Vista Compras de Productos</h3>
                         </div>
 
                         <div class="mb-2 row col-lg-12">
-                            <div class="col-sm-5 col-md-4 col-lg-4">
+                            <div class="col-sm-5 col-md-4 col-lg-3">
                                 <label class="form-label" for="txt_codProductoComp">Codigo del producto:</label>
                                 <asp:TextBox ID="txt_codProductoComp" runat="server" CssClass="form-control" ></asp:TextBox>
                             </div>
 
-                            <div class=" col-sm-5 col-md-4 col-lg-4">
+                            <div class=" col-sm-5 col-md-4 col-lg-3">
                                 <label class="form-label" for="txt_codProveedorComp">Codigo del Proveedor:</label>
                                 <asp:TextBox ID="txt_codProveedorComp" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
 
-                            <div class="col-sm-2 col-md-3 col-lg-4 d-flex align-items-end">
+                            <div class="col-sm-2 col-md-3 col-lg-2 d-flex align-items-end">
                                 <asp:Button ID="btn_buscarCompras" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="btn_buscarCompras_Click" />
                             </div>
                         </div>

@@ -23,7 +23,7 @@
                                 <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de ingreso"></asp:TextBox>
                             </div>
                             <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
-                                <asp:Button ID="btn_InvIngresoGET" runat="server" Text="Buscar registro" CssClass="btn btn-info" OnClick="btn_InvIngresoGET_Click" />
+                                <asp:Button ID="btn_InvIngresoGET" runat="server" Text="Buscar registro" CssClass="btn btn-info btn-sm" OnClick="btn_InvIngresoGET_Click" />
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                                 <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todos los registros."></asp:TextBox>
                             </div>
                             <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
-                                <asp:Button ID="btn_invIngreso2" runat="server" Text="Buscar" CssClass="btn btn-warning" OnClick="btn_invIngreso2_Click" />
+                                <asp:Button ID="btn_invIngreso2" runat="server" Text="Buscar" CssClass="btn btn-warning btn-sm" OnClick="btn_invIngreso2_Click" />
                             </div>
 
                         </div>

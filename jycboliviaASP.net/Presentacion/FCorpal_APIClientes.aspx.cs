@@ -27,37 +27,48 @@ namespace jycboliviaASP.net.Presentacion
         private bool ValidateEmpresData(out string errorMessage)
         {
             errorMessage = string.Empty;
+
             if (string.IsNullOrWhiteSpace(txt_nomlegal.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo nombre legal');", true);
+                ShowAlert("Por favor, complete el campo nombre legal.");
             }
             if (string.IsNullOrWhiteSpace(txt_nomcomercial.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo nombre comercial');", true);
+                ShowAlert("Por favor, complete el campo nombre comercial.");
             }
             if (string.IsNullOrWhiteSpace(txt_direccion.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese una direccion');", true);
+                ShowAlert("Por favor, ingrese una dirección.");
             }
             if (string.IsNullOrWhiteSpace(txt_nit.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese un NIT');", true);
+                ShowAlert("Por favor, ingrese un NIT.");
             }
             return true;
         }
         private bool ValidateClientData(out string errorMessage)
         {
             errorMessage = string.Empty;
-            
+
+            if (string.IsNullOrWhiteSpace(txt_nombre.Text))
+            {
+                ShowAlert("Por favor, complete el campo nombre.");
+               
+            }
             if (string.IsNullOrWhiteSpace(txt_paterno.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo Apellido Paterno.');", true);
-                return false;
+                ShowAlert("Por favor, complete el campo Apellido Paterno.");
+                
             }
             if (string.IsNullOrWhiteSpace(dd_tdocumento.Text))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, Ingrese un tipo de documento de identidad.');", true);
-                return false;
+                ShowAlert("Por favor, Ingrese un tipo de documento de identidad.");
+                
+            }
+            if (string.IsNullOrWhiteSpace(txt_numdocumento.Text))
+            {
+                ShowAlert("Por Favor, complete el campo Número Documento.");
+               
             }
             return true;
         }
@@ -69,6 +80,12 @@ namespace jycboliviaASP.net.Presentacion
             var na_clienteapi = new NA_APIclientes();
 
             var token = await na_clienteapi.GetTokenAsync(usuario, password);
+            if (string.IsNullOrEmpty(token))
+            {
+                ShowAlert("Error al obtener el token.");
+                return;
+            }    
+
             var empresa = new clienteEmpresaDTO
             {
                 CodigoContacto = 0,
@@ -85,11 +102,17 @@ namespace jycboliviaASP.net.Presentacion
 
             if (result)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Empresa Registrado Exitosamente.');", true);
+                ShowAlert("Empresa Registrado Exitosamente.");
+                txt_nomlegal.Text = string.Empty;
+                txt_nomcomercial.Text = string.Empty;
+                txt_direccion.Text = string.Empty;
+                txt_telefono2.Text = string.Empty;
+                txt_nit.Text = string.Empty;
+                txt_correo2.Text = string.Empty;
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error al registrar.');", true);
+                ShowAlert("Error al registrar proveedor.");
             }
         }
 
@@ -118,11 +141,20 @@ namespace jycboliviaASP.net.Presentacion
             var result = await na_clienteapi.PostPersonaAsync(cliente, token);
             if (result)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Cliente registrado exitosamente.');", true);
+                ShowAlert("Cliente registrado exitosamente.");
+                txt_nombre.Text = string.Empty;
+                txt_paterno.Text = string.Empty;
+                txt_materno.Text = string.Empty;
+                txt_casado.Text = string.Empty;
+
+                txt_numdocumento.Text = string.Empty;
+                txt_complemento.Text = string.Empty;
+                txt_telefono.Text = string.Empty;
+                txt_correo.Text = string.Empty;
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error al registrar el cliente.');", true);
+                ShowAlert("Error al registrar el cliente.");
             }
         }
 
@@ -160,98 +192,52 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Write($"Error: {ex.Message}");
             }
 
-            /*
-            string nombreLegal = txt_nomlegal.Text.Trim();
-            string nombreComercial = txt_nomcomercial.Text.Trim();
-            string Direccion = txt_direccion.Text.Trim();
-            string NIT = txt_nit.Text.Trim();
-            
-
-            // Realiza las validaciones
-            if (string.IsNullOrEmpty(nombreLegal))
-            {
-                // Muestra un mensaje de error o maneja la validación
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo Nombre Legal.');", true);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(nombreComercial))
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo Nombre Comercial.');", true);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(Direccion))
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, Ingrese un Direccion .');", true);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(NIT))
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, Ingrese un NIT.');", true);
-                return;
-            }
-
-
-
-            var na_empresaapi = new NA_APIclientes();
-            string usuario = "adm";
-            string password = "123";
-
-            try
-            {
-                var token = await na_empresaapi.GetTokenAsync(usuario, password);
-                var empresa = new clienteEmpresaDTO
-                {
-                    CodigoContacto = 0,
-                    NombreLegal = txt_nomlegal.Text,
-                    NombreComercial = txt_nomcomercial.Text,
-                    Direccion = txt_direccion.Text,
-                    Telefono = txt_telefono2.Text,
-                    NIT = txt_nit.Text,
-                    Correo = txt_correo2.Text,
-                    EsSucursal = Boolean.Parse(dd_EsSucursal.SelectedValue),
-                    Usuario = "adm"
-                };
-                var result = await na_empresaapi.PostEmpresaAsync(empresa, token);
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"Error: {ex.Message}");
-            }
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La empresa ha sido registrado exitosamente.');", true);
-            */
         }
 
         protected async void btn_buscar_CliEmpr_Click(object sender, EventArgs e)
         {
-
             string criterioBusqueda = txt_filtroBusqueda.Text;
-            NA_APIclientes pp = new NA_APIclientes();
-
-            List<ClienteEmpresaGetDTO> personas = await pp.get_ClientesPersonasAsync("adm", "123", criterioBusqueda);
-
-            if (personas != null && personas.Count > 0)
-            {
-                GridView1.DataSource = personas;
-                GridView1.DataBind();
-            }
-            else
-            {
-                GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
-                GridView1.DataBind();
-            }
-            
 
             // Realiza las validaciones
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
-                // Muestra un mensaje de error o maneja la validación
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, ingrese un valor para realizar su busqueda.');", true);
+                ShowAlert("Por favor, ingrese un dato para buscar.");
                 return;
             }
 
+            try
+            {
+                NA_APIclientes pp = new NA_APIclientes();
+                string token = await pp.ObtenerTokenAsync("adm","123");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error de autenticación. No se pudo obtener el token');", true);
+                    return;
+                }
+
+                List<ClienteEmpresaGetDTO> personas = await pp.get_ClientesPersonasAsync(token, criterioBusqueda);
+
+                if (personas != null && personas.Count > 0)
+                {
+                    GridView1.DataSource = personas;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Lo siento, no hay registros que coincidan con la búsqueda');", true);
+                    GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
+                    GridView1.DataBind();
+                }
+            } catch(Exception ex)
+            {
+                Response.Write($"Error inesperado: {ex.Message}");
+            }
         }
+        private void ShowAlert(string message)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+        }
+
     }
 }

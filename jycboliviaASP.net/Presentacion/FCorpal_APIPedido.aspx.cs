@@ -160,7 +160,7 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 var result = await api.PostPedidoAsync(pedido, token);
-                lblResult.Text = $"Numero Pedido: {result}";
+                
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Pedido registrado Exitosamente.');", true);
 
                 txt_Referencia.Text = string.Empty;
@@ -174,5 +174,7 @@ namespace jycboliviaASP.net.Presentacion
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}')", true);
             }
         }
+
+        
     }
 }
