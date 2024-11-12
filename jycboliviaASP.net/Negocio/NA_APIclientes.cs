@@ -23,25 +23,6 @@ namespace jycboliviaASP.net.Negocio
         {
             //_httpClient = new HttpClient();
         }        
-        //--------------------------    METODO PARA OBTENER EL TOKEN    ------------------------//
-        public async Task<string> GetTokenAsync(string usuario, string password)
-        {
-            var loginData = new
-            {
-                Username = usuario,
-                Password = password
-            };
-            var json = JsonConvert.SerializeObject(loginData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-            response.EnsureSuccessStatusCode();
-
-            var result  = await response.Content.ReadAsStringAsync();
-            dynamic data = JsonConvert.DeserializeObject(result);
-
-            return data.Resultado.Token.ToString();
-        }
 
         //-------------------------     POST CLIENTES/PERSONAS       -------------------------//
         public async Task<bool> PostPersonaAsync(clientePersonaDTO cliente, string token)
@@ -59,8 +40,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 throw new ApplicationException("Error en la comunicacion con el servicio", ex);
             }
-        }
-      
+        }      
         public class clientePersonaDTO
         {
             public int CodigoContacto { get; set; }
@@ -95,7 +75,6 @@ namespace jycboliviaASP.net.Negocio
             }
 
         }
-
         public class clienteEmpresaDTO
         {
             public int CodigoContacto { get; set; }
@@ -109,14 +88,12 @@ namespace jycboliviaASP.net.Negocio
             public string Usuario { get; set; }
         }
 
-
         //----------------------        GET CLIENTES/PERSONAEmpresa        ----------------------//
         public class ApiResponse
         {
             public bool EsValido { get; set; }
             public List<ClienteEmpresaGetDTO> Resultado { get; set; }
         }
-
         public async Task<List<ClienteEmpresaGetDTO>> get_ClientesPersonasAsync(string token, string criterio)
         {
             try
@@ -142,6 +119,17 @@ namespace jycboliviaASP.net.Negocio
                 return new List<ClienteEmpresaGetDTO>();
             }
         }
+        public class ClienteEmpresaGetDTO
+        {
+            public int CodigoContacto { get; set; }
+            public string NombreCompleto { get;set; }  
+            public int CodigoDocumentoIdentidad {  get;set; }
+            public string NumeroDocumentoIdentidad { get;set; }
+            public string Complemento {  get;set; }
+            public string Correo {  get;set; }
+            public string Telefono {  get;set; }
+
+        }     
         public async Task<string> ObtenerTokenAsync(string usu, string pass)
         {
             try
@@ -166,20 +154,9 @@ namespace jycboliviaASP.net.Negocio
             {
                 Console.WriteLine($"Error de autenticación: {ex.Message}");
                 return string.Empty;
-            }
-        
+            }        
         }
-       
-        public class ClienteEmpresaGetDTO
-        {
-            public int CodigoContacto { get; set; }
-            public string NombreCompleto { get;set; }  
-            public int CodigoDocumentoIdentidad {  get;set; }
-            public string NumeroDocumentoIdentidad { get;set; }
-            public string Complemento {  get;set; }
-            public string Correo {  get;set; }
-            public string Telefono {  get;set; }
 
-        }     
+
     }
 }

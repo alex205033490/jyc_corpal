@@ -79,7 +79,7 @@ namespace jycboliviaASP.net.Presentacion
             string password = "123";
             var na_clienteapi = new NA_APIclientes();
 
-            var token = await na_clienteapi.GetTokenAsync(usuario, password);
+            var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
             if (string.IsNullOrEmpty(token))
             {
                 ShowAlert("Error al obtener el token.");
@@ -123,7 +123,7 @@ namespace jycboliviaASP.net.Presentacion
             string password = "123";
             var na_clienteapi = new NA_APIclientes();
 
-            var token = await na_clienteapi.GetTokenAsync(usuario, password);
+            var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
             var cliente = new clientePersonaDTO
             {
                 CodigoContacto = 0,
@@ -207,31 +207,52 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                NA_APIclientes pp = new NA_APIclientes();
-                string token = await pp.ObtenerTokenAsync("adm","123");
+                string token = await ObtenerTokenAsync("adm","123");
 
                 if (string.IsNullOrEmpty(token))
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error de autenticación. No se pudo obtener el token');", true);
+                    ShowAlert("Error de autenticación. No se pudo obtener el token");
                     return;
                 }
-
-                List<ClienteEmpresaGetDTO> personas = await pp.get_ClientesPersonasAsync(token, criterioBusqueda);
+                var cli = new NA_APIclientes();
+                List<ClienteEmpresaGetDTO> personas = await cli.get_ClientesPersonasAsync(token, criterioBusqueda);
 
                 if (personas != null && personas.Count > 0)
                 {
-                    GridView1.DataSource = personas;
-                    GridView1.DataBind();
+                    MostrarClientes(personas);
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Lo siento, no hay registros que coincidan con la búsqueda');", true);
-                    GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
-                    GridView1.DataBind();
+                    ShowAlert("Lo siento, no hay registros que coincidan con la búsqueda");
+                    LimpiarGridView();
                 }
             } catch(Exception ex)
             {
                 Response.Write($"Error inesperado: {ex.Message}");
+            }
+        }
+
+
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIclientes cl = new NA_APIclientes();
+            return await cl.ObtenerTokenAsync(usuario, password);
+        }
+        private async Task<List<ClienteEmpresaGetDTO>> BuscarClientesAsync(string token, string criterioBusqueda)
+        {
+            NA_APIclientes cli = new NA_APIclientes();
+            return await cli.get_ClientesPersonasAsync(token, criterioBusqueda);
+        }
+        private void MostrarClientes(List<ClienteEmpresaGetDTO> personas)
+        {
+            GridView1.DataSource = personas;
+            GridView1.DataBind();
+        }
+        private void LimpiarGridView()
+        {
+            GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
+            {
+                GridView1.DataBind();
             }
         }
         private void ShowAlert(string message)

@@ -128,7 +128,7 @@
                     <!--------------- GET clientes/buscar con filtro --------------->
                     <div class="container-GETClientes p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Vista de Clientes/Proveedores</h3>
+                            <h3 class="text_tittle p-3">Búsqueda de Clientes/Proveedores</h3>
                         </div>
 
                         <asp:Panel runat="server" DefaultButton="btn_buscar_CliEmpr">
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                             </asp:Panel>
-                        <div class="container_gv2 col-md-9 col-lg-8">
+                        <div class="container_gv2 col-md-10 col-lg-10">
                             <asp:GridView ID="GridView1" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="CodigoContacto" HeaderText="CodContacto" SortExpression="ClienteID" />

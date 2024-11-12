@@ -29,6 +29,8 @@ namespace jycboliviaASP.net.Presentacion
             string criterioBusqueda = txt_nomProducto.Text.Trim();
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
+                gv_prodNombre.DataSource = null;
+                gv_prodNombre.DataBind();
                 ShowAlert("Por favor, ingrese el nombre del producto.");
                 return;
             }
@@ -69,6 +71,8 @@ namespace jycboliviaASP.net.Presentacion
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
                 ShowAlert("Por favor, ingresa el nombre de un producto");
+                gv_prodVenta.DataSource = null;
+                gv_prodVenta.DataBind();
                 return;
             }
 
@@ -102,8 +106,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-
-        /////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
+/////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
         protected async void btn_buscarCompras_Click(object sender, EventArgs e)
         {
             string criterioCodProducto = txt_codProductoComp.Text.Trim();
@@ -151,56 +154,65 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        /////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
-
+////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
         protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_codProducto.Text.Trim();
-            if (string.IsNullOrEmpty(criterioBusqueda)) 
+            if (string.IsNullOrEmpty(criterioBusqueda))
             {
                 ShowAlert("Por favor, ingresa el codigo de un producto válido.");
-                return;            
+                limpiarGrids();
+                return;
             }
 
             try
             {
-                string usuario = "adm";
-                string password = "123";
 
+                NA_APIproductos apiProd = new NA_APIproductos();
+                productoCodigoGet prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
 
-                var apiProd = new NA_APIproductos();
-                List<productoCodigoGet> prodCodigo = await apiProd.get_ProductoCodigoAsync(usuario, password, criterioBusqueda);
-
-                if (prodCodigo != null && prodCodigo.Any())
+                if (prodCodigo != null )
                 {
-                    // encapsulamiento
-                    gv_prodCod.DataSource =  prodCodigo;
-                    gv_prodCod.DataBind();
-
-                    if (prodCodigo[0].DetalleUnidadesMedida != null && prodCodigo[0].DetalleUnidadesMedida.Count > 0)
-                    {
-                        gv_prodCodDet.DataSource = prodCodigo[0].DetalleUnidadesMedida;
-                        gv_prodCodDet.DataBind();
-                    }
-                    else
-                    {
-                        gv_prodCodDet.DataSource = null;
-                        gv_prodCodDet.DataBind();
-                    }
+                    MostrarCodProducto(prodCodigo);
                 }
                 else
                 {
-                    gv_prodCod.DataSource = null;
-                    gv_prodCod.DataBind();
-                    gv_prodCodDet.DataSource = null;
-                    gv_prodCodDet.DataBind();
-                    ShowAlert("No se encontraron productos con ese codigo");
+                    ShowAlert("No se encontraron registros con ese código");
+                    limpiarGrids();
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                ShowAlert($"error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                ShowAlert($"Error: {ex.Message }");
-            }  
+                ShowAlert($"Ha Ocurrido un error inesperado: {ex.Message}");
+            }
+        }
+        private void MostrarCodProducto(productoCodigoGet prod)
+        {
+            var codProducto = new List<productoCodigoGet> { prod };
+            gv_prodCod.DataSource = codProducto;
+            gv_prodCod.DataBind();
+            
+            if(prod.DetalleUnidadesMedida != null && prod.DetalleUnidadesMedida.Count > 0)
+            {
+                gv_prodCodDet.DataSource = prod.DetalleUnidadesMedida;
+                gv_prodCodDet.DataBind();
+            }
+            else
+            {
+                gv_prodCodDet.DataSource = null;
+                gv_prodCodDet.DataBind();
+            }
+        }
+        private void limpiarGrids()
+        {
+            gv_prodCod.DataSource = null;
+            gv_prodCod.DataBind();
+            gv_prodCodDet.DataSource = null;
+            gv_prodCodDet.DataBind();
         }
 
         private void ShowAlert(string message)
