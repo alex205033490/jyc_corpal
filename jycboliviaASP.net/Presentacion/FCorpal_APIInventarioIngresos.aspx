@@ -5,38 +5,39 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="" style="padding-top: 1em;">
+    <div class="col-lg-10" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-11 col-md-offset-1">
+            <div class="col-lg-12 col-md-offset-1">
                 <div class="panel panel-success class">
 
                     <!------------------------          API GET INVENTARIO INGRESOS CON DETALLES          ------------------------------>
-                    <div class="container-GETIIngreso p-4 rounded">
+                    <div class="container-GETIIngresoDet p-4 rounded">
 
                         <div class="container_tittle">
-                            <h3 class="text_tittle p-3">Vista Detalles de Inventario Ingresos</h3>
+                            <h3 class="text_tittle p-3">Reporte Detallado de Ingresos en Inventario</h3>
                         </div>
-
+                        <asp:Panel runat="server" DefaultButton="btn_InvIngresoGET">
                         <div class="container_input row mb-2">
-                            <div class="col-sm-8 col-md-6 col-lg-4 mb-2">
-                                <label class="form-label" for="TextBox1">Numero de ingreso:</label>
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de ingreso"></asp:TextBox>
+                            <div class="col-9 col-sm-4 col-md-3 col-lg-3 mb-2">
+                                <label class="form-label" for="TextBox1">Número de ingreso:</label>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                             </div>
-                            <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
-                                <asp:Button ID="btn_InvIngresoGET" runat="server" Text="Buscar registro" CssClass="btn btn-info btn-sm" OnClick="btn_InvIngresoGET_Click" />
+                            <div class="container_btn col-3 col-sm-2 col-md-2 col-lg-2 d-flex align-items-end">
+                                <asp:Button ID="btn_InvIngresoGET" runat="server" Text="Buscar" CssClass="btn btn-dark btn-sm" OnClick="btn_InvIngresoGET_Click" />
                             </div>
                         </div>
+                            </asp:Panel>
 
-                        <div class="container_gv1 col-sm-12 col-md-12 col-lg-9 mb-4">
+                        <div class="container_gv4 col-sm-12 col-md-12 col-lg-9 mb-1">
                             <asp:GridView ID="gv_Inventario" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="NumeroIngreso" HeaderText="Numero Ingreso" SortExpression="numIng" />
+                                    <asp:BoundField DataField="NumeroIngreso" HeaderText="Número Ingreso" SortExpression="numIng" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
                                     <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
-                                    <asp:BoundField DataField="CodigoMoneda" HeaderText="Codigo Moneda" SortExpression="codMon" />
-                                    <asp:BoundField DataField="CodigoAlmacen" HeaderText="Codigo Almacen" SortExpression="codAlm" />
+                                    <asp:BoundField DataField="CodigoMoneda" HeaderText="Código Moneda" SortExpression="codMon" />
+                                    <asp:BoundField DataField="CodigoAlmacen" HeaderText="Código Almacén" SortExpression="codAlm" />
                                     <asp:BoundField DataField="MotivoMovimiento" HeaderText="Motivo Movimiento" SortExpression="motMov" />
-                                    <asp:BoundField DataField="ItemAnalisis" HeaderText="Item Analisis" SortExpression="itAnalis" />
+                                    <asp:BoundField DataField="ItemAnalisis" HeaderText="Ítem Análisis" SortExpression="itAnalis" />
                                     <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glosa" />
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="Usu" />
                                 </Columns>
@@ -52,16 +53,15 @@
                             </asp:GridView>
                         </div>
 
-                        <div class="container_gv2 col-sm-12 col-md-10 col-lg-8">
+                        <div class="container_gv1 col-sm-12 col-md-10 col-lg-8">
                             <asp:GridView ID="gv_DetalleProductos" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo Producto" SortExpression="codProd" />
+                                    <asp:BoundField DataField="Item" HeaderText="Ítem" SortExpression="item" />
+                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Código Producto" SortExpression="codProd" />
                                     <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="uMed" />
-                                    <asp:BoundField DataField="Cantidad" HeaderText="cantidad" SortExpression="cant" />
+                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="cant" />
                                     <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="costUnit" />
                                     <asp:BoundField DataField="CostoTotal" HeaderText="Costo Total" SortExpression="costTotal" />
-
                                 </Columns>
 
                                 <AlternatingRowStyle CssClass="alternating-row" />
@@ -77,33 +77,32 @@
                         </div>
                     </div>
 
-
-
-                    <br>
-
+                    <br />
                     <!------------------------          API GET INVENTARIO INGRESOS C/S CRITERIO           ------------------------------>
-                    <div class="form_getInventarioIngreso p-4 bg-light border rounded">
-                        <h2 class="text_tittle2">Ver Inventario Ingresos General</h2>
-
-                        <div class="container_input row mb-4">
-                            <div class="col-sm-8 col-md-6 col-lg-6 mb-2">
-                                <label class="form-label" for="TextBox2">Numero de transacción:</label>
-                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todos los registros."></asp:TextBox>
-                            </div>
-                            <div class="container_btn col-sm-4 col-md-6 col-lg-6 d-flex align-items-end">
-                                <asp:Button ID="btn_invIngreso2" runat="server" Text="Buscar" CssClass="btn btn-warning btn-sm" OnClick="btn_invIngreso2_Click" />
-                            </div>
-
+                    <div class="container-GETIIngreso p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Reporte de Ingresos en Inventario</h3>
                         </div>
+                        <asp:Panel runat="server" DefaultButton="btn_invIngreso2">
+                        <div class="container_input row mb-1">
+                            <div class="col-9 col-sm-5 col-md-4 col-lg-4 mb-2">
+                                <label class="form-label" for="TextBox2">Número de transacción:</label>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todo."></asp:TextBox>
+                                
+                            </div>
+                            <div class="container_btn col-3 col-sm-2 col-md-2 col-lg-1 d-flex align-items-end">
+                                <asp:Button ID="btn_invIngreso2" runat="server" Text="Buscar" CssClass="btn btn-dark btn-sm" OnClick="btn_invIngreso2_Click"  title="Ingrese un código o deje vacío para mostrar todos los registros" />
+                            </div>
+                        </div>
+                            </asp:Panel>
 
-                        <div class="container_gv3 col-xs-12 col-sm-12 col-md-12 col-lg-9 ">
-
+                        <div class="container_gv4 col-xs-12 col-sm-12 col-md-12 col-lg-9 ">
                             <asp:GridView ID="gv_invIngresos2" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="NumeroTransaccion" HeaderText="Numero de Transacción" SortExpression="numTrans" />
+                                    <asp:BoundField DataField="NumeroTransaccion" HeaderText="Número de Transacción" SortExpression="numTrans" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
                                     <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
-                                    <asp:BoundField DataField="Almacen" HeaderText="Almacen" SortExpression="alm" />
+                                    <asp:BoundField DataField="Almacen" HeaderText="Almacén" SortExpression="alm" />
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
                                 </Columns>
                                 <AlternatingRowStyle CssClass="alternating-row" />
@@ -118,89 +117,84 @@
                             </asp:GridView>
                         </div>
                     </div>
-                    <br>
+                    <br />
 
                     <!------------------------          API POST INVENTARIO INGRESOS            ------------------------------>
 
+                    <div class="container-POSTIIngreso p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Registro de Ingresos en Inventario</h3>
+                        </div>
 
-                    <div class="POST_inventarioIngreso p-4 bg-light border rounded">
-                        <h5 class="text_tittle2">Registro de Inventario Ingreso</h5>
+                        <asp:Panel runat="server" DefaultButton="btn_registrarIngreso">
+                        <div class="row mb-1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                        <div class="row mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                            <div class="col-sm-6 col-md-5">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                 <label class="form-label">Referencia:</label>
-                                <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
-                            </div>
+                                <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
 
-                            <div class="col-sm-6 col-md-3">
                                 <label class="form-label">Tipo de moneda:</label>
                                 <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown">
                                     <asp:ListItem Text="Bolivianos" Value="1" />
-                                    <asp:ListItem Text="Dolares" Value="2" />
+                                    <asp:ListItem Text="Dólares" Value="2" />
                                 </asp:DropDownList>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <label class="form-label">Código Almacen:</label>
+                                <label class="form-label">Código Almacén:</label>
                                 <asp:TextBox ID="txt_codAlmacen" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                             </div>
 
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                 <label class="form-label" for="txt_motMovimiento">Motivo Movimiento:</label>
                                 <asp:TextBox ID="txt_motMovimiento" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
-                            </div>
-
-                            <div class="col-sm-6 col-md-3">
-                                <label class="form-label" for="txt_itemAnalisis">Item Análisis:</label>
+                                <label class="form-label" for="txt_itemAnalisis">Ítem Análisis:</label>
                                 <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                <label class="form-label" for="txt_glosa">Glosa:</label>
+                                <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off" placeholder="Opcional"></asp:TextBox>
                             </div>
 
-                            <div class="col-sm-6 col-md-5">
-                                <label class="form-label" for="txt_glosa">Glosa:</label>
-                                <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                            </div>
                         </div>
+                            </asp:Panel>
+                        <br />
 
                         <!-- DETALLE PRODUCTO -->
 
-                        <br>
-                        <div class="form_detproducto col-md-12">
+                        <div class="form_detproducto col-md-12 col-lg-10">
                             <h3 class="form-label">Detalle Productos</h3>
+
+                            <asp:Panel runat="server" DefaultButton="btnAddRow">
                             <div class="table-detProducto">
                                 <table id="tblDetalleProductosIngresos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Codigo Producto</th>
+                                            <th>Código Producto</th>
                                             <th>Unidad Medida</th>
                                             <th>Cantidad</th>
                                             <th>Costo Unitario</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input class="form-control" type="text" name="codigoProducto0" /></td>
+                                                <input class="form-control" type="text" name="codigoProducto0" AutoComplete="off"/></td>
                                             <td>
                                                 <input class="form-control" type="number" name="unidadMedida0" /></td>
                                             <td>
-                                                <input class="form-control" type="number" name="cantidad0" step="0.01" /></td>
+                                                <input class="form-control" type="number" name="cantidad0" step="0.01"/></td>
                                             <td>
-                                                <input class="form-control" type="number" name="costoUnitario0" step="0.01" /></td>
+                                                <input class="form-control" type="number" name="costoUnitario0" step="0.01"/></td>
+                                            <td>
+                                                <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-success" OnClientClick="addRowIngreso(); return false;" /></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+                                </asp:Panel>
                             <br />
-                            <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-warning" OnClientClick="addRowIngreso(); return false;" />
-                            <asp:Button ID="btn_registrarIngreso" runat="server" Text="Registrar Ingreso" CssClass="btn btn-warning" OnClick="btn_registrarIngreso_Click" />
-                            <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
+                            <asp:Button ID="btn_registrarIngreso" runat="server" Text="Registrar Ingreso" CssClass="btn btn-success" OnClick="btn_registrarIngreso_Click" />
                         </div>
                     </div>
                 </div>
-
-                <br>
-                <br>
+                <br />
             </div>
         </div>
     </div>

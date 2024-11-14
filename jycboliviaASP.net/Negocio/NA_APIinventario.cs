@@ -22,39 +22,49 @@ namespace jycboliviaASP.net.Negocio
     internal class NA_APIinventario
     {
         private static readonly HttpClient httpClient = new HttpClient();
-        private readonly HttpClient _httpClient;
-
-        DBApi api = new DBApi();
+        //private readonly HttpClient _httpClient;
+        //DBApi api = new DBApi();
 
         public NA_APIinventario()
         {
-            _httpClient = new HttpClient();
+            //_httpClient = new HttpClient();
         }
 
         /////////////////////////   METODO PARA OBTENER TOKEN
         public async Task<string> GetTokenAsync(string usu, string pass)
         {
-            var loginData = new
+            try
             {
-               
-                username = usu,
-                password = pass
-            };
+                var loginData = new
+                {
+                    username = usu,
+                    password = pass
+                };
 
-            var json = JsonConvert.SerializeObject(loginData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json = JsonConvert.SerializeObject(loginData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-            response.EnsureSuccessStatusCode();
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+            
+                response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsStringAsync();
-            dynamic data = JsonConvert.DeserializeObject(result);
+                var result = await response.Content.ReadAsStringAsync();
+                dynamic data = JsonConvert.DeserializeObject(result);
 
-            return data.Resultado.Token.ToString();
+                if (data?.Resultado?.Token == null)
+                {
+                    throw new ApplicationException("El Token de autenticacion no se pudo obtener");
+                }
+                return data.Resultado.Token.ToString();
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Error al obtener el token de autenticacion", ex);
+            }
         }
-/********************************************              API    INVENTARIO  INGRESOS           **************************************/
+        /********************************************   API INVENTARIO INGRESOS ********************************************/
 
-        //----------------     GET - INVENTARIO INGRESO DETALLE
+        //---------------------- GET - INVENTARIO INGRESO DETALLE
 
         public class ApiResponseDet
         {
@@ -65,46 +75,31 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
+                string token = await GetTokenAsync(usuario, password);
 
                 string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos/{usuario}/{Uri.EscapeDataString(numeroIngreso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await httpClient.GetAsync(url);
 
-                var searchResponse = await httpClient.GetAsync(url);
-                searchResponse.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
 
-                var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseDet>(searchResponseBody);
+
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
-                    Console.WriteLine("API Response no valido o nulo");
-                    return null;
+                    throw new ApplicationException("La respuesta de la API no es válida o no se encontraron datos.");
                 }
                 return apiResponse.Resultado;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return null;
+                throw new ApplicationException("Error al obtener registros con el valor proporcionado.", ex);
             }
         }
 
-        //----------------     GET - INVENTARIOS INGRESOS
+        //---------------------- GET - INVENTARIOS INGRESOS
 
         public class ApiResponse
         {
@@ -164,7 +159,7 @@ namespace jycboliviaASP.net.Negocio
             public string Usuario { get; set; }
         }
 
-        //----------------     POST - INVENTARIO INGRESOS
+        //---------------------- POST - INVENTARIO INGRESOS
         public class ApiResponse2
         {
             public int Resultado { get; set; }
@@ -185,7 +180,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine($"Error: {e.Message}, Content: {errorContent}");
-                throw; // Puedes manejarlo de otra manera si lo prefieres
+                throw; // 
             }
 
             var result = await response.Content.ReadAsStringAsync();
@@ -220,7 +215,7 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
-        /********************************************              API INVENTARIO EGRESOS           **************************************/
+        /********************************************   API INVENTARIO EGRESOS  **************************************/
 
 
         //----------------     GET - INVENTARIO EGRESOS CON DETALLES
@@ -361,7 +356,7 @@ namespace jycboliviaASP.net.Negocio
             public string Usuario { get; set; }
         }
 
-        /**************************************     API INVENTARIO TRASPASOS        ********************************************/
+        /********************************************   API INVENTARIO TRASPASOS    ********************************************/
 
 
         /////////////////////////      GET - INVENTARIO TRASPASO
@@ -479,13 +474,6 @@ namespace jycboliviaASP.net.Negocio
 
         }
 
-
-
-
-
-
-
-
         /////////////////////////     POST - INVENTARIO TRASPASOS
         public async Task<string> PostInventarioTraspasoAsync(InventarioTraspasoDTO traspaso, string token)
         {
@@ -509,8 +497,7 @@ namespace jycboliviaASP.net.Negocio
             public string CodigoProducto { get; set; }
             public int UnidadMedida { get; set; }
             public decimal Cantidad { get; set; }
-        }
-        
+        }        
         public class InventarioTraspasoDTO
         {
             public int NumeroTraspasos { get; set; }
@@ -521,10 +508,6 @@ namespace jycboliviaASP.net.Negocio
             public List<DetalleProductoTraspasoDTO> DetalleProductos { get; set; }
             public string Usuario { get; set; }
         }
-
-
-
-
 
     }
 }
