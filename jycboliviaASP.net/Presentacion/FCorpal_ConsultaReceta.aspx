@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaIngresoEgreso.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FA_ConsultaRepuesto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_ConsultaReceta.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_ConsultaReceta" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />
@@ -44,12 +45,9 @@
              width: 110px;
          }
         </style>
-
-
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
- 
 
 <div class="card">
   <div class="card-header bg-warning text-dark">
@@ -69,9 +67,8 @@
     </td>
 <td>
     <asp:DropDownList ID="dd_consulta" class="btn btn-secondary dropdown-toggle" runat="server" Width="350px">
-        <asp:ListItem>Libro Diario Ingreso</asp:ListItem>
-        <asp:ListItem>Libro Diario Egreso</asp:ListItem>
-        <asp:ListItem>Ingreso Vs Egreso con Saldo Inicial</asp:ListItem>
+        <asp:ListItem>Recetas</asp:ListItem>
+        <asp:ListItem>Ninguno</asp:ListItem>        
     </asp:DropDownList>
     </td>
 <td></td>
@@ -80,54 +77,6 @@
         onclick="bt_buscar_Click" />
     </td>
 <td></td>
-</tr>
-</table>
-
-<table>
-<tr>
-<td></td>
-<td>
-    <asp:Label ID="Label3" runat="server" Text="Desde:"></asp:Label>
-    </td>
-<td>
-    <asp:TextBox ID="tx_desdeFecha" CssClass="form-control" runat="server"></asp:TextBox>
-    <asp:CalendarExtender ID="tx_desdeFecha_CalendarExtender" runat="server" 
-        TargetControlID="tx_desdeFecha">
-    </asp:CalendarExtender>
-    </td>
-<td></td>
-<td>
-    <asp:Label ID="Label4" runat="server" Text="Hasta:"></asp:Label>
-    </td>
-<td>
-    <asp:TextBox ID="tx_hastaFecha" CssClass="form-control" runat="server"></asp:TextBox>
-    <asp:CalendarExtender ID="tx_hastaFecha_CalendarExtender" runat="server" 
-        TargetControlID="tx_hastaFecha">
-    </asp:CalendarExtender>
-
-    </td>
-<td></td>
-<td></td>
-</tr>
-
-</table>
-
-<table>
-<tr>
-<td></td><td>
-    <asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label>
-    </td><td>
-        <asp:TextBox ID="tx_responsable" CssClass="form-control" runat="server" Width="350px"></asp:TextBox>
-        <asp:AutoCompleteExtender ID="tx_responsable_AutoCompleteExtender" 
-            runat="server" TargetControlID="tx_responsable"
-             ServiceMethod="GetlistaResponsable2" MinimumPrefixLength="1"
-                                    UseContextKey="True"
-                                    CompletionListCssClass="CompletionList" 
-                                    CompletionListItemCssClass="CompletionlistItem"                                     
-                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-
-        </asp:AutoCompleteExtender>
-    </td><td></td><td></td><td></td>
 </tr>
 </table>
 
@@ -156,7 +105,6 @@
     </li>
   </ul>
 </div>
-
 
 
 </asp:Content>

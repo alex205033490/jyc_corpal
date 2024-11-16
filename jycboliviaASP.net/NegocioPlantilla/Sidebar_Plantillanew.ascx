@@ -76,18 +76,14 @@
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
-            
-              
-
-
-              
+                          
             <li role="separator" class="divider"></li>                                
           </ul>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#insumos-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-layout-text-window-reverse"></i><span>Insumos y Recetas</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-layout-text-window-reverse"></i><span>Recetas e Insumos</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
               <li><a href="../Presentacion/FCorpal_GestionarInsumos.aspx" id="mn_Insumos" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo</span></a></li>
@@ -96,6 +92,8 @@
               <li><a href="../Presentacion/FCorpal_SolicitudInsumosMateriales.aspx" id="mn_solicitudMaterial" runat="server"><i class="bi bi-circle"></i><span>Solicitud Material</span></a></li>                                                         
               <li><a href="../Presentacion/FCorpal_CompraDeMaterialeInsumos.aspx" id="mn_compraMaterial" runat="server"><i class="bi bi-circle"></i><span>Compra Material</span></a></li>                                                         
               <li><a href="../Presentacion/FCorpal_RecibioMaterialInsumos.aspx" id="mn_MaterialRecibido" runat="server"><i class="bi bi-circle"></i><span>Material e Insumos Recibidos</span></a></li>
+              <li><a href="../Presentacion/FCorpal_ConsultaReceta.aspx" id="mn_consultaRecetaInsumo" runat="server"><i class="bi bi-circle"></i><span>Consulta</span></a></li>
+              
               <li role="separator" class="divider"></li>            
           </ul>
         </li><!-- End Tables Nav -->

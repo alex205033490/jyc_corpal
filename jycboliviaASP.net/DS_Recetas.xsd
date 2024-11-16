@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_Recetas" targetNamespace="http://tempuri.org/DS_Recetas.xsd" xmlns:mstns="http://tempuri.org/DS_Recetas.xsd" xmlns="http://tempuri.org/DS_Recetas.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_Recetas" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DS_Recetas" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_Recetas">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_Receta" msprop:Generator_RowClassName="DS_RecetaRow" msprop:Generator_RowEvHandlerName="DS_RecetaRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_RecetaRowDeleted" msprop:Generator_RowDeletingName="DS_RecetaRowDeleting" msprop:Generator_RowEvArgName="DS_RecetaRowChangeEvent" msprop:Generator_TablePropName="DS_Receta" msprop:Generator_RowChangedName="DS_RecetaRowChanged" msprop:Generator_UserTableName="DS_Receta" msprop:Generator_RowChangingName="DS_RecetaRowChanging" msprop:Generator_TableClassName="DS_RecetaDataTable" msprop:Generator_TableVarName="tableDS_Receta">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo" msprop:Generator_UserColumnName="codigo" msprop:Generator_ColumnPropNameInTable="codigoColumn" msprop:Generator_ColumnPropNameInRow="codigo" msprop:Generator_ColumnVarNameInTable="columncodigo" type="xs:string" minOccurs="0" />
+              <xs:element name="producto" msprop:Generator_UserColumnName="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnVarNameInTable="columnproducto" type="xs:string" minOccurs="0" />
+              <xs:element name="Receta" msprop:Generator_UserColumnName="Receta" msprop:Generator_ColumnPropNameInTable="RecetaColumn" msprop:Generator_ColumnPropNameInRow="Receta" msprop:Generator_ColumnVarNameInTable="columnReceta" type="xs:string" minOccurs="0" />
+              <xs:element name="Ingrediente" msprop:Generator_UserColumnName="Ingrediente" msprop:Generator_ColumnPropNameInTable="IngredienteColumn" msprop:Generator_ColumnPropNameInRow="Ingrediente" msprop:Generator_ColumnVarNameInTable="columnIngrediente" type="xs:string" minOccurs="0" />
+              <xs:element name="insumo" msprop:Generator_UserColumnName="insumo" msprop:Generator_ColumnPropNameInTable="insumoColumn" msprop:Generator_ColumnPropNameInRow="insumo" msprop:Generator_ColumnVarNameInTable="columninsumo" type="xs:string" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_UserColumnName="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnVarNameInTable="columncantidad" type="xs:string" minOccurs="0" />
+              <xs:element name="Medida" msprop:Generator_UserColumnName="Medida" msprop:Generator_ColumnPropNameInTable="MedidaColumn" msprop:Generator_ColumnPropNameInRow="Medida" msprop:Generator_ColumnVarNameInTable="columnMedida" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DS_RecetaInsumoCreado" msprop:Generator_RowEvHandlerName="DS_RecetaInsumoCreadoRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_RecetaInsumoCreadoRowDeleted" msprop:Generator_RowDeletingName="DS_RecetaInsumoCreadoRowDeleting" msprop:Generator_RowEvArgName="DS_RecetaInsumoCreadoRowChangeEvent" msprop:Generator_TablePropName="DS_RecetaInsumoCreado" msprop:Generator_RowChangedName="DS_RecetaInsumoCreadoRowChanged" msprop:Generator_RowChangingName="DS_RecetaInsumoCreadoRowChanging" msprop:Generator_TableClassName="DS_RecetaInsumoCreadoDataTable" msprop:Generator_RowClassName="DS_RecetaInsumoCreadoRow" msprop:Generator_TableVarName="tableDS_RecetaInsumoCreado" msprop:Generator_UserTableName="DS_RecetaInsumoCreado">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo" msprop:Generator_ColumnPropNameInRow="codigo" msprop:Generator_ColumnPropNameInTable="codigoColumn" msprop:Generator_ColumnVarNameInTable="columncodigo" msprop:Generator_UserColumnName="codigo" type="xs:string" minOccurs="0" />
+              <xs:element name="producto" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_ColumnVarNameInTable="columnproducto" msprop:Generator_UserColumnName="producto" type="xs:string" minOccurs="0" />
+              <xs:element name="Receta" msprop:Generator_ColumnPropNameInRow="Receta" msprop:Generator_ColumnPropNameInTable="RecetaColumn" msprop:Generator_ColumnVarNameInTable="columnReceta" msprop:Generator_UserColumnName="Receta" type="xs:string" minOccurs="0" />
+              <xs:element name="insumoCompuesto" msprop:Generator_ColumnPropNameInRow="insumoCompuesto" msprop:Generator_ColumnPropNameInTable="insumoCompuestoColumn" msprop:Generator_ColumnVarNameInTable="columninsumoCompuesto" msprop:Generator_UserColumnName="insumoCompuesto" type="xs:string" minOccurs="0" />
+              <xs:element name="cantidad" msprop:Generator_ColumnPropNameInRow="cantidad" msprop:Generator_ColumnPropNameInTable="cantidadColumn" msprop:Generator_ColumnVarNameInTable="columncantidad" msprop:Generator_UserColumnName="cantidad" type="xs:string" minOccurs="0" />
+              <xs:element name="medida" msprop:Generator_ColumnPropNameInRow="medida" msprop:Generator_ColumnPropNameInTable="medidaColumn" msprop:Generator_ColumnVarNameInTable="columnmedida" msprop:Generator_UserColumnName="medida" type="xs:string" minOccurs="0" />
+              <xs:element name="insumo" msprop:Generator_ColumnPropNameInRow="insumo" msprop:Generator_ColumnPropNameInTable="insumoColumn" msprop:Generator_ColumnVarNameInTable="columninsumo" msprop:Generator_UserColumnName="insumo" type="xs:string" minOccurs="0" />
+              <xs:element name="cantInsumo" msprop:Generator_ColumnPropNameInRow="cantInsumo" msprop:Generator_ColumnPropNameInTable="cantInsumoColumn" msprop:Generator_ColumnVarNameInTable="columncantInsumo" msprop:Generator_UserColumnName="cantInsumo" type="xs:string" minOccurs="0" />
+              <xs:element name="medidaInsumo" msprop:Generator_ColumnPropNameInRow="medidaInsumo" msprop:Generator_ColumnPropNameInTable="medidaInsumoColumn" msprop:Generator_ColumnVarNameInTable="columnmedidaInsumo" msprop:Generator_UserColumnName="medidaInsumo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -942,5 +942,31 @@ namespace jycboliviaASP.net.Datos
                 " from tbcorpal_insumo ii where ii.codigo = "+codigo;
             return Conx.consultaMySql(consulta);
         }
+
+        internal DataSet get_allReceta()
+        {
+            string consulta = "select  re.codigo, pp.producto, re.nombre as 'Receta', 'Ingrediente' as 'Ingrediente', ii.nombre as 'insumo', di.cantidad, ii.Medida  " +
+                " from tbcorpal_receta re, tbcorpal_producto pp,  tbcorpal_detingredienteinsumo di, tbcorpal_insumo ii " +
+                " where re.codproducto = pp.codigo and re.codigo = di.codreceta and di.codinsumo = ii.codigo and ii.estado = 1  and re.estado = 1  " +
+                " UNION " +
+                " select  re.codigo, pp.producto, re.nombre as 'Receta', 'Ingrediente_Compuesto' as 'Ingrediente', ii.nombre as 'insumo', di.cantidad, ii.medida  " +
+                " from tbcorpal_receta re, tbcorpal_producto pp,  tbcorpal_detingredienteinsumocreado di, tbcorpal_insumoscreados ii " +
+                " where re.codproducto = pp.codigo and re.codigo = di.codreceta and di.codinsumocreado = ii.codigo and ii.estado = 1  and re.estado = 1 ";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_allRecetaInsumoCreado()
+        {
+            string consulta = "select  re.codigo, pp.producto, re.nombre as 'Receta', ii.nombre as 'insumoCompuesto', di.cantidad, ii.medida, iis.nombre as 'insumo', ddc.cantidad as 'cantInsumo', ddc.medida as 'medidaInsumo'  " +
+                " from tbcorpal_receta re, tbcorpal_producto pp,  tbcorpal_detingredienteinsumocreado di, tbcorpal_insumoscreados ii, tbcorpal_detinsumocreado ddc, tbcorpal_insumo iis where re.codproducto = pp.codigo and re.codigo = di.codreceta and di.codinsumocreado = ii.codigo and ii.codigo = ddc.codinsumocreado and ddc.codinsumo = iis.codigo and ii.estado = 1  and re.estado = 1   ";
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_allRecetaInsumoCreado(string codigo)
+        {
+            string consulta = "select  re.codigo, pp.producto, re.nombre as 'Receta', ii.nombre as 'insumoCompuesto', di.cantidad, ii.medida, iis.nombre as 'insumo', ddc.cantidad as 'cantInsumo', ddc.medida as 'medidaInsumo'  " +
+                " from tbcorpal_receta re, tbcorpal_producto pp,  tbcorpal_detingredienteinsumocreado di, tbcorpal_insumoscreados ii, tbcorpal_detinsumocreado ddc, tbcorpal_insumo iis where re.codproducto = pp.codigo and re.codigo = di.codreceta and di.codinsumocreado = ii.codigo and ii.codigo = ddc.codinsumocreado and ddc.codinsumo = iis.codigo and ii.estado = 1  and re.estado = 1 and re.codigo = " +codigo;
+            return Conx.consultaMySql(consulta);
+        }
     }
 }

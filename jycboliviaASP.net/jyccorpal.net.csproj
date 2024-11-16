@@ -492,6 +492,7 @@
     <Content Include="Presentacion\FCorpal_APIVentas.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaReceta.aspx" />
     <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
@@ -811,6 +812,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Proyectos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DS_Recetas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Recetas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_ReciboIngresoEgreso.cs">
       <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
     </Compile>
@@ -1063,6 +1069,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.designer.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaReceta.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaReceta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaReceta.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaReceta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ConsutaProduccion.aspx.cs">
       <DependentUpon>FCorpal_ConsutaProduccion.aspx</DependentUpon>
@@ -1954,7 +1967,9 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\Receta\SubReport_detalleInsumoCreado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
+    <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
@@ -2079,6 +2094,17 @@
     <None Include="DS_Proyectos.xss">
       <DependentUpon>DS_Proyectos.xsd</DependentUpon>
     </None>
+    <Content Include="DS_Recetas.xsc">
+      <DependentUpon>DS_Recetas.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_Recetas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Recetas.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_Recetas.xss">
+      <DependentUpon>DS_Recetas.xsd</DependentUpon>
+    </Content>
     <None Include="DS_ReciboIngresoEgreso.xsc">
       <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
     </None>

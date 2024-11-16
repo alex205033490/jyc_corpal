@@ -491,5 +491,20 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.get_insumosCodigo( codigo);
         }
+
+        internal DataSet get_allReceta()
+        {
+            return dproduccion.get_allReceta();
+        }
+
+        internal DataSet get_allRecetaInsumoCreado()
+        {
+            return dproduccion.get_allRecetaInsumoCreado();
+        }
+
+        internal DataSet get_allRecetaInsumoCreado(string codigo)
+        {
+            return dproduccion.get_allRecetaInsumoCreado(codigo);
+        }
     }
 }

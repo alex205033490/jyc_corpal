@@ -69,7 +69,7 @@
             <div class="col-md-12 col-md-offset-1">
                 <div class="g_Insumos">
                         <table>          
-                         <tr><td><asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label></td>
+                         <tr><td><asp:Label ID="Label40" runat="server"  Text="Nombre Insumo :"></asp:Label></td>
                              <td><asp:TextBox ID="tx_Insumo" CssClass="form-control" runat="server"></asp:TextBox></td>
                          <td><asp:Button ID="bt_buscar" class="btn btn-success" runat="server"   
                                 onclick="bt_buscar_Click" Text="Buscar" /></td>

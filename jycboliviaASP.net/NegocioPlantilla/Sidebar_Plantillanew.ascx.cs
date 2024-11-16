@@ -63,6 +63,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_recetas.Visible = false;
             mn_Insumos.Visible = false;
             mn_InsumosCompuesto.Visible = false;
+            mn_consultaRecetaInsumo.Visible = false;
         }
 
 
@@ -181,6 +182,9 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 break;
                             case 134:
                                 mn_Insumos.Visible = true;
+                                break;
+                            case 137:
+                                mn_consultaRecetaInsumo.Visible = true;
                                 break;
 
                             default:
