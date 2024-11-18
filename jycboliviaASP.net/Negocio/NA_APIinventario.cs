@@ -65,7 +65,6 @@ namespace jycboliviaASP.net.Negocio
         /********************************************   API INVENTARIO INGRESOS ********************************************/
 
         //---------------------- GET - INVENTARIO INGRESO DETALLE
-
         public class ApiResponseDet
         {
             public bool EsValido { get; set; }
@@ -100,32 +99,18 @@ namespace jycboliviaASP.net.Negocio
         }
 
         //---------------------- GET - INVENTARIOS INGRESOS
-
         public class ApiResponse
         {
             public bool EsValido { get; set; }
             public List<Ingresos> Resultado { get; set; }
         }
+       
         public async Task<List<Ingresos>> ObtenerIngresosAsync(string usuario, string password, string criterio)
         {
             try
             // Obtener el token de autenticacion
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                // construir la URL de la API
+                string token = await GetTokenAsync(usuario, password);
                 string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos";
                 if (!string.IsNullOrEmpty(criterio))
                 {
@@ -133,23 +118,22 @@ namespace jycboliviaASP.net.Negocio
                 }
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
                 var searchResponse = await httpClient.GetAsync(url);
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-                Console.WriteLine("Response Body: " + searchResponseBody);
-
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(searchResponseBody);
-
+                
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<Ingresos>();
+
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<Ingresos>();
+                throw new ApplicationException("Error al buscar Ingreso", ex);
             }
         }
+    
         public class Ingresos
         {
             public string NumeroTransaccion { get; set; }
@@ -217,59 +201,39 @@ namespace jycboliviaASP.net.Negocio
 
         /********************************************   API INVENTARIO EGRESOS  **************************************/
 
-
         //----------------     GET - INVENTARIO EGRESOS CON DETALLES
-
         public class ApiResponseEgre
         {
             public bool EsValido { get; set; }
             public InventarioEgreso Resultado { get; set; }
         }
-
         public async Task<InventarioEgreso> GetInventarioEgresoDetalleAsync(string usuario, string password, string numIngreso)
         {
             try
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
+                string token = await GetTokenAsync(usuario, password);
 
                 string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos/{usuario}/{Uri.EscapeDataString(numIngreso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await httpClient.GetAsync(url);
 
-                var searchResponse = await httpClient.GetAsync(url);
-                searchResponse.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
 
-                var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseEgre>(searchResponseBody);
+
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
-                    Console.WriteLine("API response no valido o nulo");
-                    return null;
+                    throw new ApplicationException("La respuesta de la API no es válida o no se encontraron datos.");
                 }
                 return apiResponse.Resultado;
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return null;
+                throw new ApplicationException("Error al obtener registros con el valor proporcionado.", ex);
             }
         }
-
-
 
         //----------------     GET - INVENTARIOS EGRESOS
 
@@ -277,23 +241,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                // Obtener el token de autenticación
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                // construir la URL de la API
+                string token = await GetTokenAsync(usuario, password);
                 string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos";
                 if (!string.IsNullOrEmpty(criterio))
                 {
@@ -301,21 +249,17 @@ namespace jycboliviaASP.net.Negocio
                 }
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
                 var searchResponse = await httpClient.GetAsync(url);
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-                Console.WriteLine("Response Body: " + searchResponseBody);
-
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(searchResponseBody);
 
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<Ingresos>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<Ingresos>();
+                throw new ApplicationException("Error al buscar el registro", ex);
             }
         }
 

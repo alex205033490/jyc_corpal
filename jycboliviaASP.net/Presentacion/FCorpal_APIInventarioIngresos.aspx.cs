@@ -11,6 +11,9 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -90,26 +93,31 @@ namespace jycboliviaASP.net.Presentacion
             gv_DetalleProductos.DataBind();
         }
 
+
+
         //-------------------------- GET - BUSCAR INVENTARIO INGRESO
         protected async void btn_invIngreso2_Click(object sender, EventArgs e)
         {
             string numTransaccion = TextBox2.Text.Trim();
 
-            NA_APIinventario apiInv = new NA_APIinventario();
-            List<Ingresos> ingresos = await apiInv.ObtenerIngresosAsync("adm", "123", numTransaccion);
+            try
+            {
+                NA_APIinventario apiInv = new NA_APIinventario();
+                List<Ingresos> ingresos = await apiInv.ObtenerIngresosAsync("adm", "123", numTransaccion);
+                gv_invIngresos2.DataSource = ingresos.Any() ? ingresos : new List<Ingresos> ();
+                gv_invIngresos2.DataBind();
 
-            if (ingresos != null && ingresos.Count > 0)
+                if (ingresos.Any())
+                {
+                    showalert("No se encontraron registros con el código proporcionado");
+                }
+
+            }catch(Exception ex)
             {
-                gv_invIngresos2.DataSource = ingresos;
-                gv_invIngresos2.DataBind();
-            }
-            else
-            {
-                gv_invIngresos2.DataSource = new List<Ingresos>();
-                gv_invIngresos2.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron registros con el codigo proporcionado.');", true);
+                showalert($"Error al obtener los ingresos: {ex.Message}");
             }
         }
+
 
         //-------------------------- POST - INVENTARIO INGRESO
         protected async void btn_registrarIngreso_Click(object sender, EventArgs e)

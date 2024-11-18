@@ -13,12 +13,6 @@ function addRowIngreso() {
     `;
 }   
 
-function deleteRow(button) {
-    var row = button.parentNode.parentNode;  
-    row.parentNode.removeChild(row);  
-}
-
-
 
 /*function addRowIngreso() {
     var table = document.getElementById("tblDetalleProductosIngresos");
@@ -37,10 +31,16 @@ function addRowEgreso() {
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     row.innerHTML =
-        `<td><input type='text' class="form-control" name='codigoProducto${rowCount}' /></td>
-         <td><input type='number' class="form-control" name='unidadMedida${rowCount}' /></td>
-         <td><input type='number' class="form-control" step="0.01" name='cantidad${rowCount}' /></td>`;
+        `<td><input type='text' class="form-control" name='codigoProducto${rowCount}' id='codigoProducto${rowCount}' autocomplete="off"/></td>
+         <td><input type='number' class="form-control" name='unidadMedida${rowCount}' id='unidadMedida${rowCount}' autocomplete="off"/></td>
+         <td><input type='number' class="form-control" step="0.01" name='cantidad${rowCount}' id='cantidad{rowCount}'/></td>
+        <td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Eliminar</button></td >`;
 }
+function deleteRow(button) {
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
 
 function addRowProduccion() {
     var table = document.getElementById("tblDetalleProductoProduccion");
