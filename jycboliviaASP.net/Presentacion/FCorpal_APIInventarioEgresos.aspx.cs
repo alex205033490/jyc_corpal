@@ -92,16 +92,33 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                NA_APIinventario apiInv = new NA_APIinventario();
-                List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
-                GridView3.DataSource = egreso.Any() ? egreso : new List<Ingresos>();
-                GridView3.DataBind();
-
-                if (egreso.Any())
+                if (string.IsNullOrEmpty(criterioBusqueda))
                 {
-                    showalert("No se encontraron registros con el código proporcionado");
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
+                    GridView3.DataSource = egreso;
+                    GridView3.DataBind();
+
+                }
+                else
+                {
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
+
+                    if (egreso.Any())
+                    {
+                        GridView3.DataSource = egreso;
+                        GridView3.DataBind();
+                    }
+                    else
+                    {
+                        showalert($"No se encontró ningún egreso con el codigo : {criterioBusqueda}.");
+                        GridView3.DataSource = new List<Ingresos>();
+                        GridView3.DataBind();
+                    }
                 }
             }
+            
             catch (Exception ex)
             {
                 showalert($"Error al obtener los egresos: {ex.Message}");
@@ -146,7 +163,7 @@ namespace jycboliviaASP.net.Presentacion
                 MotivoMovimiento = TextBoxMotivoMovimiento.Text,
                 ItemAnalisis = int.Parse(TextBoxItemAnalisis.Text),
                 Glosa = TextBoxGlosa.Text,
-                Usuario = "adm",
+                Usuario = "ADM",
                 DetalleProductos = obtenerDetalleProductos()
             };
             return egreso;
@@ -160,18 +177,17 @@ namespace jycboliviaASP.net.Presentacion
             {
                 for (int i = 0; i< rowCount; i++)
                 {
-                    if (Request.Form["Item" +i] != null)
+                    if (Request.Form["codigoProducto" +i] != null)
                     {
                         var detalle = new DetalleProductoEgre
                         {
                             Item = 0,
-                            CodigoProducto = Request.Form["codigoProducto"],
-                            UnidadMedida = int.Parse(Request.Form["unidadMedida"]),
-                            Cantidad = int.Parse(Request.Form["cantidad"])
+                            CodigoProducto = Request.Form["codigoProducto" +i],
+                            UnidadMedida = int.Parse(Request.Form["unidadMedida" +i]),
+                            Cantidad = int.Parse(Request.Form["cantidad" + i])
                         };
                         detalles.Add(detalle);
                     }
-                        //Item, CodigoProducto, UnidadMedida, Cantidad
                 }
             }
             catch(Exception ex)
@@ -230,7 +246,6 @@ namespace jycboliviaASP.net.Presentacion
             TextBoxGlosa.Text = string.Empty;
 
         }
-
         private void showalert(string mensaje)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);

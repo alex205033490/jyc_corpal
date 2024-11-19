@@ -26,7 +26,7 @@
                             </div>
                         </div>
 
-                        <div class="container_gv1 col-sm-12 col-md-12 col-lg-9 mb-2">
+                        <div class="container_gv4 col-sm-12 col-md-12 col-lg-9 ">
                             <asp:GridView ID="GridView1" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="NumeroEgreso" HeaderText="Numero Egreso" SortExpression="numEgr" />
@@ -50,7 +50,7 @@
                             </asp:GridView>
                         </div>
 
-                        <div class="container_gv2 col-sm-12 col-md-10 col-lg-8">
+                        <div class="container_gv1 col-sm-12 col-md-10 col-lg-8">
                             <asp:GridView ID="GridView2" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />

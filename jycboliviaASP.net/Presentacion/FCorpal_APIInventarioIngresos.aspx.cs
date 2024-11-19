@@ -102,17 +102,32 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                NA_APIinventario apiInv = new NA_APIinventario();
-                List<Ingresos> ingresos = await apiInv.ObtenerIngresosAsync("adm", "123", numTransaccion);
-                gv_invIngresos2.DataSource = ingresos.Any() ? ingresos : new List<Ingresos> ();
-                gv_invIngresos2.DataBind();
-
-                if (ingresos.Any())
+                if (string.IsNullOrEmpty(numTransaccion))
                 {
-                    showalert("No se encontraron registros con el código proporcionado");
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> ingresos = await apiInv.ObtenerIngresosAsync("adm", "123", numTransaccion);
+                    gv_invIngresos2.DataSource = ingresos;
+                    gv_invIngresos2.DataBind();
                 }
+                else
+                {
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> ingresos = await apiInv.ObtenerIngresosAsync("adm", "123", numTransaccion);
 
-            }catch(Exception ex)
+                    if (ingresos.Any())
+                    {
+                        gv_invIngresos2.DataSource = ingresos;
+                        gv_invIngresos2.DataBind();
+                    }
+                    else
+                    {
+                        showalert($"No se encontró ningún ingreso con el codigo : {numTransaccion}");
+                        gv_invIngresos2.DataSource = new List<Ingresos>();
+                        gv_invIngresos2.DataBind();
+                    }
+                }
+            }
+            catch(Exception ex)
             {
                 showalert($"Error al obtener los ingresos: {ex.Message}");
             }
