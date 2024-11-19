@@ -36,6 +36,20 @@ function addRowEgreso() {
          <td><input type='number' class="form-control" step="0.01" name='cantidad${rowCount}' id='cantidad{rowCount}'/></td>
         <td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Eliminar</button></td >`;
 }
+
+function addRowCompra() {
+    var table = document.getElementById("tblDetalleProductosCompra");
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+    row.innerHTML =
+        `<td><input type='text' class="form-control" name='codigoProducto${rowCount}' id='codigoProducto${rowCount}' autocomplete="off"/></td>
+         <td><input type='number' class="form-control" step="0.01" name='cantidad${rowCount}' id='cantidad${rowCount}'/></td>
+         <td><input type='number' class="form-control" name='codUnidadMedida${rowCount}' id='codUnidadMedida${rowCount}' autocomplete="off"/></td>
+         <td><input type='number' class="form-control" step="0.01" name='precioUnitario${rowCount}' id='precioUnitario${rowCount}'/></td>
+         <td><input type='number' class="form-control" step="0.01" name='importeDescuento${rowCount}' id='importeDescuento${rowCount}'/></td>
+         <td><input type='number' class="form-control" step="0.01" name='porcentajeGasto${rowCount}' id='porcentajeGasto${rowCount}' /></td>
+        <td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Eliminar</button></td >`;
+}
 function deleteRow(button) {
     var row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);

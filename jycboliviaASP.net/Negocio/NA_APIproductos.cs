@@ -210,7 +210,7 @@ namespace jycboliviaASP.net.Negocio
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error al buscar productos", ex);
+                throw new ApplicationException("No se encontraron registros con ese criterio de bísqueda.", ex);
             }
 
 
