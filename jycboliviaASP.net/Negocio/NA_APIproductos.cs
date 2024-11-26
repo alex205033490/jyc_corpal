@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_PruebaAPI;
+using Newtonsoft.Json.Linq;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -69,12 +70,11 @@ namespace jycboliviaASP.net.Negocio
             public bool EsValido { get; set; }
             public List<productoCriterioGet> Resultado { get; set; }
         }
-        internal async Task<List<productoCriterioGet>> get_ProductoCriterioAsync(string usu, string pass, string criterio)
+        public async Task<List<productoCriterioGet>> get_ProductoCriterioAsync(string token, string criterio)
         {
             try
             {
-                string token = await GetTokenAsync(usu, pass);
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/{usu}/{Uri.EscapeDataString(criterio)}";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -85,9 +85,9 @@ namespace jycboliviaASP.net.Negocio
 
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<productoCriterioGet>();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Error al buscar productos", ex);
+                throw new ApplicationException("Error al buscar el producto", ex);
             }
         }
         public class productoCriterioGet

@@ -869,6 +869,7 @@
     <Compile Include="Negocio\NA_APIproduccion.cs" />
     <Compile Include="Negocio\NA_APIproductos.cs" />
     <Compile Include="Negocio\NA_APIventas.cs" />
+    <Compile Include="Negocio\NA_UPONSolicitudPedido.cs" />
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />

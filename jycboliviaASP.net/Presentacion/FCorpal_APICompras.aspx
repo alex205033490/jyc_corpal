@@ -14,7 +14,7 @@
                     <!---------------- FORMULARIO COMPRAS -------------->
                     <div class="container-POSTCompras p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h2 class="text_tittle p-3">Formulario Compras</h2>
+                            <h2 class="text_tittle p-3">Registro de Compras</h2>
                         </div>
                         <div class="form_CompraP1 col-lg-12 row">
 
@@ -48,7 +48,7 @@
                                 </div>
 
                                 <!-- col 2 -->
-                                <div class="col-sm-12 col-md-6 col-lg-5">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                         <asp:Label ID="lblcodDistribucionGastos" runat="server" Text="Cod distribución gastos: " />
                                         <asp:TextBox ID="txt_codDistribucionGastos" runat="server" CssClass="form-control" AutoComplete="off" />
@@ -69,20 +69,11 @@
                                 </div>
                                     </div>
                                 <!-- Pagos -->
-                                <div class="form_pagosDTO col-sm-6 col-md-5 col-lg-12 border mt-2 rounded align-items-center">
-                                    <div class="text-center">
-                                        <h5>Pagos </h5>
-                                    </div>
-                                    <div class="col-sm-6 col-md-5">
-                                            <asp:Label ID="lbltotalEfect" runat="server" Text="Total efectivo: " />
-                                            <asp:TextBox ID="txt_totalEfectivo" runat="server" CssClass="form-control" AutoComplete="off" />                                        
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- COL 2 -->
                             <!-- DATOS FACTURA -->
-                            <div class="form_pagosDTO col-sm-6 col-md-6 col-lg-6 border rounded mx-auto mt-2 mb-2">
+                            <div class="form_pagosDTO col-sm-6 col-md-6 col-lg-6 border rounded mx-auto mt-2 mb-2 p-2">
                                 <div class="text-center">
                                     <h5>Datos Factura</h5>
                                 </div>
@@ -121,27 +112,25 @@
                         </div>
 
                         </div>
-
+                    <br />
                         <!--  FORMULARIO PAGOS  -->
-                        <div class="col-lg-12 row">
-                     
-                            
-
+                    
                             <!-- DetalleProductos -->
 
-                            <div class="form_detproducto col-12 col-sm-12 col-md-12">
-                                <h4 class="form-label">Detalle Productos</h4>
+                            <div class="form_ADDdetProducto col-12 col-sm-12 col-md-12 p-4 rounded">
+                                <div class="col-12 text-center">
+                                    <h4 class="form-label">Detalle  del Producto</h4>
+                                </div>
                                 <div class="table-detProducto">
                                     <table id="tblDetalleProductosCompra" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Código producto</th>
+                                                <th>Código de producto</th>
                                                 <th>Cantidad</th>
                                                 <th>Código unidad medida</th>
                                                 <th>Precio unitario</th>
                                                 <th>Importe descuento</th>
-                                                <th>Porcentaje de gasto</th>
-                                                <th>Acciones</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -157,9 +146,7 @@
                                                 <td>
                                                     <input class="form-control" type="number" name="importeDescuento0" step="0.01" /></td>
                                                 <td>
-                                                    <input class="form-control" type="number" name="porcentajeGasto0" step="0.01" /></td>
-                                                <td>
-                                                    <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-success" OnClientClick="addRowCompra(); return false;" /></td>
+                                                    <asp:Button ID="btnAddRow" runat="server" Text="+" CssClass="btn btn-success" OnClientClick="addRowCompra(); return false;" /></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -169,7 +156,7 @@
 
                             </div>
                         </div>
-                    </div>
+             
                 </div>
             </div>
         </div>

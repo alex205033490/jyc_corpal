@@ -88,13 +88,25 @@ namespace jycboliviaASP.net.Negocio
             public string Usuario { get; set; }
         }
 
+        public class ClienteGetDTO
+        {
+            public int CodigoContacto { get; set; }
+            public string NombreCompleto { get; set; }
+            public int CodigoDocumentoIdentidad { get; set; }
+            public string NumeroDocumentoIdentidad { get; set; }
+            public string Complemento { get; set; }
+            public string Correo { get; set; }
+            public string Telefono { get; set; }
+
+        }
+
         //----------------------        GET CLIENTES/PERSONAEmpresa        ----------------------//
         public class ApiResponse
         {
             public bool EsValido { get; set; }
-            public List<ClienteEmpresaGetDTO> Resultado { get; set; }
+            public List<ClienteGetDTO> Resultado { get; set; }
         }
-        public async Task<List<ClienteEmpresaGetDTO>> get_ClientesPersonasAsync(string token, string criterio)
+        public async Task<List<ClienteGetDTO>> GET_ClientesAsync(string token, string criterio)
         {
             try
             {
@@ -110,13 +122,13 @@ namespace jycboliviaASP.net.Negocio
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(searchResponseBody);
 
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<ClienteEmpresaGetDTO>();
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ClienteGetDTO>();
             }
             catch (Exception ex)
             {
                 // Manejar errores y registrar información
                 Console.WriteLine($"Error en la búsqueda: {ex.Message}");
-                return new List<ClienteEmpresaGetDTO>();
+                return new List<ClienteGetDTO>();
             }
         }
         public class ClienteEmpresaGetDTO

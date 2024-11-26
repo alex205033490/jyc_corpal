@@ -194,6 +194,8 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
+
+        //--------------------------        METODO GET CLIENTE/EMPRESA      -------------------------//
         protected async void btn_buscar_CliEmpr_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_filtroBusqueda.Text;
@@ -215,7 +217,7 @@ namespace jycboliviaASP.net.Presentacion
                     return;
                 }
                 var cli = new NA_APIclientes();
-                List<ClienteEmpresaGetDTO> personas = await cli.get_ClientesPersonasAsync(token, criterioBusqueda);
+                List<ClienteGetDTO> personas = await cli.GET_ClientesAsync(token, criterioBusqueda);
 
                 if (personas != null && personas.Count > 0)
                 {
@@ -238,19 +240,19 @@ namespace jycboliviaASP.net.Presentacion
             NA_APIclientes cl = new NA_APIclientes();
             return await cl.ObtenerTokenAsync(usuario, password);
         }
-        private async Task<List<ClienteEmpresaGetDTO>> BuscarClientesAsync(string token, string criterioBusqueda)
+        private async Task<List<ClienteGetDTO>> BuscarClientesAsync(string token, string criterioBusqueda)
         {
             NA_APIclientes cli = new NA_APIclientes();
-            return await cli.get_ClientesPersonasAsync(token, criterioBusqueda);
+            return await cli.GET_ClientesAsync(token, criterioBusqueda);
         }
-        private void MostrarClientes(List<ClienteEmpresaGetDTO> personas)
+        private void MostrarClientes(List<ClienteGetDTO> personas)
         {
             GridView1.DataSource = personas;
             GridView1.DataBind();
         }
         private void LimpiarGridView()
         {
-            GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
+            GridView1.DataSource = new List<ClienteGetDTO>();
             {
                 GridView1.DataBind();
             }

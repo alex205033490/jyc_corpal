@@ -45,6 +45,12 @@
     font-size: small;
 }
 
+.container_gvClientesPedidos {
+    font-size:10px;
+}
+
+
+
 /****************************  CUENTAS/COBRANZA    ****************************/
 .container-POSTCCobranza, .container-GETCCobranzaDet, .container-GETCCobranzas {
     background-color: #ff75000a;
@@ -54,23 +60,16 @@
 }
 
 /****************************   API COMPRAS    ****************************/
-.container-POSTCompras {
+.container-POSTCompras, .form_ADDdetProducto {
     background-color: #ff75000a;
     border: 2px solid #7D7D7D; /* Color plomo */
     box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
     font-size: small;
 }
+.form-select option {
+    font-size: 12px; /* Cambia el valor según el tamaño que desees */
+}
 
-.form_pagosDTO {
-    background-color: #5ea96714;
-    padding-top: 10px;
-    padding-bottom:10px;
-}
-.form_creditoDTO {
-    background-color: #5ea96714;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
 
 

@@ -89,9 +89,10 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     if (Request.Form["codigoProducto" + i] != null)
                     {
+                        decimal importeDescuento = decimal.Parse(Request.Form["importeDescuento" + i], CultureInfo.InvariantCulture);
                         decimal cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture);
                         decimal precioUnitario = decimal.Parse(Request.Form["precioUnitario" + i], CultureInfo.InvariantCulture);
-                        decimal costoTotal = cantidad * precioUnitario;
+                        decimal costoTotal = (cantidad * precioUnitario)- importeDescuento;
 
                         var detalle = new DetalleProductoCompra
                         {
@@ -100,8 +101,8 @@ namespace jycboliviaASP.net.Presentacion
                             Cantidad = cantidad,
                             CodigoUnidadMedida = int.Parse(Request.Form["codUnidadMedida" + i]),
                             PrecioUnitario = precioUnitario,
-                            ImporteDescuento = decimal.Parse(Request.Form["importeDescuento" + i]),
-                            PorcentajeGasto = decimal.Parse(Request.Form["porcentajeGasto" + i]),
+                            ImporteDescuento = importeDescuento,
+                            PorcentajeGasto = 0,
                             ImporteTotal = costoTotal
                         };
                         detalles.Add(detalle);
@@ -131,7 +132,34 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
-
+        private PagosDTO ObtenerDetallesPagos()
+        {
+            decimal costoTotalProd = 0;
+            var detallesProducto = ObtenerDetallesProducto();
+            foreach(var detalle in detallesProducto)
+            {
+                costoTotalProd += detalle.ImporteTotal;
+            }
+            try
+            {
+                var pagos = new PagosDTO
+                {
+                    TotalEfectivo = costoTotalProd,
+                    TotalCredito = 0,
+                    TotalCheques = 0,
+                    TotalDeposito = 0,
+                    //Credito = ObtenerDetallesCredito(),
+                    //Cheque = ObtenerDetallesCheque(),
+                    //Deposito = ObtenerDetallesDeposito(),
+                };
+                return pagos;
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al obtener detalles del pago: {ex.Message}");
+                return null;
+            }
+        }
         private GastosDTO ObtenerDetallesGastos()
         {
             try
@@ -151,28 +179,7 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
-        private PagosDTO ObtenerDetallesPagos()
-        {
-            try
-            {
-                var pagos = new PagosDTO
-                {
-                    TotalEfectivo = decimal.Parse(txt_totalEfectivo.Text),
-                    TotalCredito = 0,
-                    TotalCheques = 0,
-                    TotalDeposito = 0,
-                    //Credito = ObtenerDetallesCredito(),
-                    //Cheque = ObtenerDetallesCheque(),
-                    //Deposito = ObtenerDetallesDeposito(),
-                };
-                return pagos;
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al obtener detalles del pago: {ex.Message}");
-                return null;
-            }
-        }
+
         private CreditoDTO ObtenerDetallesCredito()
         {
             try
@@ -284,6 +291,7 @@ namespace jycboliviaASP.net.Presentacion
             txt_importe_Descuentos.Text = "";
             txt_codProveedor.Text = "";
             txt_codDistribucionGastos.Text = "";
+            txt_glosa.Text = "";
         }
         private void showalert(string message)
         {

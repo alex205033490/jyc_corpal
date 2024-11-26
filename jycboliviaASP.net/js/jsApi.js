@@ -47,7 +47,6 @@ function addRowCompra() {
          <td><input type='number' class="form-control" name='codUnidadMedida${rowCount}' id='codUnidadMedida${rowCount}' autocomplete="off"/></td>
          <td><input type='number' class="form-control" step="0.01" name='precioUnitario${rowCount}' id='precioUnitario${rowCount}'/></td>
          <td><input type='number' class="form-control" step="0.01" name='importeDescuento${rowCount}' id='importeDescuento${rowCount}'/></td>
-         <td><input type='number' class="form-control" step="0.01" name='porcentajeGasto${rowCount}' id='porcentajeGasto${rowCount}' /></td>
         <td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Eliminar</button></td >`;
 }
 function deleteRow(button) {

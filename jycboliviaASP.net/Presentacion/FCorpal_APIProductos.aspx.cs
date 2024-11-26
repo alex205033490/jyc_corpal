@@ -25,7 +25,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 ////////////////////////////////////////////      GET - BUSCAR PRODUCTO POR NOMBRE
         protected async void btn_buscarProdNombre_Click(object sender, EventArgs e)
-        {
+        {/*
             string criterioBusqueda = txt_nomProducto.Text.Trim();
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
@@ -36,11 +36,13 @@ namespace jycboliviaASP.net.Presentacion
             }
             try
             {
+
                 string usuario = "adm";
                 string password = "123";
 
                 var BuscProducto = new NA_APIproductos();
-                List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
+                string token = await BuscProducto.GET
+List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
 
                 if (productos.Count > 0)
                 {
@@ -62,6 +64,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 ShowAlert($"Ha ocurrido un error inesperado. {ex.Message}");
             }
+            */
         }
 
 /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO

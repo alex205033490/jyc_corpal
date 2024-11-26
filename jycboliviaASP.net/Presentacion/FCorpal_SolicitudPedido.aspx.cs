@@ -12,6 +12,9 @@ using System.Web.Script.Services;
 using System.Drawing;
 using jycboliviaASP.net.NegocioApi;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
+using static jycboliviaASP.net.Negocio.NA_APIclientes;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -403,5 +406,119 @@ namespace jycboliviaASP.net.Presentacion
 
                 tx_cantidadProducto.Text = rowsArray.Count.ToString();
         }
+
+
+        ///////////////  SOLICITUD PEDIDO UPON
+        //  buscar clientes upon
+        protected void txt_nomCliente_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_nomCliente.Text.Trim();
+            if(!string.IsNullOrEmpty(criterio))
+            {
+                cargarClientes(criterio);
+            }
+        }
+        private async void cargarClientes(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIclientes apiCliente = new NA_APIclientes();
+                List<ClienteGetDTO> clientes = await apiCliente.GET_ClientesAsync(token, criterio);
+
+                gvPedidoClientes.DataSource = clientes;
+                gvPedidoClientes.DataBind();
+
+                gvPedidoClientes.Visible = clientes.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al realizar la busqueda: {ex.Message}");
+            }
+        }
+        protected void gv_Clientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gvPedidoClientes.SelectedIndex;
+            GridViewRow row = gvPedidoClientes.Rows[index];
+
+            string nombreCompleto = row.Cells[1].Text;
+            int codigoContacto = int.Parse(row.Cells[2].Text);
+
+            txt_nomCliente.Text = nombreCompleto;
+            Session["codigoContacto"] = codigoContacto;
+
+            gvPedidoClientes.Visible = false;
+        }
+
+
+        // buscar productos
+        private void showalert(string mensaje)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+        }
+        protected void txt_nomProducto_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_nomProducto.Text.Trim();
+            if(!string.IsNullOrEmpty(criterio))
+            {
+                cargarProductos(criterio);
+            }
+        }
+        protected void gv_PedidoGetProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index =gv_PedidoGetProductos.SelectedIndex;
+            GridViewRow row = gv_PedidoGetProductos.Rows[index];
+
+            string codigoProducto = row.Cells[1].Text;
+            string nombreCompleto = row.Cells[2].Text;
+            string codigoUnidadMedida = row.Cells[3].Text;
+            string costoUnitario = row.Cells[4].Text;
+
+            txt_nomProducto.Text =nombreCompleto;
+            txt_precProducto.Text=costoUnitario;
+
+            Session["SessionCodigoProducto"] = codigoProducto;
+            Session["SessionCodigoUnidadMedida"] = codigoUnidadMedida;
+
+            gv_PedidoGetProductos.Visible = false;
+        }
+        private async void cargarProductos(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos APIProductos = new NA_APIproductos();
+                List<productoCriterioGet> producto = await APIProductos.get_ProductoCriterioAsync(token, criterio);
+                
+                gv_PedidoGetProductos.DataSource = producto;
+                gv_PedidoGetProductos.DataBind();
+                gv_PedidoGetProductos.Visible = producto.Count > 0;
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al realizar la busqueda: {ex.Message}");
+            }
+        }
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIclientes APIClientes = new NA_APIclientes();
+            return await APIClientes.ObtenerTokenAsync(usuario, password);
+        }
+
+        // agregar producto
+
+        //List<Productos> productos = new List<Productos>();
+        
+        /*
+        public class Productos 
+        {
+            public string Nombre {  get; set; }
+            public string CodigoProducto {  get; set; }
+            public string Cantidad {  get; set; }
+            public 
+        }
+        */
     }
 }

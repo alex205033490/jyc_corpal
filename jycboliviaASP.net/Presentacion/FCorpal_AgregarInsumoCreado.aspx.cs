@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Web.UI;
 using System.Web.Services;
 using jycboliviaASP.net.Negocio;
 using System.Web.Script.Services;

@@ -104,7 +104,7 @@ namespace jycboliviaASP.net.Negocio
             public bool EsValido { get; set; }
             public List<Ingresos> Resultado { get; set; }
         }
-       
+
         public async Task<List<Ingresos>> ObtenerIngresosAsync(string usuario, string password, string criterio)
         {
             try
