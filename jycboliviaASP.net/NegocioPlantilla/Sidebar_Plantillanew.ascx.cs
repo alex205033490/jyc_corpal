@@ -64,6 +64,10 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_Insumos.Visible = false;
             mn_InsumosCompuesto.Visible = false;
             mn_consultaRecetaInsumo.Visible = false;
+            mn_vaciadoUponPedido.Visible = false;
+            mn_vaciadoUponVenta.Visible = false;
+            mn_CargaExcelComprasUpon.Visible = false;
+            mn_CargaExcelVentasUpon.Visible = false;
         }
 
 
@@ -183,8 +187,20 @@ namespace jycboliviaASP.net.NegocioPlantilla
                             case 134:
                                 mn_Insumos.Visible = true;
                                 break;
+                            case 135:
+                                mn_CargaExcelComprasUpon.Visible = true;
+                                break;
+                            case 136:
+                                mn_CargaExcelVentasUpon.Visible = true;
+                                break;
                             case 137:
                                 mn_consultaRecetaInsumo.Visible = true;
+                                break;
+                            case 140:
+                                mn_vaciadoUponPedido.Visible = true;
+                                break;
+                            case 141:
+                                mn_vaciadoUponVenta.Visible = true;
                                 break;
 
                             default:

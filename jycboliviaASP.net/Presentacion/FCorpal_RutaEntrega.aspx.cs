@@ -87,7 +87,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             string nombre = prefixText;
 
-            NCorpal_Tienda ntienda = new NCorpal_Tienda();
+            NCorpal_Cliente ntienda = new NCorpal_Cliente();
             DataSet tuplas = ntienda.listarTiendas(nombre);
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
@@ -137,8 +137,8 @@ namespace jycboliviaASP.net.Presentacion
                  string horacobro = tx_horaEntrega.Text;
                  string detalle = tx_detalleRuta.Text;
                  string tiendanombre = tx_tiendanombre.Text;
-                 NCorpal_Tienda ntienda = new NCorpal_Tienda();
-                 DataSet datoTienda = ntienda.get_tiendaNombre(tiendanombre);
+                 NCorpal_Cliente ntienda = new NCorpal_Cliente();
+                 DataSet datoTienda = ntienda.get_ClienteNombre(tiendanombre);
                  int codtienda;
                  int.TryParse(datoTienda.Tables[0].Rows[0][0].ToString(), out codtienda);   
                  string personalasignado = tx_personalAsignado.Text;
@@ -245,8 +245,8 @@ namespace jycboliviaASP.net.Presentacion
                  string horacobro = tx_horaEntrega.Text;
                  string detalle = tx_detalleRuta.Text;
                  string tiendanombre = tx_tiendanombre.Text;
-                 NCorpal_Tienda ntienda = new NCorpal_Tienda();
-                 DataSet datoTienda = ntienda.get_tiendaNombre(tiendanombre);
+                 NCorpal_Cliente ntienda = new NCorpal_Cliente();
+                 DataSet datoTienda = ntienda.get_ClienteNombre(tiendanombre);
                  int codtienda;
                  int.TryParse(datoTienda.Tables[0].Rows[0][0].ToString(), out codtienda);   
                  string personalasignado = tx_personalAsignado.Text;

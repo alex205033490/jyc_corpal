@@ -31,9 +31,9 @@ namespace jycboliviaASP.net.Negocio
                 return -1;
         }
 
-        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado)
+        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado, int codcliente)
         {
-            return dsp.set_guardarSolicitud( nroboleta,  fechaentrega,  horaentrega,  personalsolicitud,  codpersolicitante,  estado);
+            return dsp.set_guardarSolicitud( nroboleta,  fechaentrega,  horaentrega,  personalsolicitud,  codpersolicitante,  estado, codcliente);
         }
 
         internal string get_siguentenumeroRecibo(int codUser)
@@ -170,6 +170,16 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
         {
             return dsp.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_allPedidosParaVaciarUpon(string cliente)
+        {
+            return dsp.get_allPedidosParaVaciarUpon(cliente);
+        }
+
+        internal bool anularPedidoVaciadoUpon(int codigoPedido, bool bandera)
+        {
+            return dsp.anularPedidoVaciadoUpon(codigoPedido, bandera);
         }
     }
 }

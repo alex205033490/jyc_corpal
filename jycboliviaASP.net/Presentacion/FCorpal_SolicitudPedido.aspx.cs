@@ -65,6 +65,28 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
+        
+        // webservice que me permite la autocompletacion
+        [WebMethod]
+        [ScriptMethod]
+        // se devuelve un arreglo con la informacion
+        public static string[] GetlistaClientes222(string prefixText, int count)
+        {
+            string nombrecliente = prefixText;
+
+            NCorpal_Cliente cc = new NCorpal_Cliente();
+            DataSet tuplas = cc.get_ClienteNombre(nombrecliente);
+
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+            int fin = tuplas.Tables[0].Rows.Count;
+            for (int i = 0; i < fin; i++)
+            {
+                lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
+            }
+            return lista;          
+        }
+
+
         // webservice que me permite la autocompletacion
         [WebMethod]
         [ScriptMethod]
@@ -218,11 +240,15 @@ namespace jycboliviaASP.net.Presentacion
                 string horaentrega = tx_horaEntrega.Text;
 
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-                string repuestosSolicitados = ""; 
-                if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true))
+                string repuestosSolicitados = "";
+                string cliente = tx_cliente.Text;
+                int codigCliente;
+                NCorpal_Cliente nc = new NCorpal_Cliente();
+                codigCliente = nc.get_CodigoCliente(cliente);
+
+                if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante,true,codigCliente))
                 {
                     int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
-
                     double montoTotal = 0;
                     for (int i = 0; i < datoRepuesto.Rows.Count; i++)
                     {

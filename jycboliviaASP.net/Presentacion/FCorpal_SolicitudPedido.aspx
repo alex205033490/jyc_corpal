@@ -45,7 +45,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
            
 
-      <div class="row">        
+    <div class="row">        
           <div class="col-12">
           <div class="card">
              <div class="card-header bg-success text-white">
@@ -139,61 +139,83 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="row">
-        <div class="col-3">
-             <label class="form-label">Nro</label>
-            <asp:TextBox ID="tx_nrodocumento" runat="server" class="form-control"></asp:TextBox>
+                    <div class="col-md-3">
+                         <label class="form-label" for="tx_nrodocumento">Nro</label>
+                        <asp:TextBox ID="tx_nrodocumento" runat="server" class="form-control"></asp:TextBox>
+                    </div>
+            <div class="col">
+                 <label class="form-label" for="tx_solicitante">Solicitante</label>
+                <asp:TextBox ID="tx_solicitante" runat="server" class="form-control" ></asp:TextBox>
+            </div>
         </div>
-        <div class="col-12">
-             <label class="form-label">Solicitante</label>
-            <asp:TextBox ID="tx_solicitante" runat="server" class="form-control" ></asp:TextBox>
-        </div>
-        <div class="col-6">
-             <label class="form-label">Fecha Entrega</label>
-            <asp:TextBox ID="tx_fechaEntrega" runat="server" class="form-control"></asp:TextBox>
-            <asp:CalendarExtender ID="tx_fechaEntrega_CalendarExtender" runat="server" 
-                TargetControlID="tx_fechaEntrega">
-            </asp:CalendarExtender>
-        </div>
-        <div class="col-6">
-             <label class="form-label">Hora Entrega</label>
-            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control"></asp:TextBox>
-        </div>
+                <div class="row">
+                <div class="col-6">
+                     <label class="form-label" for="tx_fechaEntrega">Fecha Entrega</label>
+                    <asp:TextBox ID="tx_fechaEntrega" runat="server" class="form-control"></asp:TextBox>
+                    <asp:CalendarExtender ID="tx_fechaEntrega_CalendarExtender" runat="server" 
+                        TargetControlID="tx_fechaEntrega">
+                    </asp:CalendarExtender>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="tx_horaEntrega">Hora Entrega</label>
+                    <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label" for="tx_cliente">Cliente:</label>
+                        <asp:TextBox ID="tx_cliente" runat="server" class="form-control"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server" 
+                            TargetControlID="tx_cliente"
+                            CompletionSetCount="12" 
+                            MinimumPrefixLength="1" ServiceMethod="GetlistaClientes222" 
+                            UseContextKey="True"
+                            CompletionListCssClass="CompletionList" 
+                            CompletionListItemCssClass="CompletionlistItem" 
+                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" >
+                        </asp:AutoCompleteExtender>  
+                    </div>
+                </div>
 
-        <div class="text-left">
-            <asp:Button ID="bt_guardar" runat="server" class="btn btn-success" Text="Guardar"   onclick="bt_guardar_Click" />
-        </div>
-
-    </div>
+            <div class="row">
+                <div class="col-3">
+                    <asp:Button ID="bt_guardar" runat="server" class="btn btn-success" Text="Guardar"   onclick="bt_guardar_Click" />
+                </div>
+                
+            </div>
             </li>
+    
+    
             <li class="list-group-item">
                 <div class="row">
-        <div class="Gcotizacion">
-            <asp:GridView ID="gv_adicionados" runat="server" BackColor="White" 
+                    <div class="Gcotizacion">
+                        <asp:GridView ID="gv_adicionados" runat="server" BackColor="White" 
             
-                BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-                Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" 
-                onrowcancelingedit="gv_adicionados_RowCancelingEdit" 
-                onrowdeleting="gv_adicionados_RowDeleting" 
-                onrowediting="gv_adicionados_RowEditing" 
-                onrowupdating="gv_adicionados_RowUpdating">
-                <AlternatingRowStyle BackColor="#CCCCCC" />
-                <Columns>
-                    <asp:CommandField ShowEditButton="True" />
-                    <asp:CommandField ShowDeleteButton="True" />
-                </Columns>
+                            BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
+                            Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" 
+                            onrowcancelingedit="gv_adicionados_RowCancelingEdit" 
+                            onrowdeleting="gv_adicionados_RowDeleting" 
+                            onrowediting="gv_adicionados_RowEditing" 
+                            onrowupdating="gv_adicionados_RowUpdating">
+                            <AlternatingRowStyle BackColor="#CCCCCC" />
+                            <Columns>
+                                <asp:CommandField ShowEditButton="True" />
+                                <asp:CommandField ShowDeleteButton="True" />
+                            </Columns>
       
-                <FooterStyle BackColor="#CCCCCC" />
-                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#808080" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#383838" />
-            </asp:GridView>
-        </div>
-    </div>
-            </li>        
+                            <FooterStyle BackColor="#CCCCCC" />
+                            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                            <SortedAscendingHeaderStyle BackColor="#808080" />
+                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                            <SortedDescendingHeaderStyle BackColor="#383838" />
+                        </asp:GridView>
+                    </div>
+                </div>
+            </li>   
+              
           </ul>
         </div>
       </div>

@@ -126,14 +126,18 @@
             </ul>
         </li><!-- End Tables Nav -->
 
+    
       <li class="nav-heading"> APIs</li>          
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#uponweb-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Upon Web</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
         <ul id="uponweb-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li><a href="../Presentacion/FUpon_CargaCompras.aspx" id="mn_CargaComprasUpon" runat="server"><i class="bi bi-circle"></i><span>Carga Compras Upon</span></a></li>                                                 
-        <li><a href="../Presentacion/FUpon_CargaVentas.aspx" id="mn_CargaVentasUpon" runat="server"><i class="bi bi-circle"></i><span>Carga Ventas Upon</span></a></li>                                                 
+        
+        <li><a href="../Presentacion/FCorpal_VaciadoUponPedido.aspx" id="mn_vaciadoUponPedido" runat="server"><i class="bi bi-circle"></i><span>Vaciado Upon Pedido</span></a></li>                                                 
+        <li><a href="../Presentacion/FCorpal_VaciadoUponVenta.aspx" id="mn_vaciadoUponVenta" runat="server"><i class="bi bi-circle"></i><span>Vaciado Upon Venta</span></a></li>                                                             
+        <li><a href="../Presentacion/FUpon_CargaCompras.aspx" id="mn_CargaExcelComprasUpon" runat="server"><i class="bi bi-circle"></i><span>Carga Excel Compras Upon</span></a></li>                                                 
+        <li><a href="../Presentacion/FUpon_CargaVentas.aspx" id="mn_CargaExcelVentasUpon" runat="server"><i class="bi bi-circle"></i><span>Carga Excel Ventas Upon</span></a></li>                                                 
         </ul>
         </li>  
 
@@ -143,13 +147,13 @@
         <i class="bi bi-layout-text-window-reverse"></i><span>Clientes/Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
         <ul id="prueba-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <!--<li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>API Inventario</span></a></li> -->
+        <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>API Inventario</span></a></li> 
         <li><a href="../Presentacion/FCorpal_APIClientes.aspx" id="mn_apiclientes" runat="server" ><i class="bi bi-circle"></i><span>Cliente/Proveedor Upon</span></a></li>
-        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>Productos Upon</span></a></li><!-- -->
+        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>Productos Upon</span></a></li>
         
         
         </ul>
-        </li><!-- End Tables Nav -->
+        </li>
 
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="#">
@@ -201,7 +205,7 @@
           <li><a href="../Presentacion/FCorpal_APIVentas.aspx" id="A4" runat="server" ><i class="bi bi-circle"></i><span>Ventas GET/POST</span></a></li>
           </ul>
           </li>
-
+        
 
         
 

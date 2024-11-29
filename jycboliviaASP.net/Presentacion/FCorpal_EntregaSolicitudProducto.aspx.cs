@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.Configuration;
+using static jycboliviaASP.net.Negocio.NA_APIcompras;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -189,10 +190,50 @@ namespace jycboliviaASP.net.Presentacion
 
                     string estadoCierre = dd_estadoCierre.SelectedItem.Text;
                     string motivoCierre = dd_motivoCierre.SelectedItem.Text;
+                    string EstadoActual = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
 
                     bool cerrado = nss.update_cerrarSolicitud(codigoSolicitud, codresponsable, nombreResponsable, estadoCierre, motivoCierre, fechaEntrega, horaEntrega);
                     if (cerrado == true)
-                    {
+                    {                                                
+                        if (estadoCierre.Equals("Cerrado") && EstadoActual.Equals("Abierto")) {
+                            string cliente = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
+                            NCorpal_Cliente nc = new NCorpal_Cliente();
+                            DataSet tuplaCli = nc.get_ClienteNombreEspecifico(cliente);
+                            int codCliente = 0;
+                            string direccion = "";
+                            string correoCliente = "";
+                            string municipio = "Santa Cruz";
+                            string telefono = "";
+                            string nombreRazonSocial = "";
+                            string numeroDocumento = "";
+                            int codigoMetodoPago = 1;
+                            bool factura = false;
+                            string numeroFactura = codigoSolicitud.ToString();
+                            int codigoMoneda = 1;
+                            decimal descuentoAdicional = decimal.Parse("0");
+                            string leyendaF = "LeyendaNinguna";
+                            decimal tipoCambio = decimal.Parse("6,96");
+                            decimal montoTotal = decimal.Parse(gv_solicitudesProductos.SelectedRow.Cells[9].Text);
+                            decimal montoTotalMoneda = montoTotal;
+
+                            if (tuplaCli.Tables[0].Rows.Count > 0)
+                            {
+                                codCliente = int.Parse(tuplaCli.Tables[0].Rows[0][0].ToString());
+                                direccion = tuplaCli.Tables[0].Rows[0][2].ToString();
+                                telefono = tuplaCli.Tables[0].Rows[0][3].ToString();
+                                municipio = tuplaCli.Tables[0].Rows[0][4].ToString();
+                                correoCliente = tuplaCli.Tables[0].Rows[0][14].ToString();
+                                nombreRazonSocial = tuplaCli.Tables[0].Rows[0][12].ToString();
+                                numeroDocumento = tuplaCli.Tables[0].Rows[0][13].ToString();
+                            }
+
+                            NCorpal_Venta nv = new NCorpal_Venta();
+                            bool banderaV = nv.crearVenta(codCliente, cliente, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codresponsable, nombreResponsable, factura, fechaEntrega, codigoSolicitud);
+                            int codigoVenta = nv.get_codigoVentaUltimoInsertado(cliente, nombreRazonSocial, nombreResponsable);
+                            bool banderaAllTodosProducto = nv.insertarTodoslosProductosAVenta(codigoVenta, codigoSolicitud);
+
+                        }
+
                         limpiarDatos();
                         buscarDatosSolicitud("", "", estadoCierre);
                         Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;

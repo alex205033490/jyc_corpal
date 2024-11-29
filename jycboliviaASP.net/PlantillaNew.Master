@@ -37,8 +37,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"  EnableScriptGlobalization="True">
-        </asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"  EnableScriptGlobalization="True"/>        
 
  <!-- ======= Header ======= -->
         <uc1:Header_planillanew runat="server" id="Header_planillanew" />

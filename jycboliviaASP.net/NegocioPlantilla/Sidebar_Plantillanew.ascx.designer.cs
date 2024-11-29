@@ -330,22 +330,40 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_activosjyc;
 
         /// <summary>
-        /// Control mn_CargaComprasUpon.
+        /// Control mn_vaciadoUponPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_CargaComprasUpon;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_vaciadoUponPedido;
 
         /// <summary>
-        /// Control mn_CargaVentasUpon.
+        /// Control mn_vaciadoUponVenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_CargaVentasUpon;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_vaciadoUponVenta;
+
+        /// <summary>
+        /// Control mn_CargaExcelComprasUpon.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_CargaExcelComprasUpon;
+
+        /// <summary>
+        /// Control mn_CargaExcelVentasUpon.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_CargaExcelVentasUpon;
 
         /// <summary>
         /// Control mn_prueba.

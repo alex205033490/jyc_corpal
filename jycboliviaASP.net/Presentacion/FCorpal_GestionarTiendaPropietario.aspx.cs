@@ -48,7 +48,7 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] getListaPropietario(string prefixText, int count)
         {
             string nombre = prefixText;
-            NCorpal_Tienda prop = new NCorpal_Tienda();
+            NCorpal_Cliente prop = new NCorpal_Cliente();
             DataSet tuplas = prop.buscarPropietario(nombre);
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
@@ -65,7 +65,7 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] getListaTienda(string prefixText, int count)
         {
             string nombre = prefixText;
-            NCorpal_Tienda prop = new NCorpal_Tienda();
+            NCorpal_Cliente prop = new NCorpal_Cliente();
             DataSet tuplas = prop.listarTiendas(nombre);
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
@@ -79,7 +79,7 @@ namespace jycboliviaASP.net.Presentacion
 
         private void listarTiendas(string nombreTienda)
         {
-            NCorpal_Tienda Nproy = new NCorpal_Tienda();
+            NCorpal_Cliente Nproy = new NCorpal_Cliente();
             DataSet lista = Nproy.listarTiendas(nombreTienda);
             gv_tablaTienda.DataSource = lista;
             gv_tablaTienda.DataBind();
@@ -95,7 +95,7 @@ namespace jycboliviaASP.net.Presentacion
         {
 
             int codigo = Convert.ToInt32(gv_tablaTienda.SelectedRow.Cells[1].Text);
-            NCorpal_Tienda tienda = new NCorpal_Tienda();
+            NCorpal_Cliente tienda = new NCorpal_Cliente();
             DataSet tupla = tienda.get_tienda(codigo);
             
             tx_nombreTienda.Text = tupla.Tables[0].Rows[0][1].ToString().Replace("&nbsp;","");
@@ -150,7 +150,7 @@ namespace jycboliviaASP.net.Presentacion
             string passwordAux = Session["passworuser"].ToString();
             int codUserGra = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
-            NCorpal_Tienda ncorpal = new NCorpal_Tienda();
+            NCorpal_Cliente ncorpal = new NCorpal_Cliente();
             bool bandera = ncorpal.updateDatosTienda(codigo, tiendaname, tiendadir, tiendatelefono,
                                   tiendadepartamento, tiendazona, propietarioname,
                                   propietarioci, propietariodir, propietariocelular,
@@ -215,7 +215,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void Exportar_Excel()
         {
-            NCorpal_Tienda Ncorpal = new NCorpal_Tienda();
+            NCorpal_Cliente Ncorpal = new NCorpal_Cliente();
             DataSet lista = Ncorpal.listarTiendas(tx_nombreTienda.Text);
 
             //// Creacion del Excel
@@ -257,7 +257,7 @@ namespace jycboliviaASP.net.Presentacion
             if (gv_tablaTienda.SelectedIndex > -1)
             {
                 int codigo = int.Parse(gv_tablaTienda.SelectedRow.Cells[1].Text);
-                NCorpal_Tienda ncorp = new NCorpal_Tienda();
+                NCorpal_Cliente ncorp = new NCorpal_Cliente();
                 bool bandera = ncorp.eliminarTienda(codigo);
                 if (bandera)
                 {
@@ -302,7 +302,7 @@ namespace jycboliviaASP.net.Presentacion
 
          
                               
-         NCorpal_Tienda ncorpal = new NCorpal_Tienda();
+         NCorpal_Cliente ncorpal = new NCorpal_Cliente();
          bool bandera = ncorpal.guardarDatosTienda(tiendaname, tiendadir, tiendatelefono,
                               tiendadepartamento, tiendazona, propietarioname,
                               propietarioci, propietariodir, propietariocelular,

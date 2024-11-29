@@ -28,14 +28,14 @@ namespace jycboliviaASP.net.Datos
             return lista;
         }
 
-        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado)
+        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado, int codcliente)
         {
             string consulta = "insert into tbcorpal_solicitudentregaproducto ( "+
                              " nroboleta, fechaGRA, horaGRA, fechaentrega, horaentrega,  personalsolicitud, "+
-                             " codpersolicitante,   estado, estadosolicitud) " +
+                             " codpersolicitante,   estado, estadosolicitud, vaciadoupon, codcliente) " +
                              " values( "+
                              " '"+nroboleta+"', current_date(), current_time(), "+fechaentrega+", '"+horaentrega+"',  '"+personalsolicitud+"',"+
-                              codpersolicitante + ", " + estado + ", 'Abierto' )";
+                              codpersolicitante + ", " + estado + ", 'Abierto', false, "+codcliente+" )";
             return conexion.ejecutarMySql(consulta);
         }
 
@@ -80,13 +80,12 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
         {
-            string consulta = "select " +
-                                " codigo, nroboleta, " +
-                                " date_format(fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', horaGRA, " +
-                                " date_format(fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', horaentrega, " +
-                                " personalsolicitud, montototal, " +
-                                " estadosolicitud, detallecierre " +
+            string consulta = "select  pp.codigo, pp.nroboleta,  date_format(pp.fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', "+
+                                " pp.horaGRA,  date_format(pp.fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', "+
+                                " pp.horaentrega,  pp.personalsolicitud, pp.montototal,  pp.estadosolicitud, "+ 
+                                " cc.tiendaname as 'Cliente' "+ 
                                 " from  tbcorpal_solicitudentregaproducto pp " +
+                                " left join tbcorpal_cliente cc on pp.codcliente = cc.codigo " +
                                 " where " +
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
@@ -498,6 +497,30 @@ namespace jycboliviaASP.net.Datos
                                " ss.fechaentrega between " + fechadesde + " and " + fechahasta;
                                
             return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_allPedidosParaVaciarUpon(string cliente)
+        {
+            string consulta = "select   ss.codigo, ss.nroboleta,   " +
+                " date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega',   " +
+                " ss.horaentrega,   ss.personalsolicitud, " +                
+                " ss.estadosolicitud,   date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', " +
+                " ss.horacierre,   ss.personalentregoproducto,   cc.tiendaname as 'Cliente'  " +
+                " from tbcorpal_solicitudentregaproducto ss  left join tbcorpal_cliente cc  on ss.codcliente = cc.codigo   " +                
+                " where  " +
+                " ss.estado = 1 and  ss.estadosolicitud = 'Cerrado' and  " +
+                " ss.vaciadoupon = false  and "+
+                " cc.tiendaname like '%"+cliente+"%' "+
+                " order by ss.codigo desc ";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal bool anularPedidoVaciadoUpon(int codigoPedido, object bandera)
+        {
+            string consulta = " update tbcorpal_solicitudentregaproducto set " +
+                " tbcorpal_solicitudentregaproducto.vaciadoupon = " + bandera +
+                " where  tbcorpal_solicitudentregaproducto.codigo = " + codigoPedido;
+            return conexion.ejecutarMySql(consulta);
         }
     }
 }
