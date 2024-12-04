@@ -12,6 +12,9 @@ using static jycboliviaASP.net.Negocio.NA_APIproductos;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Navigation;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.Data;
 
 
 
@@ -19,14 +22,21 @@ namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIProductos : System.Web.UI.Page
     {
+        private readonly NA_APIproductos _na_apiproductos = new NA_APIproductos();
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 ////////////////////////////////////////////      GET - BUSCAR PRODUCTO POR NOMBRE
         protected async void btn_buscarProdNombre_Click(object sender, EventArgs e)
-        {/*
+        {
             string criterioBusqueda = txt_nomProducto.Text.Trim();
+
+            await BuscarProdCriterioAsync(criterioBusqueda);
+        }
+        // Metodo buscar productos por criterio
+        public async Task BuscarProdCriterioAsync(string criterioBusqueda)
+        {
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
                 gv_prodNombre.DataSource = null;
@@ -36,18 +46,19 @@ namespace jycboliviaASP.net.Presentacion
             }
             try
             {
+                string token = await ObtenerTokenAsync("adm", "123");
 
-                string usuario = "adm";
-                string password = "123";
-
-                var BuscProducto = new NA_APIproductos();
-                string token = await BuscProducto.GET
-List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
-
-                if (productos.Count > 0)
+                if (string.IsNullOrEmpty(token))
                 {
-                    gv_prodNombre.DataSource = productos;
-                    gv_prodNombre.DataBind();
+                    ShowAlert("Error de autenticación. No se pudo obtener el token");
+                    return;
+                }
+                var APIproducto = new NA_APIproductos();
+                List<productoCriterioGet> productoDTO = await APIproducto.get_ProductoCriterioAsync(token, criterioBusqueda);
+
+                if (productoDTO != null && productoDTO.Count > 0)
+                {
+                    MostrarProductoCriterio(productoDTO);
                 }
                 else
                 {
@@ -56,21 +67,27 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
                     ShowAlert("No se encontraron registros con el nombre proporcionado.");
                 }
             }
-            catch(ApplicationException ex)
-            {
-                ShowAlert($"Error: {ex.Message}");
-            }
             catch (Exception ex)
             {
                 ShowAlert($"Ha ocurrido un error inesperado. {ex.Message}");
             }
-            */
+        }
+
+        private void MostrarProductoCriterio(List<productoCriterioGet> productoDTO)
+        {
+            gv_prodNombre.DataSource = productoDTO;
+            gv_prodNombre.DataBind();
         }
 
 /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_ventProducto.Text.Trim();
+            await BuscarProductoVentaAsync(criterioBusqueda);   
+        }
+        public async Task BuscarProductoVentaAsync(string criterioBusqueda)
+        {
+            
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
                 ShowAlert("Por favor, ingresa el nombre de un producto");
@@ -78,7 +95,6 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
                 gv_prodVenta.DataBind();
                 return;
             }
-
             try
             {
                 string usuario = "adm";
@@ -109,8 +125,16 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
             }
         }
 
+
 /////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
         protected async void btn_buscarCompras_Click(object sender, EventArgs e)
+        {
+            string criterioCodProducto = txt_codProductoComp.Text.Trim();
+            string criterioProveedor = txt_codProveedorComp.Text.Trim();
+
+            await BuscarProductoCompraAsync(criterioCodProducto, criterioProveedor);
+        }
+        public async Task BuscarProductoCompraAsync(string criterioCodProducto2, string criterioProveedor2)
         {
             string criterioCodProducto = txt_codProductoComp.Text.Trim();
             string criterioProveedor = txt_codProveedorComp.Text.Trim();
@@ -132,7 +156,7 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
                 string password = "123";
 
                 var buscarCompra = new NA_APIproductos();
-                List<productoComprasDTO> compras = await buscarCompra.get_prodComprasAsync(usuario, password, criterioCodProducto, criterioProveedor);
+                List<productoComprasDTO> compras = await buscarCompra.get_prodComprasAsync(usuario, password, criterioCodProducto2, criterioProveedor2);
 
                 if (compras.Count > 0)
                 {
@@ -161,47 +185,62 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
         protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_codProducto.Text.Trim();
+             
+            await BuscarProdCodigoAsync(criterioBusqueda);
+        }
+        // metodo buscar producto por codigo
+        public async Task BuscarProdCodigoAsync(string criterioBusqueda)
+        {
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
-                ShowAlert("Por favor, ingresa el codigo de un producto válido.");
-                limpiarGrids();
+                ShowAlert("Por favor, ingresa el código de un producto válido.");
                 return;
             }
 
             try
             {
+                var apiProd = new NA_APIproductos();
+                var prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
 
-                NA_APIproductos apiProd = new NA_APIproductos();
-                productoCodigoGet prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
-
-                if (prodCodigo != null )
+                if (prodCodigo != null)
                 {
-                    MostrarCodProducto(prodCodigo);
+                    // Encapsulamiento de los productos encontrados
+                    var productos = new List<productoCodigoGet> { prodCodigo };
+                    gv_prodCod.DataSource = productos;
+                    gv_prodCod.DataBind();
+
+                    // Verifica y muestra detalles de unidades de medida
+                    if (prodCodigo.DetalleUnidadesMedida != null && prodCodigo.DetalleUnidadesMedida.Count > 0)
+                    {
+                        gv_prodCodDet.DataSource = prodCodigo.DetalleUnidadesMedida; 
+                        gv_prodCodDet.DataBind();
+                    }
                 }
                 else
                 {
-                    ShowAlert("No se encontraron registros con ese código");
-                    limpiarGrids();
+                    gv_prodCod.DataSource = null;
+                    gv_prodCod.DataBind();
+                    gv_prodCodDet.DataSource = null;
+                    gv_prodCodDet.DataBind();
+                    ShowAlert("No se encontraron productos con ese código.");
                 }
-            }
-            catch (ApplicationException ex)
-            {
-                ShowAlert($"error: {ex.Message}");
             }
             catch (Exception ex)
             {
-                ShowAlert($"Ha Ocurrido un error inesperado: {ex.Message}");
+                ShowAlert($"Error: {ex.Message}");
             }
+
         }
-        private void MostrarCodProducto(productoCodigoGet prod)
+
+        private void MostrarCodProducto(List<productoCodigoGet> productos)
         {
-            var codProducto = new List<productoCodigoGet> { prod };
-            gv_prodCod.DataSource = codProducto;
+
+            gv_prodCod.DataSource = productos;
             gv_prodCod.DataBind();
             
-            if(prod.DetalleUnidadesMedida != null && prod.DetalleUnidadesMedida.Count > 0)
+            if(productos.Count > 0 && productos[0].DetalleUnidadesMedida != null && productos[0].DetalleUnidadesMedida.Count> 0)
             {
-                gv_prodCodDet.DataSource = prod.DetalleUnidadesMedida;
+                gv_prodCodDet.DataSource = productos[0].DetalleUnidadesMedida;
                 gv_prodCodDet.DataBind();
             }
             else
@@ -218,9 +257,48 @@ List <productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAs
             gv_prodCodDet.DataBind();
         }
 
+        [WebMethod]
+        [ScriptMethod]
+        public string[] GetListProductosXCod(string prefixText, int count)
+        {
+            string token = ObtenerTokenAsync("adm","123").Result; 
+
+            NA_APIproductos apip = new NA_APIproductos();
+
+            var productos = apip.GET_ListProductosAsync(token).Result;
+
+            var productosFiltrados = productos
+                .Where(p => p.CodigoProducto.StartsWith(prefixText, StringComparison.InvariantCultureIgnoreCase))
+                .Take(count)
+                .Select(p => p.CodigoProducto)
+                .ToArray();
+
+            return productosFiltrados;
+        }
+
+
         private void ShowAlert(string message)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+        }
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIproductos prod = new NA_APIproductos();
+            return await prod.GetTokenAsync(usuario, password);
+        }
+
+        protected async void Unnamed1_Click(object sender, EventArgs e)
+        {
+            /*try
+            {
+                string usuario = "adm";
+                string password = "123";
+
+                string token = await ObtenerTokenAsync(usuario, password);
+
+                List<ListProductosDTO> productos = await 
+            }
+            */
         }
     }
 }

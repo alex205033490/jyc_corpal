@@ -68,7 +68,7 @@
                     <!---------------- POST clientes/empresas ---------------->
                     <div class="container-POSTEmpresa p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Formulario Registro de Proveedores</h3>
+                            <h3 class="text_tittle p-3">Formulario Registro de Empresa</h3>
                         </div>
 
                         <!-- formulario -->
@@ -145,9 +145,14 @@
                         <div class="container_gv2 col-md-10 col-lg-10">
                             <asp:GridView ID="GridView1" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
                                 <Columns>
-                                    <asp:BoundField DataField="CodigoContacto" HeaderText="CodContacto" SortExpression="ClienteID" />
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkSeleccionar" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="CodigoContacto" HeaderText="Codigo" SortExpression="ClienteID" />
                                     <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="Nombre" />
-                                    <asp:BoundField DataField="CodigoDocumentoIdentidad" HeaderText="CodDocumento Identidad" SortExpression="codDocIdentidad" />
+
                                     <asp:BoundField DataField="NumeroDocumentoIdentidad" HeaderText="Número de Identidad" SortExpression="numDocIdentidad" />
                                     <asp:BoundField DataField="Complemento" HeaderText="Complemento" SortExpression="complemento" />
                                     <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
@@ -163,6 +168,9 @@
                                 <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
                                 <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                             </asp:GridView>
+                        </div>
+                        <div class="container_btnVaciado">
+                            <asp:Button runat="server" ID="btn_vaciadoClienteUpon" Text="Vaciar Registros" CssClass="btn btn-success" OnClick="btn_vaciadoClienteUpon_Click" />
                         </div>
                     </div>
                     <br />

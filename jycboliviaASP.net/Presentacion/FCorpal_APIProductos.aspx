@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_APIProductos.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIProductos" Async="true" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
@@ -76,6 +78,16 @@
                                 <div class="col-sm-5 col-md-4 col-lg-4">
                                     <label class="form-label" for="txt_codProducto">Código del Producto:</label>
                                     <asp:TextBox ID="txt_codProducto" runat="server" CssClass="form-control" placeholder="Ingrese un código producto" AutoComplete="off"></asp:TextBox>
+                                    <!--Autocompl-->
+                                    <asp:AutoCompleteExtender ID="txt_codProducto_AutoCompleteExtender" runat="server"
+                                        TargetControlID="txt_codProducto"
+                                        CompletionSetCount="12" MinimumPrefixLength="1" 
+                                        ServiceMethod="GetListProductosXCod" UseContextKey="true"
+                                        CompletionListCssClass="CompletionList"
+                                        CompletionListItemCssClass="CompletionlistItem"
+                                        CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                    </asp:AutoCompleteExtender>
+
                                 </div>
 
                                 <div class="col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
@@ -214,6 +226,7 @@
                                 <div class="col-sm-2 col-md-3 col-lg-2 d-flex align-items-end">
                                     <asp:Button ID="btn_buscarCompras" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarCompras_Click" />
                                 </div>
+                                <asp:Button runat="server" Text="Button" OnClick="Unnamed1_Click"></asp:Button><asp:GridView runat="server"></asp:GridView>
                             </div>
                         </asp:Panel>
 

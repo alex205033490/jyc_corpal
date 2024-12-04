@@ -87,7 +87,6 @@ namespace jycboliviaASP.net.Negocio
             public Boolean EsSucursal { get; set; }
             public string Usuario { get; set; }
         }
-
         public class ClienteGetDTO
         {
             public int CodigoContacto { get; set; }

@@ -69,6 +69,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_codProducto;
 
         /// <summary>
+        /// Control txt_codProducto_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender txt_codProducto_AutoCompleteExtender;
+
+        /// <summary>
         /// Control btn_BuscarcodProducto.
         /// </summary>
         /// <remarks>

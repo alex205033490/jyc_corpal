@@ -262,5 +262,53 @@ namespace jycboliviaASP.net.Presentacion
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
         }
 
+        protected void btn_vaciadoClienteUpon_Click(object sender, EventArgs e)
+        {
+            List<int> codigosContactoSeleccionados = new List<int>();
+            List<string> nombresSeleccionados = new List<string>();
+            List<string> ciSeleccionado = new List<string>();
+            List<string> correosSeleccionados = new List<string>();
+            List<string> telefonosSeleccionados = new List<string>();
+
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox chkSeleccionar = (CheckBox)row.FindControl("chkSeleccionar");
+                if(chkSeleccionar != null && chkSeleccionar.Checked)
+                {
+                    int codigocontacto = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
+                    string nombreCompleto = row.Cells[2].Text;
+                    string ci = row.Cells[3].Text;
+                    string correo = row .Cells[4].Text;
+                    string telefono = row.Cells[5].Text;
+
+                    codigosContactoSeleccionados.Add(codigocontacto);
+                    nombresSeleccionados.Add (nombreCompleto);
+                    ciSeleccionado.Add (ci);
+                    telefonosSeleccionados.Add(telefono);
+                }
+            }
+
+            NCorpal_Clientes negocio = new NCorpal_Clientes();
+            bool exito = false;
+
+            for (int i = 0; i < codigosContactoSeleccionados.Count; i++)
+            {
+                exito = negocio.insert_vaciadocliente(
+                    codigosContactoSeleccionados[i],
+                    nombresSeleccionados[i],
+                    ciSeleccionado[i],
+                    correosSeleccionados[i],
+                    telefonosSeleccionados[i]);
+            }
+            if (exito)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Registros insertados correctamente.');", true);
+            }
+            else
+            {
+                // Si hubo un error
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Hubo un error al insertar los registros.');", true);
+            }
+        }
     }
 }

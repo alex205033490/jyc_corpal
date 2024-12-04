@@ -58,7 +58,7 @@
                     <div class="row">
                           <div class="col-12">
                             <label for="inputName5" class="form-label">Producto</label>                  
-                              <asp:TextBox ID="tx_producto" runat="server" class="form-control" ></asp:TextBox>
+                              <asp:TextBox ID="tx_producto" runat="server" class="form-control" OnTextChanged="tx_producto_TextChanged"></asp:TextBox>
                               <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server" 
                                   TargetControlID="tx_producto"
                                   CompletionSetCount="12" 

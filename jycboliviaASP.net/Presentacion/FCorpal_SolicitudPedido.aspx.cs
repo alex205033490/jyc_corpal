@@ -222,6 +222,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
                 string repuestosSolicitados = ""; 
+
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true))
                 {
                     int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
@@ -408,7 +409,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        ///////////////  SOLICITUD PEDIDO UPON
+        ///////////////  SOLICITUD PEDIDO UPON (ERROR!)
         //  buscar clientes upon
         protected void txt_nomCliente_TextChanged(object sender, EventArgs e)
         {
@@ -507,10 +508,15 @@ namespace jycboliviaASP.net.Presentacion
             return await APIClientes.ObtenerTokenAsync(usuario, password);
         }
 
+        protected void tx_producto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         // agregar producto
 
         //List<Productos> productos = new List<Productos>();
-        
+
         /*
         public class Productos 
         {
