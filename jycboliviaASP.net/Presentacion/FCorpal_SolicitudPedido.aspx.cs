@@ -245,6 +245,21 @@ namespace jycboliviaASP.net.Presentacion
                 int codigCliente;
                 NCorpal_Cliente nc = new NCorpal_Cliente();
                 codigCliente = nc.get_CodigoCliente(cliente);
+                if (codigCliente == 0) { 
+                  string propietario = tx_propietario.Text;
+                  string razonSocial = tx_razonSocial.Text;
+                  string nit = tx_nit.Text;
+                    bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
+                    codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
+                }
+
+                bool banderaActualizar = cb_actualizarCliente.Checked;
+                if (codigCliente!=0 && banderaActualizar == true) {
+                    string propietario = tx_propietario.Text;
+                    string razonSocial = tx_razonSocial.Text;
+                    string nit = tx_nit.Text;                    
+                    banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente,cliente,propietario, razonSocial, nit, codpersolicitante);
+                }
 
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante,true,codigCliente))
                 {
@@ -428,6 +443,25 @@ namespace jycboliviaASP.net.Presentacion
             }
 
                 tx_cantidadProducto.Text = rowsArray.Count.ToString();
+        }
+
+        protected void bt_verificar_Click(object sender, EventArgs e)
+        {
+            verificarTienda();
+        }
+
+        private void verificarTienda()
+        {
+            string tienda = tx_cliente.Text;
+            NCorpal_Cliente ncli = new NCorpal_Cliente();
+            DataSet tuplaCliente = ncli.get_ClienteNombre(tienda);
+            if (tuplaCliente.Tables[0].Rows.Count>0) {
+                tx_propietario.Text = tuplaCliente.Tables[0].Rows[0][6].ToString(); 
+                tx_razonSocial.Text = tuplaCliente.Tables[0].Rows[0][12].ToString();
+                tx_nit.Text = tuplaCliente.Tables[0].Rows[0][13].ToString();
+            }else
+                Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
+
         }
     }
 }

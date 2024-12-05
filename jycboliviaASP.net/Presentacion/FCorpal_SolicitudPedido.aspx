@@ -162,8 +162,8 @@
                 </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <label class="form-label" for="tx_cliente">Cliente:</label>
+                    <div class="col-md-9">
+                        <label class="form-label" for="tx_cliente">Tienda:</label>
                         <asp:TextBox ID="tx_cliente" runat="server" class="form-control"></asp:TextBox>
                         <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server" 
                             TargetControlID="tx_cliente"
@@ -175,7 +175,28 @@
                             CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" >
                         </asp:AutoCompleteExtender>  
                     </div>
+                    <div class="col-md-3">
+                        <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />   
+                        <asp:Button ID="bt_verificar" CssClass="btn btn-info" runat="server" Text="Verificar" OnClick="bt_verificar_Click" />
+                        
+                    </div>
                 </div>
+            <div class="row">
+                <div class="col">
+                    <asp:Label ID="Label1" for="tx_propietario" runat="server" Text="Propietario:"></asp:Label>
+                    <asp:TextBox ID="tx_propietario" CssClass="form-control" runat="server"></asp:TextBox>                      
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+                <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Razon Social:"></asp:Label>
+                <asp:TextBox ID="tx_razonSocial" CssClass="form-control" runat="server"></asp:TextBox>                      
+            </div>
+            <div class="col-md-6">
+                <asp:Label ID="Label3" for="tx_nit" runat="server" Text="Nit:"></asp:Label>
+                <asp:TextBox ID="tx_nit" CssClass="form-control" runat="server"></asp:TextBox>                      
+            </div>
+</div>
 
             <div class="row">
                 <div class="col-3">
@@ -221,6 +242,5 @@
       </div>
     </div>
 
-       
 
 </asp:Content>

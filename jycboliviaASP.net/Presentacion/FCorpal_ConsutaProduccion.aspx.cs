@@ -128,14 +128,38 @@ namespace jycboliviaASP.net.Presentacion
                 if (dd_consulta.SelectedIndex == 0)
                 {                
                     get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
-                }
-                if (dd_consulta.SelectedIndex == 1)
-                {
-                    get_datosEntregaProduccionFechaTurno(fechadesde, fechahasta, producto);
-                }
+                }else
+                  if (dd_consulta.SelectedIndex == 1)
+                   {
+                     get_datosEntregaProduccionFechaTurno(fechadesde, fechahasta, producto);
+                   }else
+                    if (dd_consulta.SelectedIndex == 2)
+                        {
+                            get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(fechadesde, fechahasta, producto);
+                        }
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+        }
+
+        private void get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(string fechadesde, string fechahasta, string producto)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_Detalle_objetivoProduccion_Vs_EntregaProduccion.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen", DSconsulta);
+
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.DataSources.Add(DS_detalleproductosSolicitados);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)

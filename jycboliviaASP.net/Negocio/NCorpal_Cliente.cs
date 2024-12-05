@@ -66,6 +66,29 @@ namespace jycboliviaASP.net.Negocio
             else
                 return codigo;
         }
+
+        internal bool set_clienteSolicitud(string cliente, string propietario, string razonSocial, string nit,  int codUser)
+        {
+            return dtienda.guardarDatosTienda(cliente, "", "", "", "", propietario, "", "","","","",razonSocial,nit,"","",codUser);
+        }
+
+        internal int get_clienteUltimoIngresado(string cliente, string propietario, string razonSocial, string nit)
+        {
+            DataSet tupla = dtienda.get_clienteUltimoIngresado(cliente,  propietario, razonSocial,  nit);
+            if (tupla.Tables[0].Rows.Count > 0)
+            {
+                int codigo = 0;
+                int.TryParse(tupla.Tables[0].Rows[0][0].ToString(), out codigo);
+                return codigo;
+            }
+            else
+                return 0;
+        }
+
+        internal bool updateDatosTiendaSolicitud(int codigCliente, string cliente, string propietario, string razonsocial,string nit, int codpersolicitante)
+        {
+            return dtienda.updateDatosTiendaSolicitud( codigCliente,  cliente, razonsocial, propietario,  nit,  codpersolicitante);
+        }
     }
 }
     

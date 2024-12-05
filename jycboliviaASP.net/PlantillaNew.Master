@@ -76,6 +76,21 @@
   <script src="../NegocioPlantilla/assets/js/main.js"></script>
 
         
+  <script>
+  // Guardar la posición al salir de la página
+  window.onbeforeunload = function () {
+    localStorage.setItem('scrollPosition', window.scrollY);
+  };
+
+  // Restaurar la posición al cargar la página
+  window.onload = function () {
+    const scrollPosition = localStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+    }
+  };
+</script>
+        
     </form>
 </body>
 </html>

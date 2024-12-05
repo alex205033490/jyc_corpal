@@ -506,5 +506,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.get_allRecetaInsumoCreado(codigo);
         }
+
+        internal DataSet get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(string fechahasta)
+        {
+            return dproduccion.get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen( fechahasta);
+        }
     }
 }

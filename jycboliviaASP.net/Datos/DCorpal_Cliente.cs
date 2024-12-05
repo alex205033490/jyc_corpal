@@ -138,5 +138,24 @@ namespace jycboliviaASP.net.Datos
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
+
+        internal DataSet get_clienteUltimoIngresado(string cliente, string propietario, string razonSocial, string nit)
+        {
+            string consulta = "select max(cc.codigo) from tbcorpal_cliente cc  " +
+                " where  cc.tiendaname = '"+cliente+"' and cc.propietarioname = '"+propietario+"' " +
+                " and cc.facturar_a = '"+razonSocial+"' and cc.facturar_nit = '"+nit+"'";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal bool updateDatosTiendaSolicitud(int codigCliente, string cliente, string propietario, string razonsocial,string nit, int codpersolicitante)
+        {
+            string consulta = "update tbcorpal_cliente set  " +
+                 " tbcorpal_cliente.tiendaname = '" + cliente + "' , " +
+                 " tbcorpal_cliente.propietarioname = '" + propietario + "' , " +
+                 " tbcorpal_cliente.facturar_a = '" + razonsocial + "', " +
+                 " tbcorpal_cliente.facturar_nit = '" + nit + "' " +
+                 " where tbcorpal_cliente.codigo = " + codigCliente;
+            return conexion.ejecutarMySql(consulta);    
+        }
     }
 }

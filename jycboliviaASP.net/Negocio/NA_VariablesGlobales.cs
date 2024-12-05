@@ -332,7 +332,10 @@ namespace jycboliviaASP.net.Negocio
                 " from tbcorpal_entregasordenproduccion oo   " +
                 " where   " +
                 " oo.estado = 1 and   " +
-                " oo.fechagra between "+ NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                " oo.fechagra between "+
+                " TIMESTAMP("+ NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and "+
+                " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') "+
+               // + NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
                 " group by oo.codProductonax   " +
                 " ) as t1  ON pp.codigo = t1.codProductonax   " +
                 " LEFT JOIN   " +
@@ -357,7 +360,10 @@ namespace jycboliviaASP.net.Negocio
                 " ss.codigo = dss.codsolicitud and   " +
                 " ss.estado = 1 and   " +
                 " ss.estadosolicitud = 'Cerrado' and  " +
-                " ss.fechaentrega between "+ NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                " ss.fechaentrega between "+
+                " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
+                // NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
                 " group by dss.codproducto   " +
                 " ) as t2 ON pp.codigo = t2.codproducto   " +
                 " WHERE   " +
@@ -380,7 +386,10 @@ namespace jycboliviaASP.net.Negocio
                     " from tbcorpal_entregasordenproduccion oo   " +
                     " where   " +
                     " oo.estado = 1 and   " +
-                    " oo.fechagra between " + NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
+                    " oo.fechagra between " +
+                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                    " TIMESTAMP(DATE_SUB("+ fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
+                    //NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
                     " group by oo.codProductonax   " +
                     " ) as t1  ON pp.codigo = t1.codProductonax   " +
                     " LEFT JOIN   " +
@@ -405,7 +414,10 @@ namespace jycboliviaASP.net.Negocio
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
                     " ss.estadosolicitud = 'Cerrado' and  " +
-                    " ss.fechaentrega between " + NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
+                    " ss.fechaentrega between " +
+                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                    " TIMESTAMP(DATE_SUB(" + fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
+                    // NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
                     " group by dss.codproducto   " +
                     " ) as t2 ON pp.codigo = t2.codproducto   " +
                     " WHERE   " +
@@ -427,7 +439,10 @@ namespace jycboliviaASP.net.Negocio
                     " from tbcorpal_entregasordenproduccion oo   " +
                     " where   " +
                     " oo.estado = 1 and   " +
-                    " oo.fechagra between " + NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                    " oo.fechagra between " +
+                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                    " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
+                    // NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
                     " group by oo.codProductonax   " +
                     " ) as t1  ON pp.codigo = t1.codProductonax   " +
                     " LEFT JOIN   " +
@@ -452,7 +467,10 @@ namespace jycboliviaASP.net.Negocio
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
                     " ss.estadosolicitud = 'Cerrado' and  " +
-                    " ss.fechaentrega between " + NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                    " ss.fechaentrega between " +
+                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                    " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
+                    //NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
                     " group by dss.codproducto   " +
                     " ) as t2 ON pp.codigo = t2.codproducto   " +
                     " WHERE   " +

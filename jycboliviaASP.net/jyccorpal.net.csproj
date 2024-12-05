@@ -1994,6 +1994,7 @@
     <EmbeddedResource Include="Reportes\Receta\SubReport_detalleInsumoCreado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_Detalle_objetivoProduccion_Vs_EntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />

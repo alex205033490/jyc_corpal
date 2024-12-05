@@ -74,6 +74,7 @@
     <asp:DropDownList ID="dd_consulta" class="btn btn-secondary dropdown-toggle" runat="server">        
         <asp:ListItem>Entrega Produccion</asp:ListItem>        
         <asp:ListItem>Entrega Produccion Fecha Turno</asp:ListItem>
+        <asp:ListItem>Objetivo Produccion vs Entrega Produccion con salida almacen</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td><asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar"  onclick="bt_buscar_Click"  />    </td>

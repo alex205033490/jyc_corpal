@@ -6,6 +6,7 @@ using jycboliviaASP.net.Negocio;
 using System.Data;
 using jycboliviaASP.net.Presentacion;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
+using System.Text.RegularExpressions;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -634,41 +635,51 @@ namespace jycboliviaASP.net.Datos
                " ((sum(t1.CantCajas1) * pp.pesoporcajakgr) + (sum(t1.CantSuelta) * (pp.pesounidadgr/1000)) + (sum(t1.PackFerial) * (pp.pesounidadgr/1000))+ t1.kgrdesperdicio_conaceite+t1.kgrdesperdicio_sinaceite) " +
                " , 2) as 'Total_Kgr', "+
                " sum(t1.kgrdesperdicio_conaceite) as 'kgrdesperdicioconaceite' , sum(t1.kgrdesperdicio_sinaceite) as 'kgrdesperdiciosinaceite' "+
-                "FROM tbcorpal_producto pp " +
-                "LEFT JOIN ( " +
-                "select " +
-                "eo.codProductonax, eo.productoNax,  " +
-                "eo.fechagra, " +
-                "CASE  " +
-                "WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 THEN date_add(eo.fechagra, INTERVAL -1 DAY)  " +
-                "ELSE eo.fechagra  " +
-                "END AS 'FechaSistema', eo.horagra, " +
-                "CASE    " +
-                "WHEN HOUR(eo.horagra) BETWEEN 7 AND 15 THEN sum(ifnull(eo.cantcajas,0))   " +
-                "END AS 'TurnoDia', " +
-                "CASE   " +
-                "WHEN HOUR(eo.horagra) BETWEEN 16 AND 23 THEN sum(ifnull(eo.cantcajas,0)) " +
-                "END AS 'TurnoTarde', " +
-                "CASE   " +
-                "WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 THEN sum(ifnull(eo.cantcajas,0)) " +
-                "END as 'TurnoNoche', " +
-                "sum(ifnull(eo.cantcajas,0)) as 'CantCajas1',  " +
-                "sum(ifnull(eo.unidadsuelta,0)) as 'CantSuelta',  " +
-                "sum(ifnull(eo.pack_ferial,0)) as 'PackFerial' " +
-                ", sum(eo.kgrdesperdicio_conaceite) as 'kgrdesperdicio_conaceite' " +
-                ", sum(eo.kgrdesperdicio_sinaceite) as 'kgrdesperdicio_sinaceite' "+
-                "from  " +
-                "tbcorpal_entregasordenproduccion eo " +
-                "where " +
-                "eo.estado = 1 and " +
-                "eo.fechagra between "+fechadesde+" and " + fechahasta +
-                "group by eo.fechagra, eo.codProductonax ) as t1 ON pp.codigo = t1.codProductonax " +
-                "WHERE " +                
-                "pp.estado = 1 " +
-                " and t1.FechaSistema is not null "+
-                "and pp.producto like '%" +producto+"%' " +
-                " group by  t1.FechaSistema, pp.codigo " +
-                "order by t1.FechaSistema, pp.codigo asc";
+               " FROM tbcorpal_producto pp " +
+               " LEFT JOIN ( " +
+               " SELECT "+
+               " eo.codProductonax, "+ 
+               " eo.productoNax, "+ 
+               " CASE "+
+                "    WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 "+
+                "    THEN DATE_ADD(eo.fechagra, INTERVAL -1 DAY) "+  
+                "    ELSE eo.fechagra "+
+               " END AS 'FechaSistema', "+
+               " SUM(CASE "+
+               "     WHEN HOUR(eo.horagra) BETWEEN 7 AND 15 THEN IFNULL(eo.cantcajas, 0) "+
+               "     ELSE 0 "+
+               " END) AS 'TurnoDia', "+ 
+               " SUM(CASE "+
+               "     WHEN HOUR(eo.horagra) BETWEEN 16 AND 23 THEN IFNULL(eo.cantcajas, 0) "+
+               "     ELSE 0 "+
+               " END) AS 'TurnoTarde', "+ 
+               " SUM(CASE "+
+               "     WHEN HOUR(eo.horagra) BETWEEN 0 AND 6 THEN IFNULL(eo.cantcajas, 0) "+
+               "     ELSE 0 "+
+               " END) AS 'TurnoNoche',  "+
+               " SUM(IFNULL(eo.cantcajas, 0)) AS 'CantCajas1', "+ 
+               " SUM(IFNULL(eo.unidadsuelta, 0)) AS 'CantSuelta', "+ 
+               " SUM(IFNULL(eo.pack_ferial, 0)) AS 'PackFerial', "+
+               " SUM(IFNULL(eo.kgrdesperdicio_conaceite, 0)) AS 'kgrdesperdicio_conaceite', "+
+               " SUM(IFNULL(eo.kgrdesperdicio_sinaceite, 0)) AS 'kgrdesperdicio_sinaceite' "+
+               " FROM "+
+               " tbcorpal_entregasordenproduccion eo "+
+               " WHERE "+
+               " eo.estado = 1  AND "+
+               " TIMESTAMP(eo.fechagra, eo.horagra) BETWEEN "+
+               " TIMESTAMP("+fechadesde+",'07:00:00') AND " +
+               " TIMESTAMP(DATE_ADD("+fechahasta+", INTERVAL 1 DAY), '06:00:00') "+
+               " GROUP BY "+
+               " FechaSistema, "+
+               " eo.codProductonax, "+
+               " eo.productoNax "+
+               " ) as t1 ON pp.codigo = t1.codProductonax " +
+               " WHERE " +                
+               " pp.estado = 1 " +
+               " and t1.FechaSistema is not null "+
+               " and pp.producto like '%" +producto+"%' " +
+               " group by  t1.FechaSistema, pp.codigo " +
+               " order by t1.FechaSistema, pp.codigo asc";
             return Conx.consultaMySql(consulta);
         }
 
@@ -966,6 +977,12 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "select  re.codigo, pp.producto, re.nombre as 'Receta', ii.nombre as 'insumoCompuesto', di.cantidad, ii.medida, iis.nombre as 'insumo', ddc.cantidad as 'cantInsumo', ddc.medida as 'medidaInsumo'  " +
                 " from tbcorpal_receta re, tbcorpal_producto pp,  tbcorpal_detingredienteinsumocreado di, tbcorpal_insumoscreados ii, tbcorpal_detinsumocreado ddc, tbcorpal_insumo iis where re.codproducto = pp.codigo and re.codigo = di.codreceta and di.codinsumocreado = ii.codigo and ii.codigo = ddc.codinsumocreado and ddc.codinsumo = iis.codigo and ii.estado = 1  and re.estado = 1 and re.codigo = " +codigo;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen( string fechahasta)
+        {
+            string consulta = "call 1_objetivoproduccion_vs_entregaproduccion_consalidaalmacen("+fechahasta+")";
             return Conx.consultaMySql(consulta);
         }
     }
