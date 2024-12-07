@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Negocio
 
 
         }
-        public class DetalleProductoIngre
+        public class ItemIngresoDTO
         {
             public int Item { get; set; }
             public string CodigoProducto { get; set; }
@@ -194,7 +194,7 @@ namespace jycboliviaASP.net.Negocio
             public string MotivoMovimiento { get; set; }
             public int ItemAnalisis { get; set; }
             public string Glosa { get; set; }
-            public List<DetalleProductoIngre> DetalleProductos { get; set; }
+            public List<ItemIngresoDTO> DetalleProductos { get; set; }
             public string Usuario { get; set; }
         }
 
@@ -236,7 +236,6 @@ namespace jycboliviaASP.net.Negocio
         }
 
         //----------------     GET - INVENTARIOS EGRESOS
-
         public async Task<List<Ingresos>> ObtenerEgresosAsync(string usuario, string password, string criterio)
         {
             try
@@ -263,8 +262,8 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
-        //----------------     POST - INVENTARIO EGRESOS 
 
+        //----------------     POST - INVENTARIO EGRESOS 
         public async Task<string> PostInventarioEgresoAsync(InventarioEgreso egreso, string token)
         {
             var json = JsonConvert.SerializeObject(egreso);
@@ -299,6 +298,7 @@ namespace jycboliviaASP.net.Negocio
             public List<DetalleProductoEgre> DetalleProductos { get; set; }
             public string Usuario { get; set; }
         }
+
 
         /********************************************   API INVENTARIO TRASPASOS    ********************************************/
 

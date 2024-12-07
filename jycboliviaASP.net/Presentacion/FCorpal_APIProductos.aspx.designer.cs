@@ -60,22 +60,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Panel panel_vwCodProductos;
 
         /// <summary>
-        /// Control txt_codProducto.
+        /// Control ddListCodProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProducto;
-
-        /// <summary>
-        /// Control txt_codProducto_AutoCompleteExtender.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender txt_codProducto_AutoCompleteExtender;
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProductos;
 
         /// <summary>
         /// Control btn_BuscarcodProducto.
@@ -150,22 +141,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Panel panel_vwcComprasProductos;
 
         /// <summary>
-        /// Control txt_codProductoComp.
+        /// Control ddListCodProductos2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProductoComp;
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProductos2;
 
         /// <summary>
-        /// Control txt_codProveedorComp.
+        /// Control ddListCodProveedor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProveedorComp;
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProveedor;
 
         /// <summary>
         /// Control btn_buscarCompras.

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
+
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Net.Http;
 using Newtonsoft.Json;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -21,6 +23,13 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                List<Productos> datoListaProductos = ObtenerProductosDesdeSession();
+                gv_productAgregados.DataSource = datoListaProductos;
+                gv_productAgregados.DataBind();
+                //Session["Productos"] = datoListaProductos;
+            }
         }
 
         //-------------------------- GET - INVENTARIO INGRESO DETALLE
@@ -94,7 +103,6 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-
         //-------------------------- GET - BUSCAR INVENTARIO INGRESO
         protected async void btn_invIngreso2_Click(object sender, EventArgs e)
         {
@@ -137,30 +145,68 @@ namespace jycboliviaASP.net.Presentacion
         //-------------------------- POST - INVENTARIO INGRESO
         protected async void btn_registrarIngreso_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos()) 
-                return;
-            var ingreso = CrearIngreso();
-
             try
             {
-                var result = await RegistrarIngreso(ingreso);
+                // 1. Obtener los datos desde los controles de la página
+                string referencia = txt_Referencia.Text.Trim();
+                int codigoMoneda = int.Parse(dd_codMoneda.SelectedValue);
+                int codigoAlmacen = int.Parse(txt_codAlmacen.Text.Trim());
+                string motivoMovimiento = txt_motMovimiento.Text.Trim();
+                int itemAnalisis = string.IsNullOrEmpty(txt_itemAnalisis.Text.Trim()) ? 0 : int.Parse(txt_itemAnalisis.Text.Trim());
+                string glosa = txt_glosa.Text.Trim();
+                string usuario = "adm"; // Esto puede ser dinámico dependiendo del usuario logueado.
 
-                if (result != null)
+                string password = "123";
+
+                string token = await ObtenerTokenAsync(usuario, password);  // Asegúrate de obtener el token de manera adecuada
+                // 2. Obtener la lista de productos desde la sesión
+                List<Productos> productosSession = ObtenerProductosDesdeSession();
+
+                // 3. Crear la lista de DetalleProductos
+                List<ItemIngresoDTO> detalleProductos = new List<ItemIngresoDTO>();
+                int item = 0;
+
+                foreach (var producto in productosSession)
                 {
-                    showalert($"Ingreso Registrado. Número de Ingreso: {result}");
-                    LimpiarCampos();
+                    detalleProductos.Add(new ItemIngresoDTO
+                    {
+                        Item = item++, // Incrementar el Item por cada producto
+                        CodigoProducto = producto.CodigoProducto,
+                        UnidadMedida = producto.UnidadMedida,
+                        Cantidad = producto.Cantidad,
+                        CostoUnitario = producto.CostoUnitario,
+                        CostoTotal = producto.CostoTotal
+                    });
                 }
-                else
+
+                // 4. Crear el objeto InventarioIngreso
+                InventarioIngreso ingreso = new InventarioIngreso
                 {
-                    showalert("Ocurrió un error al registrar el ingreso.");
-                }
+                    NumeroIngreso = 0,  // Puedes obtenerlo de algún otro lado si es necesario
+                    Fecha = DateTime.UtcNow, // Ajusta esto según lo necesario
+                    Referencia = referencia,
+                    CodigoMoneda = codigoMoneda,
+                    CodigoAlmacen = codigoAlmacen,
+                    MotivoMovimiento = motivoMovimiento,
+                    ItemAnalisis = itemAnalisis,
+                    Glosa = glosa,
+                    DetalleProductos = detalleProductos,
+                    Usuario = usuario
+                };
+
+                // 5. Llamar a la API con el objeto InventarioIngreso
+                NA_APIinventario negocio= new NA_APIinventario();
+                
+                string resultado = await negocio.PostInventarioIngresoAsync(ingreso, token);
+
+                // 6. Mostrar el resultado de la API
+                showalert($"Resultado: {resultado}");
             }
             catch (Exception ex)
             {
-                showalert($"Error inesperado: {ex.Message}");
+                showalert($"Error al registrar ingreso: {ex.Message}");
             }
         }
-
         private InventarioIngreso CrearIngreso()
         {
             var ingreso = new InventarioIngreso
@@ -178,42 +224,32 @@ namespace jycboliviaASP.net.Presentacion
             };
             return ingreso;
         }
-        private List<DetalleProductoIngre> ObtenerDetallesProductos()
+        private List<ItemIngresoDTO> ObtenerDetallesProductos()
         {
-            var detalles = new List<DetalleProductoIngre>();
-            int rowCount = Request.Form.AllKeys.Length;
+            List<ItemIngresoDTO> detalles = new List<ItemIngresoDTO>();
 
-            try
+            foreach(GridViewRow row in gv_productAgregados.Rows)
             {
-                for (int i = 0; i < rowCount; i++)
+                try
                 {
-                    if (Request.Form["codigoProducto" + i] != null)
+                    var detalle = new ItemIngresoDTO
                     {
-                        decimal cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture);
-                        decimal costoUnitario = decimal.Parse(Request.Form["costoUnitario" + i], CultureInfo.InvariantCulture);
-                        decimal costoTotal = cantidad * costoUnitario;
-
-                        var detalle = new DetalleProductoIngre
-                        {
-                            Item = 0,
-                            CodigoProducto = Request.Form["codigoProducto" + i],
-                            UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                            Cantidad = cantidad,
-                            CostoUnitario = costoUnitario,
-                            CostoTotal = costoTotal
-                        };
-                        detalles.Add(detalle);
-                    }
+                        Item = 0,
+                        CodigoProducto = row.Cells[1].Text,
+                        UnidadMedida = int.Parse(row.Cells[2].Text),
+                        Cantidad = decimal.Parse(row.Cells[3].Text),
+                        CostoUnitario = decimal.Parse(row.Cells[4].Text),
+                        CostoTotal = decimal.Parse(row.Cells[5].Text)
+                    };
+                    detalles.Add(detalle);
                 }
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al obtener detalles de productos: {ex.Message}");
-                return null;
+                catch (Exception ex)
+                {
+                    showalert($"Error al procesar fila: {ex.Message}");
+                }
             }
             return detalles;
         }
-
         private async Task<string> RegistrarIngreso(InventarioIngreso ingreso)
         {
             try
@@ -222,6 +258,7 @@ namespace jycboliviaASP.net.Presentacion
                 var token = await api.GetTokenAsync("adm", "123");
 
                 var result = await api.PostInventarioIngresoAsync(ingreso, token);
+                showalert($"Resultado POST: {result}");
                 return result; 
             }
             catch (Exception ex)
@@ -230,7 +267,6 @@ namespace jycboliviaASP.net.Presentacion
                 return null; 
             }
         }
-
         private void LimpiarCampos()
         {
             txt_Referencia.Text = "";
@@ -264,6 +300,172 @@ namespace jycboliviaASP.net.Presentacion
         private void showalert(string mensaje)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+        }
+
+
+
+//////////// CARGAR PRODUCTOS GV
+        protected void txt_producto_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_producto.Text.Trim();
+            if(!string.IsNullOrEmpty(criterio))
+            {
+                cargarProductosUpon(criterio);
+            }
+
+        }
+        private async void cargarProductosUpon(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos negocio = new NA_APIproductos();
+                List<productoCriterioGet> productos = await negocio.get_ProductoCriterioAsync(token, criterio);
+
+                gv_listProdIngresos.DataSource = productos;
+                gv_listProdIngresos.DataBind();
+
+                gv_listProdIngresos.Visible = productos.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al realizar la busqueda: {ex.Message}");
+            }
+        }
+
+
+
+        protected void gv_listProdIngresos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gv_listProdIngresos.SelectedIndex;
+            GridViewRow row = gv_listProdIngresos.Rows[index];
+
+            string nombre = row.Cells[1].Text;
+            string codigoProducto = row.Cells[2].Text;
+            string codigoUnidadMedida = row.Cells[3].Text;
+            string precioUnitario = row.Cells[4].Text;
+
+            txt_producto.Text = nombre;
+            Session["ScodigoProducto"] = codigoProducto;
+            Session["ScodigoUnidadMedida"] = codigoUnidadMedida;
+            Session["SprecioUnitario"] = precioUnitario;
+
+            gv_listProdIngresos.Visible = false;
+        }
+
+/////////// AGREGAR PRODUCTOS AL GRIDVIEW
+        protected void btn_addProd_Click(object sender, EventArgs e)
+        {
+            Productos nuevoProducto = CrearNuevoProducto();
+            if(nuevoProducto != null)
+            {
+                List<Productos> listaProductos = ObtenerProductosDesdeSession();
+
+                listaProductos.Add(nuevoProducto);
+
+                Session["Productos"] = listaProductos;
+
+                gv_productAgregados.DataSource = listaProductos;
+                gv_productAgregados.DataBind();
+            }
+        }
+        
+        List<Productos> productos = new List<Productos>();
+        public class Productos
+        {
+            public int Item {  get; set; }
+            public string Nombre {  get; set; }
+            public string CodigoProducto {  get; set; }
+            public int UnidadMedida {  get; set; }
+            public decimal Cantidad {  get; set; }
+            public decimal CostoUnitario {  get; set; }
+            public decimal CostoTotal {  get; set; }
+        }
+        private List<Productos> ObtenerProductosDesdeSession()
+        {
+            List<Productos> productos = Session["Productos"] as List<Productos>; 
+            if (productos == null)
+            {
+                productos = new List<Productos>();
+            }
+            return productos;
+        }
+        private Productos CrearNuevoProducto()
+        {
+            try
+            {
+                string producto = txt_producto.Text.Trim();
+                if (string.IsNullOrEmpty(producto))
+                {
+                    showalert("Debe buscar y seleccionar el nombre del producto.");
+                    return null;
+                }
+
+                if (Session["ScodigoProducto"] == null || string.IsNullOrWhiteSpace(Session["ScodigoProducto"].ToString())){
+                    showalert("El codigo del producto no esta disponible en la sesión");
+                    return null;
+                }
+                string codigo = (Session["ScodigoProducto"].ToString());
+
+                if (Session["ScodigoUnidadMedida"] ==null || string.IsNullOrWhiteSpace(Session["ScodigoUnidadMedida"].ToString()))
+                {
+                    showalert("La unidad medida del producto no esta disponible en la sesión");
+                    return null;
+                }
+                int codigoUnidadMedida = int.Parse(Session["ScodigoUnidadMedida"].ToString());
+
+                if (Session["SprecioUnitario"] == null || string.IsNullOrWhiteSpace(Session["SprecioUnitario"].ToString()))
+                {
+                    showalert("El precio del producto no esta disponible en la sessión");
+                    return null;
+                }
+                decimal precio = decimal.Parse(Session["SprecioUnitario"].ToString());
+
+                decimal cantidad = 0;
+                if (!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
+                {
+                    showalert("La cantidad del producto debe ser un número válido mayor que cero.");
+                    return null;
+                }
+
+                decimal costoTotal = precio * cantidad;
+
+                return new Productos
+                {
+                    Nombre = producto,
+                    CodigoProducto = codigo,
+                    UnidadMedida = codigoUnidadMedida,
+                    Cantidad = cantidad,
+                    CostoUnitario = precio,
+                    CostoTotal = costoTotal
+                };
+            } catch(Exception ex)
+            {
+                showalert($"Error al crear el producto: " + ex.Message);
+                return null;
+            }
+        }
+
+
+        private void LimpiarCamposAddProductos()
+        {
+            txt_producto.Text = string.Empty;
+            txt_cantProducto.Text = string.Empty;
+            Session.Remove("ScodigoProducto");
+            Session.Remove("ScodigoUnidadMedida");
+            Session.Remove("SprecioUnitario");
+        }
+        private void ActualizarGVProductosADD(List<Productos> productos)
+        {
+            gv_productAgregados.DataSource = productos;
+            gv_productAgregados.DataBind();
+        }
+
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIinventario negocio = new NA_APIinventario();
+            return await negocio.GetTokenAsync(usuario, password);
         }
     }
 }

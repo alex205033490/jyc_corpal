@@ -76,8 +76,9 @@
                             </asp:GridView>
                         </div>
                     </div>
-
                     <br />
+
+
                     <!------------------------          API GET INVENTARIO INGRESOS C/S CRITERIO           ------------------------------>
                     <div class="container-GETIIngreso p-4 rounded">
                         <div class="container_tittle rounded">
@@ -160,36 +161,44 @@
                         <div class="form_detproducto col-md-12 col-lg-10">
                             <h3 class="form-label">Detalle Productos</h3>
 
-                            <asp:Panel runat="server" DefaultButton="btnAddRow">
-                            <div class="table-detProducto">
-                                <table id="tblDetalleProductosIngresos" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Código Producto</th>
-                                            <th>Unidad Medida</th>
-                                            <th>Cantidad</th>
-                                            <th>Costo Unitario</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <input class="form-control" type="text" name="codigoProducto0" AutoComplete="off"/></td>
-                                            <td>
-                                                <input class="form-control" type="number" name="unidadMedida0" /></td>
-                                            <td>
-                                                <input class="form-control" type="number" name="cantidad0" step="0.01"/></td>
-                                            <td>
-                                                <input class="form-control" type="number" name="costoUnitario0" step="0.01"/></td>
-                                            <td>
-                                                <asp:Button ID="btnAddRow" runat="server" Text="Agregar Fila" CssClass="btn btn-success" OnClientClick="addRowIngreso(); return false;" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="form_addProducto row mb-3">
+                                <div class="input_producto col-4">
+                                    <asp:Label runat="server"> Nombre del producto:</asp:Label>
+                                    <asp:TextBox ID="txt_producto" runat="server" OnTextChanged="txt_producto_TextChanged" AutoPostBack="true" CssClass="form-control" AutoComplete="off"></asp:TextBox>
+                                </div>
+                                
+                                <div class="input_cantidad col-3">
+                                    <asp:Label runat="server"> Cantidad:</asp:Label>
+                                    <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertCommaToDot(event);" ></asp:TextBox>
+                                </div>
+                                <div class="container_btnAddProd col-3 d-flex align-items-end">
+                                    <asp:Button runat="server" ID="btn_addProd" Text="Agregar Producto" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
+                                </div>
+                                <br />
+                                <asp:GridView ID="gv_listProdIngresos" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdIngresos_SelectedIndexChanged">
+                                    <Columns>
+                                        <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
+                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
+                                        <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" />
+                                        <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio" />
+                                    </Columns>
+                                </asp:GridView>
                             </div>
-                                </asp:Panel>
                             <br />
+                            <div>
+                                <asp:GridView runat="server" ID="gv_productAgregados" AutoGenerateColumns="false" CssClss="table table-bordered">
+                                    <Columns>
+                                        <asp:BoundField DataField="Nombre" HeaderText="Producto" />
+                                        <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
+                                        <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad medida" />
+                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                        <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" />
+                                        <asp:BoundField DataField="CostoTotal" HeaderText="Costo Total" />
+                                    </Columns>
+                                </asp:GridView>
+
+                            </div>
                             <asp:Button ID="btn_registrarIngreso" runat="server" Text="Registrar Ingreso" CssClass="btn btn-success" OnClick="btn_registrarIngreso_Click" />
                         </div>
                     </div>

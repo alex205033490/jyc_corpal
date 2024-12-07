@@ -87,3 +87,13 @@ function addRowCobranza() {
         <td><input type='number' name='importeCapital${rowCount}' /></td>`;
 }
 
+// , a .
+function convertCommaToDot(event) {
+    var input = event.target;
+
+    input.value = input.value.replace(/,/g, ".");
+}
+
+
+
+

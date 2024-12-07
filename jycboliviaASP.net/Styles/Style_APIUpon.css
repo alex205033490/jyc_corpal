@@ -29,6 +29,10 @@
     font-size: small;
 }
 
+
+
+
+
 /********************************   FCORPAL API Produccion  ********************************/
 .container-POSTProduccion, .container-GETProduccionDet {
     background-color: #ff75000a;
@@ -234,6 +238,14 @@ input.inputText, input.inputNumber {
     
     /* Bordes del contenedor */
 }
+.container_gv5 {
+    height: 90px; /* Altura del contenedor */
+    overflow: auto; /* Barra de desplazamiento */
+    font-size: x-small;
+}
+
+
+
 .gridview tr {
     height: 30px;
 }

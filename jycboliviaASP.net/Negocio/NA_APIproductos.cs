@@ -159,7 +159,7 @@ namespace jycboliviaASP.net.Negocio
         }
         
         
-        // ---------------   FILTRADO DE PRODUCTO POR CODIGO
+        // --------   FILTRADO DE PRODUCTO POR CODIGO
         public class APIResponseListProductos
         {
             public bool EsValido { get; set; }
@@ -270,8 +270,41 @@ namespace jycboliviaASP.net.Negocio
             public decimal CostoUnitario { get; set; }
         }
 
+        // ------------- Filtrado de proveedores 
+
+
+
+        public class APIResponseListProveedor
+        {
+            public bool EsValido{ get; set; }
+            public List<ListProveedorDTO> Resultado{  get; set; }
+        }
+        internal async Task<List<ListProveedorDTO>> Get_ListProveedorAsync(string token)
+        {
+            try
+            {
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarProveedores";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
+                var apiResponse = JsonConvert.DeserializeObject<APIResponseListProveedor>(searchResponseBody);
+
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListProveedorDTO>();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al buscar proveedor", ex);
+            }
+        }
+        public class ListProveedorDTO
+        {
+            public int CodigoProveedor { get; set; }
+            public string NombreCompleto { get; set; }
+        }
+
         
-
-
     }
 }

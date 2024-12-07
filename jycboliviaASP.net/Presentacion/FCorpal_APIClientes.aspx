@@ -178,7 +178,7 @@
                     <!-- vaciado cliente 2 -->
                     <div class="container-VaciadoClientes p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Vaciado de Clientes (Upon a JyC) 2</h3>
+                            <h3 class="text_tittle p-3">Vaciado de Clientes (Upon a JyC)</h3>
                         </div>
 
                         <asp:Panel runat="server" DefaultButton="btn_buscarCliente">

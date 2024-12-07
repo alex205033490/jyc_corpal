@@ -23,10 +23,38 @@ namespace jycboliviaASP.net.Presentacion
     public partial class FCorpal_APIProductos : System.Web.UI.Page
     {
         private readonly NA_APIproductos _na_apiproductos = new NA_APIproductos();
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+                var productos = await ObtenerListCodProd(token);
+                var proveedor = await ObtenerListCodProveedor(token);
 
+                // dd 1
+                ddListCodProductos.DataSource = productos;
+                ddListCodProductos.DataTextField = "CodigoProducto";
+                ddListCodProductos.DataValueField = "CodigoProducto";
+                ddListCodProductos.DataBind();
+                ddListCodProductos.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un codigo", ""));
+
+                // dd 2
+                ddListCodProductos2.DataSource = productos;
+                ddListCodProductos2.DataTextField = "Producto";
+                ddListCodProductos2.DataValueField = "CodigoProducto";
+                ddListCodProductos2.DataBind();
+                ddListCodProductos2.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Selecciona un producto", ""));
+
+                // dd 3
+                ddListCodProveedor.DataSource = proveedor;
+                ddListCodProveedor.DataTextField = "NombreCompleto";
+                ddListCodProveedor.DataValueField = "CodigoProveedor";
+                ddListCodProveedor.DataBind();
+                ddListCodProveedor.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Selecciona un proveedor", ""));
+            }
         }
+
+
 ////////////////////////////////////////////      GET - BUSCAR PRODUCTO POR NOMBRE
         protected async void btn_buscarProdNombre_Click(object sender, EventArgs e)
         {
@@ -79,7 +107,92 @@ namespace jycboliviaASP.net.Presentacion
             gv_prodNombre.DataBind();
         }
 
-/////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
+
+////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
+
+        //-- obtener lista de productos por codigo
+        private async Task<List<ListProductosDTO>> ObtenerListCodProd(string token)
+        {
+            try
+            {
+                return await _na_apiproductos.GET_ListProductosAsync(token);
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error al obtener los productos: {ex.Message}");
+                return null;
+            }
+        }
+
+        //-- btn buscar producto por codigo
+        protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
+        {
+            string criterioBusqueda = ddListCodProductos.SelectedValue.Trim();
+
+            if (string.IsNullOrEmpty(criterioBusqueda))
+            {
+                ShowAlert("Por favor, ingresa el Código de un producto válido.");
+                return;
+            }
+            await BuscarProdCodigoAsync(criterioBusqueda);
+        }
+        // metodo buscar producto por codigo
+        public async Task BuscarProdCodigoAsync(string criterioBusqueda)
+        {
+            try
+            {
+                var apiProd = new NA_APIproductos();
+                var prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
+
+                if (prodCodigo != null)
+                {
+                    MostrarProductos(prodCodigo);
+
+                    MostrarDetallesProducto(prodCodigo.DetalleUnidadesMedida);
+                }
+                else
+                {
+                    limpiarGridsCodProducto();
+                    ShowAlert("No se encontraron productos con ese código.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error: {ex.Message}");
+            }
+
+        }
+        private void MostrarProductos(productoCodigoGet prodCodigo)
+        {
+            var productos = new List<productoCodigoGet> { prodCodigo };
+            gv_prodCod.DataSource = productos;
+            gv_prodCod.DataBind();
+        }
+        private void MostrarDetallesProducto(List<productoCodigoDetalleGet> prodCodigoDet)
+        {
+            if (prodCodigoDet != null && prodCodigoDet.Count > 0)
+            {
+                gv_prodCodDet.DataSource = prodCodigoDet;
+                gv_prodCodDet.DataBind();
+            }
+            else
+            {
+                gv_prodCodDet.DataSource = null;
+                gv_prodCodDet.DataBind();
+            }
+        }
+        private void limpiarGridsCodProducto()
+        {
+            gv_prodCod.DataSource = null;
+            gv_prodCod.DataBind();
+            gv_prodCodDet.DataSource = null;
+            gv_prodCodDet.DataBind();
+        }
+
+
+
+
+        /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_ventProducto.Text.Trim();
@@ -129,15 +242,15 @@ namespace jycboliviaASP.net.Presentacion
 /////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
         protected async void btn_buscarCompras_Click(object sender, EventArgs e)
         {
-            string criterioCodProducto = txt_codProductoComp.Text.Trim();
-            string criterioProveedor = txt_codProveedorComp.Text.Trim();
+            string criterioCodProducto = ddListCodProductos2.SelectedValue;
+            string criterioProveedor = ddListCodProveedor.SelectedValue;
 
             await BuscarProductoCompraAsync(criterioCodProducto, criterioProveedor);
         }
         public async Task BuscarProductoCompraAsync(string criterioCodProducto2, string criterioProveedor2)
         {
-            string criterioCodProducto = txt_codProductoComp.Text.Trim();
-            string criterioProveedor = txt_codProveedorComp.Text.Trim();
+            string criterioCodProducto = ddListCodProductos2.SelectedValue.Trim();
+            string criterioProveedor = ddListCodProveedor.SelectedValue.Trim();
 
             if (string.IsNullOrEmpty(criterioCodProducto))
             {
@@ -180,103 +293,23 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-
-////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
-        protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
+        //-- obtener lista de proveedores 
+        private async Task<List<ListProveedorDTO>> ObtenerListCodProveedor(string token)
         {
-            string criterioBusqueda = txt_codProducto.Text.Trim();
-             
-            await BuscarProdCodigoAsync(criterioBusqueda);
-        }
-        // metodo buscar producto por codigo
-        public async Task BuscarProdCodigoAsync(string criterioBusqueda)
-        {
-            if (string.IsNullOrEmpty(criterioBusqueda))
-            {
-                ShowAlert("Por favor, ingresa el código de un producto válido.");
-                return;
-            }
-
             try
             {
-                var apiProd = new NA_APIproductos();
-                var prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
-
-                if (prodCodigo != null)
-                {
-                    // Encapsulamiento de los productos encontrados
-                    var productos = new List<productoCodigoGet> { prodCodigo };
-                    gv_prodCod.DataSource = productos;
-                    gv_prodCod.DataBind();
-
-                    // Verifica y muestra detalles de unidades de medida
-                    if (prodCodigo.DetalleUnidadesMedida != null && prodCodigo.DetalleUnidadesMedida.Count > 0)
-                    {
-                        gv_prodCodDet.DataSource = prodCodigo.DetalleUnidadesMedida; 
-                        gv_prodCodDet.DataBind();
-                    }
-                }
-                else
-                {
-                    gv_prodCod.DataSource = null;
-                    gv_prodCod.DataBind();
-                    gv_prodCodDet.DataSource = null;
-                    gv_prodCodDet.DataBind();
-                    ShowAlert("No se encontraron productos con ese código.");
-                }
+                return await _na_apiproductos.Get_ListProveedorAsync(token);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                ShowAlert($"Error: {ex.Message}");
-            }
-
-        }
-
-        private void MostrarCodProducto(List<productoCodigoGet> productos)
-        {
-
-            gv_prodCod.DataSource = productos;
-            gv_prodCod.DataBind();
-            
-            if(productos.Count > 0 && productos[0].DetalleUnidadesMedida != null && productos[0].DetalleUnidadesMedida.Count> 0)
-            {
-                gv_prodCodDet.DataSource = productos[0].DetalleUnidadesMedida;
-                gv_prodCodDet.DataBind();
-            }
-            else
-            {
-                gv_prodCodDet.DataSource = null;
-                gv_prodCodDet.DataBind();
+                ShowAlert($"Error al obtener los proveedores: {ex.Message}");
+                return null;
             }
         }
-        private void limpiarGrids()
-        {
-            gv_prodCod.DataSource = null;
-            gv_prodCod.DataBind();
-            gv_prodCodDet.DataSource = null;
-            gv_prodCodDet.DataBind();
-        }
-
-        [WebMethod]
-        [ScriptMethod]
-        public string[] GetListProductosXCod(string prefixText, int count)
-        {
-            string token = ObtenerTokenAsync("adm","123").Result; 
-
-            NA_APIproductos apip = new NA_APIproductos();
-
-            var productos = apip.GET_ListProductosAsync(token).Result;
-
-            var productosFiltrados = productos
-                .Where(p => p.CodigoProducto.StartsWith(prefixText, StringComparison.InvariantCultureIgnoreCase))
-                .Take(count)
-                .Select(p => p.CodigoProducto)
-                .ToArray();
-
-            return productosFiltrados;
-        }
 
 
+
+//////////////////////////////////////////// Otros
         private void ShowAlert(string message)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
@@ -287,18 +320,5 @@ namespace jycboliviaASP.net.Presentacion
             return await prod.GetTokenAsync(usuario, password);
         }
 
-        protected async void Unnamed1_Click(object sender, EventArgs e)
-        {
-            /*try
-            {
-                string usuario = "adm";
-                string password = "123";
-
-                string token = await ObtenerTokenAsync(usuario, password);
-
-                List<ListProductosDTO> productos = await 
-            }
-            */
-        }
     }
 }

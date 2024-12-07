@@ -77,17 +77,10 @@
                             <div class="mb-3 row col-lg-10">
                                 <div class="col-sm-5 col-md-4 col-lg-4">
                                     <label class="form-label" for="txt_codProducto">Código del Producto:</label>
-                                    <asp:TextBox ID="txt_codProducto" runat="server" CssClass="form-control" placeholder="Ingrese un código producto" AutoComplete="off"></asp:TextBox>
-                                    <!--Autocompl-->
-                                    <asp:AutoCompleteExtender ID="txt_codProducto_AutoCompleteExtender" runat="server"
-                                        TargetControlID="txt_codProducto"
-                                        CompletionSetCount="12" MinimumPrefixLength="1" 
-                                        ServiceMethod="GetListProductosXCod" UseContextKey="true"
-                                        CompletionListCssClass="CompletionList"
-                                        CompletionListItemCssClass="CompletionlistItem"
-                                        CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                    </asp:AutoCompleteExtender>
+                                    <asp:DropDownList ID="ddListCodProductos" runat="server" CssClass="form-select">
 
+                                    </asp:DropDownList>
+                                    
                                 </div>
 
                                 <div class="col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
@@ -97,7 +90,7 @@
                         </asp:Panel>
 
 
-                        <div class="container_gv4">
+                        <div class="container_gv1">
                             <asp:GridView ID="gv_prodCod" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="CodProd" />
@@ -128,7 +121,7 @@
                             </asp:GridView>
                         </div>
 
-                        <div class="container_gv4 col-sm-10 col-md-8 col-lg-6">
+                        <div class="container_gv5 col-sm-10 col-md-8 col-lg-6">
                             <asp:GridView ID="gv_prodCodDet" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Código Medida" SortExpression="cod" />
@@ -150,7 +143,6 @@
                         </div>
                     </div>
                     <br />
-
 
 
                     <!------------------------- GET PRODUCTOS/VENTAS/BUSCAR ------------------------->
@@ -215,18 +207,17 @@
                             <div class="mb-2 row col-lg-12">
                                 <div class="col-sm-5 col-md-4 col-lg-3">
                                     <label class="form-label" for="txt_codProductoComp">Código del Producto:</label>
-                                    <asp:TextBox ID="txt_codProductoComp" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Ingrese el código del producto"></asp:TextBox>
+                                    <asp:DropDownList ID="ddListCodProductos2" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
 
                                 <div class=" col-sm-5 col-md-4 col-lg-3 mb-1">
                                     <label class="form-label" for="txt_codProveedorComp">Código del Proveedor:</label>
-                                    <asp:TextBox ID="txt_codProveedorComp" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Ingrese el código del proveedor"></asp:TextBox>
+                                    <asp:DropDownList ID="ddListCodProveedor" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
 
                                 <div class="col-sm-2 col-md-3 col-lg-2 d-flex align-items-end">
                                     <asp:Button ID="btn_buscarCompras" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarCompras_Click" />
                                 </div>
-                                <asp:Button runat="server" Text="Button" OnClick="Unnamed1_Click"></asp:Button><asp:GridView runat="server"></asp:GridView>
                             </div>
                         </asp:Panel>
 
