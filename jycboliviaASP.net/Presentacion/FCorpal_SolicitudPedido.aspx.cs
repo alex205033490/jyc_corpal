@@ -264,8 +264,7 @@ namespace jycboliviaASP.net.Presentacion
                     string nit = tx_nit.Text;                    
                     banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente,cliente,propietario, razonSocial, nit, codpersolicitante);
                 }
-
-                string repuestosSolicitados = ""; 
+ 
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante,true,codigCliente))
 
                 {
