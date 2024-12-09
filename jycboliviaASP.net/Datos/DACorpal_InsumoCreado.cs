@@ -5,7 +5,7 @@ using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using MySql.Data.MySqlClient;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+
 using static AjaxControlToolkit.AsyncFileUpload.Constants;
 using System.Globalization;
 
