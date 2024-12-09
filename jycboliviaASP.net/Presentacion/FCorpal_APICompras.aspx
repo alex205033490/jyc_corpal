@@ -1,167 +1,170 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FCorpal_APICompras.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APICompras" MasterPageFile="~/PlantillaNew.Master" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Styles/Style_SimecModificar.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="padding-top: 1em;">
+    <div class="col-md-12 col-lg-12" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
-                    <div>
-                        <asp:Label runat="server" Text="Label">API Compras</asp:Label><br />
-                        <br />
-                    </div>
 
+                    <!---------------- FORMULARIO COMPRAS -------------->
+                    <div class="container-POSTCompras p-4 rounded col-lg-12">
+                        <div class="container_tittle rounded">
+                            <h2 class="text_tittle p-3">Registro de Compras</h2>
+                        </div>
+                        <div class="form_CompraP1 col-lg-12 row">
 
-                    <div>
-                        <!-- COMPRADTO -->
-                        <div class="compraDTP">
-                        <asp:Label ID="lblreferencia" runat="server" Text="Referencia: " />
-                        <asp:TextBox ID="txt_referencia" runat="server" />
-                        <asp:Label ID="lblimporteDescuentos" runat="server" Text="Importe Descuentos: " />
-                        <asp:TextBox ID="txt_importe_Descuentos" runat="server"/>                        
-                        <br />
-                        <asp:Label runat="server" Text="lblcodigoMoneda">Tipo de moneda: </asp:Label>
-                        <asp:DropDownList ID="dd_codMoneda" runat="server">
-                            <asp:ListItem Text="Bolivianos" Value="1" />
-                            <asp:ListItem Text="Dolares" Value="2" />
-                        </asp:DropDownList>
-                        <asp:Label ID="lblcodProveedor" runat="server" Text="Codigo Proveedor: " />
-                        <asp:TextBox ID="txt_codProveedor" runat="server"/>
-                        <br />
-                        <asp:Label ID="lblcodDistribucionGastos" runat="server" Text="Codigo Distribucion Gastos: " />
-                        <asp:TextBox ID="txt_codDistribucionGastos" runat="server"/><br/>
+                        <!-- COL 1 -->
+                            <div class="form_datos col-sm-6 col-md-6 col-lg-6 mx-auto mt-2 mb-2">
+                                <div class="text-center">
+                                    <h2>Datos Compra</h2>
+                                </div>
+                                <div class="DcompraDTO col-lg-12 row">
+                                <!-- col 1 -->
+                                <div class="col-sm-12 col-md-6 col-lg-5">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblreferencia" runat="server" Text="Referencia:" />
+                                        <asp:TextBox ID="txt_referencia" runat="server" CssClass="form-control" AutoComplete="off" />
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblimporteDescuentos" runat="server" Text="Importe descuentos:" />
+                                        <asp:TextBox ID="txt_importe_Descuentos" runat="server" CssClass="form-control" AutoComplete="off" />
+                                    </div>
+                                    <did class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label runat="server" Text="lblcodigoMoneda">Tipo de moneda: </asp:Label>
+                                        <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="form-select">
+                                            <asp:ListItem Text="Bolivianos" Value="1" />
+                                            <asp:ListItem Text="Dolares" Value="2" />
+                                        </asp:DropDownList>
+                                    </did>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblcodProveedor" runat="server" Text="Codigo proveedor: " />
+                                        <asp:TextBox ID="txt_codProveedor" runat="server" CssClass="form-control" AutoComplete="off" />
+                                    </div>
+                                </div>
+
+                                <!-- col 2 -->
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblcodDistribucionGastos" runat="server" Text="Cod distribución gastos: " />
+                                        <asp:TextBox ID="txt_codDistribucionGastos" runat="server" CssClass="form-control" AutoComplete="off" />
+                                    </div>
+
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblFacturaPosterior" runat="server" Text="Factura posterior: " />
+                                        <asp:DropDownList ID="dd_fPosterior" runat="server" CssClass="form-select">
+                                            <asp:ListItem Text="Si" Value="true" />
+                                            <asp:ListItem Text="No" Value="false" />
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <asp:Label ID="lblGlosa" runat="server" Text="Glosa:" />
+                                        <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" AutoComplete="off" />
+                                    </div>
+                                </div>
+                                    </div>
+                                <!-- Pagos -->
                             </div>
-                        <br /><br /><br>
-                        
-                        
-                        <div class="pagosDTO"> 
-                        <!-- PAGOS {     }-->
-                        <asp:Label ID="lblPAGOS" runat="server" Text="--PAGOS--" /><br>
-                            <asp:Label ID="lbltotalEfect" runat="server" Text="Total Efectivo: "/>
-                        <asp:TextBox ID="txt_totalEfectivo" runat="server"/>
-                            <asp:Label ID="lbltotalCredito" runat="server" Text="Total credito: " />
-                        <asp:TextBox ID="txt_totalCredito" runat="server"/><br>
-                            <asp:Label ID="lbltotalCheque" runat="server" Text="total cheque: " />
-                        <asp:TextBox ID="txt_totalCheques" runat="server" />
-                            <asp:Label ID="lbltotalDeposito" runat="server" Text="total deposito: " />
-                        <asp:TextBox ID="txt_totalDeposito" runat="server" /><br />
-                            <!-- {Sub credito} -->
-                        <asp:Label ID="lblSubcredito" runat="server" Text="PAGOS: " />
-                        <asp:TextBox ID="txt_tipoCuenta" runat="server" placeholder="tipo cuenta"/>
-                        <asp:TextBox ID="txt_DiasCredito" runat="server" placeholder="dias credito" />
-                        <br />
-                            <!-- {Sub cheque} -->
-                        <asp:Label ID="lblSubcheque" runat="server" Text="CHEQUES: " />
-                        <asp:TextBox ID="txt_codigoBanco" runat="server" placeholder="codigo banco"/>
-                        <asp:TextBox ID="txt_numeroCuenta" runat="server" placeholder="numero cuenta" />
-                        <asp:TextBox ID="txt_codigoCheque" runat="server" placeholder="codigo cheque"/>
-                        <asp:TextBox ID="txt_numeroCheque" runat="server" placeholder="numero cheque" />
-                        <br />
-                            <!-- {Sub Deposito} -->
-                        <asp:Label ID="lblDeposito" runat="server" Text="Deposito: " />
-                        <asp:TextBox ID="txt_codigoBanco2" runat="server" placeholder="codigo banco"/>
-                        <asp:TextBox ID="txt_numeroCuenta2" runat="server" placeholder="numero cuenta" />
-                        <asp:TextBox ID="txt_referenciaDeposito" runat="server" placeholder="referencia"/>
-                        <br />
-                        </div>
-                        <br /><br /><br>
 
-                        <!--GASTOS [{}] -->
-                        <div class="gastosDTO">
-                        <asp:Label ID="lblgastos" runat="server" Text="--GASTOS--" /><br />
-                        <asp:Label ID="lblcodigogasto" runat="server" Text="codigo gasto: " />
-                        <asp:TextBox ID="txt_codGasto" runat="server"/>
-                        <asp:Label ID="lblimporte" runat="server" Text="importe: " />
-                        <asp:TextBox ID="txt_importe" runat="server" /><br />
-                        <asp:Label runat="server" Text="lblcodigoMonedaGastos">Tipo de moneda: </asp:Label>
-                        <asp:DropDownList ID="dd_codMonedaGastos" runat="server">
-                            <asp:ListItem Text="Bolivianos" Value="1" />
-                            <asp:ListItem Text="Dolares" Value="2" />
-                        </asp:DropDownList>                        
-                        <asp:Label runat="server" Text="lblaplicaIVA">Aplica IVA: </asp:Label>
-                        <asp:DropDownList ID="dd_aplicaIVA" runat="server">
-                            <asp:ListItem Text="Si" Value="true" />
-                            <asp:ListItem Text="No" Value="false" />
-                        </asp:DropDownList>
-                        </div>
-                        <br /><br /><br />
+                            <!-- COL 2 -->
+                            <!-- DATOS FACTURA -->
+                            <div class="form_pagosDTO col-sm-6 col-md-6 col-lg-6 border rounded mx-auto mt-2 mb-2 p-2">
+                                <div class="text-center">
+                                    <h5>Datos Factura</h5>
+                                </div>
+                                <div class="facturaDTO col-lg-12 row">
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                        <asp:Label ID="lbl_nit" runat="server" Text="NIT/CI:" />
+                                        <asp:TextBox ID="txt_nit" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lbl_razonsocial" runat="server" Text="Razón social:" />
+                                        <asp:TextBox ID="txt_razonSocial" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lbl_nFactura" runat="server" Text="Número factura:" />
+                                        <asp:TextBox ID="txt_nFactura" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lblcodAutorizacion" runat="server" Text="Código autorización: " />
+                                        <asp:TextBox ID="txt_codAutorizacion" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lblcodControl" runat="server" Text="Código control: " />
+                                        <asp:TextBox ID="txt_codControl" runat="server" CssClass="form-control" AutoComplete="off" />
 
-                        
-                        <asp:Label runat="server" Text="lblfacturaPosterior">Factura Posterior: </asp:Label>
-                        <asp:DropDownList ID="dd_facturaPost" runat="server">
-                            <asp:ListItem Text="Si" Value="true" />
-                            <asp:ListItem Text="No" Value="false" />
-                        </asp:DropDownList>
-                        <br /><br />
-                        
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                        <asp:Label ID="lblimpTotal" runat="server" Text="Importe total:" />
+                                        <asp:TextBox ID="txt_imptotal" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lblimpDescuento" runat="server" Text="Importe descuento: " />
+                                        <asp:TextBox ID="txt_impDescuento" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lblimpGift" runat="server" Text="Importe gift: " />
+                                        <asp:TextBox ID="txt_impGift" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label ID="lblimpNeto" runat="server" Text="Importe neto: " />
+                                        <asp:TextBox ID="txt_impNeto" runat="server" CssClass="form-control" AutoComplete="off" />
+                                        <asp:Label runat="server" Text="lblapCredFiscal">Aplica crédito fiscal: </asp:Label>
+                                        <asp:DropDownList ID="dd_apCredFiscal" runat="server" CssClass="form-select">
+                                            <asp:ListItem Text="Si" Value="true" />
+                                            <asp:ListItem Text="No" Value="false" />
+                                        </asp:DropDownList>
 
-                        <!-- FACTURA {} -->
-                        <div class="facturaDTO">
-                        <asp:Label ID="lblfactura" runat="server" Text="--FACTURA--" /><br/>
-                        <asp:Label ID="lbl_nit" runat="server" Text="NIT_CI: " />
-                        <asp:TextBox ID="txt_nit" runat="server" />
-                        <asp:Label ID="lbl_razonsocial" runat="server" Text="Razon Social: " />
-                        <asp:TextBox ID="txt_razonSocial" runat="server"/>
-                        <br />                   
-                        <asp:Label ID="lbl_nFactura" runat="server" Text="numero factura: " />
-                        <asp:TextBox ID="txt_nFactura" runat="server" />
-                        <asp:Label ID="lblcodAutorizacion" runat="server" Text="codigo Autorizacion: " />
-                        <asp:TextBox ID="txt_codAutorizacion" runat="server"/>
-                        <br />
-                        <asp:Label ID="lblcodControl" runat="server" Text="codigo control: " />
-                        <asp:TextBox ID="txt_codControl" runat="server" />
-                        <asp:Label ID="lblimpTotal" runat="server" Text="importe total: " />
-                        <asp:TextBox ID="txt_imptotal" runat="server"/>
-                        <br />
-                        <asp:Label ID="lblimpDescuento" runat="server" Text="importe descuento: " />
-                        <asp:TextBox ID="txt_impDescuento" runat="server" />
-                        <asp:Label ID="lblimpGift" runat="server" Text="ImporteGift: " />
-                        <asp:TextBox ID="txt_impGift" runat="server"/>
-                        <br />
-                        <asp:Label ID="lblimpNeto" runat="server" Text="importe neto: " />
-                        <asp:TextBox ID="txt_impNeto" runat="server" />
-                        <asp:Label runat="server" Text="lblapCredFiscal">Aplica Credito Fiscal: </asp:Label>
-                        <asp:DropDownList ID="dd_apCredFiscal" runat="server">
-                            <asp:ListItem Text="Si" Value="true" />
-                            <asp:ListItem Text="No" Value="false" />
-                        </asp:DropDownList>
-                        </div>
-                        <br /><br /><br />
-
-
-                        <asp:Label ID="lblGlosa" runat="server" Text="Glosa: " />
-                        <asp:TextBox ID="txt_glosa" runat="server" />
-                        <br /><br />
-
-
-                        <!-- DetalleProductos [{}] -->
-                        <div class="detalleProductoDTO">
-                        <asp:Label ID="lblDetalleProducto" runat="server" Text="--Detalle Productos--"/><br />
-                        <asp:Label ID="lblnumItem" runat="server" Text="Numero Item: "/>
-                        <asp:TextBox ID="txt_numItem" runat="server" />
-                        <asp:Label ID="lblCodigoProducto" runat="server" Text="Codigo Producto: "/>
-                        <asp:TextBox ID="txt_codProducto" runat="server" /> <br />
-                        <asp:Label ID="lblcantidad" runat="server" Text="Cantidad: "/>
-                        <asp:TextBox ID="txt_cantidad" runat="server" />
-                        <asp:Label ID="lblcodUnidadMedida" runat="server" Text="Codigo unidad medida: "/>
-                        <asp:TextBox ID="txt_codUnidadMedida" runat="server" /><br />
-                        <asp:Label ID="lblprecioUnitario" runat="server" Text="Precio unitario: "/>
-                        <asp:TextBox ID="txt_precUnitario" runat="server" />
-                        <asp:Label ID="lblimpDescuento2" runat="server" Text="Importe descuento: "/>
-                        <asp:TextBox ID="txt_impDescuento2" runat="server" /><br />
-                        <asp:Label ID="lblporcGasto" runat="server" Text="Porcentaje Gasto: "/>
-                        <asp:TextBox ID="txt_PorcGasto" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <asp:Button ID="btn_registrarCompra" runat="server" Text="Enviar" OnClick="btn_registrarCompra_Click" /> <br /><br />
+                        </div>
+                    <br />
+                        <!--  FORMULARIO PAGOS  -->
+                    
+                            <!-- DetalleProductos -->
 
-                    </div>
+                            <div class="form_ADDdetProducto col-12 col-sm-12 col-md-12 p-4 rounded">
+                                <div class="col-12 text-center">
+                                    <h4 class="form-label">Detalle  del Producto</h4>
+                                </div>
+                                <div class="table-detProducto">
+                                    <table id="tblDetalleProductosCompra" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Código de producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Código unidad medida</th>
+                                                <th>Precio unitario</th>
+                                                <th>Importe descuento</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-control" type="text" name="codigoProducto0" /></td>
+                                                <td>
+                                                    <input class="form-control" type="number" name="cantidad0" step="0.01" /></td>
+                                                <td>
+                                                    <input class="form-control" type="number" name="codUnidadMedida0" step="0.01" /></td>
+                                                <td>
+                                                    <input class="form-control" type="number" name="precioUnitario0" /></td>
+                                                <td>
+                                                    <input class="form-control" type="number" name="importeDescuento0" step="0.01" /></td>
+                                                <td>
+                                                    <asp:Button ID="btnAddRow" runat="server" Text="+" CssClass="btn btn-success" OnClientClick="addRowCompra(); return false;" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <asp:Button ID="btn_registrarCompra" runat="server" Text="Registrar Compra" CssClass="btn btn-success" OnClick="btn_registrarCompra_Click" />
+
+                            </div>
+                        </div>
+             
                 </div>
             </div>
         </div>
-    </div>
+        <br />
+
+    <br />
+    <script src="../js/jsApi.js" type="text/javascript"></script>
+
+
+
 </asp:Content>

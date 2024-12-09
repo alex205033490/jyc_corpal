@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Windows.Controls;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -18,6 +19,7 @@ namespace jycboliviaASP.net.Presentacion
         {
 
         }
+
         ///         GET - INVENTARIO EGRESOS DETALLE 
         protected async void BuscarEgresoInventarioDetalle_Click(object sender, EventArgs e)
         {
@@ -25,146 +27,228 @@ namespace jycboliviaASP.net.Presentacion
 
             if (string.IsNullOrEmpty(numTransaccion))
             {
-                GridView1.DataBind();
-                GridView2.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingrese un numero de Egreso valido.');", true);
+                showalert("Por favor, Ingrese un número de egreso válido.");
+                LimpiarGrids();
                 return;
             }
             try
             {
-                NA_APIinventario apiInv = new NA_APIinventario();
-                InventarioEgreso egreso = await apiInv.GetInventarioEgresoDetalleAsync("adm", "123", numTransaccion);
+                
+                NA_APIinventario apiI = new NA_APIinventario();
+                InventarioEgreso egreso = await apiI.GetInventarioEgresoDetalleAsync("adm", "123", numTransaccion);
 
                 if(egreso!= null)
                 {
-                    //encapsulamiento
-                    var invEgreso = new List<InventarioEgreso> { egreso };
-                    GridView1.DataSource = invEgreso;
-                    GridView1.DataBind();
-
-                    if(egreso.DetalleProductos != null && egreso.DetalleProductos.Count > 0)
-                    {
-                        GridView2.DataSource = egreso.DetalleProductos;
-                        GridView2.DataBind();
-                    }
-                    else
-                    {
-                        GridView2.DataSource = null;
-                        GridView2.DataBind();
-                    }
+                    MostrarDetallesInventario(egreso);
                 }
                 else
                 {
-                    GridView1.DataSource = null;
-                    GridView1.DataBind();
-
-                    GridView2.DataSource = null;
-                    GridView2.DataBind();
-
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert ('No se encontraron registros con el numero de egreso proporcionado. ');", true);
+                    showalert("No se encontraron registros con el número de egreso proporcionado.");
+                    LimpiarGrids();
                 }    
+            }
+            catch (ApplicationException ex)
+            {
+                showalert($"Error: {ex.Message}");
+                LimpiarGrids();
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                showalert($"Ha ocurrido un error inesperado: {ex.Message}");
+                LimpiarGrids();
             }
         }
+        
+        private void MostrarDetallesInventario(InventarioEgreso egreso)
+        {
+            var IEgreso = new List<InventarioEgreso> { egreso };
+            GridView1.DataSource = IEgreso;
+            GridView1.DataBind();
+
+            if (egreso.DetalleProductos != null && egreso.DetalleProductos.Count >0)
+            {
+                GridView2.DataSource = egreso.DetalleProductos;
+                GridView2.DataBind();
+            }
+            else
+            {
+                GridView2.DataSource = null;
+                GridView2.DataBind();
+            }
+
+        }
+        private void LimpiarGrids()
+        {
+            GridView1.DataSource = null;
+            GridView1.DataBind();
+            GridView2.DataSource = null;
+            GridView2.DataBind();
+        }
+        
         ///         GET - INVENTARIO EGRESOS  
         protected async void BuscarEgresoInventario_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = TextBox2.Text.Trim();
 
-            NA_APIinventario apiInv = new NA_APIinventario();
-            List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
+            try
+            {
+                if (string.IsNullOrEmpty(criterioBusqueda))
+                {
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
+                    GridView3.DataSource = egreso;
+                    GridView3.DataBind();
 
-            if (egreso != null && egreso.Count > 0)
-            {
-                GridView3.DataSource = egreso;
-                GridView3.DataBind();
+                }
+                else
+                {
+                    NA_APIinventario apiInv = new NA_APIinventario();
+                    List<Ingresos> egreso = await apiInv.ObtenerEgresosAsync("adm", "123", criterioBusqueda);
+
+                    if (egreso.Any())
+                    {
+                        GridView3.DataSource = egreso;
+                        GridView3.DataBind();
+                    }
+                    else
+                    {
+                        showalert($"No se encontró ningún egreso con el codigo : {criterioBusqueda}.");
+                        GridView3.DataSource = new List<Ingresos>();
+                        GridView3.DataBind();
+                    }
+                }
             }
-            else
+            
+            catch (Exception ex)
             {
-                GridView3.DataSource = new List<Ingresos>();
-                GridView3.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron registros con el código proporcionado.'); ", true);
+                showalert($"Error al obtener los egresos: {ex.Message}");
             }
         }
 
         ///         POST - INVENTARIO EGRESOS
         protected async void btn_InventarioEgresoPost2_Click(object sender, EventArgs e)
         {
-            string CodigoAlmacen = TextBoxCodigoAlmacen.Text.Trim();
-            string MotivoMovimiento = TextBoxMotivoMovimiento.Text.Trim();
-            string ItemAnalisis = TextBoxItemAnalisis.Text.Trim();
-
-
-            // Realiza las validaciones
-            if (string.IsNullOrEmpty(CodigoAlmacen))
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, Complete el campo Codigo almacen.');", true);
+            if (!ValidarCampos())
                 return;
+            var egreso = CrearEgreso();
+
+            try
+            {
+                var result = await RegistrarEgreso(egreso);
+
+                if (result != null)
+                {
+                    showalert($"Egreso Registrado. Número de Egreso: {result}");
+                    LimpiarCampos();
+                }
+                else
+                {
+                    showalert("Ocurrio un error al registrar el Egreso");
+                }
             }
-
-            if (string.IsNullOrEmpty(MotivoMovimiento))
+            catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, Complete el campo Motivo Movimiento.');", true);
-                return;
+                showalert($"Error inesperado: {ex.Message}");
             }
+        }
 
-            if (string.IsNullOrEmpty(ItemAnalisis))
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor, complete el campo Item Analisis.');", true);
-                return;
-            }// sub
-
+        private InventarioEgreso CrearEgreso()
+        {
             var egreso = new InventarioEgreso
             {
-                NumeroEgreso = 0, 
-                Fecha = DateTime.Now, 
+                NumeroEgreso = 0,
+                Fecha = DateTime.Now,
                 Referencia = TextBoxReferencia.Text,
                 CodigoAlmacen = int.Parse(TextBoxCodigoAlmacen.Text),
                 MotivoMovimiento = TextBoxMotivoMovimiento.Text,
                 ItemAnalisis = int.Parse(TextBoxItemAnalisis.Text),
                 Glosa = TextBoxGlosa.Text,
-                Usuario = "ADM"
+                Usuario = "ADM",
+                DetalleProductos = obtenerDetalleProductos()
             };
-
-            // Obtener los detalles de productos
+            return egreso;
+        }
+        private List<DetalleProductoEgre> obtenerDetalleProductos()
+        {
             var detalles = new List<DetalleProductoEgre>();
-
             int rowCount = Request.Form.AllKeys.Length;
-
-            for (int i = 0; i < rowCount; i++)
-            {
-                if (Request.Form["codigoProducto" + i] != null)
-                {
-                    detalles.Add(new DetalleProductoEgre
-                    {
-                        Item = 0,
-                        CodigoProducto = Request.Form["codigoProducto" + i], //ob
-                        UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                        Cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture)
-
-                    });
-                }
-            }
-
-            egreso.DetalleProductos = detalles;
-
-            // Obtener token y enviar datos
-            var api = new NA_APIinventario();
-            var token = await api.GetTokenAsync("adm", "123");
 
             try
             {
+                for (int i = 0; i< rowCount; i++)
+                {
+                    if (Request.Form["codigoProducto" +i] != null)
+                    {
+                        var detalle = new DetalleProductoEgre
+                        {
+                            Item = 0,
+                            CodigoProducto = Request.Form["codigoProducto" +i],
+                            UnidadMedida = int.Parse(Request.Form["unidadMedida" +i]),
+                            Cantidad = int.Parse(Request.Form["cantidad" + i])
+                        };
+                        detalles.Add(detalle);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al obtener detalles de productos: {ex.Message}");
+                return null;
+            }
+            return detalles;
+
+        }
+        private async Task<string> RegistrarEgreso(InventarioEgreso egreso)
+        {
+            try
+            {
+                var api = new NA_APIinventario();
+                var token = await api.GetTokenAsync("adm", "123");
+
                 var result = await api.PostInventarioEgresoAsync(egreso, token);
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioEgreso registrado exitosamente.');", true);
-                lblResult.Text = $"Numero Egreso: {result}";
+                return result;
             }
             catch (Exception ex)
             {
-                lblResult.Text = $"Error: {ex.Message}";
+                showalert($"Error al registrar el egreso: {ex.Message}");
+                return null;
             }
+        }
+
+        private bool ValidarCampos()
+        {
+            // Realiza las validaciones
+            if (string.IsNullOrEmpty(TextBoxCodigoAlmacen.Text.Trim()))
+            {
+                showalert("Por favor, complete el campo código almacén");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(TextBoxMotivoMovimiento.Text.Trim()))
+            {
+                showalert("Por favor, Complete el campo Motivo Movimiento.");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(TextBoxItemAnalisis.Text.Trim()))
+            {
+                showalert("Por favor, complete el campo Ítem Análisis.");
+                return false;
+            }// sub
+            return true;
+        }
+        private void LimpiarCampos()
+        {
+            TextBoxReferencia.Text = string.Empty;
+            TextBoxCodigoAlmacen.Text = string.Empty;
+            TextBoxMotivoMovimiento.Text = string.Empty;
+            TextBoxItemAnalisis.Text = string.Empty;
+            TextBoxGlosa.Text = string.Empty;
+
+        }
+        private void showalert(string mensaje)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
         }
     }
 }

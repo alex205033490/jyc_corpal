@@ -725,6 +725,7 @@
     <Compile Include="DatosSimec\DA_contabilidad.cs" />
     <Compile Include="DatosSimec\DA_inventario.cs" />
     <Compile Include="Datos\DACorpal_InsumoCreado.cs" />
+    <Compile Include="Datos\DCorpal_Clientes.cs" />
     <Compile Include="Datos\DA_ActivosJyC.cs" />
     <Compile Include="Datos\DA_AgendaProyecto.cs" />
     <Compile Include="Datos\DA_ActividadesPersonal.cs" />
@@ -885,9 +886,11 @@
     <Compile Include="Negocio\NA_APIproduccion.cs" />
     <Compile Include="Negocio\NA_APIproductos.cs" />
     <Compile Include="Negocio\NA_APIventas.cs" />
+    <Compile Include="Negocio\NA_UPONSolicitudPedido.cs" />
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
+    <Compile Include="Negocio\NCorpal_Clientes.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />

@@ -15,6 +15,15 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
+        /// Control panel_busquedaProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_busquedaProducto;
+
+        /// <summary>
         /// Control txt_nomProducto.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,60 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_prodNombre;
+
+        /// <summary>
+        /// Control panel_vwCodProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_vwCodProductos;
+
+        /// <summary>
+        /// Control ddListCodProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProductos;
+
+        /// <summary>
+        /// Control btn_BuscarcodProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_BuscarcodProducto;
+
+        /// <summary>
+        /// Control gv_prodCod.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_prodCod;
+
+        /// <summary>
+        /// Control gv_prodCodDet.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_prodCodDet;
+
+        /// <summary>
+        /// Control panel_vwVentasProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_vwVentasProductos;
 
         /// <summary>
         /// Control txt_ventProducto.
@@ -69,22 +132,31 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_prodVenta;
 
         /// <summary>
-        /// Control txt_codProductoComp.
+        /// Control panel_vwcComprasProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProductoComp;
+        protected global::System.Web.UI.WebControls.Panel panel_vwcComprasProductos;
 
         /// <summary>
-        /// Control txt_codProveedorComp.
+        /// Control ddListCodProductos2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProveedorComp;
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProductos2;
+
+        /// <summary>
+        /// Control ddListCodProveedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddListCodProveedor;
 
         /// <summary>
         /// Control btn_buscarCompras.
@@ -103,41 +175,5 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_prodCompras;
-
-        /// <summary>
-        /// Control txt_codProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProducto;
-
-        /// <summary>
-        /// Control btn_BuscarcodProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_BuscarcodProducto;
-
-        /// <summary>
-        /// Control gv_prodCod.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_prodCod;
-
-        /// <summary>
-        /// Control gv_prodCodDet.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_prodCodDet;
     }
 }

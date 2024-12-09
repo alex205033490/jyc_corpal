@@ -79,7 +79,7 @@ namespace jycboliviaASP.net.Presentacion
             string password = "123";
             var na_clienteapi = new NA_APIclientes();
 
-            var token = await na_clienteapi.GetTokenAsync(usuario, password);
+            var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
             if (string.IsNullOrEmpty(token))
             {
                 ShowAlert("Error al obtener el token.");
@@ -123,7 +123,7 @@ namespace jycboliviaASP.net.Presentacion
             string password = "123";
             var na_clienteapi = new NA_APIclientes();
 
-            var token = await na_clienteapi.GetTokenAsync(usuario, password);
+            var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
             var cliente = new clientePersonaDTO
             {
                 CodigoContacto = 0,
@@ -194,6 +194,8 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
+
+        //--------------------------        METODO GET CLIENTE/EMPRESA      -------------------------//
         protected async void btn_buscar_CliEmpr_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_filtroBusqueda.Text;
@@ -207,37 +209,212 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                NA_APIclientes pp = new NA_APIclientes();
-                string token = await pp.ObtenerTokenAsync("adm","123");
+                string token = await ObtenerTokenAsync("adm","123");
 
                 if (string.IsNullOrEmpty(token))
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error de autenticación. No se pudo obtener el token');", true);
+                    ShowAlert("Error de autenticación. No se pudo obtener el token");
                     return;
                 }
-
-                List<ClienteEmpresaGetDTO> personas = await pp.get_ClientesPersonasAsync(token, criterioBusqueda);
+                var cli = new NA_APIclientes();
+                List<ClienteGetDTO> personas = await cli.GET_ClientesAsync(token, criterioBusqueda);
 
                 if (personas != null && personas.Count > 0)
                 {
-                    GridView1.DataSource = personas;
-                    GridView1.DataBind();
+                    MostrarClientes(personas);
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Lo siento, no hay registros que coincidan con la búsqueda');", true);
-                    GridView1.DataSource = new List<ClienteEmpresaGetDTO>();
-                    GridView1.DataBind();
+                    ShowAlert("Lo siento, no hay registros que coincidan con la búsqueda");
+                    LimpiarGridView();
                 }
             } catch(Exception ex)
             {
                 Response.Write($"Error inesperado: {ex.Message}");
             }
         }
+
+
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIclientes cl = new NA_APIclientes();
+            return await cl.ObtenerTokenAsync(usuario, password);
+        }
+        private async Task<List<ClienteGetDTO>> BuscarClientesAsync(string token, string criterioBusqueda)
+        {
+            NA_APIclientes cli = new NA_APIclientes();
+            return await cli.GET_ClientesAsync(token, criterioBusqueda);
+        }
+        private void MostrarClientes(List<ClienteGetDTO> personas)
+        {
+            GridView2.DataSource = personas;
+            GridView2.DataBind();
+        }
+        private void LimpiarGridView()
+        {
+            GridView2.DataSource = new List<ClienteGetDTO>();
+            {
+                GridView2.DataBind();
+            }
+        }
+        
+        // -------------------------- METODO PARA VACIAR CLIENTES UPON
+        protected void btn_vaciadoClienteUpon_Click(object sender, EventArgs e)
+        {
+            List<int> codigosContactoSeleccionados = new List<int>();
+            List<string> nombresSeleccionados = new List<string>();
+            List<string> ciSeleccionado = new List<string>();
+            List<string> correosSeleccionados = new List<string>();
+            List<string> telefonosSeleccionados = new List<string>();
+
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox chkSeleccionar = (CheckBox)row.FindControl("chkSeleccionar");
+                if(chkSeleccionar != null && chkSeleccionar.Checked)
+                {
+                    int codigocontacto = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
+                    string nombreCompleto = row.Cells[2].Text.Trim();
+                    string ci = row.Cells[3].Text.Trim();
+                    string correo = row .Cells[4].Text.Trim();
+                    string telefono = row.Cells[5].Text.Trim();
+
+                    telefono = string.IsNullOrEmpty(telefono) || telefono == "&nbsp;" ? null : telefono;
+                    correo = string.IsNullOrEmpty(correo) || correo == "&nbsp;" ? null : correo;
+                    ci = string.IsNullOrEmpty(ci) || ci == "&nbsp;" ? null : ci;
+                    nombreCompleto = string.IsNullOrEmpty(nombreCompleto) || nombreCompleto == "&nbsp;" ? null : nombreCompleto;
+
+                    codigosContactoSeleccionados.Add(codigocontacto);
+                    nombresSeleccionados.Add(nombreCompleto);
+                    ciSeleccionado.Add(ci);
+                    correosSeleccionados.Add(correo);
+                    telefonosSeleccionados.Add(telefono);
+                }
+            }
+            if (codigosContactoSeleccionados.Count == 0)
+            {
+                ShowAlert("No se seleccionaron registros");
+                return;
+            }
+
+            bool exito = VaciadoClientesUpon(codigosContactoSeleccionados, nombresSeleccionados, ciSeleccionado, correosSeleccionados, telefonosSeleccionados);
+
+            if (exito)
+            {
+                ShowAlert("Registros Insertados Correctamente!");
+            }
+        }
+
+        private bool VaciadoClientesUpon(List<int> codigosContacto, List<string>nombres, List<string> ci, List<string> correos, List<string> telefonos)
+        {
+            NCorpal_Clientes negocioCli = new NCorpal_Clientes();
+            bool exito = false;
+
+            for (int i = 0; i < codigosContacto.Count; i++)
+            {
+                try
+                {
+                    exito = negocioCli.insert_vaciadocliente(codigosContacto[i], nombres[i], ci[i], correos[i], telefonos[i]);
+                    if (!exito)
+                    {
+                        ShowAlert($"Error al insertar el registro con código {codigosContacto[i]}");
+                        break;
+                    }
+                
+                }
+                catch(Exception ex)
+                {
+                    ShowAlert($"Error al insertar el registro con código {codigosContacto[i]}: {ex.Message}");
+                    break;
+                }
+            }
+            return exito;
+        }
+
+        // ------------------------- METODO PARA VACIAR CLIENTES UPON2
+        protected void VaciarClientes_Click(object sender, EventArgs e)
+        {
+            List<int> codigosContactoSelecc = new List<int>();
+            List<string> nombresSelecc = new List<string>();
+            List<string> ciselecc = new List<string>();
+            List<string> correosselecc = new List<string>();
+            List<string> telefonosselecc = new List<string>();
+
+            foreach (GridViewRow row in GridView2.Rows)
+            {
+                int codigoContacto = Convert.ToInt32(GridView2.DataKeys[row.RowIndex].Value);
+                string nombreCompleto = row.Cells[1].Text.Trim();
+                string ci = row.Cells[2].Text.Trim();
+                string correo = row.Cells[3].Text.Trim();
+                string telefono = row.Cells[4].Text.Trim();
+
+                telefono = string.IsNullOrEmpty(telefono) || telefono == "&nbsp;" ? null : telefono;
+                correo = string.IsNullOrEmpty(correo) || correo == "&nbsp;" ? null : correo;
+                ci = string.IsNullOrEmpty(ci) || ci == "&nbsp;" ? null : ci;
+                nombreCompleto = string.IsNullOrEmpty(nombreCompleto) || nombreCompleto == "&nbsp;" ? null : nombreCompleto;
+
+                codigosContactoSelecc.Add(codigoContacto);
+                nombresSelecc.Add(nombreCompleto);
+                ciselecc.Add(ci);
+                correosselecc.Add(correo);
+                telefonosselecc.Add(telefono);
+            }
+            if (codigosContactoSelecc.Count == 0)
+            {
+                ShowAlert("No hay registros a vaciar");
+                return;
+            }
+
+            bool exito = VaciadoClientesUpon(codigosContactoSelecc, nombresSelecc, ciselecc, correosselecc, telefonosselecc);
+
+            if (exito)
+            {
+                ShowAlert("Registros Insertados Correctamente");
+            }
+
+        }
+
+
         private void ShowAlert(string message)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
         }
+        protected async void btn_buscarCliente_Click(object sender, EventArgs e)
+        {
+            string criterioBusqueda = txt_inputCliente.Text;
 
+            // Realiza las validaciones
+            if (string.IsNullOrEmpty(criterioBusqueda))
+            {
+                ShowAlert("Por favor, ingrese un dato para buscar.");
+                return;
+            }
+
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    ShowAlert("Error de autenticación. No se pudo obtener el token");
+                    return;
+                }
+                var cli = new NA_APIclientes();
+                List<ClienteGetDTO> personas = await cli.GET_ClientesAsync(token, criterioBusqueda);
+
+                if (personas != null && personas.Count > 0)
+                {
+                    MostrarClientes(personas);
+                }
+                else
+                {
+                    ShowAlert("Lo siento, no hay registros que coincidan con la búsqueda");
+                    LimpiarGridView();
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"Error inesperado: {ex.Message}");
+            }
+        }
     }
 }

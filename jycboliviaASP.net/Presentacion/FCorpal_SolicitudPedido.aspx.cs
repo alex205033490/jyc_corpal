@@ -12,6 +12,9 @@ using System.Web.Script.Services;
 using System.Drawing;
 using jycboliviaASP.net.NegocioApi;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
+using static jycboliviaASP.net.Negocio.NA_APIclientes;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -240,6 +243,7 @@ namespace jycboliviaASP.net.Presentacion
                 string horaentrega = tx_horaEntrega.Text;
 
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+
                 string repuestosSolicitados = "";
                 string cliente = tx_cliente.Text;
                 int codigCliente;
@@ -261,7 +265,9 @@ namespace jycboliviaASP.net.Presentacion
                     banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente,cliente,propietario, razonSocial, nit, codpersolicitante);
                 }
 
+                string repuestosSolicitados = ""; 
                 if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante,true,codigCliente))
+
                 {
                     int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
                     double montoTotal = 0;
@@ -445,6 +451,7 @@ namespace jycboliviaASP.net.Presentacion
                 tx_cantidadProducto.Text = rowsArray.Count.ToString();
         }
 
+
         protected void bt_verificar_Click(object sender, EventArgs e)
         {
             verificarTienda();
@@ -463,5 +470,6 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
 
         }
+
     }
 }

@@ -9,11 +9,107 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="padding-top: 1em;">
         <div class="row">
-            <div class="col-md-11 col-md-offset-1">
-                <div class="panel panel-success class">
+            <div class="col-md-12 col-md-offset-1">
+                <div class="col-md-10 panel panel-success class">
+
+                    <!------------------------          API POST PEDIDO           ------------------------------>
+
+
+                <div class="container-POSTPedido p-4 rounded">
+                    <div class="container_tittle rounded">
+                        <h5 class="text_tittle p-3">Formulario Solicitud De Pedido</h5>
+                    </div>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+                    <div class="row mb-3">
+                        <!-- La clase col cambia dependiendo del tamaño de pantalla -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <label class="form-label">Referencia:</label>
+                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <label class="form-label">Codigo Cliente:</label>
+                            <asp:TextBox ID="txt_codCliente" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <label class="form-label">Importe Descuentos:</label>
+                            <asp:TextBox ID="txt_impDescuentos" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <label class="form-label">Glosa:</label>
+                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <!--  Detalle Productos  -->
+                    <div class="form_detalleProducto  col-md-8">
+                        <h5 runat="server" > Detalle Productos</h5>
+                        <div class="table-detProducto">
+                            <table id="tblDetalleProductosPedido" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>CodUnidad Medida</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Importe Descuento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input class="form-control " type="text" name="codigoProducto0" /></td>
+                                        <td>
+                                            <input class="form-control " type="number" name="cantidad0" step="0.01"/></td>
+                                        <td>
+                                            <input class="form-control " type="number" name="codigoUnidadMedida0" /></td>
+                                        <td>
+                                            <input class="form-control " type="number" name="precioUnitario0" step="0.01"/></td>
+                                        <td>
+                                            <input class="form-control " type="number" name="importeDescuento0" step="0.01"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <asp:Button ID="Button1" runat="server" Text="Agregar Fila" CssClass="btn btn-success btn-sm" OnClientClick="addRowPedido(); return false;" />
+                        <asp:Button ID="btn_PostPedido" runat="server" Text="Registrar Pedido " CssClass="btn btn-success btn-sm" OnClick="btn_PostPedido_Click" />
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!------------------------          API GET PEDIDO CON CRITERIO DETALLE (numero pedido)          ------------------------------>
-                    
+                    <!--
                     <div class="container-GETPedidoDet p-4 rounded col-md-12 col-lg-12">
                         <div class="container_tittle rounded">
                             <h5 class="text_tittle p-3">Vista Detalles del Pedido</h5>
@@ -33,6 +129,7 @@
 
                         </div>
                         <!--  container gv1  -->
+                        <!--
                                 <div class="container_gv1 col-sm-12 col-md-12 col-lg-12 mb-2">
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                         <Columns>
@@ -58,6 +155,7 @@
                                     </asp:GridView>
                                 </div>
                         <!--  container gv2  -->
+                    <!--
                                 <div class="container_gv2 col-sm-12 col-md-10 col-lg-12">
                                     <asp:GridView ID="gv_detalleProd" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
@@ -83,12 +181,13 @@
                                         <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                                     </asp:GridView>
                                 </div>
-                            </div>                        
+                            </div>        
+                 
                         <br/>
 
 
 <!------------------------          API GET PEDIDO C/S CRITERIO          ------------------------------>
-               
+               <!--
                 <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
                     <div class="container_tittle rounded">
                         <h5 class="text_tittle2 p-3">Vista de Pedidos</h5>
@@ -129,70 +228,11 @@
                             </asp:GridView>
                         </div>
                     </div>
-                  
+                  -->
                     <br>
 
 
-<!------------------------          API POST PEDIDO           ------------------------------>
-                <div class="container-POSTPedido p-4 rounded">
-                    <div class="container_tittle rounded">
-                        <h5 class="text_tittle p-3">Formulario Registro De Pedido</h5>
-                    </div>
 
-                    <div class="row mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="col-6 col-sm-6 col-md-3">
-                            <label class="form-label">Referencia:</label>
-                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3">
-                            <label class="form-label">Codigo Cliente:</label>
-                            <asp:TextBox ID="txt_codCliente" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3">
-                            <label class="form-label" >Importe Descuentos:</label>
-                            <asp:TextBox ID="txt_impDescuentos" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-3">
-                            <label class="form-label" ">Glosa:</label>
-                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                    </div>
-                    <!--  Detalle Productos  -->
-                    <div class="form_detalleProducto  col-md-8">
-                        <h5 runat="server" > Detalle Productos</h5>
-                        <div class="table-detProducto">
-                            <table id="tblDetalleProductosPedido" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Codigo Producto</th>
-                                        <th>Cantidad</th>
-                                        <th>CodUnidad Medida</th>
-                                        <th>Precio Unitario</th>
-                                        <th>Importe Descuento</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input class="form-control " type="text" name="codigoProducto0" /></td>
-                                        <td>
-                                            <input class="form-control " type="number" name="cantidad0" step="0.01"/></td>
-                                        <td>
-                                            <input class="form-control " type="number" name="codigoUnidadMedida0" /></td>
-                                        <td>
-                                            <input class="form-control " type="number" name="precioUnitario0" step="0.01"/></td>
-                                        <td>
-                                            <input class="form-control " type="number" name="importeDescuento0" step="0.01"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <asp:Button ID="Button1" runat="server" Text="Agregar Fila" CssClass="btn btn-success btn-sm" OnClientClick="addRowPedido(); return false;" />
-                        <asp:Button ID="btn_PostPedido" runat="server" Text="Registrar Pedido " CssClass="btn btn-success btn-sm" OnClick="btn_PostPedido_Click" />
-                        
-                    </div>
-
-                </div>
                 </div>
             </div>
         </div>
