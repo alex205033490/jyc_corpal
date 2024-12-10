@@ -878,6 +878,7 @@
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
+    <Compile Include="Negocio\NA_APIAlmacen.cs" />
     <Compile Include="Negocio\NA_APIclientes.cs" />
     <Compile Include="Negocio\NA_APIcompras.cs" />
     <Compile Include="Negocio\NA_APICuentasCobranza.cs" />

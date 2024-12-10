@@ -96,13 +96,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.DropDownList dd_codMoneda;
 
         /// <summary>
-        /// Control txt_codAlmacen.
+        /// Control dd_CodAlmacenIIngreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codAlmacen;
+        protected global::System.Web.UI.WebControls.DropDownList dd_CodAlmacenIIngreso;
 
         /// <summary>
         /// Control txt_motMovimiento.

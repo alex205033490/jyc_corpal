@@ -15,6 +15,7 @@ using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
 using System.Security.Policy;
 using System.Net.Http.Headers;
+using RestSharp.Serialization.Json;
 
 
 namespace jycboliviaASP.net.Negocio
@@ -150,30 +151,31 @@ namespace jycboliviaASP.net.Negocio
         }
         public async Task<string> PostInventarioIngresoAsync(InventarioIngreso ingreso, string token)
          {
-            var json = JsonConvert.SerializeObject(ingreso);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos", content);
-            
             try
             {
-                response.EnsureSuccessStatusCode();
+                var json = JsonConvert.SerializeObject(ingreso);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos", content);
+                
+                if(!response.IsSuccessStatusCode)
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
+                    return $"Error: {response.StatusCode} - {errorResponse}";
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var ApiResponse = JsonConvert.DeserializeObject<ApiResponse2>(result);
+                return ApiResponse.Resultado.ToString(); 
+
             }
-            catch (HttpRequestException e)
+            catch(Exception ex)
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Error: {e.Message}, Content: {errorContent}");
-                throw; // 
+                Debug.WriteLine($"Error general: {ex.Message}");
+                return $"Error general: {ex.Message}";
             }
-
-            var result = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine(result);
-
-            var apiresponse2 = JsonConvert.DeserializeObject<ApiResponse2>(result);
-            return apiresponse2.Resultado.ToString();
-
-
         }
         public class ItemIngresoDTO
         {
@@ -187,7 +189,7 @@ namespace jycboliviaASP.net.Negocio
         public class InventarioIngreso
         {
             public int NumeroIngreso { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Referencia { get; set; }
             public int CodigoMoneda { get; set; }
             public int CodigoAlmacen { get; set; }

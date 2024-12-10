@@ -29,6 +29,26 @@
     font-size: small;
 }
 
+.container_gvProdAddII tr {
+    background-color: #ff950321; /* Color de fondo suave para las filas */
+}
+
+    /* Estilo para las celdas del encabezado */
+.container_gvProdAddII th {
+    background-color: #ff8900b5; /* Naranja fuerte para el encabezado */
+    color: white; /* Color de texto blanco */
+    text-align: center; /* Centrar el texto en el encabezado */
+    padding: 8px; /* Espaciado en el encabezado */
+}
+
+    /* Estilo para las celdas de datos */
+.container_gvProdAddII td {
+    text-align: center; /* Centrar el texto en las celdas de datos */
+    padding: 8px; /* Espaciado en las celdas de datos */
+}
+
+
+
 
 
 

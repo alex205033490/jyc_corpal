@@ -140,7 +140,7 @@
                                     <asp:ListItem Text="Dólares" Value="2" />
                                 </asp:DropDownList>
                                 <label class="form-label">Código Almacén:</label>
-                                <asp:TextBox ID="txt_codAlmacen" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
+                                <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select"></asp:DropDownList>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
@@ -174,32 +174,40 @@
                                 <div class="container_btnAddProd col-3 d-flex align-items-end">
                                     <asp:Button runat="server" ID="btn_addProd" Text="Agregar Producto" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
                                 </div>
-                                <br />
+                                
+                            </div>
                                 <asp:GridView ID="gv_listProdIngresos" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdIngresos_SelectedIndexChanged">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
                                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                         <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
-                                        <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" />
+                                        <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="UM" />
                                         <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio" />
                                     </Columns>
                                 </asp:GridView>
+
+                            <div class="container_gvProdAddII mb-3">
+                                    <asp:GridView ID="gv_productAgregados" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClss="table table-bordered" OnRowCommand="gv_productAgregados_RowCommand">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Button ID="btnEliminarFila" runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument ='<%# Eval("CodigoProducto") %>' CssClass="btn btn-danger btn-sm" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Producto" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad medida" />
+                                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                            <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" />
+                                            <asp:BoundField DataField="CostoTotal" HeaderText="Costo Total" />
+                                        </Columns>
+                                    </asp:GridView>
                             </div>
-                            <br />
+
                             <div>
-                                <asp:GridView runat="server" ID="gv_productAgregados" AutoGenerateColumns="false" CssClss="table table-bordered">
-                                    <Columns>
-                                        <asp:BoundField DataField="Nombre" HeaderText="Producto" />
-                                        <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
-                                        <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad medida" />
-                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                        <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" />
-                                        <asp:BoundField DataField="CostoTotal" HeaderText="Costo Total" />
-                                    </Columns>
-                                </asp:GridView>
+                                <asp:Button ID="btn_registrarIngreso" runat="server" Text="Registrar Ingreso" CssClass="btn btn-success" OnClick="btn_registrarIngreso_Click" />
 
                             </div>
-                            <asp:Button ID="btn_registrarIngreso" runat="server" Text="Registrar Ingreso" CssClass="btn btn-success" OnClick="btn_registrarIngreso_Click" />
                         </div>
                     </div>
                 </div>
