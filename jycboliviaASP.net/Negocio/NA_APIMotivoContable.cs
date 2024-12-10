@@ -8,40 +8,49 @@ using System.Web;
 
 namespace jycboliviaASP.net.Negocio
 {
-    public class NA_APIAlmacen
+    public class NA_APIMotivoContable
     {
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        public class APIResponseAlmacen
+        public class APIResponseMotMovI
         {
             public bool EsValido { get; set; }
-            public List<ListAlmacenesDTO> Resultado { get; set; }
+            public List<ListMotMovIDTO> Resultado { get; set; }
         }
-        internal async Task<List<ListAlmacenesDTO>> Get_ListAlmacenAsync(string token)
+        internal async Task<List<ListMotMovIDTO>> Get_ListMotMovIAsync(string token)
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarAlmacenes";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/SincronizarMotivosContableIngresos";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<APIResponseAlmacen>(searchResponseBody);
+                var apiResponse = JsonConvert.DeserializeObject<APIResponseMotMovI>(searchResponseBody);
 
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListAlmacenesDTO>();
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListMotMovIDTO>();
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error al buscar el almacen", ex);
+                throw new ApplicationException("Error al buscar el Motivo", ex);
             }
         }
-        public class ListAlmacenesDTO
+        public class ListMotMovIDTO
         {
-            public int CodigoAlmacen { get; set; }
-            public string Nombre { get; set; }
-            public int CodigoSucursal { get; set; }
+            public string CodigoMotivo { get; set; }
+            public string MotivoContable { get; set; }
+
         }
+
+
+
+
+
+
+
+
+
     }
 }

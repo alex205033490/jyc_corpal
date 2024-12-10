@@ -145,7 +145,7 @@
 
                             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                 <label class="form-label" for="txt_motMovimiento">Motivo Movimiento:</label>
-                                <asp:TextBox ID="txt_motMovimiento" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
+                                <asp:DropDownList ID="dd_motMovI" runat="server" CssClass="form-select"></asp:DropDownList>
                                 <label class="form-label" for="txt_itemAnalisis">Ítem Análisis:</label>
                                 <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                                 <label class="form-label" for="txt_glosa">Glosa:</label>
@@ -161,6 +161,7 @@
                         <div class="form_detproducto col-md-12 col-lg-10">
                             <h3 class="form-label">Detalle Productos</h3>
 
+                            <asp:Panel runat="server" DefaultButton="btn_addProd">
                             <div class="form_addProducto row mb-3">
                                 <div class="input_producto col-4">
                                     <asp:Label runat="server"> Nombre del producto:</asp:Label>
@@ -174,8 +175,9 @@
                                 <div class="container_btnAddProd col-3 d-flex align-items-end">
                                     <asp:Button runat="server" ID="btn_addProd" Text="Agregar Producto" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
                                 </div>
-                                
                             </div>
+                            </asp:Panel>
+
                                 <asp:GridView ID="gv_listProdIngresos" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdIngresos_SelectedIndexChanged">
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />

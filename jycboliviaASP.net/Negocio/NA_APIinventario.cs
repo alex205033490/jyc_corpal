@@ -237,6 +237,7 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+
         //----------------     GET - INVENTARIOS EGRESOS
         public async Task<List<Ingresos>> ObtenerEgresosAsync(string usuario, string password, string criterio)
         {
@@ -274,6 +275,13 @@ namespace jycboliviaASP.net.Negocio
 
             var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos", content);
             response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
+                return $"Error: {response.StatusCode} - {errorResponse}";
+            }
 
             var result = await response.Content.ReadAsStringAsync();
             System.Diagnostics.Debug.WriteLine(result);

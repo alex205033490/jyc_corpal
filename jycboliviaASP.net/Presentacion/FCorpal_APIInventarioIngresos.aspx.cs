@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
 using static jycboliviaASP.net.Negocio.NA_APIAlmacen;
+using static jycboliviaASP.net.Negocio.NA_APIMotivoContable;
 
 using System.Data;
 using System.Data.SqlClient;
@@ -29,11 +30,18 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string token = await ObtenerTokenAsync("adm", "123");
                 var almacen = await ObtenerListCodAlmacen(token);
+                var motMovimiento = await ObtenerListCodMotMov(token);
                 dd_CodAlmacenIIngreso.DataSource = almacen;
                 dd_CodAlmacenIIngreso.DataTextField = "Nombre";
                 dd_CodAlmacenIIngreso.DataValueField = "CodigoAlmacen";
                 dd_CodAlmacenIIngreso.DataBind();
                 dd_CodAlmacenIIngreso.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un almacén", ""));
+
+                dd_motMovI.DataSource = motMovimiento;
+                dd_motMovI.DataTextField = "MotivoContable";
+                dd_motMovI.DataValueField = "CodigoMotivo";
+                dd_motMovI.DataBind();
+                dd_motMovI.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un Motivo", ""));
 
                 //
                 List<Productos> productos = ObtenerProductosDesdeSession();
@@ -201,7 +209,7 @@ namespace jycboliviaASP.net.Presentacion
                     Referencia = txt_Referencia.Text.Trim(),
                     CodigoMoneda = int.Parse(dd_codMoneda.Text.Trim()),
                     CodigoAlmacen = int.Parse(dd_CodAlmacenIIngreso.Text.Trim()),
-                    MotivoMovimiento = txt_motMovimiento.Text.Trim(),
+                    MotivoMovimiento = dd_motMovI.Text.Trim(),
                     ItemAnalisis = int.Parse(txt_itemAnalisis.Text),
                     Glosa = txt_glosa.Text,
 
@@ -243,7 +251,7 @@ namespace jycboliviaASP.net.Presentacion
         private void LimpiarCamposRegistrarII()
         {
             txt_Referencia.Text = "";
-            txt_motMovimiento.Text = "";
+            dd_motMovI.SelectedIndex = 0;
             txt_itemAnalisis.Text = "";
             txt_glosa.Text = "";
 
@@ -276,9 +284,9 @@ namespace jycboliviaASP.net.Presentacion
                 return true;
             }
 
-            if (string.IsNullOrEmpty(txt_motMovimiento.Text.Trim()))
+            if (string.IsNullOrEmpty(dd_motMovI.SelectedValue))
             {
-                showalert("Por favor, complete el campo Motivo Movimiento.");
+                showalert("Por favor, Seleccione un Motivo Movimiento valido.");
                 return true;
             }
 
@@ -467,7 +475,21 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
-
+////////    LISTAR MOTIVOS EN DD
+        private async Task<List<ListMotMovIDTO>> ObtenerListCodMotMov(string token)
+        {
+            try
+            {
+                NA_APIMotivoContable negocio = new NA_APIMotivoContable();
+                return await negocio.Get_ListMotMovIAsync(token);
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al obtener la lista de motivos: {ex.Message}");
+                return null;
+            }
+        }
+            
         private async Task<string> ObtenerTokenAsync(string usuario, string password)
         {
             NA_APIinventario negocio = new NA_APIinventario();
