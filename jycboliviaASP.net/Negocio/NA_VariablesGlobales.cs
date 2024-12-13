@@ -332,7 +332,7 @@ namespace jycboliviaASP.net.Negocio
                 " from tbcorpal_entregasordenproduccion oo   " +
                 " where   " +
                 " oo.estado = 1 and   " +
-                " oo.fechagra between "+
+                " TIMESTAMP(oo.fechagra, oo.horagra)  between " +
                 " TIMESTAMP("+ NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and "+
                 " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') "+
                // + NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
@@ -360,7 +360,7 @@ namespace jycboliviaASP.net.Negocio
                 " ss.codigo = dss.codsolicitud and   " +
                 " ss.estado = 1 and   " +
                 " ss.estadosolicitud = 'Cerrado' and  " +
-                " ss.fechaentrega between "+
+                " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
                 " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
                 " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
                 // NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
@@ -386,7 +386,7 @@ namespace jycboliviaASP.net.Negocio
                     " from tbcorpal_entregasordenproduccion oo   " +
                     " where   " +
                     " oo.estado = 1 and   " +
-                    " oo.fechagra between " +
+                    " TIMESTAMP(oo.fechagra, oo.horagra)  between " +
                     " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
                     " TIMESTAMP(DATE_SUB("+ fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
                     //NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
@@ -414,7 +414,7 @@ namespace jycboliviaASP.net.Negocio
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
                     " ss.estadosolicitud = 'Cerrado' and  " +
-                    " ss.fechaentrega between " +
+                    " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
                     " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
                     " TIMESTAMP(DATE_SUB(" + fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
                     // NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
@@ -439,7 +439,7 @@ namespace jycboliviaASP.net.Negocio
                     " from tbcorpal_entregasordenproduccion oo   " +
                     " where   " +
                     " oo.estado = 1 and   " +
-                    " oo.fechagra between " +
+                    " TIMESTAMP(oo.fechagra, oo.horagra) between " +
                     " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
                     " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
                     // NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
@@ -467,7 +467,7 @@ namespace jycboliviaASP.net.Negocio
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
                     " ss.estadosolicitud = 'Cerrado' and  " +
-                    " ss.fechaentrega between " +
+                    " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
                     " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
                     " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
                     //NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
