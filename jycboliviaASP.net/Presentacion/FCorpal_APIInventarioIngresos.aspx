@@ -140,12 +140,12 @@
                                     <asp:ListItem Text="Dólares" Value="2" />
                                 </asp:DropDownList>
                                 <label class="form-label">Código Almacén:</label>
-                                <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select"></asp:DropDownList>
+                                <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                 <label class="form-label" for="txt_motMovimiento">Motivo Movimiento:</label>
-                                <asp:DropDownList ID="dd_motMovI" runat="server" CssClass="form-select"></asp:DropDownList>
+                                <asp:DropDownList ID="dd_motMovI" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
                                 <label class="form-label" for="txt_itemAnalisis">Ítem Análisis:</label>
                                 <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                                 <label class="form-label" for="txt_glosa">Glosa:</label>
@@ -163,7 +163,7 @@
 
                             <asp:Panel runat="server" DefaultButton="btn_addProd">
                             <div class="form_addProducto row mb-3">
-                                <div class="input_producto col-4">
+                                <div class="input_producto col-6">
                                     <asp:Label runat="server"> Nombre del producto:</asp:Label>
                                     <asp:TextBox ID="txt_producto" runat="server" OnTextChanged="txt_producto_TextChanged" AutoPostBack="true" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                                 </div>

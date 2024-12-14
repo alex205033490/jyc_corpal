@@ -82,7 +82,7 @@ namespace jycboliviaASP.net.Presentacion
             catch (ApplicationException ex)
             {
                 // Excepciones esperadas (errores conocidos)
-                showalert($"Error: {ex.Message}");
+                showalert($"{ex.Message}");
                 LimpiarGrids();
             }
             catch (Exception ex)
@@ -207,8 +207,8 @@ namespace jycboliviaASP.net.Presentacion
                     NumeroIngreso = 0,
                     Fecha = "2024-11-30T00:00:00",
                     Referencia = txt_Referencia.Text.Trim(),
-                    CodigoMoneda = int.Parse(dd_codMoneda.Text.Trim()),
-                    CodigoAlmacen = int.Parse(dd_CodAlmacenIIngreso.Text.Trim()),
+                    CodigoMoneda = int.Parse(dd_codMoneda.SelectedValue),
+                    CodigoAlmacen = int.Parse(dd_CodAlmacenIIngreso.SelectedValue),
                     MotivoMovimiento = dd_motMovI.Text.Trim(),
                     ItemAnalisis = int.Parse(txt_itemAnalisis.Text),
                     Glosa = txt_glosa.Text,
@@ -280,13 +280,13 @@ namespace jycboliviaASP.net.Presentacion
         {
             if (string.IsNullOrEmpty(dd_CodAlmacenIIngreso.SelectedValue))
             {
-                showalert("Por favor, Seleccione un almacén valido.");
+                showalert("Por favor, Seleccione un almacén válido.");
                 return true;
             }
 
             if (string.IsNullOrEmpty(dd_motMovI.SelectedValue))
             {
-                showalert("Por favor, Seleccione un Motivo Movimiento valido.");
+                showalert("Por favor, Seleccione un Motivo Movimiento válido.");
                 return true;
             }
 
@@ -517,7 +517,6 @@ namespace jycboliviaASP.net.Presentacion
 
                 gv_productAgregados.DataSource = productos;
                 gv_productAgregados.DataBind();
-
             }
         }
     }
