@@ -45,6 +45,27 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
+        internal async Task<List<ListMotMovIDTO>> Get_ListMotMovEAsync(string token)
+        {
+            try
+            {
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/SincronizarMotivosContableEgresos";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
+                var apiResponse = JsonConvert.DeserializeObject<APIResponseMotMovI>(searchResponseBody);
+
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListMotMovIDTO>();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al buscar el Motivo", ex);
+            }
+        }
+
 
 
 

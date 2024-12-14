@@ -28,6 +28,14 @@
     box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
     font-size: small;
 }
+#gv_listProdIngresos tr:hover {
+    background-color: red;
+    color:white;
+}
+.dd_fsmall{
+    font-size:0.75rem;
+}
+
 
 .container_gvProdAddII tr {
     background-color: #ff950321; /* Color de fondo suave para las filas */

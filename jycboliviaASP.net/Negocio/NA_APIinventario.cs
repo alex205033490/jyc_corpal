@@ -147,7 +147,9 @@ namespace jycboliviaASP.net.Negocio
         //---------------------- POST - INVENTARIO INGRESOS
         public class ApiResponse2
         {
-            public int Resultado { get; set; }
+            public bool EsValido {  get; set; }
+            public List<string> Mensajes {  get; set; }
+            public int Resultado { get; set; }           
         }
         public async Task<string> PostInventarioIngresoAsync(InventarioIngreso ingreso, string token)
          {
@@ -269,27 +271,51 @@ namespace jycboliviaASP.net.Negocio
         //----------------     POST - INVENTARIO EGRESOS 
         public async Task<string> PostInventarioEgresoAsync(InventarioEgreso egreso, string token)
         {
-            var json = JsonConvert.SerializeObject(egreso);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos", content);
-            response.EnsureSuccessStatusCode();
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                string errorResponse = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
-                return $"Error: {response.StatusCode} - {errorResponse}";
+                var json = JsonConvert.SerializeObject(egreso);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    // Si hay error en la respuesta, obtenemos el error completo
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
+
+                    // Aquí solo retornamos el mensaje de error
+                    return "Error: " + errorResponse;
+                }
+
+                var result = await response.Content.ReadAsStringAsync();
+                var apiResponse2 = JsonConvert.DeserializeObject<ApiResponse2>(result);
+
+                // Si la validación no fue exitosa, devolvemos los mensajes de error
+                if (!apiResponse2.EsValido)
+                {
+                    // Concatenamos los mensajes y los retornamos
+                    return string.Join(", ", apiResponse2.Mensajes);
+                }
+
+                // Si todo es correcto, retornamos el número de egreso
+                return apiResponse2.Resultado.ToString();
             }
-
-            var result = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(result);
-
-            var apiResponse2 = JsonConvert.DeserializeObject<ApiResponse2>(result);
-            return apiResponse2.Resultado.ToString();
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error: {ex.Message}");
+                return $"Error general: {ex.Message}";
+            }
         }
-        public class DetalleProductoEgre
+        public class ApiResponse22
+        {
+            public bool EsValido { get; set; }
+            public List<string> Mensajes { get; set; }
+            public string Resultado { get; set; }
+        }
+
+        public class ItemEgresoDTO
         {
             public int Item { get; set; }
             public string CodigoProducto { get; set; }
@@ -299,13 +325,13 @@ namespace jycboliviaASP.net.Negocio
         public class InventarioEgreso
         {
             public int NumeroEgreso { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Referencia { get; set; }
             public int CodigoAlmacen { get; set; }
             public string MotivoMovimiento { get; set; }
             public int ItemAnalisis { get; set; }
             public string Glosa { get; set; }
-            public List<DetalleProductoEgre> DetalleProductos { get; set; }
+            public List<ItemEgresoDTO> DetalleProductos { get; set; }
             public string Usuario { get; set; }
         }
 
@@ -465,3 +491,5 @@ namespace jycboliviaASP.net.Negocio
 
     }
 }
+
+

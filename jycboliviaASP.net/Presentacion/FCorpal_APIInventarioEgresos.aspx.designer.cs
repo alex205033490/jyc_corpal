@@ -87,22 +87,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox TextBoxReferencia;
 
         /// <summary>
-        /// Control TextBoxCodigoAlmacen.
+        /// Control dd_codAlmacenIEgreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCodigoAlmacen;
+        protected global::System.Web.UI.WebControls.DropDownList dd_codAlmacenIEgreso;
 
         /// <summary>
-        /// Control TextBoxMotivoMovimiento.
+        /// Control dd_motMoviIEgreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxMotivoMovimiento;
+        protected global::System.Web.UI.WebControls.DropDownList dd_motMoviIEgreso;
 
         /// <summary>
         /// Control TextBoxItemAnalisis.
@@ -123,13 +123,49 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox TextBoxGlosa;
 
         /// <summary>
-        /// Control btnAddRow.
+        /// Control txt_producto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddRow;
+        protected global::System.Web.UI.WebControls.TextBox txt_producto;
+
+        /// <summary>
+        /// Control txt_cantProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_cantProducto;
+
+        /// <summary>
+        /// Control btn_addProd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_addProd;
+
+        /// <summary>
+        /// Control gv_listProdIngresos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_listProdIngresos;
+
+        /// <summary>
+        /// Control gv_productAgregadosIE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_productAgregadosIE;
 
         /// <summary>
         /// Control btn_InventarioEgresoPost2.
@@ -139,14 +175,5 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_InventarioEgresoPost2;
-
-        /// <summary>
-        /// Control lblResult.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResult;
     }
 }
