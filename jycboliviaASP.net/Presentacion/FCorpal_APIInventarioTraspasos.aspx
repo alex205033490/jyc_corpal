@@ -19,7 +19,7 @@
                         <div class="form_input row mb-3 col-lg-12">
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                                 <label class="form-label">Número de transacción:</label>
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" autoComplete="off" placeholder="Ingrese un número de transacción"></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" autoComplete="off" placeholder="Ingrese un número de transacción o deje vacio"></asp:TextBox>
                             </div>
                             <div class="col-3 col-sm-2 col-md-2 col-lg-2 d-flex align-items-end">
                                 <asp:Button ID="btn_GetinvTraspaso" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_GetinvTraspaso_Click" />
@@ -57,15 +57,15 @@
 
                         <div class="form_input mb-3 row">
                             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                                <label class="form-label" for="TextBox2">Número de Traspaso:</label>
-                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Ingrese un número de traspaso"></asp:TextBox>
+                                <label class="form-label" for="TextBox2">Número de transacción:</label>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Ingrese un número de transacción"></asp:TextBox>
                             </div>
                             <div class="col-3 col-sm-2 col-md-2 col-lg-3 d-flex align-items-end">
                                 <asp:Button ID="btn_GetinvTraspasoDet" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_GetinvTraspasoDet_Click" />
                             </div>
                         </div>
 
-                        <div class="container_gv1">
+                        <div class="container_gv4">
                             <asp:GridView ID="gv_invTraspasoDet" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="NumeroTraspasos" HeaderText="Número Traspaso" SortExpression="numTra" />

@@ -314,7 +314,6 @@ namespace jycboliviaASP.net.Negocio
             public List<string> Mensajes { get; set; }
             public string Resultado { get; set; }
         }
-
         public class ItemEgresoDTO
         {
             public int Item { get; set; }
@@ -346,56 +345,44 @@ namespace jycboliviaASP.net.Negocio
             public bool EsValido { get; set; }
             public List<InvTraspasoDTO> Resultado { get; set; }
         }
-
         public async Task<List<InvTraspasoDTO>> ObtenerTraspasoAsync(string usuario, string password, string criterio)
         {
             try
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
+                string token = await GetTokenAsync(usuario, password);
 
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                // construir la URL de la API
                 string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/traspasos";
+                
+                // construir la URL de la API
                 if (!string.IsNullOrEmpty(criterio))
                 {
                     url += $"?criterio={Uri.EscapeDataString(criterio)}";
                 }
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var Response = await httpClient.GetAsync(url);
 
-                var searchResponse = await httpClient.GetAsync(url);
-                searchResponse.EnsureSuccessStatusCode();
+                Response.EnsureSuccessStatusCode();
 
-                var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-                Console.WriteLine("Response Body: " + searchResponseBody);
-
+                var searchResponseBody = await Response.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseTras>(searchResponseBody);
 
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<InvTraspasoDTO>();
+                if(apiResponse == null || !apiResponse.EsValido)
+                {
+                    throw new ApplicationException("La respuesta de la API no es válida o no se encontraron datos.");
+                }
+
+                return apiResponse.Resultado;                
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<InvTraspasoDTO>();
+                throw new ApplicationException("Error al buscar el registro", ex);
             }
         }
-
         public class InvTraspasoDTO
         {
             public int NumeroTransaccion {  get; set; }
-            public DateTime Fecha {  get; set; }
+            public string Fecha {  get; set; }
             public string Referencia {  get; set; }
             public string Almacen {  get; set; }
             public string Usuario { get; set; }
@@ -408,50 +395,32 @@ namespace jycboliviaASP.net.Negocio
             public bool EsValido { get; set; }
             public InventarioTraspasoDTO Resultado {  get; set; }
         }
-
         public async Task<InventarioTraspasoDTO> GetInventarioTraspasoDetAsync(string usuario, string password, string numTraspaso)
         {
             try
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
+                string token = await GetTokenAsync(usuario, password);
 
                 string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/traspasos/{usuario}/{Uri.EscapeDataString(numTraspaso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await httpClient.GetAsync(url);
 
-                var searchResponse = await httpClient.GetAsync(url);
-                searchResponse.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
 
-                var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseInvTraspasoDet>(searchResponseBody);
+
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
-                    Console.WriteLine("API response no valido o nulo");
-                    return null;
+                    throw new ApplicationException("La respuesta de la API no es válida o no se encontraron datos.");
                 }
                 return apiResponse.Resultado;
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex:Message}");
-                return null;
+                throw new ApplicationException("Error al obtener registros con el valor proporcionado", ex);
             }
-
         }
 
         /////////////////////////     POST - INVENTARIO TRASPASOS
@@ -467,7 +436,7 @@ namespace jycboliviaASP.net.Negocio
             var result = await response.Content.ReadAsStringAsync();
             System.Diagnostics.Debug.WriteLine(result);
 
-            var apiResponse2 = JsonConvert.DeserializeObject<ApiResponse2>(result);
+            var apiResponse2 = JsonConvert.DeserializeObject<ApiResponseInvTraspasoDet>(result);
             return apiResponse2.Resultado.ToString();
 
         }
@@ -481,7 +450,7 @@ namespace jycboliviaASP.net.Negocio
         public class InventarioTraspasoDTO
         {
             public int NumeroTraspasos { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Referencia { get; set; }
             public int CodigoAlmacenDestino { get; set; }
             public string Glosa { get; set; }

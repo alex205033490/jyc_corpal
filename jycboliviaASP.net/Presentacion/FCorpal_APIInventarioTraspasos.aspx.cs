@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -20,21 +21,28 @@ namespace jycboliviaASP.net.Presentacion
         protected async void btn_GetinvTraspaso_Click(object sender, EventArgs e)
         {
             string criterio = TextBox1.Text.Trim();
+            List<InvTraspasoDTO> traspasos = await ObtenerTraspasosAsync(criterio);
 
-            NA_APIinventario apiTras = new NA_APIinventario();
-            List<InvTraspasoDTO> traspaso = await apiTras.ObtenerTraspasoAsync("adm", "123", criterio);
-
-            if (traspaso != null && traspaso.Count > 0)
+            actualizarVwTraspaso(traspasos);
+        }
+        private void actualizarVwTraspaso(List<InvTraspasoDTO> traspasos)
+        {
+            if (traspasos != null && traspasos.Count > 0)
             {
-                gv_invTraspaso.DataSource = traspaso;
+                gv_invTraspaso.DataSource = traspasos;
                 gv_invTraspaso.DataBind();
             }
             else
             {
-                gv_invTraspaso.DataSource = new List<InvTraspasoDTO>();
+                gv_invTraspaso.DataSource = traspasos;
                 gv_invTraspaso.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('No se encontraron registros con el codigo proporcionado.');", true);
+                showAlert("No se encontraron registros con el código proporcionado");
             }
+        }
+        private async Task<List<InvTraspasoDTO>> ObtenerTraspasosAsync(string criterio)
+        {
+            NA_APIinventario negocio = new NA_APIinventario();
+            return await negocio.ObtenerTraspasoAsync("adm", "123", criterio);
         }
 
 
@@ -43,63 +51,75 @@ namespace jycboliviaASP.net.Presentacion
         {
             string numTransaccion = TextBox2.Text.Trim();
 
-            if (string.IsNullOrEmpty(numTransaccion))
+            if (!IsValidTransactionnumber(numTransaccion))
             {
-                gv_invTraspasoDet.DataBind();
-                gv_invTraspasoDet2.DataBind();
-
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Por favor ingrese un numero de ingreso valido.');", true);
+                showAlert("Por favor ingrese un numero de transacción válido.");
+                LimpiarGvDet();
                 return;
             }
+            await CargarDetallesTraspasosDet(numTransaccion);
+        }
 
+        private bool IsValidTransactionnumber(string numTransaccion)
+        {
+            return !string.IsNullOrEmpty(numTransaccion);
+        }
+        private async Task CargarDetallesTraspasosDet(string numTransaccion)
+        {
             try
             {
-                NA_APIinventario apiTras = new NA_APIinventario();
-                InventarioTraspasoDTO traspaso = await apiTras.GetInventarioTraspasoDetAsync("adm", "123", numTransaccion);
+                NA_APIinventario negocio = new NA_APIinventario();
+                InventarioTraspasoDTO traspaso = await negocio.GetInventarioTraspasoDetAsync("adm", "123", numTransaccion);
 
                 if (traspaso != null)
                 {
-                    //encapsulamiento
-                    var invTras = new List<InventarioTraspasoDTO> { traspaso };
-                    gv_invTraspasoDet.DataSource = invTras;
-                    gv_invTraspasoDet.DataBind();
-
-                    if (traspaso.DetalleProductos != null && traspaso.DetalleProductos.Count > 0)
-                    {
-                        gv_invTraspasoDet2.DataSource = traspaso.DetalleProductos;
-                        gv_invTraspasoDet2.DataBind();
-                    }
-                    else
-                    {
-                        gv_invTraspasoDet2.DataSource = null;
-                        gv_invTraspasoDet2.DataBind();
-                    }
+                    CargarGvDet(traspaso);
                 }
-
                 else
                 {
-                    gv_invTraspasoDet.DataSource = null;
-                    gv_invTraspasoDet2.DataSource = null;
-
-                    gv_invTraspasoDet.DataBind();
-                    gv_invTraspasoDet2.DataBind();
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert ('No se encontraron registros con el numero de traspaso proporcionado.');", true);
-
+                    LimpiarGvDet();
+                    showAlert("No se encontraron registros con el número de transacción proporcionado.");
                 }
             } catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+                showAlert($"{ex.Message}");
+                LimpiarGvDet();
             }
-
-                }
-
-
-            }
-
-
-
         }
 
+        private void CargarGvDet(InventarioTraspasoDTO traspaso)
+        {
+            var invTras = new List<InventarioTraspasoDTO> { traspaso };
+            gv_invTraspasoDet.DataSource = invTras;
+            gv_invTraspasoDet.DataBind();
+
+            if(traspaso.DetalleProductos != null && traspaso.DetalleProductos.Count > 0)
+            {
+                gv_invTraspasoDet2.DataSource = traspaso.DetalleProductos;
+                gv_invTraspasoDet2.DataBind();
+            }
+            else
+            {
+                gv_invTraspasoDet2.DataSource = null;
+                gv_invTraspasoDet2.DataBind();
+            }
+        }
+        private void LimpiarGvDet()
+        {
+            gv_invTraspasoDet.DataSource = null;
+            gv_invTraspasoDet2.DataSource = null;
+            gv_invTraspasoDet.DataBind();
+            gv_invTraspasoDet2.DataBind();
+        }
+
+
+        // - - - - - - - - - - - - - - - - - - - - - - 
+        private void showAlert(string mensaje)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+        }
+    }
+}
 
 
 
