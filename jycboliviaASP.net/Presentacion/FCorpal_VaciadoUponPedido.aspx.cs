@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static jycboliviaASP.net.Negocio.NA_APIpedido;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -27,7 +30,8 @@ namespace jycboliviaASP.net.Presentacion
 
             if (!IsPostBack)
             {
-                buscarDatosParaCargarAUpon("");
+                cargarDatosVaciadoUpon2("");
+                //buscarDatosParaCargarAUpon("");
                 string baseDeDatos = Session["BaseDatos"].ToString();
                 NA_Historial nhistorial = new NA_Historial();
                 int codUser = Convert.ToInt32(Session["coduser"].ToString());
@@ -68,14 +72,14 @@ namespace jycboliviaASP.net.Presentacion
             return lista;
         }
 
-        private void buscarDatosParaCargarAUpon(string cliente)
+        /*private void buscarDatosParaCargarAUpon(string cliente)
         {
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
             DataSet tuplas = nss.get_allPedidosParaVaciarUpon(cliente);
             lb_cantDatos.Text = Convert.ToString(tuplas.Tables[0].Rows.Count);
             gv_datosCobros.DataSource = tuplas;
             gv_datosCobros.DataBind();
-        }
+        }*/
 
         private void anularPedido()
         {
@@ -94,7 +98,7 @@ namespace jycboliviaASP.net.Presentacion
                     }
                 }
             }
-            buscarDatosParaCargarAUpon("");
+            cargarDatosVaciadoUpon2("");
         }
         protected void bt_anularPago_Click(object sender, EventArgs e)
         {
@@ -138,16 +142,181 @@ namespace jycboliviaASP.net.Presentacion
             }
 
         }
-        protected void bt_vaciarAlSimec_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
             string cliente = tx_cliente.Text;
-            buscarDatosParaCargarAUpon(cliente);
+            cargarDatosVaciadoUpon2(cliente);
         }
+
+
+
+        //----------------- P2  VACIADO UPON
+        private void cargarDatosVaciadoUpon2 (string cliente)
+        {
+            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = nss.get_allPedidoVWParaVaciado(cliente);
+            lb_cantDatos.Text = Convert.ToString(tuplas.Tables[0].Rows.Count);
+            gv_datosCobros.DataSource = tuplas;
+            gv_datosCobros.DataBind();
+        }
+        
+        protected async void bt_vaciarAlSimec_Click(object sender, EventArgs e)
+        {
+            List<PedidoDTO> pedidoAEnviar = ObtenerPedidosSeleccionados();
+
+            if (pedidoAEnviar.Count == 0)
+            {
+                showalert("No se seleccionaron pedidos.");
+                return;
+            }
+            string token = await ObtenerTokenAsync("adm", "123");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                showalert("Error al obtener el token");
+                return;
+            }
+
+            foreach (var pedido in pedidoAEnviar)
+            {
+                string resultado = await EnviarPedidoAsync(pedido, token);
+                anularPedido();
+                showalert($"Vaciado completado.");
+            }
+        }
+
+        private List<PedidoDTO> ObtenerPedidosSeleccionados()
+        {
+            List<PedidoDTO> pedidos = new List<PedidoDTO>();
+            foreach (GridViewRow row in gv_datosCobros.Rows)
+            {
+                CheckBox chkSeleccionar = (CheckBox)row.FindControl("chkAll");
+                if (chkSeleccionar != null && chkSeleccionar.Checked)
+                {
+                    PedidoDTO pedido = CrearPedidoDesdeFila(row);
+
+                    if(pedido != null)
+                    {
+                        pedidos.Add(pedido);
+                    }
+                }
+            }
+            return pedidos;
+        }
+
+        private PedidoDTO CrearPedidoDesdeFila(GridViewRow row)
+        {
+            try
+            {
+                int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
+                string fecha = "2024-11-30T00:00:00";
+                string referencia = "Prueba referencia pedido 18/12";
+                int codigoCliente = Convert.ToInt32(row.Cells[5].Text);
+                decimal importeProductos = Convert.ToDecimal(row.Cells[7].Text);
+                decimal importeTotal = Convert.ToDecimal(row.Cells[7].Text);
+                string glosa = "Glosa pedido prueba 18/12";
+                List<ItemPedidoDTO> detalles = ObtenerDetalleProducto(codSolicitud);
+                string usuario = "adm";
+
+                return new PedidoDTO
+                {
+                    NumeroPedido = 0,
+                    Fecha = fecha,
+                    Referencia = referencia,
+                    CodigoCliente = codigoCliente,
+                    ImporteProductos = importeProductos,
+                    ImporteDescuentos = 0,
+                    ImporteTotal = importeTotal,
+                    Glosa = glosa,
+                    DetalleProductos = detalles,
+                    Usuario = usuario
+                };               
+            } catch (Exception ex)
+            {
+                showalert($"Error al crear pedido: {ex.Message}");
+                return null;
+            }
+        }
+        private async Task<string> EnviarPedidoAsync(PedidoDTO pedido, string token)
+        {
+            try
+            {
+                NA_APIpedido negocio = new NA_APIpedido();
+                return await negocio.PostPedidoAsync(pedido, token);
+            } catch(Exception ex)
+            {
+                Debug.WriteLine($"Error al enviar pedido: {ex.Message}");
+                return string.Empty;
+            }
+        }
+        private List<ItemPedidoDTO> ObtenerDetalleProducto(int codsolicitud)
+        {
+            List<ItemPedidoDTO> detalles = new List<ItemPedidoDTO>();
+
+            try
+            {
+                NCorpal_SolicitudEntregaProducto negocio = new NCorpal_SolicitudEntregaProducto();
+                DataSet dsDetalles = negocio.get_ObtenerDetalleProductoAsync(codsolicitud);
+
+                if (dsDetalles != null && dsDetalles.Tables.Count > 0)
+                {
+                    foreach(DataRow row in dsDetalles.Tables[0].Rows)
+                    {
+                        ItemPedidoDTO item = MapItemPedido(row);
+                        detalles.Add(item);
+                    }
+                }
+                else
+                {
+                    showalert($"No se encontraron detalles para el producto.");
+                }
+            } catch (Exception ex)
+            {
+                showalert($"Error al obtener detalles del producto: {ex.Message}");
+            }
+
+            return detalles;
+        }
+        private ItemPedidoDTO MapItemPedido(DataRow row)
+        {
+            try
+            {
+                return new ItemPedidoDTO
+                {
+                    CodigoProducto = row["CodigoProducto"].ToString(),
+                    Cantidad = Convert.ToDecimal(row["Cantidad"]),
+                    CodigoUnidadMedida = Convert.ToInt32(row["CodigoUnidadMedida"]),
+                    PrecioUnitario = Convert.ToDecimal(row["PrecioUnitario"]),
+                    ImporteDescuento = 0,
+                    ImporteTotal = Convert.ToDecimal(row["ImporteTotal"])
+                };
+
+            } catch (Exception ex)
+            {
+                Debug.WriteLine($"Erro al mapear el item: {ex.Message}");
+                return null;
+            }
+        }
+        //------------  
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            try
+            {
+                NA_APIpedido negocio = new NA_APIpedido();
+                return await negocio.GetTokenAsync(usuario, password);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al obtener el token: {ex.Message}");
+                return string.Empty;
+            }
+        }
+        private void showalert(string mensaje)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+        }
+
     }
 }
     

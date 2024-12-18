@@ -9,6 +9,7 @@ using Clases.ApiRest;
 using Newtonsoft.Json;
 using System.Text;
 using jycboliviaASP.net.Presentacion;
+using System.Diagnostics;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -95,13 +96,12 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
-//-------------------------------------     GET - PEDIDO
+        //-------------------------------------     GET - PEDIDO
         public class ApiResponsePedido
         {
             public bool EsValido { get; set; }
             public List<pedidoDTO2> Resultado { get; set; }
         }
-
         public async Task<List<pedidoDTO2>> ObtenerPedidoAsync(string usuario, string password, string criterio)
         {
             try
@@ -145,7 +145,6 @@ namespace jycboliviaASP.net.Negocio
                 return new List<pedidoDTO2>();
             }
         }
-
         public class pedidoDTO2
         {
             public int NumeroPedido { get; set; }
@@ -159,25 +158,36 @@ namespace jycboliviaASP.net.Negocio
         //-------------------------------------     POST - PEDIDO
         public class ApiResponsePostPed
         {
+            public bool EsVliado {  get; set; }
+            public List<string> Mensajes {  get; set; }
             public int Resultado { get; set; }
         }
         public async Task<string> PostPedidoAsync(PedidoDTO pedido, string token)
         {
-          var json = JsonConvert.SerializeObject(pedido);
-          var content = new StringContent(json, Encoding.UTF8, "application/json");
-          httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-          
-          var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/pedidos", content);
-            response.EnsureSuccessStatusCode();
-          
-            var result = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(result);
+            try
+            {
+                var json = JsonConvert.SerializeObject(pedido);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var apiresponse = JsonConvert.DeserializeObject<ApiResponsePostPed>(result);
-            return apiresponse.Resultado.ToString();
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/pedidos", content);
 
+                if(!response.IsSuccessStatusCode)
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
+                    return $"Error: {response.StatusCode} - {errorResponse}";
+                }
 
-          
+                var result = await response.Content.ReadAsStringAsync();
+                var apiResponse = JsonConvert.DeserializeObject<ApiResponsePostPed>(result);
+                return apiResponse.Resultado.ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error general: {ex.Message}");
+                return $"Error general: {ex.Message}";
+            }
         }
         public class ItemPedidoDTO
         {
@@ -188,18 +198,17 @@ namespace jycboliviaASP.net.Negocio
           public decimal PrecioUnitario { get; set; }
           public decimal ImporteDescuento { get; set; }
           public decimal ImporteTotal { get; set; }
-        }
-        
+        }        
         public class PedidoDTO
         {
           public int NumeroPedido { get; set; }
-          public DateTime Fecha { get; set; }
-          public string Referencia { get; set; }
+          public string Fecha { get; set; } 
+          public string Referencia { get; set; } //op
           public int CodigoCliente { get; set; }
-          public decimal ImporteProductos { get; set; }
+          public decimal ImporteProductos { get; set; } 
           public decimal ImporteDescuentos { get; set; }
           public decimal ImporteTotal { get; set; }
-          public string Glosa { get; set; }
+          public string Glosa { get; set; } //op
           public List<ItemPedidoDTO> DetalleProductos { get; set; }
           public string Usuario { get; set; }
         }

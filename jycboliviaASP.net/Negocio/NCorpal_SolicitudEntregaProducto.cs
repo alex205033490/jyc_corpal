@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using jycboliviaASP.net.Datos;
 using System.Data;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -176,7 +178,15 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.get_allPedidosParaVaciarUpon(cliente);
         }
-
+        // P2
+        internal DataSet get_ObtenerDetalleProductoAsync(int codsolicitud)
+        {
+            return dsp.get_ObtenerDetalleProductoAsync(codsolicitud);
+        }
+        internal DataSet get_allPedidoVWParaVaciado (string cliente)
+        {
+            return dsp.get_allPedidosVWParaVaciado(cliente);
+        }        
         internal bool anularPedidoVaciadoUpon(int codigoPedido, bool bandera)
         {
             return dsp.anularPedidoVaciadoUpon(codigoPedido, bandera);

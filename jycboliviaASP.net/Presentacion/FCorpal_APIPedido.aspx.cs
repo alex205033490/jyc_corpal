@@ -106,7 +106,7 @@ namespace jycboliviaASP.net.Presentacion
             var pedido = new PedidoDTO
             {
                 NumeroPedido = 0,
-                Fecha = DateTime.Now,
+                Fecha = "2024-11-30T00:00:00",
                 Referencia = txt_Referencia.Text,
                 CodigoCliente = int.Parse(txt_codCliente.Text),
                 ImporteProductos = 0,

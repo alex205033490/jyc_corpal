@@ -1,8 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_VaciadoUponPedido.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_VaciadoUponPedido" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_VaciadoUponPedido.aspx.cs" async="true" Inherits="jycboliviaASP.net.Presentacion.FCorpal_VaciadoUponPedido" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
- <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" type="text/css" />
  <style type="text/css">
      .CompletionList
      {
@@ -34,13 +33,40 @@
          background-repeat: repeat-x;
          outline: 0;*/            
          } 
-     
-     
-     
+    
      .style1
      {
          width: 20px;
      }
+     .Centrar
+    {        
+        margin: 0 auto;            
+        width:950px;
+        }
+
+    .titulo
+    {        
+        height:40px;    
+        margin-top: 20px;
+        }
+    
+     .sc1
+     { 
+       
+       float: left;   
+       height: 120px;  
+       width: 940px;
+     
+         }   
+     
+      .sc2
+     { 
+         
+       float: left;   
+       height: 300px;  
+       width: 840px;
+       overflow:auto;
+         } 
  </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -50,8 +76,8 @@
     <div class="card-body">
         <div class="list-group list-group-flush">
             <div class="list-group-item">
-                <div class="row">                    
-                        <div class="col-md-9">
+                <div class="row mb-2">                    
+                        <div class="col-9 col-sm-8 col-md-8">
                             <asp:Label ID="Label3" for="tx_cliente" runat="server" Text="Cliente:" Font-Size="Small"></asp:Label>            
                             <asp:TextBox ID="tx_cliente"  CssClass="form-control" runat="server" Font-Size="Small"></asp:TextBox>
                             <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server" 
@@ -65,19 +91,19 @@
                                 >
                             </asp:AutoCompleteExtender>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-3 col-sm-3 col-md-3">
                             <br />
                             <asp:Button ID="bt_buscar" CssClass="btn btn-info" runat="server" Text="Buscar" OnClick="bt_buscar_Click" />
                         </div>
                     </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-4 col-sm-4 col-md-3">
                     <asp:Button ID="bt_anularPago" CssClass="btn btn-danger" runat="server" onclick="bt_anularPago_Click"  Text="Anular" />
                         </div>
-                    <div class="col-md-3">
+                    <div class="col-4 col-sm-4 col-md-3">
                     <asp:Button ID="bt_vaciarAlUpon" CssClass="btn btn-success" runat="server" onclick="bt_vaciarAlSimec_Click" Text="Vaciar al Upon" /> 
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-4 col-sm-4 col-md-3">
                     <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" onclick="Button1_Click" Text="Excel" /> 
                     </div>                    
                 </div>
@@ -85,33 +111,39 @@
             </div>
           </div>
      </div>            
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="sc2">
-                            <asp:GridView ID="gv_datosCobros" runat="server" BackColor="White"                                 
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-                                Font-Size="Small" ForeColor="Black" GridLines="Vertical">
+            <div class="card-body list-group-item col-11 col-sm-11 col-md-8">
+                <div class="row col-md-12">
+                        <div class="sc2 col-md-1">
+                            <asp:GridView ID="gv_datosCobros" runat="server" BackColor="White" 
+                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="2px" CellPadding="6"
+                                Font-Size="Small" ForeColor="black" GridLines="Vertical" AutoGenerateColumns="false">
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                 <FooterStyle BackColor="#CCCCCC" />
-                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <HeaderStyle BackColor="green" Font-Bold="true" ForeColor="white" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="right" />
                                 <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
                                 <SortedAscendingHeaderStyle BackColor="#808080" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                                 <Columns>
-                                <asp:TemplateField HeaderText="Anular">
+                                <asp:TemplateField HeaderText="Seleccionar">
                                     <ItemTemplate>
                                            <asp:CheckBox ID="chkAll" runat="server"  />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                    <asp:BoundField DataField="codigo" HeaderText ="Codigo Solicitud" SortExpression="codigo"/>
+                                    <asp:BoundField DataField="nroboleta" HeaderText ="Nro Boleta" SortExpression="nroboleta"/>
+                                    <asp:BoundField DataField="fecha_entrega" HeaderText ="Fecha Entrega" SortExpression="fecha_entrega"/>
+                                    <asp:BoundField DataField="horaentrega" HeaderText ="Hora Entrega" SortExpression="horaentrega"/>
+                                    <asp:BoundField DataField="CodClienteUpon" HeaderText ="Codigo Cliente" SortExpression="CodClienteUpon"/> 
+                                    <asp:BoundField DataField="Cliente" HeaderText ="Cliente" SortExpression="Cliente"/>
+                                    <asp:BoundField DataField="ImporteProductos" HeaderText ="Importe Total" SortExpression="ImporteProductos"/>
+                                    
                                 </Columns>
                             </asp:GridView>
                             </div>
                     </div>
-                </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
