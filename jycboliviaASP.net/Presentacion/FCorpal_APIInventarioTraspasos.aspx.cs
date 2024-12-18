@@ -20,13 +20,24 @@ namespace jycboliviaASP.net.Presentacion
         //----------------------------------        GET - INVENTARIO TRASPASO
         protected async void btn_GetinvTraspaso_Click(object sender, EventArgs e)
         {
-            string criterio = TextBox1.Text.Trim();
-            List<InvTraspasoDTO> traspasos = await ObtenerTraspasosAsync(criterio);
+            try
+            {
+                string criterio = TextBox1.Text.Trim();
+                List<InvTraspasoDTO> traspasos = await ObtenerTraspasosAsync(criterio);
+                actualizarVwTraspaso(traspasos);
 
-            actualizarVwTraspaso(traspasos);
+            }catch(Exception ex)
+            {
+                showAlert("Ocurrió un error al realizar la búsqueda. Intente nuevamente más tarde.");
+                LogError(ex);
+            }
+
         }
         private void actualizarVwTraspaso(List<InvTraspasoDTO> traspasos)
         {
+            gv_invTraspaso.DataSource = null;
+            gv_invTraspaso.DataBind();
+
             if (traspasos != null && traspasos.Count > 0)
             {
                 gv_invTraspaso.DataSource = traspasos;
@@ -41,25 +52,47 @@ namespace jycboliviaASP.net.Presentacion
         }
         private async Task<List<InvTraspasoDTO>> ObtenerTraspasosAsync(string criterio)
         {
-            NA_APIinventario negocio = new NA_APIinventario();
-            return await negocio.ObtenerTraspasoAsync("adm", "123", criterio);
+            try
+            {
+                NA_APIinventario negocio = new NA_APIinventario();
+                var result = await negocio.ObtenerTraspasoAsync("adm", "123", criterio);
+
+                if (result == null)
+                {
+                    throw new Exception("La llamada a la API no devolvió resultados.");
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                throw;
+            }
         }
 
 
         //------------------------------------      GET - INVENTARIO TRASPASO DETALLE
         protected async void btn_GetinvTraspasoDet_Click(object sender, EventArgs e)
         {
-            string numTransaccion = TextBox2.Text.Trim();
-
-            if (!IsValidTransactionnumber(numTransaccion))
+            try
             {
-                showAlert("Por favor ingrese un numero de transacción válido.");
-                LimpiarGvDet();
-                return;
-            }
-            await CargarDetallesTraspasosDet(numTransaccion);
-        }
+                string numTransaccion = TextBox2.Text.Trim();
 
+                if (!IsValidTransactionnumber(numTransaccion))
+                {
+                    showAlert("Por favor ingrese un número de transacción válido.");
+                    LimpiarGvDet();
+                    return;
+                }
+                await CargarDetallesTraspasosDet(numTransaccion);
+
+            } catch (Exception ex)
+            {
+                showAlert($"Ocurrio un error: {ex.Message}");
+                LimpiarGvDet();
+            }
+
+        }
         private bool IsValidTransactionnumber(string numTransaccion)
         {
             return !string.IsNullOrEmpty(numTransaccion);
@@ -86,23 +119,29 @@ namespace jycboliviaASP.net.Presentacion
                 LimpiarGvDet();
             }
         }
-
         private void CargarGvDet(InventarioTraspasoDTO traspaso)
         {
-            var invTras = new List<InventarioTraspasoDTO> { traspaso };
-            gv_invTraspasoDet.DataSource = invTras;
-            gv_invTraspasoDet.DataBind();
+            try
+            {
+                var invTras = new List<InventarioTraspasoDTO> {traspaso};
+                gv_invTraspasoDet.DataSource = invTras;
+                gv_invTraspasoDet.DataBind();
 
-            if(traspaso.DetalleProductos != null && traspaso.DetalleProductos.Count > 0)
+                if (traspaso.DetalleProductos != null && traspaso.DetalleProductos.Count > 0)
+                {
+                    gv_invTraspasoDet2.DataSource = traspaso.DetalleProductos;
+                    gv_invTraspasoDet2.DataBind();
+                }
+                else
+                {
+                    gv_invTraspasoDet2.DataSource = null;
+                    gv_invTraspasoDet2.DataBind();
+                }
+            } catch (Exception ex)
             {
-                gv_invTraspasoDet2.DataSource = traspaso.DetalleProductos;
-                gv_invTraspasoDet2.DataBind();
+                showAlert($"Error al cargar los datos en el Grid :{ex.Message}");
             }
-            else
-            {
-                gv_invTraspasoDet2.DataSource = null;
-                gv_invTraspasoDet2.DataBind();
-            }
+            
         }
         private void LimpiarGvDet()
         {
@@ -117,6 +156,10 @@ namespace jycboliviaASP.net.Presentacion
         private void showAlert(string mensaje)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+        }
+        private void LogError(Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error: {ex.Message} \n {ex.StackTrace}");
         }
     }
 }
