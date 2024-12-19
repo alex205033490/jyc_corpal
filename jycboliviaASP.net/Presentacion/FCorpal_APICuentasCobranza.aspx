@@ -54,7 +54,7 @@
                     <!------------------------          API GET CUENTAS COBRANZAS         ------------------------------>
                     <div class="container-GETCCobranzas p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h5 class="text_tittle p-3">CONSULTA COBRANZA</h5>
+                            <h5 class="text_tittle p-3">CONSULTA COBRANZA (F)</h5>
                         </div>
                         <div class="form_busqueda row mb-3">
                             <div class="col-md-4">
@@ -88,7 +88,7 @@
                     
                     <div class="container-POSTCCobranza p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h5 class="text_tittle p-3"> FORMULARIO REGISTRO COBRANZA</h5>
+                            <h5 class="text_tittle p-3"> FORMULARIO REGISTRO COBRANZA (F)</h5>
                         </div>
 
                         <div class="container-formulario container">

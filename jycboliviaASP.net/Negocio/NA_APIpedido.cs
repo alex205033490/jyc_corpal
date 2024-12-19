@@ -78,7 +78,7 @@ namespace jycboliviaASP.net.Negocio
                 response.EnsureSuccessStatusCode();
 
                 var SearchResponseBody = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<dynamic>(SearchResponseBody);
+                var apiResponse = JsonConvert.DeserializeObject<ApiResponsePedCrit>(SearchResponseBody);
 
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
@@ -88,11 +88,11 @@ namespace jycboliviaASP.net.Negocio
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Error al obtener registros con el valor proporcionado.");
+                throw new ApplicationException("Error al obtener registros con el valor proporcionado.", ex);
             }
         }
 
-        //-------------------------------------     GET - PEDIDO
+        //-------------------------------------     GET - PEDIDO C/S CRITERIO
         public class ApiResponsePedido
         {
             public bool EsValido { get; set; }
@@ -104,7 +104,7 @@ namespace jycboliviaASP.net.Negocio
             //Obtener token de authenticacion
             {
                 string token = await GetTokenAsync(usuario, password);
-                string url = "http://192.168.11.62/ServcioUponApi/api/v1/pedidos";
+                string url = "http://192.168.11.62/ServcioUponApi/api/v1/pedidos/{usuario}";
                 if (!string.IsNullOrEmpty(criterio))
                 {
                     url += $"?criterio={Uri.EscapeDataString(criterio)}";

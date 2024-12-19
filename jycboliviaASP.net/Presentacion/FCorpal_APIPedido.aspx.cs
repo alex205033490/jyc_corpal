@@ -34,9 +34,7 @@ namespace jycboliviaASP.net.Presentacion
             }
 
             await BuscarPedidoPorCriterioAsync(numPedido);
-
         }
-       
         private async Task BuscarPedidoPorCriterioAsync(string numPedido)
         {
             try
@@ -55,23 +53,18 @@ namespace jycboliviaASP.net.Presentacion
                 }
             } catch (Exception ex)
             {
-                showAlert($"Error al obtener el pedido: {ex.Message}");
+                showAlert($"No se encontro registros con el codigo: {numPedido}. {ex.Message}");
                 LimpiarGridViews();
             }
         }
         private void ActualizarGridViews(PedidoDTO pedidos)
         {
-            gv_pedidoCriterio.DataSource = new List<PedidoDTO> { pedidos};
+            gv_pedidoCriterio.DataSource = new List<PedidoDTO> { pedidos };
             gv_pedidoCriterio.DataBind();
 
-            if (pedidos.DetalleProductos != null && pedidos.DetalleProductos.Count >0)
-            {
-                gv_detalleProd.DataSource=pedidos.DetalleProductos;
-            }
-            else
-            {
-                gv_detalleProd.DataSource = null;
-            }
+            gv_detalleProd.DataSource = pedidos.DetalleProductos != null && pedidos.DetalleProductos.Count > 0
+                ? pedidos.DetalleProductos
+                : null;
             gv_detalleProd.DataBind();
         }
         private void LimpiarGridViews()
@@ -80,6 +73,10 @@ namespace jycboliviaASP.net.Presentacion
             gv_detalleProd.DataSource = null;
             gv_pedidoCriterio.DataBind();
             gv_detalleProd.DataBind();
+        }
+        private bool IsValidPedido(string numPedido)
+        {
+            return !string.IsNullOrEmpty(numPedido);
         }
 
         //--------------------------- GET - PEDIDO
@@ -98,15 +95,11 @@ namespace jycboliviaASP.net.Presentacion
                 LimpiarGridView();
             }
         }
-        private bool IsValidPedido(string numPedido)
-        {
-            return !string.IsNullOrEmpty(numPedido);
-        }
         private async Task<List<pedidoDTO2>> obtenerPedidoAsync(string numPedido)
         {
-            NA_APIpedido negocio = new NA_APIpedido();
             try
             {
+                NA_APIpedido negocio = new NA_APIpedido();
                 return await negocio.ObtenerPedidoAsync("adm", "123", numPedido);
             }
             catch (Exception ex)
@@ -126,8 +119,13 @@ namespace jycboliviaASP.net.Presentacion
             {
                 gv_pedido.DataSource = new List<pedidoDTO2>();
                 gv_pedido.DataBind();
-                showAlert("No se encontraron registros con el código proporcionado.");
+                showAlert($"No se encontraron registros con el código: {pedido}.");
             }
+        }
+        private void LimpiarGridView()
+        {
+            gv_pedido.DataSource = new List<pedidoDTO2>();
+            gv_pedido.DataBind();
         }
         //--------------------------- POST PEDIDO
         protected async void btn_PostPedido_Click(object sender, EventArgs e)
@@ -217,11 +215,6 @@ namespace jycboliviaASP.net.Presentacion
 
         //--------------------------
 
-        private void LimpiarGridView()
-        {
-            gv_pedido.DataSource = new List<pedidoDTO2>();
-            gv_pedido.DataBind();
-        }
         private void showAlert(string message)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);

@@ -122,7 +122,7 @@
 
                             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                 <label class="form-label" for="TextBox1">Numero de Pedido:</label>
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de pedido"></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de pedido" AutoComplete="off"></asp:TextBox>
                             </div>
 
                             <div class="col-4 col-sm-5 col-md-3 col-lg-3 d-flex align-items-end">
@@ -132,7 +132,7 @@
                         </div>
                         <!--  container gv1  -->
                         
-                                <div class="container_gv1 col-sm-12 col-md-12 col-lg-12 mb-2">
+                                <div class="container_gv4 col-sm-12 col-md-12 col-lg-12 mb-2">
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                         <Columns>
                                             <asp:BoundField DataField="NumeroPedido" HeaderText="Numero Pedido" SortExpression="nPed" />
@@ -198,7 +198,7 @@
                     <div class="container_input row mb-4">
                     <div class=" col-7 col-sm-6 col-md-5 col-lg-4 mb-2"> 
                         <label class="form-label" for="TextBox2">Numero de Pedido:</label>
-                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío."></asp:TextBox>
+                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío." AutoComplete="off"></asp:TextBox>
                     </div>
 
                     <div class="container_btn col-4 col-sm-3 col-md-3 col-lg-3 d-flex align-items-end">

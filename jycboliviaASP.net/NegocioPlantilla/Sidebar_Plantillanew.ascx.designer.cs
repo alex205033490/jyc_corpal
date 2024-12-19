@@ -366,15 +366,6 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_CargaExcelVentasUpon;
 
         /// <summary>
-        /// Control mn_prueba.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_prueba;
-
-        /// <summary>
         /// Control mn_apiclientes.
         /// </summary>
         /// <remarks>
