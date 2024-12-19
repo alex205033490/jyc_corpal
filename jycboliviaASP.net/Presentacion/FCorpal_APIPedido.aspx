@@ -14,7 +14,7 @@
 
                     <!------------------------          API POST PEDIDO           ------------------------------>
 
-
+                    <!--
                 <div class="container-POSTPedido p-4 rounded">
                     <div class="container_tittle rounded">
                         <h5 class="text_tittle p-3">Formulario Solicitud De Pedido</h5>
@@ -26,6 +26,7 @@
 
                     <div class="row mb-3">
                         <!-- La clase col cambia dependiendo del tamaño de pantalla -->
+                        <!--
                         <div class="col-12 col-sm-6 col-md-3">
                             <label class="form-label">Referencia:</label>
                             <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
@@ -45,6 +46,7 @@
                     </div>
 
                     <!--  Detalle Productos  -->
+                    <!--
                     <div class="form_detalleProducto  col-md-8">
                         <h5 runat="server" > Detalle Productos</h5>
                         <div class="table-detProducto">
@@ -109,7 +111,7 @@
 
 
 <!------------------------          API GET PEDIDO CON CRITERIO DETALLE (numero pedido)          ------------------------------>
-                    <!--
+                    
                     <div class="container-GETPedidoDet p-4 rounded col-md-12 col-lg-12">
                         <div class="container_tittle rounded">
                             <h5 class="text_tittle p-3">Vista Detalles del Pedido</h5>
@@ -129,7 +131,7 @@
 
                         </div>
                         <!--  container gv1  -->
-                        <!--
+                        
                                 <div class="container_gv1 col-sm-12 col-md-12 col-lg-12 mb-2">
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                         <Columns>
@@ -155,7 +157,7 @@
                                     </asp:GridView>
                                 </div>
                         <!--  container gv2  -->
-                    <!--
+                    
                                 <div class="container_gv2 col-sm-12 col-md-10 col-lg-12">
                                     <asp:GridView ID="gv_detalleProd" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
@@ -187,7 +189,7 @@
 
 
 <!------------------------          API GET PEDIDO C/S CRITERIO          ------------------------------>
-               <!--
+               
                 <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
                     <div class="container_tittle rounded">
                         <h5 class="text_tittle2 p-3">Vista de Pedidos</h5>
@@ -228,7 +230,7 @@
                             </asp:GridView>
                         </div>
                     </div>
-                  -->
+                  
                     <br>
 
 
