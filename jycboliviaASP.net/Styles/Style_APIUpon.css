@@ -433,3 +433,28 @@ input.inputText, input.inputNumber {
     font-weight:normal;
     color: white;
 }
+
+/*  TXT AUTOCOMPLETE    */
+
+/* Estilo para la lista de sugerencias */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0;
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListHighlightedItem {
+    background-color: Green;
+    color: White;
+}

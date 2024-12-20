@@ -28,18 +28,19 @@ namespace jycboliviaASP.net.Presentacion
             if(!IsPostBack)
             {
                 string token = await ObtenerTokenAsync("adm", "123");
-                var productos = await ObtenerListCodProd(token);
+                var productosNom = await ObtenerListNomProd(token);
+                var productosCod = await ObtenerListCodProd(token);
                 var proveedor = await ObtenerListCodProveedor(token);
 
                 // dd 1
-                ddListCodProductos.DataSource = productos;
+                ddListCodProductos.DataSource = productosCod;
                 ddListCodProductos.DataTextField = "CodigoProducto";
                 ddListCodProductos.DataValueField = "CodigoProducto";
                 ddListCodProductos.DataBind();
                 ddListCodProductos.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un codigo", ""));
-
+                
                 // dd 2
-                ddListCodProductos2.DataSource = productos;
+                ddListCodProductos2.DataSource = productosNom;
                 ddListCodProductos2.DataTextField = "Producto";
                 ddListCodProductos2.DataValueField = "CodigoProducto";
                 ddListCodProductos2.DataBind();
@@ -110,12 +111,27 @@ namespace jycboliviaASP.net.Presentacion
 
 ////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
 
-        //-- obtener lista de productos por codigo
+        //-- Mostrar Lista de Productos Nombre Asc
+        private async Task<List<ListProductosDTO>> ObtenerListNomProd(string token)
+        {
+            try
+            {
+                var productos = await _na_apiproductos.GET_ListProductosAsync(token);
+                return productos.OrderBy(p => p.Producto).ToList();
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error al obtener los productos: {ex.Message}");
+                return null;
+            }
+        }
+        //-- Mostrar Lista de Productos Codigo Asc
         private async Task<List<ListProductosDTO>> ObtenerListCodProd(string token)
         {
             try
             {
-                return await _na_apiproductos.GET_ListProductosAsync(token);
+                var productos = await _na_apiproductos.GET_ListProductosAsync(token);
+                return productos.OrderBy(p => p.CodigoProducto).ToList();
             }
             catch (Exception ex)
             {
@@ -190,8 +206,6 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-
-
         /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
@@ -262,7 +276,6 @@ namespace jycboliviaASP.net.Presentacion
                 ShowAlert("Por favor, ingrese un codigo proveedor válido.");
                 return;
             }
-
             try
             {
                 string usuario = "adm";

@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_APIProductos.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIProductos" Async="true" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
 
@@ -77,10 +76,8 @@
                             <div class="mb-3 row col-lg-10">
                                 <div class="col-sm-5 col-md-4 col-lg-4">
                                     <label class="form-label" for="txt_codProducto">Código del Producto:</label>
-                                    <asp:DropDownList ID="ddListCodProductos" runat="server" CssClass="form-select">
-
+                                    <asp:DropDownList ID="ddListCodProductos" runat="server" CssClass="form-select">                                       
                                     </asp:DropDownList>
-                                    
                                 </div>
 
                                 <div class="col-sm-4 col-md-3 col-lg-3 d-flex align-items-end">
@@ -202,7 +199,7 @@
                                 <asp:AsyncPostBackTrigger controlID="btn_ventProducto" EventName="Click"/>
                             </Triggers>
                       </asp:UpdatePanel>
-                   
+                   </div>
                     <br />
 
                     <!------------------------- GET PRODUCTOS/COMPRAS/BUSCAR ------------------------->

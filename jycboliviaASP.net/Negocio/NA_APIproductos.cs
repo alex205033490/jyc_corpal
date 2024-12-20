@@ -55,6 +55,7 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+
 // ---------------------------------------------    GET BUSCAR PRODUCTO POR CRITERIO
         public class ApiResponseProd
         {
@@ -94,6 +95,7 @@ namespace jycboliviaASP.net.Negocio
                 public decimal CostoUnitario {  get; set; }
                 //public string UrlImagen { get; set; }
         }
+
 
 // ---------------------------------------------    GET BUSCAR PRODUCTO POR CODIGO PRODUCTO
         public class ApiResponseProdCodigo
@@ -159,7 +161,7 @@ namespace jycboliviaASP.net.Negocio
         }
         
         
-        // --------   FILTRADO DE PRODUCTO POR CODIGO
+        // --------   VW CATALOGO PRODUCTOS
         public class APIResponseListProductos
         {
             public bool EsValido { get; set; }
@@ -197,8 +199,7 @@ namespace jycboliviaASP.net.Negocio
             // public string UrlImagen
         }
 
-
-// ---------------------------------------------    GET BUSCAR PRODUCTO/VENTAS POR CRITERIO(producto)
+        // ---------------------------------------------    GET BUSCAR PRODUCTO/VENTAS POR CRITERIO(producto)
         internal async Task<List<productoCriterioGet>> get_ProductoVentasCriterioAsync(string usuario, string password, string criterio)
         {
             try
