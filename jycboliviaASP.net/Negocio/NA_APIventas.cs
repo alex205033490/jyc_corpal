@@ -80,7 +80,7 @@ namespace jycboliviaASP.net.Negocio
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseVentas>(searchResponseBody);
 
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<VentaDTO>
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<VentaDTO>();
             } 
             catch (Exception ex)
             {
