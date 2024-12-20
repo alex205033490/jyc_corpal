@@ -88,7 +88,7 @@
                         <div class="container_input row mb-1">
                             <div class="col-9 col-sm-5 col-md-4 col-lg-4 mb-2">
                                 <label class="form-label" for="TextBox2">Número de transacción:</label>
-                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todo."></asp:TextBox>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío para mostrar todo." AutoComplete="off"></asp:TextBox>
                                 
                             </div>
                             <div class="container_btn col-3 col-sm-2 col-md-2 col-lg-1 d-flex align-items-end">

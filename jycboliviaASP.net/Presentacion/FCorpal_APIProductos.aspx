@@ -147,10 +147,13 @@
 
                     <!------------------------- GET PRODUCTOS/VENTAS/BUSCAR ------------------------->
                     <div class="container-GETProductosVentas p-4 rounded">
+
                         <div class="container_tittle rounded">
                             <h3 class="text_tittle p-3">Reporte Ventas de Productos</h3>
                         </div>
 
+                        <asp:UpdatePanel id="updatePanelVentasProductos" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
                         <asp:Panel ID="panel_vwVentasProductos" runat="server" DefaultButton="btn_ventProducto">
 
 
@@ -165,6 +168,8 @@
 
                             </div>
                         </asp:Panel>
+                        
+
 
                         <div class="container_gv2">
                             <asp:GridView ID="gv_prodVenta" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
@@ -192,8 +197,12 @@
 
                             </asp:GridView>
                         </div>
-
-                    </div>
+                       </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger controlID="btn_ventProducto" EventName="Click"/>
+                            </Triggers>
+                      </asp:UpdatePanel>
+                   
                     <br />
 
                     <!------------------------- GET PRODUCTOS/COMPRAS/BUSCAR ------------------------->
@@ -205,12 +214,12 @@
                         <asp:Panel ID="panel_vwcComprasProductos" runat="server" DefaultButton="btn_buscarCompras">
 
                             <div class="mb-2 row col-lg-12">
-                                <div class="col-sm-5 col-md-4 col-lg-3">
+                                <div class="col-sm-5 col-md-4 col-lg-4">
                                     <label class="form-label" for="txt_codProductoComp">Código del Producto:</label>
                                     <asp:DropDownList ID="ddListCodProductos2" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
 
-                                <div class=" col-sm-5 col-md-4 col-lg-3 mb-1">
+                                <div class=" col-sm-5 col-md-4 col-lg-4 mb-1">
                                     <label class="form-label" for="txt_codProveedorComp">Código del Proveedor:</label>
                                     <asp:DropDownList ID="ddListCodProveedor" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
