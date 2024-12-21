@@ -191,7 +191,7 @@
           <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas API</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APICuentas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza GET/POST</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>API Cuentas/Cobranza</span></a></li>
           </ul>
           </li>
 

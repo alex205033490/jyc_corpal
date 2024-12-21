@@ -13,7 +13,6 @@
                 <div class="col-md-10 panel panel-success class">
 
                     <!------------------------          API POST PEDIDO           ------------------------------>
-
                     <!--
                 <div class="container-POSTPedido p-4 rounded">
                     <div class="container_tittle rounded">
@@ -114,15 +113,15 @@
                     
                     <div class="container-GETPedidoDet p-4 rounded col-md-12 col-lg-12">
                         <div class="container_tittle rounded">
-                            <h5 class="text_tittle p-3">Vista Detalles del Pedido</h5>
+                            <h5 class="text_tittle p-3">Reporte Detallado de Pedidos</h5>
                         </div>
                     
 
                         <div class="container_input row mb-4">
 
                             <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                                <label class="form-label" for="TextBox1">Numero de Pedido:</label>
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un numero de pedido" AutoComplete="off"></asp:TextBox>
+                                <label class="form-label" for="TextBox1">Número de Pedido:</label>
+                                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Ingrese un número de pedido" AutoComplete="off"></asp:TextBox>
                             </div>
 
                             <div class="col-4 col-sm-5 col-md-3 col-lg-3 d-flex align-items-end">
@@ -192,13 +191,13 @@
                
                 <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
                     <div class="container_tittle rounded">
-                        <h5 class="text_tittle2 p-3">Vista de Pedidos</h5>
+                        <h5 class="text_tittle2 p-3">Reporte de Pedidos</h5>
                     </div>
 
                     <div class="container_input row mb-4">
                     <div class=" col-7 col-sm-6 col-md-5 col-lg-4 mb-2"> 
-                        <label class="form-label" for="TextBox2">Numero de Pedido:</label>
-                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un código o deje vacío." AutoComplete="off"></asp:TextBox>
+                        <label class="form-label" for="TextBox2">Número de Pedido:</label>
+                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un número o deje vacío." AutoComplete="off"></asp:TextBox>
                     </div>
 
                     <div class="container_btn col-4 col-sm-3 col-md-3 col-lg-3 d-flex align-items-end">

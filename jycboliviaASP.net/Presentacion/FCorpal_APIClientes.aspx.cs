@@ -369,6 +369,7 @@ namespace jycboliviaASP.net.Presentacion
             if (exito)
             {
                 ShowAlert("Registros Insertados Correctamente");
+                LimpiarGridView();
             }
 
         }
@@ -376,7 +377,8 @@ namespace jycboliviaASP.net.Presentacion
 
         private void ShowAlert(string message)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            string script = $"alert('{message.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
         protected async void btn_buscarCliente_Click(object sender, EventArgs e)
         {

@@ -14,7 +14,7 @@
                     <!------------------------          API GET CUENTAS         ------------------------------>
                     <div class="container-GETCCobranzaDet p-4 rounded col-md-12">
                         <div class="container_tittle rounded">
-                            <h5 class="text_tittle p-3"> VISTA DE CUENTAS </h5>
+                            <h5 class="text_tittle p-3">Consulta De Cuentas</h5>
                         </div>
 
                         <div class="row col-sm-10 col-md-12">

@@ -311,7 +311,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                return await _na_apiproductos.Get_ListProveedorAsync(token);
+                var productos = await _na_apiproductos.Get_ListProveedorAsync(token);
+                return productos.OrderBy(p => p.NombreCompleto).ToList();
             }
             catch(Exception ex)
             {
@@ -325,7 +326,8 @@ namespace jycboliviaASP.net.Presentacion
 //////////////////////////////////////////// Otros
         private void ShowAlert(string message)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            string script = $"alert('{message.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
         private async Task<string> ObtenerTokenAsync(string usuario, string password)
         {

@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_APIProductos.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIProductos" Async="true" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -35,33 +36,40 @@
                             </div>
                         </asp:Panel>
 
-                        <div class="container_gv2">
-                            <asp:GridView ID="gv_prodNombre" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
+                        <asp:UpdatePanel ID="updatePanelGetProdCrit" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv2">
+                                    <asp:GridView ID="gv_prodNombre" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="cod" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                                            <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
+                                            <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" SortExpression="codUniMedida" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
+                                            <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
+                                            <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
+                                            <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="Descuento" />
+                                            <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
+                                        </Columns>
 
-                                <Columns>
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="cod" />
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                                    <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" SortExpression="codUniMedida" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
-                                    <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
-                                    <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="Descuento" />
-                                    <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
-                                </Columns>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
 
-                                <AlternatingRowStyle CssClass="alternating-row" />
-                                <FooterStyle CssClass="footer" />
-                                <HeaderStyle CssClass="header" />
-                                <PagerStyle CssClass="pager" />
-                                <SelectedRowStyle CssClass="selected-row" />
-                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_nomProducto" EventName="Click" />
+                            </Triggers>
 
-                            </asp:GridView>
-                        </div>
+                        </asp:UpdatePanel>
                     </div>
                     <br />
 
@@ -76,7 +84,7 @@
                             <div class="mb-3 row col-lg-10">
                                 <div class="col-sm-5 col-md-4 col-lg-4">
                                     <label class="form-label" for="txt_codProducto">Código del Producto:</label>
-                                    <asp:DropDownList ID="ddListCodProductos" runat="server" CssClass="form-select">                                       
+                                    <asp:DropDownList ID="ddListCodProductos" runat="server" CssClass="form-select">
                                     </asp:DropDownList>
                                 </div>
 
@@ -86,37 +94,43 @@
                             </div>
                         </asp:Panel>
 
+                        <asp:UpdatePanel ID="updatePanelGetProdCod" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv1">
+                                    <asp:GridView ID="gv_prodCod" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="CodProd" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                                            <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descrip" />
+                                            <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnit" />
+                                            <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
+                                            <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="DescPermitido" />
+                                            <asp:BoundField DataField="CodigoMoneda" HeaderText="Código Moneda" SortExpression="CodMoneda" />
+                                            <asp:BoundField DataField="EsFraccionado" HeaderText="EsFraccionado" SortExpression="EsFracc" />
+                                            <asp:BoundField DataField="Categoria" HeaderText="Categoria" SortExpression="Categ" />
+                                            <asp:BoundField DataField="Grupo" HeaderText="Grupo" SortExpression="Grupo" />
+                                            <asp:BoundField DataField="SubGrupo" HeaderText="SubGrupo" SortExpression="SGrupo" />
+                                            <asp:BoundField DataField="Marca" HeaderText="Marca" SortExpression="Marca" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UMedida" />
 
-                        <div class="container_gv1">
-                            <asp:GridView ID="gv_prodCod" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="CodProd" />
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descrip" />
-                                    <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnit" />
-                                    <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="DescPermitido" />
-                                    <asp:BoundField DataField="CodigoMoneda" HeaderText="Código Moneda" SortExpression="CodMoneda" />
-                                    <asp:BoundField DataField="EsFraccionado" HeaderText="EsFraccionado" SortExpression="EsFracc" />
-                                    <asp:BoundField DataField="Categoria" HeaderText="Categoria" SortExpression="Categ" />
-                                    <asp:BoundField DataField="Grupo" HeaderText="Grupo" SortExpression="Grupo" />
-                                    <asp:BoundField DataField="SubGrupo" HeaderText="SubGrupo" SortExpression="SGrupo" />
-                                    <asp:BoundField DataField="Marca" HeaderText="Marca" SortExpression="Marca" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UMedida" />
+                                        </Columns>
 
-                                </Columns>
-
-                                <AlternatingRowStyle CssClass="alternating-row" />
-                                <FooterStyle CssClass="footer" />
-                                <HeaderStyle CssClass="header" />
-                                <PagerStyle CssClass="pager" />
-                                <SelectedRowStyle CssClass="selected-row" />
-                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_BuscarcodProducto" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
 
                         <div class="container_gv5 col-sm-10 col-md-8 col-lg-6">
                             <asp:GridView ID="gv_prodCodDet" runat="server" CssClass="gridview" AutoGenerateColumns="false">
@@ -149,8 +163,7 @@
                             <h3 class="text_tittle p-3">Reporte Ventas de Productos</h3>
                         </div>
 
-                        <asp:UpdatePanel id="updatePanelVentasProductos" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
+
                         <asp:Panel ID="panel_vwVentasProductos" runat="server" DefaultButton="btn_ventProducto">
 
 
@@ -165,41 +178,42 @@
 
                             </div>
                         </asp:Panel>
-                        
 
 
-                        <div class="container_gv2">
-                            <asp:GridView ID="gv_prodVenta" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="cod" />
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                                    <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" SortExpression="codUniMedida" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
-                                    <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
-                                    <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="Descuento" />
-                                    <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
-                                </Columns>
+                        <asp:UpdatePanel ID="updatePanelVentasProductos" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv2">
+                                    <asp:GridView ID="gv_prodVenta" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="cod" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                                            <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
+                                            <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Cod Unidad Medida" SortExpression="codUniMedida" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
+                                            <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
+                                            <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
+                                            <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento Permitido" SortExpression="Descuento" />
+                                            <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
+                                        </Columns>
 
-                                <AlternatingRowStyle CssClass="alternating-row" />
-                                <FooterStyle CssClass="footer" />
-                                <HeaderStyle CssClass="header" />
-                                <PagerStyle CssClass="pager" />
-                                <SelectedRowStyle CssClass="selected-row" />
-                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
 
-                            </asp:GridView>
-                        </div>
-                       </ContentTemplate>
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
                             <Triggers>
-                                <asp:AsyncPostBackTrigger controlID="btn_ventProducto" EventName="Click"/>
+                                <asp:AsyncPostBackTrigger ControlID="btn_ventProducto" EventName="Click" />
                             </Triggers>
-                      </asp:UpdatePanel>
-                   </div>
+                        </asp:UpdatePanel>
+                    </div>
                     <br />
 
                     <!------------------------- GET PRODUCTOS/COMPRAS/BUSCAR ------------------------->
@@ -227,30 +241,37 @@
                             </div>
                         </asp:Panel>
 
-                        <div class="container_gv4">
-                            <asp:GridView ID="gv_prodCompras" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="cod" />
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                                    <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
-                                    <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Código Medida" SortExpression="codUniMedida" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
-                                    <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
-                                    <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
-                                    <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento" SortExpression="Descuento" />
-                                    <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
-                                </Columns>
-                                <AlternatingRowStyle CssClass="alternating-row" />
-                                <FooterStyle CssClass="footer" />
-                                <HeaderStyle CssClass="header" />
-                                <PagerStyle CssClass="pager" />
-                                <SelectedRowStyle CssClass="selected-row" />
-                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                        <asp:UpdatePanel ID="updatePanelGetComprProd" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv4">
+                                    <asp:GridView ID="gv_prodCompras" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Código" SortExpression="cod" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                                            <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock" />
+                                            <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Código Medida" SortExpression="codUniMedida" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="UniMedida" />
+                                            <asp:BoundField DataField="UnidadMedidaAbreviatura" HeaderText="Abreviatura" SortExpression="Abrev" />
+                                            <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio Unitario" SortExpression="PrecUnitario" />
+                                            <asp:BoundField DataField="DescuentosPermitido" HeaderText="Descuento" SortExpression="Descuento" />
+                                            <asp:BoundField DataField="CostoUnitario" HeaderText="Costo Unitario" SortExpression="CosUnitario" />
+                                        </Columns>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_buscarCompras" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                     <br />
 

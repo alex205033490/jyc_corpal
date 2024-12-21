@@ -14,7 +14,7 @@
                     <!---------------- FORMULARIO COMPRAS -------------->
                     <div class="container-POSTCompras p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
-                            <h2 class="text_tittle p-3">Registro de Compras</h2>
+                            <h2 class="text_tittle p-3">Registro de Compras (F)</h2>
                         </div>
                         <div class="form_CompraP1 col-lg-12 row">
 
