@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Net.Http;
 using Newtonsoft.Json;
 using static jycboliviaASP.net.Negocio.NA_APIproductos;
+using System.Web.Services.Description;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -41,7 +42,7 @@ namespace jycboliviaASP.net.Presentacion
                 dd_motMovI.DataTextField = "MotivoContable";
                 dd_motMovI.DataValueField = "CodigoMotivo";
                 dd_motMovI.DataBind();
-                dd_motMovI.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un Motivo", ""));
+                dd_motMovI.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un motivo", ""));
 
                 //
                 List<Productos> productos = ObtenerProductosDesdeSession();
@@ -498,7 +499,8 @@ namespace jycboliviaASP.net.Presentacion
 
         private void showalert(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
         protected void gv_productAgregados_RowCommand(object sender, GridViewCommandEventArgs e)

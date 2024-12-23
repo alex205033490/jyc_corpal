@@ -104,6 +104,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             catch (Exception ex)
             {
+                showAlert($"No se encontro registros con el codigo: {numPedido}. {ex.Message}");
                 throw new Exception("Error al obtener los pedidos de la API", ex);
             }
 
@@ -119,7 +120,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 gv_pedido.DataSource = new List<pedidoDTO2>();
                 gv_pedido.DataBind();
-                showAlert($"No se encontraron registros con el código: {pedido}.");
+                showAlert($"No se encontraron registros con el código proporcionado.");
             }
         }
         private void LimpiarGridView()
@@ -217,7 +218,9 @@ namespace jycboliviaASP.net.Presentacion
 
         private void showAlert(string message)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            string script = $"alert('{message.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+
         }
     }
 }

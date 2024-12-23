@@ -26,26 +26,33 @@
                             </div>
                         </div>
 
-                        <div class="container_gv1">
-                            <asp:GridView ID="gv_invTraspaso" runat="server" CssClass="gridview" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="NumeroTransaccion" HeaderText="Número De Transacción" SortExpression="numTrans" />
-                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
-                                    <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
-                                    <asp:BoundField DataField="Almacen" HeaderText="Almacen" SortExpression="alm" />
-                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
-                                </Columns>
-                                   <AlternatingRowStyle CssClass="alternating-row" />
-                                   <FooterStyle CssClass="footer" />
-                                   <HeaderStyle CssClass="header" />
-                                   <PagerStyle CssClass="pager" />
-                                   <SelectedRowStyle CssClass="selected-row" />
-                                   <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                   <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                   <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                   <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                        <asp:UpdatePanel ID="updatePanelGet_IT" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv1">
+                                    <asp:GridView ID="gv_invTraspaso" runat="server" CssClass="gridview" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="NumeroTransaccion" HeaderText="Número De Transacción" SortExpression="numTrans" />
+                                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
+                                            <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
+                                            <asp:BoundField DataField="Almacen" HeaderText="Almacen" SortExpression="alm" />
+                                            <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
+                                        </Columns>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_GetinvTraspaso" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                     <br />
 
@@ -65,55 +72,62 @@
                             </div>
                         </div>
 
-                        <div class="container_gv4">
-                            <asp:GridView ID="gv_invTraspasoDet" runat="server" CssClass="gridview" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="NumeroTraspasos" HeaderText="Número Traspaso" SortExpression="numTra" />
-                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
-                                    <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
-                                    <asp:BoundField DataField="CodigoAlmacenDestino" HeaderText="Código Almacen Destino" SortExpression="cAlmDest" />
-                                    <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glo" />
-                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
-                                </Columns>
-                                    <AlternatingRowStyle CssClass="alternating-row" />
-                                    <FooterStyle CssClass="footer" />
-                                    <HeaderStyle CssClass="header" />
-                                    <PagerStyle CssClass="pager" />
-                                    <SelectedRowStyle CssClass="selected-row" />
-                                    <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                    <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                    <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                    <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                        <asp:UpdatePanel ID="updatePanelGet_ITDet" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv4">
+                                    <asp:GridView ID="gv_invTraspasoDet" runat="server" CssClass="gridview" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="NumeroTraspasos" HeaderText="Número Traspaso" SortExpression="numTra" />
+                                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
+                                            <asp:BoundField DataField="Referencia" HeaderText="Referencia" SortExpression="ref" />
+                                            <asp:BoundField DataField="CodigoAlmacenDestino" HeaderText="Código Almacen Destino" SortExpression="cAlmDest" />
+                                            <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glo" />
+                                            <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
+                                        </Columns>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
 
-                        <div class="container_gv2">
-                            <asp:GridView ID="gv_invTraspasoDet2" runat="server" CssClass="gridview" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField DataField="Item" HeaderText="Ítem" SortExpression="item" />
-                                    <asp:BoundField DataField="CodigoProducto" HeaderText="Código Producto" SortExpression="codProd" />
-                                    <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="uMed" />
-                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="cant" />
-                                </Columns>
-                                    <AlternatingRowStyle CssClass="alternating-row" />
-                                    <FooterStyle CssClass="footer" />
-                                    <HeaderStyle CssClass="header" />
-                                    <PagerStyle CssClass="pager" />
-                                    <SelectedRowStyle CssClass="selected-row" />
-                                    <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                    <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                    <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                    <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                                <div class="container_gv2">
+                                    <asp:GridView ID="gv_invTraspasoDet2" runat="server" CssClass="gridview" AutoGenerateColumns="false">
+                                        <Columns>
+                                            <asp:BoundField DataField="Item" HeaderText="Ítem" SortExpression="item" />
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Código Producto" SortExpression="codProd" />
+                                            <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="uMed" />
+                                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="cant" />
+                                        </Columns>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_GetinvTraspasoDet" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
                     <br />
 
 
                     <!------------------------          API POST INVENTARIO TRASPASOS            ------------------------------>
                     <div class="panel-body">
-                    <label>Formulario Registro Traspasos en Inventario - INVENTARIO TRASPASOS (F)</label>
-                        <br/>
+                        <label>Formulario Registro Traspasos en Inventario - INVENTARIO TRASPASOS (F)</label>
+                        <br />
                         <!--
                         <asp:TextBox ID="txt_referencia" runat="server" placeholder="Referencia"></asp:TextBox>
                         <asp:TextBox ID="txt_codAlmacenDest" runat="server" placeholder="Codigo Almacen Dest" TextMode="Number"></asp:TextBox>

@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FCorpal_APICuentasCobranza.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APICuentasCobranza" Async="true" MasterPageFile="~/PlantillaNew.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -9,7 +9,7 @@
         <div class="">
             <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
-                    
+
 
                     <!------------------------          API GET CUENTAS         ------------------------------>
                     <div class="container-GETCCobranzaDet p-4 rounded col-md-12">
@@ -19,33 +19,40 @@
 
                         <div class="row col-sm-10 col-md-12">
                             <div class="col-sm-6 col-md-3 col-lg-2 mb-2">
-                                <asp:Button ID="btn_getCuentas" runat="server" Text="Consulta Cuentas" CssClass="btn btn-dark btn-sm" OnClick="btn_getCuentas_Click" />
+                                <asp:Button ID="btn_getCuentas" runat="server" Text="Consultar Cuentas" CssClass="btn btn-dark btn-sm" OnClick="btn_getCuentas_Click" />
                             </div>
 
-                            <div class="container_gv1 col-12 col-xs-12 col-sm-12 col-md-12 col-lg-10">  
-                                <asp:GridView ID="gv_Cuentas" runat="server" AutoGenerateColumns="false" CssClass="gridview">
-                                    <Columns>
-                                        <asp:BoundField DataField="NumeroCuenta" HeaderText="Numero Cuenta" SortExpression="nCuenta" />
-                                        <asp:BoundField DataField="ContactoContacto" HeaderText="Contacto" SortExpression="contac" />
-                                        <asp:BoundField DataField="ImporteTotal" HeaderText="Importe Total" SortExpression="iTotal" />
-                                        <asp:BoundField DataField="ImporteSaldo" HeaderText="Importe Saldo" SortExpression="iSaldo" />
-                                        <asp:BoundField DataField="ImporteVencido" HeaderText="Importe Vencido" SortExpression="iVenc" />
-                                        <asp:BoundField DataField="CodigoMoneda" HeaderText="Codigo Moneda" SortExpression="cMoneda" />
-                                        <asp:BoundField DataField="CodigoModulo" HeaderText="Codigo Modulo" SortExpression="cModulo" />
-                                        <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="Glos" />
-                                        <asp:BoundField DataField="FechaVencimiento" HeaderText="Fecha Vencimiento" SortExpression="fVenc" />
-                                    </Columns>
-                                        <AlternatingRowStyle CssClass="alternating-row" />
-                                        <FooterStyle CssClass="footer" />
-                                        <HeaderStyle CssClass="header" />
-                                        <PagerStyle CssClass="pager" />
-                                        <SelectedRowStyle CssClass="selected-row" />
-                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                                </asp:GridView>
-                            </div>
+                            <asp:UpdatePanel ID="updatePanelGet_IID" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="container_gv1 col-12 col-xs-12 col-sm-12 col-md-12 col-lg-10">
+                                        <asp:GridView ID="gv_Cuentas" runat="server" AutoGenerateColumns="false" CssClass="gridview">
+                                            <Columns>
+                                                <asp:BoundField DataField="NumeroCuenta" HeaderText="Numero Cuenta" SortExpression="nCuenta" />
+                                                <asp:BoundField DataField="ContactoContacto" HeaderText="Contacto" SortExpression="contac" />
+                                                <asp:BoundField DataField="ImporteTotal" HeaderText="Importe Total" SortExpression="iTotal" />
+                                                <asp:BoundField DataField="ImporteSaldo" HeaderText="Importe Saldo" SortExpression="iSaldo" />
+                                                <asp:BoundField DataField="ImporteVencido" HeaderText="Importe Vencido" SortExpression="iVenc" />
+                                                <asp:BoundField DataField="CodigoMoneda" HeaderText="Codigo Moneda" SortExpression="cMoneda" />
+                                                <asp:BoundField DataField="CodigoModulo" HeaderText="Codigo Modulo" SortExpression="cModulo" />
+                                                <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="Glos" />
+                                                <asp:BoundField DataField="FechaVencimiento" HeaderText="Fecha Vencimiento" SortExpression="fVenc" />
+                                            </Columns>
+                                            <AlternatingRowStyle CssClass="alternating-row" />
+                                            <FooterStyle CssClass="footer" />
+                                            <HeaderStyle CssClass="header" />
+                                            <PagerStyle CssClass="pager" />
+                                            <SelectedRowStyle CssClass="selected-row" />
+                                            <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                            <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                            <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                            <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                        </asp:GridView>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btn_getCuentas" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
 
@@ -85,10 +92,10 @@
                     </div>
                     <br />
                     <!------------------------          API POST CUENTAS/COBRANZA            ------------------------------>
-                    
+
                     <div class="container-POSTCCobranza p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h5 class="text_tittle p-3"> FORMULARIO REGISTRO COBRANZA (F)</h5>
+                            <h5 class="text_tittle p-3">FORMULARIO REGISTRO COBRANZA (F)</h5>
                         </div>
 
                         <div class="container-formulario container">
@@ -117,7 +124,7 @@
                             </div>
 
                             <div class="row">
-                                
+
                                 <div class="col-md-3 col-sm-6 mb-2">
                                     <asp:Label runat="server" Text="lblcodigoMoneda">Tipo de moneda:</asp:Label>
                                     <asp:DropDownList ID="dd_codMoneda" runat="server" class="form-select">
@@ -153,11 +160,11 @@
                         <div class="col-md-12 row mb-2">
                             <div class="col-sm-8 col-md-5 mb-2">
                                 <h5>Detalle Cuentas</h5>
-                                
-                                <table id="tblDetalleCuentas" CssClass="col-1 col-md-1" border="1">
+
+                                <table id="tblDetalleCuentas" cssclass="col-1 col-md-1" border="1">
                                     <tr>
-                                        <th style="width:40%;">NumeroCuenta</th>
-                                        <th style="width:40%;">Importe Capital</th>
+                                        <th style="width: 40%;">NumeroCuenta</th>
+                                        <th style="width: 40%;">Importe Capital</th>
                                     </tr>
                                     <tr>
                                         <td>

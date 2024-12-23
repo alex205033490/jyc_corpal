@@ -87,6 +87,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_buscarPedidoCriterio;
 
         /// <summary>
+        /// Control updatePanelGet_PedidoDet.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_PedidoDet;
+
+        /// <summary>
         /// Control gv_pedidoCriterio.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_buscarPedido;
+
+        /// <summary>
+        /// Control updatePanelGet_Pedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_Pedido;
 
         /// <summary>
         /// Control gv_pedido.

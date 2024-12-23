@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FCorpal_APIPedido.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIPedido" Async="true" MasterPageFile="~/PlantillaNew.Master"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FCorpal_APIPedido.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIPedido" Async="true" MasterPageFile="~/PlantillaNew.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
 
                     <div class="row mb-3">
                         <!-- La clase col cambia dependiendo del tamaño de pantalla -->
-                        <!--
+                    <!--
                         <div class="col-12 col-sm-6 col-md-3">
                             <label class="form-label">Referencia:</label>
                             <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
@@ -110,12 +110,12 @@
 
 
 <!------------------------          API GET PEDIDO CON CRITERIO DETALLE (numero pedido)          ------------------------------>
-                    
+
                     <div class="container-GETPedidoDet p-4 rounded col-md-12 col-lg-12">
                         <div class="container_tittle rounded">
                             <h5 class="text_tittle p-3">Reporte Detallado de Pedidos</h5>
                         </div>
-                    
+
 
                         <div class="container_input row mb-4">
 
@@ -130,7 +130,9 @@
 
                         </div>
                         <!--  container gv1  -->
-                        
+
+                        <asp:UpdatePanel ID="updatePanelGet_PedidoDet" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
                                 <div class="container_gv4 col-sm-12 col-md-12 col-lg-12 mb-2">
                                     <asp:GridView ID="gv_pedidoCriterio" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                                         <Columns>
@@ -155,8 +157,8 @@
                                         <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                                     </asp:GridView>
                                 </div>
-                        <!--  container gv2  -->
-                    
+                                <!--  container gv2  -->
+
                                 <div class="container_gv2 col-sm-12 col-md-10 col-lg-12">
                                     <asp:GridView ID="gv_detalleProd" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
@@ -182,61 +184,70 @@
                                         <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                                     </asp:GridView>
                                 </div>
-                            </div>        
-                 
-                        <br/>
-
-
-<!------------------------          API GET PEDIDO C/S CRITERIO          ------------------------------>
-               
-                <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
-                    <div class="container_tittle rounded">
-                        <h5 class="text_tittle2 p-3">Reporte de Pedidos</h5>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_buscarPedidoCriterio" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
 
-                    <div class="container_input row mb-4">
-                    <div class=" col-7 col-sm-6 col-md-5 col-lg-4 mb-2"> 
-                        <label class="form-label" for="TextBox2">Número de Pedido:</label>
-                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un número o deje vacío." AutoComplete="off"></asp:TextBox>
-                    </div>
+                    <br />
 
-                    <div class="container_btn col-4 col-sm-3 col-md-3 col-lg-3 d-flex align-items-end">
-                        <asp:Button ID="btn_buscarPedido" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarPedido_Click" />
-                    </div>
+
+                    <!------------------------          API GET PEDIDO C/S CRITERIO          ------------------------------>
+
+                    <div class="container-GETPedido rounded p-4 col-md-12 col-lg-12">
+                        <div class="container_tittle rounded">
+                            <h5 class="text_tittle2 p-3">Reporte de Pedidos</h5>
+                        </div>
+
+                        <div class="container_input row mb-4">
+                            <div class=" col-7 col-sm-6 col-md-5 col-lg-4 mb-2">
+                                <label class="form-label" for="TextBox2">Número de Pedido:</label>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" placeholder="Ingrese un número o deje vacío." AutoComplete="off"></asp:TextBox>
+                            </div>
+
+                            <div class="container_btn col-4 col-sm-3 col-md-3 col-lg-3 d-flex align-items-end">
+                                <asp:Button ID="btn_buscarPedido" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarPedido_Click" />
+                            </div>
 
                         </div>
-                        <div class="container_gv3">
 
-                            <asp:GridView ID="gv_pedido" runat="server" CssClass="gridview" AutoGenerateColumns="false" >
+                        <asp:UpdatePanel ID="updatePanelGet_Pedido" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="container_gv3">
+                                    <asp:GridView ID="gv_pedido" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
-                                <Columns>
-                                    <asp:BoundField DataField="NumeroPedido" HeaderText="Numero Pedido" SortExpression="nPed" />
-                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
-                                    <asp:BoundField DataField="Cliente" HeaderText="Cliente" SortExpression="cli" />
-                                    <asp:BoundField DataField="CodigoCliente" HeaderText="Codigo Cliente" SortExpression="cCl" />
-                                    <asp:BoundField DataField="ImporteTotal" HeaderText="Importe Total" SortExpression="iTot" />
-                                </Columns>
+                                        <Columns>
+                                            <asp:BoundField DataField="NumeroPedido" HeaderText="Numero Pedido" SortExpression="nPed" />
+                                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
+                                            <asp:BoundField DataField="Cliente" HeaderText="Cliente" SortExpression="cli" />
+                                            <asp:BoundField DataField="CodigoCliente" HeaderText="Codigo Cliente" SortExpression="cCl" />
+                                            <asp:BoundField DataField="ImporteTotal" HeaderText="Importe Total" SortExpression="iTot" />
+                                        </Columns>
 
-                                <AlternatingRowStyle CssClass="alternating-row" />
-                                <FooterStyle CssClass="footer" />
-                                <HeaderStyle CssClass="header" />
-                                <PagerStyle CssClass="pager" />
-                                <SelectedRowStyle CssClass="selected-row" />
-                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
-                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
-                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
-                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
-                            </asp:GridView>
-                        </div>
+                                        <AlternatingRowStyle CssClass="alternating-row" />
+                                        <FooterStyle CssClass="footer" />
+                                        <HeaderStyle CssClass="header" />
+                                        <PagerStyle CssClass="pager" />
+                                        <SelectedRowStyle CssClass="selected-row" />
+                                        <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                        <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                        <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                        <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
+                                    </asp:GridView>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_buscarPedido" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
-                  
+
                     <br>
-
-
-
                 </div>
             </div>
         </div>
     </div>
-        <script src="../js/jsApi.js" type="text/javascript"></script>
+    <script src="../js/jsApi.js" type="text/javascript"></script>
 </asp:Content>

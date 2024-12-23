@@ -155,7 +155,8 @@ namespace jycboliviaASP.net.Presentacion
         // - - - - - - - - - - - - - - - - - - - - - - 
         private void showAlert(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
         private void LogError(Exception ex)
         {

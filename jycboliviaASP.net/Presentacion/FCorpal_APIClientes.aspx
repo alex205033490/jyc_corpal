@@ -184,7 +184,7 @@
                     <br />
                     -->
 
-                    <!-- vaciado cliente 2 -->
+                    <!-- POST VACIADO CLIENTES  UPON - DB -->
                     <div class="container-VaciadoClientes p-4 rounded col-lg-12">
                         <div class="container_tittle rounded">
                             <h3 class="text_tittle p-3">Vaciado de Clientes (Upon a JyC)</h3>
@@ -208,9 +208,9 @@
                                     <asp:GridView ID="GridView2" runat="server" CssClass="gridview table-hover" AutoGenerateColumns="false" DataKeyNames="CodigoContacto">
                                         <Columns>
                                             <asp:BoundField DataField="CodigoContacto" HeaderText="Codigo" SortExpression="ClienteID" />
-                                            <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="Nombre" />
+                                            <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="Nombre" HtmlEncode="false"/>
                                             <asp:BoundField DataField="NumeroDocumentoIdentidad" HeaderText="Número de Identidad" SortExpression="numDocIdentidad" />
-                                            <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
+                                            <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" HtmlEncode="false"/>
                                             <asp:BoundField DataField="Telefono" HeaderText="Teléfono" SortExpression="Teléfono" />
                                         </Columns>
                                         <AlternatingRowStyle CssClass="alternating-row" />
@@ -234,7 +234,6 @@
                         </asp:UpdatePanel>
                     </div>
                     <br />
-
 
 
                 </div>

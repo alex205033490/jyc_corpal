@@ -533,7 +533,8 @@ namespace jycboliviaASP.net.Presentacion
 
         private void showalert(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
         private async Task<string> ObtenerTokenAsync(string usuario, string password)
         {

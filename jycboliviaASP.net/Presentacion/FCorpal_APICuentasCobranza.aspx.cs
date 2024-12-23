@@ -32,7 +32,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 gv_Cuentas.DataSource = new List<CuentaDTO>();
                 gv_Cuentas.DataBind();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert'(No se encontraron registros.');", true);
+                ShowAlert("No se contraron registros con el valor proporcionado.");
             }
         }
 
@@ -45,6 +45,11 @@ namespace jycboliviaASP.net.Presentacion
         protected void btn_PostCobranza_Click(object sender, EventArgs e)
         {
 
+        }
+        private void ShowAlert(string mensaje)
+        {
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
     }
 }

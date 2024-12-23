@@ -33,6 +33,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_GetinvTraspaso;
 
         /// <summary>
+        /// Control updatePanelGet_IT.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_IT;
+
+        /// <summary>
         /// Control gv_invTraspaso.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_GetinvTraspasoDet;
+
+        /// <summary>
+        /// Control updatePanelGet_ITDet.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_ITDet;
 
         /// <summary>
         /// Control gv_invTraspasoDet.
