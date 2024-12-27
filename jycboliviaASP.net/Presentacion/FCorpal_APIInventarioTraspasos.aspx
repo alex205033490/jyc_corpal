@@ -125,28 +125,108 @@
 
 
                     <!------------------------          API POST INVENTARIO TRASPASOS            ------------------------------>
-                    <div class="panel-body">
-                        <label>Formulario Registro Traspasos en Inventario - INVENTARIO TRASPASOS (F)</label>
-                        <br />
-                        <!--
-                        <asp:TextBox ID="txt_referencia" runat="server" placeholder="Referencia"></asp:TextBox>
-                        <asp:TextBox ID="txt_codAlmacenDest" runat="server" placeholder="Codigo Almacen Dest" TextMode="Number"></asp:TextBox>
-                        <asp:TextBox ID="txt_motMovimiento" runat="server" placeholder="Motivo Movimiento"></asp:TextBox>
-                        <asp:TextBox ID="txt_itAnalisis" runat="server" placeholder="Item Analisis" TextMode="Number"></asp:TextBox>
-                        <asp:TextBox ID="txt_glosa" runat="server" placeholder="Glosa"></asp:TextBox><br>
-                        <label>- Detalle Productos -</label>
-                        <br>
-                        <asp:TextBox ID="txt_item" runat="server" placeholder="Item" TextMode="Number"></asp:TextBox>
-                        <asp:TextBox ID="txt_codProducto" runat="server" placeholder="Codigo Producto"></asp:TextBox>
-                        <asp:TextBox ID="txt_unMedida" runat="server" placeholder="Unidad Medida" TextMode="Number"></asp:TextBox>
-                        <asp:TextBox ID="txt_cantidad" runat="server" placeholder="Cantidad" TextMode="Number"></asp:TextBox>
-                        <br>
+                    <div class="container-POSTITraspaso p-4 rounded">
+                        <div class="container_tittle rounded">
+                            <h3 class="text_tittle p-3">Traspaso de Inventario entre Almacenes</h3>
+                        </div>
 
-                        <asp:Button ID="btn_registrarTraspaso" runat="server" Text="Registrar Traspaso" />
-                        <asp:Label ID="lblresult" runat="server" Text="Label"></asp:Label>
-                                -->
+                        <asp:UpdatePanel ID="updatePanelPost_IT" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:Panel runat="server" DefaultButton="btn_registrarIngreso">
+                                    <div class="row mb-1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+     
+                                        <div class="col-md-4">
+                                            <label class="form-label">Referencia:</label>
+                                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>                                         
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Almacén Destino:</label>
+                                            <asp:DropDownList ID="dd_codAlmacenDestino" runat="server" CssClass="custom-dropdown">
+                                            </asp:DropDownList>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <label class="form-label" for="txt_glosa">Glosa:</label>
+                                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off" placeholder="Opcional"></asp:TextBox>                                       
+                                        </div>
+
+                                    </div>
+                                </asp:Panel>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_registrarIngreso" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                        <br />
+
+                        <!-- DETALLE PRODUCTO -->
+
+                        <div class="form_detproducto col-md-12 col-lg-10">
+                            <h3 class="form-label">Detalle Productos</h3>
+
+                            <asp:UpdatePanel ID="updatePanelPost_ITDetProd" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Panel runat="server" DefaultButton="btn_addProd">
+                                        <div class="form_addProducto row mb-3">
+
+
+                                            <div class="input_producto col-6">
+                                                <asp:Label runat="server">Producto:</asp:Label>
+                                                <asp:TextBox ID="txt_producto" runat="server" OnTextChanged="txt_producto_TextChanged" AutoPostBack="true" CssClass="form-control" AutoComplete="off"></asp:TextBox>
+                                            </div>
+
+
+                                            <div class="input_cantidad col-3">
+                                                <asp:Label runat="server">Cantidad:</asp:Label>
+                                                <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertCommaToDot(event);"></asp:TextBox>
+                                            </div>
+                                            <div class="container_btnAddProd col-3 d-flex align-items-end">
+                                                <asp:Button runat="server" ID="btn_addProd" Text="Agregar Producto" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+
+
+                                    <asp:GridView ID="gv_listProdTraspaso" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdTraspaso_SelectedIndexChanged">
+                                        <Columns>
+                                            <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
+                                            <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
+                                            <asp:BoundField DataField="Nombre" HeaderText="Nombre" HtmlEncode="false" />
+                                            <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="Unidad Medida" />
+                                        </Columns>
+                                    </asp:GridView>
+
+
+                                    <div class="container_gvProdAddIT mb-3">
+                                        <asp:GridView ID="gv_productAgregados" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClss="table table-bordered" OnRowCommand="gv_productAgregados_RowCommand">
+                                            <Columns>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="btnEliminarFila" runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument='<%# Eval("CodigoProducto") %>' CssClass="btn btn-danger btn-sm" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
+                                                <asp:BoundField DataField="Nombre" HeaderText="Producto" />
+                                                <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad medida" />
+                                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btn_registrarIngreso" EventName="Click" />
+                                </Triggers>
+
+                            </asp:UpdatePanel>
+
+                            <div>
+                                <asp:Button ID="btn_registrarTraspaso" runat="server" Text="Registrar Traspaso" CssClass="btn btn-success" OnClick="btn_registrarTraspaso_Click" />
+
+                            </div>
+                        </div>
                     </div>
-                    <br>
+
                     <br>
                 </div>
             </div>

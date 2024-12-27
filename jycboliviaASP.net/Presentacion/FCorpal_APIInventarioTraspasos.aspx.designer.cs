@@ -96,40 +96,31 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_invTraspasoDet2;
 
         /// <summary>
-        /// Control txt_referencia.
+        /// Control updatePanelPost_IT.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_referencia;
+        protected global::System.Web.UI.UpdatePanel updatePanelPost_IT;
 
         /// <summary>
-        /// Control txt_codAlmacenDest.
+        /// Control txt_Referencia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codAlmacenDest;
+        protected global::System.Web.UI.WebControls.TextBox txt_Referencia;
 
         /// <summary>
-        /// Control txt_motMovimiento.
+        /// Control dd_codAlmacenDestino.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_motMovimiento;
-
-        /// <summary>
-        /// Control txt_itAnalisis.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_itAnalisis;
+        protected global::System.Web.UI.WebControls.DropDownList dd_codAlmacenDestino;
 
         /// <summary>
         /// Control txt_glosa.
@@ -141,40 +132,58 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_glosa;
 
         /// <summary>
-        /// Control txt_item.
+        /// Control updatePanelPost_ITDetProd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_item;
+        protected global::System.Web.UI.UpdatePanel updatePanelPost_ITDetProd;
 
         /// <summary>
-        /// Control txt_codProducto.
+        /// Control txt_producto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codProducto;
+        protected global::System.Web.UI.WebControls.TextBox txt_producto;
 
         /// <summary>
-        /// Control txt_unMedida.
+        /// Control txt_cantProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_unMedida;
+        protected global::System.Web.UI.WebControls.TextBox txt_cantProducto;
 
         /// <summary>
-        /// Control txt_cantidad.
+        /// Control btn_addProd.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_cantidad;
+        protected global::System.Web.UI.WebControls.Button btn_addProd;
+
+        /// <summary>
+        /// Control gv_listProdTraspaso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_listProdTraspaso;
+
+        /// <summary>
+        /// Control gv_productAgregados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_productAgregados;
 
         /// <summary>
         /// Control btn_registrarTraspaso.
@@ -184,14 +193,5 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_registrarTraspaso;
-
-        /// <summary>
-        /// Control lblresult.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblresult;
     }
 }

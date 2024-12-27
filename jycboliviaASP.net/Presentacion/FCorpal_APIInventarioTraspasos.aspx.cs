@@ -7,17 +7,33 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIinventario;
+using static jycboliviaASP.net.Negocio.NA_APIAlmacen;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
 
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIInventarioTraspasos : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+                var almacen = await ObtenerListCodAlmacen(token);
 
+                dd_codAlmacenDestino.DataSource = almacen;
+                dd_codAlmacenDestino.DataTextField = "Nombre";
+                dd_codAlmacenDestino.DataValueField = "CodigoAlmacen";
+                dd_codAlmacenDestino.DataBind();
+                dd_codAlmacenDestino.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un almacén", ""));
+
+                List<Productos> productos = ObtenerProductosDesdeSession();
+                gv_productAgregados.DataSource = productos;
+                gv_productAgregados.DataBind();
+            }
         }
 
-        //----------------------------------        GET - INVENTARIO TRASPASO
+        //--------------------------------------        GET - INVENTARIO TRASPASO
         protected async void btn_GetinvTraspaso_Click(object sender, EventArgs e)
         {
             try
@@ -26,9 +42,9 @@ namespace jycboliviaASP.net.Presentacion
                 List<InvTraspasoDTO> traspasos = await ObtenerTraspasosAsync(criterio);
                 actualizarVwTraspaso(traspasos);
 
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
-                showAlert("Ocurrió un error al realizar la búsqueda. Intente nuevamente más tarde.");
+                showAlert("Ocurrió un error al realizar la búsqueda. Intente nuevamente más tarde.:");
                 LogError(ex);
             }
 
@@ -71,7 +87,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        //------------------------------------      GET - INVENTARIO TRASPASO DETALLE
+        //-------------------------------------      GET - INVENTARIO TRASPASO DETALLE
         protected async void btn_GetinvTraspasoDet_Click(object sender, EventArgs e)
         {
             try
@@ -123,7 +139,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                var invTras = new List<InventarioTraspasoDTO> {traspaso};
+                var invTras = new List<InventarioTraspasoDTO> { traspaso };
                 gv_invTraspasoDet.DataSource = invTras;
                 gv_invTraspasoDet.DataBind();
 
@@ -141,7 +157,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showAlert($"Error al cargar los datos en el Grid :{ex.Message}");
             }
-            
+
         }
         private void LimpiarGvDet()
         {
@@ -150,6 +166,33 @@ namespace jycboliviaASP.net.Presentacion
             gv_invTraspasoDet.DataBind();
             gv_invTraspasoDet2.DataBind();
         }
+
+
+        //-------------------------------------     POST - INVENTARIO TRASPASO
+
+
+
+
+        // -- DD ALMACENES
+        private async Task<List<ListAlmacenesDTO>> ObtenerListCodAlmacen(string token)
+        {
+            try
+            {
+                NA_APIAlmacen negocio = new NA_APIAlmacen();
+                return await negocio.Get_ListAlmacenAsync(token);
+
+            } catch (Exception ex)
+            {
+                showAlert($"Error al obtener la lista de almacenes");
+                return null;
+            }
+
+        }
+
+
+
+
+
 
 
         // - - - - - - - - - - - - - - - - - - - - - - 
@@ -162,63 +205,161 @@ namespace jycboliviaASP.net.Presentacion
         {
             System.Diagnostics.Debug.WriteLine($"Error: {ex.Message} \n {ex.StackTrace}");
         }
-    }
-}
-
-
-
-
-
-
-
-
-/*protected async void btn_registrarTraspaso_Click(object sender, EventArgs e)
-{
-    var traspaso = new InventarioTraspasoDTO
-    {
-        NumeroTraspasos = 0,
-        Fecha = DateTime.Now,
-        Referencia = txt_referencia.Text,
-        CodigoAlmacenDestino = int.Parse(txt_codAlmacenDest.Text),
-        Glosa = txt_glosa.Text,
-        Usuario = "adm",
-    };
-
-    // obtener los detalles de productos
-    var detalles = new List<DetalleProductoTraspasoDTO>();
-    int rowCount = Request.Form.AllKeys.Length;
-    for (int i = 0; i < rowCount; i++)
-    {
-        if (Request.Form["item" + i] != null)
+        private async Task<string> ObtenerTokenAsync(string usu, string pass)
         {
-            detalles.Add(new DetalleProductoTraspasoDTO
+            NA_APIinventario negocio = new NA_APIinventario();
+            return await negocio.GetTokenAsync(usu, pass);
+        }
+
+        protected void txt_producto_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_producto.Text.Trim();
+            if (!string.IsNullOrEmpty(criterio))
             {
-                Item = int.Parse(Request.Form["item" + i]),
-                CodigoProducto = Request.Form["codigoProducto" + i],
-                UnidadMedida = int.Parse(Request.Form["unidadMedida" + i]),
-                Cantidad = decimal.Parse(Request.Form["cantidad" + i])
-            });
+                cargarProductosUpon(criterio);
+            }
+        }
+
+        private async void cargarProductosUpon(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos negocio = new NA_APIproductos();
+                List<productoCriterioGet> productos = await negocio.get_ProductoCriterioAsync(token, criterio);
+
+                gv_listProdTraspaso.DataSource = productos;
+                gv_listProdTraspaso.DataBind();
+
+                gv_listProdTraspaso.Visible = productos.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                showAlert($"Error al realizar la busqueda: {ex.Message}");
+            }
+        }
+
+        protected void gv_listProdTraspaso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gv_listProdTraspaso.SelectedIndex;
+            GridViewRow row = gv_listProdTraspaso.Rows[index];
+
+            string codigoProducto = row.Cells[1].Text;
+            string nombreProducto = row.Cells[2].Text;
+            string unidadMedidaProducto = row.Cells[3].Text;
+
+            txt_producto.Text = nombreProducto;
+            Session["STnombreProducto"] = nombreProducto;
+            Session["STcodigoProducto"] = codigoProducto;
+            Session["STunidadMedidaProducto"] = unidadMedidaProducto;
+
+            gv_listProdTraspaso.Visible = false;
+        }
+
+        protected void btn_addProd_Click(object sender, EventArgs e)
+        {
+            Productos newProducto = CrearNuevoProducto();
+            if(newProducto != null)
+            {
+                List<Productos> listaProductos = ObtenerProductosDesdeSession();
+
+                listaProductos.Add(newProducto);
+
+                Session["ProductosTraspaso"] = listaProductos;
+
+                gv_productAgregados.DataSource = listaProductos;
+                gv_productAgregados.DataBind();
+
+                LimpiarCamposAddProductos();
+            }
+            else
+            {
+                showAlert("Ingrese un producto valido");
+            }
+
+        }
+
+
+        List<Productos> productos = new List<Productos>();
+        public class Productos
+        {
+            public string Producto { get; set; }
+            public string CodigoProducto {  get; set; }
+            public int UnidadMedida {  get; set; }
+            public decimal cantidad {  get; set; }
+        }
+        private List<Productos> ObtenerProductosDesdeSession()
+        {
+            List<Productos> productos = Session["ProductosTraspaso"] as List<Productos>;
+            if(productos == null)
+            {
+                productos = new List<Productos>();
+            }
+            return productos;
+        }
+        private Productos CrearNuevoProducto()
+        {
+            try
+            {
+                string producto = txt_producto.Text.Trim();
+                if (string.IsNullOrEmpty(producto))
+                {
+                    showAlert("Debe buscar y seleccionar el nombre de un producto.");
+                    return null;
+                }
+
+                if (Session["STcodigoProducto"] == null || string.IsNullOrWhiteSpace(Session["STcodigoProducto"].ToString()))
+                {
+                    showAlert("El codigo del producto no esta disponible en la a sessión");
+                    return null;
+                }
+                string codigo = (Session["STcodigoO"].ToString());
+
+                if (Session["STcodigoUnidadMedida"] == null || string.IsNullOrWhiteSpace(Session["STcodigoProducto"].ToString()))
+                {
+                    showAlert("La unidad medida del producto no esta disponible en la sessión");
+                    return null; 
+                }
+                int codigoUnidadMedida = int.Parse(Session["STcodigoUnidadMedida"].ToString());
+
+                decimal cantidad = 0;
+                if(!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
+                {
+                    showAlert("La cantidad del producto debe ser un número nayor que cero.");
+                    return null;
+                }
+
+                return new Productos
+                {
+                    CodigoProducto = codigo,
+                    Producto = producto,
+                    UnidadMedida = codigoUnidadMedida,
+                    cantidad = cantidad
+                };
+            } catch(Exception ex)
+            {
+                showAlert($"Error al crear el producto: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void LimpiarCamposAddProductos()
+        {
+            txt_producto.Text = string.Empty;
+            txt_cantProducto.Text = string.Empty;
+
+            Session.Remove("STnombreProducto");
+            Session.Remove("STcodigoProducto");
+            Session.Remove("STunidadMedidaProducto");
+        }
+
+        private void ActualizarGVProductosADD(List<Productos> productos)
+        {
+            gv_productAgregados.DataSource = productos;
+            gv_productAgregados.DataBind();
         }
     }
-    traspaso.DetalleProductos = detalles;
-
-    // obtener token y enviar datos
-    var api = new NA_APIinventario();
-    var token = await api.GetTokenAsync("adm", "123");
-
-    try
-    {
-        var result = await api.PostInventarioTraspasoAsync(traspaso, token);
-        lblresult.Text = $"Numero Ingreso: {result}";
-    }
-    catch (Exception ex) 
-    {
-        Response.Write($"Error: {ex.Message}");
-    }
-    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('InventarioTraspaso registrado exitosamente.');", true);
-
 }
 
 
-}
-}*/
