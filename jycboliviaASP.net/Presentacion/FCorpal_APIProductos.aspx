@@ -1,9 +1,46 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_APIProductos.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_APIProductos" Async="true" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_APIUpon.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+           .CompletionList
+        {
+            padding: 5px 0 ;
+            margin: 2px 0 0;            
+          /*  position:absolute;  */
+            height:150px;
+            width:200px;
+            background-color: White;
+            cursor: pointer;
+            border: solid ;  
+            border-width: 1px;    
+            font-size:x-small;
+            overflow: auto;
+                        }
+                        
+           .CompletionlistItem
+           {
+               font-size:x-small;           
+            }             
+                        
+        .CompletionListMighlightedItem
+        {
+             background-color: Green;
+             color: White;
+            /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/            
+            } 
+        
+        .style1
+        {
+            height: 26px;
+        }
+    </style>
 
 </asp:Content>
 
@@ -25,14 +62,23 @@
                             <div class="mb-3 row">
 
                                 <div class="col-7 col-sm-5 col-md-4 col-lg-3">
-                                    <label class="form-label" for="txt_nomProducto">Nombre del Producto:</label>
-                                    <asp:TextBox ID="txt_nomProducto" runat="server" CssClass="form-control" placeholder="Ingrese el nombre del producto" AutoComplete="off"></asp:TextBox>
+                                    <label class="form-label">Nombre del Producto:</label>
+                                    <asp:TextBox ID="txt_nomProducto" runat="server" AutoCompleteType="None" Class="form-control" placeholder="Ingrese el nombre del producto"></asp:TextBox>
+
+                                    <ajaxToolkit:AutoCompleteExtender 
+                                        ID="txt_nomProducto_AutoCompleteExtender"
+                                        runat="server"
+                                        TargetControlID="txt_nomProducto"
+                                        ServiceMethod="GetProductos"
+                                        MinimumPrefixLength="2"
+                                        CompletionSetCount="10"
+                                        EnableCaching="true"/>
+                                   
                                 </div>
 
                                 <div class="col-3 col-sm-3 col-md-2 col-lg-2 d-flex align-items-end">
                                     <asp:Button ID="btn_nomProducto" runat="server" Text="Buscar" CssClass="btn btn-dark" OnClick="btn_buscarProdNombre_Click" />
                                 </div>
-
                             </div>
                         </asp:Panel>
 
@@ -163,9 +209,7 @@
                             <h3 class="text_tittle p-3">Reporte Ventas de Productos</h3>
                         </div>
 
-
                         <asp:Panel ID="panel_vwVentasProductos" runat="server" DefaultButton="btn_ventProducto">
-
 
                             <div class="mb-3 row col-lg-12">
                                 <div class="col-8 col-sm-6 col-md-4 col-lg-4">

@@ -9,8 +9,9 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Text;
 using System.Web.UI.WebControls;
-using static jycboliviaASP.net.Negocio.NA_PruebaAPI;
 using Newtonsoft.Json.Linq;
+using System.Web.UI;
+
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -49,9 +50,7 @@ namespace jycboliviaASP.net.Negocio
             }
             catch (Exception ex)
             {
-                // Lanza una excepción con el detalle del error
-                Console.WriteLine($"Error al obtener el token de autenticación: {ex.Message}");
-                return string.Empty;
+                throw new ApplicationException($"Error al obtener el token de autenticacion: {ex.Message}", ex);
             }
         }
 
@@ -66,6 +65,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
+
                 string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -73,6 +73,8 @@ namespace jycboliviaASP.net.Negocio
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(searchResponseBody);
+
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseProd>(searchResponseBody);
 
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<productoCriterioGet>();
@@ -161,44 +163,6 @@ namespace jycboliviaASP.net.Negocio
         }
         
         
-        // --------   VW CATALOGO PRODUCTOS
-        public class APIResponseListProductos
-        {
-            public bool EsValido { get; set; }
-            public List<ListProductosDTO> Resultado {  get; set; }
-        }
-        internal async Task<List<ListProductosDTO>> GET_ListProductosAsync(string token)
-        {
-            try
-            {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
-
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                var searchResponseBody = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<APIResponseListProductos>(searchResponseBody);
-
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListProductosDTO>();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Error al buscar producto", ex);
-            }
-        }
-        public class ListProductosDTO
-        {
-            public string CodigoProducto { get; set;}   
-            public string Producto { get; set; }
-            public string Descripcion { get; set; }
-            public int UnidadMedida { get; set; }
-            public string DescripcionUnidadMedida { get; set; }
-            public string AbreviaturaUnidadMedida { get; set; }
-            public Boolean ParaVenta { get; set; }
-            // public string UrlImagen
-        }
-
         // ---------------------------------------------    GET BUSCAR PRODUCTO/VENTAS POR CRITERIO(producto)
         internal async Task<List<productoCriterioGet>> get_ProductoVentasCriterioAsync(string usuario, string password, string criterio)
         {
@@ -271,9 +235,8 @@ namespace jycboliviaASP.net.Negocio
             public decimal CostoUnitario { get; set; }
         }
 
-        // ------------- Filtrado de proveedores 
 
-
+// --------------------------------------------- GET FILTRADO PROVEEDORES
 
         public class APIResponseListProveedor
         {
@@ -306,6 +269,50 @@ namespace jycboliviaASP.net.Negocio
             public string NombreCompleto { get; set; }
         }
 
-        
+
+// --------------------------------------------- VW CATALOGO PRODUCTOS
+        public class APIResponseListProductos
+        {
+            public bool EsValido { get; set; }
+            public List<ListProductosDTO> Resultado { get; set; }
+        }
+        internal async Task<List<ListProductosDTO>> GET_ListProductosAsync(string token)
+        {
+            try
+            {
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Respuesta de la API: {searchResponseBody}");
+                var apiResponse = JsonConvert.DeserializeObject<APIResponseListProductos>(searchResponseBody);
+                if (!apiResponse.EsValido)
+                {
+                    throw new ApplicationException("La respuesta de la API no es válida.");
+                }
+
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListProductosDTO>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar producto: {ex.Message}");
+                throw new ApplicationException("Error al buscar producto", ex);
+            }
+        }
+        public class ListProductosDTO
+        {
+            public string CodigoProducto { get; set; }
+            public string Producto { get; set; }
+            public string Descripcion { get; set; }
+            public int UnidadMedida { get; set; }
+            public string DescripcionUnidadMedida { get; set; }
+            public string AbreviaturaUnidadMedida { get; set; }
+            public Boolean ParaVenta { get; set; }
+            // public string UrlImagen
+        }
+
     }
 }

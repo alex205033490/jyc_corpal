@@ -15,13 +15,18 @@ using System.Windows.Navigation;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.Data;
-
+using System.Net.Http;
+using AjaxControlToolkit.HtmlEditor.ToolbarButtons;
+using Newtonsoft.Json.Linq;
 
 
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIProductos : System.Web.UI.Page
     {
+        private static readonly HttpClient _httpClient = new HttpClient();
+
+
         private readonly NA_APIproductos _na_apiproductos = new NA_APIproductos();
         protected async void Page_Load(object sender, EventArgs e)
         {
@@ -56,7 +61,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-////////////////////////////////////////////      GET - BUSCAR PRODUCTO POR NOMBRE
+////////////////////////////////////////////        GET - BUSCAR PRODUCTO POR NOMBRE
         protected async void btn_buscarProdNombre_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_nomProducto.Text.Trim();
@@ -77,17 +82,13 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string token = await ObtenerTokenAsync("adm", "123");
 
-                if (string.IsNullOrEmpty(token))
-                {
-                    ShowAlert("Error de autenticación. No se pudo obtener el token");
-                    return;
-                }
                 var APIproducto = new NA_APIproductos();
                 List<productoCriterioGet> productoDTO = await APIproducto.get_ProductoCriterioAsync(token, criterioBusqueda);
 
                 if (productoDTO != null && productoDTO.Count > 0)
                 {
                     MostrarProductoCriterio(productoDTO);
+                    gv_prodNombre.Visible = true;
                 }
                 else
                 {
@@ -109,7 +110,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
+////////////////////////////////////////////        GET - BUSCAR PRODUCTOS POR CODPRODUCTO
 
         //-- Mostrar Lista de Productos Nombre Asc
         private async Task<List<ListProductosDTO>> ObtenerListNomProd(string token)
@@ -206,7 +207,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
+//////////////////////////////////////////////      GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_ventProducto.Text.Trim();
@@ -253,7 +254,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-/////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
+/////////////////////////////////////////////       GET - BUSCAR COMPRAS X PRODUCTO
         protected async void btn_buscarCompras_Click(object sender, EventArgs e)
         {
             string criterioCodProducto = ddListCodProductos2.SelectedValue;
@@ -323,7 +324,38 @@ namespace jycboliviaASP.net.Presentacion
 
 
 
-//////////////////////////////////////////// Otros
+
+
+////////        LISTA PRODUCTOS AUTOC
+        [WebMethod]
+        [ScriptMethod]
+        public async Task<List<string>> GetProductosAsync(string prefixText, int count)
+        {
+            List<string> productos = new List<string>();
+
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos pp = new NA_APIproductos();
+
+                var productosDTO = await pp.GET_ListProductosAsync(token);
+
+                productos = productosDTO
+                    .Where(p => p.Producto.ToLower().Contains(prefixText.ToLower()))
+                    .Select(p => p.Producto)
+                    .Take(count)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error: {ex.Message}");
+            }
+            return productos;
+        }
+
+
+/////////////////////////////////////////////// Otros
         private void ShowAlert(string message)
         {
             string script = $"alert('{message.Replace("'", "\\'")}');";
@@ -334,6 +366,5 @@ namespace jycboliviaASP.net.Presentacion
             NA_APIproductos prod = new NA_APIproductos();
             return await prod.GetTokenAsync(usuario, password);
         }
-
     }
 }
