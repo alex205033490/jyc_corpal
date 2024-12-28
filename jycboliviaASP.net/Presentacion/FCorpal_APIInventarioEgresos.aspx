@@ -190,7 +190,7 @@
                                                     <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertCommaToDot(event);"></asp:TextBox>
                                                 </div>
                                                 <div class="container_btnAddProd col-3 d-flex align-items-end">
-                                                    <asp:Button runat="server" ID="btn_addProd" Text="Agregar Producto" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
+                                                    <asp:Button runat="server" ID="btn_addProd" Text="Agregar" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
                                                 </div>
                                             </div>
                                         </asp:Panel>

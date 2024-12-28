@@ -168,49 +168,47 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
+
         //-------------------------------------     POST - INVENTARIO TRASPASO
-
-
-
-
-        // -- DD ALMACENES
-        private async Task<List<ListAlmacenesDTO>> ObtenerListCodAlmacen(string token)
+        protected void btn_registrarTraspaso_Click(object sender, EventArgs e)
         {
             try
             {
-                NA_APIAlmacen negocio = new NA_APIAlmacen();
-                return await negocio.Get_ListAlmacenAsync(token);
+                if (ValidarCampos())
+                {
+                    return 
+                }
+                List<Productos> productos = ObtenerProductosDesdeSession();
 
-            } catch (Exception ex)
+                if(!valida)
+            } 
+            catch (Exception ex)
             {
-                showAlert($"Error al obtener la lista de almacenes");
-                return null;
+                showAlert($"Error al registrar el traspaso: {ex.Message}");
             }
 
         }
 
 
-
-
-
-
-
-        // - - - - - - - - - - - - - - - - - - - - - - 
-        private void showAlert(string mensaje)
+        // - - LISTAR DD ALMACENES
+        private async Task<List<ListAlmacenesDTO>> ObtenerListCodAlmacen(string token)
         {
-            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
-        }
-        private void LogError(Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"Error: {ex.Message} \n {ex.StackTrace}");
-        }
-        private async Task<string> ObtenerTokenAsync(string usu, string pass)
-        {
-            NA_APIinventario negocio = new NA_APIinventario();
-            return await negocio.GetTokenAsync(usu, pass);
+            try
+            {
+                NA_APIAlmacen negocio = new NA_APIAlmacen();
+                var almacenes = await negocio.Get_ListAlmacenAsync(token);
+                var almacenesOrdenado = almacenes.OrderBy(a => a.Nombre).ToList();
+                return almacenesOrdenado;
+
+            } catch (Exception ex)
+            {
+                showAlert($"Error al obtener la lista de almacenes: {ex.Message}");
+                return null;
+            }
         }
 
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - TXT Producto
         protected void txt_producto_TextChanged(object sender, EventArgs e)
         {
             string criterio = txt_producto.Text.Trim();
@@ -219,7 +217,6 @@ namespace jycboliviaASP.net.Presentacion
                 cargarProductosUpon(criterio);
             }
         }
-
         private async void cargarProductosUpon(string criterio)
         {
             try
@@ -239,7 +236,6 @@ namespace jycboliviaASP.net.Presentacion
                 showAlert($"Error al realizar la busqueda: {ex.Message}");
             }
         }
-
         protected void gv_listProdTraspaso_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = gv_listProdTraspaso.SelectedIndex;
@@ -257,6 +253,8 @@ namespace jycboliviaASP.net.Presentacion
             gv_listProdTraspaso.Visible = false;
         }
 
+
+        // - - - - - - - ADD PRODUCTOS AL GV
         protected void btn_addProd_Click(object sender, EventArgs e)
         {
             Productos newProducto = CrearNuevoProducto();
@@ -280,13 +278,12 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
-
         List<Productos> productos = new List<Productos>();
         public class Productos
         {
-            public string Producto { get; set; }
-            public string CodigoProducto {  get; set; }
-            public int UnidadMedida {  get; set; }
+            public string producto { get; set; }
+            public string codigoProducto {  get; set; }
+            public int unidadMedida {  get; set; }
             public decimal cantidad {  get; set; }
         }
         private List<Productos> ObtenerProductosDesdeSession()
@@ -302,26 +299,26 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                string producto = txt_producto.Text.Trim();
-                if (string.IsNullOrEmpty(producto))
+                if (Session["STnombreProducto"] == null || string.IsNullOrWhiteSpace(Session["STnombreProducto"].ToString()))
                 {
                     showAlert("Debe buscar y seleccionar el nombre de un producto.");
                     return null;
                 }
+                string producto = Session["STnombreProducto"].ToString();
 
                 if (Session["STcodigoProducto"] == null || string.IsNullOrWhiteSpace(Session["STcodigoProducto"].ToString()))
                 {
                     showAlert("El codigo del producto no esta disponible en la a sessión");
                     return null;
                 }
-                string codigo = (Session["STcodigoO"].ToString());
+                string codigo = (Session["STcodigoProducto"].ToString());
 
-                if (Session["STcodigoUnidadMedida"] == null || string.IsNullOrWhiteSpace(Session["STcodigoProducto"].ToString()))
+                if (Session["STunidadMedidaProducto"] == null || string.IsNullOrWhiteSpace(Session["STunidadMedidaProducto"].ToString()))
                 {
                     showAlert("La unidad medida del producto no esta disponible en la sessión");
                     return null; 
                 }
-                int codigoUnidadMedida = int.Parse(Session["STcodigoUnidadMedida"].ToString());
+                int codigoUnidadMedida = int.Parse(Session["STunidadMedidaProducto"].ToString());
 
                 decimal cantidad = 0;
                 if(!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
@@ -332,9 +329,9 @@ namespace jycboliviaASP.net.Presentacion
 
                 return new Productos
                 {
-                    CodigoProducto = codigo,
-                    Producto = producto,
-                    UnidadMedida = codigoUnidadMedida,
+                    codigoProducto = codigo,
+                    producto = producto,
+                    unidadMedida = codigoUnidadMedida,
                     cantidad = cantidad
                 };
             } catch(Exception ex)
@@ -358,6 +355,68 @@ namespace jycboliviaASP.net.Presentacion
         {
             gv_productAgregados.DataSource = productos;
             gv_productAgregados.DataBind();
+        }
+
+
+        // - - - - - - - Funcion eliminar Fila GV
+        protected void gv_productAgregados_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Eliminar")
+            {
+                string codigoProducto = (e.CommandArgument.ToString());
+                List<Productos> productos = Session["ProductosTraspaso"] as List<Productos>;
+                var productoAEliminar = productos.FirstOrDefault(p => p.codigoProducto == codigoProducto);
+
+                if (productoAEliminar != null)
+                {
+                    productos.Remove(productoAEliminar);
+                }
+                Session["ProductosTraspaso"] = productos;
+
+                gv_productAgregados.DataSource = productos;
+                gv_productAgregados.DataBind();
+            }
+        }
+
+        // ---- VALIDACION
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrEmpty(txt_glosa.Text.Trim()))
+            {
+                showAlert("Por favor, Complete el campo glosa.");
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(dd_codAlmacenDestino.SelectedValue))
+            {
+                showAlert("Por favor, Seleccione un almacén destino válido.");
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(txt_Referencia.Text.Trim()))
+            {
+                showAlert("Por favor, complete el campo Referencia.");
+                return true;
+            }
+
+            return false;
+        }
+
+
+        // - - - - - - - - - - - - - - - - TOKEN, ShowAlert
+        private void showAlert(string mensaje)
+        {
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+        private void LogError(Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error: {ex.Message} \n {ex.StackTrace}");
+        }
+        private async Task<string> ObtenerTokenAsync(string usu, string pass)
+        {
+            NA_APIinventario negocio = new NA_APIinventario();
+            return await negocio.GetTokenAsync(usu, pass);
         }
     }
 }
