@@ -37,7 +37,7 @@ namespace jycboliviaASP.net.Negocio
                 string json = JsonConvert.SerializeObject(loginData);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+                var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
                 
                 response.EnsureSuccessStatusCode();
 
@@ -68,7 +68,7 @@ namespace jycboliviaASP.net.Negocio
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/compras", content);
+            var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/compras", content);
             try
             {
                 response.EnsureSuccessStatusCode();

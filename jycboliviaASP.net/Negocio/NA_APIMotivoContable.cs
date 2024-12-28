@@ -21,7 +21,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/SincronizarMotivosContableIngresos";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/SincronizarMotivosContableIngresos";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);
@@ -49,7 +49,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/SincronizarMotivosContableEgresos";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/SincronizarMotivosContableEgresos";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);

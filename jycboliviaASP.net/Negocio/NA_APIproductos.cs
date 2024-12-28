@@ -40,7 +40,7 @@ namespace jycboliviaASP.net.Negocio
                 var json = JsonConvert.SerializeObject(datoP);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+                var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
                 response.EnsureSuccessStatusCode();
 
                 var result = await response.Content.ReadAsStringAsync();
@@ -66,7 +66,7 @@ namespace jycboliviaASP.net.Negocio
             try
             {
 
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -115,7 +115,7 @@ namespace jycboliviaASP.net.Negocio
                     Console.WriteLine("No se pudo obtener el token.");
                     return null;
                 }
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/{Uri.EscapeDataString(criterio)}/{usuario}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/{Uri.EscapeDataString(criterio)}/{usuario}";
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Negocio
                     return null;
                 }
 
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/ventas/buscar/adm/{Uri.EscapeDataString(criterio)}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/ventas/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -204,7 +204,7 @@ namespace jycboliviaASP.net.Negocio
             try
             {
                 string token = await GetTokenAsync(usuario, password);
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/compras/buscar/{usuario}/{Uri.EscapeDataString(critCodProducto)}?proveedor={Uri.EscapeDataString(critProveedor)}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/compras/buscar/{usuario}/{Uri.EscapeDataString(critCodProducto)}?proveedor={Uri.EscapeDataString(critProveedor)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -247,7 +247,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarProveedores";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/sincronizarProveedores";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);
@@ -280,7 +280,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);
