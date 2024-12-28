@@ -1,0 +1,5 @@
+NumeroVenta;NumeroPedido;Fecha;CodigoCliente;Referencia;Glosa;EmitirFactura;ImporteProductos;ImporteDescuentos;ImporteTotal;Cobros_TotalEfectivo;Cobros_TotalDeposito;Factura_TipoDocumentoIdentidad;Factura_NIT_CI;Factura_Complemento;Factura_RazonSocial;Factura_Telefono;Factura_Email;Factura_MetodoPago;DetProd_NumeroItem;DetProd_CodigoProducto;DetProd_Cantidad;DetProd_CodigoUnidadMedida;DetProd_PrecioUnitario;DetProd_ImporteDescuento;DetProd_ImporteTotal;DetProd_NumeroItemOrigen;Usuario;estado;vaciadoupon
+0;0;2024-10-08;61;Referencia hohhhhh 1;Glosa hhhh 1;false;10;0;10;10;0;0;nit;complemento;razon social;7815725;correo;0;1;INCA02002;10;17;1;0;10;0;adm;1;0
+0;0;2024-10-08;61;Referencia hohhhhh 1;Glosa hhhh 1;false;10;0;10;10;0;0;nit;complemento;razon social;7815725;correo;0;1;INCA02002;10;17;1;0;10;0;adm;1;0
+0;0;2024-10-08;61;Referencia hohhhhh 1;Glosa hhhh 1;false;10;0;10;10;0;0;nit;complemento;razon social;7815725;correo;0;1;INCA02002;10;17;1;0;10;0;adm;1;0
+0;0;2024-10-08;61;Referencia hohhhhh 1;Glosa hhhh 1;false;10;0;10;10;0;0;nit;complemento;razon social;7815725;correo;0;1;INCA02002;10;17;1;0;10;0;adm;1;0

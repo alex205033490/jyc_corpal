@@ -15,14 +15,14 @@ namespace jycboliviaASP.net.Negocio
 {
     internal class NA_APIproductos
     {
-        private static readonly HttpClient httpClient = new HttpClient();
+       private static readonly HttpClient httpClient = new HttpClient();
         //private readonly HttpClient _httpClient;
 
         //DBApi api = new DBApi();
 
         public NA_APIproductos()
         {
-            //_httpClient = new HttpClient();
+          //  httpClient = new HttpClient();
         }
 
 // ---------------------------------------------    GET BUSCAR PRODUCTO POR CRITERIO
@@ -51,9 +51,9 @@ namespace jycboliviaASP.net.Negocio
                     string token = loginResponse.Resultado?.Token?.ToString();
 
                     if (string.IsNullOrEmpty(token))
-                {
-                    throw new Exception("Token is null or empty");
-                }    
+                        {
+                            throw new Exception("Token is null or empty");
+                        }    
 
                     string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/{usu}/{Uri.EscapeDataString(criterio)}";
 
@@ -283,6 +283,11 @@ namespace jycboliviaASP.net.Negocio
             public int UnidadMedida { get; set; }
 
             public List<productoCodigoDetalleGet> DetalleUnidadesMedida { get; set; }
+
+            public static implicit operator productoCodigoGet(List<productoCriterioGet> v)
+            {
+                throw new NotImplementedException();
+            }
         } 
     }
 }

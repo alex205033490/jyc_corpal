@@ -242,6 +242,74 @@ namespace jycboliviaASP.net.NegocioApi
             return EsValido_bandera;
 
         }
+
+        internal bool insertarVentas2(string token,
+          int NumeroVenta,
+          int NumeroPedido,
+          DateTime Fecha,
+          int CodigoCliente,
+          string Referencia,
+          string Glosa,
+          bool EmitirFactura,
+          decimal ImporteProductos,
+          decimal ImporteDescuentos,
+          decimal ImporteTotal,
+          decimal Cobros_TotalEfectivo,
+          decimal Cobros_TotalDeposito,
+          int Factura_TipoDocumentoIdentidad,
+          string Factura_NIT_CI,
+          string Factura_Complemento,
+          string Factura_RazonSocial,
+          string Factura_Telefono,
+          string Factura_Email,
+          int Factura_MetodoPago,          
+          string Usuario,
+          List<DetalleProductoV> DetalleProductosVenta
+          )
+        {
+
+            J_Ventas venta1 = new J_Ventas
+            {
+                NumeroVenta = NumeroVenta,
+                NumeroPedido = NumeroPedido,
+                Fecha = Fecha,
+                CodigoCliente = CodigoCliente,
+                Referencia = Referencia,
+                Glosa = Glosa,
+                EmitirFactura = EmitirFactura,
+                ImporteProductos = ImporteProductos,
+                ImporteDescuentos = ImporteDescuentos,
+                ImporteTotal = ImporteTotal,
+
+                Cobros = new Cobros
+                {
+                    TotalEfectivo = Cobros_TotalEfectivo,
+                    TotalDeposito = Cobros_TotalDeposito
+                },
+
+                Factura = new FacturaV
+                {
+                    TipoDocumentoIdentidad = Factura_TipoDocumentoIdentidad,
+                    NIT_CI = Factura_NIT_CI,
+                    Complemento = Factura_Complemento,
+                    RazonSocial = Factura_RazonSocial,
+                    Telefono = Factura_Telefono,
+                    Email = Factura_Email,
+                    MetodoPago = Factura_MetodoPago
+                },
+
+                DetalleProductos = DetalleProductosVenta,
+                Usuario = Usuario
+            };
+
+            string json1 = JsonConvert.SerializeObject(venta1);
+            string url = "http://192.168.11.62/ServcioUponApi/api/v1/ventas";
+            dynamic respuesta = api.Post(url, json1, token);
+            string EsValido = respuesta.EsValido.ToString();
+            bool EsValido_bandera = Convert.ToBoolean(EsValido);
+            return EsValido_bandera;
+        }
+
     }
 }
 

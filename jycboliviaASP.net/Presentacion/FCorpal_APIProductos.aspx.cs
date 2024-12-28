@@ -135,7 +135,7 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 var apiProd = new NA_APIproductos();
-                productoCodigoGet prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
+                productoCodigoGet prodCodigo = await apiProd.get_ProductoCriterioAsync("adm", "123", criterioBusqueda);
 
                 if (prodCodigo != null)
                 {
