@@ -152,7 +152,7 @@
                                             <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
 
                                             <label class="form-label">Tipo de moneda:</label>
-                                            <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown">
+                                            <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown dd_fsmall">
                                                 <asp:ListItem Text="Bolivianos" Value="1" />
                                                 <asp:ListItem Text="Dólares" Value="2" />
                                             </asp:DropDownList>

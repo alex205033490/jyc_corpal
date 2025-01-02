@@ -90,7 +90,7 @@ namespace jycboliviaASP.net.Negocio
         public class DTOCompras
         {
             public int NumeroCompra { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Referencia { get; set; }
             public decimal ImporteProductos { get; set; }
             public decimal ImporteDescuento { get; set; }

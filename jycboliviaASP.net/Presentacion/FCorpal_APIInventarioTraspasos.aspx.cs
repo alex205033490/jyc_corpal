@@ -87,6 +87,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
+
         //-------------------------------------      GET - INVENTARIO TRASPASO DETALLE
         protected async void btn_GetinvTraspasoDet_Click(object sender, EventArgs e)
         {
@@ -170,25 +171,82 @@ namespace jycboliviaASP.net.Presentacion
 
 
         //-------------------------------------     POST - INVENTARIO TRASPASO
-        protected void btn_registrarTraspaso_Click(object sender, EventArgs e)
+        protected async void btn_registrarTraspaso_Click(object sender, EventArgs e)
         {
             try
             {
                 if (ValidarCampos())
                 {
-                    return 
+                    return; 
                 }
                 List<Productos> productos = ObtenerProductosDesdeSession();
 
-                if(!valida)
+                if (!ValidarProductos(productos))
+                {
+                    showAlert("Tu lista de productos esta vacia.");
+                    return;
+                }
+
+                InventarioTraspasoDTO traspaso = CrearTraspaso(productos);
+
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                string resultado = await RegistrarTraspasoAsync(traspaso, token);
+
+                showAlert($"Traspaso Registrado. Nro de registro: {resultado}");
+
+                LimpiarGvDet();
+                LimpiarCamposAddProductos();
+
             } 
             catch (Exception ex)
             {
                 showAlert($"Error al registrar el traspaso: {ex.Message}");
             }
-
         }
 
+        private InventarioTraspasoDTO CrearTraspaso(List<Productos> productos)
+        {
+            try
+            {
+                return new InventarioTraspasoDTO
+                {
+                    NumeroTraspasos = 0,
+                    Fecha = "2024-11-30T00:00:00",
+                    Referencia = txt_Referencia.Text,
+                    CodigoAlmacenDestino = int.Parse(dd_codAlmacenDestino.SelectedValue),
+                    Glosa = txt_glosa.Text,
+                    DetalleProductos = productos.Select(p => new DetalleProductoTraspasoDTO
+                    {
+                        Item = 0,
+                        CodigoProducto = p.codigoProducto,
+                        UnidadMedida = p.unidadMedida,
+                        Cantidad = p.cantidad,
+                    }).ToList(),
+                    Usuario = "adm"
+                };
+            } catch (Exception ex)
+            {
+                showAlert($"Error: {ex.Message}");
+                return null;
+            }
+        }
+
+        private async Task<string> RegistrarTraspasoAsync(InventarioTraspasoDTO traspaso, string token)
+        {
+            try
+            {
+                NA_APIinventario negocio = new NA_APIinventario();
+
+                string resultado = await negocio.PostInventarioTraspasoAsync(traspaso, token);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                showAlert($"Error al registrar el traspaso en el sistema. {ex.Message}");
+                return null;
+            }
+        }
 
         // - - LISTAR DD ALMACENES
         private async Task<List<ListAlmacenesDTO>> ObtenerListCodAlmacen(string token)
@@ -206,7 +264,6 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
-
 
         // - - - - - - - - - - - - - - - - - - - - - - - - TXT Producto
         protected void txt_producto_TextChanged(object sender, EventArgs e)
@@ -252,7 +309,6 @@ namespace jycboliviaASP.net.Presentacion
 
             gv_listProdTraspaso.Visible = false;
         }
-
 
         // - - - - - - - ADD PRODUCTOS AL GV
         protected void btn_addProd_Click(object sender, EventArgs e)
@@ -301,7 +357,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 if (Session["STnombreProducto"] == null || string.IsNullOrWhiteSpace(Session["STnombreProducto"].ToString()))
                 {
-                    showAlert("Debe buscar y seleccionar el nombre de un producto.");
+                    showAlert("Debe buscar y seleccionar un producto.");
                     return null;
                 }
                 string producto = Session["STnombreProducto"].ToString();
@@ -323,7 +379,7 @@ namespace jycboliviaASP.net.Presentacion
                 decimal cantidad = 0;
                 if(!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
                 {
-                    showAlert("La cantidad del producto debe ser un número nayor que cero.");
+                    showAlert("La cantidad del producto debe ser un número mayor que cero.");
                     return null;
                 }
 
@@ -349,6 +405,31 @@ namespace jycboliviaASP.net.Presentacion
             Session.Remove("STnombreProducto");
             Session.Remove("STcodigoProducto");
             Session.Remove("STunidadMedidaProducto");
+        }
+
+        private void LimpiarCamposRegistrarIT()
+        {
+            txt_Referencia.Text = "";
+            txt_glosa.Text = "";
+            dd_codAlmacenDestino.SelectedIndex = 0;
+
+            Session["productosTraspaso"] = null;
+
+            gv_productAgregados.DataSource = null;
+            gv_productAgregados.DataBind();
+        }
+
+        private bool ValidarProductos(List<Productos> productos)
+        {
+            try
+            {
+                return productos != null && productos.Count() > 0;
+            }
+            catch (Exception ex)
+            {
+                showAlert($"Error validar productos: {ex.Message}");
+                return false;
+            }
         }
 
         private void ActualizarGVProductosADD(List<Productos> productos)
@@ -381,9 +462,9 @@ namespace jycboliviaASP.net.Presentacion
         // ---- VALIDACION
         private bool ValidarCampos()
         {
-            if (string.IsNullOrEmpty(txt_glosa.Text.Trim()))
+            if (string.IsNullOrEmpty(txt_Referencia.Text.Trim()))
             {
-                showAlert("Por favor, Complete el campo glosa.");
+                showAlert("Por favor, complete el campo Referencia.");
                 return true;
             }
 
@@ -393,15 +474,13 @@ namespace jycboliviaASP.net.Presentacion
                 return true;
             }
 
-            if (string.IsNullOrEmpty(txt_Referencia.Text.Trim()))
+            if (string.IsNullOrEmpty(txt_glosa.Text.Trim()))
             {
-                showAlert("Por favor, complete el campo Referencia.");
+                showAlert("Por favor, Complete el campo glosa.");
                 return true;
             }
-
             return false;
         }
-
 
         // - - - - - - - - - - - - - - - - TOKEN, ShowAlert
         private void showAlert(string mensaje)

@@ -127,7 +127,7 @@
                     <!------------------------          API POST INVENTARIO TRASPASOS            ------------------------------>
                     <div class="container-POSTITraspaso p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Traspaso de Inventario entre Almacenes</h3>
+                            <h3 class="text_tittle p-3">Traspaso de Inventario entre Almacenes (F)</h3>
                         </div>
 
                         <asp:UpdatePanel ID="updatePanelPost_IT" runat="server" UpdateMode="Conditional">
