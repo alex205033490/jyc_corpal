@@ -20,6 +20,7 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = Session["BaseDatos"].ToString();
+            cb_actualizarCliente.Visible = false;
 
             if (tienePermisoDeIngreso(118) == false)
             {
@@ -245,14 +246,14 @@ namespace jycboliviaASP.net.Presentacion
                 int codigCliente;
                 NCorpal_Cliente nc = new NCorpal_Cliente();
                 codigCliente = nc.get_CodigoCliente(cliente);
-                if (codigCliente == 0) { 
+              /*  if (codigCliente == 0) { 
                   string propietario = tx_propietario.Text;
                   string razonSocial = tx_razonSocial.Text;
                   string nit = tx_nit.Text;
                     bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
                     codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
                 }
-
+                */
                 bool banderaActualizar = cb_actualizarCliente.Checked;
                 if (codigCliente!=0 && banderaActualizar == true) {
                     string propietario = tx_propietario.Text;
@@ -261,50 +262,54 @@ namespace jycboliviaASP.net.Presentacion
                     banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente,cliente,propietario, razonSocial, nit, codpersolicitante);
                 }
 
-                if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante,true,codigCliente))
-                {
-                    int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
-                    double montoTotal = 0;
-                    for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                if (codigCliente > 0) {
+                    if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente))
                     {
-                        int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                        double cantidad = Convert.ToDouble(datoRepuesto.Rows[i]["cantidad"].ToString());
-                        double preciocompra = Convert.ToDouble(datoRepuesto.Rows[i]["Precio"].ToString());
+                        int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
+                        double montoTotal = 0;
+                        for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                        {
+                            int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
+                            double cantidad = Convert.ToDouble(datoRepuesto.Rows[i]["cantidad"].ToString());
+                            double preciocompra = Convert.ToDouble(datoRepuesto.Rows[i]["Precio"].ToString());
 
-                        string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                        string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                        string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
-                        double total = preciocompra * cantidad;
+                            string producto = datoRepuesto.Rows[i]["producto"].ToString();
+                            string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
+                            string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
+                            double total = preciocompra * cantidad;
 
-                        repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
-                        nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
-                        montoTotal = montoTotal + total;
+                            repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
+                            nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
+                            montoTotal = montoTotal + total;
+                        }
+
+                        nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
+                        //----------------envio de correo-------------
+                        /* string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
+                         string cuerpo = "Correo Automatico. <br><br>" +
+                                         "Se realizo la solicitud de los siguientes productos : <br>" +
+                                         "Nro Recibo = " + nroboleta + "<br>" +
+                                         "Solicitante = " + personalsolicitud + "<br>" +
+                                         "Fecha Entrega = " + fechaentrega + " <br>" +
+                                         "Hora Entrega = " + horaentrega + " <br>" +                                    
+                                         "Repuesto Solicitado: <br>" +
+                                         repuestosSolicitados +
+                                         "<br><br><br>" +
+                                         "Fin de Mensaje.";
+                         NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();                    
+                         bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
+                        //----------------fin envio de correo---------                    
+                        limpiarDatos();
+                        buscarProductos("");
+                        Session["codigoSolicitudProducto"] = ultimoinsertado;
+                        Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
+                        //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                     }
-
-                    nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
-                    //----------------envio de correo-------------
-                   /* string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
-                    string cuerpo = "Correo Automatico. <br><br>" +
-                                    "Se realizo la solicitud de los siguientes productos : <br>" +
-                                    "Nro Recibo = " + nroboleta + "<br>" +
-                                    "Solicitante = " + personalsolicitud + "<br>" +
-                                    "Fecha Entrega = " + fechaentrega + " <br>" +
-                                    "Hora Entrega = " + horaentrega + " <br>" +                                    
-                                    "Repuesto Solicitado: <br>" +
-                                    repuestosSolicitados +
-                                    "<br><br><br>" +
-                                    "Fin de Mensaje.";
-                    NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();                    
-                    bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
-                    //----------------fin envio de correo---------                    
-                    limpiarDatos();
-                    buscarProductos("");
-                    Session["codigoSolicitudProducto"] = ultimoinsertado;
-                    Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
-                    //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
+                    else
+                        Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");
                 }
                 else
-                    Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");
+                    Response.Write("<script type='text/javascript'> alert('Error: El Cliente no existe') </script>");
 
             }
             else
