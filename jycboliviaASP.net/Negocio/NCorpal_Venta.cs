@@ -38,6 +38,18 @@ namespace jycboliviaASP.net.Negocio
                 return codigo;
         }
 
+        internal DataSet get_ItemVendidos(int codigoVendido)
+        {
+            DataSet tuplasDI = dv.get_ItemVendidos( codigoVendido);
+            return tuplasDI;
+        }
+
+        internal DataSet get_ventaRealizadaparaVaciar(int codigoVendido)
+        {
+            DataSet tuplaV = dv.get_ventaRealizadaparaVaciar(codigoVendido);
+            return tuplaV;
+        }
+
         internal bool insertarTodoslosProductosAVenta(int codigoVenta, int codigoSolicitud)
         {
             return dv.insertarTodoslosProductosAVenta( codigoVenta,  codigoSolicitud);

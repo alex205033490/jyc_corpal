@@ -215,6 +215,10 @@ namespace jycboliviaASP.net.Presentacion
                             decimal tipoCambio = decimal.Parse("6,96");
                             decimal montoTotal = decimal.Parse(gv_solicitudesProductos.SelectedRow.Cells[9].Text);
                             decimal montoTotalMoneda = montoTotal;
+                            string solicitandte  = tx_SolicitanteProducto.Text;
+                            int codigoSolicitante = Nresp.getCodigo_NombreResponsable(solicitandte);
+
+
 
                             if (tuplaCli.Tables[0].Rows.Count > 0)
                             {
@@ -228,7 +232,7 @@ namespace jycboliviaASP.net.Presentacion
                             }
 
                             NCorpal_Venta nv = new NCorpal_Venta();
-                            bool banderaV = nv.crearVenta(codCliente, cliente, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codresponsable, nombreResponsable, factura, fechaEntrega, codigoSolicitud);
+                            bool banderaV = nv.crearVenta(codCliente, cliente, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitandte, factura, fechaEntrega, codigoSolicitud);
                             int codigoVenta = nv.get_codigoVentaUltimoInsertado(cliente, nombreRazonSocial, nombreResponsable);
                             bool banderaAllTodosProducto = nv.insertarTodoslosProductosAVenta(codigoVenta, codigoSolicitud);
 

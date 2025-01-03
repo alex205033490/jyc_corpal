@@ -1,15 +1,26 @@
 ﻿using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Script.Services;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static jycboliviaASP.net.Negocio.NA_APIproductos.ApiResponseProd;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Navigation;
+using System.Data;
+using CheckBox = System.Web.UI.WebControls.CheckBox;
+using System.Configuration;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.IO;
+using DataGrid = System.Web.UI.WebControls.DataGrid;
+using jycboliviaASP.net.NegocioApi;
+
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -27,7 +38,6 @@ namespace jycboliviaASP.net.Presentacion
 
             if (!IsPostBack)
             {
-
                 buscarDatosParaCargarAUpon("");
                 string baseDeDatos = Session["BaseDatos"].ToString();
                 NA_Historial nhistorial = new NA_Historial();
@@ -165,7 +175,111 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_vaciarAlSimec_Click(object sender, EventArgs e)
         {
+            string usuario = "adm";
+            string password = "123";
+            vaciaraUponVentasRealizadas(usuario, password);
+        }
 
+        private async void vaciaraUponVentasRealizadas(string usuario, string password)
+        {
+            foreach (GridViewRow row in gv_datosCobros.Rows)
+            {
+                NCorpal_Venta nss = new NCorpal_Venta();
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    row.RowState = DataControlRowState.Edit;
+                    bool isChecked = row.Cells[0].Controls.OfType<CheckBox>().FirstOrDefault().Checked;
+                    if (isChecked == true)
+                    {
+                        int CodigoVendido = int.Parse(row.Cells[1].Text);
+                        DataSet tuplaVenta = nss.get_ventaRealizadaparaVaciar(CodigoVendido);
+                        DataSet tuplasItemVendido = nss.get_ItemVendidos(CodigoVendido);
+
+                        int codigo = CodigoVendido;
+                        int NumeroVenta = 0;
+                        //int.TryParse(tuplaVenta.Tables[0].Rows[0][0].ToString(), out NumeroVenta);
+                        int NumeroPedido = 0;
+                        //int.TryParse(tuplaVenta.Tables[0].Rows[0][0].ToString(), out NumeroPedido);
+                        DateTime Fecha;
+                        DateTime.TryParse("2024-12-26", out Fecha);
+                        // DateTime.TryParse(tuplaVenta.Tables[0].Rows[0][2].ToString(), out Fecha);
+                        int CodigoCliente;
+                        int.TryParse(tuplaVenta.Tables[0].Rows[0][3].ToString(), out CodigoCliente);
+                        string Referencia = tuplaVenta.Tables[0].Rows[0][4].ToString();
+                        string Glosa = tuplaVenta.Tables[0].Rows[0][4].ToString();
+                        bool EmitirFactura = Convert.ToBoolean(tuplaVenta.Tables[0].Rows[0][31].ToString());
+                        decimal ImporteProductos;
+                        decimal.TryParse(tuplaVenta.Tables[0].Rows[0][22].ToString().Replace(".", ","), out ImporteProductos);
+                        decimal ImporteDescuentos;
+                        decimal.TryParse(tuplaVenta.Tables[0].Rows[0][27].ToString().Replace(".", ","), out ImporteDescuentos);
+                        decimal ImporteTotal;
+                        decimal.TryParse(tuplaVenta.Tables[0].Rows[0][22].ToString().Replace(".", ","), out ImporteTotal);
+                        decimal Cobros_TotalEfectivo;
+                        decimal.TryParse(tuplaVenta.Tables[0].Rows[0][22].ToString().Replace(".", ","), out Cobros_TotalEfectivo);
+                        decimal Cobros_TotalDeposito;
+                        decimal.TryParse(tuplaVenta.Tables[0].Rows[0][22].ToString().Replace(".", ","), out Cobros_TotalDeposito);
+                        int Factura_TipoDocumentoIdentidad;
+                        int.TryParse(tuplaVenta.Tables[0].Rows[0][18].ToString(), out Factura_TipoDocumentoIdentidad);
+                        string Factura_NIT_CI = tuplaVenta.Tables[0].Rows[0][19].ToString();
+                        string Factura_Complemento = tuplaVenta.Tables[0].Rows[0][19].ToString();
+                        string Factura_RazonSocial = tuplaVenta.Tables[0].Rows[0][17].ToString();
+                        string Factura_Telefono = tuplaVenta.Tables[0].Rows[0][9].ToString();
+                        string Factura_Email = tuplaVenta.Tables[0].Rows[0][5].ToString();
+                        int Factura_MetodoPago;
+                        int.TryParse(tuplaVenta.Tables[0].Rows[0][20].ToString(), out Factura_MetodoPago);
+
+                        NUpon_Ventas nupon = new NUpon_Ventas();
+                        NA_endpoints napi = new NA_endpoints();
+                        List<DetalleProductoV> listaProductosV = new List<DetalleProductoV>();
+
+                        for (int i = 0; i < tuplasItemVendido.Tables[0].Rows.Count; i++)
+                        {
+                            int DetProd_NumeroItem;
+                            int.TryParse((i + 1).ToString(), out DetProd_NumeroItem);
+                            string DetProd_CodigoProducto = tuplasItemVendido.Tables[0].Rows[0][9].ToString();
+                            string cantidadAux = tuplasItemVendido.Tables[0].Rows[0][3].ToString();
+                            decimal resultado = Math.Ceiling(decimal.Parse(cantidadAux));
+                            int DetProd_Cantidad;
+                            int.TryParse(resultado.ToString(), out DetProd_Cantidad);
+                            int DetProd_CodigoUnidadMedida;
+                            int.TryParse(tuplasItemVendido.Tables[0].Rows[0][10].ToString(), out DetProd_CodigoUnidadMedida);
+
+                            string criterioBusqueda = DetProd_CodigoProducto.Trim();                         
+                            
+                            var BuscProducto = new NA_APIproductos();
+                            List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
+                            productoCriterioGet product = productos[0];
+
+                            DetalleProductoV Item = new DetalleProductoV();
+                            Item.NumeroItem = DetProd_NumeroItem;
+                            Item.CodigoProducto = criterioBusqueda;
+                            Item.Cantidad = DetProd_Cantidad;
+                            Item.CodigoUnidadMedida = product.CodigoUnidadMedida;
+                            Item.PrecioUnitario = product.PrecioUnitario;
+                            Item.ImporteDescuento = product.DescuentosPermitido;
+                            Item.ImporteTotal = (product.PrecioUnitario * DetProd_Cantidad);
+                            Item.NumeroItemOrigen = DetProd_NumeroItem;
+                            listaProductosV.Add(Item);
+                        }
+
+                        bool banderaAut = napi.get_AutenticarUsuario(usuario, password);
+                        if (banderaAut)
+                        {
+                            string Usuario = usuario;
+                            string token = napi.get_TokenUsuario(usuario, password);
+                            bool banderaUpon = napi.insertarVentas2(token, NumeroVenta, NumeroPedido, Fecha, CodigoCliente,
+                                Referencia, Glosa, EmitirFactura, ImporteProductos, ImporteDescuentos, ImporteTotal, Cobros_TotalEfectivo,
+                                Cobros_TotalDeposito, Factura_TipoDocumentoIdentidad, Factura_NIT_CI, Factura_Complemento, Factura_RazonSocial,
+                                Factura_Telefono, Factura_Email, Factura_MetodoPago, Usuario, listaProductosV);
+                            if (banderaUpon == true)
+                            {
+                                bool bandera = nupon.updateVaciadoOk(CodigoVendido);
+                            }
+                        }
+                    }
+                }
+            }
+            buscarDatosParaCargarAUpon("");
         }
 
         protected void bt_buscar_Click(object sender, EventArgs e)
@@ -173,5 +287,8 @@ namespace jycboliviaASP.net.Presentacion
             string cliente = tx_cliente.Text;
             buscarDatosParaCargarAUpon(cliente);
         }
+
     }
 }
+      
+

@@ -47,7 +47,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select  vv.codigo, date_format(vv.fechaentrega,'%d/%m/%Y') as 'Fecha_Entrega', " +
                 " vv.cliente,  vv.direccion,  vv.cicliente,  vv.telefono,  vv.razonSocialEmisor,  " +
                 " vv.nitEmisor,  vv.correoCliente,  vv.montoTotal,  vv.tipoCambio  from tbcorpal_venta vv " +
-                " where  vv.cliente like '%"+cliente+"%' and vv.vaciadoupon = false and vv.estado = 1 and vv.estadoventa = 'Cerrado'  " +
+                " where  vv.cliente like '%"+cliente+"%' and vv.vaciadoupon = false and vv.estado = 1 and vv.estadoventa = 'Abierto'  " +
                 " order by vv.codigo desc ";
             return cnx.consultaMySql(consulta);
         }
@@ -59,6 +59,40 @@ namespace jycboliviaASP.net.Datos
                 " vv.cliente = '" + cliente + "' and " +
                 " vv.nombreRazonSocial = '" + nombreRazonSocial + "' and " +
                 " vv.responsable = '" + nombreResponsable + "'";
+            return cnx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_ItemVendidos(int codigoVendido)
+        {
+            string consulta = "select     " +
+                " dv.codventa,  dv.codprod,  dv.descripcion,  dv.cantidad,   " +
+                " dv.codmedida,  dv.medida,  dv.precioUnitario,  dv.montoDescuento,   " +
+                " dv.precioTotal, pp.codupon, pp.codumupon   " +
+                " from tbcorpal_detalleventasproducto dv , tbcorpal_producto pp where   " +
+                " dv.codprod = pp.codigo and "+
+                " dv.codventa = " +codigoVendido;
+            return cnx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_ventaRealizadaparaVaciar(int codigoVendido)
+        {
+            string consulta = "SELECT    " +
+                " vv.codigo,   date_format(vv.fechagra,'%d/%m/%Y') as 'fecha_Gra',   " +
+                " vv.horagra,  vv.codigoCliente,  vv.cliente,  vv.correoCliente,   " +
+                " vv.nitEmisor,  vv.razonSocialEmisor,  vv.municipio,  vv.telefono,   " +
+                " vv.numeroFactura,  vv.cuf,  vv.cufd,  vv.codigoSucursal,   " +
+                " vv.direccion,  vv.codigoPuntoVenta,  vv.fechaEmision,   " +
+                " vv.nombreRazonSocial,  vv.codigoTipoDocumentoIdentidad,   " +
+                " vv.numeroDocumento,  vv.codigoMetodoPago,  vv.numeroTarjeta,   " +
+                " vv.montoTotal,  vv.montoTotalSujetoIva,  vv.codigoMoneda,   " +
+                " vv.tipoCambio,  vv.montoTotalMoneda,  vv.descuentoAdicional,   " +
+                " vv.leyendaF,  vv.codresp,  vv.responsable,  vv.factura,   " +
+                " vv.fechaentrega,  vv.codcliente,  vv.cicliente,   " +
+                " vv.estado,  vv.codsolicitudentregaproducto,   " +
+                " vv.estadoventa,  vv.vaciadoupon,  vv.codusercierre,   " +
+                " vv.responsablecierre   " +
+                " from tbcorpal_venta vv   " +
+                " where vv.codigo = "+codigoVendido;
             return cnx.consultaMySql(consulta);
         }
 
