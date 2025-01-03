@@ -33,7 +33,7 @@ namespace jycboliviaASP.net.Negocio
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             try
             {
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/clientes/personas", content);
+                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/clientes/personas", content);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace jycboliviaASP.net.Negocio
 
             try
             {
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/clientes/empresas", content);
+                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/clientes/empresas", content);
                 return response.IsSuccessStatusCode;
             }
             catch(Exception ex)
@@ -109,7 +109,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/clientes/buscar/{Uri.EscapeDataString(criterio)}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/clientes/buscar/{Uri.EscapeDataString(criterio)}";
 
                 // Configurar el encabezado de autorización
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -153,7 +153,7 @@ namespace jycboliviaASP.net.Negocio
                 string json = JsonConvert.SerializeObject(datoP);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync();

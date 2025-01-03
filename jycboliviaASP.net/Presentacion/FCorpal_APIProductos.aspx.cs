@@ -15,31 +15,37 @@ using System.Windows.Navigation;
 using System.Web.Services;
 using System.Web.Script.Services;
 using System.Data;
-
+using System.Net.Http;
+using AjaxControlToolkit.HtmlEditor.ToolbarButtons;
+using Newtonsoft.Json.Linq;
 
 
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIProductos : System.Web.UI.Page
     {
+        private static readonly HttpClient _httpClient = new HttpClient();
+
+
         private readonly NA_APIproductos _na_apiproductos = new NA_APIproductos();
         protected async void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
                 string token = await ObtenerTokenAsync("adm", "123");
-                var productos = await ObtenerListCodProd(token);
+                var productosNom = await ObtenerListNomProd(token);
+                var productosCod = await ObtenerListCodProd(token);
                 var proveedor = await ObtenerListCodProveedor(token);
 
                 // dd 1
-                ddListCodProductos.DataSource = productos;
+                ddListCodProductos.DataSource = productosCod;
                 ddListCodProductos.DataTextField = "CodigoProducto";
                 ddListCodProductos.DataValueField = "CodigoProducto";
                 ddListCodProductos.DataBind();
                 ddListCodProductos.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un codigo", ""));
-
+                
                 // dd 2
-                ddListCodProductos2.DataSource = productos;
+                ddListCodProductos2.DataSource = productosNom;
                 ddListCodProductos2.DataTextField = "Producto";
                 ddListCodProductos2.DataValueField = "CodigoProducto";
                 ddListCodProductos2.DataBind();
@@ -55,7 +61,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-////////////////////////////////////////////      GET - BUSCAR PRODUCTO POR NOMBRE
+////////////////////////////////////////////        GET - BUSCAR PRODUCTO POR NOMBRE
         protected async void btn_buscarProdNombre_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_nomProducto.Text.Trim();
@@ -76,17 +82,13 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string token = await ObtenerTokenAsync("adm", "123");
 
-                if (string.IsNullOrEmpty(token))
-                {
-                    ShowAlert("Error de autenticación. No se pudo obtener el token");
-                    return;
-                }
                 var APIproducto = new NA_APIproductos();
                 List<productoCriterioGet> productoDTO = await APIproducto.get_ProductoCriterioAsync(token, criterioBusqueda);
 
                 if (productoDTO != null && productoDTO.Count > 0)
                 {
                     MostrarProductoCriterio(productoDTO);
+                    gv_prodNombre.Visible = true;
                 }
                 else
                 {
@@ -108,14 +110,15 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-////////////////////////////////////////////    GET - BUSCAR PRODUCTOS POR CODPRODUCTO
+////////////////////////////////////////////        GET - BUSCAR PRODUCTOS POR CODPRODUCTO
 
-        //-- obtener lista de productos por codigo
-        private async Task<List<ListProductosDTO>> ObtenerListCodProd(string token)
+        //-- Mostrar Lista de Productos Nombre Asc
+        private async Task<List<ListProductosDTO>> ObtenerListNomProd(string token)
         {
             try
             {
-                return await _na_apiproductos.GET_ListProductosAsync(token);
+                var productos = await _na_apiproductos.GET_ListProductosAsync(token);
+                return productos.OrderBy(p => p.Producto).ToList();
             }
             catch (Exception ex)
             {
@@ -123,6 +126,21 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
+        //-- Mostrar Lista de Productos Codigo Asc
+        private async Task<List<ListProductosDTO>> ObtenerListCodProd(string token)
+        {
+            try
+            {
+                var productos = await _na_apiproductos.GET_ListProductosAsync(token);
+                return productos.OrderBy(p => p.CodigoProducto).ToList();
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error al obtener los productos: {ex.Message}");
+                return null;
+            }
+        }
+
 
         //-- btn buscar producto por codigo
         protected async void btn_BuscarcodProducto_Click(object sender, EventArgs e)
@@ -141,6 +159,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+                string token = await ObtenerTokenAsync("adm", "123");
+
                 var apiProd = new NA_APIproductos();
                 var prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
 
@@ -170,15 +190,18 @@ namespace jycboliviaASP.net.Presentacion
         }
         private void MostrarDetallesProducto(List<productoCodigoDetalleGet> prodCodigoDet)
         {
-            if (prodCodigoDet != null && prodCodigoDet.Count > 0)
+            if (prodCodigoDet != null)
             {
                 gv_prodCodDet.DataSource = prodCodigoDet;
                 gv_prodCodDet.DataBind();
-            }
+            } 
             else
             {
                 gv_prodCodDet.DataSource = null;
                 gv_prodCodDet.DataBind();
+
+                gv_prodCod.DataSource = null;
+                gv_prodCod.DataBind();
             }
         }
         private void limpiarGridsCodProducto()
@@ -190,9 +213,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-
-
-        /////////////////////////////////////////////           GET - BUSCAR VENTAS X PRODUCTO
+//////////////////////////////////////////////      GET - BUSCAR VENTAS X PRODUCTO
         protected async void btn_BuscarventProducto_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txt_ventProducto.Text.Trim();
@@ -210,11 +231,11 @@ namespace jycboliviaASP.net.Presentacion
             }
             try
             {
-                string usuario = "adm";
-                string password = "123";
 
+                string token = await ObtenerTokenAsync("adm", "123");
+                
                 var BuscCodProd = new NA_APIproductos();
-                List<productoCriterioGet> egresos = await BuscCodProd.get_ProductoVentasCriterioAsync(usuario, password, criterioBusqueda);
+                List<productoCriterioGet> egresos = await BuscCodProd.get_ProductoVentasCriterioAsync(token, criterioBusqueda);
 
                 if (egresos.Count > 0)
                 {
@@ -239,7 +260,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-/////////////////////////////////////////////           GET - BUSCAR COMPRAS X PRODUCTO
+/////////////////////////////////////////////       GET - BUSCAR COMPRAS X PRODUCTO
         protected async void btn_buscarCompras_Click(object sender, EventArgs e)
         {
             string criterioCodProducto = ddListCodProductos2.SelectedValue;
@@ -262,7 +283,6 @@ namespace jycboliviaASP.net.Presentacion
                 ShowAlert("Por favor, ingrese un codigo proveedor válido.");
                 return;
             }
-
             try
             {
                 string usuario = "adm";
@@ -298,7 +318,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                return await _na_apiproductos.Get_ListProveedorAsync(token);
+                var productos = await _na_apiproductos.Get_ListProveedorAsync(token);
+                return productos.OrderBy(p => p.NombreCompleto).ToList();
             }
             catch(Exception ex)
             {
@@ -309,16 +330,47 @@ namespace jycboliviaASP.net.Presentacion
 
 
 
-//////////////////////////////////////////// Otros
+
+
+////////        LISTA PRODUCTOS AUTOC
+        [WebMethod]
+        [ScriptMethod]
+        public async Task<List<string>> GetProductosAsync(string prefixText, int count)
+        {
+            List<string> productos = new List<string>();
+
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos pp = new NA_APIproductos();
+
+                var productosDTO = await pp.GET_ListProductosAsync(token);
+
+                productos = productosDTO
+                    .Where(p => p.Producto.ToLower().Contains(prefixText.ToLower()))
+                    .Select(p => p.Producto)
+                    .Take(count)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                ShowAlert($"Error: {ex.Message}");
+            }
+            return productos;
+        }
+
+
+/////////////////////////////////////////////// Otros
         private void ShowAlert(string message)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            string script = $"alert('{message.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
         private async Task<string> ObtenerTokenAsync(string usuario, string password)
         {
             NA_APIproductos prod = new NA_APIproductos();
             return await prod.GetTokenAsync(usuario, password);
         }
-
     }
 }

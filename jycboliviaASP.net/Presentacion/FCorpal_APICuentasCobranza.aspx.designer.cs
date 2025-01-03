@@ -24,6 +24,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_getCuentas;
 
         /// <summary>
+        /// Control updatePanelGet_IID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_IID;
+
+        /// <summary>
         /// Control gv_Cuentas.
         /// </summary>
         /// <remarks>

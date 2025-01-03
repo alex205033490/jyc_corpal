@@ -9,8 +9,10 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Text;
 using System.Web.UI.WebControls;
-using static jycboliviaASP.net.Negocio.NA_PruebaAPI;
 using Newtonsoft.Json.Linq;
+using System.Web.UI;
+using AjaxControlToolkit.HtmlEditor.ToolbarButtons;
+
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -39,7 +41,7 @@ namespace jycboliviaASP.net.Negocio
                 var json = JsonConvert.SerializeObject(datoP);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
+                var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
                 response.EnsureSuccessStatusCode();
 
                 var result = await response.Content.ReadAsStringAsync();
@@ -49,11 +51,10 @@ namespace jycboliviaASP.net.Negocio
             }
             catch (Exception ex)
             {
-                // Lanza una excepción con el detalle del error
-                Console.WriteLine($"Error al obtener el token de autenticación: {ex.Message}");
-                return string.Empty;
+                throw new ApplicationException($"Error al obtener el token de autenticacion: {ex.Message}", ex);
             }
         }
+
 
 // ---------------------------------------------    GET BUSCAR PRODUCTO POR CRITERIO
         public class ApiResponseProd
@@ -64,19 +65,16 @@ namespace jycboliviaASP.net.Negocio
         public async Task<List<productoCriterioGet>> get_ProductoCriterioAsync(string token, string criterio)
         {
             try
-            {
-                if (string.IsNullOrEmpty(token))
-                        {
-                            throw new Exception("Token is null or empty");
-                        }  
-
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
+            {  
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(searchResponseBody);
+
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseProd>(searchResponseBody);
                 
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<productoCriterioGet>();
@@ -100,62 +98,14 @@ namespace jycboliviaASP.net.Negocio
                 public decimal CostoUnitario {  get; set; }
                 //public string UrlImagen { get; set; }
         }
-
-
         
-        
-        // --------   FILTRADO DE PRODUCTO POR CODIGO
-        public class APIResponseListProductos
-        {
-            public bool EsValido { get; set; }
-            public List<ListProductosDTO> Resultado {  get; set; }
-        }
-        internal async Task<List<ListProductosDTO>> GET_ListProductosAsync(string token)
+        // ---------------------------------------------    GET BUSCAR PRODUCTO/VENTAS POR CRITERIO(producto)
+        internal async Task<List<productoCriterioGet>> get_ProductoVentasCriterioAsync(string token, string criterio)
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
-
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                var searchResponseBody = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<APIResponseListProductos>(searchResponseBody);
-
-                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListProductosDTO>();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Error al buscar producto", ex);
-            }
-        }
-        public class ListProductosDTO
-        {
-            public string CodigoProducto { get; set;}   
-            public string Producto { get; set; }
-            public string Descripcion { get; set; }
-            public int UnidadMedida { get; set; }
-            public string DescripcionUnidadMedida { get; set; }
-            public string AbreviaturaUnidadMedida { get; set; }
-            public Boolean ParaVenta { get; set; }
-            // public string UrlImagen
-        }
-
-
-// ---------------------------------------------    GET BUSCAR PRODUCTO/VENTAS POR CRITERIO(producto)
-        internal async Task<List<productoCriterioGet>> get_ProductoVentasCriterioAsync(string usuario, string password, string criterio)
-        {
-            try
-            {
-                string token = await GetTokenAsync(usuario, password);
-                if (string.IsNullOrEmpty(token))
-                {
-                    Console.WriteLine("No se pudo obtener el token.");
-                    return null;
-                }
-
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/ventas/buscar/adm/{Uri.EscapeDataString(criterio)}";
+                
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/ventas/buscar/adm/{Uri.EscapeDataString(criterio)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -184,7 +134,7 @@ namespace jycboliviaASP.net.Negocio
             try
             {
                 string token = await GetTokenAsync(usuario, password);
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/compras/buscar/{usuario}/{Uri.EscapeDataString(critCodProducto)}?proveedor={Uri.EscapeDataString(critProveedor)}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/compras/buscar/{usuario}/{Uri.EscapeDataString(critCodProducto)}?proveedor={Uri.EscapeDataString(critProveedor)}";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var searchResponse = await _httpClient.GetAsync(url);
@@ -199,8 +149,6 @@ namespace jycboliviaASP.net.Negocio
             {
                 throw new ApplicationException("No se encontraron registros con ese criterio de bísqueda.", ex);
             }
-
-
         }
         public class productoComprasDTO
         {
@@ -216,8 +164,7 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
-// ----------------------------------------- GET BUSCAR PROVEEDORES
-
+// --------------------------------------------- GET FILTRADO PROVEEDORES
         public class APIResponseListProveedor
         {
             public bool EsValido{ get; set; }
@@ -227,7 +174,7 @@ namespace jycboliviaASP.net.Negocio
         {
             try
             {
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/sincronizarProveedores";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/sincronizarProveedores";
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.GetAsync(url);
@@ -250,42 +197,31 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
-
 // ---------------------------------------------    GET BUSCAR PRODUCTO POR CODIGO PRODUCTO
         public class ApiResponseProdCodigo
         {
             public bool EsValido { get; set; }
             public productoCodigoGet Resultado { get; set; }
         }
-        public async Task<productoCodigoGet> get_ProductoCodigoAsync(string usu, string pass, string criterio)
+        internal async Task<productoCodigoGet> get_ProductoCodigoAsync(string usuario, string password, string criterio)
         {
             try
             {
-                Persona datoP = new Persona
+                string token = await GetTokenAsync(usuario, password);
+                if (string.IsNullOrEmpty(token))
                 {
-                    Username = usu,
-                    Password = pass
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/productos/{Uri.EscapeDataString(criterio)}/{usu}";
-
+                    Console.WriteLine("No se pudo obtener el token.");
+                    return null;
+                }
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/productos/{Uri.EscapeDataString(criterio)}/{usuario}";
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 var searchResponse = await _httpClient.GetAsync(url);
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponseProdCodigo>(searchResponseBody);
+
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
                     Console.WriteLine("API Response no valido o nulo");
@@ -295,8 +231,7 @@ namespace jycboliviaASP.net.Negocio
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Error:{ex.Message}");
                 return null;
             }
         }
@@ -330,5 +265,49 @@ namespace jycboliviaASP.net.Negocio
             }
         }
         
+// --------------------------------------------- VW CATALOGO PRODUCTOS
+        public class APIResponseListProductos
+        {
+            public bool EsValido { get; set; }
+            public List<ListProductosDTO> Resultado { get; set; }
+        }
+        internal async Task<List<ListProductosDTO>> GET_ListProductosAsync(string token)
+        {
+            try
+            {
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/sincronizarCatalogoProductos";
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var searchResponseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Respuesta de la API: {searchResponseBody}");
+                var apiResponse = JsonConvert.DeserializeObject<APIResponseListProductos>(searchResponseBody);
+                if (!apiResponse.EsValido)
+                {
+                    throw new ApplicationException("La respuesta de la API no es válida.");
+                }
+
+                return apiResponse.EsValido ? apiResponse.Resultado : new List<ListProductosDTO>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al buscar producto: {ex.Message}");
+                throw new ApplicationException("Error al buscar producto", ex);
+            }
+        }
+        public class ListProductosDTO
+        {
+            public string CodigoProducto { get; set; }
+            public string Producto { get; set; }
+            public string Descripcion { get; set; }
+            public int UnidadMedida { get; set; }
+            public string DescripcionUnidadMedida { get; set; }
+            public string AbreviaturaUnidadMedida { get; set; }
+            public Boolean ParaVenta { get; set; }
+            // public string UrlImagen
+        }
+
     }
 }

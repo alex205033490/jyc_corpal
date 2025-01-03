@@ -58,7 +58,7 @@
                     <div class="row">
                           <div class="col-12">
                             <label for="inputName5" class="form-label">Producto</label>                  
-                              <asp:TextBox ID="tx_producto" runat="server" class="form-control" OnTextChanged="tx_producto_TextChanged"></asp:TextBox>
+                              <asp:TextBox ID="tx_producto" runat="server" class="form-control"></asp:TextBox>
                               <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server" 
                                   TargetControlID="tx_producto"
                                   CompletionSetCount="12" 
@@ -246,22 +246,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!--    Solicitud Pedido UPON    -->
     <!--
     <div class="row">
@@ -282,7 +266,7 @@
 
                         <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                             <label class="form-label">Cliente:</label>
-                            <asp:TextBox ID="txt_nomCliente" runat="server" CssClass="form-control" placeholder="Ingrese un nombre" autocomplete="off" OnTextChanged="txt_nomCliente_TextChanged"></asp:TextBox>
+                            <asp:TextBox ID="txt_nomCliente" runat="server" CssClass="form-control" placeholder="Ingrese un nombre" autocomplete="off" ></asp:TextBox>
 
                         </div>
 
@@ -322,7 +306,7 @@
                     <div class="container_gvClientesPedidos col-lg-6">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gvPedidoClientes" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnSelectedIndexChanged="gv_Clientes_SelectedIndexChanged">
+                                <asp:GridView ID="gvPedidoClientes" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" >
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="true" HeaderText="Selecciona un cliente" SelectText="Seleccionar" />
                                         <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="NombreCompleto" />
@@ -341,7 +325,7 @@
                     <div class="row mb-1 col-lg-12">
                         <div class="item_nomProducto col-lg-3">
                             <p class="item-name mb-1">Producto:</p>
-                            <asp:TextBox ID="txt_nomProducto" runat="server" class="form-control mb-1" AutoPostBack="true" placeholder="Ingrese un nombre" AutoComplete="off" OnTextChanged="txt_nomProducto_TextChanged"></asp:TextBox>
+                            <asp:TextBox ID="txt_nomProducto" runat="server" class="form-control mb-1" AutoPostBack="true" placeholder="Ingrese un nombre" AutoComplete="off" ></asp:TextBox>
                         </div>
                         <div class="item_cantidad col-lg-2">
                             <p class="item-name mb-1">Cantidad:</p>
@@ -360,7 +344,7 @@
                         </div>
                     </div>
                     <div class="table-responsive col-lg-8">
-                        <asp:GridView ID="gv_PedidoGetProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" OnSelectedIndexChanged="gv_PedidoGetProductos_SelectedIndexChanged">
+                        <asp:GridView ID="gv_PedidoGetProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" >
                             <Columns>
                                 <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
                                 <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="CodProd" />

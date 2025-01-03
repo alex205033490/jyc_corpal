@@ -9,6 +9,7 @@ using Clases.ApiRest;
 using Newtonsoft.Json;
 using System.Text;
 using jycboliviaASP.net.Presentacion;
+using System.Diagnostics;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -25,23 +26,34 @@ namespace jycboliviaASP.net.Negocio
         //-------------------------------------     METODO PARA OBTENER TOKEN
         public async Task<string> GetTokenAsync(string usuario, string pass)
         {
-            var loginData = new
+            try
             {
-                username = usuario,
-                password = pass
-             
-            };
+                var loginData = new
+                {
+                    username = usuario,
+                    password = pass
+                };
 
-            var json = JsonConvert.SerializeObject(loginData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json = JsonConvert.SerializeObject(loginData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-            response.EnsureSuccessStatusCode();
+                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+            
+                response.EnsureSuccessStatusCode();
 
-            var result = await response.Content.ReadAsStringAsync();
-            dynamic data = JsonConvert.DeserializeObject(result);
+                var result = await response.Content.ReadAsStringAsync();
+                dynamic data = JsonConvert.DeserializeObject(result);
 
-            return data.Resultado.Token.ToString();
+                if (data?.Resultado?.Token == null)
+                {
+                    throw new ApplicationException("El token de autenticacion no se pudo obtener");
+                }
+                return data.Resultado.Token.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener el token de autenticación", ex);
+            }
         }
 
         //-------------------------------------     GET - PEDIDO CON CRITERIO
@@ -52,100 +64,65 @@ namespace jycboliviaASP.net.Negocio
             public PedidoDTO Resultado { get; set; }
         }
 
-        public async Task<PedidoDTO> ObtenerPedidoCriterioAsync(string usuario, string password, string numeroPedido)
+        public async Task<PedidoDTO> ObtenerPedidoCriterioAsync(string usuario, string password, string criterio)
         {
             try
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                string token = await GetTokenAsync(usuario, password);
 
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/pedidos/{Uri.EscapeDataString(numeroPedido)}?usuario={usuario}";
+                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/pedidos/{Uri.EscapeDataString(criterio)}?usuario={usuario}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await httpClient.GetAsync(url);
 
-                var searchResponse = await httpClient.GetAsync(url);
-                searchResponse.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
 
-                var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
+                var SearchResponseBody = await response.Content.ReadAsStringAsync();
+                var apiResponse = JsonConvert.DeserializeObject<ApiResponsePedCrit>(SearchResponseBody);
 
-                var apiResponse = JsonConvert.DeserializeObject<ApiResponsePedCrit>(searchResponseBody);
                 if (apiResponse == null || !apiResponse.EsValido)
                 {
-                    Console.WriteLine("API Response no valido o nulo");
-                    return null;
+                    throw new ApplicationException("La respuesta de la API no es válida o no se encontraron datos.");
                 }
                 return apiResponse.Resultado;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return null;
+                throw new ApplicationException("Error al obtener registros con el valor proporcionado.", ex);
             }
         }
 
-//-------------------------------------     GET - PEDIDO
+        //-------------------------------------     GET - PEDIDO C/S CRITERIO
         public class ApiResponsePedido
         {
             public bool EsValido { get; set; }
             public List<pedidoDTO2> Resultado { get; set; }
         }
-
         public async Task<List<pedidoDTO2>> ObtenerPedidoAsync(string usuario, string password, string criterio)
         {
             try
             //Obtener token de authenticacion
             {
-                Persona datoP = new Persona
-                {
-                    Username = usuario,
-                    Password = password
-                };
-                string json = JsonConvert.SerializeObject(datoP);
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
-                string token = loginResponse.Resultado.Token.ToString();
-
-                // URL API
-                string url = "http://192.168.11.62/ServcioUponApi/api/v1/pedidos/{usuario}";
+                string token = await GetTokenAsync(usuario, password);
+                string url = "http://192.168.11.63/ServcioUponApi/api/v1/pedidos/{usuario}";
                 if (!string.IsNullOrEmpty(criterio))
                 {
                     url += $"?criterio={Uri.EscapeDataString(criterio)}";
                 }
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
                 var searchResponse = await httpClient.GetAsync(url);
                 searchResponse.EnsureSuccessStatusCode();
 
                 var searchResponseBody = await searchResponse.Content.ReadAsStringAsync();
-                Console.WriteLine("Response Body: " + searchResponseBody);
-
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponsePedido>(searchResponseBody);
 
                 return apiResponse.EsValido ? apiResponse.Resultado : new List<pedidoDTO2>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<pedidoDTO2>();
+                throw new ApplicationException("Error al buscar pedido", ex);
             }
         }
-
         public class pedidoDTO2
         {
             public int NumeroPedido { get; set; }
@@ -159,25 +136,36 @@ namespace jycboliviaASP.net.Negocio
         //-------------------------------------     POST - PEDIDO
         public class ApiResponsePostPed
         {
+            public bool EsVliado {  get; set; }
+            public List<string> Mensajes {  get; set; }
             public int Resultado { get; set; }
         }
         public async Task<string> PostPedidoAsync(PedidoDTO pedido, string token)
         {
-          var json = JsonConvert.SerializeObject(pedido);
-          var content = new StringContent(json, Encoding.UTF8, "application/json");
-          httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-          
-          var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/pedidos", content);
-            response.EnsureSuccessStatusCode();
-          
-            var result = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine(result);
+            try
+            {
+                var json = JsonConvert.SerializeObject(pedido);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var apiresponse = JsonConvert.DeserializeObject<ApiResponsePostPed>(result);
-            return apiresponse.Resultado.ToString();
+                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/pedidos", content);
 
+                if(!response.IsSuccessStatusCode)
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error al registrar: {response.StatusCode}, {errorResponse}");
+                    return $"Error: {response.StatusCode} - {errorResponse}";
+                }
 
-          
+                var result = await response.Content.ReadAsStringAsync();
+                var apiResponse = JsonConvert.DeserializeObject<ApiResponsePostPed>(result);
+                return apiResponse.Resultado.ToString();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error general: {ex.Message}");
+                return $"Error general: {ex.Message}";
+            }
         }
         public class ItemPedidoDTO
         {
@@ -188,18 +176,17 @@ namespace jycboliviaASP.net.Negocio
           public decimal PrecioUnitario { get; set; }
           public decimal ImporteDescuento { get; set; }
           public decimal ImporteTotal { get; set; }
-        }
-        
+        }        
         public class PedidoDTO
         {
           public int NumeroPedido { get; set; }
-          public DateTime Fecha { get; set; }
-          public string Referencia { get; set; }
+          public string Fecha { get; set; } 
+          public string Referencia { get; set; } //op
           public int CodigoCliente { get; set; }
-          public decimal ImporteProductos { get; set; }
+          public decimal ImporteProductos { get; set; } 
           public decimal ImporteDescuentos { get; set; }
           public decimal ImporteTotal { get; set; }
-          public string Glosa { get; set; }
+          public string Glosa { get; set; } //op
           public List<ItemPedidoDTO> DetalleProductos { get; set; }
           public string Usuario { get; set; }
         }

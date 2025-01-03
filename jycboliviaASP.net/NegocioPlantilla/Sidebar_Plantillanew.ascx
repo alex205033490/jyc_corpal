@@ -144,65 +144,71 @@
 
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#prueba-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Clientes/Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-layout-text-window-reverse"></i><span>Clientes Upon</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
         <ul id="prueba-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li><a href="../Presentacion/FCorpal_prueba.aspx" id="mn_prueba" runat="server" ><i class="bi bi-circle"></i><span>API Inventario</span></a></li> 
         <li><a href="../Presentacion/FCorpal_APIClientes.aspx" id="mn_apiclientes" runat="server" ><i class="bi bi-circle"></i><span>Cliente/Proveedor Upon</span></a></li>
-        <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>Productos Upon</span></a></li>
-        
-        
+        </ul>
+        </li>
+
+
+        <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#productosapi-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="productosapi-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li><a href="../Presentacion/FCorpal_APIProductos.aspx" id="mn_apiproductos" runat="server" ><i class="bi bi-circle"></i><span>Productos Upon</span></a></li>
         </ul>
         </li>
 
       <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Inventario API</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-layout-text-window-reverse"></i><span>Inventario UPON</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
 
         <ul id="inventario-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li><a href="../Presentacion/FCorpal_APIInventarioIngresos.aspx" id="mn_apiinventariosingresos" runat="server" ><i class="bi bi-circle"></i><span>API Inventario Ingresos</span></a></li>
-        <li><a href="../Presentacion/FCorpal_APIInventarioEgresos.aspx" id="mn_apiinventariosegresos" runat="server" ><i class="bi bi-circle"></i><span>API Inventario Egresos</span></a></li>
-        <li><a href="../Presentacion/FCorpal_APIInventarioTraspasos.aspx" id="mn_apiinventariostraspasos" runat="server" ><i class="bi bi-circle"></i><span>API Inventario Traspasos</span></a></li>
+        <li><a href="../Presentacion/FCorpal_APIInventarioIngresos.aspx" id="mn_apiinventariosingresos" runat="server" ><i class="bi bi-circle"></i><span>Inventario Ingresos Upon</span></a></li>
+        <li><a href="../Presentacion/FCorpal_APIInventarioEgresos.aspx" id="mn_apiinventariosegresos" runat="server" ><i class="bi bi-circle"></i><span>Inventario Egresos Upon</span></a></li>
+        <li><a href="../Presentacion/FCorpal_APIInventarioTraspasos.aspx" id="mn_apiinventariostraspasos" runat="server" ><i class="bi bi-circle"></i><span>Inventario Traspasos  Upon</span></a></li>
         </ul>
         </li>
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIproduccion-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Producción API</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Producción UPON</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APIproduccion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APIProduccion.aspx" id="mn_APIProduccion" runat="server" ><i class="bi bi-circle"></i><span>API Produccion</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APIProduccion.aspx" id="mn_APIProduccion" runat="server" ><i class="bi bi-circle"></i><span>Producción Upon</span></a></li>
           </ul>
           </li>
 
 
         <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#APIpedido-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Pedido API</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#APIpedidoVent-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Pedido/Venta UPON</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-          <ul id="APIpedido-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APIPedido.aspx" id="A2" runat="server" ><i class="bi bi-circle"></i><span>API Pedido</span></a></li>
+          <ul id="APIpedidoVent-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li><a href="../Presentacion/FCorpal_APIPedido.aspx" id="A2" runat="server" ><i class="bi bi-circle"></i><span>Pedido Upon</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APIVentas.aspx" id="A4" runat="server" ><i class="bi bi-circle"></i><span>Ventas Upon</span></a></li>
           </ul>
           </li>
 
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICuentas-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas API</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas UPON</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APICuentas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza GET/POST</span></a></li>
+          <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza Upon</span></a></li>
           </ul>
           </li>
 
 
         <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#APIVentas-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Compras/Ventas Upon</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#APICompras-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Compras Upon</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-          <ul id="APIVentas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li><a href="../Presentacion/FCorpal_APIVentas.aspx" id="A4" runat="server" ><i class="bi bi-circle"></i><span>Ventas Upon</span></a></li>
+          <ul id="APICompras-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li><a href="../Presentacion/FCorpal_APICompras.aspx" id="A1" runat="server" ><i class="bi bi-circle"></i><span>Compras Upon</span></a></li>
           </ul>
             

@@ -33,6 +33,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_InvIngresoGET;
 
         /// <summary>
+        /// Control updatePanelGet_IID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_IID;
+
+        /// <summary>
         /// Control gv_Inventario.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_invIngreso2;
 
         /// <summary>
+        /// Control updatePanelGet_II.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_II;
+
+        /// <summary>
         /// Control gv_invIngresos2.
         /// </summary>
         /// <remarks>
@@ -76,6 +94,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_invIngresos2;
+
+        /// <summary>
+        /// Control updatePanelPost_II.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelPost_II;
 
         /// <summary>
         /// Control txt_Referencia.
@@ -96,22 +123,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.DropDownList dd_codMoneda;
 
         /// <summary>
-        /// Control txt_codAlmacen.
+        /// Control dd_CodAlmacenIIngreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codAlmacen;
+        protected global::System.Web.UI.WebControls.DropDownList dd_CodAlmacenIIngreso;
 
         /// <summary>
-        /// Control txt_motMovimiento.
+        /// Control dd_motMovI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_motMovimiento;
+        protected global::System.Web.UI.WebControls.DropDownList dd_motMovI;
 
         /// <summary>
         /// Control txt_itemAnalisis.
@@ -130,6 +157,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_glosa;
+
+        /// <summary>
+        /// Control updatePanelPost_IIDetProd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelPost_IIDetProd;
 
         /// <summary>
         /// Control txt_producto.

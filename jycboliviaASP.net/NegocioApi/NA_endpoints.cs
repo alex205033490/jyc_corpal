@@ -38,7 +38,7 @@ namespace jycboliviaASP.net.NegocioApi
             };
 
             string json = JsonConvert.SerializeObject(datoP);
-            dynamic respuesta = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
+            dynamic respuesta = api.Post("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", json);
             string token = respuesta.Resultado.Token.ToString();
             return token;
         }
@@ -62,7 +62,7 @@ namespace jycboliviaASP.net.NegocioApi
             };
 
             string json = JsonConvert.SerializeObject(datoP);
-            string url = "http://192.168.11.62/ServcioUponApi/api/v1/auth/login";
+            string url = "http://192.168.11.63/ServcioUponApi/api/v1/auth/login";
             dynamic respuesta = api.Post(url, json);
             string codigo = respuesta.Resultado.CodVendedor.ToString();
             return int.Parse(codigo);
@@ -73,7 +73,7 @@ namespace jycboliviaASP.net.NegocioApi
             string token = get_TokenUsuario(usuario, password);
             string parametro = "criterio=" + nombreProducto + "&usuario=" + usuario;
 
-            string url = "http://192.168.11.62/ServcioUponApi/api/v1/almacenes/productos/Busqueda?";
+            string url = "http://192.168.11.63/ServcioUponApi/api/v1/almacenes/productos/Busqueda?";
             url = url + parametro;
             dynamic respuesta = api.Get_2(url, token);
             return  respuesta;
@@ -131,7 +131,7 @@ namespace jycboliviaASP.net.NegocioApi
             };
 
             string json = JsonConvert.SerializeObject(compra);
-            string url = "http://192.168.11.62/ServcioUponApi/api/v1/compras";
+            string url = "http://192.168.11.63/ServcioUponApi/api/v1/compras";
             dynamic respuesta = api.Post(url, json, Token);
             string EsValido = respuesta.EsValido.ToString();
             bool EsValido_bandera = Convert.ToBoolean(EsValido);           
@@ -151,7 +151,7 @@ namespace jycboliviaASP.net.NegocioApi
                 Password = passwordUpon
             };
             string json = JsonConvert.SerializeObject(datoP);
-            dynamic respuesta = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
+            dynamic respuesta = api.Post("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", json);
             string dato = respuesta.EsValido.ToString();
             return Convert.ToBoolean(dato);
         }
@@ -234,7 +234,7 @@ namespace jycboliviaASP.net.NegocioApi
             };
 
             string json1 = JsonConvert.SerializeObject(venta1);
-            string url = "http://192.168.11.62/ServcioUponApi/api/v1/ventas";
+            string url = "http://192.168.11.63/ServcioUponApi/api/v1/ventas";
             dynamic respuesta = api.Post(url, json1, token);
             string EsValido = respuesta.EsValido.ToString();
             bool EsValido_bandera = Convert.ToBoolean(EsValido);

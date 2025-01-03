@@ -11,120 +11,172 @@ using System.Web.UI.WebControls;
 using static jycboliviaASP.net.Negocio.NA_APIcompras;
 
 using System.Threading.Tasks;
+using static jycboliviaASP.net.Negocio.NA_APIProveedores;
+using static jycboliviaASP.net.Negocio.NA_APIproductos;
+using System.Web.Services.Description;
 
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APICompras : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+                var proveedor = await ObtenerListCodProveedor(token);
+
+                dd_codProveedor.DataSource = proveedor;
+                dd_codProveedor.DataTextField = "NombreCompleto";
+                dd_codProveedor.DataValueField = "CodigoProveedor";
+                dd_codProveedor.DataBind();
+                dd_codProveedor.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un proveedor", ""));
+
+                List<Productos> productos = ObtenerProductosDesdeSession();
+                gv_productAgregados.DataSource = productos;
+                gv_productAgregados.DataBind();             
+            }
         }
 
         //------------------------------------  POST - POST API COMPRAS
         protected async void btn_registrarCompra_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
-                return;
-            var compra = CrearCompra();
-
             try
             {
-                var result = await RegistrarCompra(compra);
-                if (result != null)
+                if (ValidarCampos())
                 {
-                    showalert($"Compra Registrada. Número de Compra: {result}");
-                    LimpiarCampos();
+                    return;
                 }
-                else
+
+                List<Productos> productos = ObtenerProductosDesdeSession();
+
+                if (!ValidarProductosCompras(productos))
                 {
-                    showalert("Ocurrio un error al registrar la compra.");
+                    showalert("Tu lista de productos esta vacia.");
+                    return;
                 }
+
+                DTOCompras compras = CrearCompra(productos);
+
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                string resultado = await RegistrarCompraAsync(compras, token);
+
+                LimpiarCamposRegistrarCompra();
+            
+                LimpiarCamposADDProductosCompra();
+            
+                showalert($"Compra Registrado. Nro de registros: {resultado}");
             }
+            
             catch (Exception ex)
             {
-                showalert($"Error inesperado: {ex.Message}");
+                // Captura cualquier otra excepción inesperada
+                showalert($"Error inesperado: {ex.Message}.");
             }
         }
-        
-        private DTOCompras CrearCompra()
+
+        private bool ValidarProductosCompras(List<Productos> productos)
         {
-            decimal costoTotalProductos = 0;
-            var detallesProducto = ObtenerDetallesProducto();
-
-            foreach (var detalle in detallesProducto)
+            try
             {
-                costoTotalProductos += detalle.ImporteTotal;
+                return productos != null && productos.Count > 0;
+            
+            } catch(Exception ex)
+            {
+                showalert($"Error validar productos: {ex.Message}");
+                return false;
             }
-
-            var compra = new DTOCompras
-            {
-                NumeroCompra = 0,
-                Fecha = DateTime.Now,
-                Referencia = txt_referencia.Text,
-                ImporteProductos = costoTotalProductos,
-                ImporteDescuento = decimal.Parse(txt_importe_Descuentos.Text),
-                ImporteTotal = costoTotalProductos - decimal.Parse(txt_importe_Descuentos.Text),// ImporteProductos-ImporteDescuento
-                CodigoMoneda = int.Parse(dd_codMoneda.SelectedValue),
-                CodigoProveedor = int.Parse(txt_codProveedor.Text),
-                CodigoDistribucionGastos = int.Parse(txt_codDistribucionGastos.Text),
-                Pagos = ObtenerDetallesPagos(),
-                //Gastos = ObtenerDetallesGastos(),
-                FacturaPosterior = Boolean.Parse(dd_fPosterior.SelectedValue),
-                Factura = ObtenerDetalleFactura(),
-                Glosa = txt_glosa.Text,
-                DetalleProductos = ObtenerDetallesProducto(),
-                Usuario = "adm"
-            };
-            return compra;
         }
 
-        private List<DetalleProductoCompra> ObtenerDetallesProducto()
+        private DTOCompras CrearCompra(List<Productos> productos)
         {
-            var detalles = new List<DetalleProductoCompra>();
-            int rowCount = Request.Form.AllKeys.Length;
+            decimal impDescuento = 0;
+            string importeDescuentoTx = txt_importe_Descuentos.Text.Trim();
+            if (string.IsNullOrWhiteSpace(importeDescuentoTx))
+            {
+                impDescuento = 0;
+            }
+            else
+            {
+                if(!decimal.TryParse(importeDescuentoTx, out impDescuento) || impDescuento < 0)
+                {
+                    showalert("El descuento debe ser un número válido mayor o igual que 0.");
+                    return null;
+                }
+            }
+
+            decimal importeProductosTx = productos.Sum(p => p.importeTotal);
+            //decimal importDescuentoTx = decimal.Parse(txt_importe_Descuentos.Text);
+            decimal importeTotalTx = importeProductosTx - impDescuento;
+            decimal totalIva = (importeProductosTx * 13)/100 ;
+            decimal importeNeto = importeProductosTx - totalIva;
 
             try
             {
-                for (int i = 0; i < rowCount; i++)
+                
+                return new DTOCompras
                 {
-                    if (Request.Form["codigoProducto" + i] != null)
+                    NumeroCompra = 0,
+                    Fecha = "2024-11-30T00:00:00",
+                    Referencia = txt_referencia.Text,
+                    ImporteProductos = importeProductosTx,
+                    ImporteDescuento = impDescuento,
+                    ImporteTotal = importeTotalTx,
+                    CodigoMoneda = int.Parse(dd_codMoneda.SelectedValue),
+                    CodigoProveedor = int.Parse(dd_codProveedor.SelectedValue),
+                    CodigoDistribucionGastos = int.Parse(dd_codDistGastos.SelectedValue),
+                    Glosa = txt_glosa.Text,
+                    
+                    Pagos = new PagosDTO
                     {
-                        decimal importeDescuento = decimal.Parse(Request.Form["importeDescuento" + i], CultureInfo.InvariantCulture);
-                        decimal cantidad = decimal.Parse(Request.Form["cantidad" + i], CultureInfo.InvariantCulture);
-                        decimal precioUnitario = decimal.Parse(Request.Form["precioUnitario" + i], CultureInfo.InvariantCulture);
-                        decimal costoTotal = (cantidad * precioUnitario)- importeDescuento;
+                        TotalEfectivo = importeProductosTx,
+                    },
 
-                        var detalle = new DetalleProductoCompra
-                        {
-                            NumeroItem = 0,
-                            CodigoProducto = Request.Form["codigoProducto" + i],
-                            Cantidad = cantidad,
-                            CodigoUnidadMedida = int.Parse(Request.Form["codUnidadMedida" + i]),
-                            PrecioUnitario = precioUnitario,
-                            ImporteDescuento = importeDescuento,
-                            PorcentajeGasto = 0,
-                            ImporteTotal = costoTotal
-                        };
-                        detalles.Add(detalle);
-                    }
-                }
+                    Factura = new FacturaDTO
+                    {
+                        NIT_CI = txt_nit.Text,
+                        RazonSocial = txt_razonSocial.Text,
+                        NumeroFactura = txt_nFactura.Text,
+                        CodigoAutorizacion = txt_codAutorizacion.Text,
+                        CodigoControl = txt_codControl.Text,
+                        ImporteTotal = 0, 
+                        ImporteDescuento = 0,
+                        ImporteGift = 0,
+                        ImporteNeto = 0,
+                        AplicaCredictoFiscal = bool.Parse(dd_apCredFiscal.SelectedValue)
+                    },
+                    DetalleProductos = productos.Select(p => new DetalleProductoCompra
+                    {
+                        NumeroItem = 0,
+                        CodigoProducto = p.codigoProducto,
+                        Cantidad = p.cantidad,
+                        CodigoUnidadMedida = p.codigoUnidadMedida,
+                        PrecioUnitario = p.precioUnitario,
+                        ImporteDescuento = p.importeDescuento,
+                        PorcentajeGasto = p.porcentajeGasto,
+                        ImporteTotal = p.importeTotal
+                    }).ToList(),
+                    
+
+                    Usuario = "adm"
+                };
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                showalert($"Error al obtener detalles del producto: {ex.Message}");
+                showalert($"Error: {ex.Message}");
                 return null;
             }
-            return detalles;
         }
-        private async Task<string> RegistrarCompra(DTOCompras compras)
+
+        private async Task<string> RegistrarCompraAsync(DTOCompras compras, string token)
         {
             try
             {
-                var api = new NA_APIcompras();
-                var token = await api.ObtenerTokenAsync("adm", "123");
+                NA_APIcompras negocio = new NA_APIcompras();
 
-                var result = await api.PostComprasAsync(compras, token);
-                return result;
+                string resultado = await negocio.PostComprasAsync(compras, token);
+                return resultado;
             }
             catch (Exception ex)
             {
@@ -132,170 +184,333 @@ namespace jycboliviaASP.net.Presentacion
                 return null;
             }
         }
-        private PagosDTO ObtenerDetallesPagos()
+
+        private void LimpiarCamposRegistrarCompra()
         {
-            decimal costoTotalProd = 0;
-            var detallesProducto = ObtenerDetallesProducto();
-            foreach(var detalle in detallesProducto)
-            {
-                costoTotalProd += detalle.ImporteTotal;
-            }
-            try
-            {
-                var pagos = new PagosDTO
-                {
-                    TotalEfectivo = costoTotalProd,
-                    TotalCredito = 0,
-                    TotalCheques = 0,
-                    TotalDeposito = 0,
-                    //Credito = ObtenerDetallesCredito(),
-                    //Cheque = ObtenerDetallesCheque(),
-                    //Deposito = ObtenerDetallesDeposito(),
-                };
-                return pagos;
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al obtener detalles del pago: {ex.Message}");
-                return null;
-            }
-        }
-        private GastosDTO ObtenerDetallesGastos()
-        {
-            try
-            {
-                var gastos = new GastosDTO
-                {
-                    CodigoGasto = 0,
-                    Importe = 0,
-                    CodigoMoneda = 0,
-                    AplicaIva = false
-                };
-                return gastos;
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al obtener detalles del pago: {ex.Message}");
-                return null;
-            }
+            // Datos compra
+            txt_referencia.Text = string.Empty;
+            txt_importe_Descuentos.Text = string.Empty;
+            dd_codMoneda.SelectedIndex = 0;
+            dd_codProveedor.SelectedIndex = 0;
+            dd_codDistGastos.SelectedIndex = 0;
+            txt_glosa.Text = string.Empty;
+
+            // Datos Factura
+            txt_nit.Text = string.Empty;
+            txt_razonSocial.Text = "";
+            txt_nFactura.Text = "";
+            txt_codAutorizacion.Text = string.Empty;
+            txt_codControl.Text = string.Empty;
+            dd_apCredFiscal.SelectedIndex = 0;
+
+            // GV
+            Session["ProductosCompras"] = null;
+
+            gv_productAgregados.DataSource = null;
+            gv_productAgregados.DataBind();
         }
 
-        private CreditoDTO ObtenerDetallesCredito()
+        private void LimpiarCamposADDProductosCompra()
         {
-            try
-            {
-                var credito = new CreditoDTO
-                {
-                    TipoCuenta = 0,
-                    DiasCredito = 0
-                };
-                return credito;
-            }
-            catch(Exception ex)
-            {
-                showalert($"Error al obtener detalles del credito: {ex.Message}");
-                return null;
-            }
-        }
-        private ChequeDTO ObtenerDetallesCheque()
-        {
-            try
-            {
-                var cheque = new ChequeDTO
-                {
-                    CodigoBanco = 0,
-                    NumeroCuenta = "",
-                    CodigoCheque = 0, 
-                    NumeroCheque = 0,
-                    FechaGiro = ""
-                };
-                return cheque;
-            }
-            catch(Exception ex)
-            {
-                showalert($"Error al obtener detalles del cheque: {ex.Message}");
-                return null;
-            }
-        }
-        private DepositoDTO ObtenerDetallesDeposito()
-        {
-            try
-            {
-                var deposito = new DepositoDTO
-                {
-                    CodigoBanco = 0,
-                    NumeroCuenta = "",
-                    Referencia = ""
-                };
-                return deposito;
-            }
-            catch (Exception ex) 
-            {
-                showalert($"Error al obtener detalles del deposito: {ex.Message}");
-                return null;
-            }
-        }
-        private FacturaDTO ObtenerDetalleFactura()
-        {
-            try
-            {
-                var factura = new FacturaDTO
-                {
-                    NIT_CI = "9759005",//txt_nit.Text,
-                    RazonSocial = "rs 19-11",//txt_razonSocial.Text,
-                    NumeroFactura = "nrof 19-11",//txt_nFactura.Text,
-                    CodigoAutorizacion = "ca 123",//txt_codAutorizacion.Text,
-                    CodigoControl = "cc 123",//txt_codControl.Text,
-                    ImporteTotal = 10,//decimal.Parse(txt_imptotal.Text, CultureInfo.InvariantCulture),
-                    ImporteDescuento = 0,//decimal.Parse(txt_impDescuento.Text, CultureInfo.InvariantCulture),
-                    ImporteGift = 0,//decimal.Parse(txt_impGift.Text, CultureInfo.InvariantCulture),
-                    ImporteNeto = 0,//decimal.Parse(txt_impNeto.Text, CultureInfo.InvariantCulture),
-                    AplicaCredictoFiscal = true,//Boolean.Parse(dd_apCredFiscal.SelectedValue)
-                };
-                return factura;
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al obtener detalle de la factura: {ex.Message}");
-                return null;
-            }
+            txt_producto.Text = string.Empty;
+            txt_cantProducto.Text = string.Empty;
+            txt_impDescProd.Text = string.Empty;
+            txt_porceGastos.Text = string.Empty;
+
+            Session.Remove("SCnombre");
+            Session.Remove("SCcodigoProducto");
+            Session.Remove("SCcodigoUnidadMedida");
+            Session.Remove("SCprecioUnitario");
         }
 
         private bool ValidarCampos()
         {
-            if (string.IsNullOrEmpty(txt_referencia.Text.Trim()))
+            
+            if (string.IsNullOrEmpty(dd_codMoneda.SelectedValue))
             {
-                showalert("Por favor, Complete el campo referencia");
-                return false;
+                showalert("Por favor, seleccione un tipo de moneda válido.");
+                return true;
             }
-            if (string.IsNullOrEmpty(txt_importe_Descuentos.Text.Trim()))
+            if (string.IsNullOrEmpty(dd_codProveedor.SelectedValue))
             {
-                showalert("Por favor, Complete el campo importe descuento");
-                return false;
+                showalert("Por favor, seleccione un proveedor válido.");
+                return true;
             }
-            if (string.IsNullOrEmpty(txt_codProveedor.Text.Trim()))
+            if (string.IsNullOrEmpty(txt_razonSocial.Text))
             {
-                showalert("Por favor, Complete el campo código proveedor");
-                return false;
+                showalert("Por favor, complete el campo razón social.");
+                return true;
             }
-            if (string.IsNullOrEmpty(txt_codDistribucionGastos.Text.Trim()))
+            if(string.IsNullOrEmpty(txt_nFactura.Text))
             {
-                showalert("Por favor, Complete el campo codigo Distribución Gastos");
-                return false;
-            }
-            return true;
+                showalert("Por favor, complete el campo número de factura.");
+            }    
+
+            return false;
         }
-        private void LimpiarCampos()
+
+
+// - - - - - - - - DD OBTENER LISTA PROVEEDORES
+        private async Task<List<ProveedorDTO>> ObtenerListCodProveedor(string token)
         {
-            txt_referencia.Text = "";
-            txt_importe_Descuentos.Text = "";
-            txt_codProveedor.Text = "";
-            txt_codDistribucionGastos.Text = "";
-            txt_glosa.Text = "";
+            try
+            {
+                NA_APIProveedores negocio = new NA_APIProveedores();
+                List<ProveedorDTO> proveedores = await negocio.Get_ListProveedorAsync(token);
+
+                var proveedoresOrd = proveedores.OrderBy(p => p.NombreCompleto).ToList();
+                return proveedoresOrd;
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al obtener la lista de proveedores: {ex.Message}");
+                return null;
+            }
         }
+
+
+//- - - - - - - - Buscar Productos GV
+        protected void txt_producto_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_producto.Text.Trim();
+            if (!string.IsNullOrEmpty(criterio))
+            {
+                cargarProductosVW(criterio);
+            }
+        }
+        private async void cargarProductosVW(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIproductos negocio = new NA_APIproductos();
+                List<productoCriterioGet> productos = await negocio.get_ProductoCriterioAsync(token, criterio); 
+
+                gv_listProdCompras.DataSource = productos;
+                gv_listProdCompras.DataBind();
+
+                gv_listProdCompras.Visible = productos.Count > 0;
+
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al realizar la busqueda: {ex.Message}");
+            }
+        }
+
+
+// - - - - - - - - Seleccionar Producto Del GV
+        protected void gv_listProdCompras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gv_listProdCompras.SelectedIndex;
+            GridViewRow row = gv_listProdCompras.Rows[index];
+
+            string nombre = row.Cells[1].Text;
+            string codigoProducto = row.Cells[2].Text;
+            int codigoUnidadMedida = int.Parse(row.Cells[3].Text);
+            string precioUnitario = row.Cells[4].Text;
+
+            txt_producto.Text = nombre;
+
+            Session["SCnombre"] = nombre;
+            Session["SCcodigoProducto"] = codigoProducto;
+            Session["SCcodigoUnidadMedida"] = codigoUnidadMedida;
+            Session["SCprecioUnitario"] = precioUnitario;
+
+            gv_listProdCompras.Visible = false;
+        }
+
+
+        // - - - - - - - - Elimnar Fila GV
+        protected void gv_productAgregados_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Eliminar")
+            {
+                string codigoProducto = (e.CommandArgument.ToString());
+                List<Productos> productos = Session["ProductosCompras"] as List<Productos>;
+                var productoAEliminar = productos.FirstOrDefault(p => p.codigoProducto == codigoProducto);
+
+                if(productoAEliminar != null)
+                {
+                    productos.Remove(productoAEliminar);
+                }
+                Session["ProductosCompras"] = productos;
+
+                gv_productAgregados.DataSource = productos;
+                gv_productAgregados.DataBind();
+            }
+        }
+
+
+        // - - - - - - - - - btn ADD Productos a la lista GV
+        protected void btn_addProd_Click(object sender, EventArgs e)
+        {
+            Productos nuevoProducto = CrearNuevoProductoCompra();
+
+            if(nuevoProducto != null)
+            {
+                List<Productos> listaProductos = ObtenerProductosDesdeSession();
+
+                listaProductos.Add(nuevoProducto);
+
+                Session["ProductosCompras"] = listaProductos;
+
+                gv_productAgregados.DataSource = listaProductos;
+                gv_productAgregados.DataBind();
+
+                LimpiarCamposADDProductosCompra();
+            }
+            else
+            {
+                showalert("Ingrese un producto válido");
+            }
+        }
+
+        private Productos CrearNuevoProductoCompra()
+        {
+            try
+            {
+                if (Session["SCnombre"] ==null || string.IsNullOrWhiteSpace(Session["SCnombre"].ToString()))
+                {
+                    showalert("Debe buscar y seleccionar el nombre del producto.");
+                    return null;
+                }
+                string producto = (Session["SCnombre"].ToString());
+                //- - -
+                decimal cantidad = 0;
+                if(!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
+                {
+                    showalert("La cantidad del producto debe ser un número válido mayor que cero.");
+                    return null;
+                }
+                //- - - 
+                if (Session["SCcodigoProducto"] == null || string.IsNullOrWhiteSpace(Session["SCcodigoProducto"].ToString()))
+                {
+                    showalert("El codigo producto no esta disponible en la sessión");
+                    return null;
+                }
+                string codigoProducto = (Session["SCcodigoProducto"].ToString());
+                //- - -
+                if (Session["SCcodigoUnidadMedida"] == null || string.IsNullOrWhiteSpace(Session["SCcodigoUnidadMedida"].ToString()))
+                {
+                    showalert("La unidad medida del producto no esta disponible en la sesión");
+                    return null;
+                }
+                int codigoUnidadMedida = int.Parse(Session["SCcodigoUnidadMedida"].ToString());
+                //- - -
+                if (Session["SCprecioUnitario"] == null || string.IsNullOrWhiteSpace(Session["SCprecioUnitario"].ToString()))
+                {
+                    showalert("El precio del producto no esta disponible en la sesión");
+                    return null;
+                }
+                decimal precioUnitario = 1;//decimal.Parse(Session["SCprecioUnitario"].ToString());
+                //- - - 
+                decimal importeDescuento = 0;
+                string descuentoText = txt_impDescProd.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(descuentoText))
+                {
+                    importeDescuento = 0;
+                }
+                else
+                {
+                    if (!decimal.TryParse(descuentoText, out importeDescuento) || importeDescuento < 0)
+                    {
+                        showalert("El descuento del producto debe ser un número válido mayor o igual que 0.");
+                        return null;
+                    }
+                }
+                //- - -
+                decimal porcentajeGasto = 0;
+                string porcGastoText = txt_porceGastos.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(porcGastoText))
+                {
+                    porcentajeGasto = 0;
+                }
+                else
+                {
+                    if (!decimal.TryParse(descuentoText, out porcentajeGasto) || porcentajeGasto < 0)
+                    {
+                        showalert("El porcentaje de gastos debe ser un número válido mayor o igual que 0.");
+                        return null;
+                    }
+                }
+
+                decimal importeTotal = 0;
+                importeTotal = (cantidad * precioUnitario) - importeDescuento;
+
+                return new Productos
+                {
+                    codigoProducto = codigoProducto,
+                    nombre = producto,
+                    cantidad = cantidad,
+                    codigoUnidadMedida = codigoUnidadMedida,
+                    precioUnitario = precioUnitario,
+                    importeDescuento = importeDescuento,
+                    porcentajeGasto = porcentajeGasto,
+                    importeTotal = importeTotal
+                };
+
+            }
+            catch(FormatException ex)
+            {
+                showalert($"Error en formato de datos: {ex.Message}");
+                return null;
+            }
+            catch(NullReferenceException ex)
+            {
+                showalert($"Error en referencia nula: {ex.Message}");
+                return null;
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al crear el producto: {ex.Message}");
+                return null;
+            }
+        }
+        public class Productos
+        {
+            public int numeroItem { get; set; }
+            public string nombre {  get; set; }
+            public string codigoProducto {  get; set; }
+            public decimal cantidad {  get; set; }
+            public int codigoUnidadMedida {  get; set; }
+            public decimal precioUnitario {  get; set; }
+            public decimal importeDescuento {  get; set; }
+            public decimal porcentajeGasto {  get; set; }
+            public decimal importeTotal {  get; set; }
+        }
+
+        List<Productos> productos = new List<Productos>();
+
+        private List<Productos> ObtenerProductosDesdeSession()
+        {
+            List<Productos> productos = Session["ProductosCompras"] as List<Productos>;
+            if (productos == null)
+            {
+                productos = new List<Productos>();
+            }
+            return productos;
+        }
+
+
+
+
+
+// - - - - - - - -
         private void showalert(string message)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{message}');", true);
+            string script = $"alert('{message.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIProveedores negocio = new NA_APIProveedores();
+            return await negocio.GetTokenAsync(usuario, password);
+        }
+
+
     }
 }

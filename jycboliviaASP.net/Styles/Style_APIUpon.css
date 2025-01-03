@@ -22,12 +22,40 @@
 }
 
 /********************************   FCORPAL API Inventario, Egreso, Traspaso  ********************************/
-.container-GETIIngresoDet, .container-GETIIngreso, .container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet {
+.container-GETIIngresoDet, .container-GETIIngreso, .container-POSTIIngreso, .container-GETIEgresoDet, .container-GETIEgreso, .container-POSTIEgreso, .container-GETITraspaso, .container-GETITraspasoDet, .container-POSTITraspaso {
     background-color: #ff75000a;
     border: 2px solid #7D7D7D; /* Color plomo */
     box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
     font-size: small;
 }
+#gv_listProdIngresos tr:hover {
+    background-color: red;
+    color:white;
+}
+.dd_fsmall{
+    font-size:0.75rem;
+}
+
+
+.container_gvProdAddII tr{
+    background-color: #ff950321; /* Color de fondo suave para las filas */
+}
+
+    /* Estilo para las celdas del encabezado */
+.container_gvProdAddII th{
+    background-color: #ff8900b5; /* Naranja fuerte para el encabezado */
+    color: white; /* Color de texto blanco */
+    text-align: center; /* Centrar el texto en el encabezado */
+    padding: 8px; /* Espaciado en el encabezado */
+}
+
+    /* Estilo para las celdas de datos */
+.container_gvProdAddII td{
+    text-align: center; /* Centrar el texto en las celdas de datos */
+    padding: 8px; /* Espaciado en las celdas de datos */
+}
+
+
 
 
 
@@ -74,6 +102,14 @@
     font-size: 12px; /* Cambia el valor según el tamaño que desees */
 }
 
+
+/*************************  API VENTAS      *************************/
+.container-GETVentas, .container-GETVentasDet {
+    background-color: #ff75000a;
+    border: 2px solid #7D7D7D; /* Color plomo */
+    box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
+    font-size: small;
+}
 
 
 
@@ -329,9 +365,6 @@ input.inputText, input.inputNumber {
 
 
 
-
-
-
 /*################################################         ################################################*/
 /********************************    FCORPAL INSUMO-CREADO      ********************************/
 .container-ICreadoADD {
@@ -404,4 +437,29 @@ input.inputText, input.inputNumber {
     font-size: small;
     font-weight:normal;
     color: white;
+}
+
+/*  TXT AUTOCOMPLETE    */
+
+/* Estilo para la lista de sugerencias */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0;
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListHighlightedItem {
+    background-color: Green;
+    color: White;
 }

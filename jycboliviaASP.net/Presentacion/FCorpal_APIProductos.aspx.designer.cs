@@ -33,6 +33,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_nomProducto;
 
         /// <summary>
+        /// Control txt_nomProducto_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender txt_nomProducto_AutoCompleteExtender;
+
+        /// <summary>
         /// Control btn_nomProducto.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_nomProducto;
+
+        /// <summary>
+        /// Control updatePanelGetProdCrit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGetProdCrit;
 
         /// <summary>
         /// Control gv_prodNombre.
@@ -76,6 +94,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_BuscarcodProducto;
+
+        /// <summary>
+        /// Control updatePanelGetProdCod.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGetProdCod;
 
         /// <summary>
         /// Control gv_prodCod.
@@ -123,6 +150,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_ventProducto;
 
         /// <summary>
+        /// Control updatePanelVentasProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelVentasProductos;
+
+        /// <summary>
         /// Control gv_prodVenta.
         /// </summary>
         /// <remarks>
@@ -166,6 +202,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_buscarCompras;
+
+        /// <summary>
+        /// Control updatePanelGetComprProd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGetComprProd;
 
         /// <summary>
         /// Control gv_prodCompras.
