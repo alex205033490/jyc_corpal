@@ -244,10 +244,12 @@ namespace jycboliviaASP.net.Presentacion
                             int DetProd_CodigoUnidadMedida;
                             int.TryParse(tuplasItemVendido.Tables[0].Rows[0][10].ToString(), out DetProd_CodigoUnidadMedida);
 
-                            string criterioBusqueda = DetProd_CodigoProducto.Trim();                         
-                            
+                            string criterioBusqueda = DetProd_CodigoProducto.Trim();
+
+                            string token = await ObtenerTokenAsync("adm", "123");
+
                             var BuscProducto = new NA_APIproductos();
-                            List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(usuario, password, criterioBusqueda);
+                            List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(token, criterioBusqueda);
                             productoCriterioGet product = productos[0];
 
                             DetalleProductoV Item = new DetalleProductoV();
@@ -286,6 +288,12 @@ namespace jycboliviaASP.net.Presentacion
         {
             string cliente = tx_cliente.Text;
             buscarDatosParaCargarAUpon(cliente);
+        }
+
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIproductos negocio = new NA_APIproductos();
+            return await negocio.GetTokenAsync(usuario, password);
         }
 
     }
