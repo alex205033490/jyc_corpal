@@ -342,6 +342,7 @@ namespace jycboliviaASP.net.Presentacion
             string precioUnitario = row.Cells[4].Text;
 
             txt_producto.Text = nombre;
+            Session["SnombreProducto"] = nombre;
             Session["ScodigoProducto"] = codigoProducto;
             Session["ScodigoUnidadMedida"] = codigoUnidadMedida;
             Session["SprecioUnitario"] = precioUnitario;
@@ -396,12 +397,13 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                string producto = txt_producto.Text.Trim();
-                if (string.IsNullOrEmpty(producto))
+               
+                if (Session["SnombreProducto"] == null || string.IsNullOrWhiteSpace(Session["SnombreProducto"].ToString()))
                 {
-                    showalert("Debe buscar y seleccionar el nombre del producto.");
+                    showalert("Debe buscar y seleccionar un producto.");
                     return null;
                 }
+                string nombre = (Session["SnombreProducto"].ToString());
 
                 if (Session["ScodigoProducto"] == null || string.IsNullOrWhiteSpace(Session["ScodigoProducto"].ToString())){
                     showalert("El codigo del producto no esta disponible en la sesión");
@@ -435,7 +437,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 return new Productos
                 {
-                    Nombre = producto,
+                    Nombre = nombre,
                     CodigoProducto = codigo,
                     UnidadMedida = codigoUnidadMedida,
                     Cantidad = cantidad,
@@ -453,6 +455,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             txt_producto.Text = string.Empty;
             txt_cantProducto.Text = string.Empty;
+            Session.Remove("SnombreProducto");
             Session.Remove("ScodigoProducto");
             Session.Remove("ScodigoUnidadMedida");
             Session.Remove("SprecioUnitario");

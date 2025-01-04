@@ -141,17 +141,17 @@
 
                                         <div class="input_cantidad col-2">
                                             <asp:Label runat="server"> Cantidad:</asp:Label>
-                                            <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertCommaToDot(event);"></asp:TextBox>
+                                            <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertdotcomma(event);"></asp:TextBox>
                                         </div>
 
                                         <div class="input_impDescuento col-2">
                                             <asp:Label runat="server">Descuento</asp:Label>
-                                            <asp:TextBox ID="txt_impDescProd" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional" oninput="convertCommaToDot(event);"></asp:TextBox>
+                                            <asp:TextBox ID="txt_impDescProd" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional" oninput="convertdotcomma(event);"></asp:TextBox>
                                         </div>
 
                                         <div class="input_porcenGasto col-2">
                                             <asp:Label runat="server">Gastos (%)</asp:Label>
-                                            <asp:TextBox ID="txt_porceGastos" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional" oninput="convertCommaToDot(event);"></asp:TextBox>
+                                            <asp:TextBox ID="txt_porceGastos" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional" oninput="convertdotcomma(event);"></asp:TextBox>
                                         </div>
 
                                         <div class="container_btnAddProd col-2 d-flex align-items-end">

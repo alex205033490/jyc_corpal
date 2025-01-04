@@ -6,11 +6,11 @@ function deleteRow(button) {
 }
 
 
-// , a .
-function convertCommaToDot(event) {
+// . a ,
+function convertdotcomma(event) {
     var input = event.target;
 
-    input.value = input.value.replace(/,/g, ".");
+    input.value = input.value.replace('.',',');
 }
 
 
