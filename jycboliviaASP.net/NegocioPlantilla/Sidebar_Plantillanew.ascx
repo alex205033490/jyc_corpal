@@ -151,7 +151,7 @@
         </ul>
         </li>
 
-
+<!--
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#productosapi-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -161,7 +161,7 @@
         </ul>
         </li>
 
-      <li class="nav-item">
+        <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Inventario UPON</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -182,7 +182,6 @@
           </ul>
           </li>
 
-
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIpedidoVent-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Pedido/Venta UPON</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -193,7 +192,6 @@
           </ul>
           </li>
 
-
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICuentas-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas UPON</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -202,7 +200,6 @@
           <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza Upon</span></a></li>
           </ul>
           </li>
-
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICompras-nav" data-bs-toggle="collapse" href="#">
@@ -214,8 +211,7 @@
             
           </li>
         
-
-        
+          -->    
 
     </ul>
 

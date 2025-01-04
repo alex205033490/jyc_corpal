@@ -13,8 +13,8 @@ namespace jycboliviaASP.net.Datos.Datos_old
         private conexionMySql conexion = new conexionMySql();
         internal bool insert_vaciadoCliente(int CodigoContacto, string NombreCompleto, string NumeroDocumentoIdentidad, string correo, string telefono)
         {
-            string consulta = "INSERT INTO tbcorpal_cliente(fechagra, horagra, cod_clienteupon, propietarioname, propietarioci, propietariocorreo, propietariocelular) " +
-                "SELECT current_date(), current_time(), " + CodigoContacto + ", '" + NombreCompleto + "', '" + NumeroDocumentoIdentidad + "', '" + correo + "', '" + telefono + "' " +
+            string consulta = "INSERT INTO tbcorpal_cliente(fechagra, horagra, cod_clienteupon, propietarioname, tiendaname, propietarioci, propietariocorreo, propietariocelular) " +
+                "SELECT current_date(), current_time(), " + CodigoContacto + ", '" + NombreCompleto + "','"+ NombreCompleto +"', '" + NumeroDocumentoIdentidad + "', '" + correo + "', '" + telefono + "' " +
                 " from dual " +
                 " where not exists (select 1 from tbcorpal_cliente where cod_clienteupon = " + CodigoContacto + ")";
 
