@@ -13,7 +13,7 @@
                     <!------------------------          API GET INVENTARIO EGRESO CON DETALLES          ------------------------------>
                     <div class="container-GETIEgresoDet p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Informe Detallado de Egresos de Inventario</h3>
+                            <h3 class="text_tittle p-3">Reporte Detallado de Egresos de Inventario</h3>
                         </div>
 
                         <asp:Panel runat="server" DefaultButton="BuscarEgresoInventarioDetalle">
@@ -86,7 +86,7 @@
                     <!------------------------          API GET INVENTARIO EGRESO C/S CRITERIO        ------------------------------>
                     <div class="container-GETIEgreso p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Informe de Egresos de Inventario</h3>
+                            <h3 class="text_tittle p-3">Reporte de Egresos de Inventario</h3>
                         </div>
                         <asp:Panel runat="server" DefaultButton="btn_BuscarEgresoInventario">
                             <div class="container_input row mb-4">
@@ -157,7 +157,7 @@
                                         </div>
                                         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                             <label class="form-label">Ítem Análisis:</label>
-                                            <asp:TextBox ID="TextBoxItemAnalisis" runat="server" CssClass="form-control" Text="0" AutoComplete="off"></asp:TextBox>
+                                            <asp:TextBox ID="TextBoxItemAnalisis" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                                         </div>
                                         <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                             <label class="form-label">Glosa:</label>
@@ -200,7 +200,8 @@
                                                 <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
                                                 <asp:BoundField DataField="Nombre" HeaderText="Producto" HtmlEncode="false" />
                                                 <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
-                                                <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="UM" />
+                                                <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CUM" />
+                                                <asp:BoundField DataField="Stock" HeaderText="Stock"/>
 
                                             </Columns>
                                         </asp:GridView>

@@ -20,6 +20,8 @@ namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIInventarioEgresos : System.Web.UI.Page
     {
+        private readonly NA_APIAlmacen _NA_APIAlmacen = new NA_APIAlmacen();
+        private readonly NA_APIMotivoContable _NA_APIMotivoC = new NA_APIMotivoContable(); 
         protected async void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -315,15 +317,24 @@ namespace jycboliviaASP.net.Presentacion
 
             if (string.IsNullOrEmpty(dd_motMoviIEgreso.SelectedValue))
             {
-                showalert("Por favor, Seleccione un Motivo movimiento válido.");
+                showalert("Por favor, Seleccione un motivo movimiento válido.");
                 return true;
             }
 
-            if (string.IsNullOrEmpty(TextBoxItemAnalisis.Text.Trim()))
+
+            int itemAnalisis = 0;
+            if (string.IsNullOrWhiteSpace(TextBoxItemAnalisis.Text))
             {
-                showalert("Por favor, Complete el campo Item Analisis.");
-                return true;
-            }// sub
+                TextBoxItemAnalisis.Text = "0";
+            }
+            else
+            {
+                if(!int.TryParse(TextBoxItemAnalisis.Text, out itemAnalisis) || itemAnalisis < 0)
+                {
+                    showalert("El campo ítem análisis debe contener un número valido mayor o igual que 0.");
+                    return true;
+                }
+            }
             return false;
         }
         private bool ValidarProductos(List<Productos> productos)
@@ -391,6 +402,7 @@ namespace jycboliviaASP.net.Presentacion
             string codigoUnidadMedida = row.Cells[3].Text;
 
             txt_producto.Text = nombre;
+            Session["SnombreProductoEgre"] = nombre;
             Session["ScodigoProductoEgre"] = codigoProducto;
             Session["SunidadMedidaEgre"] = codigoUnidadMedida;
 
@@ -419,7 +431,6 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert("Ingrese un producto Valido");
             }
-
         }
 
         List<Productos> productos = new List<Productos>();
@@ -445,13 +456,15 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                string producto = txt_producto.Text.Trim();
-                if (string.IsNullOrEmpty(producto))
-                {
-                    showalert("Debe buscar y seleccionar un producto");
+
+
+                if (Session["SnombreProductoEgre"] == null || string.IsNullOrWhiteSpace(Session["SnombreProductoEgre"].ToString())){
+                    showalert("Debe buscar y seleccionar un producto válido.");
                     return null;
                 }
-                
+                string nombre = (Session["SnombreProductoEgre"].ToString());
+
+
                 if (Session["ScodigoProductoEgre"] == null || string.IsNullOrWhiteSpace(Session["ScodigoProductoEgre"].ToString()))
                 {
                     showalert("El codigo del producto no esta disponible en la sesión");
@@ -475,7 +488,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 return new Productos
                 {
-                    Nombre = producto,
+                    Nombre = nombre,
                     CodigoProducto = codigo,
                     UnidadMedida = codigoUnidadMedida,
                     Cantidad = cantidad
@@ -491,8 +504,12 @@ namespace jycboliviaASP.net.Presentacion
         {
             txt_producto.Text = string.Empty;
             txt_cantProducto.Text = string.Empty;
+            Session.Remove("SnombreProductoEgre");
             Session.Remove("ScodigoProductoEgre");
             Session.Remove("SunidadMedidaEgre");
+
+            gv_listProdIngresos.DataSource = null;
+            gv_listProdIngresos.DataBind();
         }
         private void ActualizarGVProductosADD(List<Productos> productos)
         {
@@ -506,8 +523,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                NA_APIAlmacen negocio = new NA_APIAlmacen();
-                return await negocio.Get_ListAlmacenAsync(token);
+                var almacen = await _NA_APIAlmacen.Get_ListAlmacenAsync(token);
+                return almacen.OrderBy(a => a.Nombre).ToList();
             }
             catch (Exception ex)
             {
@@ -520,8 +537,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                NA_APIMotivoContable negocio = new NA_APIMotivoContable();
-                return await negocio.Get_ListMotMovEAsync(token);
+                var motivoMov = await _NA_APIMotivoC.Get_ListMotMovEAsync(token);
+                return motivoMov.OrderBy(m => m.MotivoContable).ToList();
             }
             catch (Exception ex)
             {

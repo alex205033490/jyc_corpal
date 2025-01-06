@@ -194,7 +194,6 @@ namespace jycboliviaASP.net.Presentacion
             }
             catch (Exception ex)
             {
-
                 showalert($"Error al registrar el ingreso: {ex.Message}\n{ex.StackTrace}");
             }
         }
@@ -281,14 +280,17 @@ namespace jycboliviaASP.net.Presentacion
         private bool ValidarCampos()
         {
             int itemAnalisis = 0;
-            if ((string.IsNullOrEmpty(txt_itemAnalisis.Text.Trim())))
+            if (string.IsNullOrWhiteSpace(txt_itemAnalisis.Text.Trim()))
             {
                 txt_itemAnalisis.Text = "0";
             }
-            if (!int.TryParse(txt_itemAnalisis.Text, out itemAnalisis) || itemAnalisis<0)
+            else
             {
-                showalert("El campo ítem análisis debe contener un número valido mayor o igual a 0");
-                return true;
+                if (!int.TryParse(txt_itemAnalisis.Text, out itemAnalisis) || itemAnalisis<0)
+                {
+                    showalert("El campo ítem análisis debe contener un número valido mayor o igual que 0");
+                    return true;
+                }
             }
 
             if (string.IsNullOrEmpty(dd_CodAlmacenIIngreso.SelectedValue))
@@ -300,12 +302,6 @@ namespace jycboliviaASP.net.Presentacion
             if (string.IsNullOrEmpty(dd_motMovI.SelectedValue))
             {
                 showalert("Por favor, Seleccione un Motivo Movimiento válido.");
-                return true;
-            }
-
-            if (string.IsNullOrEmpty(txt_itemAnalisis.Text.Trim()))
-            {
-                showalert("Por favor, complete el campo Item analisis.");
                 return true;
             }
 
@@ -471,6 +467,9 @@ namespace jycboliviaASP.net.Presentacion
             Session.Remove("ScodigoProducto");
             Session.Remove("ScodigoUnidadMedida");
             Session.Remove("SprecioUnitario");
+
+            gv_listProdIngresos.DataSource = null;
+            gv_listProdIngresos.DataBind();
         }
         private void ActualizarGVProductosADD(List<Productos> productos)
         {
