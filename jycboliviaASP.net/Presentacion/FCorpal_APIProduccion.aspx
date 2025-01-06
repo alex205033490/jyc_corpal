@@ -7,62 +7,86 @@
 </asp:Content>
 
 <asp:Content ID="Contentn2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="padding-top: 1em;">
+    <div class="" style="padding-top: 1em;">
         <div class="">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
 
                     <!--------------------------------          API POST PRODUCCION PARTEproduccion  (registra datos vacios - La cadena de entrada no tiene el formato correcto.)       ----------------------->
 
                     <div class="container-POSTProduccion p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Registro Produccion (F)</h3>
+                            <h3 class="text_tittle p-3">Registro Producción (F)</h3>
                         </div>
 
                         <!--  FORMULARIO PARA REGISTRAR PRODUCCION  -->
                         <div class="form_col1 row">
-                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-5 col-lg-5">
-                                <div class="col-9 col-sm-12 col-md-12 col-lg-9">
+                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-5 col-lg-4">
+                                <div class="col-9 col-sm-12 col-md-12 col-lg-12">
                                     <label class="form-label">Referencia:</label>
                                     <asp:TextBox ID="txt_referencia" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
-                                <div class="col-8 col-md-10 col-lg-7">
-                                    <label class="form-label">Linea Produccion:</label>
-                                    <asp:TextBox ID="txt_lineaProduccion" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
-                                    <div class="col-6 col-md-10 col-lg-5">
-                                        <label class="form-label">Item Analisis:</label>
-                                        <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control"></asp:TextBox>
-                                    </div>
+                                <div class="col-10 col-sm-12 col-md-12 col-lg-12">
+    <label class="form-label">Glosa:</label>
+    <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
+                                
                             </div>
 
-                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-6">
-                                <div class="col-6 col-sm-10 col-md-10 col-lg-7">
-                                    <label class="form-label">Codigo Responsable:</label>
-                                    <asp:TextBox ID="txt_codResponsable" runat="server" CssClass="form-control"></asp:TextBox>
+                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                <div class="col-9 col-sm-12 col-md-10 col-lg-10">
+                                    <label class="form-label">Linea Producción:</label>
+                                    <asp:DropDownList ID="dd_lineaProduccion" runat="server" CssClass="form-select dd_fsmall">
+                                        <asp:ListItem></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 
-                                <div class="col-4 col-sm-9 col-md-10 col-lg-5">
+                                
+                                <div class="col-8 col-sm-9 col-md-10 col-lg-10">
                                     <label class="form-label">Realizar Descarga:</label>
                                     <asp:DropDownList ID="dd_realDescarga" runat="server" CssClass="form-select">
                                         <asp:ListItem Text="Si" Value="true" />
                                         <asp:ListItem Text="No" Value="false" />
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-10 col-md-12 col-lg-9">
-                                    <label class="form-label">Glosa:</label>
-                                    <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control"></asp:TextBox>
-                                </div>
+                                
                             </div>
+                            <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                <div class="col-10 col-sm-12 col-md-10 col-lg-12">
+                                    <label class="form-label">Responsable:</label>
+                                    <asp:TextBox ID="txt_codResponsable" runat="server" CssClass="form-control" OnTextChanged="txt_codResponsable_TextChanged"></asp:TextBox>
+                                    <asp:GridView ID="gv_listResponsables" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="gv_listResponsables table table-bordered small" OnSelectedIndexChanged="gv_listResponsables_SelectedIndexChanged">
+                                        <Columns>
+                                            <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
+                                            <asp:BoundField DataField="CodigoContacto" HeaderText="Codigo"/>
+                                            <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre Completo" HtmlEncode="false"/>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                                
+                            <div class="col-6 col-sm-10 col-md-10 col-lg-8">
+                                <label class="form-label">Ítem Análisis:</label>
+                                <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            
+                            </div>
+
                         </div>
 
-                        <!--  lista add productos  -->
+
+
+
+
+
+
+                        <!--  LISTA DETALLE PRODUCCION  -->
                         <div class="container_formADDProducto col-lg-12">
                             <div class="container_subtittle mb-2">
                                 
                                 <h5 CssClass="text_tittle" runat="server">Detalle Producto</h5>
                             </div>
-                            
+
+    
                             <div class="row col-lg-12">
                                 <!--  columna 1  -->
                                 <div class="table-responsive col-sm-8 col-md-8 col-lg-8">

@@ -379,7 +379,7 @@ namespace jycboliviaASP.net.Presentacion
                 decimal cantidad = 0;
                 if(!decimal.TryParse(txt_cantProducto.Text, out cantidad) || cantidad <= 0)
                 {
-                    showAlert("La cantidad del producto debe ser un número mayor que cero.");
+                    showAlert("La cantidad del producto debe ser un número válido mayor que 0.");
                     return null;
                 }
 
@@ -405,6 +405,9 @@ namespace jycboliviaASP.net.Presentacion
             Session.Remove("STnombreProducto");
             Session.Remove("STcodigoProducto");
             Session.Remove("STunidadMedidaProducto");
+
+            gv_listProdTraspaso.DataSource = null;
+            gv_listProdTraspaso.DataBind();
         }
 
         private void LimpiarCamposRegistrarIT()

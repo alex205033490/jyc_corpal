@@ -24,31 +24,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_referencia;
 
         /// <summary>
-        /// Control txt_lineaProduccion.
+        /// Control txt_glosa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_lineaProduccion;
+        protected global::System.Web.UI.WebControls.TextBox txt_glosa;
 
         /// <summary>
-        /// Control txt_itemAnalisis.
+        /// Control dd_lineaProduccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_itemAnalisis;
-
-        /// <summary>
-        /// Control txt_codResponsable.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_codResponsable;
+        protected global::System.Web.UI.WebControls.DropDownList dd_lineaProduccion;
 
         /// <summary>
         /// Control dd_realDescarga.
@@ -60,13 +51,31 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.DropDownList dd_realDescarga;
 
         /// <summary>
-        /// Control txt_glosa.
+        /// Control txt_codResponsable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_glosa;
+        protected global::System.Web.UI.WebControls.TextBox txt_codResponsable;
+
+        /// <summary>
+        /// Control gv_listResponsables.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_listResponsables;
+
+        /// <summary>
+        /// Control txt_itemAnalisis.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_itemAnalisis;
 
         /// <summary>
         /// Control btnAddRow.

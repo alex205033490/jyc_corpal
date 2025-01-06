@@ -883,11 +883,13 @@
     <Compile Include="Negocio\NA_APIcompras.cs" />
     <Compile Include="Negocio\NA_APICuentasCobranza.cs" />
     <Compile Include="Negocio\NA_APIinventario.cs" />
+    <Compile Include="Negocio\NA_APILineaProduccion.cs" />
     <Compile Include="Negocio\NA_APIMotivoContable.cs" />
     <Compile Include="Negocio\NA_APIpedido.cs" />
     <Compile Include="Negocio\NA_APIproduccion.cs" />
     <Compile Include="Negocio\NA_APIproductos.cs" />
     <Compile Include="Negocio\NA_APIProveedores.cs" />
+    <Compile Include="Negocio\NA_APIReceta.cs" />
     <Compile Include="Negocio\NA_APIventas.cs" />
     <Compile Include="Negocio\NA_UPONSolicitudPedido.cs" />
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />

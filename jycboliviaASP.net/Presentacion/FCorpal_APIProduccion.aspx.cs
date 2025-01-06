@@ -3,20 +3,33 @@ using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIproduccion;
+using static jycboliviaASP.net.Negocio.NA_APILineaProduccion;
 
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIProduccion : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        private readonly NA_APILineaProduccion _NA_APILineaProduccion = new NA_APILineaProduccion();
+        protected async void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+                var lineaProduccion = await ObtenerListLineaProduccion(token);
+                dd_lineaProduccion.DataSource = lineaProduccion;
+                dd_lineaProduccion.DataTextField = "LineaProducion";
+                dd_lineaProduccion.DataValueField = "CodigoUnidadAnalisis";
+                dd_lineaProduccion.DataBind();
 
+            }
         }
-        //      POST PRODUCCION partePRODUCCION
+// - - - - - - - - - - - - - - - - -  POST PRODUCCION
         protected async void btn_Insert_parteProd_Click(object sender, EventArgs e)
         {
             var parteProd = new ParteProduccionDTO
@@ -57,8 +70,7 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                var result = await api.PostParteProduccionAsync(parteProd, token);
-                
+                var result = await api.PostParteProduccionAsync(parteProd, token); 
             }
             catch (Exception ex) 
             {
@@ -66,7 +78,67 @@ namespace jycboliviaASP.net.Presentacion
             }
             ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Produccion registrado exitosamente.');", true);
         }
-        //      GET PRODUCCION partePRODUCCION  
+
+
+        // - - Obtener lista de clientes (Responsable)
+        protected void txt_codResponsable_TextChanged(object sender, EventArgs e)
+        {
+            string criterio = txt_codResponsable.Text.Trim();
+            if (!string.IsNullOrEmpty(criterio))
+            {
+                cargarResponsableUpon(criterio);
+            }
+        }
+        private async void cargarResponsableUpon(string criterio)
+        {
+            try
+            {
+                string token = await ObtenerTokenAsync("adm", "123");
+
+                NA_APIclientes negocio = new NA_APIclientes();
+                List<ClienteGetDTO> cliente = await negocio.GET_ClientesAsync(token, criterio);
+
+                gv_listResponsables.DataSource = cliente;
+                gv_listResponsables.DataBind();
+
+                gv_listResponsables.Visible = cliente.Count > 0;
+            }
+            catch(Exception ex)
+            {
+                showAlert($"Error al realizar la busqueda: {ex.Message}");  
+            }
+        }
+        protected void gv_listResponsables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gv_listResponsables.SelectedIndex;
+            GridViewRow row = gv_listResponsables.Rows[index];
+
+            string codigo = row.Cells[1].Text;
+            string nombreCompleto = row.Cells[2].Text;
+
+            txt_codResponsable.Text = nombreCompleto;
+            Session["ScodigoRespProduccion"] = codigo;
+
+            gv_listResponsables.Visible = false;
+        }
+
+        // - - Listar LineaProduccion en DD
+        private async Task<List<ListLineaProduccionDTO>> ObtenerListLineaProduccion(string token)
+        {
+            try
+            {
+                var lProduccion = await _NA_APILineaProduccion.Get_ListLineaProduccion(token);
+                return lProduccion.OrderBy(lp => lp.LineaProducion).ToList();
+            }
+            catch(Exception ex)
+            {
+                showAlert($"Erro al obtener la lista de linea de producción: {ex.Message}");
+                return null;
+            }
+
+        }
+
+        // - - - - - - - - - - - - - - - - -  GET PRODUCCION partePRODUCCION  
         protected async void btn_buscProduccion_Click(object sender, EventArgs e)
         {
             string numProduccion = txt_numProduccion1.Text.Trim();
@@ -118,5 +190,20 @@ namespace jycboliviaASP.net.Presentacion
 
 
         }
+
+
+
+// - - - - - - - - - - - - - - - - - Otros
+        private async Task<string> ObtenerTokenAsync(string usuario, string password)
+        {
+            NA_APIproduccion negocio = new NA_APIproduccion();
+            return await negocio.GetTokenAsync(usuario, password);
+        }
+        private void showAlert(string mensaje)
+        {
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
     }
 }

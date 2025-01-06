@@ -142,7 +142,7 @@
 
                                         <div class="col-6 col-sm-6 col-md-4">
                                             <label class="form-label">Almacén Destino:</label>
-                                            <asp:DropDownList ID="dd_codAlmacenDestino" runat="server" CssClass="custom-dropdown">
+                                            <asp:DropDownList ID="dd_codAlmacenDestino" runat="server" CssClass="form-select dd_fsmall">
                                             </asp:DropDownList>
                                         </div>
                                         
