@@ -24,7 +24,8 @@ namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_APIInventarioIngresos : System.Web.UI.Page
     {
-        
+        private readonly NA_APIMotivoContable _NA_APIMotivoC = new NA_APIMotivoContable();
+        private readonly NA_APIAlmacen _NA_APIAlmacen = new NA_APIAlmacen();
         protected async void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -279,6 +280,17 @@ namespace jycboliviaASP.net.Presentacion
         }
         private bool ValidarCampos()
         {
+            int itemAnalisis = 0;
+            if ((string.IsNullOrEmpty(txt_itemAnalisis.Text.Trim())))
+            {
+                txt_itemAnalisis.Text = "0";
+            }
+            if (!int.TryParse(txt_itemAnalisis.Text, out itemAnalisis) || itemAnalisis<0)
+            {
+                showalert("El campo ítem análisis debe contener un número valido mayor o igual a 0");
+                return true;
+            }
+
             if (string.IsNullOrEmpty(dd_CodAlmacenIIngreso.SelectedValue))
             {
                 showalert("Por favor, Seleccione un almacén válido.");
@@ -471,9 +483,10 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                NA_APIAlmacen negocio = new NA_APIAlmacen();
-                return await negocio.Get_ListAlmacenAsync(token);
-            }   catch(Exception ex)
+                var almacen = await _NA_APIAlmacen.Get_ListAlmacenAsync(token);
+                return almacen.OrderBy(a => a.Nombre).ToList();
+            }   
+            catch(Exception ex)
             {
                 showalert($"Error al obtener la lista de almacenes: {ex.Message}");
                 return null;
@@ -484,8 +497,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                NA_APIMotivoContable negocio = new NA_APIMotivoContable();
-                return await negocio.Get_ListMotMovIAsync(token);
+                var motivo = await _NA_APIMotivoC.Get_ListMotMovIAsync(token);
+                return motivo.OrderBy(m => m.MotivoContable).ToList();
             }
             catch (Exception ex)
             {

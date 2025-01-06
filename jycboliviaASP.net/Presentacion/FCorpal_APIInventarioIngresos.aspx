@@ -155,6 +155,7 @@
                                             <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown dd_fsmall">
                                                 <asp:ListItem Text="Bolivianos" Value="1" />
                                                 <asp:ListItem Text="Dólares" Value="2" />
+                                                <asp:ListItem Text="Unidad Fomento Vivienda" Value="3"/>
                                             </asp:DropDownList>
                                             <label class="form-label">Código Almacén:</label>
                                             <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
