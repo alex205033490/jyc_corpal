@@ -7,6 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Text;
+using System.Web.UI;
+using System.Web.Services.Description;
+using System.Diagnostics;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -44,10 +47,12 @@ namespace jycboliviaASP.net.Negocio
 
         public class ApiResponse
         {
+            public bool EsValido { get; set; }
+            public List<string> Mensajes { get; set; }
             public int Resultado { get; set; }
         }
 
-        public async Task<string> PostParteProduccionAsync(ParteProduccionDTO pProduccion, string token )
+        public async Task<string> PostParteProduccionAsync(ParteProduccionDTO pProduccion, string token)
         {
             var json = JsonConvert.SerializeObject(pProduccion);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -66,7 +71,7 @@ namespace jycboliviaASP.net.Negocio
         public class ParteProduccionDTO
         {
             public int NumeroParteProduccion { get; set; }
-            public DateTime Fecha { get; set; }
+            public string Fecha { get; set; }
             public string Referencia { get; set; }
             public int CodigoResponsable { get; set; }
             public int ItemAnalisis {  get; set; }
@@ -84,7 +89,7 @@ namespace jycboliviaASP.net.Negocio
             public int UnidadMedida { get; set; }
             public string CodigoReceta { get; set; }
         }
-
+        
         /*****************************************************      GET PRODUCCION parteProduccion      *****************************************************/
 
         public class ApiResponseProd
