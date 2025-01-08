@@ -174,6 +174,9 @@
                         </div>
                     </div>
 
+                    <asp:UpdatePanel ID="updatePanel_GETProduccionDet" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+
                     <div class="container_gv1">
                         <asp:GridView ID="gv_produccion" runat="server" AutoGenerateColumns="false">
                             <columns>
@@ -209,6 +212,12 @@
                             <alternatingrowstyle backcolor="#f8f9fa" />
                         </asp:GridView>
                     </div>
+
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btn_buscProduccion" EventName="Click"/>
+                        </Triggers>
+                        </asp:UpdatePanel>
                 </div>
             </div>
         </div>

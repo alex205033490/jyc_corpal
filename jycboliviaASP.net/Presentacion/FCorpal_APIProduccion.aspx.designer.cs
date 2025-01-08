@@ -177,6 +177,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_buscProduccion;
 
         /// <summary>
+        /// Control updatePanel_GETProduccionDet.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel_GETProduccionDet;
+
+        /// <summary>
         /// Control gv_produccion.
         /// </summary>
         /// <remarks>
