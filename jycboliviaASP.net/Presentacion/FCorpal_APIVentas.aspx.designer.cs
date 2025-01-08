@@ -33,6 +33,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_getVentas;
 
         /// <summary>
+        /// Control updatePanel_GETVentas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel_GETVentas;
+
+        /// <summary>
         /// Control gv_getVentas.
         /// </summary>
         /// <remarks>

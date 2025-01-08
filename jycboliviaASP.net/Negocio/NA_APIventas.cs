@@ -98,6 +98,7 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
+
         //----------------------------GET VER VENTAS DETALLE
         public class ApiResponseVentasDet
         {
@@ -132,8 +133,6 @@ namespace jycboliviaASP.net.Negocio
                 throw new ApplicationException("Error al obtener registros con el valor proporcionado.", ex);
             }
         }
-
-
 
 
         public class VentaDetDTO
