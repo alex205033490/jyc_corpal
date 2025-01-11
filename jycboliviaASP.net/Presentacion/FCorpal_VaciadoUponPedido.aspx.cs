@@ -151,7 +151,12 @@ namespace jycboliviaASP.net.Presentacion
 
 
 
-        //----------------- P2  VACIADO UPON
+
+
+
+
+
+        //------------------------------------------------- P2  VACIADO UPON
         private void cargarDatosVaciadoUpon2 (string cliente)
         {
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
@@ -186,7 +191,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        private List<PedidoDTO> ObtenerPedidosSeleccionados()
+        private List<PedidoDTO> ObtenerPedidosSeleccionados() //1
         {
             List<PedidoDTO> pedidos = new List<PedidoDTO>();
             foreach (GridViewRow row in gv_datosCobros.Rows)
@@ -205,17 +210,17 @@ namespace jycboliviaASP.net.Presentacion
             return pedidos;
         }
 
-        private PedidoDTO CrearPedidoDesdeFila(GridViewRow row)
+        private PedidoDTO CrearPedidoDesdeFila(GridViewRow row) //pedido
         {
             try
             {
                 int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
                 string fecha = "2024-11-30T00:00:00";
-                string referencia = "Prueba referencia pedido 18/12";
+                string referencia = "Prueba referencia pedido 03/01";
                 int codigoCliente = Convert.ToInt32(row.Cells[5].Text);
                 decimal importeProductos = Convert.ToDecimal(row.Cells[7].Text);
                 decimal importeTotal = Convert.ToDecimal(row.Cells[7].Text);
-                string glosa = "Glosa pedido prueba 18/12";
+                string glosa = "Glosa pedido prueba 03/01";
                 List<ItemPedidoDTO> detalles = ObtenerDetalleProducto(codSolicitud);
                 string usuario = "adm";
 
@@ -244,7 +249,8 @@ namespace jycboliviaASP.net.Presentacion
             {
                 NA_APIpedido negocio = new NA_APIpedido();
                 return await negocio.PostPedidoAsync(pedido, token);
-            } catch(Exception ex)
+            } 
+            catch(Exception ex)
             {
                 Debug.WriteLine($"Error al enviar pedido: {ex.Message}");
                 return string.Empty;
@@ -294,11 +300,11 @@ namespace jycboliviaASP.net.Presentacion
 
             } catch (Exception ex)
             {
-                Debug.WriteLine($"Erro al mapear el item: {ex.Message}");
+                Debug.WriteLine($"Error al mapear el item: {ex.Message}");
                 return null;
             }
         }
-        //------------  
+        //------------  OBTENER TOKEN
         private async Task<string> ObtenerTokenAsync(string usuario, string password)
         {
             try
