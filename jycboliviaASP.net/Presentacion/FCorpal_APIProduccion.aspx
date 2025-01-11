@@ -178,7 +178,7 @@
                     <ContentTemplate>
 
                     <div class="container_gv1">
-                        <asp:GridView ID="gv_produccion" runat="server" AutoGenerateColumns="false">
+                        <asp:GridView ID="gv_produccion" runat="server" CssClass="gridview" AutoGenerateColumns="false">
                             <columns>
                                 <asp:BoundField DataField="NumeroParteProduccion" HeaderText="numPartProduccion" SortExpression="nPartProd" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="fech" />
@@ -190,14 +190,20 @@
                                 <asp:BoundField DataField="Glosa" HeaderText="Glosa" SortExpression="glo" />
                                 <asp:BoundField DataField="Usuario" HeaderText="Usuario" SortExpression="usu" />
                             </columns>
-                            <headerstyle backcolor="#ffcc00" forecolor="black" />
-                            <rowstyle backcolor="white" />
-                            <alternatingrowstyle backcolor="#f8f9fa" />
+                                <AlternatingRowStyle CssClass="alternating-row" />
+                                <FooterStyle CssClass="footer" />
+                                <HeaderStyle CssClass="header" />
+                                <PagerStyle CssClass="pager" />
+                                <SelectedRowStyle CssClass="selected-row" />
+                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                         </asp:GridView>
                     </div>
 
                     <div class="container_gv2">
-                        <asp:GridView ID="gv_detalle" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">
+                        <asp:GridView ID="gv_detalle" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
                             <columns>
                                 <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />
@@ -207,9 +213,15 @@
                                 <asp:BoundField DataField="CodigoReceta" HeaderText="codReceta" SortExpression="cRecet" />
                             </columns>
 
-                            <headerstyle backcolor="#ffcc00" forecolor="black" />
-                            <rowstyle backcolor="white" />
-                            <alternatingrowstyle backcolor="#f8f9fa" />
+                            <AlternatingRowStyle CssClass="alternating-row" />
+                                <FooterStyle CssClass="footer" />
+                                <HeaderStyle CssClass="header" />
+                                <PagerStyle CssClass="pager" />
+                                <SelectedRowStyle CssClass="selected-row" />
+                                <SortedAscendingCellStyle CssClass="sorted-asc-cell" />
+                                <SortedAscendingHeaderStyle CssClass="sorted-asc-header" />
+                                <SortedDescendingCellStyle CssClass="sorted-desc-cell" />
+                                <SortedDescendingHeaderStyle CssClass="sorted-desc-header" />
                         </asp:GridView>
                     </div>
 
