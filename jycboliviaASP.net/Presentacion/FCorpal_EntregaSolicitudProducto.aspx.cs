@@ -69,14 +69,14 @@ namespace jycboliviaASP.net.Presentacion
         {
             if(gv_solicitudesProductos.SelectedIndex > -1){
                 int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
-                string nroboleta = gv_solicitudesProductos.SelectedRow.Cells[3].Text;
+                string nroboleta = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[3].Text);
                 string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
                 string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
-                string personaSolicitud = gv_solicitudesProductos.SelectedRow.Cells[8].Text;
+                string personaSolicitud = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
 
                 dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
 
-                string detalleCierre = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
+                string detalleCierre = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[11].Text);
                 if (!string.IsNullOrEmpty(detalleCierre) && !detalleCierre.Equals("&nbsp;"))
                 {
                     dd_motivoCierre.SelectedValue = detalleCierre;

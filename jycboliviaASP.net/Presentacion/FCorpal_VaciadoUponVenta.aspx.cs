@@ -201,7 +201,7 @@ namespace jycboliviaASP.net.Presentacion
                         int NumeroPedido = 0;
                         //int.TryParse(tuplaVenta.Tables[0].Rows[0][0].ToString(), out NumeroPedido);
                         DateTime Fecha;
-                        DateTime.TryParse("2024-12-26", out Fecha);
+                        DateTime.TryParse("2024-11-30", out Fecha);
                         // DateTime.TryParse(tuplaVenta.Tables[0].Rows[0][2].ToString(), out Fecha);
                         int CodigoCliente;
                         int.TryParse(tuplaVenta.Tables[0].Rows[0][3].ToString(), out CodigoCliente);
@@ -249,19 +249,29 @@ namespace jycboliviaASP.net.Presentacion
                             string token = await ObtenerTokenAsync("adm", "123");
 
                             var BuscProducto = new NA_APIproductos();
-                            List<productoCriterioGet> productos = await BuscProducto.get_ProductoCriterioAsync(token, criterioBusqueda);
-                            productoCriterioGet product = productos[0];
+                            productoCodigoGet product = await BuscProducto.get_ProductoCodigoAsync(usuario, password, criterioBusqueda);
+                            //productoCriterioGet product = productos[0];
 
                             DetalleProductoV Item = new DetalleProductoV();
                             Item.NumeroItem = DetProd_NumeroItem;
                             Item.CodigoProducto = criterioBusqueda;
                             Item.Cantidad = DetProd_Cantidad;
-                            Item.CodigoUnidadMedida = product.CodigoUnidadMedida;
+                            Item.CodigoUnidadMedida = product.UnidadMedida;
                             Item.PrecioUnitario = product.PrecioUnitario;
-                            Item.ImporteDescuento = product.DescuentosPermitido;
+                            //Item.ImporteDescuento = product.DescuentosPermitido;
+                            Item.ImporteDescuento = 0;
                             Item.ImporteTotal = (product.PrecioUnitario * DetProd_Cantidad);
                             Item.NumeroItemOrigen = DetProd_NumeroItem;
                             listaProductosV.Add(Item);
+                            /** -------------- datos para sumar --------- */
+                            decimal montoUnitario;
+                            decimal.TryParse(product.PrecioUnitario.ToString(), out montoUnitario);
+                            ImporteProductos = ImporteProductos + montoUnitario;
+                            ImporteTotal = ImporteTotal + montoUnitario;
+                            Cobros_TotalEfectivo = Cobros_TotalEfectivo + montoUnitario;
+
+                            /** -------------- datos para sumar --------- */
+
                         }
 
                         bool banderaAut = napi.get_AutenticarUsuario(usuario, password);

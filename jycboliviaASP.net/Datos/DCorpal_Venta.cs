@@ -68,31 +68,33 @@ namespace jycboliviaASP.net.Datos
                 " dv.codventa,  dv.codprod,  dv.descripcion,  dv.cantidad,   " +
                 " dv.codmedida,  dv.medida,  dv.precioUnitario,  dv.montoDescuento,   " +
                 " dv.precioTotal, pp.codupon, pp.codumupon   " +
-                " from tbcorpal_detalleventasproducto dv , tbcorpal_producto pp where   " +
-                " dv.codprod = pp.codigo and "+
+                " from tbcorpal_detalleventasproducto dv " +
+                " left join tbcorpal_producto pp on dv.codprod = pp.codigo " +
+                " where   " +                
                 " dv.codventa = " +codigoVendido;
             return cnx.consultaMySql(consulta);
         }
 
         internal DataSet get_ventaRealizadaparaVaciar(int codigoVendido)
         {
-            string consulta = "SELECT    " +
-                " vv.codigo,   date_format(vv.fechagra,'%d/%m/%Y') as 'fecha_Gra',   " +
-                " vv.horagra,  vv.codigoCliente,  vv.cliente,  vv.correoCliente,   " +
-                " vv.nitEmisor,  vv.razonSocialEmisor,  vv.municipio,  vv.telefono,   " +
-                " vv.numeroFactura,  vv.cuf,  vv.cufd,  vv.codigoSucursal,   " +
-                " vv.direccion,  vv.codigoPuntoVenta,  vv.fechaEmision,   " +
-                " vv.nombreRazonSocial,  vv.codigoTipoDocumentoIdentidad,   " +
-                " vv.numeroDocumento,  vv.codigoMetodoPago,  vv.numeroTarjeta,   " +
-                " vv.montoTotal,  vv.montoTotalSujetoIva,  vv.codigoMoneda,   " +
-                " vv.tipoCambio,  vv.montoTotalMoneda,  vv.descuentoAdicional,   " +
-                " vv.leyendaF,  vv.codresp,  vv.responsable,  vv.factura,   " +
-                " vv.fechaentrega,  vv.codcliente,  vv.cicliente,   " +
-                " vv.estado,  vv.codsolicitudentregaproducto,   " +
-                " vv.estadoventa,  vv.vaciadoupon,  vv.codusercierre,   " +
-                " vv.responsablecierre   " +
-                " from tbcorpal_venta vv   " +
-                " where vv.codigo = "+codigoVendido;
+            string consulta = "SELECT " +
+                " vv.codigo, date_format(vv.fechagra,'%d/%m/%Y') as 'fecha_Gra',   " +
+                " vv.horagra, ifnull(cc.cod_clienteupon,0) as 'codigoCliente', vv.cliente, vv.correoCliente,   " +
+                " vv.nitEmisor, vv.razonSocialEmisor, vv.municipio, vv.telefono,   " +
+                " vv.numeroFactura, vv.cuf, vv.cufd, vv.codigoSucursal, " +
+                " vv.direccion, vv.codigoPuntoVenta, vv.fechaEmision, " +
+                " vv.nombreRazonSocial, vv.codigoTipoDocumentoIdentidad, " +
+                " vv.numeroDocumento, vv.codigoMetodoPago, vv.numeroTarjeta, " +
+                " vv.montoTotal, vv.montoTotalSujetoIva, vv.codigoMoneda, " +
+                " vv.tipoCambio, vv.montoTotalMoneda, vv.descuentoAdicional, " +
+                " vv.leyendaF, vv.codresp, vv.responsable, vv.factura, " +
+                " vv.fechaentrega, vv.codcliente, vv.cicliente, " +
+                " vv.estado, vv.codsolicitudentregaproducto, " +
+                " vv.estadoventa, vv.vaciadoupon, vv.codusercierre,   " +
+                " vv.responsablecierre " +
+                " from tbcorpal_venta vv " +
+                " left join  tbcorpal_cliente cc on vv.codigoCliente = cc.codigo "+
+                " where vv.codigo = " +codigoVendido;
             return cnx.consultaMySql(consulta);
         }
 
