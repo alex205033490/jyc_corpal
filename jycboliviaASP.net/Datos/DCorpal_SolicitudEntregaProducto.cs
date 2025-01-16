@@ -90,7 +90,8 @@ namespace jycboliviaASP.net.Datos
                                 " where " +
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
-                                " pp.nroboleta like '%" + nroSolicitud + "%' ";
+                                " pp.nroboleta like '%" + nroSolicitud + "%' "+
+                                " order by pp.codigo desc";
             if(!string.IsNullOrEmpty(solicitante)){
             consulta = consulta + " and pp.personalsolicitud like '%"+solicitante+"%'";
             }
@@ -245,7 +246,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select " +
                                 " pp.producto, dse.medida , " +
                                 " dse.cant as 'cantidad', " +
-                                " dse.tiposolicitud " +
+                                " dse.tiposolicitud, pp.codupon " +
                                 " from tbcorpal_solicitudentregaproducto se , " +
                                 " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp " +
                                 " where " +

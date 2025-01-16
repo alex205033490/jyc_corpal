@@ -30,6 +30,8 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
 
+
+
             if (tienePermisoDeIngreso(141) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
@@ -67,6 +69,7 @@ namespace jycboliviaASP.net.Presentacion
 
             return lista;
         }
+
 
         private bool tienePermisoDeIngreso(int permiso)
         {
@@ -175,8 +178,8 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_vaciarAlSimec_Click(object sender, EventArgs e)
         {
-            string usuario = "adm";
-            string password = "123";
+            string usuario = tx_usuarioUpon.Text;
+            string password = tx_passUpon.Text;
             vaciaraUponVentasRealizadas(usuario, password);
         }
 
@@ -205,6 +208,7 @@ namespace jycboliviaASP.net.Presentacion
                         // DateTime.TryParse(tuplaVenta.Tables[0].Rows[0][2].ToString(), out Fecha);
                         int CodigoCliente;
                         int.TryParse(tuplaVenta.Tables[0].Rows[0][3].ToString(), out CodigoCliente);
+                        
                         string Referencia = tuplaVenta.Tables[0].Rows[0][4].ToString();
                         string Glosa = tuplaVenta.Tables[0].Rows[0][4].ToString();
                         bool EmitirFactura = Convert.ToBoolean(tuplaVenta.Tables[0].Rows[0][31].ToString());
@@ -232,6 +236,8 @@ namespace jycboliviaASP.net.Presentacion
                         NA_endpoints napi = new NA_endpoints();
                         List<DetalleProductoV> listaProductosV = new List<DetalleProductoV>();
 
+                        bool errorDatos = false;
+
                         for (int i = 0; i < tuplasItemVendido.Tables[0].Rows.Count; i++)
                         {
                             int DetProd_NumeroItem;
@@ -246,8 +252,12 @@ namespace jycboliviaASP.net.Presentacion
 
                             string criterioBusqueda = DetProd_CodigoProducto.Trim();
 
-                            string token = await ObtenerTokenAsync("adm", "123");
+                            if (string.IsNullOrEmpty(criterioBusqueda)) {
+                                errorDatos = true;
+                                break;
+                            }
 
+                            string token = await ObtenerTokenAsync(usuario, password);
                             var BuscProducto = new NA_APIproductos();
                             productoCodigoGet product = await BuscProducto.get_ProductoCodigoAsync(usuario, password, criterioBusqueda);
                             //productoCriterioGet product = productos[0];
@@ -274,20 +284,27 @@ namespace jycboliviaASP.net.Presentacion
 
                         }
 
-                        bool banderaAut = napi.get_AutenticarUsuario(usuario, password);
-                        if (banderaAut)
+                        if (errorDatos == false)
                         {
-                            string Usuario = usuario;
-                            string token = napi.get_TokenUsuario(usuario, password);
-                            bool banderaUpon = napi.insertarVentas2(token, NumeroVenta, NumeroPedido, Fecha, CodigoCliente,
-                                Referencia, Glosa, EmitirFactura, ImporteProductos, ImporteDescuentos, ImporteTotal, Cobros_TotalEfectivo,
-                                Cobros_TotalDeposito, Factura_TipoDocumentoIdentidad, Factura_NIT_CI, Factura_Complemento, Factura_RazonSocial,
-                                Factura_Telefono, Factura_Email, Factura_MetodoPago, Usuario, listaProductosV);
-                            if (banderaUpon == true)
+                            bool banderaAut = napi.get_AutenticarUsuario(usuario, password);
+                            if (banderaAut)
                             {
-                                bool bandera = nupon.updateVaciadoOk(CodigoVendido);
+                                string Usuario = usuario;
+                                string token = napi.get_TokenUsuario(usuario, password);
+                                bool banderaUpon = napi.insertarVentas2(token, NumeroVenta, NumeroPedido, Fecha, CodigoCliente,
+                                    Referencia, Glosa, EmitirFactura, ImporteProductos, ImporteDescuentos, ImporteTotal, Cobros_TotalEfectivo,
+                                    Cobros_TotalDeposito, Factura_TipoDocumentoIdentidad, Factura_NIT_CI, Factura_Complemento, Factura_RazonSocial,
+                                    Factura_Telefono, Factura_Email, Factura_MetodoPago, Usuario, listaProductosV);
+                                if (banderaUpon == true)
+                                {
+                                    bool bandera = nupon.updateVaciadoOk(CodigoVendido);
+                                }
                             }
                         }
+                        else {
+                            Console.WriteLine("Error de guardar.");
+                        }
+
                     }
                 }
             }
@@ -306,6 +323,27 @@ namespace jycboliviaASP.net.Presentacion
             return await negocio.GetTokenAsync(usuario, password);
         }
 
+        protected void cb_selecciontodo_CheckedChanged(object sender, EventArgs e)
+        {
+            seleccionarTodo();
+        }
+
+        private void seleccionarTodo()
+        {
+            bool seleccionado = cb_selecciontodo.Checked;           
+            foreach (GridViewRow row in gv_datosCobros.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    row.RowState = DataControlRowState.Edit;
+                    if (seleccionado == true) {
+                        row.Cells[0].Controls.OfType<CheckBox>().FirstOrDefault().Checked = true;
+                    }else
+                        row.Cells[0].Controls.OfType<CheckBox>().FirstOrDefault().Checked = false;
+
+                }
+            }
+        }
     }
 }
       

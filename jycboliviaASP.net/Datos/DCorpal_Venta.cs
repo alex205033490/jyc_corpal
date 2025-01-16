@@ -47,7 +47,9 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select  vv.codigo, date_format(vv.fechaentrega,'%d/%m/%Y') as 'Fecha_Entrega', " +
                 " vv.cliente,  vv.direccion,  vv.cicliente,  vv.telefono,  vv.razonSocialEmisor,  " +
                 " vv.nitEmisor,  vv.correoCliente,  vv.montoTotal,  vv.tipoCambio  from tbcorpal_venta vv " +
-                " where  vv.cliente like '%"+cliente+"%' and vv.vaciadoupon = false and vv.estado = 1 and vv.estadoventa = 'Abierto'  " +
+                " where  vv.cliente like '%"+cliente+"%' and " +
+                " vv.vaciadoupon = false and vv.estado = 1 and " +
+                " vv.estadoventa = 'Cerrado'  " +
                 " order by vv.codigo desc ";
             return cnx.consultaMySql(consulta);
         }

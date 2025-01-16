@@ -2,6 +2,7 @@
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" type="text/css" />
  <style type="text/css">
      .CompletionList
      {
@@ -113,7 +114,7 @@
      </div>            
             <div class="card-body list-group-item col-11 col-sm-11 col-md-8">
                 <div class="row col-md-12">
-                        <div class="sc2 col-md-1">
+                        <div class="sc2 col-md-12">
                             <asp:GridView ID="gv_datosCobros" runat="server" BackColor="White" 
                                 BorderColor="#999999" BorderStyle="Solid" BorderWidth="2px" CellPadding="6"
                                 Font-Size="Small" ForeColor="black" GridLines="Vertical" AutoGenerateColumns="false">

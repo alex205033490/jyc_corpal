@@ -56,8 +56,7 @@
         <asp:Label ID="Label8" runat="server" Font-Size="Small" Text="NroSolicitud:"></asp:Label>
     </td>
     <td>
-        <asp:TextBox ID="tx_nrosolicitud" class="form-control" runat="server" 
-            Width="100px"></asp:TextBox>
+        <asp:TextBox ID="tx_nrosolicitud" class="form-control" runat="server" Font-Size="Small"   Width="100px"></asp:TextBox>
     </td>
     <td>
         &nbsp;</td>
@@ -78,8 +77,7 @@
         Font-Size="Small"></asp:Label>
     </td>
 <td>
-    <asp:TextBox ID="tx_fechaEngrega" class="form-control" runat="server" 
-        Width="100px"></asp:TextBox>
+    <asp:TextBox ID="tx_fechaEngrega" class="form-control" runat="server" Font-Size="Small"      Width="100px"></asp:TextBox>
     <asp:CalendarExtender ID="tx_fechaEngrega_CalendarExtender" runat="server" 
         TargetControlID="tx_fechaEngrega">
     </asp:CalendarExtender>
@@ -88,7 +86,7 @@
     <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Hora Entrega :"></asp:Label>
     </td>
 <td>
-    <asp:TextBox ID="tx_horaentrega" class="form-control" runat="server" Width="100px"></asp:TextBox>    
+    <asp:TextBox ID="tx_horaentrega" class="form-control" Font-Size="Small" runat="server" Width="100px"></asp:TextBox>    
     </td>
 <td>
     <asp:Label ID="Label3" runat="server" Text="Estado:"></asp:Label>  </td>

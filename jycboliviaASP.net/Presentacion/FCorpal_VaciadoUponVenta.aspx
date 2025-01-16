@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PlantillaNew.Master" AutoEventWireup="true" CodeBehind="FCorpal_VaciadoUponVenta.aspx.cs" Inherits="jycboliviaASP.net.Presentacion.FCorpal_VaciadoUponVenta" Async="true" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" type="text/css" />
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"> 
+    <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" />   
 <style type="text/css">
     .CompletionList
     {
@@ -50,11 +50,19 @@
 <div class="card-header bg-success text-white">Vaciar al Upon las Ventas de JyC</div>
 <div class="card-body">
     <div class="list-group list-group-flush">
-        <div class="list-group-item">
-            <div class="row">                    
+        <div class="list-group-item">            
+            <div class="row">             
+                    <div class="col-md-3">
+                    <asp:Label ID="Label1" for="lb_usuarioUpon" runat="server" Text="Usuario Upon:" Font-Size="Small"></asp:Label>            
+                        <asp:TextBox ID="tx_usuarioUpon" CssClass="form-control" runat="server" Font-Size="Small" Text="adm"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3">
+                    <asp:Label ID="Label2" for="lb_passUpon" runat="server" Text="Password Upon:" Font-Size="Small"></asp:Label>            
+                        <asp:TextBox ID="tx_passUpon" type="password" CssClass="form-control" runat="server" Font-Size="Small" Text="123"></asp:TextBox>
+                    </div>
                     <div class="col-md-9">
                         <asp:Label ID="Label3" for="tx_cliente" runat="server" Text="Cliente:" Font-Size="Small"></asp:Label>            
-                        <asp:TextBox ID="tx_cliente"  CssClass="form-control" runat="server" Font-Size="Small"></asp:TextBox>
+                        <asp:TextBox ID="tx_cliente" CssClass="form-control" runat="server" Font-Size="Small"></asp:TextBox>
                         <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server" 
                             TargetControlID="tx_cliente"
                             CompletionSetCount="12" 
@@ -70,6 +78,10 @@
                         <br />
                         <asp:Button ID="bt_buscar" CssClass="btn btn-info" runat="server" Text="Buscar" OnClick="bt_buscar_Click" />
                     </div>
+                    <div class="col-md-12">                        
+                        <asp:CheckBox ID="cb_selecciontodo" Text="Seleccionar Todo" runat="server" AutoPostBack="true" OnCheckedChanged="cb_selecciontodo_CheckedChanged" />
+                    </div>
+
                 </div>
             <div class="row">
                 <div class="col-md-3">

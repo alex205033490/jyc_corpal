@@ -24,9 +24,8 @@
      
   .sc2
  { 
-   border: double #666;  
-   float: left;   
+   border: double #666;     
    height: 300px;  
-   width: 940px;
+   width: auto;
    overflow:auto;
      } 
