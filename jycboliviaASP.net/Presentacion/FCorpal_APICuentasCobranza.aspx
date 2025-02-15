@@ -10,7 +10,6 @@
             <div class="col-md-11 col-md-offset-1">
                 <div class="panel panel-success class">
 
-
                     <!------------------------          API GET CUENTAS         ------------------------------>
                     <div class="container-GETCCobranzaDet p-4 rounded col-md-12">
                         <div class="container_tittle rounded">
@@ -141,8 +140,8 @@
                                 <div class="col-md-4 col-sm-6 mb-2">
                                     <div class="border p-2 bg-light rounded shadow-sm">
                                         <asp:Label runat="server">COBROS</asp:Label><br />
-                                        <asp:TextBox ID="txt_totalEfectivo" runat="server" placeholder="Total Efectivo" CssClass="form-control mb-1"></asp:TextBox>
-                                        <asp:TextBox ID="txt_totalDeposito" runat="server" placeholder="Total Deposito" CssClass="form-control"></asp:TextBox><br />
+                                        <asp:TextBox ID="txt_totalEfectivo" runat="server" placeholder="Total Efectivo" AutoComplete="off" CssClass="form-control mb-1"></asp:TextBox>
+                                        <asp:TextBox ID="txt_totalDeposito" runat="server" placeholder="Total Deposito" AutoComplete="off" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -156,9 +155,10 @@
                                             <asp:ListItem Text="Banco Union" Value="3" />
                                         </asp:DropDownList>
                                         <asp:TextBox ID="txt_numCuenta" runat="server" placeholder="Numero de Cuenta" CssClass="form-control mb-1"></asp:TextBox>
-                                        <asp:TextBox ID="txt_referenciaDepos" runat="server" placeholder="Referencia Desposito" CssClass="form-control"></asp:TextBox><br />
+                                        <asp:TextBox ID="txt_referenciaDepos" runat="server" placeholder="Referencia Desposito" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 

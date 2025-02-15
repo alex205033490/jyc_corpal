@@ -148,26 +148,26 @@
                                     <div class="row mb-1 col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                                            <label class="form-label">Referencia:</label>
-                                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
+                                            <asp:label runat="server" class="form-label">Referencia:</asp:label>
+                                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control mb-2" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
 
-                                            <label class="form-label">Tipo de moneda:</label>
-                                            <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown dd_fsmall">
+                                            <asp:label runat="server" class="form-label">Tipo de moneda:</asp:label>
+                                            <asp:DropDownList ID="dd_codMoneda" runat="server" CssClass="custom-dropdown dd_fsmall mb-2">
                                                 <asp:ListItem Text="Bolivianos" Value="1" />
                                                 <asp:ListItem Text="Dólares" Value="2" />
                                                 <asp:ListItem Text="Unidad Fomento Vivienda" Value="3"/>
                                             </asp:DropDownList>
-                                            <label class="form-label">Código Almacén:</label>
-                                            <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
+                                            <asp:label runat="server" class="form-label">Código Almacén:</asp:label>
+                                            <asp:DropDownList ID="dd_CodAlmacenIIngreso" runat="server" CssClass="form-select dd_fsmall mb-2"></asp:DropDownList>
                                         </div>
 
                                         <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                                            <label class="form-label" for="txt_motMovimiento">Motivo Movimiento:</label>
-                                            <asp:DropDownList ID="dd_motMovI" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
-                                            <label class="form-label" for="txt_itemAnalisis">Ítem Análisis:</label>
-                                            <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                                            <label class="form-label" for="txt_glosa">Glosa:</label>
-                                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off" placeholder="Opcional"></asp:TextBox>
+                                            <asp:label runat="server" class="form-label" for="txt_motMovimiento">Motivo Movimiento:</asp:label>
+                                            <asp:DropDownList ID="dd_motMovI" runat="server" CssClass="form-select dd_fsmall mb-2"></asp:DropDownList>
+                                            <asp:label runat="server" class="form-label" for="txt_itemAnalisis">Ítem Análisis:</asp:label>
+                                            <asp:TextBox ID="txt_itemAnalisis" runat="server" CssClass="form-control mb-2" autocomplete="off"></asp:TextBox>
+                                            <asp:label runat="server" class="form-label" for="txt_glosa">Glosa:</asp:label>
+                                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control mb-2" autocomplete="off" placeholder="Opcional"></asp:TextBox>
                                         </div>
 
                                     </div>

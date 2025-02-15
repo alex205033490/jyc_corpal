@@ -21,7 +21,6 @@
                         <asp:UpdatePanel ID="updatePanel_RProduccion" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
 
-                            
                         <div class="form_col1 row">
                             <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-5 col-lg-4">
                                 <div class="col-9 col-sm-12 col-md-12 col-lg-12">
@@ -36,13 +35,13 @@
                             </div>
 
                             <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                
                                 <div class="col-9 col-sm-12 col-md-10 col-lg-10">
                                     <label class="form-label">Linea Producción:</label>
                                     <asp:DropDownList ID="dd_lineaProduccion" runat="server" CssClass="form-select dd_fsmall">
                                         <asp:ListItem></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-
 
                                 <div class="col-8 col-sm-9 col-md-10 col-lg-10">
                                     <label class="form-label">Realizar Descarga:</label>
@@ -56,7 +55,7 @@
                             <div class="mb-3 col-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                 <div class="col-10 col-sm-12 col-md-10 col-lg-12">
                                     <label class="form-label">Responsable:</label>
-                                    <asp:TextBox ID="txt_codResponsable" runat="server" AutoPostBack="true" CssClass="form-control" AutoComplete="off" OnTextChanged="txt_codResponsable_TextChanged"></asp:TextBox>
+                                    <asp:TextBox ID="txt_codResponsable" runat="server" placeholder="Busque y seleccione un Responsable" AutoPostBack="true" CssClass="form-control" AutoComplete="off" OnTextChanged="txt_codResponsable_TextChanged"></asp:TextBox>
                                     <asp:GridView ID="gv_listResponsables" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="gv_listResponsables table table-bordered small" OnSelectedIndexChanged="gv_listResponsables_SelectedIndexChanged">
                                         <columns>
                                             <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
@@ -94,7 +93,7 @@
 
                                             <div class="input_producto col-4">
                                                 <asp:Label runat="server"> Nombre del producto:</asp:Label>
-                                                <asp:TextBox ID="txt_producto" runat="server" AutoPostBack="true" CssClass="form-control dd_fsmall" AutoComplete="off" OnTextChanged="txt_producto_TextChanged"></asp:TextBox>
+                                                <asp:TextBox ID="txt_producto" runat="server" AutoPostBack="true" placeholder="Busque y seleccione un producto" CssClass="form-control dd_fsmall" AutoComplete="off" OnTextChanged="txt_producto_TextChanged"></asp:TextBox>
                                             </div>
 
                                             <div class="input_cantidad col-2">
@@ -114,7 +113,7 @@
                                     </asp:Panel>
 
 
-                                    <asp:GridView ID="gv_listProdProduccion" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdProduccion_SelectedIndexChanged">
+                                    <asp:GridView ID="gv_listProdProduccion" runat="server" EnableViewState="true" placeholder="Busque y seleccione un producto" AutoGenerateColumns="false" CssClass="table table-bordered" OnSelectedIndexChanged="gv_listProdProduccion_SelectedIndexChanged">
                                         <Columns>
                                             <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
                                             <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
@@ -132,11 +131,11 @@
                                                 <asp:Button ID="btnEliminarFila" runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument='<%# Eval("CodigoProducto") %>' CssClass="btn btn-danger btn-sm" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                                        <asp:BoundField DataField="CodigoProducto" HeaderText="CodProducto" />
-                                        <asp:BoundField DataField="CodUnidadMedida" HeaderText="Unidad Medida" />
-                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                        <asp:BoundField DataField="CodReceta" HeaderText="CodReceta" />
+                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre"/>
+                                        <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo Producto"/>
+                                        <asp:BoundField DataField="CodUnidadMedida" HeaderText="Unidad Medida"/>
+                                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad"/>
+                                        <asp:BoundField DataField="CodReceta" HeaderText="Codigo Receta"/>
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -206,11 +205,11 @@
                         <asp:GridView ID="gv_detalle" runat="server" CssClass="gridview" AutoGenerateColumns="false">
 
                             <columns>
-                                <asp:BoundField DataField="Item" HeaderText="item" SortExpression="item" />
-                                <asp:BoundField DataField="CodigoProducto" HeaderText="codProducto" SortExpression="codProd" />
-                                <asp:BoundField DataField="Cantidad" HeaderText="cantidad" SortExpression="cant" />
-                                <asp:BoundField DataField="UnidadMedida" HeaderText="uMedida" SortExpression="uMed" />
-                                <asp:BoundField DataField="CodigoReceta" HeaderText="codReceta" SortExpression="cRecet" />
+                                <asp:BoundField DataField="Item" HeaderText="Item" SortExpression="item" />
+                                <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo Producto" SortExpression="codProd" />
+                                <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="cant" />
+                                <asp:BoundField DataField="UnidadMedida" HeaderText="Unidad Medida" SortExpression="uMed" />
+                                <asp:BoundField DataField="CodigoReceta" HeaderText="Codigo Receta" SortExpression="cRecet" />
                             </columns>
 
                             <AlternatingRowStyle CssClass="alternating-row" />
