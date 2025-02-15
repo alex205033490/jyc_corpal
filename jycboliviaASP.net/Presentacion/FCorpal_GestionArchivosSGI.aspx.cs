@@ -28,7 +28,7 @@ namespace jycboliviaASP.net.Presentacion
              } 
 
              string baseDatos = Session["BaseDatos"].ToString();
-             if (!baseDatos.Equals("Santa Cruz") && !baseDatos.Equals("La Paz") && !baseDatos.Equals("Cochabamba"))
+             if (!baseDatos.Equals("Santa Cruz") && !baseDatos.Equals("La Paz") && !baseDatos.Equals("Cochabamba") && !baseDatos.Equals("Corpal") )
              {
                  baseDatos = "JyC";
              }
