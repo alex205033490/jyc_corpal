@@ -24,13 +24,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_getCuentas;
 
         /// <summary>
-        /// Control updatePanelGet_IID.
+        /// Control updatePanelGet_CGet.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelGet_IID;
+        protected global::System.Web.UI.UpdatePanel updatePanelGet_CGet;
 
         /// <summary>
         /// Control gv_Cuentas.
@@ -58,6 +58,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_buscarCobranza;
+
+        /// <summary>
+        /// Control updatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel1;
 
         /// <summary>
         /// Control gv_cuentaCobranza.
@@ -159,6 +168,24 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_referenciaDepos;
 
         /// <summary>
+        /// Control txt_numCuentaDet.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_numCuentaDet;
+
+        /// <summary>
+        /// Control txt_importeCapital.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_importeCapital;
+
+        /// <summary>
         /// Control btnAddRow.
         /// </summary>
         /// <remarks>
@@ -166,6 +193,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddRow;
+
+        /// <summary>
+        /// Control gv_productosAgregados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_productosAgregados;
 
         /// <summary>
         /// Control btn_PostCobranza.

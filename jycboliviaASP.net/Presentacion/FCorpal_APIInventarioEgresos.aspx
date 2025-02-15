@@ -13,7 +13,7 @@
                     <!------------------------          API GET INVENTARIO EGRESO CON DETALLES          ------------------------------>
                     <div class="container-GETIEgresoDet p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Informe Detallado de Egresos de Inventario</h3>
+                            <h3 class="text_tittle p-3">Reporte Detallado de Egresos de Inventario</h3>
                         </div>
 
                         <asp:Panel runat="server" DefaultButton="BuscarEgresoInventarioDetalle">
@@ -86,7 +86,7 @@
                     <!------------------------          API GET INVENTARIO EGRESO C/S CRITERIO        ------------------------------>
                     <div class="container-GETIEgreso p-4 rounded">
                         <div class="container_tittle rounded">
-                            <h3 class="text_tittle p-3">Informe de Egresos de Inventario</h3>
+                            <h3 class="text_tittle p-3">Reporte de Egresos de Inventario</h3>
                         </div>
                         <asp:Panel runat="server" DefaultButton="btn_BuscarEgresoInventario">
                             <div class="container_input row mb-4">
@@ -140,27 +140,27 @@
                         <asp:Panel runat="server" DefaultButton="btn_InventarioEgresoPost2">
                             <asp:UpdatePanel ID="updatePanelPost_IE" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <div class="row mb-3 col-xs-12 col-sm-12 col-ms-12 col-lg-12">
+                                    <div class="row mb-3 col-xs-12 col-sm-12 col-ms-12 col-lg-12 mb-2">
 
-                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                                            <label class="form-label">Referencia:</label>
+                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mb-2">
+                                            <asp:label runat="server" class="form-label">Referencia:</asp:label>
                                             <asp:TextBox ID="TextBoxReferencia" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
                                         </div>
-                                        <div class="col-6 col-sm-6 col-md-3 col-lg-4">
-                                            <label class="form-label">Almacen:</label>
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-4 mb-2">
+                                            <asp:label runat="server" class="form-label">Almacen:</asp:label>
                                             <asp:DropDownList ID="dd_codAlmacenIEgreso" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
                                         </div>
 
-                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                            <label class="form-label">Motivo Movimiento:</label>
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2">
+                                            <asp:label runat="server" class="form-label">Motivo Movimiento:</asp:label>
                                             <asp:DropDownList ID="dd_motMoviIEgreso" runat="server" CssClass="form-select dd_fsmall"></asp:DropDownList>
                                         </div>
                                         <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                            <label class="form-label">Ítem Análisis:</label>
-                                            <asp:TextBox ID="TextBoxItemAnalisis" runat="server" CssClass="form-control" Text="0" AutoComplete="off"></asp:TextBox>
+                                            <asp:label runat="server" class="form-label">Ítem Análisis:</asp:label>
+                                            <asp:TextBox ID="TextBoxItemAnalisis" runat="server" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                                         </div>
                                         <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                                            <label class="form-label">Glosa:</label>
+                                            <asp:label runat="server" class="form-label">Glosa:</asp:label>
                                             <asp:TextBox ID="TextBoxGlosa" runat="server" CssClass="form-control" AutoComplete="off" placeholder="Opcional"></asp:TextBox>
                                         </div>
                                     </div>
@@ -182,12 +182,12 @@
                                             <div class="form_addProducto row mb-3">
                                                 <div class="input_producto col-6">
                                                     <asp:Label runat="server"> Producto:</asp:Label>
-                                                    <asp:TextBox ID="txt_producto" runat="server" OnTextChanged="txt_producto_TextChanged" AutoPostBack="true" CssClass="form-control" AutoComplete="off"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_producto" runat="server" placeholder="Busque y seleccione un producto" OnTextChanged="txt_producto_TextChanged" AutoPostBack="true" CssClass="form-control" AutoComplete="off"></asp:TextBox>
                                                 </div>
 
                                                 <div class="input_cantidad col-3">
                                                     <asp:Label runat="server"> Cantidad:</asp:Label>
-                                                    <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertCommaToDot(event);"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_cantProducto" runat="server" CssClass="form-control" AutoComplete="off" oninput="convertdotcomma(event);"></asp:TextBox>
                                                 </div>
                                                 <div class="container_btnAddProd col-3 d-flex align-items-end">
                                                     <asp:Button runat="server" ID="btn_addProd" Text="Agregar" CssClass="btn btn-success" OnClick="btn_addProd_Click" />
@@ -200,7 +200,8 @@
                                                 <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
                                                 <asp:BoundField DataField="Nombre" HeaderText="Producto" HtmlEncode="false" />
                                                 <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" />
-                                                <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="UM" />
+                                                <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CUM" />
+                                                <asp:BoundField DataField="Stock" HeaderText="Stock"/>
 
                                             </Columns>
                                         </asp:GridView>

@@ -68,6 +68,15 @@
     box-shadow: 3px 2px 50px rgba(125, 125, 125, 0.5); /* Sombra plomo */
     font-size: small;
 }
+.gv_listResponsables th{
+    padding: 0.30rem;
+}
+
+.gv_listResponsables td{
+    padding: 0.3rem
+}
+
+
 
 /*****************************     FCORPAL API PEDIDO      **********************************/
 .container-GETPedidoDet, .container-GETPedido, .container-POSTPedido {

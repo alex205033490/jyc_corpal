@@ -19,12 +19,10 @@
           </a>
         </li><!-- End Login Page Nav -->
 
-
          <li></li>         
          <li></li>       
          <li></li>       
          <li></li>       
-
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -163,7 +161,7 @@
 
         <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>Inventario UPON</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-layout-text-window-reverse"></i><span>Inventario Upon</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
 
         <ul id="inventario-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -175,7 +173,7 @@
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIproduccion-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Producción UPON</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Producción Upon</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APIproduccion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li><a href="../Presentacion/FCorpal_APIProduccion.aspx" id="mn_APIProduccion" runat="server" ><i class="bi bi-circle"></i><span>Producción Upon</span></a></li>
@@ -184,7 +182,7 @@
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIpedidoVent-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Pedido/Venta UPON</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Pedido/Venta Upon</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APIpedidoVent-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li><a href="../Presentacion/FCorpal_APIPedido.aspx" id="A2" runat="server" ><i class="bi bi-circle"></i><span>Pedido Upon</span></a></li>
@@ -194,7 +192,7 @@
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICuentas-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas UPON</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas Upon</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
           <ul id="APICuentas-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza Upon</span></a></li>

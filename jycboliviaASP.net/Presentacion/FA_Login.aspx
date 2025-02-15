@@ -47,14 +47,11 @@
                     	<input class="input100" type="text" name="username" placeholder="Username" runat="server" ID="tx_usuario" />                         
 						<span class="focus-input100"></span>
 					</div>
-                                       
-
-					<div class="wrap-input100 validate-input" data-validate = "Please enter password">						
+                    
+					<div class="wrap-input100 validate-input mb-2" data-validate = "Please enter password">						
                         <input type="password" class="input100" name="pass" placeholder="Password" runat="server" id="tx_password" /> 
 						<span class="focus-input100"></span>
 					</div>
-
-                    
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">						
                         <asp:DropDownList class="input100"  ID="dd_loginDpto" runat="server" >
