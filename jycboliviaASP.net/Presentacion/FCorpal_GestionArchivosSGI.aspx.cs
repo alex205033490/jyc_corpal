@@ -72,9 +72,7 @@ namespace jycboliviaASP.net.Presentacion
             return directoryNode;
         }
 
-
-       
-
+        
         protected void Button1_Click(object sender, EventArgs e)
         {            
             LisDirectory(TreeView1, rutaArchivo);
