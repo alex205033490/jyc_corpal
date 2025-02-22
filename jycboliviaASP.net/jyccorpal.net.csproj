@@ -502,6 +502,7 @@
     <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_DevoluciondeProductoTerminado.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_EntregaSolicitudProductoACamion.aspx" />
     <Content Include="Presentacion\FCorpal_GestionarInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
@@ -635,6 +636,7 @@
     <Content Include="Styles\Style_AgendaNegociacion.css" />
     <Content Include="Styles\Style_CompradeMaterialeInsumos.css" />
     <Content Include="Styles\Style_consultaRutasporDatos.css" />
+    <Content Include="Styles\Style_CorpalEntregaProdCamion.css" />
     <Content Include="Styles\Style_CostosPolizasImportacion.css" />
     <Content Include="Styles\Style_CotiEra.css" />
     <Content Include="Styles\Style_GActividades.css" />
@@ -786,6 +788,7 @@
     <Compile Include="Datos\Datos old\DMeses.cs" />
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
+    <Compile Include="Datos\DCorpal_SolicitudEntregaProductoACamion.cs" />
     <Compile Include="Datos\DCorpal_Venta.cs" />
     <Compile Include="Datos\DUpon_compras.cs" />
     <Compile Include="Datos\DUpon_Ventas.cs" />
@@ -891,6 +894,7 @@
     <Compile Include="Negocio\NA_APIProveedores.cs" />
     <Compile Include="Negocio\NA_APIReceta.cs" />
     <Compile Include="Negocio\NA_APIventas.cs" />
+    <Compile Include="Negocio\NA_SolicitudEntregaProductoACamion.cs" />
     <Compile Include="Negocio\NA_UPONSolicitudPedido.cs" />
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
@@ -1115,6 +1119,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaProduccion.aspx.designer.cs">
       <DependentUpon>FCorpal_EntregaProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProductoACamion.aspx.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProductoACamion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_EntregaSolicitudProductoACamion.aspx.designer.cs">
+      <DependentUpon>FCorpal_EntregaSolicitudProductoACamion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_GestionarInsumos.aspx.cs">
       <DependentUpon>FCorpal_GestionarInsumos.aspx</DependentUpon>

@@ -1,0 +1,67 @@
+﻿.container_datosSolicitud{
+    background-color:antiquewhite;
+}
+
+
+
+.container_buscarRegistro{
+    padding:10px;
+}
+
+.container_datosFactura {
+    padding: 10px;
+}
+
+.btn_limpiar{
+    padding:10px;
+}
+
+.btn_guardar{
+    padding:10px;
+}
+
+.container_listRegistros {
+    height: 250px;
+    border: 2px solid black;
+    font-size: 12px;
+    margin:10px
+}
+
+.container_detalleProductos{
+    font-size:12px;
+    padding:20px;
+    height:200px;
+    border:2px solid;
+}
+
+/*AUTOCOMPLETE*/
+/*  AutoComplete  */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: medium;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: medium;
+}
+
+.CompletionListMighlightedItem {
+    background-color: blue;
+    color: White;
+    /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/
+}
+
+
