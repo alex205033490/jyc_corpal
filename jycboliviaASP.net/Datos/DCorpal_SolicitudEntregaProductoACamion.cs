@@ -1,9 +1,11 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Protocols;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -61,6 +63,7 @@ namespace jycboliviaASP.net.Datos
                                 " where " +
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
+                                " ds.codvehiculo is null and" +
                                 " pp.nroboleta like '%" + NroSolicitud + "%'";
 
             if (!string.IsNullOrEmpty(solicitud))
@@ -88,13 +91,42 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_ShowVehiculo()
         {
-            string consulta = "select v.codigo, v.marca, v.modelo, v.placa, " +
-                "v.conductor, CONCAT(v.marca, '-', v.`modelo`, ' placa:', v.placa )as 'detalle' " +
+            string consulta = "select v.codigo, v.marca, v.modelo, v.placa, v.conductor, " +
+                "CONCAT(COALESCE(v.marca, ''), ' - ', " +
+                "COALESCE(v.`modelo`, ''), " +
+                "' placa: ', " +
+                "COALESCE(v.placa, ''))" +
+                "as 'detalle' " +
                 "from tbcorpal_vehiculos v " +
                 "order by v.marca asc";
             return conexion.consultaMySql(consulta);
         }
+        internal DataSet get_detVehiculo(int codigo)
+        {
+            string consulta = "select v.codigo, v.cargacajas, v.capacidad, v.medida " +
+                "from tbcorpal_vehiculos v " +
+                "where v.codigo = "+codigo+" ";
+            return conexion.consultaMySql(consulta);
+        } 
 
+        // UPDATE ASIGNAR VEHICULO
+        internal bool update_ADDVehiculoAPedido(int codVehiculo, int codUser, int codSolicitud, int codProducto)
+        {
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto ds " +
+                "SET ds.codvehiculo = @codVehiculo, ds.fechaasignacion_car = current_date(), " +
+                "ds.horaasignacion_car = current_time(), ds.coduserasignacion_car = @codUser " +
+                "WHERE ds.codsolicitud = @codSolicitud and ds.codProducto = @codProducto";
 
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                comand.Parameters.AddWithValue("@codVehiculo", codVehiculo);
+                comand.Parameters.AddWithValue("@codUser", codUser);
+                comand.Parameters.AddWithValue("@codSolicitud", codSolicitud);
+                comand.Parameters.AddWithValue("@codProducto", codProducto);
+
+                return conexion.ejecutarMySql2(comand);
+            }
+        }
+        
     }
 }

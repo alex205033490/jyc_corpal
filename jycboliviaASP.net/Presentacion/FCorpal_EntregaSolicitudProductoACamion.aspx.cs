@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Management.Instrumentation;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -172,7 +173,6 @@ namespace jycboliviaASP.net.Presentacion
         // DD VEHICULO
 
 
-
         protected void btn_Limpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -182,15 +182,141 @@ namespace jycboliviaASP.net.Presentacion
         {
             txt_nroSolicitud.Text = string.Empty;
             txt_SolicitanteProducto.Text = string.Empty;
+            dd_vehiculos.SelectedIndex = 0;
 
             mostrarRegistrosSolicitudProductos("", "", "Abierto");
         }
 
-        protected void dd_vehiculos_SelectedIndexChanged(object sender, EventArgs e)
+        
+
+        // UPDATE agregar vehiculo a pedido
+        protected void btn_registrar_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (!ProductosSeleccionados())
+                {
+                    showalert("Debe seleccionar al menos un pedido.");
+                    return;
+                }
+
+                if (!IsVehiculoSeleccionado())
+                {
+                    showalert("Debe seleccionar 1 vehiculo.");
+                    return;
+                }
+                bool resultadoGeneral = RegistrarProductosConVehiculo();
+
+                if (resultadoGeneral)
+                {
+                    showalert("Registro insertado exitosamente.");
+                    mostrarRegistrosSolicitudProductos("","","Abierto");
+                    LimpiarCampos();
+                } else
+                {
+                    showalert("Hubo un error al insertar el registro.");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error: {ex.Message}");
+            }
         }
 
-        
+
+        private int obtenerCodResponsable()
+        {
+            try
+            {
+                NA_Responsables negocio = new NA_Responsables();
+                string usu = Session["NameUser"].ToString();
+                string pass = Session["passworuser"].ToString();
+                return negocio.getCodUsuario(usu, pass);
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al obtener el codigo del responsable. {ex.Message}");
+                return 0;
+            }
+        }
+        private bool RegistrarProductosConVehiculo()
+        {
+            bool resultadoGeneral = true;
+            NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();
+
+            foreach(GridViewRow row in gv_listRegistros.Rows)
+            {
+                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
+
+                if(chkSelect != null && chkSelect.Checked)
+                {
+                    int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
+                    int codProducto = Convert.ToInt32(row.Cells[7].Text);
+                    int codResponsable = obtenerCodResponsable();
+                    int codCar = int.Parse(dd_vehiculos.SelectedValue);
+
+                    bool resultado = negocio.UpdateADDVehiculoAPedido(codCar, codResponsable, codSolicitud, codProducto);
+
+                    if (!resultado)
+                    {
+                        resultadoGeneral = false;
+                        break;
+                    }
+                }
+
+            }
+            return resultadoGeneral;
+        }
+        private bool IsVehiculoSeleccionado()
+        {
+            return dd_vehiculos.SelectedIndex != 0;
+        }
+        private bool ProductosSeleccionados()
+        {
+            foreach(GridViewRow row in gv_listRegistros.Rows)
+            {
+                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
+                if(chkSelect != null && chkSelect.Checked)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void MostrarDetVehiculos()
+        {
+            NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();
+            DataSet datos = negocio.get_ShowVehiculos();
+            gv_detCar.DataSource = datos;
+            gv_detCar.DataBind();
+        }
+
+        protected void dd_vehiculos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int codigo = int.Parse(dd_vehiculos.SelectedValue);
+                NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();
+
+                DataSet vehiculoData = negocio.get_detVehiculo(codigo);
+
+                if (vehiculoData.Tables[0].Rows.Count > 0)
+                {
+                    gv_detCar.DataSource = vehiculoData;
+                    gv_detCar.DataBind();
+                    gv_detCar.Visible = true;
+
+                } else
+                {
+                    gv_detCar.Visible = false; 
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al cargar los datos. {ex.Message}");
+            }
+
+        }
     }
 }

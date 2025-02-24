@@ -23,57 +23,91 @@
 
                         <div class="container_form1 row">
 
-                            <div class="container_buscarRegistro row col-lg-7">
-                                <div class="col-lg-6">
-                                    <label>Nro Solicitud:</label>
-                                    <asp:TextBox ID="txt_nroSolicitud" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:AutoCompleteExtender ID="txt_nroSolicitud_AutoCompleteExtender" runat="server" TargetControlID="txt_nroSolicitud"
-                                        CompletionSetCount="12"
-                                        MinimumPrefixLength="1" ServiceMethod="getListNroBoletas"
-                                        UseContextKey="True"
-                                        CompletionListCssClass="CompletionList"
-                                        CompletionListItemCssClass="CompletionlistItem"
-                                        CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                    </asp:AutoCompleteExtender>
+                            <div class="container_buscarRegistro row col-lg-12" style="margin: 10px">
+                                <div class="col-lg-5">
+                                    <div>
+                                        <label>Nro Solicitud:</label>
+                                        <asp:TextBox ID="txt_nroSolicitud" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:AutoCompleteExtender ID="txt_nroSolicitud_AutoCompleteExtender" runat="server" TargetControlID="txt_nroSolicitud"
+                                            CompletionSetCount="12"
+                                            MinimumPrefixLength="1" ServiceMethod="getListNroBoletas"
+                                            UseContextKey="True"
+                                            CompletionListCssClass="CompletionList"
+                                            CompletionListItemCssClass="CompletionlistItem"
+                                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                        </asp:AutoCompleteExtender>
+                                    </div>
 
-                                    <label>Vendedor</label>
-                                    <asp:TextBox ID="txt_SolicitanteProducto" runat="server" CssClass="form-control"></asp:TextBox>
-                                    <asp:AutoCompleteExtender ID="txt_SolicitanteProducto_AutoCompleteExtender" runat="server"
-                                        TargetControlID="txt_SolicitanteProducto"
-                                        CompletionSetCount="12"
-                                        MinimumPrefixLength="1" ServiceMethod="getListPersonalSolicitante"
-                                        UseContextKey="True"
-                                        CompletionListCssClass="CompletionList"
-                                        CompletionListItemCssClass="CompletionlistItem"
-                                        CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                    </asp:AutoCompleteExtender>
+                                    <div class="mb-2">
+                                        <label>Vendedor</label>
+                                        <asp:TextBox ID="txt_SolicitanteProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:AutoCompleteExtender ID="txt_SolicitanteProducto_AutoCompleteExtender" runat="server"
+                                            TargetControlID="txt_SolicitanteProducto"
+                                            CompletionSetCount="12"
+                                            MinimumPrefixLength="1" ServiceMethod="getListPersonalSolicitante"
+                                            UseContextKey="True"
+                                            CompletionListCssClass="CompletionList"
+                                            CompletionListItemCssClass="CompletionlistItem"
+                                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                        </asp:AutoCompleteExtender>
+                                    </div>
+
+                                    <div class="col-lg-4 d-flex align-items-end mb-3">
+                                        <div class="col-lg-12">
+                                            <asp:Button ID="btn_buscarRegistro" runat="server" CssClass="btn btn-dark" Text="Buscar" OnClick="btn_buscarRegistro_Click" />
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <asp:Button ID="btn_Limpiar" runat="server" CssClass="btn btn-info" Text="Limpiar Campos" OnClick="btn_Limpiar_Click" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label>Encargado de Asignación:</label>
+                                        <asp:TextBox ID="txt_entregoProducto" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox>
+
+                                    </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <asp:Button ID="btn_buscarRegistro" runat="server" CssClass="btn btn-dark" Text="Buscar" OnClick="btn_buscarRegistro_Click" />
-                                    <asp:Button ID="btn_Limpiar" runat="server" CssClass="btn btn-info" Text="Limpiar Campos" OnClick="btn_Limpiar_Click" />
+                                <!-- COL2 -->
+                                <div class="container-vehiculos col-lg-5">
+                                    <div class="tittle_principal">
+                                        <h3>Lista de Vehiculos</h3>
+                                    </div>
+                                    <div class="add_vehiculos col-lg-12 row">
+                                        <div class="lista_vehiculos col-lg-8">
+                                            <asp:DropDownList ID="dd_vehiculos" runat="server" CssClass="form-select" OnSelectedIndexChanged="dd_vehiculos_SelectedIndexChanged" AutoPostBack="true">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="class_btn col-lg-4">
+                                            <asp:Button ID="btn_registrar" runat="server" CssClass="btn btn-success" Text="Agregar vehiculo" OnClick="btn_registrar_Click" />
+                                        </div>
+                                    </div>
+
+                                    <asp:UpdatePanel ID="updatePanelDDdetCar" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <div class="container_detCar">
+                                                <asp:GridView ID="gv_detCar" runat="server" CssClass="table table-responsive" AutoGenerateColumns="false">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="capacidad" HeaderText="Capacidad" />
+                                                        <asp:BoundField datafield="medida" HeaderText="Medida"/>
+                                                        <asp:BoundField DataField="cargacajas" HeaderText="Capacidad Cajas" />
+                                                    </Columns>
+                                                </asp:GridView>
+
+                                            </div>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="dd_vehiculos" EventName="SelectedIndexChanged" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+
                                 </div>
 
                             </div>
 
                             <!-- Cuadro Datos d Solicitud -->
 
-                            <div class="row container_datosFactura mb-2 col-lg-4">
 
-                                <!-- COL1 -->
-                                <div class="container_EAsignacion col-lg-10">
-
-                                    <label>Encargado de Asignación:</label>
-                                    <asp:TextBox ID="txt_entregoProducto" runat="server" CssClass="form-control"></asp:TextBox>
-
-                                </div>
-
-
-                                
-
-
-
-                            </div>
                         </div>
                     </ContentTemplate>
                     <Triggers>
@@ -82,89 +116,55 @@
                 </asp:UpdatePanel>
 
                 <!--CONTAINER BTN-->
-                <div class="container_btn row mb-2 col-lg-6">
-                    <div class="col-lg-6 btn_guardar">
-                    </div>
-                
-                </div>
 
                 <!-- GV LISTAS DE REGISTOS -->
-                <asp:UpdatePanel ID="updatePanelBtnBuscar" runat="server" UpdateMode="Conditional">
+                <asp:UpdatePanel ID="updatePanelBtnRegistrar" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                        <asp:UpdatePanel ID="updatePanelBtnBuscar" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
 
 
-                <div class="container_listRegistros table-responsive col-lg-12">
-                    <asp:GridView ID="gv_listRegistros" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-striped" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
-                        <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="codRegistro" HeaderText="CodigoRegistro" />
-                            <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
-                            <asp:BoundField DataField="FechaGra" HeaderText="Fecha Gra" />
-                            <asp:BoundField DataField="horaGRA" HeaderText="Hora Gra" />
-                            <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
-                            <asp:BoundField DataField="estadosolicitud" HeaderText="Estado" HtmlEncode="false" />
-                            <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
-                            <asp:BoundField DataField="cant" HeaderText="Cantidad" />
-                            <asp:BoundField DataField="cantEntregada" HeaderText="Cantidad Entregada" />
-                            <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo de Solicitud" HtmlEncode="false" />
-                        </Columns>
-                    </asp:GridView>
-                </div>
+                                <div class="container_listRegistros table-responsive col-lg-12">
+                                    <asp:GridView ID="gv_listRegistros" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-striped" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chkSelect" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="codRegistro" HeaderText="Codigo Registro" />
+                                            <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
+                                            <asp:BoundField DataField="FechaGra" HeaderText="Fecha Gra" />
+                                            <asp:BoundField DataField="horaGRA" HeaderText="Hora Gra" />
+                                            <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
+                                            <asp:BoundField DataField="estadosolicitud" HeaderText="Estado" HtmlEncode="false" />
+                                            <asp:BoundField DataField="codProducto" HeaderText="Codigo Producto" HtmlEncode="false" />
+                                            <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
+                                            <asp:BoundField DataField="cant" HeaderText="Cantidad" />
+                                            <asp:BoundField DataField="cantEntregada" HeaderText="Cantidad Entregada" />
+                                            <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo de Solicitud" HtmlEncode="false" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
 
-                                            </ContentTemplate>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_buscarRegistro" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+                    </ContentTemplate>
                     <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btn_buscarRegistro" EventName="Click"/>
+                        <asp:AsyncPostBackTrigger ControlID="btn_registrar" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
                 <br />
 
-                <!-- CONTAINER VEHICULOS -->
-                <div class="container-vehiculos col-lg-10">
-                    <div class="tittle_principal">
-                        <h3>Lista de Vehiculos</h3>
-                    </div>
-                    <div class="add_vehiculos col-lg-8 row">
-                        <div class="lista_vehiculos col-lg-8">
-                            <label>Vehiculos</label>
-                            <asp:DropDownList ID="dd_vehiculos" runat="server" CssClass="form-select" OnSelectedIndexChanged="dd_vehiculos_SelectedIndexChanged">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="class_btn col-lg-4">
-                            <asp:Button ID="btn_registrar" runat="server" CssClass="btn btn-success" Text="Agregar vehiculo a pedido" />
-                        </div>
-                    </div>
-                </div>
 
-
-
-                <!--DETALLE VEHICULO-->
-                <asp:UpdatePanel ID="updatePanelVehiculo" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <div class="container_detalleVehiculo table-responsive col-lg-10">
-                            <asp:GridView ID="gv_detVehiculo" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
-                                <Columns>
-                                    <asp:BoundField DataField="codigo" HeaderText="Codigo" />
-                                    <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
-                                    <asp:BoundField DataField="cantSolici" HeaderText="Cantidad Solicitada" />
-                                    <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo Solicitud" HtmlEncode="false" />
-                                </Columns>
-                            </asp:GridView>
-                        </div>
-                    </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="gv_listRegistros" EventName="SelectedIndexChanged" />
-                    </Triggers>
-                </asp:UpdatePanel>
 
 
             </div>
         </div>
-
-
-
-
-
-
 
     </div>
 </asp:Content>

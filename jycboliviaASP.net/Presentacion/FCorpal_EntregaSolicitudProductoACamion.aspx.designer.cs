@@ -87,24 +87,6 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_entregoProducto;
 
         /// <summary>
-        /// Control updatePanelBtnBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelBtnBuscar;
-
-        /// <summary>
-        /// Control gv_listRegistros.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_listRegistros;
-
-        /// <summary>
         /// Control dd_vehiculos.
         /// </summary>
         /// <remarks>
@@ -123,21 +105,48 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_registrar;
 
         /// <summary>
-        /// Control updatePanelVehiculo.
+        /// Control updatePanelDDdetCar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelVehiculo;
+        protected global::System.Web.UI.UpdatePanel updatePanelDDdetCar;
 
         /// <summary>
-        /// Control gv_detVehiculo.
+        /// Control gv_detCar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_detVehiculo;
+        protected global::System.Web.UI.WebControls.GridView gv_detCar;
+
+        /// <summary>
+        /// Control updatePanelBtnRegistrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelBtnRegistrar;
+
+        /// <summary>
+        /// Control updatePanelBtnBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelBtnBuscar;
+
+        /// <summary>
+        /// Control gv_listRegistros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_listRegistros;
     }
 }
