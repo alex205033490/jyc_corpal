@@ -15,7 +15,7 @@
 
             <div class="form_buscarCar col-sm-6 col-md-5 col-lg-4 mb-2">
                 <asp:Label ID="Label8" runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
-                <asp:DropDownList ID="dd_listVehiculo" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
+                <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                 </asp:DropDownList>
             </div>
 
@@ -86,6 +86,9 @@
 
             </div>
 
+            <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+
             <asp:UpdatePanel id="UpdatePanel1" runat="server">
                 <ContentTemplate>
 
@@ -144,6 +147,12 @@
                         </asp:GridView>
                     </div>
                                     </ContentTemplate>
+            </asp:UpdatePanel>
+
+                                    </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged"/>
+                </Triggers>
             </asp:UpdatePanel>
 
         </div>
