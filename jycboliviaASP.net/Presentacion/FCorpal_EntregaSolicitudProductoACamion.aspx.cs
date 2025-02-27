@@ -183,6 +183,8 @@ namespace jycboliviaASP.net.Presentacion
             txt_nroSolicitud.Text = string.Empty;
             txt_SolicitanteProducto.Text = string.Empty;
             dd_vehiculos.SelectedIndex = 0;
+            gv_detCar.DataSource = null;
+            gv_detCar.DataBind();
 
             mostrarRegistrosSolicitudProductos("", "", "Abierto");
         }

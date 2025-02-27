@@ -24,44 +24,49 @@
                         <div class="container_form1 row">
 
                             <div class="container_buscarRegistro row col-lg-12" style="margin: 10px">
-                                <div class="col-lg-5">
-                                    <div>
-                                        <label>Nro Solicitud:</label>
-                                        <asp:TextBox ID="txt_nroSolicitud" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:AutoCompleteExtender ID="txt_nroSolicitud_AutoCompleteExtender" runat="server" TargetControlID="txt_nroSolicitud"
-                                            CompletionSetCount="12"
-                                            MinimumPrefixLength="1" ServiceMethod="getListNroBoletas"
-                                            UseContextKey="True"
-                                            CompletionListCssClass="CompletionList"
-                                            CompletionListItemCssClass="CompletionlistItem"
-                                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                        </asp:AutoCompleteExtender>
-                                    </div>
+                                <div class="col-lg-4 col-md-5 col-sm-6 col-11 mb-3">
+                                    <div class="container_buscar mb-3">
 
-                                    <div class="mb-2">
-                                        <label>Vendedor</label>
-                                        <asp:TextBox ID="txt_SolicitanteProducto" runat="server" CssClass="form-control"></asp:TextBox>
-                                        <asp:AutoCompleteExtender ID="txt_SolicitanteProducto_AutoCompleteExtender" runat="server"
-                                            TargetControlID="txt_SolicitanteProducto"
-                                            CompletionSetCount="12"
-                                            MinimumPrefixLength="1" ServiceMethod="getListPersonalSolicitante"
-                                            UseContextKey="True"
-                                            CompletionListCssClass="CompletionList"
-                                            CompletionListItemCssClass="CompletionlistItem"
-                                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                        </asp:AutoCompleteExtender>
-                                    </div>
 
-                                    <div class="col-lg-4 d-flex align-items-end mb-3">
-                                        <div class="col-lg-12">
-                                            <asp:Button ID="btn_buscarRegistro" runat="server" CssClass="btn btn-dark" Text="Buscar" OnClick="btn_buscarRegistro_Click" />
+                                        <div class="col-lg-5 mb-2">
+                                            <label>Nro Solicitud:</label>
+                                            <asp:TextBox ID="txt_nroSolicitud" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:AutoCompleteExtender ID="txt_nroSolicitud_AutoCompleteExtender" runat="server" TargetControlID="txt_nroSolicitud"
+                                                CompletionSetCount="12"
+                                                MinimumPrefixLength="1" ServiceMethod="getListNroBoletas"
+                                                UseContextKey="True"
+                                                CompletionListCssClass="CompletionList"
+                                                CompletionListItemCssClass="CompletionlistItem"
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                            </asp:AutoCompleteExtender>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <asp:Button ID="btn_Limpiar" runat="server" CssClass="btn btn-info" Text="Limpiar Campos" OnClick="btn_Limpiar_Click" />
+
+                                        <div class=" col-lg-9 mb-2">
+                                            <label>Vendedor</label>
+                                            <asp:TextBox ID="txt_SolicitanteProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:AutoCompleteExtender ID="txt_SolicitanteProducto_AutoCompleteExtender" runat="server"
+                                                TargetControlID="txt_SolicitanteProducto"
+                                                CompletionSetCount="12"
+                                                MinimumPrefixLength="1" ServiceMethod="getListPersonalSolicitante"
+                                                UseContextKey="True"
+                                                CompletionListCssClass="CompletionList"
+                                                CompletionListItemCssClass="CompletionlistItem"
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                            </asp:AutoCompleteExtender>
                                         </div>
+
+                                        <div class="col-lg-12 d-flex align-items-end">
+                                            <div class="col-lg-5">
+                                                <asp:Button ID="btn_buscarRegistro" runat="server" CssClass="btn btn-dark" Text="Buscar" OnClick="btn_buscarRegistro_Click" />
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <asp:Button ID="btn_Limpiar" runat="server" CssClass="btn btn-info" Text="Limpiar Campos" OnClick="btn_Limpiar_Click" />
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div>
+                                    <div class="col-lg-7">
                                         <label>Encargado de Asignación:</label>
                                         <asp:TextBox ID="txt_entregoProducto" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox>
 
@@ -69,13 +74,13 @@
                                 </div>
 
                                 <!-- COL2 -->
-                                <div class="container-vehiculos col-lg-5">
+                                <div class="container-vehiculos col-8 col-sm-5 col-md-6 col-lg-4">
                                     <div class="tittle_principal">
                                         <h3>Lista de Vehiculos</h3>
                                     </div>
                                     <div class="add_vehiculos col-lg-12 row">
-                                        <div class="lista_vehiculos col-lg-8">
-                                            <asp:DropDownList ID="dd_vehiculos" runat="server" CssClass="form-select" OnSelectedIndexChanged="dd_vehiculos_SelectedIndexChanged" AutoPostBack="true">
+                                        <div class="lista_vehiculos col-lg-8 mb-2">
+                                            <asp:DropDownList ID="dd_vehiculos" Font-Size="Small" runat="server" CssClass="form-select" OnSelectedIndexChanged="dd_vehiculos_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </div>
                                         <div class="class_btn col-lg-4">
@@ -86,10 +91,10 @@
                                     <asp:UpdatePanel ID="updatePanelDDdetCar" runat="server" UpdateMode="Conditional">
                                         <ContentTemplate>
                                             <div class="container_detCar">
-                                                <asp:GridView ID="gv_detCar" runat="server" CssClass="table table-responsive" AutoGenerateColumns="false">
+                                                <asp:GridView ID="gv_detCar" runat="server" CssClass="table table-striped" AutoGenerateColumns="false">
                                                     <Columns>
                                                         <asp:BoundField DataField="capacidad" HeaderText="Capacidad" />
-                                                        <asp:BoundField datafield="medida" HeaderText="Medida"/>
+                                                        <asp:BoundField DataField="medida" HeaderText="Medida" />
                                                         <asp:BoundField DataField="cargacajas" HeaderText="Capacidad Cajas" />
                                                     </Columns>
                                                 </asp:GridView>
@@ -124,7 +129,7 @@
                             <ContentTemplate>
 
 
-                                <div class="container_listRegistros table-responsive col-lg-12">
+                                <div class="container_listRegistros table-responsive col-lg-11">
                                     <asp:GridView ID="gv_listRegistros" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-striped" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
                                         <Columns>
                                             <asp:TemplateField>
