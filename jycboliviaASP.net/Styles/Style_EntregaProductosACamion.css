@@ -1,0 +1,52 @@
+﻿.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListMighlightedItem {
+    background-color: Green;
+    color: White;
+    /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/
+}
+
+.container-form{
+    padding:20px;
+    background-color:antiquewhite;
+    color:black;
+}
+
+.form_buscarCar{
+    padding:5px;
+    background-color: #ff9f0547;
+    border: 1px solid #ebdb93;
+}
+
+
+.container-gvRegistros{
+    height: 250px;
+    border: 2px solid black;
+    font-size: 12px;
+    margin:10px;
+}
+
+.container-gvDetRegistros{
+    font-size:12px;
+    margin:10px;
+}

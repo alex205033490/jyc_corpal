@@ -147,7 +147,7 @@ namespace jycboliviaASP.net.Presentacion
 
 
 
-        // Cargar Vechiulos 
+        // Cargar Vehiculos 
         private void cargarVehiculos()
         {
             NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();

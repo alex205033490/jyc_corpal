@@ -23,7 +23,9 @@ namespace jycboliviaASP.net.Presentacion
             }
             if (!IsPostBack)
             {
-                buscarDatosSolicitud("","","Abierto");
+                GET_MostrarSolicitudProductos("Abierto");
+                cargarRegistroVehiculosDD();
+                //buscarDatosSolicitud("","","Abierto");
             }
 
             NA_Responsables Nresp = new NA_Responsables();
@@ -44,13 +46,13 @@ namespace jycboliviaASP.net.Presentacion
             return npermiso.tienePermisoResponsable(permiso, codUser);
         }
 
-        protected void bt_buscar_Click(object sender, EventArgs e)
+        /*protected void bt_buscar_Click(object sender, EventArgs e)
         {
             string nroSolicitud = tx_nrosolicitud.Text;
             string solicitante = tx_SolicitanteProducto.Text;
             string estado = dd_estadoCierre.SelectedItem.Text;
             buscarDatosSolicitud(nroSolicitud, solicitante, estado);
-        }
+        }*/
 
         private void buscarDatosSolicitud(string nroSolicitud, string solicitante, string estadoSolicitud)
         {
@@ -59,47 +61,70 @@ namespace jycboliviaASP.net.Presentacion
             gv_solicitudesProductos.DataSource = datos;
             gv_solicitudesProductos.DataBind();
         }
-
+        /*
         protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            seleccionarDatos();
-        }
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
-        private void seleccionarDatos()
+            GridViewRow row = gv_solicitudesProductos.SelectedRow;
+
+            TextBox tx_cantidadEntregarOK = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+            string cantidadEntregarText = tx_cantidadEntregarOK.Text.Trim();
+
+            if (string.IsNullOrEmpty(cantidadEntregarText) || float.Parse(cantidadEntregarText) == 0)
+            {
+                showalert("La cantidad no puede ser 0 o estar vacia.");
+                return;
+            }
+
+            int codigoSolicitud = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Value);
+            int codigoProducto = Convert.ToInt32(((Label)row.FindControl("lbl_codigoProducto")).Text);
+
+            float cantidadEntregada = float.Parse(cantidadEntregarText);
+
+            float restarStock = cantidadEntregada;
+
+            bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregada, restarStock);
+
+            if (resultado)
+            {
+                showalert($"Datos actualizados");
+            }
+            else
+            {
+                showalert("Hubo un error al actualizar los datos ");
+            }
+
+
+
+        }
+        */
+        /*private void seleccionarDatos()
         {
             if(gv_solicitudesProductos.SelectedIndex > -1){
-                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
-                string nroboleta = gv_solicitudesProductos.SelectedRow.Cells[3].Text;
-                string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
-                string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
-                string personaSolicitud = gv_solicitudesProductos.SelectedRow.Cells[8].Text;
+                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[5].Text);
+                int codigoProducto = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
+                string nroboleta = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
+                string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
+                string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
+                string personaSolicitud = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
+                tx_SolicitanteProducto.Text = HttpUtility.HtmlDecode(personaSolicitud);
+                
+                dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[12].Text;
 
-                dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
-
-                string detalleCierre = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
-                if (!string.IsNullOrEmpty(detalleCierre) && !detalleCierre.Equals("&nbsp;"))
-                {
-                    dd_motivoCierre.SelectedValue = detalleCierre;
-                }
-                else
-                    dd_motivoCierre.SelectedIndex = 0;
-
-
-                tx_nrosolicitud.Text = nroboleta;
-                tx_SolicitanteProducto.Text = personaSolicitud;
+               
                 tx_fechaEngrega.Text = fechaentrega;
                 tx_horaentrega.Text = horaentrega;
 
-                NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-                DataSet datos = nss.get_datosSolicitudProductos(codigoSolicitud);
-                gv_detallesolicitud.DataSource = datos;
-                gv_detallesolicitud.DataBind();
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+                DataSet datos = negocio.get_detSolicitudProducto(codigoSolicitud, codigoProducto);
+
             }
-        }
+        }*/
 
         protected void bt_eliminar_Click(object sender, EventArgs e)
         {
-            eliminarSolicitud();
+            //eliminarSolicitud();
         }
 
         private void eliminarSolicitud()
@@ -148,7 +173,7 @@ namespace jycboliviaASP.net.Presentacion
                 int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
                // float sumStock = nss.get_SumStockTotal(codigoSolicitud);
                 bool banderaerror = false;
-                foreach (GridViewRow row in gv_detallesolicitud.Rows)
+                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
                 {                    
                     int codProducto ;
                     int.TryParse(row.Cells[0].Text, out codProducto);
@@ -163,8 +188,8 @@ namespace jycboliviaASP.net.Presentacion
                     }                   
                 }
 
-                if(banderaerror == false){
-                    foreach (GridViewRow row in gv_detallesolicitud.Rows)
+                if (banderaerror == false) {
+                    foreach (GridViewRow row in gv_solicitudesProductos.Rows)
                     {
                         int codProducto;
                         int.TryParse(row.Cells[0].Text, out codProducto);
@@ -258,13 +283,10 @@ namespace jycboliviaASP.net.Presentacion
 
         private void limpiarDatos()
         {
-            tx_nrosolicitud.Text = "";
             tx_fechaEngrega.Text = "";
-            tx_horaentrega.Text = "";
             tx_SolicitanteProducto.Text = "";
             gv_solicitudesProductos.SelectedIndex = -1;
-            gv_detallesolicitud.DataSource = null;
-            gv_detallesolicitud.DataBind();
+
         }
 
         protected void gv_detallesolicitud_SelectedIndexChanged(object sender, EventArgs e)
@@ -289,6 +311,185 @@ namespace jycboliviaASP.net.Presentacion
             
         }
 
-        
+        /* -------- P2 ------- */
+        //Mostrar Registros
+        private void GET_MostrarSolicitudProductos(string estadoSolicitud)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet datos = negocio.get_VWRegistrosEntregaSolicitudProductos(estadoSolicitud);
+            gv_solicitudesProductos.DataSource = datos;
+            gv_solicitudesProductos.DataBind();
+        }
+        private void GET_MostrarXVehiculoSolicitudesProd()
+        {
+            try
+            {
+                int codigo = int.Parse(dd_listVehiculo.SelectedValue);
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+                DataSet carData = negocio.get_VWRegistrosEntregaSolicitudProductoXCamion("Abierto", codigo);
+                if (carData.Tables[0].Rows.Count > 0)
+                {
+                    gv_solicitudesProductos.DataSource = carData;
+                    gv_solicitudesProductos.DataBind();
+                    gv_solicitudesProductos.Visible = true;
+                }
+                else
+                {
+                    GET_MostrarSolicitudProductos("Abierto");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al cargar los datos. {ex.Message}");
+            }
+        }
+
+        protected void dd_listVehiculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int codigo = int.Parse(dd_listVehiculo.SelectedValue);
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+                DataSet carData = negocio.get_VWRegistrosEntregaSolicitudProductoXCamion("Abierto",codigo);
+
+                if (carData.Tables[0].Rows.Count > 0)
+                {
+                    gv_solicitudesProductos.DataSource = carData;
+                    gv_solicitudesProductos.DataBind();
+                    gv_solicitudesProductos.Visible = true;
+                }
+                else
+                {
+                    GET_MostrarSolicitudProductos("Abierto");
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al cargar los datos. {ex.Message}");
+            }
+        }
+
+        private void cargarRegistroVehiculosDD()
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet dsCar = negocio.get_showCarDD();
+
+            if(dsCar != null && dsCar.Tables.Count > 0)
+            {
+                dd_listVehiculo.DataSource = dsCar.Tables[0];
+                dd_listVehiculo.DataTextField = "Vehiculo";
+                dd_listVehiculo.DataValueField = "codvehiculo";
+
+                dd_listVehiculo.DataBind();
+                System.Web.UI.WebControls.ListItem li = new System.Web.UI.WebControls.ListItem("Seleccione un vehiculo", "0");
+                dd_listVehiculo.Items.Insert(0, li);
+            }
+        }
+
+
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
+        protected void gv_solicitudesProductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "GuardarCantidad")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gv_solicitudesProductos.Rows[index];
+
+                int codigoSolicitud = Convert.ToInt32(row.Cells[5].Text);
+                int codigoProducto = Convert.ToInt32(row.Cells[7].Text);
+
+                // txt Cantidad a entregar
+                TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+
+                // lb Cantidad entregada
+                Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
+
+                bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
+
+                if (cantidadValida)
+                {
+                    ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
+                    txtCantidadAEntregar.Text = "";
+                    GET_MostrarXVehiculoSolicitudesProd();
+                }
+            }
+        }
+
+        private bool validarCantidad(TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        {
+            try
+            {
+                if(txtCantidadAEntregar != null && !string.IsNullOrEmpty(txtCantidadAEntregar.Text))
+                {
+                    float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
+
+                    if (cantidadEntregar <= 0)
+                    {
+                        showalert("La cantidad debe ser mayor a 0");
+                        return false;
+                    }
+                    float cantActual = float.Parse(lblCantEntregada.Text);
+                    GridViewRow row = (GridViewRow)txtCantidadAEntregar.NamingContainer;
+                    int stockDisponible = int.Parse(((Label)row.FindControl("lb_stockAlmacen")).Text);
+
+                    if(cantidadEntregar > stockDisponible)
+                    {
+                        showalert("Cantidad no válida. Supera el stock disponible");
+                        return false;
+                    }
+                    
+                    return true;
+                }
+                else
+                {
+                    showalert("Ingrese una cantidad válida");
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"error al validar la cantidad: {ex.Message}");
+                return false;
+            }
+        }
+
+        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        {
+            try
+            {
+                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
+                float cantActual = float.Parse(lblCantEntregada.Text);
+                float cantEntregadaAnterior = cantActual;
+
+                float cantidadTotalEntregada = cantidadEntregar + cantActual;
+                float restarStock = cantidadEntregar - cantEntregadaAnterior;
+
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock);
+
+                if (resultado)
+                {
+                    showalert($"Se ha actualizado el registro exitosamente.");
+                    
+                }
+                else
+                {
+                    showalert($"Error al actualizar el producto con codigo: {codigoProducto}");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al actualizar la cantidad: {ex.Message}");
+            }
+        }
     }
 }

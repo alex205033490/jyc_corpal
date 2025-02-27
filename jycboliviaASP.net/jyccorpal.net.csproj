@@ -639,6 +639,7 @@
     <Content Include="Styles\Style_CorpalEntregaProdCamion.css" />
     <Content Include="Styles\Style_CostosPolizasImportacion.css" />
     <Content Include="Styles\Style_CotiEra.css" />
+    <Content Include="Styles\Style_EntregaProductosACamion.css" />
     <Content Include="Styles\Style_GActividades.css" />
     <Content Include="Styles\Style_ImportacionJYCIA.css" />
     <Content Include="Styles\login-box.css" />
@@ -776,6 +777,7 @@
     <Compile Include="Datos\Datos old\DA_Zona.cs" />
     <Compile Include="Datos\Datos old\DCargaCuadroXXXa.cs" />
     <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
+    <Compile Include="Datos\DCorpal_EntregaSolicitudProducto2.cs" />
     <Compile Include="Datos\DCorpal_Produccion.cs" />
     <Compile Include="Datos\DCorpal_SolicitudEntregaProducto.cs" />
     <Compile Include="Datos\DCorpal_Cliente.cs" />
@@ -900,6 +902,7 @@
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_Clientes.cs" />
+    <Compile Include="Negocio\NCorpal_EntregaSolicitudProducto2.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
