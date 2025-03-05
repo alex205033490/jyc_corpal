@@ -168,13 +168,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button bt_verRecibo;
 
         /// <summary>
-        /// Control bt_eliminar.
+        /// Control btn_anularSolicitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_eliminar;
+        protected global::System.Web.UI.WebControls.Button btn_anularSolicitud;
 
         /// <summary>
         /// Control updatePanelDDUpdate.

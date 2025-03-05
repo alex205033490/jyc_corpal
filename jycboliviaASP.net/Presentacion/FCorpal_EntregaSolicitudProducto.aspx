@@ -8,6 +8,17 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $(".sticky-table");
+
+            if (table.find("thead").length === 0) {
+                table.prepend("<thead>" + table.find("tr:first").html() + "</thead>");
+                table.find("tr:first").remove();
+            }
+        })
+    </script>
 
     <div class="card">
         <div class="card-header bg-warning text-black">Entrega de Solicitud Productos</div>
@@ -80,8 +91,8 @@
                         OnClick="bt_limpiar_Click" />
                     <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-warning"
                         Text="Ver Recibo" OnClick="bt_verRecibo_Click" />
-                    <asp:Button ID="bt_eliminar" runat="server" class="btn btn-danger" Text="Anular"
-                        OnClick="bt_eliminar_Click" />
+                    <asp:Button ID="btn_anularSolicitud" runat="server" class="btn btn-danger" Text="Retirar Solicitud"
+                        OnClick="btn_anularSolicitud_click" />
                 </div>
 
             </div>
@@ -89,74 +100,83 @@
             <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
 
-            <asp:UpdatePanel id="UpdatePanel1" runat="server">
-                <ContentTemplate>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
 
 
-                    <div class="container-gvRegistros table-responsive mb-2">
-                        <asp:GridView ID="gv_solicitudesProductos" runat="server" CssClass="table table-striped" AutoGenerateColumns="false"
-                            DataKeyNames="codigo" OnRowCommand="gv_solicitudesProductos_RowCommand">
-                            <Columns>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:Button ID="btn_addCantidad" runat="server" CssClass="btn btn-success" Text="Guardar"
-                                            Font-Size="11px" CommandName="GuardarCantidad" CommandArgument="<%# Container.DataItemIndex %>" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                            <div class="container-gvRegistros table-responsive mb-2" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
+                                <asp:GridView ID="gv_solicitudesProductos" runat="server" ShowHeader="true" EnableViewState="true"
+                                    CssClass="table table-striped sticky-table" AutoGenerateColumns="false"
+                                    DataKeyNames="codigo" OnRowCommand="gv_solicitudesProductos_RowCommand" OnSelectedIndexChanged="gv_solicitudesProductos_SelectedIndexChanged">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkSelect" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Button ID="btn_addCantidad" runat="server" CssClass="btn btn-success" Text="Guardar"
+                                                    Font-Size="11px" CommandName="GuardarCantidad" CommandArgument="<%# Container.DataItemIndex %>" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Anular">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="cbk_eliminar" runat="server" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
 
-                                <asp:BoundField DataField="Vehiculo" HeaderText="Vehiculo" HtmlEncode="false" />
-                                <asp:BoundField DataField="placa" HeaderText="Placa" HtmlEncode="false" />
-                                <asp:BoundField DataField="conductor" HeaderText="Conductor" HtmlEncode="false" />
-                                <asp:BoundField DataField="codigo" HeaderText="Codigo Registro" />
-                                <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
-                                <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" />
-                                <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
+                                        <asp:BoundField DataField="Vehiculo" HeaderText="Vehiculo" HtmlEncode="false" />
+                                        <asp:BoundField DataField="placa" HeaderText="Placa" HtmlEncode="false" />
+                                        <asp:BoundField DataField="conductor" HeaderText="Conductor" HtmlEncode="false" />
+                                        <asp:BoundField DataField="codigo" HeaderText="Codigo Registro" />
+                                        <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
+                                        <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" />
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lb_codproducto" runat="server" Text='<%# Eval("codproducto") %>' Visible="false"></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad Solicitada" />
+                                        <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
 
-                                <asp:TemplateField HeaderText="Cantidad Entregada" SortExpression="Cantidad Entregada">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lb_cantentregada" runat="server" Text='<%# Bind("cantEntregada") %>' ></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                        <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad Solicitada" />
 
-                                <asp:TemplateField HeaderText="Cantidad a Entregar">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off"></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cantidad Entregada" SortExpression="Cantidad Entregada">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lb_cantentregada" runat="server" Text='<%# Bind("cantEntregada") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Stock Almacen">
-                                    <ItemTemplate>
-                                        <asp:Label id="lb_stockAlmacen" runat="server" Text='<%# Bind("StockAlmacen")%>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cantidad a Entregar">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:BoundField DataField="fechaentrega" HeaderText="Fecha Entrega" />
-                                <asp:BoundField DataField="horaentrega" HeaderText="Hora Entrega" />
-                                <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
-                                <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo Solicitud" HtmlEncode="false" />
-                                <asp:BoundField DataField="estadosolicitud" HeaderText="Estado Solicitud" HtmlEncode="false" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                                    </ContentTemplate>
-            </asp:UpdatePanel>
+                                        <asp:TemplateField HeaderText="Stock Almacen">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lb_stockAlmacen" runat="server" Text='<%# Bind("StockAlmacen")%>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                    </ContentTemplate>
+                                        <asp:BoundField DataField="fechaentrega" HeaderText="Fecha Entrega" />
+                                        <asp:BoundField DataField="horaentrega" HeaderText="Hora Entrega" />
+                                        <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
+                                        <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo Solicitud" HtmlEncode="false" />
+                                        <asp:BoundField DataField="estadosolicitud" HeaderText="Estado Solicitud" HtmlEncode="false" />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                </ContentTemplate>
                 <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged"/>
+                    <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
                 </Triggers>
             </asp:UpdatePanel>
+
+
 
         </div>
 
     </div>
-
+    <script src="../js/mainCorpal.js"></script>
 </asp:Content>

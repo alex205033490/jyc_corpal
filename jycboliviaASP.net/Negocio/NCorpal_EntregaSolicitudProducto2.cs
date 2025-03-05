@@ -56,5 +56,13 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregado, restarStock);
         }
+        internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int> codProducto)
+        {
+            return datos.update_RetirarSolicitud(codSolicitud, codProducto);
+        }
+        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codUser)
+        {
+            return datos.update_CierreAutSolicitudProd(codSolicitud, codUser);
+        }
     }
 }

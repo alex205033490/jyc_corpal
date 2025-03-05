@@ -27,8 +27,23 @@
     height: 250px;
     border: 2px solid black;
     font-size: 12px;
-    margin:10px
+    overflow-y:auto;
+    margin:10px;
 }
+/* Fija la cabecera */
+
+.sticky-table th {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ff7e00!important;
+    color: white !important;
+    z-index: 100 !important;
+}
+
+
+
+
+
 
 .container_detalleProductos{
     font-size:12px;
@@ -88,6 +103,12 @@
     padding: 10px;
     border: 2px solid #000000;
     box-shadow: -1px 0px 7px 0px black;
+}
+
+/* CHECKBOX */
+.highlighted {
+    background-color: #f68327c4;
+    color: white;
 }
 
 

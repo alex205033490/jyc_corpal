@@ -17,7 +17,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
             if (tienePermisoDeIngreso(119) == false)
-            {
+            {                   
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
             }
@@ -31,7 +31,7 @@ namespace jycboliviaASP.net.Presentacion
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
             string passwordAux = Session["passworuser"].ToString();
-            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);                       
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
             tx_entregoSolicitud.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
         }
 
@@ -122,9 +122,47 @@ namespace jycboliviaASP.net.Presentacion
             }
         }*/
 
-        protected void bt_eliminar_Click(object sender, EventArgs e)
+        protected void btn_anularSolicitud_click(object sender, EventArgs e)
         {
-            //eliminarSolicitud();
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            List<int> selectCodSolicitud = new List<int>();
+            List<int> selectCodProducto = new List<int>();
+
+
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+            {
+                CheckBox chkAnular = (CheckBox)row.FindControl("chkSelect");
+
+                if(chkAnular != null && chkAnular.Checked)
+                {
+                    int codigo = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Value);
+                    int codProducto = Convert.ToInt32(((Label)row.FindControl("lb_codproducto")).Text);
+
+                    selectCodSolicitud.Add(codigo);
+                    selectCodProducto.Add(codProducto);
+                }
+            }
+            if (selectCodSolicitud.Count > 0)
+            {
+                bool exito = negocio.update_RetirarSolicitud(selectCodSolicitud, selectCodProducto);
+
+                if (exito)
+                {
+                    showalert("Se ha anulado los registros exitosamente.");
+                    cargarRegistroVehiculosDD();
+                    GET_MostrarSolicitudProductos("Abierto");
+                }
+                else
+                {
+                    string solicitudesStr = string.Join(",", selectCodSolicitud);
+                    string productosStr = string.Join(",", selectCodProducto);
+                    showalert($"Hubo un error al anular el registro : {solicitudesStr}, {productosStr}");
+                }
+            }
+            else
+            {
+                showalert("Por favor, seleccione al menos un registro");
+            }
         }
 
         private void eliminarSolicitud()
@@ -144,7 +182,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_actualizar_Click(object sender, EventArgs e)
         {
-            actualizarTodoslosDatos();
+            //actualizarTodoslosDatos();
         }
 
         public string aFecha(string fecha)
@@ -283,10 +321,11 @@ namespace jycboliviaASP.net.Presentacion
 
         private void limpiarDatos()
         {
-            tx_fechaEngrega.Text = "";
-            tx_SolicitanteProducto.Text = "";
-            gv_solicitudesProductos.SelectedIndex = -1;
-
+            tx_fechaEngrega.Text = string.Empty;
+            tx_horaentrega.Text = string.Empty;
+            tx_SolicitanteProducto.Text = string.Empty;
+            GET_MostrarSolicitudProductos("Abierto");
+            cargarRegistroVehiculosDD();
         }
 
         protected void gv_detallesolicitud_SelectedIndexChanged(object sender, EventArgs e)
@@ -296,7 +335,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
-            verReciboSeleccionado();
+            //verReciboSeleccionado();
         }
 
         private void verReciboSeleccionado()
@@ -349,6 +388,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+
                 int codigo = int.Parse(dd_listVehiculo.SelectedValue);
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
@@ -356,9 +396,11 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (carData.Tables[0].Rows.Count > 0)
                 {
+                    
                     gv_solicitudesProductos.DataSource = carData;
                     gv_solicitudesProductos.DataBind();
                     gv_solicitudesProductos.Visible = true;
+
                 }
                 else
                 {
@@ -406,6 +448,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 int codigoSolicitud = Convert.ToInt32(row.Cells[5].Text);
                 int codigoProducto = Convert.ToInt32(row.Cells[7].Text);
+                string producto = row.Cells[9].Text;
 
                 // txt Cantidad a entregar
                 TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
@@ -420,6 +463,7 @@ namespace jycboliviaASP.net.Presentacion
                     ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
                     txtCantidadAEntregar.Text = "";
                     GET_MostrarXVehiculoSolicitudesProd();
+                    showalert($"echo cantidad aumentada a {producto}");
                 }
             }
         }
@@ -432,9 +476,9 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
 
-                    if (cantidadEntregar <= 0)
+                    if (cantidadEntregar < 0)
                     {
-                        showalert("La cantidad debe ser mayor a 0");
+                        showalert("La cantidad es inválida");
                         return false;
                     }
                     float cantActual = float.Parse(lblCantEntregada.Text);
@@ -473,13 +517,20 @@ namespace jycboliviaASP.net.Presentacion
                 float cantidadTotalEntregada = cantidadEntregar + cantActual;
                 float restarStock = cantidadEntregar - cantEntregadaAnterior;
 
+                NA_Responsables NResponsable = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
+
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
                 bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock);
 
                 if (resultado)
                 {
-                    showalert($"Se ha actualizado el registro exitosamente.");
-                    
+                    //showalert($"Se ha actualizado el registro exitosamente.");
+                    negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser);
+
+
                 }
                 else
                 {
@@ -490,6 +541,11 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error al actualizar la cantidad: {ex.Message}");
             }
+        }
+
+        protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -40,13 +40,27 @@
 
 
 .container-gvRegistros{
-    height: 250px;
+    height: 350px;
     border: 2px solid black;
     font-size: 12px;
+    overflow-y:auto;
     margin:10px;
 }
 
 .container-gvDetRegistros{
     font-size:12px;
     margin:10px;
+}
+
+.sticky-table th {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ff8800 !important;
+    color: white !important;
+    z-index: 100 !important;
+}
+
+/* CHECKBOX */
+.selected-row {
+    background-color: red !important;
 }

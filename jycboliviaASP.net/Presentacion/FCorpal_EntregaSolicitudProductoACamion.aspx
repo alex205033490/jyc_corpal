@@ -5,9 +5,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_CorpalEntregaProdCamion.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $(".sticky-table");
+
+            if (table.find("thead").length === 0) {
+                table.prepend("<thead>" + table.find("tr:first").html() + "</thead>");
+                table.find("tr:first").remove();
+            }
+        })
+    </script>
 
     <div class="card">
         <div class="card-header bg-warning text-black">
@@ -29,7 +41,7 @@
 
 
                                         <div class="col-lg-5 mb-2">
-                                            <label>Nro Solicitud:</label>
+                                            <label>Nro de boleta:</label>
                                             <asp:TextBox ID="txt_nroSolicitud" runat="server" CssClass="form-control"></asp:TextBox>
                                             <asp:AutoCompleteExtender ID="txt_nroSolicitud_AutoCompleteExtender" runat="server" TargetControlID="txt_nroSolicitud"
                                                 CompletionSetCount="12"
@@ -68,8 +80,7 @@
 
                                     <div class="col-lg-7">
                                         <label>Encargado de Asignación:</label>
-                                        <asp:TextBox ID="txt_entregoProducto" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox>
-
+                                        <asp:TextBox ID="txt_entregoProducto" ReadOnly="true" runat="server" BackColor="lightgray" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -128,9 +139,10 @@
                         <asp:UpdatePanel ID="updatePanelBtnBuscar" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
 
-
-                                <div class="container_listRegistros table-responsive col-lg-11">
-                                    <asp:GridView ID="gv_listRegistros" runat="server" EnableViewState="true" AutoGenerateColumns="false" CssClass="table table-striped" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
+                                <div class="container_listRegistros table-responsive col-lg-11" data-clientid="<%= gv_listRegistros.ClientID %>">
+                                    <asp:GridView ID="gv_listRegistros" runat="server" ShowHeader="true" EnableViewState="true" AutoGenerateColumns="false" 
+                                        CssClass="table table-striped sticky-table" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
+                                        
                                         <Columns>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
@@ -172,4 +184,5 @@
         </div>
 
     </div>
+    <script src="../js/mainCorpal.js"></script>
 </asp:Content>

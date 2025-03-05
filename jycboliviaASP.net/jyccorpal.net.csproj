@@ -176,6 +176,7 @@
     <Content Include="js\jquery.js" />
     <Content Include="js\jsApi.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\mainCorpal.js" />
     <Content Include="NegocioPlantilla\assets\css\style.css" />
     <Content Include="NegocioPlantilla\assets\img\apple-touch-icon.png" />
     <Content Include="NegocioPlantilla\assets\img\card.jpg" />

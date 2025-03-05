@@ -74,7 +74,6 @@
 
   <!-- Template Main JS File -->
   <script src="../NegocioPlantilla/assets/js/main.js"></script>
-
         
   <script>
   // Guardar la posición al salir de la página

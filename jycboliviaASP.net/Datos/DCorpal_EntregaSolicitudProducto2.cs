@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -33,7 +34,7 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' and sep.estado = true " +
-                "order by v.marca, v.modelo asc";
+                "AND dsp.codvehiculo is not null AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
             return conexion.consultaMySql(consulta);
         }
@@ -56,7 +57,7 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
                 "WHERE sep.estadosolicitud = '" + estadoSolicitud + "' and sep.estado = true " +
-                "AND dsp.codvehiculo = "+codVehiculo+" order by v.marca, v.modelo asc";
+                "AND dsp.codvehiculo = "+codVehiculo+" AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
             return conexion.consultaMySql(consulta);
         }
@@ -91,7 +92,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select dsp.codvehiculo, CONCAT(COALESCE(v.`marca`,''), ' ', COALESCE(v.`modelo`,''), 'Placa: ',COALESCE(v.`placa`,'')) as 'Vehiculo' " +
                 " from tbcorpal_detalle_solicitudproducto dsp " +
                 " left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
-                " WHERE dsp.codvehiculo is not null GROUP BY dsp.codvehiculo";
+                " WHERE dsp.codvehiculo is not null AND dsp.cantentregada is null GROUP BY dsp.codvehiculo";
             return conexion.consultaMySql(consulta);
         }
 
@@ -121,6 +122,59 @@ namespace jycboliviaASP.net.Datos
                 }
                     return banderaResultado;
         }
+
+        //UPDATE ANULAR SOLICITUD
+        internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int>codProducto)
+        {
+            string codSolicitudStr = string.Join(",", codSolicitud);
+            string codProductoStr = string.Join(",", codProducto);
+
+            if(string.IsNullOrEmpty(codSolicitudStr) || string.IsNullOrEmpty(codProductoStr))
+            {
+                throw new ArgumentException("Las listas de códigos no deben estar vacias.");
+            }
+
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto dsp " +
+            "set dsp.codvehiculo = null, dsp.fechaasignacion_car = null, " +
+            "dsp.horaasignacion_car = null, dsp.coduserasignacion_car = null " +
+            "where dsp.codsolicitud in ("+ codSolicitudStr +") " +
+            "and dsp.codProducto in ("+ codProductoStr +") ;";
+
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                try
+                {
+                    return conexion.ejecutarMySql2(comand);
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
+                }
+            }
+        }
+
+        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codUserEntrego)
+        {
+            string consulta = "UPDATE tbcorpal_detalle_solicitudProducto dd " +
+                "JOIN ( " +
+                "SELECT codsolicitud " +
+                "FROM tbcorpal_detalle_solicitudProducto " +
+                "WHERE codsolicitud = @codsolicitud " +
+                "GROUP BY codsolicitud " +
+                "HAVING SUM(CASE WHEN cantentregada IS NULL OR cantentregada < 0 THEN 1 ELSE 0 END) = 0 " +
+                ") valid_check ON dd.codsolicitud = valid_check.codsolicitud " +
+                "SET dd.fechaentrega_car = CURRENT_DATE(), dd.horaentrega_car = CURRENT_TIME(), dd.coduserentrega_car = @coduser " +
+                "WHERE dd.codsolicitud = @codsolicitud;";
+
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                comand.Parameters.AddWithValue("@codsolicitud", codSolicitud);
+                comand.Parameters.AddWithValue("@coduser", codUserEntrego);
+                return conexion.ejecutarMySql2(comand);
+            }
+
+        }
+
 
     }
 }
