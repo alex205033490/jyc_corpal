@@ -1,0 +1,114 @@
+﻿.container_DatosSolicitud{
+    background-color:antiquewhite;
+
+}
+
+.container_datosSolicitud{
+    background-color:antiquewhite;
+}
+
+.container_buscarRegistro{
+    padding:10px;
+}
+
+.container_datosFactura {
+    padding: 10px;
+}
+
+.btn_limpiar{
+    padding:10px;
+}
+
+.btn_guardar{
+    padding:10px;
+}
+
+.container_listRegistros {
+    height: 250px;
+    border: 2px solid black;
+    font-size: 12px;
+    overflow-y:auto;
+    margin:10px;
+}
+
+
+.sticky-table th {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ff7e00!important;
+    color: white !important;
+    z-index: 100 !important;
+}
+
+
+
+
+
+
+.container_detalleProductos{
+    font-size:12px;
+    padding:20px;
+    height:200px;
+    border:2px solid;
+}
+
+/*AUTOCOMPLETE*/
+/*  AutoComplete  */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: medium;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: medium;
+}
+
+.CompletionListMighlightedItem {
+    background-color: blue;
+    color: White;
+    /* color: Lime;
+           padding: 3px 20px;
+            text-decoration: none;           
+            background-repeat: repeat-x;
+            outline: 0;*/
+}
+
+
+/* HEAD P1*/
+.container_form1{
+    margin: 10px;
+}
+.container_buscarRegistro{
+    margin:10px;
+}
+
+
+/* END P3*/
+.container-vehiculos{
+    margin:10px;
+}
+
+/* container_buscar */
+.container_buscar {
+    background-color: #d19e4c2e;
+    padding: 10px;
+    border: 2px solid #000000;
+    box-shadow: -1px 0px 7px 0px black;
+}
+
+/* CHECKBOX */
+.highlighted {
+    background-color: #ff710057;
+}
+
+
+

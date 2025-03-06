@@ -11,214 +11,151 @@ namespace jycboliviaASP.net.Presentacion
 {
 
 
-    public partial class FCorpal_EntregaSolicitudProducto
+    public partial class FCorpal_EntregaSolicitudProductoACamion_
     {
 
         /// <summary>
-        /// Control updatePanelLimpiar.
+        /// Control UpdatePanelContainer_F1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelLimpiar;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelContainer_F1;
 
         /// <summary>
-        /// Control updatePanelRetirarSol.
+        /// Control txt_nroSolicitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelRetirarSol;
+        protected global::System.Web.UI.WebControls.TextBox txt_nroSolicitud;
 
         /// <summary>
-        /// Control Label8.
+        /// Control txt_nroSolicitud_AutoCompleteExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::AjaxControlToolkit.AutoCompleteExtender txt_nroSolicitud_AutoCompleteExtender;
 
         /// <summary>
-        /// Control dd_listVehiculo.
+        /// Control txt_SolicitanteProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_listVehiculo;
+        protected global::System.Web.UI.WebControls.TextBox txt_SolicitanteProducto;
 
         /// <summary>
-        /// Control Label2.
+        /// Control txt_SolicitanteProducto_AutoCompleteExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::AjaxControlToolkit.AutoCompleteExtender txt_SolicitanteProducto_AutoCompleteExtender;
 
         /// <summary>
-        /// Control tx_fechaEngrega.
+        /// Control btn_buscarRegistro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_fechaEngrega;
+        protected global::System.Web.UI.WebControls.Button btn_buscarRegistro;
 
         /// <summary>
-        /// Control tx_fechaEngrega_CalendarExtender.
+        /// Control btn_Limpiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender tx_fechaEngrega_CalendarExtender;
+        protected global::System.Web.UI.WebControls.Button btn_Limpiar;
 
         /// <summary>
-        /// Control Label6.
+        /// Control txt_entregoProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.TextBox txt_entregoProducto;
 
         /// <summary>
-        /// Control tx_horaentrega.
+        /// Control dd_vehiculos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_horaentrega;
+        protected global::System.Web.UI.WebControls.DropDownList dd_vehiculos;
 
         /// <summary>
-        /// Control Label1.
+        /// Control btn_registrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button btn_registrar;
 
         /// <summary>
-        /// Control dd_estadoCierre.
+        /// Control updatePanelDDdetCar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_estadoCierre;
+        protected global::System.Web.UI.UpdatePanel updatePanelDDdetCar;
 
         /// <summary>
-        /// Control Label31.
+        /// Control gv_detCar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label31;
+        protected global::System.Web.UI.WebControls.GridView gv_detCar;
 
         /// <summary>
-        /// Control dd_motivoCierre.
+        /// Control updatePanelBtnLimpiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_motivoCierre;
+        protected global::System.Web.UI.UpdatePanel updatePanelBtnLimpiar;
 
         /// <summary>
-        /// Control Label10.
+        /// Control updatePanelBtnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.UpdatePanel updatePanelBtnRegistrar;
 
         /// <summary>
-        /// Control tx_SolicitanteProducto.
+        /// Control updatePanelBtnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_SolicitanteProducto;
+        protected global::System.Web.UI.UpdatePanel updatePanelBtnBuscar;
 
         /// <summary>
-        /// Control tx_entregoSolicitud.
+        /// Control gv_listRegistros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_entregoSolicitud;
-
-        /// <summary>
-        /// Control bt_actualizar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_actualizar;
-
-        /// <summary>
-        /// Control bt_limpiar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_limpiar;
-
-        /// <summary>
-        /// Control bt_verRecibo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_verRecibo;
-
-        /// <summary>
-        /// Control btn_anularSolicitud.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_anularSolicitud;
-
-        /// <summary>
-        /// Control updatePanelDDUpdate.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelDDUpdate;
-
-        /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
-        /// Control gv_solicitudesProductos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_solicitudesProductos;
+        protected global::System.Web.UI.WebControls.GridView gv_listRegistros;
     }
 }
