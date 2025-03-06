@@ -211,9 +211,13 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (resultadoGeneral)
                 {
-                    showalert("Registro insertado exitosamente.");
-                    mostrarRegistrosSolicitudProductos("","","Abierto");
-                    LimpiarCampos();
+                    showalert("El registro se ha insertado exitosamente.");
+                    string nroSolicitud = txt_nroSolicitud.Text;
+                    string solicitante = txt_SolicitanteProducto.Text;
+                    string estado = "Abierto";
+                    buscarDatosRegistro(nroSolicitud, solicitante, estado);
+                    //mostrarRegistrosSolicitudProductos("","","Abierto");
+                    //LimpiarCampos();
                 } else
                 {
                     showalert("Hubo un error al insertar el registro.");

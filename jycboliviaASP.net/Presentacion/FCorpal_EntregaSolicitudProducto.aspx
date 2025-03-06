@@ -18,12 +18,23 @@
                 table.find("tr:first").remove();
             }
         })
+
+        
+
     </script>
+
 
     <div class="card">
         <div class="card-header bg-warning text-black">Entrega de Solicitud Productos</div>
         <div class="container-form">
 
+            <asp:UpdatePanel ID="updatePanelLimpiar" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+
+    
+
+<asp:UpdatePanel ID="updatePanelRetirarSol" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
             <div class="form_buscarCar col-sm-6 col-md-5 col-lg-4 mb-2">
                 <asp:Label ID="Label8" runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
                 <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
@@ -96,6 +107,7 @@
                 </div>
 
             </div>
+            
 
             <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -103,15 +115,14 @@
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
 
-
                             <div class="container-gvRegistros table-responsive mb-2" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                                 <asp:GridView ID="gv_solicitudesProductos" runat="server" ShowHeader="true" EnableViewState="true"
-                                    CssClass="table table-striped sticky-table" AutoGenerateColumns="false"
-                                    DataKeyNames="codigo" OnRowCommand="gv_solicitudesProductos_RowCommand" OnSelectedIndexChanged="gv_solicitudesProductos_SelectedIndexChanged">
+                                    CssClass="table-striped sticky-table" AutoGenerateColumns="false"
+                                    DataKeyNames="codigo" style="background-color:white !important;" OnRowCommand="gv_solicitudesProductos_RowCommand" OnSelectedIndexChanged="gv_solicitudesProductos_SelectedIndexChanged" OnRowDataBound="gv_solicitudesProductos_RowDataBound">
                                     <Columns>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="chkSelect" runat="server" />
+                                                <asp:CheckBox ID="chkSelect" CssClass="chkSelect" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField>
@@ -173,8 +184,16 @@
                 </Triggers>
             </asp:UpdatePanel>
 
-
-
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btn_anularSolicitud" EventName="Click"/>
+                </Triggers>
+            </asp:UpdatePanel>
+                        </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="Click"/>
+                </Triggers>
+</asp:UpdatePanel>
         </div>
 
     </div>

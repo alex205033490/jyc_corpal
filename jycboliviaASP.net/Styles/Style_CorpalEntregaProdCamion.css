@@ -30,7 +30,7 @@
     overflow-y:auto;
     margin:10px;
 }
-/* Fija la cabecera */
+
 
 .sticky-table th {
     position: sticky !important;
@@ -107,8 +107,7 @@
 
 /* CHECKBOX */
 .highlighted {
-    background-color: #f68327c4;
-    color: white;
+    background-color: #ff710057;
 }
 
 

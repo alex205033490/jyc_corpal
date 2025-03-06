@@ -39,12 +39,20 @@
 }
 
 
-.container-gvRegistros{
+.container-gvRegistros {
     height: 350px;
     border: 2px solid black;
     font-size: 12px;
-    overflow-y:auto;
-    margin:10px;
+    overflow-y: auto;
+    margin: 10px;
+    padding: 0px;
+}
+
+.container-gvRegistros th{
+    padding:10px;
+}
+.container-gvRegistros td{
+    padding:5px;
 }
 
 .container-gvDetRegistros{
@@ -60,7 +68,6 @@
     z-index: 100 !important;
 }
 
-/* CHECKBOX */
-.selected-row {
-    background-color: red !important;
+table.sticky-table tr.highlighted {
+    background-color: #ff920082 !important;
 }

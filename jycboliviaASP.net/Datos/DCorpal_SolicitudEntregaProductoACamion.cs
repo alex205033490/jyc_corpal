@@ -76,7 +76,10 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_ShowNroBoleta(string nroBoleta)
         {
             string consulta = "select sp.nroboleta from tbcorpal_solicitudentregaproducto sp " +
-                "where sp.estado = 1 and sp.estadosolicitud = 'Abierto' and sp.nroboleta like '%" + nroBoleta + "%';  ";
+                "left join tbcorpal_detalle_solicitudproducto ds on sp.codigo = ds.codsolicitud " +
+                "where sp.estado = 1 and sp.estadosolicitud = 'Abierto' " +
+                "and ds.codvehiculo is null and sp.nroboleta like '%" + nroBoleta + "%' " +
+                "group by sp.nroboleta  ";
 
             return conexion.consultaMySql(consulta);
         }

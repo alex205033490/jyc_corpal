@@ -134,6 +134,11 @@
                 <!--CONTAINER BTN-->
 
                 <!-- GV LISTAS DE REGISTOS -->
+                <asp:UpdatePanel ID="updatePanelBtnLimpiar" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+
+
+
                 <asp:UpdatePanel ID="updatePanelBtnRegistrar" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:UpdatePanel ID="updatePanelBtnBuscar" runat="server" UpdateMode="Conditional">
@@ -175,10 +180,12 @@
                         <asp:AsyncPostBackTrigger ControlID="btn_registrar" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
+                                            </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btn_Limpiar" EventName="Click"/>
+                    </Triggers>
+                </asp:UpdatePanel>
                 <br />
-
-
-
 
             </div>
         </div>

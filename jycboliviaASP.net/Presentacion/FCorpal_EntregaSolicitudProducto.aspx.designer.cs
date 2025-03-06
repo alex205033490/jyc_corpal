@@ -15,6 +15,24 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
+        /// Control updatePanelLimpiar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelLimpiar;
+
+        /// <summary>
+        /// Control updatePanelRetirarSol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelRetirarSol;
+
+        /// <summary>
         /// Control Label8.
         /// </summary>
         /// <remarks>

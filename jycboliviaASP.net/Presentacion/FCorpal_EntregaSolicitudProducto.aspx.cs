@@ -148,9 +148,8 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (exito)
                 {
-                    showalert("Se ha anulado los registros exitosamente.");
-                    cargarRegistroVehiculosDD();
-                    GET_MostrarSolicitudProductos("Abierto");
+                    showalert($"Se han anulado los registros exitosamente.");
+                    limpiarDatos();
                 }
                 else
                 {
@@ -441,6 +440,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void gv_solicitudesProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
             if(e.CommandName == "GuardarCantidad")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
@@ -463,7 +463,7 @@ namespace jycboliviaASP.net.Presentacion
                     ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
                     txtCantidadAEntregar.Text = "";
                     GET_MostrarXVehiculoSolicitudesProd();
-                    showalert($"echo cantidad aumentada a {producto}");
+                    showalert($"Solicitud entregada exitosamente.");
                 }
             }
         }
@@ -546,6 +546,19 @@ namespace jycboliviaASP.net.Presentacion
         protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                CheckBox chkSelect = (CheckBox)e.Row.FindControl("chkSelect");
+                if (chkSelect != null && chkSelect.Checked)
+                {
+                    e.Row.CssClass += "highlighted";
+                }
+
+            }
         }
     }
 }
