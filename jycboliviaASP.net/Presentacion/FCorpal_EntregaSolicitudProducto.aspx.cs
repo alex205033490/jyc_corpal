@@ -197,10 +197,7 @@ namespace jycboliviaASP.net.Presentacion
             buscarDatosSolicitud("", "", "Abierto");
         }
 
-        protected void bt_actualizar_Click(object sender, EventArgs e)
-        {
-            //actualizarTodoslosDatos();
-        }
+        
 
         public string aFecha(string fecha)
         {
@@ -369,6 +366,128 @@ namespace jycboliviaASP.net.Presentacion
 
         /* -------- P2 ------- */
         //Mostrar Registros
+        protected void bt_actualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+                {
+                    CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
+                    if (chkSelect != null && chkSelect.Checked)
+                    {
+                        int codigoSolicitud = Convert.ToInt32(row.Cells[4].Text);
+                        int codigoProducto = Convert.ToInt32(row.Cells[6].Text);
+
+                        TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                        Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
+
+                        bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
+                        if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
+                        {
+                            txtCantidadAEntregar.Text = "0";
+
+                        }
+                        if (cantidadValida)
+                        {
+                            ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
+                            showalert($"Se ha actualizado los registros exitosamente.");
+                            GET_MostrarXVehiculoSolicitudesProd();
+                        }
+                        else
+                        {
+                            showalert("Ocurrio un error al registrar la soliciud");
+                        }
+                    }
+                    else
+                    {
+                        showalert("Selecciona al menos 1 registro.");
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al actualizar la cantidad : {ex.Message}");
+            }
+        }
+        private bool validarCantidad(TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
+                {
+                    txtCantidadAEntregar.Text ="0";
+                    return true;
+                }
+
+                if (!float.TryParse(txtCantidadAEntregar.Text, out float cantidadEntregar))
+                {
+                    showalert("la cantidad ingresada no es un número válido.");
+                    return false;
+                }
+
+                if (cantidadEntregar < 0)
+                {
+                    showalert("La cantidad no puede ser negativa.");
+                    return false;
+                }
+
+                float cantActual = float.Parse(lblCantEntregada.Text);
+
+                GridViewRow row = (GridViewRow)txtCantidadAEntregar.NamingContainer;
+                int stockDisponible = int.Parse(((Label)row.FindControl("lb_stockAlmacen")).Text);
+
+                if (cantidadEntregar > stockDisponible)
+                {
+                    showalert("Cantidad no válida. Supera el stock disponible.");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                showalert($"error al validar la cantidad: {ex.Message}");
+                return false;
+            }
+        }
+
+        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        {
+            try
+            {
+                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
+                float cantActual = float.Parse(lblCantEntregada.Text);
+                float cantEntregadaAnterior = cantActual;
+
+                float cantidadTotalEntregada = cantidadEntregar + cantActual;
+                float restarStock = cantidadEntregar - cantEntregadaAnterior;
+
+                NA_Responsables NResponsable = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
+
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock);
+
+                if (resultado)
+                {
+                    //showalert($"Se ha actualizado el registro exitosamente.");
+                    negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser);
+
+
+                }
+                else
+                {
+                    showalert($"Error al actualizar el producto con codigo: {codigoProducto}");
+                }
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al actualizar la cantidad: {ex.Message}");
+            }
+        }
+
         private void GET_MostrarSolicitudProductos(string estadoSolicitud)
         {
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
@@ -455,7 +574,8 @@ namespace jycboliviaASP.net.Presentacion
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
-
+        
+        /*
         protected void gv_solicitudesProductos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -485,81 +605,7 @@ namespace jycboliviaASP.net.Presentacion
                 }
             }
         }
-
-        private bool validarCantidad(TextBox txtCantidadAEntregar, Label lblCantEntregada)
-        {
-            try
-            {
-                if(txtCantidadAEntregar != null && !string.IsNullOrEmpty(txtCantidadAEntregar.Text))
-                {
-                    float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
-
-                    if (cantidadEntregar < 0)
-                    {
-                        showalert("La cantidad es inválida");
-                        return false;
-                    }
-                    float cantActual = float.Parse(lblCantEntregada.Text);
-                    GridViewRow row = (GridViewRow)txtCantidadAEntregar.NamingContainer;
-                    int stockDisponible = int.Parse(((Label)row.FindControl("lb_stockAlmacen")).Text);
-
-                    if(cantidadEntregar > stockDisponible)
-                    {
-                        showalert("Cantidad no válida. Supera el stock disponible");
-                        return false;
-                    }
-                    
-                    return true;
-                }
-                else
-                {
-                    showalert("Ingrese una cantidad válida");
-                    return false;
-                }
-            }
-            catch(Exception ex)
-            {
-                showalert($"error al validar la cantidad: {ex.Message}");
-                return false;
-            }
-        }
-
-        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
-        {
-            try
-            {
-                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
-                float cantActual = float.Parse(lblCantEntregada.Text);
-                float cantEntregadaAnterior = cantActual;
-
-                float cantidadTotalEntregada = cantidadEntregar + cantActual;
-                float restarStock = cantidadEntregar - cantEntregadaAnterior;
-
-                NA_Responsables NResponsable = new NA_Responsables();
-                string usuarioAux = Session["NameUser"].ToString();
-                string passwordAux = Session["passworuser"].ToString();
-                int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
-
-                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock);
-
-                if (resultado)
-                {
-                    //showalert($"Se ha actualizado el registro exitosamente.");
-                    negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser);
-
-
-                }
-                else
-                {
-                    showalert($"Error al actualizar el producto con codigo: {codigoProducto}");
-                }
-            }
-            catch(Exception ex)
-            {
-                showalert($"Error al actualizar la cantidad: {ex.Message}");
-            }
-        }
+        */
 
         protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
