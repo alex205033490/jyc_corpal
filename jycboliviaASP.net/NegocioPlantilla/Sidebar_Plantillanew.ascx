@@ -54,11 +54,11 @@
           </a>
           <ul id="producto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>                                             
+                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Asignación de Productos a Camión</span></a></li>
                 <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><i class="bi bi-circle"></i><span>Entrega Solicitud Productos</span></a></li>                                                         
                 <li role="separator" class="divider"></li>            
                 <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Consulta Productos</span></a></li>                                                         
-                <li role="separator" class="divider"></li>                                
-                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Entrega Solicitud de Productos a Camión</span></a></li>
+                <li role="separator" class="divider"></li>                                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
           </ul>

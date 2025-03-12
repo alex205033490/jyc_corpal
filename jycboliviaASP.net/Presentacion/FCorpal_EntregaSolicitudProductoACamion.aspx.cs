@@ -32,8 +32,6 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-
-
         /* MOSTRAR Registros GV*/
         private void mostrarRegistrosSolicitudProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
         {

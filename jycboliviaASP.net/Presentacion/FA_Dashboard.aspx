@@ -111,7 +111,7 @@
                           // Inicializamos el gráfico
                           initializeChart();
                           // Configuramos un intervalo para actualizar el gráfico cada 5 segundos
-                          setInterval(updateChartData, 10000); // 5000 ms = 5 segundos
+                          setInterval(updateChartData, 5000); // 5000 ms = 5 segundos
                       });
 
                       async function updateChartData() {
@@ -129,9 +129,9 @@
                               // Actualizar los datos del gráfico
                               chart.updateOptions({
                                   series: [
-                                      { name: 'Sales', data: data.Sales },
-                                      { name: 'Revenue', data: data.Revenue },
-                                      { name: 'Customers', data: data.Customers }
+                                      { name: 'Objetivo', data: data.Sales },
+                                      { name: 'Ventas', data: data.Revenue },
+                                      { name: 'Produccion', data: data.Customers }
                                   ],
                                   xaxis: {
                                       categories: data.Categories // Actualizar los meses
@@ -147,9 +147,9 @@
                           // Crear el gráfico inicialmente con datos vacíos o predeterminados
                           chart = new ApexCharts(document.querySelector("#reportsChart"), {
                               series: [
-                                  { name: 'Sales', data: [] },
-                                  { name: 'Revenue', data: [] },
-                                  { name: 'Customers', data: [] }
+                                  { name: 'Objetivo', data: [] },
+                                  { name: 'Ventas', data: [] },
+                                  { name: 'Produccion', data: [] }
                               ],
                               chart: {
                                   height: 350,

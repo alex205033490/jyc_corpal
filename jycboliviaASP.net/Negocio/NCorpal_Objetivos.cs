@@ -12,8 +12,12 @@ namespace jycboliviaASP.net.Negocio
         DCorpal_Objetivos dobjetivo = new DCorpal_Objetivos();
         public NCorpal_Objetivos() { }
 
+        internal DataSet get_ListaObjetivoProduccionyVentasAnual(int gestion)
+        {
+            return dobjetivo.get_ListaObjetivoProduccionyVentasAnual( gestion);
+        }
 
-        internal float get_montosTotalObjetivoProduccionyVentasAnual()
+        internal DataSet get_montosTotalObjetivoProduccionyVentasAnual()
         {
             DataSet dato = dobjetivo.montototalAnualObjetivosVentasProgramado();
             return dato;

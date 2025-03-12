@@ -64,7 +64,8 @@ namespace jycboliviaASP.net.Datos
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
                                 " ds.codvehiculo is null and" +
-                                " pp.nroboleta like '%" + NroSolicitud + "%'";
+                                " pp.nroboleta like '%" + NroSolicitud + "%'"+
+                                " order by pp.codigo desc";
 
             if (!string.IsNullOrEmpty(solicitud))
             {
