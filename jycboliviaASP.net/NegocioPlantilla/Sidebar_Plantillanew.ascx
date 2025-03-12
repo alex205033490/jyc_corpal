@@ -109,6 +109,17 @@
           </ul>
         </li><!-- End Tables Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#extintores-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Distribución de Extintores</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="extintores-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a href="../Presentacion/FCorpal_GestionExtintores.aspx" id="mn_GestionExtintores" runat="server"><i class="bi bi-circle"></i><span>Gestión de Extintores</span></a></li>
+
+            </ul>
+
+        </li>
+
 
         <li class="nav-heading">SGI</li>
         <li class="nav-item">

@@ -506,6 +506,7 @@
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProductoACamion.aspx" />
     <Content Include="Presentacion\FCorpal_GestionarInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionExtintores.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
     <Content Include="Presentacion\FCorpal_OrdenProduccion.aspx" />
@@ -781,6 +782,7 @@
     <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
     <Compile Include="Datos\DCorpal_Objetivos.cs" />
     <Compile Include="Datos\DCorpal_EntregaSolicitudProducto2.cs" />
+    <Compile Include="Datos\DCorpal_Extintor.cs" />
     <Compile Include="Datos\DCorpal_Produccion.cs" />
     <Compile Include="Datos\DCorpal_SolicitudEntregaProducto.cs" />
     <Compile Include="Datos\DCorpal_Cliente.cs" />
@@ -907,6 +909,7 @@
     <Compile Include="Negocio\NCorpal_Clientes.cs" />
     <Compile Include="Negocio\NCorpal_Objetivos.cs" />
     <Compile Include="Negocio\NCorpal_EntregaSolicitudProducto2.cs" />
+    <Compile Include="Negocio\NCorpal_Extintor.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
     <Compile Include="Negocio\NA_Recibo_IngresoEgreso.cs" />
     <Compile Include="Negocio\NCorpal_Produccion.cs" />
@@ -1147,6 +1150,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_GestionarInsumos.aspx.designer.cs">
       <DependentUpon>FCorpal_GestionarInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionExtintores.aspx.cs">
+      <DependentUpon>FCorpal_GestionExtintores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionExtintores.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionExtintores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.cs">
       <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>
