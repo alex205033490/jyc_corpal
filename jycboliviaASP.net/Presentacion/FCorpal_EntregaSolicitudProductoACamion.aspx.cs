@@ -1,6 +1,7 @@
 ﻿using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            this.Title = Session["BaseDatos"].ToString();
+
+            if (tienePermisoDeIngreso(143) == false)
+            {
+                string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 mostrarRegistrosSolicitudProductos("","","Abierto");
@@ -31,6 +41,16 @@ namespace jycboliviaASP.net.Presentacion
             txt_entregoProducto.Text = resp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
         }
 
+        private bool tienePermisoDeIngreso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            NA_DetallePermiso npermiso = new NA_DetallePermiso();
+            return npermiso.tienePermisoResponsable(permiso, codUser);
+        }
 
         /* MOSTRAR Registros GV*/
         private void mostrarRegistrosSolicitudProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
