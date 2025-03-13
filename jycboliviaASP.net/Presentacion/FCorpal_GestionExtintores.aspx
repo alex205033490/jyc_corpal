@@ -189,10 +189,7 @@
                         <asp:ListItem>Mantenimiento</asp:ListItem>
                         <asp:ListItem>Nuevo</asp:ListItem>
                     </asp:DropDownList>
-
-
                     </div>
-
 
                 </div>
             </div>
@@ -229,7 +226,28 @@
 
                         <asp:TemplateField HeaderText="Área">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_area" runat="server" Width="100px" BackColor="yellow" autoComplete="off"></asp:TextBox>
+                                <asp:DropDownList ID="dd_area2" CssClass="dd_area" Width="160px" BackColor="Yellow" runat="server">
+                                    <asp:ListItem> Selecciona un área:</asp:ListItem>
+                                    <asp:ListItem> Almacén de materia prima 1 </asp:ListItem>
+                                    <asp:ListItem> Almacén de materia prima 2 </asp:ListItem>
+                                    <asp:ListItem> Almacén de materia prima 3 </asp:ListItem>
+                                    <asp:ListItem> Almacén de producto terminado </asp:ListItem>
+                                    <asp:ListItem> Almacén maestro </asp:ListItem>
+                                    <asp:ListItem> Alta tensión </asp:ListItem>
+                                    <asp:ListItem> Batido de semilla </asp:ListItem>
+                                    <asp:ListItem> Compresores </asp:ListItem>
+                                    <asp:ListItem> Container </asp:ListItem>
+                                    <asp:ListItem> envolsado de semilla </asp:ListItem>
+                                    <asp:ListItem> Evaporadores de gas </asp:ListItem>
+                                    <asp:ListItem> Galpon 1 - Galletas </asp:ListItem>
+                                    <asp:ListItem> Galpon 2 - Papas </asp:ListItem>
+                                    <asp:ListItem> Galpon 3 - Nachos</asp:ListItem>
+                                    <asp:ListItem> Mantenimiento </asp:ListItem>
+                                    <asp:ListItem> Oficina Administración</asp:ListItem>
+                                    <asp:ListItem> Pasillo sazón de ají </asp:ListItem>
+                                    <asp:ListItem> Tasques de gas </asp:ListItem>
+                                    <asp:ListItem> Tostado de semilla </asp:ListItem>
+                                </asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -268,20 +286,24 @@
                             <ItemTemplate>
                                 <asp:TextBox ID="txt_fproximacarga" runat="server" Width="90px" BackColor="yellow" autoComplete="off"></asp:TextBox>
                                 <asp:CalendarExtender id="txt_fproximacarga_calendarExtender" runat="server" TargetControlID="txt_fproximacarga"/>
-
                             </ItemTemplate>
                         </asp:TemplateField>
 
                        
                         <asp:TemplateField HeaderText="Estado Extintor">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_estadoextintor" runat="server" Width="100px" BackColor="yellow" autoComplete="off"></asp:TextBox>
+                                <asp:DropDownList ID="dd_eextintor2" runat="server" BackColor="Yellow" Width="100px">
+                                    <asp:ListItem>Selecciona un estado:</asp:ListItem>
+                                    <asp:ListItem>Recarga</asp:ListItem>
+                                    <asp:ListItem>Mantenimiento</asp:ListItem>
+                                    <asp:ListItem>Nuevo</asp:ListItem>
+                                </asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
                         
                         <asp:TemplateField HeaderText="Próxima prueba hidrostatica">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_pPruebaHidrostatica" runat="server" BackColor="Yellow" AutoComplete="off"></asp:TextBox>
+                                <asp:TextBox ID="txt_pphidrostatica" runat="server" BackColor="Yellow" AutoComplete="off"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 

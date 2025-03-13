@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 
 namespace jycboliviaASP.net.Negocio
@@ -27,19 +28,11 @@ namespace jycboliviaASP.net.Negocio
             return datos.anular_RegistroExtintor(codigo);
         }
 
-        public bool Actualizar_RegistrosSeleccionados(List<int> codigosSeleccionados, Dictionary<int, Dictionary<string, object>> parametrosPorCodigo)
+        public bool update_registros (int codigos, string detalle, string area, string agenteextintor, string marca, float capacidad,
+            string codSistema, string estadoextintor, int anioPruebaHidrostatica)
         {
-            if (codigosSeleccionados == null || codigosSeleccionados.Count == 0)
-            {
-                throw new ArgumentException("No se han seleccionado registros para actualizar.");
-            }
-            if(parametrosPorCodigo == null || parametrosPorCodigo.Count == 0)
-            {
-                throw new ArgumentException("No se han proporcionado parametros de actualizacion.");
-            }
-            bool resultado = datos.update_RegistrosExtintor(codigosSeleccionados, parametrosPorCodigo);
-
-            return resultado;
+            return datos.ActualizarRegistrosExtintor(codigos, detalle, area, agenteextintor, marca, capacidad,
+                codSistema, estadoextintor, anioPruebaHidrostatica);
         }
     }
 }
