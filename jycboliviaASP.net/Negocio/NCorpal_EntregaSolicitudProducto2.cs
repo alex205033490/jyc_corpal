@@ -64,5 +64,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.update_CierreAutSolicitudProd(codSolicitud, codUser);
         }
+
+        internal DataSet get_EntregasProductoaCamion(int codigoCamion)
+        {
+            return datos.get_EntregasProductoaCamion(codigoCamion);
+        }
     }
 }

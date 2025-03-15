@@ -484,6 +484,7 @@
     <Content Include="NegocioPlantilla\forms\Readme.txt" />
     <Content Include="NegocioPlantilla\Header_planillanew.ascx" />
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
+    <Content Include="Presentacion\FACorpal_ConsultaGrafica.aspx" />
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
@@ -996,6 +997,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGrafica.aspx.cs">
+      <DependentUpon>FACorpal_ConsultaGrafica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGrafica.aspx.designer.cs">
+      <DependentUpon>FACorpal_ConsultaGrafica.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FA_Dashboard.aspx.cs">
       <DependentUpon>FA_Dashboard.aspx</DependentUpon>
@@ -2041,6 +2049,8 @@
     <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Detalle_objetivoProduccion_Vs_EntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregaProductosCamion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboAsignacionProductosCamion.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />

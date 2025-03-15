@@ -35,6 +35,12 @@ namespace jycboliviaASP.net.Presentacion
                 case "Reporte_Entrega_Produccion":
                     entregaProduccion();
                     break;
+                case "Reporte_AsignacionProductoCamion":
+                    AsignacionProductoCamion();
+                    break;
+                case "Reporte_ProductoCamionEntrega":
+                    ReporteProductoCamionEntrega();
+                    break;
                 case "Reporte_SolicitudMaterialInsumos":
                     reporteSolicitudMaterialInsumos();
                     break;
@@ -51,6 +57,51 @@ namespace jycboliviaASP.net.Presentacion
                     //number = "Error";
                     break;
             }
+        }
+
+        private void ReporteProductoCamionEntrega()
+        {
+            int codigoCamion;  
+            int.TryParse(Session["codigoCamion"].ToString(), out codigoCamion);
+            
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();            
+            DataSet datoResult = negocio.get_EntregasProductoaCamion(codigoCamion);
+            DataTable DS_EntregaProductosCamiones = datoResult.Tables[0];
+            ReportDataSource DSEntregaProductosCamiones = new ReportDataSource("DS_EntregaProductosCamiones", DS_EntregaProductosCamiones);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_EntregaProductosCamion"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+            ReportViewer1.LocalReport.DataSources.Add(DSEntregaProductosCamiones);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void AsignacionProductoCamion()
+        {
+            
+            int codigoCamion = int.Parse(Session["codigoCamion"].ToString());
+            NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();
+            DataSet datoResult = negocio.get_AsignacionProductoaCamion(codigoCamion);
+            DataTable DSasignacionProductoCamion = datoResult.Tables[0];            
+            ReportDataSource DS_AsignacionProductoCamiones = new ReportDataSource("DS_AsignacionProductoCamiones", DSasignacionProductoCamion);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_AsignacionProductosCamion"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+            ReportViewer1.LocalReport.DataSources.Add(DS_AsignacionProductoCamiones);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void CalcularInsumosPorTurnoDia()

@@ -229,13 +229,18 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (resultadoGeneral)
                 {
-                    showalert("El registro se ha insertado exitosamente.");
-                    string nroSolicitud = txt_nroSolicitud.Text;
-                    string solicitante = txt_SolicitanteProducto.Text;
-                    string estado = "Abierto";
-                    buscarDatosRegistro(nroSolicitud, solicitante, estado);
-                    //mostrarRegistrosSolicitudProductos("","","Abierto");
-                    //LimpiarCampos();
+                    int codCar = int.Parse(dd_vehiculos.SelectedValue);
+                    Session["codigoCamion"] = codCar;                    
+                    Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
+                    Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+
+                    /*  showalert("El registro se ha insertado exitosamente.");
+                      string nroSolicitud = txt_nroSolicitud.Text;
+                      string solicitante = txt_SolicitanteProducto.Text;
+                      string estado = "Abierto";
+                      buscarDatosRegistro(nroSolicitud, solicitante, estado);
+                      //mostrarRegistrosSolicitudProductos("","","Abierto");
+                      //LimpiarCampos();*/
                 } else
                 {
                     showalert("Hubo un error al insertar el registro.");
@@ -341,6 +346,20 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error al cargar los datos. {ex.Message}");
             }
 
+        }
+
+        protected void bt_verRecibo_Click(object sender, EventArgs e)
+        {
+            if (!IsVehiculoSeleccionado())
+            {
+                showalert("Debe seleccionar 1 vehiculo.");
+                return;
+            }
+
+            int codCar = int.Parse(dd_vehiculos.SelectedValue);
+            Session["codigoCamion"] = codCar;
+            Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
+            Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
         }
     }
 }

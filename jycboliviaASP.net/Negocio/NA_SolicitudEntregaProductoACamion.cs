@@ -50,5 +50,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.update_ADDVehiculoAPedido(codVehiculo, codUser, codSolicitud, codProducto);
         }
+
+        internal DataSet get_AsignacionProductoaCamion(int codigoCamion)
+        {
+            return datos.get_AsignacionProductoaCamion(codigoCamion);
+        }
     }
 }

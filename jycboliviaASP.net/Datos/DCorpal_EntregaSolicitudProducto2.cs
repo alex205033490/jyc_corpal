@@ -115,9 +115,11 @@ namespace jycboliviaASP.net.Datos
                 if (bandera0)
                 {
                     string consulta = "update tbcorpal_detalle_solicitudproducto " +
-                        "set tbcorpal_detalle_solicitudproducto.cantentregada = '" + cantEntregado.ToString().Replace(',', '.') + "' " +
-                        "where tbcorpal_detalle_solicitudproducto.codsolicitud = " + codigoSolicitud + " and " +
-                        "tbcorpal_detalle_solicitudproducto.codproducto = " + codigoProducto + " ";
+                        " set tbcorpal_detalle_solicitudproducto.cantentregada = '" + cantEntregado.ToString().Replace(',', '.') + "', " +
+                        " tbcorpal_detalle_solicitudproducto.fechaentrega_car = current_date(), "+
+                        " tbcorpal_detalle_solicitudproducto.horaentrega_car = current_time() "+
+                        " where tbcorpal_detalle_solicitudproducto.codsolicitud = " + codigoSolicitud + " and " +
+                        " tbcorpal_detalle_solicitudproducto.codproducto = " + codigoProducto + " ";
                     banderaResultado = conexion.ejecutarMySql(consulta);
                 }
                     return banderaResultado;
@@ -175,6 +177,23 @@ namespace jycboliviaASP.net.Datos
 
         }
 
-
+        internal DataSet get_EntregasProductoaCamion(int codigoCamion)
+        {
+            string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
+                                " v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
+                                " date_format(dsp.fechaentrega_car, '%d/%m/%Y') as 'fechaentrega_car', dsp.horaentrega_car, sep.estadosolicitud, " +
+                                " dsp.tiposolicitud, dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada' " +
+                                " from tbcorpal_solicitudentregaproducto sep " +
+                                " left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud " +
+                                " left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
+                                " left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
+                                " WHERE " +
+                                " dsp.fechaentrega_car = current_date()  and sep.estado = true ";
+                                if (codigoCamion > 0) {
+                                    consulta = consulta + "  AND dsp.codvehiculo = " + codigoCamion;
+                                }
+                    consulta +=  " order by v.marca, v.modelo asc";
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

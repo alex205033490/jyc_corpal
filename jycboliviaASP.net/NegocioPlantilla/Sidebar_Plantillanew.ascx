@@ -75,7 +75,7 @@
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
-                          
+             
             <li role="separator" class="divider"></li>                                
           </ul>
         </li><!-- End Tables Nav -->
@@ -115,9 +115,16 @@
             </a>
             <ul id="extintores-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li><a href="../Presentacion/FCorpal_GestionExtintores.aspx" id="mn_GestionExtintores" runat="server"><i class="bi bi-circle"></i><span>Gestión de Extintores</span></a></li>
-
             </ul>
+        </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#consultaG-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Consultas Generales</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="consultaG-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a href="../Presentacion/FACorpal_ConsultaGrafica.aspx" id="mn_ConsultaGraficaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Grafica</span></a></li>
+            </ul>
         </li>
 
 

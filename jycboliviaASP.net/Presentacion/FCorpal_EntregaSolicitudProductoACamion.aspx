@@ -95,7 +95,10 @@
                                             </asp:DropDownList>
                                         </div>
                                         <div class="class_btn col-lg-4">
-                                            <asp:Button ID="btn_registrar" runat="server" CssClass="btn btn-success" Text="Agregar vehiculo" OnClick="btn_registrar_Click" />
+                                            <asp:Button ID="btn_registrar" runat="server" CssClass="btn btn-success" Text="Agregar vehiculo" OnClick="btn_registrar_Click" />                                            
+                                        </div>
+                                         <div class="class_btn col-lg-4">
+                                             <asp:Button ID="bt_verRecibo" runat="server" CssClass="btn btn-info" Text="Ver Recibo" OnClick="bt_verRecibo_Click" />
                                         </div>
                                     </div>
 

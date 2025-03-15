@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>F:\WebSite\jyc_naxSnax_New2</_PublishTargetUrl>
-    <History>True|2025-02-13T14:01:44.5881950Z||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
+    <History>True|2025-03-12T19:01:49.1807166Z||;True|2025-02-13T10:01:44.5881950-04:00||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -199,10 +199,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.dll">
-      <publishTime>03/12/2025 08:43:40</publishTime>
+      <publishTime>03/13/2025 16:52:47</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.pdb">
-      <publishTime>03/12/2025 08:43:40</publishTime>
+      <publishTime>03/13/2025 16:52:47</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1786,13 +1786,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/20/2025 10:55:30</publishTime>
     </File>
     <File Include="NegocioPlantilla/Sidebar_Plantillanew.ascx">
-      <publishTime>03/12/2025 08:19:01</publishTime>
+      <publishTime>03/12/2025 12:29:32</publishTime>
     </File>
     <File Include="PlantillaNew.Master">
       <publishTime>03/10/2025 11:49:24</publishTime>
     </File>
     <File Include="Presentacion/ControlUser.ascx">
       <publishTime>10/11/2024 08:25:01</publishTime>
+    </File>
+    <File Include="Presentacion/FACorpal_ConsultaGrafica.aspx">
+      <publishTime>03/12/2025 12:01:47</publishTime>
     </File>
     <File Include="Presentacion/FA_Dashboard.aspx">
       <publishTime>03/11/2025 10:01:00</publishTime>
@@ -1879,10 +1882,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProducto.aspx">
-      <publishTime>03/12/2025 08:19:01</publishTime>
+      <publishTime>03/13/2025 10:53:49</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx">
-      <publishTime>03/10/2025 11:49:24</publishTime>
+      <publishTime>03/13/2025 15:03:36</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_Facturacion.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -2662,7 +2665,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/10/2025 11:07:57</publishTime>
+      <publishTime>03/13/2025 16:52:48</publishTime>
     </File>
     <File Include="x64/SqlServerSpatial160.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>

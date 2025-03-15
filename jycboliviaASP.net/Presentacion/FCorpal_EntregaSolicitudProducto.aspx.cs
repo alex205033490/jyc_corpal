@@ -349,7 +349,13 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
-            //verReciboSeleccionado();
+            if (dd_listVehiculo.SelectedIndex >= 0) {
+                int codigo = int.Parse(dd_listVehiculo.SelectedValue);
+                Session["codigoCamion"] = codigo;
+                Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+            }
+            
         }
 
         private void verReciboSeleccionado()
@@ -404,6 +410,13 @@ namespace jycboliviaASP.net.Presentacion
                     }
                     
                 }
+
+
+                int codigo; 
+                int.TryParse(dd_listVehiculo.SelectedValue, out codigo);
+                Session["codigoCamion"] = codigo;                
+                Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
             }
             catch (Exception ex)
             {
