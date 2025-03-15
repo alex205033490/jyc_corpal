@@ -77,14 +77,14 @@ namespace jycboliviaASP.net.Datos
         }
 
         internal bool ActualizarRegistrosExtintor(int codigo, string detalle, string area, string agenteextintor, string marca, float capacidad,
-            string codSistema, string estadoextintor, int anioProxPruebaH)
+            string codSistema, string estadoextintor, int anioProxPruebaH, string fechadecarga, string fechaproximacarga)
         {
             try
             {
                 string consulta = "UPDATE tbcorpal_extintores e SET e.detalle = @detalle , e.area = @area, e.agenteextintor = @aextintor, " +
                        "e.marca = @marca, e.capacidad = @capacidad, e.codSistema = @codsistema, " +
-                       "e.estadoextintor = @estadoextintor, e.anioproximapruebahidrostatica = @anioProxPruebaH " +
-                       "WHERE e.codigo = @codigo AND e.estado = 1";
+                       "e.estadoextintor = @estadoextintor, e.anioproximapruebahidrostatica = @anioProxPruebaH, e.fechadecarga = @fechadecarga, " +
+                       "e.fechaproximacarga = @fechaproximacarga WHERE e.codigo = @codigo AND e.estado = 1";
 
                 MySqlCommand cmd = new MySqlCommand(consulta);
 
@@ -97,6 +97,8 @@ namespace jycboliviaASP.net.Datos
                 cmd.Parameters.AddWithValue("@codsistema", codSistema);
                 cmd.Parameters.AddWithValue("@estadoextintor", estadoextintor);
                 cmd.Parameters.AddWithValue("@anioProxPruebaH", anioProxPruebaH);
+                cmd.Parameters.AddWithValue("@fechadecarga", fechadecarga);
+                cmd.Parameters.AddWithValue("@fechaproximacarga", fechaproximacarga);
 
 
                 return conexion.ejecutarMySql2(cmd);

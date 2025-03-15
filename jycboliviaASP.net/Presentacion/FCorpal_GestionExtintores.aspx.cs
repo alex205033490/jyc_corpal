@@ -30,6 +30,7 @@ namespace jycboliviaASP.net.Presentacion
             if (isValid)
             {
                 insertarRegistroExtintor();
+                LimpiarForm();
             }
         }
         private void insertarRegistroExtintor()
@@ -197,7 +198,7 @@ namespace jycboliviaASP.net.Presentacion
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
-
+        /*---   CARGAR DATOS AL GV    ---*/
         protected void gv_registrosExtintores_row_DataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -277,8 +278,43 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+
+        /*---   BOTON ACTUALIZAR   ---*/
         protected void btn_updateRegistro_Click(object sender, EventArgs e)
         {
+            try
+            {
+                List<int> codigosActualizados = new List<int>();
+                foreach(GridViewRow row in gv_registrosExtintores.Rows)
+                {
+                    CheckBox chkSelect = row.FindControl("chkSelect") as CheckBox;
+                    if(chkSelect != null && chkSelect.Checked)
+                    {
+                        if (!ValidarDropDowns(row))
+                        {
+                            return;
+                        }
+                        int codigo = Convert.ToInt32(row.Cells[1].Text);
+                        ActualizarRegistros(row, codigo);
+                        codigosActualizados.Add(codigo);
+                    }
+                }
+                if(codigosActualizados.Count > 0)
+                {
+                    showalert($"Registros actualizados correctamente: {string.Join(", ", codigosActualizados)}");
+                    mostarRegistros("");
+                }
+                else
+                {
+                    showalert("No se seleccionaron registros para actualizar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error inesperado: {ex.Message}");
+            }
+
+            /*
             try
             {
                 foreach(GridViewRow row in gv_registrosExtintores.Rows)
@@ -296,10 +332,12 @@ namespace jycboliviaASP.net.Presentacion
                         TextBox txtcodSistema = (TextBox)row.FindControl("txt_codsistema");
                         DropDownList ddEstadoextintor = (DropDownList)row.FindControl("dd_eextintor2");
                         TextBox txtAnioPruebaH = (TextBox)row.FindControl("txt_pphidrostatica");
+                        TextBox txtFechadecarga = ((TextBox)row.FindControl("txt_fdcarga"));
+                        TextBox txtFechaproximadcarga = ((TextBox)row.FindControl("txt_fproximacarga"));
 
                         NCorpal_Extintor negocio = new NCorpal_Extintor();
 
-                        ActualizarDatosRegistro(codigo, txtDetalle, ddarea, txtAExtintor, txtMarca, txtCapacidad, txtcodSistema, ddEstadoextintor, txtAnioPruebaH);
+                        ActualizarDatosRegistro(codigo, txtDetalle, ddarea, txtAExtintor, txtMarca, txtCapacidad, txtcodSistema, ddEstadoextintor, txtAnioPruebaH, txtFechadecarga, txtFechaproximadcarga);
                         showalert($"Registro actualizado");
                         mostarRegistros("");
                     }
@@ -309,17 +347,21 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error inesperado. {ex.Message}");
             }
+            */
         }
 
-        private void ActualizarDatosRegistro(int codigo, TextBox txtdetalle, DropDownList ddarea, TextBox txtaExtintor, TextBox txtmarca, TextBox txtcapacidad, TextBox txtcodsistema, DropDownList ddeextintor, TextBox txtanio)
+        private void ActualizarDatosRegistro(int codigo, TextBox txtdetalle, DropDownList ddarea, TextBox txtaExtintor, TextBox txtmarca, 
+            TextBox txtcapacidad, TextBox txtcodsistema, DropDownList ddeextintor, TextBox txtanio, TextBox txtfechadecarga, TextBox txfechaproximadcarga)
         {
             try
             {
                 string detalle = txtdetalle.Text;
-    
                 string area = ddarea.Text;
+                
                 string aExtintor = txtaExtintor.Text;
                 string marca = txtmarca.Text;
+                string fechadecarga = ConvertidorFecha(txtfechadecarga.Text);
+                string fechaproximadcarga = ConvertidorFecha(txfechaproximadcarga.Text);
 
                 string capacidadTexto = txtcapacidad.Text.Replace('.', ',');
                 float capacidad = 0;
@@ -340,7 +382,8 @@ namespace jycboliviaASP.net.Presentacion
                 }
 
                 NCorpal_Extintor negocio = new NCorpal_Extintor();
-                bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, estadoExtintor, ppanio);
+                bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, 
+                    estadoExtintor, ppanio, fechadecarga, fechaproximadcarga);
 
                 if (resultado)
                 {
@@ -350,12 +393,83 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     // Muestra la consulta SQL que estás ejecutando
                     
-                    showalert($"Error al actualizar los campos del codigo2 :codigo:{codigo} {detalle}, {area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}");
+                    showalert($"Error al actualizar los campos del codigo2 :codigo:{codigo} {detalle}, " +
+                        $"{area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}, {fechadecarga}");
                 }
             }
             catch(Exception ex)
             {
                 showalert($"Error al actualizar los datos2. {ex.Message}");
+            }
+        }
+
+        private bool ValidarDropDowns(GridViewRow row)
+        {
+            DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
+            DropDownList ddEstadoExtintor = row.FindControl("dd_eextintor2") as DropDownList;
+
+            if(ddArea != null && ddArea.SelectedIndex == 0)
+            {
+                showalert("Por favor, selecciona un área válida.");
+                return false;
+            }
+
+            if(ddEstadoExtintor != null && ddEstadoExtintor.SelectedIndex == 0)
+            {
+                showalert("Por favor, selecciona un estado extintor válido.");
+                return false;
+            }
+            return true;
+
+        }
+        private void ActualizarRegistros(GridViewRow row, int codigo)
+        {
+            try
+            {
+                TextBox txtDetalle = row.FindControl("txt_detalle") as TextBox;
+                DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
+                TextBox txtAExtintor = row.FindControl("txt_aextintor") as TextBox;
+                TextBox txtMarca = row.FindControl("txt_marca") as TextBox;
+                TextBox txtCapacidad = row.FindControl("txt_capacidad") as TextBox;
+                TextBox txtCodSistema = row.FindControl("txt_codsistema") as TextBox;
+                DropDownList ddEstadoExtintor = row.FindControl("dd_eextintor2") as DropDownList;
+                TextBox txtAnioPruebaH = row.FindControl("txt_pphidrostatica") as TextBox;
+                TextBox txtFechadecarga = row.FindControl("txt_fdcarga") as TextBox;
+                TextBox txtFechaproximadcarga = row.FindControl("txt_fproximacarga") as TextBox;
+
+                string detalle = txtDetalle?.Text ?? "";
+                string area = ddArea?.Text ?? "";
+                string aExtintor = txtAExtintor?.Text ?? "";
+                string marca = txtMarca?.Text ?? "";
+                string codSistema = txtCodSistema?.Text ?? "";
+                string estadoExtintor = ddEstadoExtintor?.Text ?? "";
+                string fechadecarga = ConvertidorFecha(txtFechadecarga?.Text);
+                string fechaproximadcarga = ConvertidorFecha(txtFechaproximadcarga?.Text);
+
+                if(!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
+                {
+                    showalert("La capacidad no tiene el formato correcto");
+                    return;
+                }
+
+                if(!int.TryParse(txtAnioPruebaH?.Text, out int ppanio))
+                {
+                    showalert("El año de prueba no tiene el formato correcto.");
+                    return;
+                }
+                NCorpal_Extintor negocio = new NCorpal_Extintor();
+                bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, estadoExtintor,
+                    ppanio, fechadecarga, fechaproximadcarga);
+
+                if (!resultado)
+                {
+                    showalert($"Error al actulizar el registro con código {codigo} ,{detalle}, {area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}," +
+                        $" {ppanio}, {fechadecarga}, {fechaproximadcarga}");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al actualizar el registro {codigo}: {ex.Message}");
             }
         }
     }

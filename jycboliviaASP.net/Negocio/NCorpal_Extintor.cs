@@ -29,10 +29,10 @@ namespace jycboliviaASP.net.Negocio
         }
 
         public bool update_registros (int codigos, string detalle, string area, string agenteextintor, string marca, float capacidad,
-            string codSistema, string estadoextintor, int anioPruebaHidrostatica)
+            string codSistema, string estadoextintor, int anioPruebaHidrostatica, string fechadecarga, string fechaproximacarga)
         {
             return datos.ActualizarRegistrosExtintor(codigos, detalle, area, agenteextintor, marca, capacidad,
-                codSistema, estadoextintor, anioPruebaHidrostatica);
+                codSistema, estadoextintor, anioPruebaHidrostatica, fechadecarga, fechaproximacarga);
         }
     }
 }

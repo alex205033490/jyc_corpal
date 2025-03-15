@@ -31,6 +31,17 @@
             } 
         }
 
+        function validarFecha(input) {
+            var valor = input.value;
+            var regex = /^(?:\d{4}[\/-]\d{2}[\/-]\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4})$/;
+
+            if (!regex.test(valor)) {
+                input.setCustomValidity("Ingresa una fecha válida 'YYYY-MM-DD' o 'DD-MM-YYYY' (usando '/' o '-') ");
+            } else {
+                input.setCustomValidity("");
+            }
+        }
+
         function validarAnioMin(input) {
             var valor = input.value.trim();
             var regex = /^\d+$/;
@@ -45,6 +56,30 @@
                 input.setCustomValidity("");
             }
         }
+
+        $(document).ready(function () {
+            function addCheckboxChangeListener() {
+                var gridViewId = $(".container-listaRegistrosExtintores").data("clientid");
+
+                $("#" + gridViewId + " input[type='checkbox']").change(function () {
+                    var row = $(this).closest("tr");
+
+                    if ($(this).is(":checked")) {
+                        row.addClass("highlighted");
+                    } else {
+                        row.removeClass("highlighted");
+                    }
+                });
+            }
+            addCheckboxChangeListener();
+            Sys.Application.add_load(function () {
+                addCheckboxChangeListener();
+            });
+        });
+
+ 
+
+
     </script>
 
     <style>
@@ -62,7 +97,7 @@
         input[type=text], input[type="number"], select {
             padding: 3px;
             margin-bottom: 7px;
-            width: 80%;
+            width: 90%;
             border-radius: 6px;
             border:1px solid #0000005c;
         }
@@ -86,13 +121,13 @@
         .container-listaRegistrosExtintores{
             padding:10px;
             height:350px;
+            width:98%;
         }
 
         .gv_registrosExtintores{
             overflow-y:auto;
             overflow-x:auto;
-            font-size:small;
-            border:2px solid black;
+            font-size:11px;
         }
         
         .gv_registrosExtintores th{
@@ -114,7 +149,10 @@
             background-color:#ffa93e47;
         }
 
-        
+        .gv_registrosExtintores tr.highlighted td{
+            background-color: #ff870052 !important;
+            border: 2px solid white !important;
+        }
 
     </style>
     
@@ -123,8 +161,12 @@
         <div class="container-form">
 
             <div class="container-registro bg-white"> Registro de Extintores
+
+                <asp:UpdatePanel ID="updatePanelRegistrar" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                    
                 <div class="form-registro row">
-                    <div class="columna1 col-lg-3">
+                    <div class="columna1 col-lg-3 col-md-4 col-sm-6 col-6">
                     <label>Area:</label>
                     <asp:DropDownList ID="dd_area" CssClass="dd_area" runat="server">
                         <asp:ListItem> Selecciona un área:</asp:ListItem>
@@ -160,7 +202,7 @@
                     <asp:TextBox ID="txt_fechaProximaPrueba" runat="server" autocomplete="off" onInput="validarAnioMin(this);"></asp:TextBox>
                     </div>
 
-                    <div class="columna2 col-lg-3">
+                    <div class="columna2 col-lg-3 col-md-3 col-sm-5 col-5">
                     <label>Detalle:</label>
                     <asp:TextBox ID="txt_detalle" runat="server" autocomplete="off"></asp:TextBox>
 
@@ -175,7 +217,7 @@
                     <asp:Button ID="btn_guardarForm" runat="server" Text="Registrar" CssClass="btn btn-success" Style="width: 80%;" OnClick="btn_guardarForm_Click" />
                     </div>
 
-                    <div class="columna3 col-lg-3">
+                    <div class="columna3 col-lg-3 col-md-4 col-sm-6 col-6">
                     <label>Agente Extintor:</label>
                     <asp:TextBox ID="txt_agenteExtintor" runat="server" autocomplete="off"></asp:TextBox>
 
@@ -192,20 +234,34 @@
                     </div>
 
                 </div>
+                            </ContentTemplate>
+</asp:UpdatePanel>
             </div>
 
             <br />
-            <div class="container-btns row col-lg-6">
-                <div class="col-lg-6">
+            <div class="container-btns row ms-2 mb-2 col-lg-6 col-md-6 col-10">
+                <div class="col-lg-6 col-md-6 col-6">
                     <asp:Button id="btn_anularRegistro" runat="server" Text="Anular" CssClass="btn btn-danger" style="width:80%;" OnClick="btn_anularRegistro_Click"/>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-6">
                     <asp:Button ID="btn_updateRegistro" runat="server" Text="Actualizar" CssClass="btn btn-success" Style="width: 80%;" OnClick="btn_updateRegistro_Click" />
                 </div>
             </div>
-            <div class="container-listaRegistrosExtintores table-responsive col-lg-11"> Lista de registros 
-                <asp:GridView ID="gv_registrosExtintores" runat="server" DataKeyNames="codigo" CssClass="table table-sticky table-striped table-responsive gv_registrosExtintores" 
+            <div class="container-tittle ms-2">
+                <h2>Lista de registros </h2>
+            </div>
+
+
+            <asp:UpdatePanel ID="updatePanelBTNanular" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+
+
+
+                
+            <div class="container-listaRegistrosExtintores table-responsive" data-clientid="<%= gv_registrosExtintores.ClientID %>"">
+                <asp:GridView ID="gv_registrosExtintores" runat="server" DataKeyNames="codigo" 
+                    CssClass="table table-sticky table-striped gv_registrosExtintores" 
                     AutoGenerateColumns="false" OnRowDataBound="gv_registrosExtintores_row_DataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="">
@@ -213,7 +269,6 @@
                                 <asp:CheckBox ID="chkSelect" CssClass="chkSelect"  runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
-
 
                         <asp:BoundField DataField="codigo" HeaderText="Código"/>
                         <asp:BoundField DataField="fechagra" HeaderText="Fecha Creación" />
@@ -253,7 +308,7 @@
 
                         <asp:TemplateField HeaderText="Agente extintor">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_aextintor" runat="server" Width="120px" BackColor="yellow" autoComplete="off"></asp:TextBox>
+                                <asp:TextBox ID="txt_aextintor" runat="server" Width="80px" BackColor="yellow" autoComplete="off"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -277,15 +332,15 @@
 
                         <asp:TemplateField HeaderText="Fecha de Carga">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_fdcarga" runat="server" Width="90px" BackColor="yellow" autoComplete="off"></asp:TextBox>
-                                <asp:CalendarExtender id="txt_fdcarga_calendarExtender" runat="server" TargetControlID="txt_fdcarga"/>
+                                <div class="campo-fechaCarga" >
+                                    <asp:TextBox ID="txt_fdcarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off" onInput="validarFecha(this);"></asp:TextBox>
+                                </div>
                             </ItemTemplate>
                         </asp:TemplateField>                        
 
                         <asp:TemplateField HeaderText="Fecha Proxima Carga">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="90px" BackColor="yellow" autoComplete="off"></asp:TextBox>
-                                <asp:CalendarExtender id="txt_fproximacarga_calendarExtender" runat="server" TargetControlID="txt_fproximacarga"/>
+                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off" onInput="validarFecha(this);"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -312,10 +367,16 @@
                     </Columns>
                 </asp:GridView>
             </div>
-
+                        </ContentTemplate>
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="btn_anularRegistro" EventName="Click"/>
+        <asp:AsyncPostBackTrigger ControlID="btn_updateRegistro" EventName="Click"/>
+    </Triggers>
+</asp:UpdatePanel>
+            <br />
         </div>
     </div>
 
-
+    <scrip src="../js/maintCorpal.js" ></scrip>
 
 </asp:Content>
