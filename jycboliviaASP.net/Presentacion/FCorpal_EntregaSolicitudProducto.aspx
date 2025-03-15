@@ -19,9 +19,36 @@
             }
         })
 
+        $(document).ready(function () {
+            function addCheckboxChangeListener() {
+                var gridViewId = $(".container-gvRegistros").data("clientid");
 
+                $("#" + gridViewId + " input[type='checkbox']").change(function () {
+                    var row = $(this).closest("tr");
+
+                    if ($(this).is(":checked")) {
+                        row.addClass("highlighted");
+                    } else {
+                        row.removeClass("highlighted");
+                    }
+                });
+            }
+            addCheckboxChangeListener();
+            Sys.Application.add_load(function () {
+                addCheckboxChangeListener();
+            });
+        });
 
     </script>
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+    </style>
 
 
     <div class="card">
@@ -117,7 +144,7 @@
 
                                             <div class="container-gvRegistros table-responsive mb-2" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                                                 <asp:GridView ID="gv_solicitudesProductos" runat="server" ShowHeader="true" EnableViewState="true"
-                                                    CssClass="table-striped sticky-table" AutoGenerateColumns="false"
+                                                    CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
                                                     DataKeyNames="codigo" Style="background-color: white !important;" OnSelectedIndexChanged="gv_solicitudesProductos_SelectedIndexChanged" OnRowDataBound="gv_solicitudesProductos_RowDataBound">
                                                     <Columns>
                                                         <asp:TemplateField>
@@ -150,7 +177,7 @@
 
                                                         <asp:TemplateField HeaderText="Cantidad a Entregar">
                                                             <ItemTemplate>
-                                                                <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off"></asp:TextBox>
+                                                                <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off" ></asp:TextBox>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
