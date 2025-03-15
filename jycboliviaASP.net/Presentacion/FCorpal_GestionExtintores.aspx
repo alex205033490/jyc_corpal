@@ -3,55 +3,19 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <link href="../Styles/Style_GestionExtintores.css" rel="stylesheet" type="text/css" />
 
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            var table = $(".table-sticky");
-
-            if (table.find("thead").length === 0) {
-                table.prepend("<thead>" + table.find("tr:first").html() + "</thead>");
-                table.find("tr:first").remove();
-            }
-
-        })
-
         function validarDecimal(input) {
             var valor = input.value;
             var regex = /^\d*(?:[.,]\d{0,2})?$/;
 
             if (!regex.test(valor)) {
                 input.setCustomValidity("Solo se permiten números con hasta 2 decimales.")
-            } else {
-                input.setCustomValidity("");
-            } 
-        }
-
-        function validarFecha(input) {
-            var valor = input.value;
-            var regex = /^(?:\d{4}[\/-]\d{2}[\/-]\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4})$/;
-
-            if (!regex.test(valor)) {
-                input.setCustomValidity("Ingresa una fecha válida 'YYYY-MM-DD' o 'DD-MM-YYYY' (usando '/' o '-') ");
-            } else {
-                input.setCustomValidity("");
-            }
-        }
-
-        function validarAnioMin(input) {
-            var valor = input.value.trim();
-            var regex = /^\d+$/;
-
-            var anioActual = new Date().getFullYear();
-
-            if (!regex.test(valor)) {
-                input.setCustomValidity("Solo se permiten números enteros.");
-            } else if (parseInt(valor) < anioActual) {
-                input.setCustomValidity("El año debe ser mayor o igual a " + anioActual + ".");
             } else {
                 input.setCustomValidity("");
             }
@@ -77,90 +41,44 @@
             });
         });
 
- 
+        function validarAnioMin(input) {
+            var valor = input.value.trim();
+            var regex = /^\d+$/;
 
+            var anioActual = new Date().getFullYear();
+
+            if (!regex.test(valor)) {
+                input.setCustomValidity("Solo se permiten números enteros.");
+            } else if (parseInt(valor) < anioActual) {
+                input.setCustomValidity("El año debe ser mayor o igual a " + anioActual + ".");
+            } else {
+                input.setCustomValidity("");
+            }
+        }
+
+        function validarFecha(input) {
+            var valor = input.value;
+            var regex = /^(?:\d{4}[\/-]\d{2}[\/-]\d{2}|\d{2}[\/-]\d{2}[\/-]\d{4})$/;
+
+            if (!regex.test(valor)) {
+                input.setCustomValidity("Ingresa una fecha válida 'YYYY-MM-DD' o 'DD-MM-YYYY' (usando '/' o '-') ");
+            } else {
+                input.setCustomValidity("");
+            }
+        }
 
     </script>
 
     <style>
-        .container-registro{
-            padding-left:20px;
-            padding-right:20px;
-            font-size:14px;
-           
-        }
-        .columna1, .columna2, .columna3{
-            margin: 5px;
-            display:flex;
-            flex-direction:column;
-        }
-        input[type=text], input[type="number"], select {
-            padding: 3px;
-            margin-bottom: 7px;
-            width: 90%;
-            border-radius: 6px;
-            border:1px solid #0000005c;
-        }
-        input[type=text]:hover, input[type="number"]:hover, select:hover {
-            background-color:#00000038;
-        }
-        input[type=text]:focus, input[type="number"]:focus, select:focus {
-            background-color:#0034ff1c ;
-            box-shadow: 2px 2px 10px black;
-        }
-
-        .btn-success:hover{
-            box-shadow:2px 2px 15px green;
-            
-        }
-        .btn-danger:hover{
-            box-shadow:2px 2px 15px red;
-    
-        }   
-
-        .container-listaRegistrosExtintores{
-            padding:10px;
-            height:350px;
-            width:98%;
-        }
-
-        .gv_registrosExtintores{
-            overflow-y:auto;
-            overflow-x:auto;
-            font-size:11px;
-        }
         
-        .gv_registrosExtintores th{
-            background-color:orange;
-            padding:6px;
-            border:2px solid black;
-        }
-        .gv_registrosExtintores td{
-            background-color:white;
-            padding:6px; 
-        }
-        .table-sticky th{
-            position: sticky !important;
-            top:-10px !important;
-            z-index:100 !important;
-            border:1px solid black;
-        }
-        .form-registro{
-            background-color:#ffa93e47;
-        }
-
-        .gv_registrosExtintores tr.highlighted td{
-            background-color: #ff870052 !important;
-            border: 2px solid white !important;
-        }
 
     </style>
     
     <div class="card">
-        <div class="card-header bg-warning"> Gestión de Extintores </div>
+        <div class="card-header bg-warning"> <h2>Gestión de Extintores</h2> </div>
         <div class="container-form">
 
-            <div class="container-registro bg-white"> Registro de Extintores
+            <div class="container-registro bg-white"> <h3>Registro</h3> 
 
                 <asp:UpdatePanel ID="updatePanelRegistrar" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
