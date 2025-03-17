@@ -48,7 +48,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "Select codigo, fechagra, horagra, detalle, area, agenteextintor, marca, " +
                 "capacidad, codSistema, fechadecarga, fechaproximacarga, estadoextintor, " +
                 "anioproximapruebahidrostatica, nombreresp from tbcorpal_extintores where estado = 1 " +
-                "and area like '%" + area + "%';";
+                "and area like '%" +area+ "%';";
 
             return conexion.consultaMySql(consulta);
         }

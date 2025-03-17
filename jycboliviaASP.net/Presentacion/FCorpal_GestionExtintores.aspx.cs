@@ -135,7 +135,7 @@ namespace jycboliviaASP.net.Presentacion
         }
         private bool validarFormRegistro()
         {
-            if (string.IsNullOrEmpty(txt_agenteExtintor.Text.Trim()))
+            /*if (string.IsNullOrEmpty(txt_agenteExtintor.Text.Trim()))
             {
                 showalert("El campo agente extintor es obligatorio.");
                 return false;
@@ -144,8 +144,8 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert("El campo marca es obligatorio.");
                 return false;
-            } 
-            else if (string.IsNullOrEmpty(txt_capacidad.Text.Trim()) || !float.TryParse(txt_capacidad.Text.Trim(), out _))
+            } */
+            if (string.IsNullOrEmpty(txt_capacidad.Text.Trim()) || !float.TryParse(txt_capacidad.Text.Trim(), out _))
             {
                 showalert("La capacidad debe ser un número válido.");
                 return false;

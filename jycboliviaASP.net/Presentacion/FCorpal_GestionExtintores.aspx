@@ -289,6 +289,7 @@
     <Triggers>
         <asp:AsyncPostBackTrigger ControlID="btn_anularRegistro" EventName="Click"/>
         <asp:AsyncPostBackTrigger ControlID="btn_updateRegistro" EventName="Click"/>
+        <asp:AsyncPostBackTrigger ControlID="btn_guardarForm" EventName="Click" />
     </Triggers>
 </asp:UpdatePanel>
             <br />
