@@ -645,6 +645,7 @@
     <Content Include="Styles\Style_CotiEra.css" />
     <Content Include="Styles\Style_EntregaProductosACamion.css" />
     <Content Include="Styles\Style_GActividades.css" />
+    <Content Include="Styles\Style_GestionExtintores.css" />
     <Content Include="Styles\Style_ImportacionJYCIA.css" />
     <Content Include="Styles\login-box.css" />
     <Content Include="Styles\Style_adicionarRepuesto.css" />

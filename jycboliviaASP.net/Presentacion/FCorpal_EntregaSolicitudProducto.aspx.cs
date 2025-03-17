@@ -404,11 +404,6 @@ namespace jycboliviaASP.net.Presentacion
                             showalert("Ocurrio un error al registrar la soliciud");
                         }
                     }
-                    else
-                    {
-                        showalert("Selecciona al menos 1 registro.");
-                    }
-                    
                 }
 
 

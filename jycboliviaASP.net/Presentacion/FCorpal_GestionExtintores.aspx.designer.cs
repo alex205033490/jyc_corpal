@@ -15,6 +15,15 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
+        /// Control updatePanelRegistrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelRegistrar;
+
+        /// <summary>
         /// Control dd_area.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_updateRegistro;
+
+        /// <summary>
+        /// Control updatePanelBTNanular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelBTNanular;
 
         /// <summary>
         /// Control gv_registrosExtintores.

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.EntitySql;
 using System.Globalization;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace jycboliviaASP.net.Presentacion
             if (isValid)
             {
                 insertarRegistroExtintor();
+                LimpiarForm();
             }
         }
         private void insertarRegistroExtintor()
@@ -133,7 +135,7 @@ namespace jycboliviaASP.net.Presentacion
         }
         private bool validarFormRegistro()
         {
-            if (string.IsNullOrEmpty(txt_agenteExtintor.Text.Trim()))
+            /*if (string.IsNullOrEmpty(txt_agenteExtintor.Text.Trim()))
             {
                 showalert("El campo agente extintor es obligatorio.");
                 return false;
@@ -142,8 +144,8 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert("El campo marca es obligatorio.");
                 return false;
-            } 
-            else if (string.IsNullOrEmpty(txt_capacidad.Text.Trim()) || !float.TryParse(txt_capacidad.Text.Trim(), out _))
+            } */
+            if (string.IsNullOrEmpty(txt_capacidad.Text.Trim()) || !float.TryParse(txt_capacidad.Text.Trim(), out _))
             {
                 showalert("La capacidad debe ser un número válido.");
                 return false;
@@ -196,24 +198,36 @@ namespace jycboliviaASP.net.Presentacion
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
-
+        /*---   CARGAR DATOS AL GV    ---*/
         protected void gv_registrosExtintores_row_DataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string proximaPruebaHidrostatica = DataBinder.Eval(e.Row.DataItem, "anioproximapruebahidrostatica").ToString();
-                string fechaProximaCarga = DataBinder.Eval(e.Row.DataItem, "fechaproximacarga").ToString();
-                string fechadecarga = DataBinder.Eval(e.Row.DataItem, "fechadecarga").ToString();
+                string fechaProximaCarga = ConvertidorFecha(DataBinder.Eval(e.Row.DataItem, "fechaproximacarga").ToString());
+                string fechadecarga = ConvertidorFecha(DataBinder.Eval(e.Row.DataItem, "fechadecarga").ToString());
                 string codSistema = DataBinder.Eval(e.Row.DataItem, "codSistema").ToString();
                 string capacidad = DataBinder.Eval(e.Row.DataItem, "capacidad").ToString();
                 string marca = DataBinder.Eval(e.Row.DataItem, "marca").ToString();
                 string agenteextintor = DataBinder.Eval(e.Row.DataItem, "agenteextintor").ToString();
                 string detalle = DataBinder.Eval(e.Row.DataItem, "detalle").ToString();
                 string estadoextintor = DataBinder.Eval(e.Row.DataItem, "estadoextintor").ToString();
-                string area = DataBinder.Eval(e.Row.DataItem, "area").ToString();
 
+                string estadoextintor2 = DataBinder.Eval(e.Row.DataItem, "estadoextintor").ToString();
+                DropDownList dd_eextintor2 = (DropDownList)e.Row.FindControl("dd_eextintor2");
+                if(dd_eextintor2 != null)
+                {
+                    dd_eextintor2.Text = estadoextintor2;
+                }
 
-                TextBox txt_pPruebaHidrostatica = (TextBox)e.Row.FindControl("txt_pPruebaHidrostatica");
+                string area2 = DataBinder.Eval(e.Row.DataItem, "area").ToString();
+                DropDownList dd_area2 = (DropDownList)e.Row.FindControl("dd_area2");
+                if(dd_area2 != null)
+                {
+                    dd_area2.Text = area2;
+                }
+
+                TextBox txt_pphidrostatica = (TextBox)e.Row.FindControl("txt_pphidrostatica");
                 TextBox txt_fechaproximacarga = (TextBox)e.Row.FindControl("txt_fproximacarga");
                 TextBox txt_fechadcarga = (TextBox)e.Row.FindControl("txt_fdcarga");
                 TextBox txt_codSistema = (TextBox)e.Row.FindControl("txt_codsistema");
@@ -222,11 +236,10 @@ namespace jycboliviaASP.net.Presentacion
                 TextBox txt_agenteextintor = (TextBox)e.Row.FindControl("txt_aextintor");
                 TextBox txt_detalle = (TextBox)e.Row.FindControl("txt_detalle");
                 TextBox txt_estadoextintor = (TextBox)e.Row.FindControl("txt_estadoextintor");
-                TextBox txt_area = (TextBox)e.Row.FindControl("txt_area");
 
-                if (txt_pPruebaHidrostatica != null)
+                if (txt_pphidrostatica != null)
                 {
-                    txt_pPruebaHidrostatica.Text = proximaPruebaHidrostatica;
+                    txt_pphidrostatica.Text = proximaPruebaHidrostatica;
                 }
                 if (txt_fechaproximacarga != null)
                 {
@@ -244,7 +257,7 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     txt_capacidad.Text = capacidad;
                 }
-                if (txt_marca!= null)
+                if (txt_marca != null)
                 {
                     txt_marca.Text = marca;
                 }
@@ -256,71 +269,208 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     txt_detalle.Text = detalle;
                 }
-                if(txt_estadoextintor != null)
+                if (txt_estadoextintor != null)
                 {
-                    txt_estadoextintor.Text = estadoextintor; 
+                    txt_estadoextintor.Text = estadoextintor;
                 }
-                if(txt_area != null)
-                {
-                    txt_area.Text = area;
-                }
+                
 
             }
-
-
-
-
         }
 
+
+        /*---   BOTON ACTUALIZAR   ---*/
         protected void btn_updateRegistro_Click(object sender, EventArgs e)
         {
-            List<int> codigosSeleccionados = new List<int>();
-            Dictionary<int, Dictionary<string, object>> parametrosPorCodigo = new Dictionary<int, Dictionary<string, object>>();
-
-            foreach(GridViewRow row in gv_registrosExtintores.Rows)
-            {
-                CheckBox chkselect = (CheckBox)row.FindControl("chkSelect");
-
-                if(chkselect != null && chkselect.Checked)
-                {
-                    int codigo = Convert.ToInt32(gv_registrosExtintores.DataKeys[row.RowIndex].Value);
-                    codigosSeleccionados.Add(codigo);
-
-                    Dictionary<string, object> parametros = new Dictionary<string, object>();
-
-                    parametros.Add("detalle", ((TextBox)row.FindControl("txt_detalle")).Text);
-                    parametros.Add("area", ((TextBox)row.FindControl("txt_area")).Text);
-                    parametros.Add("agenteextintor", ((TextBox)row.FindControl("txt_aextintor")).Text);
-                    parametros.Add("marca", ((TextBox)row.FindControl("txt_marca")).Text);
-                    parametros.Add("capacidad", ((TextBox)row.FindControl("txt_capacidad")).Text);
-                    parametros.Add("codSistema", ((TextBox)row.FindControl("txt_codsistema")).Text);
-                    parametros.Add("fechadecarga", ((TextBox)row.FindControl("txt_fdcarga")).Text);
-                    parametros.Add("fechaproximacarga", ((TextBox)row.FindControl("txt_fproximacarga")).Text);
-                    parametros.Add("estadoextintor", ((TextBox)row.FindControl("txt_estadoextintor")) );
-                    parametros.Add("anioproximapruebahidrostatica", ((TextBox)row.FindControl("txt_pPruebaHidrostatica")).Text);
-
-                    parametrosPorCodigo.Add(codigo, parametros);
-                }
-            }
             try
             {
-                NCorpal_Extintor negocio = new NCorpal_Extintor();
-                bool resultado = negocio.Actualizar_RegistrosSeleccionados(codigosSeleccionados, parametrosPorCodigo);
-                if (resultado)
+                List<int> codigosActualizados = new List<int>();
+                foreach(GridViewRow row in gv_registrosExtintores.Rows)
                 {
-                    showalert("Registro actualizado correctamente.");
+                    CheckBox chkSelect = row.FindControl("chkSelect") as CheckBox;
+                    if(chkSelect != null && chkSelect.Checked)
+                    {
+                        if (!ValidarDropDowns(row))
+                        {
+                            return;
+                        }
+                        int codigo = Convert.ToInt32(row.Cells[1].Text);
+                        ActualizarRegistros(row, codigo);
+                        codigosActualizados.Add(codigo);
+                    }
+                }
+                if(codigosActualizados.Count > 0)
+                {
+                    showalert($"Registros actualizados correctamente: {string.Join(", ", codigosActualizados)}");
+                    mostarRegistros("");
                 }
                 else
                 {
-                    showalert($"Hubo un error al actualizar los registros. {parametrosPorCodigo}");
+                    showalert("No se seleccionaron registros para actualizar.");
                 }
             }
             catch (Exception ex)
             {
-                string cod = string.Join(",", codigosSeleccionados);
-                showalert($"ERROR : {ex.Message}. cod: {cod}");
+                showalert($"Error inesperado: {ex.Message}");
             }
 
+            /*
+            try
+            {
+                foreach(GridViewRow row in gv_registrosExtintores.Rows)
+                {
+                    CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
+                    if(chkSelect != null && chkSelect.Checked)
+                    {
+                        int codigo = Convert.ToInt32(row.Cells[1].Text);
+
+                        TextBox txtDetalle = (TextBox)row.FindControl("txt_detalle");
+                        DropDownList ddarea = (DropDownList)row.FindControl("dd_area2");
+                        TextBox txtAExtintor = (TextBox)row.FindControl("txt_aextintor");
+                        TextBox txtMarca = (TextBox)row.FindControl("txt_marca");
+                        TextBox txtCapacidad = (TextBox)row.FindControl("txt_capacidad");
+                        TextBox txtcodSistema = (TextBox)row.FindControl("txt_codsistema");
+                        DropDownList ddEstadoextintor = (DropDownList)row.FindControl("dd_eextintor2");
+                        TextBox txtAnioPruebaH = (TextBox)row.FindControl("txt_pphidrostatica");
+                        TextBox txtFechadecarga = ((TextBox)row.FindControl("txt_fdcarga"));
+                        TextBox txtFechaproximadcarga = ((TextBox)row.FindControl("txt_fproximacarga"));
+
+                        NCorpal_Extintor negocio = new NCorpal_Extintor();
+
+                        ActualizarDatosRegistro(codigo, txtDetalle, ddarea, txtAExtintor, txtMarca, txtCapacidad, txtcodSistema, ddEstadoextintor, txtAnioPruebaH, txtFechadecarga, txtFechaproximadcarga);
+                        showalert($"Registro actualizado");
+                        mostarRegistros("");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error inesperado. {ex.Message}");
+            }
+            */
+        }
+
+        private void ActualizarDatosRegistro(int codigo, TextBox txtdetalle, DropDownList ddarea, TextBox txtaExtintor, TextBox txtmarca, 
+            TextBox txtcapacidad, TextBox txtcodsistema, DropDownList ddeextintor, TextBox txtanio, TextBox txtfechadecarga, TextBox txfechaproximadcarga)
+        {
+            try
+            {
+                string detalle = txtdetalle.Text;
+                string area = ddarea.Text;
+                
+                string aExtintor = txtaExtintor.Text;
+                string marca = txtmarca.Text;
+                string fechadecarga = ConvertidorFecha(txtfechadecarga.Text);
+                string fechaproximadcarga = ConvertidorFecha(txfechaproximadcarga.Text);
+
+                string capacidadTexto = txtcapacidad.Text.Replace('.', ',');
+                float capacidad = 0;
+                if(!float.TryParse(capacidadTexto, out capacidad))
+                {
+                    showalert("La capacidad no tiene el formato correcto.");
+                    return;
+                }
+
+                string codSistema = txtcodsistema.Text;
+                string estadoExtintor = ddeextintor.Text;
+
+                int ppanio = 0;
+                if(!int.TryParse(txtanio.Text, out ppanio))
+                {
+                    showalert("El año de prueba no tiene el formato correcto");
+                    return;
+                }
+
+                NCorpal_Extintor negocio = new NCorpal_Extintor();
+                bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, 
+                    estadoExtintor, ppanio, fechadecarga, fechaproximadcarga);
+
+                if (resultado)
+                {
+                    showalert("Campos correctos");
+                }
+                else
+                {
+                    // Muestra la consulta SQL que estás ejecutando
+                    
+                    showalert($"Error al actualizar los campos del codigo2 :codigo:{codigo} {detalle}, " +
+                        $"{area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}, {fechadecarga}");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al actualizar los datos2. {ex.Message}");
+            }
+        }
+
+        private bool ValidarDropDowns(GridViewRow row)
+        {
+            DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
+            DropDownList ddEstadoExtintor = row.FindControl("dd_eextintor2") as DropDownList;
+
+            if(ddArea != null && ddArea.SelectedIndex == 0)
+            {
+                showalert("Por favor, selecciona un área válida.");
+                return false;
+            }
+
+            if(ddEstadoExtintor != null && ddEstadoExtintor.SelectedIndex == 0)
+            {
+                showalert("Por favor, selecciona un estado extintor válido.");
+                return false;
+            }
+            return true;
+
+        }
+        private void ActualizarRegistros(GridViewRow row, int codigo)
+        {
+            try
+            {
+                TextBox txtDetalle = row.FindControl("txt_detalle") as TextBox;
+                DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
+                TextBox txtAExtintor = row.FindControl("txt_aextintor") as TextBox;
+                TextBox txtMarca = row.FindControl("txt_marca") as TextBox;
+                TextBox txtCapacidad = row.FindControl("txt_capacidad") as TextBox;
+                TextBox txtCodSistema = row.FindControl("txt_codsistema") as TextBox;
+                DropDownList ddEstadoExtintor = row.FindControl("dd_eextintor2") as DropDownList;
+                TextBox txtAnioPruebaH = row.FindControl("txt_pphidrostatica") as TextBox;
+                TextBox txtFechadecarga = row.FindControl("txt_fdcarga") as TextBox;
+                TextBox txtFechaproximadcarga = row.FindControl("txt_fproximacarga") as TextBox;
+
+                string detalle = txtDetalle?.Text ?? "";
+                string area = ddArea?.Text ?? "";
+                string aExtintor = txtAExtintor?.Text ?? "";
+                string marca = txtMarca?.Text ?? "";
+                string codSistema = txtCodSistema?.Text ?? "";
+                string estadoExtintor = ddEstadoExtintor?.Text ?? "";
+                string fechadecarga = ConvertidorFecha(txtFechadecarga?.Text);
+                string fechaproximadcarga = ConvertidorFecha(txtFechaproximadcarga?.Text);
+
+                if(!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
+                {
+                    showalert("La capacidad no tiene el formato correcto");
+                    return;
+                }
+
+                if(!int.TryParse(txtAnioPruebaH?.Text, out int ppanio))
+                {
+                    showalert("El año de prueba no tiene el formato correcto.");
+                    return;
+                }
+                NCorpal_Extintor negocio = new NCorpal_Extintor();
+                bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, estadoExtintor,
+                    ppanio, fechadecarga, fechaproximadcarga);
+
+                if (!resultado)
+                {
+                    showalert($"Error al actulizar el registro con código {codigo} ,{detalle}, {area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}," +
+                        $" {ppanio}, {fechadecarga}, {fechaproximadcarga}");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al actualizar el registro {codigo}: {ex.Message}");
+            }
         }
     }
 }

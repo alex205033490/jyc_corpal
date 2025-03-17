@@ -1,0 +1,75 @@
+﻿.container-registro {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+}
+
+.columna1, .columna2, .columna3 {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=text], input[type="number"], select {
+    padding: 3px;
+    margin-bottom: 7px;
+    width: 90%;
+    border-radius: 6px;
+    border: 1px solid #0000005c;
+}
+
+    input[type=text]:hover, input[type="number"]:hover, select:hover {
+        background-color: #00000038;
+    }
+
+    input[type=text]:focus, input[type="number"]:focus, select:focus {
+        background-color: #0034ff1c;
+        box-shadow: 2px 2px 10px black;
+    }
+
+.btn-success:hover {
+    box-shadow: 2px 2px 15px green;
+}
+
+.btn-danger:hover {
+    box-shadow: 2px 2px 15px red;
+}
+
+.container-listaRegistrosExtintores {
+    padding: 10px;
+    height: 350px;
+    width: 98%;
+}
+
+.gv_registrosExtintores {
+    overflow-y: auto;
+    overflow-x: auto;
+    font-size: 11px;
+}
+
+    .gv_registrosExtintores th {
+        background-color: orange;
+        padding: 6px;
+        border: 2px solid black;
+    }
+
+    .gv_registrosExtintores td {
+        background-color: white;
+        padding: 6px;
+    }
+
+.table-sticky th {
+    position: sticky !important;
+    top: -10px !important;
+    z-index: 100 !important;
+    border: 1px solid black;
+}
+
+.form-registro {
+    background-color: #ffa93e47;
+}
+
+.gv_registrosExtintores tr.highlighted td {
+    background-color: #ff870052 !important;
+    border: 2px solid white !important;
+}
