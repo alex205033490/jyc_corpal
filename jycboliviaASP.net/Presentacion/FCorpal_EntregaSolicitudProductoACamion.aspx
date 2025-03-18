@@ -146,7 +146,7 @@
 
                                 <div class="container_listRegistros table-responsive col-lg-11" data-clientid="<%= gv_listRegistros.ClientID %>">
                                     <asp:GridView ID="gv_listRegistros" runat="server" ShowHeader="true" EnableViewState="true" AutoGenerateColumns="false" 
-                                        CssClass="table table-striped sticky-table" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
+                                        CssClass="table table-striped sticky-table gv_listRegistrosSolicitudes" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
                                         
                                         <Columns>
                                             <asp:TemplateField>

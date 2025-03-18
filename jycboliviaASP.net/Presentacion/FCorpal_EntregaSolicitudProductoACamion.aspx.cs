@@ -79,12 +79,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }*/
 
-        private void showalert(string mensaje)
-        {
-            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
-        }
-
+        
         // BTN buscar registro
         protected void btn_buscarRegistro_Click(object sender, EventArgs e)
         {
@@ -324,5 +319,12 @@ namespace jycboliviaASP.net.Presentacion
             }
 
         }
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
     }
 }
