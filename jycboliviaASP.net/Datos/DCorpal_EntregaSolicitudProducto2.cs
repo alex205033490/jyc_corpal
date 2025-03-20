@@ -59,7 +59,14 @@ namespace jycboliviaASP.net.Datos
                 "WHERE sep.estadosolicitud = '" + estadoSolicitud + "' and sep.estado = true " +
                 "AND dsp.codvehiculo = "+codVehiculo+" AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
-            return conexion.consultaMySql(consulta);
+            List<MySqlParameter> parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@consultaStock", MySqlDbType.VarChar){Value = consultaStock},
+                new MySqlParameter("@estadoSolicitud", MySqlDbType.VarChar){ Value = estadoSolicitud},
+                new MySqlParameter("@codVehiculo", MySqlDbType.VarChar){Value = codVehiculo}
+
+            };
+            return conexion.consultaMySqlParametros(consulta, parametros);
         }
         /*
         internal DataSet get_detSolicitudProductos(int codigoSolicitud, int codProducto)
@@ -120,8 +127,10 @@ namespace jycboliviaASP.net.Datos
                         "tbcorpal_detalle_solicitudproducto.codproducto = " + codigoProducto + " ";
                     banderaResultado = conexion.ejecutarMySql(consulta);
                 }
-                    return banderaResultado;
+            
+            return banderaResultado;
         }
+
 
         //UPDATE ANULAR SOLICITUD
         internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int>codProducto)
@@ -152,6 +161,44 @@ namespace jycboliviaASP.net.Datos
                 }
             }
         }
+        internal bool update_RetirarSolicitud2(List<int> codSolicitud, List<int> codProducto)
+        {
+            string codSolicitudStr = string.Join(",", codSolicitud);
+            string codProductoStr = string.Join(",", codProducto);
+
+            if(string.IsNullOrEmpty(codSolicitudStr) || string.IsNullOrEmpty(codProductoStr))
+            {
+                throw new ArgumentException("Las listas de códigos no deben estar vacias.");
+            }
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto dsp " +
+                "set dsp.codvehiculo = null, dsp.fechaasignacion_car = null, " +
+                "dsp.horaasignacion_car = null, dsp.coduserasignacion_car = null " +
+                "where dsp.codsolicitud in (" + codSolicitudStr + ") " +
+                "and dsp.codProducto in (" + codProductoStr + ") ;";
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                try
+                {
+                    comand.Parameters.AddWithValue("@codSolicitudStr", codSolicitud);
+                    comand.Parameters.AddWithValue("@codProductoStr", codProducto);
+                    return conexion.ejecutarMySql2(comand);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+
+
 
         internal bool update_CierreAutSolicitudProd(int codSolicitud, int codUserEntrego)
         {
