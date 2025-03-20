@@ -32,11 +32,11 @@
 {
     border: double #666666;  
     width: 810px;   
-    }    
-    
- .Gcotizacion
- {
-     border: double #666666;             
-     height: 150px;     
-     overflow: auto;
-     }
+    }
+
+.Gcotizacion {
+    border: double #666666;
+    width: auto;
+    height: 150px;
+    overflow: auto;
+}

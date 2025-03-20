@@ -105,6 +105,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_registrar;
 
         /// <summary>
+        /// Control bt_verRecibo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_verRecibo;
+
+        /// <summary>
         /// Control updatePanelDDdetCar.
         /// </summary>
         /// <remarks>

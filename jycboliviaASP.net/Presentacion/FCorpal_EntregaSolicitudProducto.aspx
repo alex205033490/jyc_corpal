@@ -12,7 +12,6 @@
     <script>
         $(document).ready(function () {
             var table = $(".sticky-table");
-
             if (table.find("thead").length === 0) {
                 table.prepend("<thead>" + table.find("tr:first").html() + "</thead>");
                 table.find("tr:first").remove();

@@ -6,7 +6,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="../Presentacion/index.aspx">
+        <a class="nav-link " href="../Presentacion/FA_Dashboard.aspx">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -54,11 +54,11 @@
           </a>
           <ul id="producto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>                                             
+                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Asignación de Productos a Camión</span></a></li>
                 <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><i class="bi bi-circle"></i><span>Entrega Solicitud Productos</span></a></li>                                                         
                 <li role="separator" class="divider"></li>            
                 <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Consulta Productos</span></a></li>                                                         
-                <li role="separator" class="divider"></li>                                
-                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Entrega Solicitud de Productos a Camión</span></a></li>
+                <li role="separator" class="divider"></li>                                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
           </ul>
@@ -75,7 +75,7 @@
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
-                          
+             
             <li role="separator" class="divider"></li>                                
           </ul>
         </li><!-- End Tables Nav -->
@@ -115,9 +115,16 @@
             </a>
             <ul id="extintores-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li><a href="../Presentacion/FCorpal_GestionExtintores.aspx" id="mn_GestionExtintores" runat="server"><i class="bi bi-circle"></i><span>Gestión de Extintores</span></a></li>
-
             </ul>
+        </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#consultaG-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Consultas Generales</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="consultaG-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a href="../Presentacion/FACorpal_ConsultaGrafica.aspx" id="mn_ConsultaGraficaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Grafica</span></a></li>
+            </ul>
         </li>
 
 
@@ -161,7 +168,7 @@
         </ul>
         </li>
 
-
+<!--
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#productosapi-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>Productos Upon</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -171,7 +178,7 @@
         </ul>
         </li>
 
-      <li class="nav-item">
+        <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#inventario-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Inventario Upon</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -192,7 +199,6 @@
           </ul>
           </li>
 
-
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APIpedidoVent-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Pedido/Venta Upon</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -203,7 +209,6 @@
           </ul>
           </li>
 
-
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICuentas-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Cuentas Upon</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -212,7 +217,6 @@
           <li><a href="../Presentacion/FCorpal_APICuentasCobranza.aspx" id="A3" runat="server" ><i class="bi bi-circle"></i><span>Cuentas/Cobranza Upon</span></a></li>
           </ul>
           </li>
-
 
         <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#APICompras-nav" data-bs-toggle="collapse" href="#">
@@ -224,8 +228,7 @@
             
           </li>
         
-
-        
+          -->    
 
     </ul>
 

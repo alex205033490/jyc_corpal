@@ -2,6 +2,7 @@
 using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net.Http;
@@ -19,7 +20,32 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Title = Session["BaseDatos"].ToString();
+            if (tienePermisoDeIngreso(142) == false)
+            {
+                string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+            }
+            if (!IsPostBack)
+            {
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+            }
+                       
+            
+        }
 
+        private bool tienePermisoDeIngreso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            NA_DetallePermiso npermiso = new NA_DetallePermiso();
+            return npermiso.tienePermisoResponsable(permiso, codUser);
         }
 
         //------------------------      POST CLIENTES/PERSONAS      ----------------------//

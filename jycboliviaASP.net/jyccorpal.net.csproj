@@ -484,6 +484,8 @@
     <Content Include="NegocioPlantilla\forms\Readme.txt" />
     <Content Include="NegocioPlantilla\Header_planillanew.ascx" />
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
+    <Content Include="Presentacion\FACorpal_ConsultaGrafica.aspx" />
+    <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_AgregarInsumoCreado.aspx" />
@@ -780,6 +782,7 @@
     <Compile Include="Datos\Datos old\DA_Zona.cs" />
     <Compile Include="Datos\Datos old\DCargaCuadroXXXa.cs" />
     <Compile Include="Datos\Datos old\DCargaFechaExpedicion.cs" />
+    <Compile Include="Datos\DCorpal_Objetivos.cs" />
     <Compile Include="Datos\DCorpal_EntregaSolicitudProducto2.cs" />
     <Compile Include="Datos\DCorpal_Extintor.cs" />
     <Compile Include="Datos\DCorpal_Produccion.cs" />
@@ -885,7 +888,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datos\DCorpal_PedidoMaterialeInsumos.cs" />
-    <Compile Include="Negocio\DCorpal_RutaEntrega.cs" />
+    <Compile Include="Datos\DCorpal_RutaEntrega.cs" />
     <Compile Include="Negocio\NA_ActivosJyC.cs" />
     <Compile Include="Negocio\NA_APIAlmacen.cs" />
     <Compile Include="Negocio\NA_APIclientes.cs" />
@@ -906,6 +909,7 @@
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
     <Compile Include="Negocio\NCorpal_Clientes.cs" />
+    <Compile Include="Negocio\NCorpal_Objetivos.cs" />
     <Compile Include="Negocio\NCorpal_EntregaSolicitudProducto2.cs" />
     <Compile Include="Negocio\NCorpal_Extintor.cs" />
     <Compile Include="Negocio\NCorpal_PedidoMaterialeInsumos.cs" />
@@ -994,6 +998,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_R-144.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGrafica.aspx.cs">
+      <DependentUpon>FACorpal_ConsultaGrafica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGrafica.aspx.designer.cs">
+      <DependentUpon>FACorpal_ConsultaGrafica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FA_Dashboard.aspx.cs">
+      <DependentUpon>FA_Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FA_Dashboard.aspx.designer.cs">
+      <DependentUpon>FA_Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.cs">
       <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
@@ -2022,14 +2040,18 @@
     <Content Include="Site1.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Negocio\no sirve\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\Receta\SubReport_detalleInsumoCreado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Detalle_objetivoProduccion_Vs_EntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboEntregaProductosCamion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ReciboAsignacionProductosCamion.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />

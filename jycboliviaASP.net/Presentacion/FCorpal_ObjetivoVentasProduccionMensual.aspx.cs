@@ -51,6 +51,9 @@ namespace jycboliviaASP.net.Presentacion
             dd_productosNax.AppendDataBoundItems = true;
             dd_productosNax.SelectedIndex = 1;
             dd_productosNax.DataBind();
+                        
+            string medida = tuplas.Tables[0].Rows[0][2].ToString();
+            tx_medida.Text = medida;
         }
 
         private bool tienePermisoDeIngreso(int permiso)

@@ -66,7 +66,8 @@ namespace jycboliviaASP.net.Datos
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
                                 " ds.codvehiculo is null and" +
-                                " pp.nroboleta like '%" + NroSolicitud + "%'";
+                                " pp.nroboleta like '%" + NroSolicitud + "%'"+
+                                " order by pp.codigo desc";
 
             if (!string.IsNullOrEmpty(solicitud))
             {
@@ -198,6 +199,23 @@ namespace jycboliviaASP.net.Datos
                 return conexion.ejecutarMySql2(comand);
             }
         }
-        
+
+        internal DataSet get_AsignacionProductoaCamion(int codigoCamion)
+        {
+            string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', "+
+                           " v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, "+
+                           " date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, "+
+                           " dsp.cant as 'cantSolicitada' "+
+                           " from tbcorpal_solicitudentregaproducto sep "+
+                           " left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud "+
+                           " left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo "+
+                           " left join tbcorpal_producto p ON dsp.codproducto = p.codigo "+
+                           " WHERE "+
+                           " dsp.fechaasignacion_car = current_date() and "+
+                           " sep.estadosolicitud = 'Abierto' and sep.estado = true "+
+                           " AND dsp.codvehiculo = "+codigoCamion+" AND dsp.cantentregada is null "+
+                           " order by v.marca, v.modelo asc";
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

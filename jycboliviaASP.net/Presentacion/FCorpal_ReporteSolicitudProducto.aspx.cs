@@ -48,6 +48,7 @@ namespace jycboliviaASP.net.Presentacion
             string fechasolicitud = datoResult.Tables[0].Rows[0][2].ToString();
             string horasolicitud = datoResult.Tables[0].Rows[0][3].ToString();
             string nombresolicitante = datoResult.Tables[0].Rows[0][4].ToString();
+            string cliente = datoResult.Tables[0].Rows[0][6].ToString();
 
 
             DataSet tuplasFilas = nie.get_productosSolicitudProducto(codigoSolicitudProducto);
@@ -57,6 +58,7 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechasolicitud);
             ReportParameter p_nombresolicitante = new ReportParameter("p_nombresolicitante", nombresolicitante);
             ReportParameter p_horasolicitud = new ReportParameter("p_horasolicitud", horasolicitud);
+            ReportParameter p_cliente = new ReportParameter("p_cliente", cliente);
             ReportDataSource DS_ProductosAlmacen = new ReportDataSource("DS_ProductosAlmacen", DSProductosAlmacen);
 
             string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_SolicitudProducto"];
@@ -69,7 +71,8 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.SetParameters(p_nrocomprobante);
             ReportViewer1.LocalReport.SetParameters(p_fechasolicitud);
             ReportViewer1.LocalReport.SetParameters(p_horasolicitud);
-            ReportViewer1.LocalReport.SetParameters(p_nombresolicitante);            
+            ReportViewer1.LocalReport.SetParameters(p_nombresolicitante);
+            ReportViewer1.LocalReport.SetParameters(p_cliente);
             ReportViewer1.LocalReport.DataSources.Add(DS_ProductosAlmacen);
 
             ReportViewer1.LocalReport.Refresh();

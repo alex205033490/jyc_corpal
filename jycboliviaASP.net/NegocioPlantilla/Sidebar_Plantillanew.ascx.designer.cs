@@ -96,6 +96,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudproductos;
 
         /// <summary>
+        /// Control mn_entregaSolicitudProductoACamion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_entregaSolicitudProductoACamion;
+
+        /// <summary>
         /// Control mn_entregaSolicitudProducto.
         /// </summary>
         /// <remarks>
@@ -112,15 +121,6 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_detallesolicitudproductos;
-
-        /// <summary>
-        /// Control mn_entregaSolicitudProductoACamion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_entregaSolicitudProductoACamion;
 
         /// <summary>
         /// Control mn_devolucionProductoTerminado.
@@ -292,6 +292,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_GestionExtintores;
+
+        /// <summary>
+        /// Control mn_ConsultaGraficaProduccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaGraficaProduccion;
 
         /// <summary>
         /// Control mn_agenda.

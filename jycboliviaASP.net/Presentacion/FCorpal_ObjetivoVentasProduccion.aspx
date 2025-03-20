@@ -60,46 +60,43 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-<div class="container" style="padding-top: 1em;">
-
-
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-success class">
-            <div class="panel-heading">
-            <h3 class="panel-title">Objetivo Ventas Produccion:</h3>
-            </div>
-            <div class="panel-body">
-            
-       <table>   
-       <tr>
+    <div class="card" >
+      <div class="card-header  bg-warning text-black">
+        Objetivo Ventas Produccion:
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="row">
+                <div class ="col-12">
+                        <table>   
+   <tr>
+    <td>
+        <asp:Label ID="Label36" runat="server" Text="Fecha Limite :"></asp:Label>
+       </td>
+    <td>
+        <asp:TextBox ID="tx_fechalimite" class="form-control" runat="server" 
+            Width="150px" ></asp:TextBox>
+        <asp:CalendarExtender ID="tx_fechalimite_CalendarExtender" runat="server" 
+            TargetControlID="tx_fechalimite">
+        </asp:CalendarExtender>
+       </td>
+    <td><asp:Button ID="bt_buscar" class="btn btn-success" runat="server"   
+                onclick="bt_buscar_Click" Text="Buscar" /></td>
+   </tr>  
+      
+    <tr>
         <td>
-            <asp:Label ID="Label36" runat="server" Text="Fecha Limite :"></asp:Label>
-           </td>
+            <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
+        </td>
         <td>
-            <asp:TextBox ID="tx_fechalimite" class="form-control" runat="server" 
-                Width="150px" ></asp:TextBox>
-            <asp:CalendarExtender ID="tx_fechalimite_CalendarExtender" runat="server" 
-                TargetControlID="tx_fechalimite">
-            </asp:CalendarExtender>
-           </td>
-        <td><asp:Button ID="bt_buscar" class="btn btn-success" runat="server"   
-                    onclick="bt_buscar_Click" Text="Buscar" /></td>
-       </tr>  
-          
-        <tr>
-            <td>
-                <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
-            </td>
-            <td>
-                <asp:DropDownList ID="dd_productosNax" class="form-control" runat="server" 
-                    Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
-                </asp:DropDownList>
-            </td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+            <asp:DropDownList ID="dd_productosNax" class="btn btn-secondary dropdown-toggle" runat="server" 
+                Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
+            </asp:DropDownList>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
     <table>
         <tr>
             <td>
@@ -112,16 +109,14 @@
             <td>
                 <asp:Label ID="Label32" runat="server" Text="Medida:"></asp:Label>
             </td>
-            
+        
             <td>
-                <asp:TextBox ID="tx_medida" class="form-control" runat="server" 
-                    Width="150px"></asp:TextBox>
+                <asp:TextBox ID="tx_medida" class="form-control" runat="server"
+                    Width="150px" Enabled="False"></asp:TextBox>
             </td>            
         </tr>
-        
-    </table>
-   
     
+    </table>
     <table>
         <tr>
             <td>
@@ -157,55 +152,52 @@
 
             <td>
                 &nbsp;</td>
-            
+        
         </tr>
     </table>
-
+                </div>
             </div>
-        </div>
-     </div>
-</div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-12">
+                     <div class="DatosProyecto">
+     <asp:GridView ID="gv_objetivoProduccion" 
+          runat="server" BackColor="White" 
+         BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
+         Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
+         onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">
+         <AlternatingRowStyle BackColor="#CCCCCC" />
+         <Columns>
+             <asp:CommandField ShowSelectButton="True" />
+         </Columns>
+         <FooterStyle BackColor="#CCCCCC" />
+         <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+         <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+         <SelectedRowStyle BackColor="#669900" Font-Bold="True" ForeColor="White" />
+         <SortedAscendingCellStyle BackColor="#F1F1F1" />
+         <SortedAscendingHeaderStyle BackColor="#808080" />
+         <SortedDescendingCellStyle BackColor="#CAC9C9" />
+         <SortedDescendingHeaderStyle BackColor="#383838" />
+     </asp:GridView>
+ </div>
 
-
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-success class">
-            <div class="panel-heading">
-            <h3 class="panel-title">Datos:</h3>
+                </div>
             </div>
-            <div class="panel-body">
-            <div class="DatosProyecto">
-                
-
-                <asp:GridView ID="gv_objetivoProduccion" 
-                     runat="server" BackColor="White" 
-                    BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-                    Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
-                    onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">
-                    <AlternatingRowStyle BackColor="#CCCCCC" />
-                    <Columns>
-                        <asp:CommandField ShowSelectButton="True" />
-                    </Columns>
-                    <FooterStyle BackColor="#CCCCCC" />
-                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                    <SelectedRowStyle BackColor="#669900" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                    <SortedAscendingHeaderStyle BackColor="#808080" />
-                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#383838" />
-                </asp:GridView>
-                
-
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-12">
+                    <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server"  Text="Excel" onclick="bt_excel_Click" />
+                </div>
             </div>
-            <asp:Button ID="bt_excel" class="btn btn-success mr-2" runat="server" 
-                    Text="Excel" onclick="bt_excel_Click" />
-            </div>
-        </div>
+        </li>
+      </ul>
     </div>
-</div>
 
 
-</div>
+
+
+
 
 </asp:Content>

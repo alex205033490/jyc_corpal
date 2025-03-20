@@ -102,6 +102,25 @@ namespace jycboliviaASP.net.Presentacion
         /*private void seleccionarDatos()
         {
             if(gv_solicitudesProductos.SelectedIndex > -1){
+                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
+                string nroboleta = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[3].Text);
+                string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
+                string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
+                string personaSolicitud = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
+
+                dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
+
+                string detalleCierre = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[11].Text);
+                if (!string.IsNullOrEmpty(detalleCierre) && !detalleCierre.Equals("&nbsp;"))
+                {
+                    dd_motivoCierre.SelectedValue = detalleCierre;
+                }
+                else
+                    dd_motivoCierre.SelectedIndex = 0;
+
+
+                tx_nrosolicitud.Text = nroboleta;
+                tx_SolicitanteProducto.Text = personaSolicitud;
                 int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[5].Text);
                 int codigoProducto = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
                 string nroboleta = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
@@ -111,8 +130,7 @@ namespace jycboliviaASP.net.Presentacion
                 tx_SolicitanteProducto.Text = HttpUtility.HtmlDecode(personaSolicitud);
                 
                 dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[12].Text;
-
-               
+                
                 tx_fechaEngrega.Text = fechaentrega;
                 tx_horaentrega.Text = horaentrega;
 
@@ -331,7 +349,13 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
-            //verReciboSeleccionado();
+            if (dd_listVehiculo.SelectedIndex >= 0) {
+                int codigo = int.Parse(dd_listVehiculo.SelectedValue);
+                Session["codigoCamion"] = codigo;
+                Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+            }
+            
         }
 
         private void verReciboSeleccionado()
@@ -381,6 +405,13 @@ namespace jycboliviaASP.net.Presentacion
                         }
                     }
                 }
+
+
+                int codigo; 
+                int.TryParse(dd_listVehiculo.SelectedValue, out codigo);
+                Session["codigoCamion"] = codigo;                
+                Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
             }
             catch (Exception ex)
             {

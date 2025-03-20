@@ -46,11 +46,12 @@ namespace jycboliviaASP.net.Presentacion
 
             string ciudad = Session["BaseDatos"].ToString();
             //string nroboleta = datoResult.Tables[0].Rows[0][0].ToString();
-            string nrodocumento = datoResult.Tables[0].Rows[0][1].ToString();
+            string nrodocumento = HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][1].ToString());
             string fechasolicitud = datoResult.Tables[0].Rows[0][2].ToString();
             string horasolicitud = datoResult.Tables[0].Rows[0][3].ToString();
-            string nombresolicitante = datoResult.Tables[0].Rows[0][4].ToString();
-            string entrego = datoResult.Tables[0].Rows[0][5].ToString();
+            string nombresolicitante = HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][4].ToString());
+            string entrego = HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][5].ToString());
+            string Cliente = HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][6].ToString());
 
             DataSet tuplasFilas = nie.get_productosEngregaSolicitudProducto(codigoEntregaSolicitudProducto);
             DataTable DSProductosAlmacen = tuplasFilas.Tables[0];
@@ -59,7 +60,8 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechasolicitud);
             ReportParameter p_nombresolicitante = new ReportParameter("p_nombresolicitante", nombresolicitante);
             ReportParameter p_horasolicitud = new ReportParameter("p_horasolicitud", horasolicitud);
-            ReportParameter p_entrego = new ReportParameter("p_entrego", entrego);            
+            ReportParameter p_entrego = new ReportParameter("p_entrego", entrego);
+            ReportParameter p_cliente = new ReportParameter("p_cliente", Cliente);
             ReportDataSource DS_ProductosAlmacen = new ReportDataSource("DS_ProductosAlmacen", DSProductosAlmacen);
                                     
             //ReportParameter p_edificio = new ReportParameter("p_edificio", HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][3].ToString()));
@@ -101,6 +103,7 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.SetParameters(p_horasolicitud);
             ReportViewer1.LocalReport.SetParameters(p_nombresolicitante);
             ReportViewer1.LocalReport.SetParameters(p_entrego);
+            ReportViewer1.LocalReport.SetParameters(p_cliente);
             ReportViewer1.LocalReport.DataSources.Add(DS_ProductosAlmacen);
 
             ReportViewer1.LocalReport.Refresh();

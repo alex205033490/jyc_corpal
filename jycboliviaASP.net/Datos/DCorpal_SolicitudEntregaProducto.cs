@@ -90,7 +90,8 @@ namespace jycboliviaASP.net.Datos
                                 " where " +
                                 " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
                                 " pp.estado = true and " +
-                                " pp.nroboleta like '%" + nroSolicitud + "%' ";
+                                " pp.nroboleta like '%" + nroSolicitud + "%' "+
+                                " order by pp.codigo desc";
             if(!string.IsNullOrEmpty(solicitante)){
             consulta = consulta + " and pp.personalsolicitud like '%"+solicitante+"%'";
             }
@@ -214,8 +215,10 @@ namespace jycboliviaASP.net.Datos
                                 " pp.codigo, pp.nroboleta, "+
                                 " date_format(pp.fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', pp.horaentrega, "+
                                 " pp.personalsolicitud, pp.personalentregoproducto "+
-                                " from  tbcorpal_solicitudentregaproducto pp "+
-                                " where "+
+                                " , cc.tiendaname as 'Cliente' "+
+                                " from tbcorpal_solicitudentregaproducto pp "+
+                                " left join tbcorpal_cliente cc on pp.codcliente = cc.codigo "+   
+                                " where " +
                                 " pp.codigo = "+codigoEntregaSolicitudProducto;
             return conexion.consultaMySql(consulta);
         }
@@ -228,7 +231,8 @@ namespace jycboliviaASP.net.Datos
                                 " pp.producto, pp.medida , "+
                                 " dse.cantentregada as 'cantidad', "+
                                 " dse.tiposolicitud "+
-                                " from tbcorpal_solicitudentregaproducto se , "+
+                                " , pp. codupon "+
+                                " from tbcorpal_solicitudentregaproducto se , " +
                                 " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp "+
                                 " where "+
                                 " se.codigo = dse.codsolicitud and "+
@@ -242,7 +246,7 @@ namespace jycboliviaASP.net.Datos
             string consulta = "select " +
                                 " pp.producto, dse.medida , " +
                                 " dse.cant as 'cantidad', " +
-                                " dse.tiposolicitud " +
+                                " dse.tiposolicitud, pp.codupon " +
                                 " from tbcorpal_solicitudentregaproducto se , " +
                                 " tbcorpal_detalle_solicitudproducto dse, tbcorpal_producto pp " +
                                 " where " +

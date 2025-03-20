@@ -465,7 +465,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             string tienda = tx_cliente.Text;
             NCorpal_Cliente ncli = new NCorpal_Cliente();
-            DataSet tuplaCliente = ncli.get_ClienteNombre(tienda);
+            DataSet tuplaCliente = ncli.get_ClienteNombreEspecifico(tienda);
             if (tuplaCliente.Tables[0].Rows.Count>0) {
                 tx_propietario.Text = tuplaCliente.Tables[0].Rows[0][6].ToString(); 
                 tx_razonSocial.Text = tuplaCliente.Tables[0].Rows[0][12].ToString();
