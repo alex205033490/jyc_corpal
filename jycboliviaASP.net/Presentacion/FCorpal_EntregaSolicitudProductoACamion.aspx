@@ -146,7 +146,7 @@
 
                                 <div class="container_listRegistros table-responsive col-lg-11" data-clientid="<%= gv_listRegistros.ClientID %>">
                                     <asp:GridView ID="gv_listRegistros" runat="server" ShowHeader="true" EnableViewState="true" AutoGenerateColumns="false" 
-                                        CssClass="table table-striped sticky-table gv_listRegistrosSolicitudes" OnSelectedIndexChanged="gv_listRegistros_SelectedIndexChanged">
+                                        CssClass="table table-striped sticky-table gv_listRegistrosSolicitudes">
                                         
                                         <Columns>
                                             <asp:TemplateField>
@@ -154,13 +154,13 @@
                                                     <asp:CheckBox ID="chkSelect" runat="server" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:BoundField DataField="codRegistro" HeaderText="Codigo Registro" />
+                                            <asp:BoundField DataField="codRegistro" HeaderText="Código Registro" />
                                             <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
                                             <asp:BoundField DataField="FechaGra" HeaderText="Fecha Gra" />
                                             <asp:BoundField DataField="horaGRA" HeaderText="Hora Gra" />
                                             <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
                                             <asp:BoundField DataField="estadosolicitud" HeaderText="Estado" HtmlEncode="false" />
-                                            <asp:BoundField DataField="codProducto" HeaderText="Codigo Producto" HtmlEncode="false" />
+                                            <asp:BoundField DataField="codProducto" HeaderText="Código Producto" HtmlEncode="false" />
                                             <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
                                             <asp:BoundField DataField="cant" HeaderText="Cantidad" />
                                             <asp:BoundField DataField="cantEntregada" HeaderText="Cantidad Entregada" />
