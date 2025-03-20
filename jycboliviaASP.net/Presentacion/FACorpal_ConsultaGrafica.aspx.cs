@@ -17,7 +17,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
 
-            if (tienePermisoDeIngreso(132) == false)
+            if (tienePermisoDeIngreso(145) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
@@ -65,7 +65,7 @@ namespace jycboliviaASP.net.Presentacion
             string baseDatos = Session["BaseDatos"].ToString();
             if (baseDatos.Equals("Santa Cruz"))
             {
-                //dvFrame.InnerHtml = "<iframe width='1140' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiMTc5YzcxNTItMWVjOS00NzgxLThmYjYtNjNmNDJlOWQxYTc3IiwidCI6ImE1ZDk5ZmJjLTE5YmYtNDNkMi05Y2FiLWVhNDM0YzZkYjYwZiJ9&pageName=ReportSection' frameborder='0' allowFullScreen='true'></iframe>";                
+                //dvFrame.InnerHtml = "<iframe width='1140' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiMTc5YzcxNTItMWVjOS00NzgxLThmYjYtNjNmNDJlOWQxYTc3IiwidCI6ImE1ZDk5ZmJjLTE5YmYtNDNkMi05Y2FiLWVhNDM0YzZkYjYwZiJ9&pageName=ReportSection' frameborder='0' allowFullScreen='true'></iframe>";                            
                 dvFrame.InnerHtml = "<iframe width='1140' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiNTQ3NmFmYjUtZDc2Yy00MDkxLWFlY2QtMWYzNWIzYzJjYWZhIiwidCI6IjQ1Yjc0YjExLTg2ZWQtNDQ0My05MTY2LTNhZGJmMGFhMmIxNSJ9' frameborder='0' allowFullScreen='true'></iframe>";
                 //dvFrame.InnerHtml =  "<iframe src='https://www.google.com/maps/d/embed?mid=1WBzjIpbENEwzPWxhWoNQUR5HieI&hl=es-419&ehbc=2E312F' width='640' height='480'></iframe> ";
 
@@ -187,51 +187,10 @@ namespace jycboliviaASP.net.Presentacion
             if (baseDatos.Equals("Corpal"))
             {
                 //dvFrame.InnerHtml = "<iframe width='1140' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiMTQwNjg5YmQtNjgzZC00Yzc5LTg0ZGMtZWYzMTc5MTUyNDYwIiwidCI6ImE1ZDk5ZmJjLTE5YmYtNDNkMi05Y2FiLWVhNDM0YzZkYjYwZiJ9' frameborder='0' allowFullScreen='true'></iframe>";                
-                dvFrame.InnerHtml = "<iframe title='PorcentajesObjetivoVSVentas' width='1024' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiZjlhZGQzNDAtZDNhZS00OTc4LTlhMTEtOTFkODBmOGE3M2UwIiwidCI6IjQ1Yjc0YjExLTg2ZWQtNDQ0My05MTY2LTNhZGJmMGFhMmIxNSJ9' frameborder='0' allowFullScreen='true'></iframe>";
+                
+                dvFrame.InnerHtml = "<iframe title='PorcentajesObjetivoVSVentas' width='1024' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiMzBhODI1ZGYtMTdjNS00MWI3LWI2YTAtYTViMGMyM2UwZjIzIiwidCI6IjQ1Yjc0YjExLTg2ZWQtNDQ0My05MTY2LTNhZGJmMGFhMmIxNSJ9' frameborder='0' allowFullScreen='true'></iframe>";
             }
-            /*  else
-                  if (baseDatos.Equals("Cochabamba"))
-              {
-                  dvFrame.InnerHtml = "<iframe title='Horas Trabajadas Tipo Boletas Cbba' width='1024' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiNDliZDgzMjUtMzZlZS00MTFlLWE3ZTctNjhjODJiMGZjMWIwIiwidCI6IjQ1Yjc0YjExLTg2ZWQtNDQ0My05MTY2LTNhZGJmMGFhMmIxNSJ9' frameborder='0' allowFullScreen='true'></iframe>";
-
-              }
-              else
-                      if (baseDatos.Equals("La Paz"))
-              {
-
-                  dvFrame.InnerHtml = "<iframe title='Horas Trabajadas Tipo Boletas Lpz' width='1024' height='612' src='https://app.powerbi.com/view?r=eyJrIjoiZDBiMGFkMWEtMzg3YS00NDY1LTgzNjktOTMxZjM4YjkwMTcwIiwidCI6IjQ1Yjc0YjExLTg2ZWQtNDQ0My05MTY2LTNhZGJmMGFhMmIxNSJ9' frameborder='0' allowFullScreen='true'></iframe>";
-
-              }
-              else
-                          if (baseDatos.Equals("Sucre"))
-              {
-
-
-              }
-              else
-                              if (baseDatos.Equals("Asuncion-Nuevo"))
-              {
-
-
-              }
-              else
-                                  if (baseDatos.Equals("Potosi"))
-              {
-
-
-              }
-              else
-                                      if (baseDatos.Equals("Tarija"))
-              {
-
-
-              }
-              else
-                                          if (baseDatos.Equals("Oruro"))
-              {
-
-
-              }*/
+            
         }
 
         private void consultaHorasExtrasTrabajadas()

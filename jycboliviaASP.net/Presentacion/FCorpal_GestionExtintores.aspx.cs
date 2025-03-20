@@ -1,6 +1,7 @@
 ﻿using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.EntitySql;
@@ -16,12 +17,34 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            this.Title = Session["BaseDatos"].ToString();
+
+              if (tienePermisoDeIngreso(25) == false)
+              {
+                  string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                  Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+              } 
+              
+
             if (!IsPostBack)
             {
                 mostarRegistros("");
             }
 
         }
+
+        private bool tienePermisoDeIngreso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            NA_DetallePermiso npermiso = new NA_DetallePermiso();
+            return npermiso.tienePermisoResponsable(permiso, codUser);
+        }
+
         /* -----    BTN GUARDAR     -----*/
         protected void btn_guardarForm_Click(object sender, EventArgs e)
         {

@@ -71,6 +71,8 @@ namespace jycboliviaASP.net.NegocioPlantilla
 
             mn_apiclientes.Visible = false;
             mn_entregaSolicitudProductoACamion.Visible = false;
+            mn_GestionExtintores.Visible = false;
+            mn_ConsultaGraficaProduccion.Visible = false;
         }
 
 
@@ -210,6 +212,12 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 break;
                             case 143:
                                 mn_entregaSolicitudProductoACamion.Visible = true;
+                                break;
+                            case 144:
+                                mn_GestionExtintores.Visible = true;
+                                break;
+                            case 145:
+                                mn_ConsultaGraficaProduccion.Visible = true;
                                 break;
                             default:
                                 Console.WriteLine("Default case");
