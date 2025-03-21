@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("No se seleccionaron pedidos.");
                 return;
             }
-            string token = await ObtenerTokenAsync("adm", "123");
+            string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
             if (string.IsNullOrEmpty(token))
             {

@@ -36,7 +36,7 @@ namespace jycboliviaASP.net.Negocio
             };
 
             string json = JsonConvert.SerializeObject(datoP);            
-            dynamic respuesta = api.Post("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", json);
+            dynamic respuesta = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
             string codVendedor = respuesta.Resultado.CodigoVendedor.ToString();
             string login = respuesta.Resultado.UserName.ToString();
            // MessageBox.Show(codVendedor + " " + login);
@@ -58,10 +58,10 @@ namespace jycboliviaASP.net.Negocio
                 Password = pass
             };
             string json = JsonConvert.SerializeObject(datoP);
-            dynamic DatosResponsable = api.Post("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", json);
+            dynamic DatosResponsable = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
             string Token = DatosResponsable.Resultado.Token.ToString();
 
-            dynamic resultProducto = api.Get_2("http://192.168.11.63/ServcioUponApi/api/v1/productos/buscar//" + usuario + "//" + producto, Token);
+            dynamic resultProducto = api.Get_2("http://192.168.11.62/ServcioUponApi/api/v1/productos/buscar//" + usuario + "//" + producto, Token);
             return resultProducto.Resultado[0].Nombre.ToString();
            // return resultProducto.ToString();
 
@@ -82,12 +82,12 @@ namespace jycboliviaASP.net.Negocio
                 Password = pass
             };
             string json = JsonConvert.SerializeObject(datoP);
-            dynamic DatosResponsable = api.Post("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", json);
+            dynamic DatosResponsable = api.Post("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", json);
             string Token = DatosResponsable.Resultado.Token.ToString();
 
             string url = string.IsNullOrWhiteSpace(criterio)
-                ? "http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos"
-                : $"http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos?criterio={criterio}";
+                ? "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos"
+                : $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos?criterio={criterio}";
             dynamic resultProducto = api.Get_2(url, Token);
             // Convertir el resultado a una instancia de ApiResponse
             ApiResponse apiResponse = JsonConvert.DeserializeObject<ApiResponse>(resultProducto.ToString());
@@ -125,7 +125,7 @@ namespace jycboliviaASP.net.Negocio
             var json = JsonConvert.SerializeObject(loginData); 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+            var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync();
@@ -142,7 +142,7 @@ namespace jycboliviaASP.net.Negocio
             var content = new StringContent(json, Encoding.UTF8 , "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos", content);
+            var response = await _httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos", content);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync();
@@ -182,7 +182,7 @@ namespace jycboliviaASP.net.Negocio
                 Username = usuario
             };
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos/{usuario}/{criterio}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos/{usuario}/{criterio}");
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var response = await httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();

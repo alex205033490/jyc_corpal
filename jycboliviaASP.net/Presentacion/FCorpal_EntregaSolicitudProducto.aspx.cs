@@ -370,7 +370,7 @@ namespace jycboliviaASP.net.Presentacion
             
         }
 
-        /* -------- P2 ------- */
+        ///* ////////////////////////////////////////////////////////////////////-------- P2 -------/////////////////////////////////////////////////////// */
         //Mostrar Registros
         protected void bt_actualizar_Click(object sender, EventArgs e)
         {
@@ -395,8 +395,14 @@ namespace jycboliviaASP.net.Presentacion
                         }
                         if (cantidadValida)
                         {
+                            NA_Responsables NResponsable = new NA_Responsables();
+                            string usuarioAux = Session["NameUser"].ToString();
+                            string passwordAux = Session["passworuser"].ToString();
+
+                            int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
+
                             ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
-                            showalert($"Se ha actualizado los registros exitosamente.");
+                            //showalert($"Se ha actualizado los registros exitosamente. {codUser}");
                             GET_MostrarXVehiculoSolicitudesProd();
                         }
                         else
@@ -411,7 +417,7 @@ namespace jycboliviaASP.net.Presentacion
                 int.TryParse(dd_listVehiculo.SelectedValue, out codigo);
                 Session["codigoCamion"] = codigo;                
                 Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
-                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
             }
             catch (Exception ex)
             {
@@ -473,15 +479,26 @@ namespace jycboliviaASP.net.Presentacion
                 NA_Responsables NResponsable = new NA_Responsables();
                 string usuarioAux = Session["NameUser"].ToString();
                 string passwordAux = Session["passworuser"].ToString();
+
                 int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
 
+                string personal = tx_entregoSolicitud.Text;
+
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock);
+                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock, codUser);
 
                 if (resultado)
                 {
-                    //showalert($"Se ha actualizado el registro exitosamente.");
-                    negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser);
+                    bool resultadoCierreAuto = negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser, personal);
+                    showalert($"Se ha actualizado el registro exitosamente. {codigoSolicitud}, {codUser}, {personal}");
+
+                    if (resultadoCierreAuto == true)
+                    {
+
+
+                    }
+
+
 
 
                 }
@@ -489,6 +506,7 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     showalert($"Error al actualizar el producto con codigo: {codigoProducto}");
                 }
+                
             }
             catch (Exception ex)
             {

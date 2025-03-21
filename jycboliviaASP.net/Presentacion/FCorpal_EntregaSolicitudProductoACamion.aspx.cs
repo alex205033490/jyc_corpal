@@ -332,20 +332,21 @@ namespace jycboliviaASP.net.Presentacion
             gv_detCar.DataBind();
 
             mostrarRegistrosSolicitudProductos("", "", "Abierto");
-
-        protected void bt_verRecibo_Click(object sender, EventArgs e)
-        {
-            if (!IsVehiculoSeleccionado())
-            {
-                showalert("Debe seleccionar 1 vehiculo.");
-                return;
-            }
-
-            int codCar = int.Parse(dd_vehiculos.SelectedValue);
-            Session["codigoCamion"] = codCar;
-            Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
-            Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-
         }
+
+            protected void bt_verRecibo_Click(object sender, EventArgs e)
+            {
+                if (!IsVehiculoSeleccionado())
+                {
+                    showalert("Debe seleccionar 1 vehiculo.");
+                    return;
+                }
+
+                int codCar = int.Parse(dd_vehiculos.SelectedValue);
+                Session["codigoCamion"] = codCar;
+                Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+
+            }
     }
 }

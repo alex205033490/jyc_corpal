@@ -23,7 +23,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             if (!IsPostBack)
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
                 var proveedor = await ObtenerListCodProveedor(token);
 
                 dd_codProveedor.DataSource = proveedor;
@@ -58,7 +58,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 DTOCompras compras = CrearCompra(productos);
 
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 string resultado = await RegistrarCompraAsync(compras, token);
 
@@ -282,7 +282,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 NA_APIproductos negocio = new NA_APIproductos();
                 List<productoCriterioGet> productos = await negocio.get_ProductoCriterioAsync(token, criterio); 

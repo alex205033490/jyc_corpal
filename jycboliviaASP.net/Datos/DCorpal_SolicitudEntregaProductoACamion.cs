@@ -49,7 +49,7 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_RegistrosSolicitudPedidos (string NroSolicitud, string solicitud, string estadoSolicitud)
+        internal DataSet get_RegistrosSolicitudPedidos2 (string NroSolicitud, string solicitud, string estadoSolicitud)
         {
             NA_VariablesGlobales nv = new NA_VariablesGlobales();
             string consultaStock = nv.get_consultaStockProductosActual();
@@ -75,7 +75,8 @@ namespace jycboliviaASP.net.Datos
             }
             return conexion.consultaMySql(consulta);
         }
-        public DataSet get_RegistrosSolicitudPedidos2(string NroSolicitud, string solicitud, string estadoSolicitud)
+
+        public DataSet get_RegistrosSolicitudPedidos(string NroSolicitud, string solicitud, string estadoSolicitud)
         {
             NA_VariablesGlobales nv = new NA_VariablesGlobales();
             string consultaStock = nv.get_consultaStockProductosActual();
@@ -87,7 +88,7 @@ namespace jycboliviaASP.net.Datos
                                 " from tbcorpal_solicitudentregaproducto pp " +
                                 " left join tbcorpal_detalle_solicitudproducto ds on pp.codigo = ds.codsolicitud " +
                                 " left join tbcorpal_cliente cc on pp.codcliente = cc.codigo " +
-                                " left join (@consultaStock) as st on ds.codproducto = st.codigo " +
+                                " left join ("+consultaStock+") as st on ds.codproducto = st.codigo " +
                                 " where " +
                                 " pp.estadosolicitud = @estadoSolicitud and " +
                                 " pp.estado = true and " +
@@ -95,7 +96,6 @@ namespace jycboliviaASP.net.Datos
                                 " pp.nroboleta like @NroSolicitud";
             List<MySqlParameter> parametros = new List<MySqlParameter>
             {
-                new MySqlParameter("@consultaStock", MySqlDbType.VarChar){ Value = consultaStock},
                 new MySqlParameter("@estadoSolicitud", MySqlDbType.VarChar){ Value = estadoSolicitud},
                 new MySqlParameter("@NroSolicitud", MySqlDbType.VarChar){ Value = "%" +NroSolicitud+ "%"}
             };

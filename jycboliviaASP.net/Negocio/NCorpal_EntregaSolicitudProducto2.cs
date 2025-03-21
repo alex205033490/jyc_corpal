@@ -52,17 +52,17 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
         }
 
-        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoProducto, float cantidadEntregado, float restarStock)
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoProducto, float cantidadEntregado, float restarStock, int coduser)
         {
-            return datos.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregado, restarStock);
+            return datos.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregado, restarStock, coduser);
         }
         internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int> codProducto)
         {
             return datos.update_RetirarSolicitud(codSolicitud, codProducto);
         }
-        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codUser)
+        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codPer,string personal)
         {
-            return datos.update_CierreAutSolicitudProd(codSolicitud, codUser);
+            return datos.update_CierreAutSolicitudProd(codSolicitud, codPer, personal);
         }
 
         internal DataSet get_EntregasProductoaCamion(int codigoCamion)
