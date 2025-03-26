@@ -144,7 +144,7 @@
                                             <div class="container-gvRegistros table-responsive mb-2" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                                                 <asp:GridView ID="gv_solicitudesProductos" runat="server" ShowHeader="true" EnableViewState="true"
                                                     CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
-                                                    DataKeyNames="codigo" Style="background-color: white !important;" OnSelectedIndexChanged="gv_solicitudesProductos_SelectedIndexChanged" OnRowDataBound="gv_solicitudesProductos_RowDataBound">
+                                                    DataKeyNames="codigo" Style="background-color: white !important;" OnRowDataBound="gv_solicitudesProductos_RowDataBound">
                                                     <Columns>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
@@ -187,8 +187,8 @@
                                                         </asp:TemplateField>
 
                                                         <asp:BoundField DataField="fechaentrega" HeaderText="Fecha Entrega" />
-                                                        <asp:BoundField DataField="horaentrega" HeaderText="Hora Entrega" />
                                                         <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
+                                                        <asp:BoundField DataField="cliente" HeaderText="Codigo Cliente" />
                                                         <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo Solicitud" HtmlEncode="false" />
                                                         <asp:BoundField DataField="estadosolicitud" HeaderText="Estado Solicitud" HtmlEncode="false" />
                                                     </Columns>

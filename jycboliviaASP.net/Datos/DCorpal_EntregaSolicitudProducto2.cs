@@ -23,7 +23,7 @@ namespace jycboliviaASP.net.Datos
             string consultaStock = negocio.get_consultaStockProductosActual();
 
             string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
-                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
+                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'cliente', " +
                 "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
                 "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
@@ -33,6 +33,7 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
+                "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' and sep.estado = true " +
                 "AND dsp.codvehiculo is not null AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
@@ -46,7 +47,7 @@ namespace jycboliviaASP.net.Datos
             string consultaStock = negocio.get_consultaStockProductosActual();
 
             string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
-                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
+                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'cliente', " +
                 "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
                 "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
@@ -56,6 +57,7 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
+                "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '" + estadoSolicitud + "' and sep.estado = true " +
                 "AND dsp.codvehiculo = "+codVehiculo+" AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
@@ -234,9 +236,10 @@ namespace jycboliviaASP.net.Datos
                 comand.Parameters.AddWithValue("@codigo", codSolicitud);
                 comand.Parameters.AddWithValue("@codper", codper);
                 comand.Parameters.AddWithValue("@personal", personal);
-                return conexion.ejecutarMySql2(comand);
-            }
 
+                bool success = conexion.ejecutarMySql2(comand);
+                return success;
+            }
         }
 
         internal DataSet get_EntregasProductoaCamion(int codigoCamion)

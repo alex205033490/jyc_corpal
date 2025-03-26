@@ -277,6 +277,7 @@ namespace jycboliviaASP.net.Presentacion
                             NCorpal_Cliente nc = new NCorpal_Cliente();
                             DataSet tuplaCli = nc.get_ClienteNombreEspecifico(cliente);
                             int codCliente = 0;
+                            string tiendaName = "";
                             string direccion = "";
                             string correoCliente = "";
                             string municipio = "Santa Cruz";
@@ -300,6 +301,7 @@ namespace jycboliviaASP.net.Presentacion
                             if (tuplaCli.Tables[0].Rows.Count > 0)
                             {
                                 codCliente = int.Parse(tuplaCli.Tables[0].Rows[0][0].ToString());
+                                tiendaName = tuplaCli.Tables[0].Rows[0][1].ToString();
                                 direccion = tuplaCli.Tables[0].Rows[0][2].ToString();
                                 telefono = tuplaCli.Tables[0].Rows[0][3].ToString();
                                 municipio = tuplaCli.Tables[0].Rows[0][4].ToString();
@@ -309,7 +311,8 @@ namespace jycboliviaASP.net.Presentacion
                             }
 
                             NCorpal_Venta nv = new NCorpal_Venta();
-                            bool banderaV = nv.crearVenta(codCliente, cliente, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitandte, factura, fechaEntrega, codigoSolicitud);
+                            bool banderaV = nv.crearVenta(codCliente, tiendaName, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, 
+                                codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitandte, factura, fechaEntrega, codigoSolicitud);
                             int codigoVenta = nv.get_codigoVentaUltimoInsertado(cliente, nombreRazonSocial, nombreResponsable);
                             bool banderaAllTodosProducto = nv.insertarTodoslosProductosAVenta(codigoVenta, codigoSolicitud);
 
@@ -343,9 +346,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         protected void gv_detallesolicitud_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
@@ -378,40 +379,8 @@ namespace jycboliviaASP.net.Presentacion
             {
                 foreach (GridViewRow row in gv_solicitudesProductos.Rows)
                 {
-                    CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
-                    if (chkSelect != null && chkSelect.Checked)
-                    {
-                        int codigoSolicitud = Convert.ToInt32(row.Cells[4].Text);
-                        int codigoProducto = Convert.ToInt32(row.Cells[6].Text);
-
-                        TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-                        Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
-
-                        bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
-                        if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
-                        {
-                            txtCantidadAEntregar.Text = "0";
-
-                        }
-                        if (cantidadValida)
-                        {
-                            NA_Responsables NResponsable = new NA_Responsables();
-                            string usuarioAux = Session["NameUser"].ToString();
-                            string passwordAux = Session["passworuser"].ToString();
-
-                            int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
-
-                            ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
-                            //showalert($"Se ha actualizado los registros exitosamente. {codUser}");
-                            GET_MostrarXVehiculoSolicitudesProd();
-                        }
-                        else
-                        {
-                            showalert("Ocurrio un error al registrar la soliciud");
-                        }
-                    }
+                    ProcesarFila(row);
                 }
-
 
                 int codigo; 
                 int.TryParse(dd_listVehiculo.SelectedValue, out codigo);
@@ -421,7 +390,130 @@ namespace jycboliviaASP.net.Presentacion
             }
             catch (Exception ex)
             {
-                showalert($"Error al actualizar la cantidad : {ex.Message}");
+                showalert($"Error al actualizar la cantidad1 : {ex.Message}");
+            }
+        }
+     
+        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        {
+            try
+            {
+                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
+                float cantActual = float.Parse(lblCantEntregada.Text);
+                float cantEntregadaAnterior = cantActual;
+
+                float cantidadTotalEntregada = cantidadEntregar + cantActual;
+                float restarStock = cantidadEntregar - cantEntregadaAnterior;
+
+                NA_Responsables NResponsable = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+
+                int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
+
+                string personal = tx_entregoSolicitud.Text;
+                
+
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock, codUser);
+
+                if (resultado)
+                {
+                    bool resultadoCierreAuto = negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser, personal);
+                }
+                else
+                {
+                    showalert($"Error al actualizar el producto con codigo2: {codigoProducto}");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al actualizar la cantidaddd: {ex.Message}");
+            }
+        }
+        /*
+        private void RegistrarVentaAut (int codSolicitud, int codigo)
+        {
+            try
+            {
+                NCorpal_Venta negocioVenta = new NCorpal_Venta();
+                bool resultado = negocioVenta.crearVenta2(codigo, codSolicitud);
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al insertar la venta. {ex.Message}");
+            }
+        }
+        */
+        private void RegistrarVentaAut2(int codigoSolicitud, int codigoCliente)
+        {
+            try
+            {
+                NA_Responsables Nresp = new NA_Responsables();
+                NCorpal_Cliente negocioCLiente = new NCorpal_Cliente();
+                DataSet tuplaCLI = negocioCLiente.get_ClienteCodigo(codigoCliente);
+
+                // Datos Cliente
+                string tiendaName = "", tiendaCorreoCliente = "", municipio = "", tiendaTelefono = "", tiendaDir = "", tiendaNombreRazonSocial = "", numeroDocumento = "";
+                string numeroFactura = "";
+                
+                if (tuplaCLI.Tables[0].Rows.Count > 0)
+                {
+                    tiendaName = tuplaCLI.Tables[0].Rows[0][1].ToString();
+                    tiendaDir = tuplaCLI.Tables[0].Rows[0][2].ToString();
+                    tiendaTelefono = tuplaCLI.Tables[0].Rows[0][3].ToString();
+                    municipio = tuplaCLI.Tables[0].Rows[0][4].ToString();
+                    tiendaNombreRazonSocial = tuplaCLI.Tables[0].Rows[0][12].ToString();
+                    numeroDocumento = tuplaCLI.Tables[0].Rows[0][13].ToString();
+                    tiendaCorreoCliente = tuplaCLI.Tables[0].Rows[0][14].ToString();
+                }
+                NCorpal_Venta negocioVenta = new NCorpal_Venta();
+                bool resultado = negocioVenta.crearVentas3(codigoCliente, tiendaName, codigoSolicitud, tiendaCorreoCliente, municipio, tiendaTelefono,
+                    numeroFactura, tiendaDir);
+
+                if (resultado)
+                {
+                    showalert("Correcto venta insertada");
+                }else
+                {
+                    showalert($"Error en la venta : codigoCliente: {codigoCliente}, tiendaName: {tiendaName}, codigoSolicitud:{codigoSolicitud}, " +
+                        $"tiendaCorreo: {tiendaCorreoCliente}, municipio: {municipio}, tiendaTelefono: {tiendaTelefono}, " +
+                        $"numeroFactura: {numeroFactura}, tiendaDir: {tiendaDir}");
+                }
+            }
+            catch( Exception ex )
+            {
+                showalert($"Error al insertar la venta. {ex.Message}");
+            }
+        }
+        private void ProcesarFila(GridViewRow row)
+        {
+            CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
+            if (chkSelect != null && chkSelect.Checked)
+            {
+                int codigoSolicitud = Convert.ToInt32(row.Cells[4].Text);
+                int codigoProducto = Convert.ToInt32(row.Cells[6].Text);
+                int codigoCliente = Convert.ToInt32(row.Cells[15].Text);
+
+                TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
+
+                bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
+                if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
+                {
+                    txtCantidadAEntregar.Text = "0";
+                }
+                if (cantidadValida)
+                {
+                    ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
+                    RegistrarVentaAut2(codigoSolicitud, codigoCliente);
+                    showalert($"se ha actualizado los registros exitosamente. {codigoCliente}");
+                }
+                else
+                {
+                    showalert("Ocurrio un error al registrar la solicitud");
+                }
             }
         }
         private bool validarCantidad(TextBox txtCantidadAEntregar, Label lblCantEntregada)
@@ -430,7 +522,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
                 {
-                    txtCantidadAEntregar.Text ="0";
+                    txtCantidadAEntregar.Text = "0";
                     return true;
                 }
 
@@ -462,55 +554,6 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"error al validar la cantidad: {ex.Message}");
                 return false;
-            }
-        }
-
-        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
-        {
-            try
-            {
-                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
-                float cantActual = float.Parse(lblCantEntregada.Text);
-                float cantEntregadaAnterior = cantActual;
-
-                float cantidadTotalEntregada = cantidadEntregar + cantActual;
-                float restarStock = cantidadEntregar - cantEntregadaAnterior;
-
-                NA_Responsables NResponsable = new NA_Responsables();
-                string usuarioAux = Session["NameUser"].ToString();
-                string passwordAux = Session["passworuser"].ToString();
-
-                int codUser = NResponsable.getCodUsuario(usuarioAux, passwordAux);
-
-                string personal = tx_entregoSolicitud.Text;
-
-                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock, codUser);
-
-                if (resultado)
-                {
-                    bool resultadoCierreAuto = negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser, personal);
-                    showalert($"Se ha actualizado el registro exitosamente. {codigoSolicitud}, {codUser}, {personal}");
-
-                    if (resultadoCierreAuto == true)
-                    {
-
-
-                    }
-
-
-
-
-                }
-                else
-                {
-                    showalert($"Error al actualizar el producto con codigo: {codigoProducto}");
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al actualizar la cantidad: {ex.Message}");
             }
         }
 
@@ -632,11 +675,6 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
         */
-
-        protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
