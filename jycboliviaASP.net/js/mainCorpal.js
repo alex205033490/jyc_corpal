@@ -33,6 +33,15 @@ $(document).ready(function () {
 
 })
 
+function convertdotcomma(event) {
+    var input = event.target;
+
+    input.value = input.value.replace('.', ',');
+}
+
+
+
+
 
 
 

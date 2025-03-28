@@ -93,7 +93,7 @@ namespace jycboliviaASP.net.Datos
                                 " pp.estadosolicitud = @estadoSolicitud and " +
                                 " pp.estado = true and " +
                                 " ds.codvehiculo is null and" +
-                                " pp.nroboleta like @NroSolicitud";
+                                " pp.nroboleta like @NroSolicitud order by pp.fechaGRA desc";
             List<MySqlParameter> parametros = new List<MySqlParameter>
             {
                 new MySqlParameter("@estadoSolicitud", MySqlDbType.VarChar){ Value = estadoSolicitud},

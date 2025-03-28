@@ -8,6 +8,7 @@ using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.Configuration;
 using static jycboliviaASP.net.Negocio.NA_APIcompras;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -198,7 +199,25 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         
-
+        public string aFecha2(string fecha)
+        {
+            if (string.IsNullOrEmpty(fecha) || fecha == "&nbsp;")
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    DateTime fecha_ = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    return fecha_.ToString("yyyy-MM-dd");
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception($"error al convertir la fecha : " + ex.Message);
+                }
+            }
+        }
         public string aFecha(string fecha)
         {
             if (fecha == "" || fecha == "&nbsp;")
@@ -390,12 +409,14 @@ namespace jycboliviaASP.net.Presentacion
             }
             catch (Exception ex)
             {
-                showalert($"Error al actualizar la cantidad1 : {ex.Message}");
+                showalert($"Error al registrar la solicitud : {ex.Message}");
+                limpiarDatos();
             }
         }
      
         private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
         {
+            int codigoVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
             try
             {
                 float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
@@ -420,6 +441,10 @@ namespace jycboliviaASP.net.Presentacion
                 if (resultado)
                 {
                     bool resultadoCierreAuto = negocio.update_CierreAutSolicitudProd(codigoSolicitud, codUser, personal);
+                    DataSet datos = negocio.get_VWRegistrosEntregaSolicitudProductoXCamion("Abierto", codigoVehiculo);
+
+                    gv_solicitudesProductos.DataSource = datos;
+                    gv_solicitudesProductos.DataBind();
                 }
                 else
                 {
@@ -446,14 +471,24 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
         */
-        private void RegistrarVentaAut2(int codigoSolicitud, int codigoCliente)
+        private void RegistrarVentaAut2(int codigoSolicitud, int codigoCliente, string solicitante, string fechaentrega)
         {
             try
             {
+                int codigoMetodoPago = 1;
+                decimal montoTotal = 0;
+                decimal montoTotalMoneda = montoTotal;
+                int codigoMoneda = 1;
+                decimal tipoCambio = decimal.Parse("6,96");
+                decimal descuentoAdicional = decimal.Parse("0");
+                string leyendaF = "leyendaNingun";
+                int factura = 0;
+
                 NA_Responsables Nresp = new NA_Responsables();
                 NCorpal_Cliente negocioCLiente = new NCorpal_Cliente();
                 DataSet tuplaCLI = negocioCLiente.get_ClienteCodigo(codigoCliente);
 
+                int codSolicitante = Nresp.getCodigo_NombreResponsable(solicitante);
                 // Datos Cliente
                 string tiendaName = "", tiendaCorreoCliente = "", municipio = "", tiendaTelefono = "", tiendaDir = "", tiendaNombreRazonSocial = "", numeroDocumento = "";
                 string numeroFactura = "";
@@ -464,23 +499,31 @@ namespace jycboliviaASP.net.Presentacion
                     tiendaDir = tuplaCLI.Tables[0].Rows[0][2].ToString();
                     tiendaTelefono = tuplaCLI.Tables[0].Rows[0][3].ToString();
                     municipio = tuplaCLI.Tables[0].Rows[0][4].ToString();
+                    tiendaCorreoCliente = tuplaCLI.Tables[0].Rows[0][11].ToString();
                     tiendaNombreRazonSocial = tuplaCLI.Tables[0].Rows[0][12].ToString();
                     numeroDocumento = tuplaCLI.Tables[0].Rows[0][13].ToString();
-                    tiendaCorreoCliente = tuplaCLI.Tables[0].Rows[0][14].ToString();
                 }
                 NCorpal_Venta negocioVenta = new NCorpal_Venta();
-                bool resultado = negocioVenta.crearVentas3(codigoCliente, tiendaName, codigoSolicitud, tiendaCorreoCliente, municipio, tiendaTelefono,
-                    numeroFactura, tiendaDir);
-
-                if (resultado)
+                bool resultado = negocioVenta.crearVentas3(codigoCliente, tiendaName, codigoSolicitud, tiendaCorreoCliente, municipio, tiendaTelefono, numeroFactura, tiendaDir,
+                    tiendaNombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, 
+                    descuentoAdicional, leyendaF, codSolicitante, solicitante, factura, fechaentrega, codigoSolicitud);
+                if (!resultado)
                 {
-                    showalert("Correcto venta insertada");
-                }else
-                {
-                    showalert($"Error en la venta : codigoCliente: {codigoCliente}, tiendaName: {tiendaName}, codigoSolicitud:{codigoSolicitud}, " +
-                        $"tiendaCorreo: {tiendaCorreoCliente}, municipio: {municipio}, tiendaTelefono: {tiendaTelefono}, " +
-                        $"numeroFactura: {numeroFactura}, tiendaDir: {tiendaDir}");
+                    showalert("Error al registrar la venta.");
+                    return;
                 }
+
+                bool resultadoProductosVenta = negocioVenta.insertarTodoslosProductosAVenta3(codigoSolicitud);
+               
+                if (resultadoProductosVenta)
+                {
+                    //showalert("Productos insertados en la venta ");
+                }
+                else
+                {
+                    showalert($"error al insertar los productos: {codigoSolicitud}");
+                }
+                
             }
             catch( Exception ex )
             {
@@ -495,20 +538,23 @@ namespace jycboliviaASP.net.Presentacion
                 int codigoSolicitud = Convert.ToInt32(row.Cells[4].Text);
                 int codigoProducto = Convert.ToInt32(row.Cells[6].Text);
                 int codigoCliente = Convert.ToInt32(row.Cells[15].Text);
+                string solicitante = row.Cells[14].Text;
+                string fechaentrega = aFecha2(row.Cells[13].Text);
 
                 TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
                 Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
 
-                bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
-                if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
+                if (string.IsNullOrEmpty(txtCantidadAEntregar.Text) )
                 {
                     txtCantidadAEntregar.Text = "0";
                 }
+
+                bool cantidadValida = validarCantidad(txtCantidadAEntregar, lblCantEntregada);
                 if (cantidadValida)
                 {
                     ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
-                    RegistrarVentaAut2(codigoSolicitud, codigoCliente);
-                    showalert($"se ha actualizado los registros exitosamente. {codigoCliente}");
+                    RegistrarVentaAut2(codigoSolicitud, codigoCliente, solicitante, fechaentrega);
+                    showalert($"se ha registrado la solicitud exitosamente.");
                 }
                 else
                 {

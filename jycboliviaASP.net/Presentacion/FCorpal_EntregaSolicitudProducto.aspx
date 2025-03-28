@@ -176,7 +176,7 @@
 
                                                         <asp:TemplateField HeaderText="Cantidad a Entregar">
                                                             <ItemTemplate>
-                                                                <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off" ></asp:TextBox>
+                                                                <asp:TextBox ID="tx_cantidadEntregarOK" runat="server" BackColor="Yellow" Width="90px" autoComplete="off" onInput="convertdotcomma(event)"></asp:TextBox>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
 
