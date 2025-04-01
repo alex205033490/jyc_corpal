@@ -507,6 +507,7 @@
     <Content Include="Presentacion\FCorpal_EntregaProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProductoACamion.aspx" />
     <Content Include="Presentacion\FCorpal_GestionarInsumos.aspx" />
+    <Content Include="Presentacion\FCorpal_GestionarVehiculos.aspx" />
     <Content Include="Presentacion\FCorpal_GestionExtintores.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
@@ -645,6 +646,7 @@
     <Content Include="Styles\Style_CotiEra.css" />
     <Content Include="Styles\Style_EntregaProductosACamion.css" />
     <Content Include="Styles\Style_GActividades.css" />
+    <Content Include="Styles\Style_gestionarVehiculo.css" />
     <Content Include="Styles\Style_GestionExtintores.css" />
     <Content Include="Styles\Style_ImportacionJYCIA.css" />
     <Content Include="Styles\login-box.css" />
@@ -798,6 +800,7 @@
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
     <Compile Include="Datos\DCorpal_SolicitudEntregaProductoACamion.cs" />
+    <Compile Include="Datos\DCorpal_Vehiculo.cs" />
     <Compile Include="Datos\DCorpal_Venta.cs" />
     <Compile Include="Datos\DUpon_compras.cs" />
     <Compile Include="Datos\DUpon_Ventas.cs" />
@@ -967,6 +970,7 @@
     <Compile Include="Negocio\NCargaFechaExpedicion.cs" />
     <Compile Include="Negocio\NCorpal_SolicitudEntregaProducto.cs" />
     <Compile Include="Negocio\NCorpal_Cliente.cs" />
+    <Compile Include="Negocio\NCorpal_Vehiculos.cs" />
     <Compile Include="Negocio\NCorpal_Venta.cs" />
     <Compile Include="Negocio\NEncargadoPago.cs" />
     <Compile Include="Negocio\NEquipo.cs" />
@@ -1159,6 +1163,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_GestionarInsumos.aspx.designer.cs">
       <DependentUpon>FCorpal_GestionarInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarVehiculos.aspx.cs">
+      <DependentUpon>FCorpal_GestionarVehiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_GestionarVehiculos.aspx.designer.cs">
+      <DependentUpon>FCorpal_GestionarVehiculos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_GestionExtintores.aspx.cs">
       <DependentUpon>FCorpal_GestionExtintores.aspx</DependentUpon>

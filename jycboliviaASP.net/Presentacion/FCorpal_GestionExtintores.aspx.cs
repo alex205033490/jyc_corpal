@@ -486,13 +486,12 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (!resultado)
                 {
-                    showalert($"Error al actulizar el registro con código {codigo} ,{detalle}, {area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}," +
-                        $" {ppanio}, {fechadecarga}, {fechaproximadcarga}");
+                    showalert($"Error al actualizar el registro");
                 }
             }
             catch(Exception ex)
             {
-                showalert($"Error al actualizar el registro {codigo}: {ex.Message}");
+                showalert($"Error inesperado al actualizar el registro {codigo}: {ex.Message}");
             }
         }
     }
