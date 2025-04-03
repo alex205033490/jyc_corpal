@@ -74,7 +74,7 @@
         <div class="card-header bg-warning"> <h2>Gestión de Extintores</h2> </div>
         <div class="container-form">
 
-            <div class="container-registro bg-white"> <h3>Registro</h3> 
+            <div class="container-registro bg-white"> <h2>Formulario de asignaciòn de extintores</h2> 
 
                 <asp:UpdatePanel ID="updatePanelRegistrar" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="container-tittle ms-2">
-                <h2>Lista de registros </h2>
+                <h2> Lista de registros </h2>
             </div>
 
 
