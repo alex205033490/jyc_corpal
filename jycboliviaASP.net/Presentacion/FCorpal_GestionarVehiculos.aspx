@@ -139,7 +139,7 @@
 
                         <asp:TemplateField HeaderText="Capacidad Cajas">
                             <ItemTemplate>
-                                <asp:TextBox ID="tx_cargacajasCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("cargacajas") %>'></asp:TextBox>
+                                <asp:TextBox ID="tx_cargacajasCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("estado") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
