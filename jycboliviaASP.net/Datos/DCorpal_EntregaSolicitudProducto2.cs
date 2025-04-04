@@ -183,7 +183,9 @@ namespace jycboliviaASP.net.Datos
                                 " v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
                                 " date_format(dsp.fechaentrega_car, '%d/%m/%Y') as 'fechaentrega_car', dsp.horaentrega_car, sep.estadosolicitud, " +
                                 " dsp.tiposolicitud, dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada' " +
+                                " , cli.tiendaname as 'cliente' "+
                                 " from tbcorpal_solicitudentregaproducto sep " +
+                                " left join tbcorpal_cliente cli on sep.codcliente = cli.codigo "+
                                 " left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud " +
                                 " left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                                 " left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +

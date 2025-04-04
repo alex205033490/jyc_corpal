@@ -1,5 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+using Microsoft.Reporting.Map.WebForms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

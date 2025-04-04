@@ -30,6 +30,7 @@ namespace jycboliviaASP.net.Presentacion
             if (!IsPostBack)
             {                
                 buscarDatos("", codUser);
+                tx_fechaingreso.Text = DateTime.Now.ToString("dd/MM/yyyy");
             }
             NA_Recibo_IngresoEgreso nr = new NA_Recibo_IngresoEgreso();
             string NroRecibo = nr.get_nroRegistroIngresoSiguiente(codUser);

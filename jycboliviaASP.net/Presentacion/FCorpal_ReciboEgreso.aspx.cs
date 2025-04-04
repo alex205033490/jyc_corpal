@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using jycboliviaASP.net.Negocio;
 using System.Data;
+using System.Windows.Controls;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -30,6 +31,7 @@ namespace jycboliviaASP.net.Presentacion
             if (!IsPostBack)
             {                
                 buscarDatos("",codUser);
+                tx_fechaegreso.Text = DateTime.Now.ToString("dd/MM/yyyy");
             }
 
             NA_Recibo_IngresoEgreso nre = new NA_Recibo_IngresoEgreso();
@@ -289,7 +291,7 @@ namespace jycboliviaASP.net.Presentacion
             dd_moneda.SelectedValue = gv_reciboIngresoEgreso.SelectedRow.Cells[6].Text;
             tx_chequenro.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[7].Text;
             tx_banco.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[8].Text;            
-            cb_efectivo.Checked = (gv_reciboIngresoEgreso.SelectedRow.Cells[9].Controls[0] as CheckBox).Checked;
+            cb_efectivo.Checked = (gv_reciboIngresoEgreso.SelectedRow.Cells[9].Controls[0] as System.Web.UI.WebControls.CheckBox).Checked;
             tx_concepto.Text = gv_reciboIngresoEgreso.SelectedRow.Cells[10].Text;
             
             float porcentajeretencioniue;

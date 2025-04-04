@@ -212,7 +212,8 @@ namespace jycboliviaASP.net.Datos
                             " where " +
                             " rr.estadoingreso = true " +
                             " and rr.responsable like '%"+responsable+"%' "+
-                            " and rr.fecharecibo between " + fecha1 + " and " + fecha2;
+                            " and rr.fecharecibo between " + fecha1 + " and " + fecha2 +
+                            " order by TIMESTAMP(rr.fecharecibo,  horagra) asc";
             return ConecRes.consultaMySql(consulta);
         }
 
@@ -229,7 +230,9 @@ namespace jycboliviaASP.net.Datos
                                 " where " +
                                 " rr.estadoegreso = true " +
                                 " and rr.responsable like '%" + responsable + "%' " +
-                                " and rr.fechagra between " + fecha1 + " and " + fecha2;
+                                " and rr.fechagra between " + fecha1 + " and " + fecha2+
+                                " order by TIMESTAMP(rr.fechaegreso,  horagra) asc";
+            ;
             return ConecRes.consultaMySql(consulta);
         }
 

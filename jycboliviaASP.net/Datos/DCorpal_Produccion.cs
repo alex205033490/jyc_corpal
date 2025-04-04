@@ -5,7 +5,7 @@ using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using jycboliviaASP.net.Presentacion;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+using Microsoft.Reporting.Map.WebForms;
 using System.Text.RegularExpressions;
 
 namespace jycboliviaASP.net.Datos

@@ -12,7 +12,7 @@ using System.Text.Encodings;
 using System.Text;
 using System.Diagnostics;
 using static jycboliviaASP.net.Negocio.NA_APIclientes;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+using Microsoft.Reporting.Map.WebForms;
 using System.Security.Policy;
 using System.Net.Http.Headers;
 using RestSharp.Serialization.Json;

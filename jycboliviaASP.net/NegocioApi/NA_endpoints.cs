@@ -1,7 +1,7 @@
 ﻿
 using Clases.ApiRest;
 using jycboliviaASP.net.Negocio;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
+using Microsoft.Reporting.Map.WebForms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
