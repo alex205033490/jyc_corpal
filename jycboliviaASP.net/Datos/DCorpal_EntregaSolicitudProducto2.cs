@@ -16,14 +16,14 @@ namespace jycboliviaASP.net.Datos
     {
         private conexionMySql conexion = new conexionMySql();
 
-        // LISTA DE TODOS LOS REGISTROS 
+        // List principal gv registros
         internal DataSet get_VWRegistrosEntregaSolicitudProductos(string estadoSolicitud)
         {
             NA_VariablesGlobales negocio = new NA_VariablesGlobales();
             string consultaStock = negocio.get_consultaStockProductosActual();
 
-            string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
-                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'cliente', " +
+            string consulta = "SELECT " +
+                "sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'codCliente', cc.tiendaname, " +
                 "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
                 "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
@@ -35,7 +35,7 @@ namespace jycboliviaASP.net.Datos
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' and sep.estado = true " +
-                "AND dsp.codvehiculo is not null AND dsp.cantentregada is null order by v.marca, v.modelo asc";
+                "order by sep.fechaGRA desc";
 
             return conexion.consultaMySql(consulta);
         }
@@ -260,5 +260,48 @@ namespace jycboliviaASP.net.Datos
                     consulta +=  " order by v.marca, v.modelo asc";
             return conexion.consultaMySql(consulta);
         }
+
+        //mostrar vehiculo en dd
+        internal DataSet get_showVehiculoDD()
+        {
+            string consulta = "select v.codigo, v.marca, v.modelo, v.placa, v.conductor, " +
+                "CONCAT(COALESCE(v.marca, ''), ' - ', " +
+                "COALESCE(v.`modelo`, ''), " +
+                "' placa: ', " +
+                "COALESCE(v.placa, ''))" +
+                "as 'detalle' " +
+                "from tbcorpal_vehiculos v " +
+                "order by v.marca asc";
+            return conexion.consultaMySql(consulta);
+        }
+        // ver detalle de vehiculo en GV
+        internal DataSet GET_detalleVehiculoGV(int codigo)
+        {
+            string consulta = "select v.codigo, v.cargacajas, v.capacidad, v.medida, v.conductor " +
+                "from tbcorpal_vehiculos v where v.codigo = @codigo";
+            MySqlParameter paramCodigo = new MySqlParameter("@codigo", MySqlDbType.Int64);
+            paramCodigo.Value = codigo;
+            return conexion.consultaMySqlParametros(consulta, new List<MySqlParameter> { paramCodigo });
+        }
+
+        //asignar vehiculo a pedido
+        internal bool UPDATE_ADDvehiculoAPedido(int codVehiculo, int codUser, int codSolicitud, int codProducto)
+        {
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto ds " +
+                "SET ds.codvehiculo = @codVehiculo, ds.fechaasignacion_car = current_date(), " +
+                "ds.horaasignacion_car = current_time(), ds.coduserasignacion_car = @codUser " +
+                "WHERE ds.codsolicitud = @codSolicitud and ds.codProducto = @codProducto";
+
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                comand.Parameters.AddWithValue("@codVehiculo", codVehiculo);
+                comand.Parameters.AddWithValue("@codUser", codUser);
+                comand.Parameters.AddWithValue("@codSolicitud", codSolicitud);
+                comand.Parameters.AddWithValue("@codProducto", codProducto);
+
+                return conexion.ejecutarMySql2(comand);
+            }
+        }
+
     }
 }
