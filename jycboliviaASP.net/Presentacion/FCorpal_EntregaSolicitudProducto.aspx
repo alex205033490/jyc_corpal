@@ -128,18 +128,11 @@
                                     <Columns>
                                         <asp:TemplateField>
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="chkSelect" CssClass="chkSelect" runat="server" />
+                                                <asp:Button id="btn_addGV" runat="server" CssClass="btn btn-success" Text="Add"/>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:BoundField DataField="codigo" HeaderText="Codigo Registro" />
-                                        <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
-                                        <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" />
-                                        <asp:TemplateField HeaderText="lb codProducto">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lb_codproducto" runat="server" Text='<%# Eval("codproducto") %>' Visible="true"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />                                        
 
                                         <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
 
@@ -157,18 +150,12 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Stock Almacen">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lb_stockAlmacen" runat="server" Text='<%# Bind("StockAlmacen")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                              
 
                                         <asp:BoundField DataField="fechaentrega" HeaderText="Fecha Entrega" />
                                         <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
                                         <asp:BoundField DataField="codCliente" HeaderText="Codigo Cliente" />
                                         <asp:BoundField DataField="tiendaname" HeaderText="Cliente" HtmlEncode="false" />
-                                        <asp:BoundField DataField="tiposolicitud" HeaderText="Tipo Solicitud" HtmlEncode="false" />
-                                        <asp:BoundField DataField="estadosolicitud" HeaderText="Estado Solicitud" HtmlEncode="false" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
@@ -177,6 +164,18 @@
                             <asp:AsyncPostBackTrigger ControlID="btn_RegistrarSolicitud" EventName="Click" />
                         </Triggers>
                     </asp:UpdatePanel>
+
+                    <div class="container_despachoDProductos">
+                        <div>
+                            <h3>Despacho de productos</h3>
+                        </div>
+                        <div class="lista_despachos">
+                            <asp:GridView ID="gv_despachoProductos" runat="server" CssClass="table table-striped"></asp:GridView>
+                        </div>
+
+                    </div>
+
+
 
 
                 </ContentTemplate>

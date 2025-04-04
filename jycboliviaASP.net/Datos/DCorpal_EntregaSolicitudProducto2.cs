@@ -23,9 +23,19 @@ namespace jycboliviaASP.net.Datos
             string consultaStock = negocio.get_consultaStockProductosActual();
 
             string consulta = "SELECT " +
-                "sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'codCliente', cc.tiendaname, " +
-                "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
-                "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
+                "sep.codigo, " +
+                "sep.nroboleta, " +
+                "sep.personalsolicitud, " +
+                "dsp.codproducto, " +
+                "p.producto, " +
+                "cc.codigo as 'codCliente', " +
+                "cc.tiendaname, " +
+                "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', " +
+                "sep.horaentrega, " +
+                "sep.estadosolicitud, " +
+                "dsp.tiposolicitud, " +
+                "dsp.cant as 'cantSolicitada', " +
+                "ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
                 "ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' " +
                 "from tbcorpal_solicitudentregaproducto sep " +
@@ -34,7 +44,9 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
-                "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' and sep.estado = true " +
+                "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' " +
+                "and sep.estado = true " +
+                "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
                 "order by sep.fechaGRA desc";
 
             return conexion.consultaMySql(consulta);
