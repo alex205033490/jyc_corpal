@@ -455,20 +455,25 @@ namespace jycboliviaASP.net.Presentacion
                 string fechadecarga = string.IsNullOrWhiteSpace(txtFechadecarga?.Text) || txtFechadecarga.Text.Trim() == "null" ? null : ConvertidorFecha(txtFechadecarga?.Text);
                 string fechaproximadcarga = string.IsNullOrWhiteSpace(txtFechaproximadcarga?.Text) || txtFechaproximadcarga.Text.Trim() == "null" ? null : ConvertidorFecha(txtFechaproximadcarga?.Text);
 
-                if(!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
+                int anioPruebaH = 0;
+                if(!string.IsNullOrWhiteSpace(txtAnioPruebaH?.Text) && int.TryParse(txtAnioPruebaH?.Text, out int parsedAnioPruebaH))
+                {
+                    anioPruebaH = parsedAnioPruebaH;
+                }
+                else
+                {
+                    anioPruebaH = 0;
+                }
+                
+                if (!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
                 {
                     showalert("La capacidad no tiene el formato correcto");
                     return;
                 }
 
-                if(!int.TryParse(txtAnioPruebaH?.Text, out int ppanio))
-                {
-                    showalert("El año de prueba no tiene el formato correcto.");
-                    return;
-                }
                 NCorpal_Extintor negocio = new NCorpal_Extintor();
                 bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, estadoExtintor,
-                    ppanio, fechadecarga, fechaproximadcarga);
+                    anioPruebaH, fechadecarga, fechaproximadcarga);
 
                 if (!resultado)
                 {
