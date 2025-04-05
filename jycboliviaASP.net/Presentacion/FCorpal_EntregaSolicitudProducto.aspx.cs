@@ -726,5 +726,53 @@ namespace jycboliviaASP.net.Presentacion
                 }
             }
         }
+
+       
+
+        public class Product
+        {
+            public string nroboleta { get; set; }
+            public string producto { get; set; }
+        }
+
+        protected void gv_solProductos_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "SeleccionarProducto")
+            {
+                // Obtén el índice de la fila seleccionada
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = gv_solicitudesProductos.Rows[rowIndex];
+
+                // Obtén los valores de la fila seleccionada
+                string nroBoleta = row.Cells[1].Text;  // El índice de las celdas depende de cómo esté estructurado tu GridView
+                string producto = row.Cells[2].Text;
+
+                // Crea un nuevo objeto que contendrá estos datos
+                Product selectedProduct = new Product
+                {
+                    nroboleta = nroBoleta,
+                    producto = producto
+                };
+
+                // Recupera la lista de productos en la sesión
+                List<Product> despachoList = (List<Product>)Session["despachoList"];
+
+                if (despachoList == null)
+                {
+                    despachoList = new List<Product>();
+                }
+
+                // Agrega el producto seleccionado a la lista
+                despachoList.Add(selectedProduct);
+
+                // Guarda la lista de productos en la sesión
+                Session["despachoList"] = despachoList;
+
+                // Vuelve a vincular el GridView de despacho con la lista actualizada
+                gv_despachoProductos.DataSource = despachoList;
+                gv_despachoProductos.DataBind();
+            }
+        }
     }
 }
+
