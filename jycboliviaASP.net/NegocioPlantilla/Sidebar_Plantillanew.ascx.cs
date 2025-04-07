@@ -71,7 +71,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
 
             mn_apiclientes.Visible = false;
             mn_entregaSolicitudProductoACamion.Visible = false;
-            mn_GestionExtintores.Visible = false;
+            mn_GestionExtintores.Visible = true;
             mn_ConsultaGraficaProduccion.Visible = false;
         }
 
