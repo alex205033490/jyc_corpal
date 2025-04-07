@@ -186,7 +186,7 @@
 
                         <asp:TemplateField HeaderText="Área">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_area" runat="server" Width="160px" BackColor="Yellow" autoComplete="off" text='<%# Bind("area") %>'></asp:TextBox>
+                                <asp:TextBox ID="txt_area" runat="server" Width="180px" BackColor="Yellow" autoComplete="off" text='<%# Bind("area") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -217,25 +217,25 @@
                         <asp:TemplateField HeaderText="Fecha de Carga">
                             <ItemTemplate>
                                 <div class="campo-fechaCarga" >
-                                    <asp:TextBox ID="txt_fdcarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txt_fdcarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off" placeholder="YY-MM-DD"></asp:TextBox>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>                        
 
                         <asp:TemplateField HeaderText="Fecha Proxima Carga">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off"></asp:TextBox>
+                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off"  placeholder="YY-MM-DD"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                        
                         <asp:TemplateField HeaderText="Estado Extintor">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_estadoExtintor" runat="server" Width="160px" BackColor="Yellow" autoComplete="off" text='<%# Bind("estadoextintor") %>'></asp:TextBox>
+                                <asp:TextBox ID="txt_estadoExtintor" runat="server" Width="100px" BackColor="Yellow" autoComplete="off" text='<%# Bind("estadoextintor") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         
-                        <asp:TemplateField HeaderText="Próxima prueba hidrostatica">
+                        <asp:TemplateField HeaderText="Año Próxima prueba hidrostatica">
                             <ItemTemplate>
                                 <asp:TextBox ID="txt_pphidrostatica" runat="server" BackColor="Yellow" AutoComplete="off"></asp:TextBox>
                             </ItemTemplate>
