@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Services.Protocols;
 
@@ -31,6 +32,7 @@ namespace jycboliviaASP.net.Datos
             }
             return conexion.consultaMySql(consulta);
         }
+       
         /*Error*/
         internal DataSet get_detalleSolicitudProducto(int codigoSolicitud)
         {
@@ -47,7 +49,7 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_RegistrosSolicitudPedidos (string NroSolicitud, string solicitud, string estadoSolicitud)
+        internal DataSet get_RegistrosSolicitudPedidos2 (string NroSolicitud, string solicitud, string estadoSolicitud)
         {
             NA_VariablesGlobales nv = new NA_VariablesGlobales();
             string consultaStock = nv.get_consultaStockProductosActual();
@@ -74,7 +76,39 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_ShowNroBoleta(string nroBoleta)
+        public DataSet get_RegistrosSolicitudPedidos(string NroSolicitud, string solicitud, string estadoSolicitud)
+        {
+            NA_VariablesGlobales nv = new NA_VariablesGlobales();
+            string consultaStock = nv.get_consultaStockProductosActual();
+            string consulta = "select pp.codigo as 'codRegistro', pp.nroboleta,  date_format(pp.fechaGRA,'%d/%m/%Y') as 'FechaGra', " +
+                                " pp.horaGRA,  date_format(pp.fechaentrega,'%d/%m/%Y') as 'FechaEntrega', " +
+                                " pp.horaentrega, pp.personalsolicitud, pp.montototal,  pp.estadosolicitud, " +
+                                " cc.tiendaname as 'Cliente', ds.cant, ds.tiposolicitud, ifnull(ds.cantentregada,0) as 'cantEntregada', " +
+                                " st.codigo as 'codProducto', st.producto " +
+                                " from tbcorpal_solicitudentregaproducto pp " +
+                                " left join tbcorpal_detalle_solicitudproducto ds on pp.codigo = ds.codsolicitud " +
+                                " left join tbcorpal_cliente cc on pp.codcliente = cc.codigo " +
+                                " left join ("+consultaStock+") as st on ds.codproducto = st.codigo " +
+                                " where " +
+                                " pp.estadosolicitud = @estadoSolicitud and " +
+                                " pp.estado = true and " +
+                                " ds.codvehiculo is null and" +
+                                " pp.nroboleta like @NroSolicitud order by pp.fechaGRA desc";
+            List<MySqlParameter> parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@estadoSolicitud", MySqlDbType.VarChar){ Value = estadoSolicitud},
+                new MySqlParameter("@NroSolicitud", MySqlDbType.VarChar){ Value = "%" +NroSolicitud+ "%"}
+            };
+
+            if (!string.IsNullOrEmpty(solicitud))
+            {
+                consulta += " AND pp.personalsolicitud LIKE @solicitud";
+                parametros.Add(new MySqlParameter("@solicitud", MySqlDbType.VarChar) { Value = "%" + solicitud + "%" });
+            }
+            return conexion.consultaMySqlParametros(consulta, parametros);
+        }
+
+        /*internal DataSet get_ShowNroBoleta2(string nroBoleta)
         {
             string consulta = "select sp.nroboleta from tbcorpal_solicitudentregaproducto sp " +
                 "left join tbcorpal_detalle_solicitudproducto ds on sp.codigo = ds.codsolicitud " +
@@ -83,14 +117,38 @@ namespace jycboliviaASP.net.Datos
                 "group by sp.nroboleta  ";
 
             return conexion.consultaMySql(consulta);
+        }*/
+        internal DataSet get_ShowNroBoleta(string nroBoleta) 
+        {
+            string consulta = "select sp.nroboleta from tbcorpal_solicitudentregaproducto sp " +
+                      "left join tbcorpal_detalle_solicitudproducto ds on sp.codigo = ds.codsolicitud " +
+                      "where sp.estado = 1 and sp.estadosolicitud = 'Abierto' " +
+                      "and ds.codvehiculo is null and sp.nroboleta like @nroBoleta " +
+                      "group by sp.nroboleta";
+
+            MySqlParameter paramNroBoleta = new MySqlParameter("@nroBoleta", MySqlDbType.VarChar);
+            paramNroBoleta.Value = "%" + nroBoleta + "%";
+
+            return conexion.consultaMySqlParametros(consulta, new List<MySqlParameter> { paramNroBoleta });
         }
 
-        internal DataSet get_ShowPersonalSolicitud(string nombre)
+        /*internal DataSet get_ShowPersonalSolicitud2(string nombre)
         {
             string consulta = "select sp.personalsolicitud from tbcorpal_solicitudentregaproducto sp " +
                 "where sp.estado = 1 and sp.estadosolicitud = 'Abierto' and " +
                 "sp.personalsolicitud like '%" + nombre + "%' group by sp.personalsolicitud ";
             return conexion.consultaMySql(consulta);
+        }*/
+        internal DataSet get_ShowPersonalSolicitud(string nombre)
+        {
+            string consulta = "select sp.personalsolicitud from tbcorpal_solicitudentregaproducto sp " +
+                "where sp.estado = 1 and sp.estadosolicitud = 'Abierto' and " +
+                "sp.personalsolicitud like @nombre group by sp.personalsolicitud;";
+
+            MySqlParameter paramNombre = new MySqlParameter("@nombre", MySqlDbType.VarChar);
+            paramNombre.Value = "%" + nombre + "%";
+
+            return conexion.consultaMySqlParametros(consulta, new List<MySqlParameter> { paramNombre });
         }
 
         internal DataSet get_ShowVehiculo()
@@ -105,13 +163,23 @@ namespace jycboliviaASP.net.Datos
                 "order by v.marca asc";
             return conexion.consultaMySql(consulta);
         }
-        internal DataSet get_detVehiculo(int codigo)
+        /*internal DataSet get_detVehiculo2(int codigo)
         {
             string consulta = "select v.codigo, v.cargacajas, v.capacidad, v.medida " +
                 "from tbcorpal_vehiculos v " +
                 "where v.codigo = "+codigo+" ";
             return conexion.consultaMySql(consulta);
-        } 
+        }*/
+        internal DataSet get_detVehiculo(int codigo)
+        {
+            string consulta = "select v.codigo, v.cargacajas, v.capacidad, v.medida " +
+                "from tbcorpal_vehiculos v where v.codigo = @codigo ";
+
+            MySqlParameter paramCodigo = new MySqlParameter("@codigo", MySqlDbType.Int64);
+            paramCodigo.Value = codigo;
+
+            return conexion.consultaMySqlParametros(consulta, new List<MySqlParameter> { paramCodigo });
+        }
 
         // UPDATE ASIGNAR VEHICULO
         internal bool update_ADDVehiculoAPedido(int codVehiculo, int codUser, int codSolicitud, int codProducto)

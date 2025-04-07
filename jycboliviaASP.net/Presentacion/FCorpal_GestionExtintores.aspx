@@ -69,16 +69,12 @@
 
     </script>
 
-    <style>
-        
-
-    </style>
     
     <div class="card">
         <div class="card-header bg-warning"> <h2>Gestión de Extintores</h2> </div>
         <div class="container-form">
 
-            <div class="container-registro bg-white"> <h3>Registro</h3> 
+            <div class="container-registro bg-white"> <h2>Formulario de asignaciòn de extintores</h2> 
 
                 <asp:UpdatePanel ID="updatePanelRegistrar" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -86,28 +82,16 @@
                 <div class="form-registro row">
                     <div class="columna1 col-lg-3 col-md-4 col-sm-6 col-6">
                     <label>Area:</label>
-                    <asp:DropDownList ID="dd_area" CssClass="dd_area" runat="server">
-                        <asp:ListItem> Selecciona un área:</asp:ListItem>
-                        <asp:ListItem> Almacén de materia prima 1 </asp:ListItem>
-                        <asp:ListItem> Almacén de materia prima 2 </asp:ListItem>
-                        <asp:ListItem> Almacén de materia prima 3 </asp:ListItem>
-                        <asp:ListItem> Almacén de producto terminado </asp:ListItem>
-                        <asp:ListItem> Almacén maestro </asp:ListItem>
-                        <asp:ListItem> Alta tensión </asp:ListItem>
-                        <asp:ListItem> Batido de semilla </asp:ListItem>
-                        <asp:ListItem> Compresores </asp:ListItem>
-                        <asp:ListItem> Container </asp:ListItem>
-                        <asp:ListItem> envolsado de semilla </asp:ListItem>
-                        <asp:ListItem> Evaporadores de gas </asp:ListItem>
-                        <asp:ListItem> Galpon 1 - Galletas </asp:ListItem>
-                        <asp:ListItem> Galpon 2 - Papas </asp:ListItem>
-                        <asp:ListItem> Galpon 3 - Nachos</asp:ListItem>
-                        <asp:ListItem> Mantenimiento </asp:ListItem>
-                        <asp:ListItem> Oficina Administración</asp:ListItem>
-                        <asp:ListItem> Pasillo sazón de ají </asp:ListItem>
-                        <asp:ListItem> Tasques de gas </asp:ListItem>
-                        <asp:ListItem> Tostado de semilla </asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:TextBox ID="txt_area" runat="server" autoComplete="off"></asp:TextBox>
+                        <asp:AutoCompleteExtender
+                            id="autocompleteArea" runat="server" 
+                            TargetControlID="txt_area" ServiceMethod="GetAreas" 
+                            MinimumPrefixLength="1" CompletionInterval="100"
+                            EnableCaching="true" CompletionSetCount="10" CompletionListCssClass="CompletionList"
+                            CompletionListItemCssClass="CompletionlistItem"
+                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" >
+                        </asp:AutoCompleteExtender>
+
 
                     <label>Marca:</label>
                     <asp:TextBox ID="txt_marca" runat="server" autocomplete="off"></asp:TextBox>
@@ -143,12 +127,15 @@
                     <asp:TextBox ID="txt_codSistema" runat="server" autocomplete="off"></asp:TextBox>
 
                     <label>Estado Extintor:</label>
-                    <asp:DropDownList ID="dd_estadoExtintor" runat="server">
-                        <asp:ListItem>Selecciona un estado:</asp:ListItem>
-                        <asp:ListItem>Recarga</asp:ListItem>
-                        <asp:ListItem>Mantenimiento</asp:ListItem>
-                        <asp:ListItem>Nuevo</asp:ListItem>
-                    </asp:DropDownList>
+                        <asp:TextBox ID="txt_estadoExtintor" runat="server" autoComplete="off"></asp:TextBox>
+                        <asp:AutoCompleteExtender
+                            id="AutoCompleteEstado" runat="server" 
+                            TargetControlID="txt_estadoExtintor" ServiceMethod="getEstadoExtintor" 
+                            MinimumPrefixLength="1" CompletionInterval="100"
+                            EnableCaching="true" CompletionSetCount="10" CompletionListCssClass="CompletionList"
+                            CompletionListItemCssClass="CompletionlistItem"
+                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" >
+                        </asp:AutoCompleteExtender>
                     </div>
 
                 </div>
@@ -167,7 +154,7 @@
                 </div>
             </div>
             <div class="container-tittle ms-2">
-                <h2>Lista de registros </h2>
+                <h2> Lista de registros </h2>
             </div>
 
 
@@ -199,28 +186,7 @@
 
                         <asp:TemplateField HeaderText="Área">
                             <ItemTemplate>
-                                <asp:DropDownList ID="dd_area2" CssClass="dd_area" Width="160px" BackColor="Yellow" runat="server">
-                                    <asp:ListItem> Selecciona un área:</asp:ListItem>
-                                    <asp:ListItem> Almacén de materia prima 1 </asp:ListItem>
-                                    <asp:ListItem> Almacén de materia prima 2 </asp:ListItem>
-                                    <asp:ListItem> Almacén de materia prima 3 </asp:ListItem>
-                                    <asp:ListItem> Almacén de producto terminado </asp:ListItem>
-                                    <asp:ListItem> Almacén maestro </asp:ListItem>
-                                    <asp:ListItem> Alta tensión </asp:ListItem>
-                                    <asp:ListItem> Batido de semilla </asp:ListItem>
-                                    <asp:ListItem> Compresores </asp:ListItem>
-                                    <asp:ListItem> Container </asp:ListItem>
-                                    <asp:ListItem> envolsado de semilla </asp:ListItem>
-                                    <asp:ListItem> Evaporadores de gas </asp:ListItem>
-                                    <asp:ListItem> Galpon 1 - Galletas </asp:ListItem>
-                                    <asp:ListItem> Galpon 2 - Papas </asp:ListItem>
-                                    <asp:ListItem> Galpon 3 - Nachos</asp:ListItem>
-                                    <asp:ListItem> Mantenimiento </asp:ListItem>
-                                    <asp:ListItem> Oficina Administración</asp:ListItem>
-                                    <asp:ListItem> Pasillo sazón de ají </asp:ListItem>
-                                    <asp:ListItem> Tasques de gas </asp:ListItem>
-                                    <asp:ListItem> Tostado de semilla </asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:TextBox ID="txt_area" runat="server" Width="160px" BackColor="Yellow" autoComplete="off" text='<%# Bind("area") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
@@ -251,26 +217,21 @@
                         <asp:TemplateField HeaderText="Fecha de Carga">
                             <ItemTemplate>
                                 <div class="campo-fechaCarga" >
-                                    <asp:TextBox ID="txt_fdcarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off" onInput="validarFecha(this);"></asp:TextBox>
+                                    <asp:TextBox ID="txt_fdcarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off"></asp:TextBox>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>                        
 
                         <asp:TemplateField HeaderText="Fecha Proxima Carga">
                             <ItemTemplate>
-                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off" onInput="validarFecha(this);"></asp:TextBox>
+                                <asp:TextBox ID="txt_fproximacarga" runat="server" Width="80px" BackColor="yellow" autoComplete="off"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                        
                         <asp:TemplateField HeaderText="Estado Extintor">
                             <ItemTemplate>
-                                <asp:DropDownList ID="dd_eextintor2" runat="server" BackColor="Yellow" Width="100px">
-                                    <asp:ListItem>Selecciona un estado:</asp:ListItem>
-                                    <asp:ListItem>Recarga</asp:ListItem>
-                                    <asp:ListItem>Mantenimiento</asp:ListItem>
-                                    <asp:ListItem>Nuevo</asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:TextBox ID="txt_estadoExtintor" runat="server" Width="160px" BackColor="Yellow" autoComplete="off" text='<%# Bind("estadoextintor") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         
@@ -279,8 +240,6 @@
                                 <asp:TextBox ID="txt_pphidrostatica" runat="server" BackColor="Yellow" AutoComplete="off"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-
-                        <asp:BoundField DataField="nombreresp" HeaderText="Responsable" HtmlEncode="false"/>
 
                     </Columns>
                 </asp:GridView>

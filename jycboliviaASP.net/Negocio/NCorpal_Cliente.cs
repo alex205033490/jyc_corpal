@@ -53,6 +53,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return dtienda.get_ClienteNombreEspecifico(tiendanombre);
         }
+        internal DataSet get_ClienteCodigo(int codigo)
+        {
+            return dtienda.get_ClienteCodCliente(codigo);
+        }
 
         internal int get_CodigoCliente(string cliente)
         {

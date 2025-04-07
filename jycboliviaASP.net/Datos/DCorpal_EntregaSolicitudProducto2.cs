@@ -16,16 +16,26 @@ namespace jycboliviaASP.net.Datos
     {
         private conexionMySql conexion = new conexionMySql();
 
-        // LISTA DE TODOS LOS REGISTROS 
+        // List principal gv registros
         internal DataSet get_VWRegistrosEntregaSolicitudProductos(string estadoSolicitud)
         {
             NA_VariablesGlobales negocio = new NA_VariablesGlobales();
             string consultaStock = negocio.get_consultaStockProductosActual();
 
-            string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
-                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
-                "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
-                "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
+            string consulta = "SELECT " +
+                "sep.codigo, " +
+                "sep.nroboleta, " +
+                "sep.personalsolicitud, " +
+                "dsp.codproducto, " +
+                "p.producto, " +
+                "cc.codigo as 'codCliente', " +
+                "cc.tiendaname, " +
+                "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', " +
+                "sep.horaentrega, " +
+                "sep.estadosolicitud, " +
+                "dsp.tiposolicitud, " +
+                "dsp.cant as 'cantSolicitada', " +
+                "ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
                 "ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' " +
                 "from tbcorpal_solicitudentregaproducto sep " +
@@ -33,8 +43,11 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
-                "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' and sep.estado = true " +
-                "AND dsp.codvehiculo is not null AND dsp.cantentregada is null order by v.marca, v.modelo asc";
+                "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
+                "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' " +
+                "and sep.estado = true " +
+                "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
+                "order by sep.fechaGRA desc";
 
             return conexion.consultaMySql(consulta);
         }
@@ -46,7 +59,7 @@ namespace jycboliviaASP.net.Datos
             string consultaStock = negocio.get_consultaStockProductosActual();
 
             string consulta = "SELECT CONCAT(COALESCE(v.marca, ''), ' ', COALESCE(v.modelo, '')) AS 'Vehiculo', " +
-                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, " +
+                "v.placa, v.conductor, sep.codigo, sep.nroboleta, sep.personalsolicitud, dsp.codproducto, p.producto, cc.codigo as 'cliente', " +
                 "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', sep.horaentrega, sep.estadosolicitud, dsp.tiposolicitud, " +
                 "dsp.cant as 'cantSolicitada', ifnull(dsp.cantentregada, 0) as 'cantEntregada', " +
                 "CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) " +
@@ -56,10 +69,18 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
+                "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '" + estadoSolicitud + "' and sep.estado = true " +
                 "AND dsp.codvehiculo = "+codVehiculo+" AND dsp.cantentregada is null order by v.marca, v.modelo asc";
 
-            return conexion.consultaMySql(consulta);
+            List<MySqlParameter> parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@consultaStock", MySqlDbType.VarChar){Value = consultaStock},
+                new MySqlParameter("@estadoSolicitud", MySqlDbType.VarChar){ Value = estadoSolicitud},
+                new MySqlParameter("@codVehiculo", MySqlDbType.VarChar){Value = codVehiculo}
+
+            };
+            return conexion.consultaMySqlParametros(consulta, parametros);
         }
         /*
         internal DataSet get_detSolicitudProductos(int codigoSolicitud, int codProducto)
@@ -103,7 +124,7 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoProducto, float cantEntregado, float restarStock)
+        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoProducto, float cantEntregado, float restarStock, int coduser)
         {
                 bool banderaResultado = false;
                 string consulta0 = "UPDATE tbcorpal_producto set tbcorpal_producto.stock = tbcorpal_producto.stock - " +
@@ -114,16 +135,19 @@ namespace jycboliviaASP.net.Datos
 
                 if (bandera0)
                 {
-                    string consulta = "update tbcorpal_detalle_solicitudproducto " +
-                        " set tbcorpal_detalle_solicitudproducto.cantentregada = '" + cantEntregado.ToString().Replace(',', '.') + "', " +
-                        " tbcorpal_detalle_solicitudproducto.fechaentrega_car = current_date(), "+
-                        " tbcorpal_detalle_solicitudproducto.horaentrega_car = current_time() "+
-                        " where tbcorpal_detalle_solicitudproducto.codsolicitud = " + codigoSolicitud + " and " +
-                        " tbcorpal_detalle_solicitudproducto.codproducto = " + codigoProducto + " ";
+                    string consulta = "update tbcorpal_detalle_solicitudproducto dsp" +
+                        " set dsp.cantentregada = '" + cantEntregado.ToString().Replace(',', '.') + "', " +
+                        " dsp.fechaentrega_car = current_date(), " +
+                        " dsp.horaentrega_car = current_time(), " +
+                        " dsp.coduserentrega_car = "+coduser+" "+
+                        " where dsp.codsolicitud = " +codigoSolicitud+ " and " +
+                        " dsp.codproducto = " + codigoProducto + " ";
                     banderaResultado = conexion.ejecutarMySql(consulta);
                 }
-                    return banderaResultado;
+            
+            return banderaResultado;
         }
+
 
         //UPDATE ANULAR SOLICITUD
         internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int>codProducto)
@@ -154,10 +178,48 @@ namespace jycboliviaASP.net.Datos
                 }
             }
         }
-
-        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codUserEntrego)
+        internal bool update_RetirarSolicitud2(List<int> codSolicitud, List<int> codProducto)
         {
-            string consulta = "UPDATE tbcorpal_detalle_solicitudProducto dd " +
+            string codSolicitudStr = string.Join(",", codSolicitud);
+            string codProductoStr = string.Join(",", codProducto);
+
+            if(string.IsNullOrEmpty(codSolicitudStr) || string.IsNullOrEmpty(codProductoStr))
+            {
+                throw new ArgumentException("Las listas de códigos no deben estar vacias.");
+            }
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto dsp " +
+                "set dsp.codvehiculo = null, dsp.fechaasignacion_car = null, " +
+                "dsp.horaasignacion_car = null, dsp.coduserasignacion_car = null " +
+                "where dsp.codsolicitud in (" + codSolicitudStr + ") " +
+                "and dsp.codProducto in (" + codProductoStr + ") ;";
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                try
+                {
+                    comand.Parameters.AddWithValue("@codSolicitudStr", codSolicitud);
+                    comand.Parameters.AddWithValue("@codProductoStr", codProducto);
+                    return conexion.ejecutarMySql2(comand);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al ejecutar la consulta: " + ex.Message);
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codper,string personal)
+        {
+            /*string consulta = "UPDATE tbcorpal_detalle_solicitudProducto dd " +
                 "JOIN ( " +
                 "SELECT codsolicitud " +
                 "FROM tbcorpal_detalle_solicitudProducto " +
@@ -165,16 +227,31 @@ namespace jycboliviaASP.net.Datos
                 "GROUP BY codsolicitud " +
                 "HAVING SUM(CASE WHEN cantentregada IS NULL OR cantentregada < 0 THEN 1 ELSE 0 END) = 0 " +
                 ") valid_check ON dd.codsolicitud = valid_check.codsolicitud " +
-                "SET dd.fechaentrega_car = CURRENT_DATE(), dd.horaentrega_car = CURRENT_TIME(), dd.coduserentrega_car = @coduser " +
+                "SET dd.fechaentrega_car = CURRENT_DATE(), " +
+                "dd.horaentrega_car = CURRENT_TIME(), " +
+                "dd.coduserentrega_car = @coduser " +
                 "WHERE dd.codsolicitud = @codsolicitud;";
+            */
+            string consulta = "UPDATE tbcorpal_solicitudentregaproducto sep " +
+                "SET sep.fechacierre = current_date(), " +
+                "sep.horacierre = current_time(), " +
+                "sep.codperentregoproducto = @codper, " +
+                "sep.personalentregoproducto = @personal, " +
+                "sep.estadosolicitud = 'Cerrado' " +
+                "WHERE sep.codigo = @codigo " +
+                "AND NOT EXISTS ( " +
+                "SELECT 1 FROM tbcorpal_detalle_solicitudproducto dsp " +
+                "WHERE dsp.codsolicitud = @codigo AND dsp.cantentregada IS NULL); ";
 
             using (MySqlCommand comand = new MySqlCommand(consulta))
             {
-                comand.Parameters.AddWithValue("@codsolicitud", codSolicitud);
-                comand.Parameters.AddWithValue("@coduser", codUserEntrego);
-                return conexion.ejecutarMySql2(comand);
-            }
+                comand.Parameters.AddWithValue("@codigo", codSolicitud);
+                comand.Parameters.AddWithValue("@codper", codper);
+                comand.Parameters.AddWithValue("@personal", personal);
 
+                bool success = conexion.ejecutarMySql2(comand);
+                return success;
+            }
         }
 
         internal DataSet get_EntregasProductoaCamion(int codigoCamion)
@@ -197,5 +274,48 @@ namespace jycboliviaASP.net.Datos
                     consulta +=  " order by v.marca, v.modelo asc";
             return conexion.consultaMySql(consulta);
         }
+
+        //mostrar vehiculo en dd
+        internal DataSet get_showVehiculoDD()
+        {
+            string consulta = "select v.codigo, v.marca, v.modelo, v.placa, v.conductor, " +
+                "CONCAT(COALESCE(v.marca, ''), ' - ', " +
+                "COALESCE(v.`modelo`, ''), " +
+                "' placa: ', " +
+                "COALESCE(v.placa, ''))" +
+                "as 'detalle' " +
+                "from tbcorpal_vehiculos v " +
+                "order by v.marca asc";
+            return conexion.consultaMySql(consulta);
+        }
+        // ver detalle de vehiculo en GV
+        internal DataSet GET_detalleVehiculoGV(int codigo)
+        {
+            string consulta = "select v.codigo, v.cargacajas, v.capacidad, v.medida, v.conductor " +
+                "from tbcorpal_vehiculos v where v.codigo = @codigo";
+            MySqlParameter paramCodigo = new MySqlParameter("@codigo", MySqlDbType.Int64);
+            paramCodigo.Value = codigo;
+            return conexion.consultaMySqlParametros(consulta, new List<MySqlParameter> { paramCodigo });
+        }
+
+        //asignar vehiculo a pedido
+        internal bool UPDATE_ADDvehiculoAPedido(int codVehiculo, int codUser, int codSolicitud, int codProducto)
+        {
+            string consulta = "UPDATE tbcorpal_detalle_solicitudproducto ds " +
+                "SET ds.codvehiculo = @codVehiculo, ds.fechaasignacion_car = current_date(), " +
+                "ds.horaasignacion_car = current_time(), ds.coduserasignacion_car = @codUser " +
+                "WHERE ds.codsolicitud = @codSolicitud and ds.codProducto = @codProducto";
+
+            using (MySqlCommand comand = new MySqlCommand(consulta))
+            {
+                comand.Parameters.AddWithValue("@codVehiculo", codVehiculo);
+                comand.Parameters.AddWithValue("@codUser", codUser);
+                comand.Parameters.AddWithValue("@codSolicitud", codSolicitud);
+                comand.Parameters.AddWithValue("@codProducto", codProducto);
+
+                return conexion.ejecutarMySql2(comand);
+            }
+        }
+
     }
 }

@@ -251,7 +251,7 @@ namespace jycboliviaASP.net.Presentacion
                             int.TryParse(tuplasItemVendido.Tables[0].Rows[0][10].ToString(), out DetProd_CodigoUnidadMedida);
 
                             string criterioBusqueda = DetProd_CodigoProducto.Trim();
-
+                            
                             if (string.IsNullOrEmpty(criterioBusqueda)) {
                                 errorDatos = true;
                                 break;

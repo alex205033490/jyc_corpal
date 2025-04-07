@@ -41,7 +41,7 @@ namespace jycboliviaASP.net.Negocio
 
                 string json = JsonConvert.SerializeObject(datoP);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync();
@@ -49,7 +49,7 @@ namespace jycboliviaASP.net.Negocio
                 string token = loginResponse.Resultado.Token.ToString();
 
                 //construccion de la url
-                string url = "http://192.168.11.63/ServcioUponApi/api/v1/cuentas/{usuario}";
+                string url = "http://192.168.11.62/ServcioUponApi/api/v1/cuentas/{usuario}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 

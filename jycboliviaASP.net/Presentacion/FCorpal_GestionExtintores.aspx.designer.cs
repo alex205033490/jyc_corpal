@@ -24,13 +24,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.UpdatePanel updatePanelRegistrar;
 
         /// <summary>
-        /// Control dd_area.
+        /// Control txt_area.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_area;
+        protected global::System.Web.UI.WebControls.TextBox txt_area;
+
+        /// <summary>
+        /// Control autocompleteArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender autocompleteArea;
 
         /// <summary>
         /// Control txt_marca.
@@ -132,13 +141,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txt_codSistema;
 
         /// <summary>
-        /// Control dd_estadoExtintor.
+        /// Control txt_estadoExtintor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_estadoExtintor;
+        protected global::System.Web.UI.WebControls.TextBox txt_estadoExtintor;
+
+        /// <summary>
+        /// Control AutoCompleteEstado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender AutoCompleteEstado;
 
         /// <summary>
         /// Control btn_anularRegistro.

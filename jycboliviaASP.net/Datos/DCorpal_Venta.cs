@@ -1,7 +1,9 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Web;
 using static jycboliviaASP.net.Negocio.NA_APIcompras;
@@ -22,8 +24,13 @@ namespace jycboliviaASP.net.Datos
             return cnx.ejecutarMySql(consulta);
         }
 
-        internal bool crearVenta(int codClient, string cliente, string correoCliente, string municipio, string telefono, string direccion, string numeroFactura, string nombreRazonSocial, string numeroDocumento, int codigoMetodoPago, decimal montoTotal, int codigoMoneda, decimal tipoCambio, decimal montoTotalMoneda, decimal descuentoAdicional, string leyendaF, int codresp, string responsable, bool factura, string fechaentrega, int codsolicitudentregaproducto)
+        internal bool crearVenta(int codClient, string cliente, string correoCliente, string municipio, string telefono, string direccion, string numeroFactura,
+    string nombreRazonSocial, string numeroDocumento, int codigoMetodoPago, decimal montoTotal, int codigoMoneda, decimal tipoCambio, decimal montoTotalMoneda,
+    decimal descuentoAdicional, string leyendaF, int codresp, string responsable, bool factura, string fechaentrega, int codsolicitudentregaproducto)
         {
+
+
+
             string consulta = "insert into tbcorpal_venta( " +
                 " fechagra,horagra,codigoCliente, cliente, correoCliente, " +
                 " municipio,telefono,numeroFactura, direccion, " +
@@ -32,14 +39,75 @@ namespace jycboliviaASP.net.Datos
                 " tipoCambio,montoTotalMoneda,descuentoAdicional, " +
                 " leyendaF,codresp, " +
                 " responsable,factura,fechaentrega,estadoventa,estado,cicliente,vaciadoupon,codsolicitudentregaproducto) " +
-                " values( current_date(), current_time(), "+ codClient + ", '"+cliente+"', '"+correoCliente+"', " +
-                "'"+municipio+"','"+telefono+"','"+numeroFactura+"', '"+direccion+"', " +
-                "'"+nombreRazonSocial+"', '"+numeroDocumento+"',"+ codigoMetodoPago + "," +
-                "'"+ montoTotal.ToString().Replace(',','.') + "',"+ codigoMoneda + ", " +
-                "'"+tipoCambio.ToString().Replace(',', '.')+"','"+ montoTotalMoneda.ToString().Replace(',','.')+ "','"+ descuentoAdicional.ToString().Replace(',','.') + "', " +
-                "'"+leyendaF+"',"+ codresp + "," +
-                "'"+ responsable + "',"+factura+", "+fechaentrega+",'Abierto',1,'"+ numeroDocumento + "',false,"+ codsolicitudentregaproducto + ");";
+                " values( current_date(), current_time(), " + codClient + ", '" + cliente + "', '" + correoCliente + "', " +
+                "'" + municipio + "','" + telefono + "','" + numeroFactura + "', '" + direccion + "', " +
+                "'" + nombreRazonSocial + "', '" + numeroDocumento + "'," + codigoMetodoPago + "," +
+                "'" + montoTotal.ToString().Replace(',', '.') + "'," + codigoMoneda + ", " +
+                "'" + tipoCambio.ToString().Replace(',', '.') + "','" + montoTotalMoneda.ToString().Replace(',', '.') + "','" + descuentoAdicional.ToString().Replace(',', '.') + "', " +
+                "'" + leyendaF + "'," + codresp + "," +
+                "'" + responsable + "'," + factura + ", " + fechaentrega + ",'Abierto',1,'" + numeroDocumento + "',false," + codsolicitudentregaproducto + ");";
             return cnx.ejecutarMySql(consulta);
+        }
+        
+        ////////// VENTAS OPCIONAL uso adm
+        
+        internal bool crearVentas3(int codClient, string cliente, int codigoSolicitud, string correoCliente, string municipio, string telefono, string numeroFactura, string direccion, 
+            string nombreRazonSocial, string numeroDocumento, int codigoMetodoPago, decimal montoTotal, int codigoMoneda, decimal tipocambio, decimal montoTotalMoneda, 
+            decimal descuentoAdicional, string leyendaF, int codresp, string responsable, int factura, string fechaentrega, int codsolicitudentregaproducto)
+        {
+            try
+            {
+                string consulta = "INSERT INTO tbcorpal_venta (fechagra, horagra, codigoCliente, cliente, correoCliente, municipio, telefono, numeroFactura, direccion, " +
+                    "nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, " +
+                    "descuentoAdicional, leyendaF, codresp, responsable, factura, fechaentrega, codsolicitudentregaproducto, estadoventa, estado, vaciadoupon, cicliente) " +
+                                  "SELECT current_date(), current_time(), @codClient, @cliente, @correoCliente, @municipio, @telefono, @numeroFactura, @direccion, " +
+                                  "@nombreRazonSocial, @numeroDocumento, @codigoMetodoPago, @montoTotal, @codigoMoneda, @tipoCambio, @montoTotalMoneda, " +
+                                  "@descuentoAdicional, @leyendaF, @codresp, @responsable, @factura, @fechaentrega, @codsolicitudentregaproducto, 'Abierto', 1, false, @numeroDocumento " +
+                                  "FROM tbcorpal_solicitudentregaproducto sep " +
+                                  "WHERE sep.codigo = @codigoSolicitud " +
+                                  "AND sep.fechacierre IS NOT NULL " +
+                                  "AND sep.horacierre IS NOT NULL " +
+                                  "AND sep.estadosolicitud = 'Cerrado';";
+
+                Console.WriteLine("CONSULTA GENERADA: " + consulta);
+
+                // Usar parámetros en lugar de concatenación directa
+                var parametros = new List<MySqlParameter>
+        {
+            new MySqlParameter("@codClient", codClient),
+            new MySqlParameter("@cliente", cliente),
+            new MySqlParameter("@correoCliente", correoCliente),
+            new MySqlParameter("@municipio", municipio),
+            new MySqlParameter("@telefono", telefono),
+            new MySqlParameter("@numeroFactura", numeroFactura),
+            new MySqlParameter("@direccion", direccion),
+
+            new MySqlParameter("@nombreRazonSocial", nombreRazonSocial),
+            new MySqlParameter("@numeroDocumento", numeroDocumento),
+            new MySqlParameter("@codigoMetodoPago", codigoMetodoPago),
+            new MySqlParameter("@montoTotal", montoTotal),
+            new MySqlParameter("@codigoMoneda", codigoMoneda),
+            new MySqlParameter("@tipoCambio", tipocambio),
+            new MySqlParameter("@montoTotalMoneda", montoTotalMoneda),
+
+            new MySqlParameter("@descuentoAdicional", descuentoAdicional),
+            new MySqlParameter("@leyendaF", leyendaF),
+            new MySqlParameter("@codresp", codresp),
+            new MySqlParameter("@responsable", responsable),
+            new MySqlParameter("@factura", factura),
+            new MySqlParameter("@fechaentrega", fechaentrega),
+            new MySqlParameter("@codsolicitudentregaproducto", codsolicitudentregaproducto),
+
+            new MySqlParameter("@codigoSolicitud", codigoSolicitud)
+        };
+
+                return cnx.ejecutarMySql2arg(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al insertar la venta: " + ex.Message);
+                return false;
+            }
         }
 
         internal DataSet get_allVentasParaVaciarUpon(string cliente)
@@ -109,9 +177,43 @@ namespace jycboliviaASP.net.Datos
                 " ifnull(dp.cantentregada,0), null as 'codmedida', " +
                 " pp.medida, pp.precio, 0 , ifnull((dp.cantentregada * pp.precio),0) " +
                 " from tbcorpal_detalle_solicitudproducto dp , " +
-                " tbcorpal_producto pp " +
+                " tbcorpal_producto pp" +
                 " where dp.codproducto = pp.codigo and dp.codsolicitud = "+codigoSolicitud;
             return cnx.ejecutarMySql(consulta);
+        }
+
+        ////////// POST productos a venta uso adm
+        internal bool insertarTodoslosProducosAVenta3(int codigoSolicitud)
+        {
+            try
+            {
+                string consulta = "insert into tbcorpal_detalleventasproducto ( " +
+                        "codventa, codprod, descripcion, cantidad, codmedida, medida, " +
+                        "precioUnitario, montoDescuento, precioTotal) " +
+                        "select v.codigo, dsp.codproducto, p.producto, " +
+                        "ifnull(dsp.cantentregada ,0), null, p.medida, p.precio, 0, " +
+                        "ifnull((dsp.cantentregada * p.precio), 0) " +
+                        "from tbcorpal_venta v " +
+                        "join tbcorpal_solicitudentregaproducto sep on sep.codigo = v.codsolicitudentregaproducto " +
+                        "join tbcorpal_detalle_solicitudproducto dsp on dsp.codsolicitud = sep.codigo " +
+                        "join tbcorpal_producto p on p.codigo = dsp.codproducto " +
+                        "where dsp.codsolicitud = @codigoSolicitud " +
+                        "and v.estado = 1 and v.estadoventa = 'Abierto' " +
+                        "and sep.estadosolicitud = 'Cerrado' and sep.estado = 1 ";
+
+                Console.WriteLine("Consulta generada: " + consulta);
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codigoSolicitud", codigoSolicitud)
+                };
+                return cnx.ejecutarMySql2arg(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error al insertar los productos a la venta: " + ex.Message);
+                return false;
+            }
         }
     }
 }

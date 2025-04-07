@@ -35,7 +35,7 @@ namespace jycboliviaASP.net.Negocio
             var json = JsonConvert.SerializeObject(loginData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync();
@@ -58,7 +58,7 @@ namespace jycboliviaASP.net.Negocio
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/produccion/parteproduccion", content);
+            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/produccion/parteproduccion", content);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content?.ReadAsStringAsync();
@@ -110,14 +110,14 @@ namespace jycboliviaASP.net.Negocio
                 string json = JsonConvert.SerializeObject(datoP);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync();
                 var loginResponse = JsonConvert.DeserializeObject<dynamic>(responseBody);
                 string token = loginResponse.Resultado.Token.ToString();
 
-                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/produccion/parteproduccion/{usuario}/{Uri.EscapeDataString(numProduccion)}";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/produccion/parteproduccion/{usuario}/{Uri.EscapeDataString(numProduccion)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 

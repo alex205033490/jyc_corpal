@@ -32,7 +32,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             if(!IsPostBack)
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
                 var productosNom = await ObtenerListNomProd(token);
                 var productosCod = await ObtenerListCodProd(token);
                 var proveedor = await ObtenerListCodProveedor(token);
@@ -80,7 +80,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             try
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 var APIproducto = new NA_APIproductos();
                 List<productoCriterioGet> productoDTO = await APIproducto.get_ProductoCriterioAsync(token, criterioBusqueda);
@@ -159,7 +159,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 var apiProd = new NA_APIproductos();
                 var prodCodigo = await apiProd.get_ProductoCodigoAsync("adm", "123", criterioBusqueda);
@@ -232,7 +232,7 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
 
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
                 
                 var BuscCodProd = new NA_APIproductos();
                 List<productoCriterioGet> egresos = await BuscCodProd.get_ProductoVentasCriterioAsync(token, criterioBusqueda);
@@ -341,7 +341,7 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 NA_APIproductos pp = new NA_APIproductos();
 

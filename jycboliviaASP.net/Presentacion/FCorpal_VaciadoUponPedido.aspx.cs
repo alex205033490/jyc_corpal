@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("No se seleccionaron pedidos.");
                 return;
             }
-            string token = await ObtenerTokenAsync("adm", "123");
+            string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
             if (string.IsNullOrEmpty(token))
             {
@@ -215,12 +215,12 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
-                string fecha = "2024-11-30T00:00:00";
-                string referencia = "Prueba referencia pedido 03/01";
+                string fecha = "2025-04-01T00:00:00";
+                string referencia = "Referencia PruebaRef Vaciado";
                 int codigoCliente = Convert.ToInt32(row.Cells[5].Text);
                 decimal importeProductos = Convert.ToDecimal(row.Cells[7].Text);
                 decimal importeTotal = Convert.ToDecimal(row.Cells[7].Text);
-                string glosa = "Glosa pedido prueba 03/01";
+                string glosa = "Glosa PruebaGlo Vaciado";
                 List<ItemPedidoDTO> detalles = ObtenerDetalleProducto(codSolicitud);
                 string usuario = "adm";
 

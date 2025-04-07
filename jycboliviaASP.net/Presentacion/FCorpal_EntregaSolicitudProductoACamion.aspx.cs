@@ -19,9 +19,7 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             this.Title = Session["BaseDatos"].ToString();
-
             if (tienePermisoDeIngreso(143) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
@@ -61,12 +59,6 @@ namespace jycboliviaASP.net.Presentacion
             gv_listRegistros.DataBind();
         }
 
-        // SELECTED GV registros
-        protected void gv_listRegistros_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         // metodo mostrar 1 Registro
         /*private void seleccionarRegistro()
         {
@@ -97,12 +89,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }*/
 
-        private void showalert(string mensaje)
-        {
-            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
-        }
-
+        
         // BTN buscar registro
         protected void btn_buscarRegistro_Click(object sender, EventArgs e)
         {
@@ -119,7 +106,8 @@ namespace jycboliviaASP.net.Presentacion
             gv_listRegistros.DataBind();
 
         }
-        // AUTOCOMPLETE
+        
+        // AUTO nro boletas
         [WebMethod]
         [ScriptMethod]
         public static string[] getListNroBoletas (string prefixText, int count)
@@ -137,6 +125,8 @@ namespace jycboliviaASP.net.Presentacion
             }
             return lista;
         }
+        
+        // AUTO vendedor
         [WebMethod]
         [ScriptMethod]
         public static string[] getListPersonalSolicitante(string prefixText, int count)
@@ -157,15 +147,7 @@ namespace jycboliviaASP.net.Presentacion
 
 
 
-
-
-
-
-
-
-
-
-        // Cargar Vehiculos 
+        // Cargar Vehiculos en DD
         private void cargarVehiculos()
         {
             NA_SolicitudEntregaProductoACamion negocio = new NA_SolicitudEntregaProductoACamion();
@@ -185,29 +167,12 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-       
 
-
-        // DD VEHICULO
-
-
+        // BTN Limpiar formulario
         protected void btn_Limpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
         }
-
-        private void LimpiarCampos()
-        {
-            txt_nroSolicitud.Text = string.Empty;
-            txt_SolicitanteProducto.Text = string.Empty;
-            dd_vehiculos.SelectedIndex = 0;
-            gv_detCar.DataSource = null;
-            gv_detCar.DataBind();
-
-            mostrarRegistrosSolicitudProductos("", "", "Abierto");
-        }
-
-        
 
         // UPDATE agregar vehiculo a pedido
         protected void btn_registrar_Click(object sender, EventArgs e)
@@ -251,7 +216,24 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error: {ex.Message}");
             }
         }
+        private bool IsVehiculoSeleccionado()
+        {
+            return dd_vehiculos.SelectedIndex != 0;
+        }
 
+        // seleccionar Chk
+        private bool ProductosSeleccionados()
+        {
+            foreach (GridViewRow row in gv_listRegistros.Rows)
+            {
+                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
+                if (chkSelect != null && chkSelect.Checked)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         private int obtenerCodResponsable()
         {
@@ -296,22 +278,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             return resultadoGeneral;
         }
-        private bool IsVehiculoSeleccionado()
-        {
-            return dd_vehiculos.SelectedIndex != 0;
-        }
-        private bool ProductosSeleccionados()
-        {
-            foreach(GridViewRow row in gv_listRegistros.Rows)
-            {
-                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
-                if(chkSelect != null && chkSelect.Checked)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+
 
         private void MostrarDetVehiculos()
         {
@@ -321,6 +288,7 @@ namespace jycboliviaASP.net.Presentacion
             gv_detCar.DataBind();
         }
 
+        // DD detalle vehiculos
         protected void dd_vehiculos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -348,18 +316,37 @@ namespace jycboliviaASP.net.Presentacion
 
         }
 
-        protected void bt_verRecibo_Click(object sender, EventArgs e)
+        // mensaje JS
+        private void showalert(string mensaje)
         {
-            if (!IsVehiculoSeleccionado())
-            {
-                showalert("Debe seleccionar 1 vehiculo.");
-                return;
-            }
-
-            int codCar = int.Parse(dd_vehiculos.SelectedValue);
-            Session["codigoCamion"] = codCar;
-            Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
-            Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
+
+        private void LimpiarCampos()
+        {
+            txt_nroSolicitud.Text = string.Empty;
+            txt_SolicitanteProducto.Text = string.Empty;
+            dd_vehiculos.SelectedIndex = 0;
+            gv_detCar.DataSource = null;
+            gv_detCar.DataBind();
+
+            mostrarRegistrosSolicitudProductos("", "", "Abierto");
+        }
+
+            protected void bt_verRecibo_Click(object sender, EventArgs e)
+            {
+                if (!IsVehiculoSeleccionado())
+                {
+                    showalert("Debe seleccionar 1 vehiculo.");
+                    return;
+                }
+
+                int codCar = int.Parse(dd_vehiculos.SelectedValue);
+                Session["codigoCamion"] = codCar;
+                Session["ReporteGeneral"] = "Reporte_AsignacionProductoCamion";
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+
+            }
     }
 }

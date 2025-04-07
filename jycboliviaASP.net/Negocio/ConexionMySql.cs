@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Data.Entity.Core.Metadata.Edm;
 
 
 
@@ -287,6 +288,30 @@ namespace jycboliviaASP.net.Negocio
             MySqlConexion.Close();
             return datosMysql;
         }
+        public DataSet consultaMySqlParametros(string consulta, List<MySqlParameter> parametros)
+        {
+            try
+            {
+                MySqlComando = new MySqlCommand(consulta, MySqlConexion);
+
+                foreach(var parametro in parametros)
+                {
+                    MySqlComando.Parameters.Add(parametro);
+                }
+                MySqlDataAdapter mdatos = new MySqlDataAdapter(MySqlComando);
+
+                MySqlConexion.Open();
+                DataSet datosMysql = new DataSet();
+                mdatos.Fill(datosMysql);
+                return datosMysql;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error en consulta Mysql: {ex.Message}");
+                return null;
+            }
+        }
+
 
 
         public DataSet RellenarConConsulta(DataSet tablaMySql,string consulta)

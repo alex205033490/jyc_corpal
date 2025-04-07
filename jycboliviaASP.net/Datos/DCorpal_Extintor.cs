@@ -1,6 +1,7 @@
 ﻿using jycboliviaASP.net.Negocio;
 using Microsoft.Reporting.Map.WebForms;
 using MySql.Data.MySqlClient;
+//using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,8 +48,8 @@ namespace jycboliviaASP.net.Datos
         {
             string consulta = "Select codigo, fechagra, horagra, detalle, area, agenteextintor, marca, " +
                 "capacidad, codSistema, fechadecarga, fechaproximacarga, estadoextintor, " +
-                "anioproximapruebahidrostatica, nombreresp from tbcorpal_extintores where estado = 1 " +
-                "and area like '%" +area+ "%';";
+                "anioproximapruebahidrostatica, nombreresp from tbcorpal_extintores where " +
+                " area like '%" +area+ "%' and estado=1 order by area asc;";
 
             return conexion.consultaMySql(consulta);
         }

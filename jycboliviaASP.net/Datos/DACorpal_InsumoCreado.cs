@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
-using MySql.Data.MySqlClient;
-
-using static AjaxControlToolkit.AsyncFileUpload.Constants;
 using System.Globalization;
+using MySql.Data.MySqlClient;
+//using MySqlConnector;
 
 namespace jycboliviaASP.net.Datos
 {
