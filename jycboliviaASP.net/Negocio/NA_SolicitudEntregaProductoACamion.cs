@@ -20,6 +20,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.get_RegistrosSolicitudPedidos(nroSolicitud, solicitante, estadoSolicitante);
         }
+        internal DataSet get_RegistrosSolicitudPedidos2(string nroSolicitud, string solicitante, string estadoSolicitud)
+        {
+            return datos.get_RegistrosSolicitudPedidos2(nroSolicitud, solicitante, estadoSolicitud);
+        }
 
         internal DataSet get_DetSolicitudesRealizadas(int codigoSolicitud)
         {

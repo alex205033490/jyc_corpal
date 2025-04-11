@@ -34,8 +34,6 @@
 
 .form_buscarCar{
     padding:5px;
-    background-color: #ff9f0547;
-    border: 1px solid #ebdb93;
 }
 
 
@@ -74,9 +72,37 @@
     border:1px solid white !important;
 }
 
+
 .vista1 {
     border: double #666666;
     width: auto;
     height: 250px;
     overflow: auto;
+}
+
+.form-control:focus, .form-select:focus{
+    border: 2px solid black !important;
+    box-shadow: 0 0 7px 2px black !important;
+}
+
+.btn-success:hover{
+    border:1px solid black;
+    box-shadow: 0 0 10px green;
+}
+.btn-danger:hover {
+    border: 1px solid black;
+    box-shadow: 0 0 10px red;
+}
+.btn-primary:hover {
+    border: 1px solid black;
+    box-shadow: 0 0 10px blue;
+}
+.btn-warning:hover {
+    border: 1px solid black;
+    box-shadow: 0 0 10px orange;
+}
+.dropdown-toggle:focus-visible {
+    background-color: #1f1d1dd1 !important;
+    box-shadow: 0 0 11px 1px #4f3e3ea6 !important;
+
 }

@@ -102,6 +102,20 @@
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#gVehiculos-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi bi-layout-text-window-reverse"></i><span>Vehiculos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="gVehiculos-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a href="../Presentacion/FCorpal_GestionarVehiculos.aspx" id="mn_GestionarVehiculos" runat="server"><i class="bi bi-circle"></i><span>Gestionar Vehiculos</span></a></li>
+            </ul>
+        </li>
+
+
+
+
+
+
+        <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#bancarizacion-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>Bancarizacion</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
@@ -115,13 +129,14 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#extintores-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Distribución de Extintores</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi bi-layout-text-window-reverse"></i><span>Distribución de Extintores</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="extintores-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li><a href="../Presentacion/FCorpal_GestionExtintores.aspx" id="mn_GestionExtintores" runat="server"><i class="bi bi-circle"></i><span>Gestión de Extintores</span></a></li>
+                <li><a href="../Presentacion/FCorpal_GestionExtintores.aspx" id="mn_GestionExtintores" runat="server"><i class="bi bi-circle"></i><span>Gestiòn de Extintores</span></a></li>
             </ul>
-        </li>
 
+        </li>
+        
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#consultaG-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i><span>Consultas Generales</span><i class="bi bi-chevron-down ms-auto"></i>

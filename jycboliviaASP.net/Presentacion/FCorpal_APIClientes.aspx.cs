@@ -102,7 +102,7 @@ namespace jycboliviaASP.net.Presentacion
         private async Task RegisterEmpresaAsync()
         {
             string usuario = "adm";
-            string password = "123";
+            string password = "Corpal205010180";
             var na_clienteapi = new NA_APIclientes();
 
             var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
@@ -146,7 +146,7 @@ namespace jycboliviaASP.net.Presentacion
         private async Task RegisterClienteAsync()
         {
             string usuario = "adm";
-            string password = "123";
+            string password = "Corpal205010180";
             var na_clienteapi = new NA_APIclientes();
 
             var token = await na_clienteapi.ObtenerTokenAsync(usuario, password);
@@ -235,7 +235,7 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                string token = await ObtenerTokenAsync("adm","123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 if (string.IsNullOrEmpty(token))
                 {
@@ -419,7 +419,7 @@ namespace jycboliviaASP.net.Presentacion
 
             try
             {
-                string token = await ObtenerTokenAsync("adm", "123");
+                string token = await ObtenerTokenAsync("adm", "Corpal205010180");
 
                 if (string.IsNullOrEmpty(token))
                 {

@@ -1,0 +1,39 @@
+﻿.form-p1, .form-p2 {
+    background-color: #ff92002e;
+}
+
+.form-registro{
+    background-color: #d9ae8517;
+    font-size:14px;
+}
+
+.form-control:focus {
+color: black !important;
+background-color: white !important;
+border-color: black !important;
+box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 63% ) !important
+}
+
+.container_listaVehiculos{
+    margin: 20px;
+    font-size: 0.9rem;
+    height: 350px;
+}
+
+.table-sticky th {
+    position: sticky !important;
+    top: 0 !important;
+    color: white !important;
+    z-index: 100 !important;
+    background-color: black !important;
+
+}
+.table-sticky td {
+    text-align: center;
+    padding: 5px;
+}
+
+.gv_listaVehiculos tr.highlighted td {
+    background-color: #f67d00 !important;
+    box-shadow: 0px 0px 3px 1px black;
+}

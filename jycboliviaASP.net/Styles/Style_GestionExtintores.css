@@ -73,3 +73,34 @@ input[type=text], input[type="number"], select {
     background-color: #ff870052 !important;
     border: 2px solid white !important;
 }
+
+
+/*AUTOCOMPLETE*/
+/*  AutoComplete  */
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: lightgrey;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: medium;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: medium;
+}
+
+.CompletionListMighlightedItem {
+    background-color: blue;
+    color: White;
+    /* color: Lime;
+               padding: 3px 20px;
+                text-decoration: none;           
+                background-repeat: repeat-x;
+                outline: 0;*/
+}

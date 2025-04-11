@@ -45,7 +45,7 @@ namespace jycboliviaASP.net.Negocio
                 var json = JsonConvert.SerializeObject(loginData);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/auth/login", content);
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/auth/login", content);
             
                 response.EnsureSuccessStatusCode();
 
@@ -77,7 +77,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 string token = await GetTokenAsync(usuario, password);
 
-                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos/{usuario}/{Uri.EscapeDataString(numeroIngreso)}";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos/{usuario}/{Uri.EscapeDataString(numeroIngreso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await httpClient.GetAsync(url);
@@ -112,7 +112,7 @@ namespace jycboliviaASP.net.Negocio
             // Obtener el token de autenticacion
             {
                 string token = await GetTokenAsync(usuario, password);
-                string url = "http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos";
+                string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos";
                 if (!string.IsNullOrEmpty(criterio))
                 {
                     url += $"?criterio={Uri.EscapeDataString(criterio)}";
@@ -159,7 +159,7 @@ namespace jycboliviaASP.net.Negocio
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/inventarios/ingresos", content);
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/ingresos", content);
                 
                 if(!response.IsSuccessStatusCode)
                 {
@@ -217,7 +217,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 string token = await GetTokenAsync(usuario, password);
 
-                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/inventarios/egresos/{usuario}/{Uri.EscapeDataString(numIngreso)}";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos/{usuario}/{Uri.EscapeDataString(numIngreso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await httpClient.GetAsync(url);
@@ -246,7 +246,7 @@ namespace jycboliviaASP.net.Negocio
             try
             {
                 string token = await GetTokenAsync(usuario, password);
-                string url = "http://192.168.11.63/ServcioUponApi/api/v1/inventarios/egresos";
+                string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos";
                 if (!string.IsNullOrEmpty(criterio))
                 {
                     url += $"?criterio={Uri.EscapeDataString(criterio)}";
@@ -277,7 +277,7 @@ namespace jycboliviaASP.net.Negocio
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/inventarios/egresos", content);
+                var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/egresos", content);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -351,7 +351,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 string token = await GetTokenAsync(usuario, password);
 
-                string url = "http://192.168.11.63/ServcioUponApi/api/v1/inventarios/traspasos";
+                string url = "http://192.168.11.62/ServcioUponApi/api/v1/inventarios/traspasos";
                 
                 // construir la URL de la API
                 if (!string.IsNullOrEmpty(criterio))
@@ -401,7 +401,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 string token = await GetTokenAsync(usuario, password);
 
-                string url = $"http://192.168.11.63/ServcioUponApi/api/v1/inventarios/traspasos/{usuario}/{Uri.EscapeDataString(numTraspaso)}";
+                string url = $"http://192.168.11.62/ServcioUponApi/api/v1/inventarios/traspasos/{usuario}/{Uri.EscapeDataString(numTraspaso)}";
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await httpClient.GetAsync(url);
@@ -430,7 +430,7 @@ namespace jycboliviaASP.net.Negocio
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await httpClient.PostAsync("http://192.168.11.63/ServcioUponApi/api/v1/inventarios/traspasos", content);
+            var response = await httpClient.PostAsync("http://192.168.11.62/ServcioUponApi/api/v1/inventarios/traspasos", content);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync();

@@ -138,6 +138,20 @@ namespace jycboliviaASP.net.Datos
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
+        internal DataSet get_ClienteCodCliente(int codigo)
+        {
+            string consulta = "Select " +
+                            " codigo, " +
+                            " tiendaname,  tiendadir,  tiendatelefono, " +
+                            " tiendadepartamento,  tiendazona,  propietarioname, " +
+                            " propietarioci,  propietariodir,  propietariocelular, " +
+                            " propietarionit,  propietariocorreo, facturar_a, " +
+                            " facturar_nit, observacion " +
+                            " from tbcorpal_cliente tt " +
+                           "  where tt.codigo = " + codigo + "";
+            DataSet lista = conexion.consultaMySql(consulta);
+            return lista;
+        }
 
         internal DataSet get_clienteUltimoIngresado(string cliente, string propietario, string razonSocial, string nit)
         {

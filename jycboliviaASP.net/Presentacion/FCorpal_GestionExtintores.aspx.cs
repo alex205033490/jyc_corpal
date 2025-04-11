@@ -8,6 +8,7 @@ using System.Data.Common.EntitySql;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -20,11 +21,6 @@ namespace jycboliviaASP.net.Presentacion
 
             this.Title = Session["BaseDatos"].ToString();
 
-              if (tienePermisoDeIngreso(144) == false)
-              {
-                  string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
-                  Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
-              } 
               
 
             if (!IsPostBack)
@@ -61,16 +57,16 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 string detalle = txt_detalle.Text.Trim();
-                string area = dd_area.SelectedValue.ToString();
+                string area = txt_area.Text.Trim();
                 string agenteExterior = txt_agenteExtintor.Text.Trim();
                 string marca = txt_marca.Text.Trim();
                 float capacidad = float.Parse(txt_capacidad.Text.Trim().Replace(',','.'), CultureInfo.InvariantCulture);
                 string codSistema = txt_codSistema.Text.Trim();
-                string fechaCarga = ConvertidorFecha(txt_fechadCarga.Text.Trim());
-                string fechaProximaCarga = ConvertidorFecha(txt_fechaProximaCarga.Text.Trim());
-                string estadoExtintor = dd_estadoExtintor.SelectedValue.ToString();
+                string fechaCarga = string.IsNullOrWhiteSpace(txt_fechadCarga.Text) ? null : ConvertidorFecha(txt_fechadCarga.Text.Trim());
+                string fechaProximaCarga = string.IsNullOrWhiteSpace(txt_fechaProximaCarga.Text) ? null : ConvertidorFecha(txt_fechaProximaCarga.Text.Trim());
+                string estadoExtintor = txt_estadoExtintor.Text.Trim();
                 int añoProximaPrueba = int.Parse(txt_fechaProximaPrueba.Text.Trim());
-                int codRes = 50;
+                int codRes = 55;
                 string nombreRes = "carlos to";
 
                 NCorpal_Extintor negocio = new NCorpal_Extintor();
@@ -173,7 +169,7 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("La capacidad debe ser un número válido.");
                 return false;
             }
-            else if (string.IsNullOrEmpty(txt_fechadCarga.Text.Trim()) || !DateTime.TryParse(txt_fechadCarga.Text.Trim(), out _))
+            /*else if (string.IsNullOrEmpty(txt_fechadCarga.Text.Trim()) || !DateTime.TryParse(txt_fechadCarga.Text.Trim(), out _))
             {
                 showalert("La fecha de carga no es valida.");
                 return false;
@@ -182,29 +178,24 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert("La fecha proxima carga no es válida.");
                 return false;
-            }
-            else if (string.IsNullOrEmpty(txt_fechaProximaPrueba.Text.Trim()) || !int.TryParse(txt_fechaProximaPrueba.Text.Trim(), out _))
+            }*/
+            /*else if (string.IsNullOrEmpty(txt_fechaProximaPrueba.Text.Trim()) || !int.TryParse(txt_fechaProximaPrueba.Text.Trim(), out _))
             {
                 showalert("El año de próxima prueba hidrostática debe ser un número válido.");
                 return false;
-            }
-            else if (dd_area.SelectedIndex == 0)
+            }*/
+            else if (string.IsNullOrEmpty(txt_area.Text.Trim()))
             {
-                showalert("Por favor, seleccione un área válido ");
+                showalert("Por favor, ingrese una area valida");
                 return false;
             }
-            else if(dd_estadoExtintor.SelectedIndex == 0)
-            {
-                showalert("Por favor, seleccione un estado válido");
-                return false;
-            }
-
+            
             return true;
         }
 
         private void LimpiarForm()
         {
-            dd_area.SelectedIndex = 0;
+            txt_area.Text = string.Empty;
             txt_marca.Text = string.Empty;
             txt_fechadCarga.Text = string.Empty;
             txt_fechaProximaPrueba.Text = string.Empty;
@@ -213,7 +204,7 @@ namespace jycboliviaASP.net.Presentacion
             txt_fechaProximaCarga.Text = string.Empty;
             txt_agenteExtintor.Text = string.Empty;
             txt_codSistema.Text = string.Empty;
-            dd_estadoExtintor.SelectedIndex = 0;
+            txt_estadoExtintor.Text = string.Empty;
         }
 
         private void showalert(string mensaje)
@@ -372,14 +363,14 @@ namespace jycboliviaASP.net.Presentacion
             }
             */
         }
-
-        private void ActualizarDatosRegistro(int codigo, TextBox txtdetalle, DropDownList ddarea, TextBox txtaExtintor, TextBox txtmarca, 
-            TextBox txtcapacidad, TextBox txtcodsistema, DropDownList ddeextintor, TextBox txtanio, TextBox txtfechadecarga, TextBox txfechaproximadcarga)
+        /*
+        private void ActualizarDatosRegistro(int codigo, TextBox txtdetalle, TextBox txtarea, TextBox txtaExtintor, TextBox txtmarca, 
+            TextBox txtcapacidad, TextBox txtcodsistema, TextBox txtestadoExtintor, TextBox txtanio, TextBox txtfechadecarga, TextBox txfechaproximadcarga)
         {
             try
             {
                 string detalle = txtdetalle.Text;
-                string area = ddarea.Text;
+                string area = txtarea.Text;
                 
                 string aExtintor = txtaExtintor.Text;
                 string marca = txtmarca.Text;
@@ -395,7 +386,7 @@ namespace jycboliviaASP.net.Presentacion
                 }
 
                 string codSistema = txtcodsistema.Text;
-                string estadoExtintor = ddeextintor.Text;
+                string estadoExtintor = txtestadoExtintor.Text;
 
                 int ppanio = 0;
                 if(!int.TryParse(txtanio.Text, out ppanio))
@@ -416,16 +407,15 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     // Muestra la consulta SQL que estás ejecutando
                     
-                    showalert($"Error al actualizar los campos del codigo2 :codigo:{codigo} {detalle}, " +
-                        $"{area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}, {fechadecarga}");
+                    showalert($"Error al actualizar los campos del codigo : {codigo}");
                 }
             }
             catch(Exception ex)
             {
-                showalert($"Error al actualizar los datos2. {ex.Message}");
+                showalert($"Ocurrio un error inesperado al actualizar los datos. {ex.Message}");
             }
         }
-
+        */
         private bool ValidarDropDowns(GridViewRow row)
         {
             DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
@@ -450,50 +440,94 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 TextBox txtDetalle = row.FindControl("txt_detalle") as TextBox;
-                DropDownList ddArea = row.FindControl("dd_area2") as DropDownList;
+                TextBox txtArea = row.FindControl("txt_area") as TextBox;
                 TextBox txtAExtintor = row.FindControl("txt_aextintor") as TextBox;
                 TextBox txtMarca = row.FindControl("txt_marca") as TextBox;
                 TextBox txtCapacidad = row.FindControl("txt_capacidad") as TextBox;
                 TextBox txtCodSistema = row.FindControl("txt_codsistema") as TextBox;
-                DropDownList ddEstadoExtintor = row.FindControl("dd_eextintor2") as DropDownList;
+                TextBox txtestadoExtintor = row.FindControl("txt_estadoExtintor") as TextBox;
                 TextBox txtAnioPruebaH = row.FindControl("txt_pphidrostatica") as TextBox;
                 TextBox txtFechadecarga = row.FindControl("txt_fdcarga") as TextBox;
                 TextBox txtFechaproximadcarga = row.FindControl("txt_fproximacarga") as TextBox;
 
                 string detalle = txtDetalle?.Text ?? "";
-                string area = ddArea?.Text ?? "";
+                string area = txtArea?.Text ?? "";
                 string aExtintor = txtAExtintor?.Text ?? "";
                 string marca = txtMarca?.Text ?? "";
                 string codSistema = txtCodSistema?.Text ?? "";
-                string estadoExtintor = ddEstadoExtintor?.Text ?? "";
-                string fechadecarga = ConvertidorFecha(txtFechadecarga?.Text);
-                string fechaproximadcarga = ConvertidorFecha(txtFechaproximadcarga?.Text);
+                string estadoExtintor = txtestadoExtintor?.Text ?? "";
+                string fechadecarga = string.IsNullOrWhiteSpace(txtFechadecarga?.Text) || txtFechadecarga.Text.Trim() == "null" ? null : ConvertidorFecha(txtFechadecarga?.Text);
+                string fechaproximadcarga = string.IsNullOrWhiteSpace(txtFechaproximadcarga?.Text) || txtFechaproximadcarga.Text.Trim() == "null" ? null : ConvertidorFecha(txtFechaproximadcarga?.Text);
 
-                if(!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
+                int anioPruebaH = 0;
+                if(!string.IsNullOrWhiteSpace(txtAnioPruebaH?.Text) && int.TryParse(txtAnioPruebaH?.Text, out int parsedAnioPruebaH))
+                {
+                    anioPruebaH = parsedAnioPruebaH;
+                }
+                else
+                {
+                    anioPruebaH = 0;
+                }
+                
+                if (!float.TryParse(txtCapacidad?.Text.Replace('.',','), out float capacidad))
                 {
                     showalert("La capacidad no tiene el formato correcto");
                     return;
                 }
 
-                if(!int.TryParse(txtAnioPruebaH?.Text, out int ppanio))
-                {
-                    showalert("El año de prueba no tiene el formato correcto.");
-                    return;
-                }
                 NCorpal_Extintor negocio = new NCorpal_Extintor();
                 bool resultado = negocio.update_registros(codigo, detalle, area, aExtintor, marca, capacidad, codSistema, estadoExtintor,
-                    ppanio, fechadecarga, fechaproximadcarga);
+                    anioPruebaH, fechadecarga, fechaproximadcarga);
 
                 if (!resultado)
                 {
-                    showalert($"Error al actulizar el registro con código {codigo} ,{detalle}, {area}, {aExtintor}, {marca}, {capacidad}, {codSistema}, {estadoExtintor}," +
-                        $" {ppanio}, {fechadecarga}, {fechaproximadcarga}");
+                    showalert($"Error al actualizar el registro");
                 }
             }
             catch(Exception ex)
             {
-                showalert($"Error al actualizar el registro {codigo}: {ex.Message}");
+                showalert($"Error inesperado al actualizar el registro {codigo}: {ex.Message}");
             }
+        }
+
+        [WebMethod]
+        public static List<string> getAreas(string prefixText)
+        {
+            List<string> areas = new List<string>
+            {
+                "Almacén de materia prima 1",
+            "Almacén de materia prima 2",
+            "Almacén de materia prima 3",
+            "Almacén de producto terminado",
+            "Almacén maestro",
+            "Alta tensión",
+            "Batido de semilla",
+            "Compresores",
+            "Container",
+            "Envolsado de semilla",
+            "Evaporadores de gas",
+            "Galpón 1 - Galletas",
+            "Galpón 2 - Papas",
+            "Galpón 3 - Nachos",
+            "Mantenimiento",
+            "Oficina Administración",
+            "Pasillo sazón de ají",
+            "Tasques de gas",
+            "Tostado de semilla"
+
+            };
+            return areas.FindAll(area => area.ToLower().Contains(prefixText.ToLower()));
+        }
+        [WebMethod]
+        public static List<string> getEstadoExtintor(string prefixText)
+        {
+            List<string> estados = new List<string>
+            {
+                "Nuevo",
+                "Mantenimiento",
+                "Recarga"
+            };
+            return estados.FindAll(area => area.ToLower().Contains(prefixText.ToLower()));
         }
     }
 }
