@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>F:\WebSite\jyc_naxSnax_New2</_PublishTargetUrl>
-    <History>True|2025-03-18T14:30:25.5130084Z||;True|2025-03-17T17:53:49.5987989-04:00||;True|2025-03-12T15:01:49.1807166-04:00||;True|2025-02-13T10:01:44.5881950-04:00||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
+    <History>True|2025-04-07T12:59:30.8708117Z||;True|2025-04-05T12:59:22.1839163-04:00||;True|2025-03-18T10:30:25.5130084-04:00||;True|2025-03-17T17:53:49.5987989-04:00||;True|2025-03-12T15:01:49.1807166-04:00||;True|2025-02-13T10:01:44.5881950-04:00||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -31,19 +31,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -64,19 +64,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -106,19 +106,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -154,19 +154,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -178,19 +178,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -199,10 +199,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.dll">
-      <publishTime>03/18/2025 10:30:15</publishTime>
+      <publishTime>04/10/2025 16:28:19</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.pdb">
-      <publishTime>03/18/2025 10:30:15</publishTime>
+      <publishTime>04/10/2025 16:28:19</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -217,19 +217,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -240,29 +240,32 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
+    <File Include="bin/Microsoft.Maps.MapControl.WPF.dll">
+      <publishTime>02/18/2015 06:10:06</publishTime>
+    </File>
     <File Include="bin/Microsoft.MSXML.dll">
       <publishTime>10/22/2009 19:51:18</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Common.dll">
-      <publishTime>01/17/2024 18:08:52</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.DataVisualization.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Design.dll">
-      <publishTime>01/17/2024 18:08:52</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.WebDesign.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
-      <publishTime>01/17/2024 18:08:52</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.WinForms.dll">
-      <publishTime>01/17/2024 18:08:52</publishTime>
+      <publishTime>02/06/2016 13:43:16</publishTime>
     </File>
     <File Include="bin/Microsoft.SqlServer.Types.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -286,19 +289,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -313,19 +316,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -415,19 +418,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -436,19 +439,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>10/11/2024 08:25:09</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/17/2024 18:08:54</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -1786,7 +1789,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/20/2025 10:55:30</publishTime>
     </File>
     <File Include="NegocioPlantilla/Sidebar_Plantillanew.ascx">
-      <publishTime>03/12/2025 12:29:32</publishTime>
+      <publishTime>04/09/2025 12:10:38</publishTime>
     </File>
     <File Include="PlantillaNew.Master">
       <publishTime>03/10/2025 11:49:24</publishTime>
@@ -1804,7 +1807,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
     <File Include="Presentacion/FA_Login.aspx">
-      <publishTime>02/20/2025 10:55:30</publishTime>
+      <publishTime>04/09/2025 08:46:13</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_ActivosJYC.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -1875,6 +1878,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Presentacion/FCorpal_ConsutaProduccion.aspx">
       <publishTime>03/12/2024 16:34:20</publishTime>
     </File>
+    <File Include="Presentacion/FCorpal_DespachoCamiones.aspx">
+      <publishTime>04/09/2025 11:58:42</publishTime>
+    </File>
     <File Include="Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
@@ -1882,7 +1888,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProducto.aspx">
-      <publishTime>03/17/2025 17:46:03</publishTime>
+      <publishTime>04/05/2025 12:15:03</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx">
       <publishTime>03/13/2025 15:03:36</publishTime>
@@ -2533,7 +2539,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Styles/Style_EntregaProductosACamion.css">
-      <publishTime>03/17/2025 17:46:03</publishTime>
+      <publishTime>04/08/2025 16:32:46</publishTime>
     </File>
     <File Include="Styles/Style_EstadisticaParqueAscensores.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
@@ -2668,7 +2674,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/13/2025 16:52:48</publishTime>
+      <publishTime>04/10/2025 16:28:31</publishTime>
     </File>
     <File Include="x64/SqlServerSpatial160.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>

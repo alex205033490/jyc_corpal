@@ -53,10 +53,65 @@ namespace jycboliviaASP.net.Presentacion
                 case "CalcularInsumosPorTurnoDia":
                     CalcularInsumosPorTurnoDia();
                     break;
+                case "Reporte_DespachoProductoCamionEntrega":
+                    ReporteDespachoProductoCamionEntrega();
+                    break;
+                case "Report_DespachoBoletasProdEntrega":
+                    ReportDespachoBoletasProdEntrega();
+                    break;
+
                 default:
                     //number = "Error";
                     break;
             }
+        }
+
+        private void ReportDespachoBoletasProdEntrega()
+        {
+            
+
+            int codigoDespacho;
+            int.TryParse(Session["codigoDespacho"].ToString(), out codigoDespacho);
+
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet datoResult = negocio.get_DespachoBoletasProdEntrega(codigoDespacho);
+            DataTable DS_EntregaProductosCamiones = datoResult.Tables[0];
+            ReportDataSource DSEntregaProductosCamiones = new ReportDataSource("DS_BoletasProductosEntrega_porDespacho", DS_EntregaProductosCamiones);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_DespachoBoletasProdEntrega"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+            ReportViewer1.LocalReport.DataSources.Add(DSEntregaProductosCamiones);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void ReporteDespachoProductoCamionEntrega()
+        {
+            int codigoDespacho;
+            int.TryParse(Session["codigoDespacho"].ToString(), out codigoDespacho);
+
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet datoResult = negocio.get_DespachoProductoaCamion(codigoDespacho);
+            DataTable DS_EntregaProductosCamiones = datoResult.Tables[0];
+            ReportDataSource DSEntregaProductosCamiones = new ReportDataSource("DS_DespachoProdVehiculo", DS_EntregaProductosCamiones);
+
+            string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_DespachoProductosCamion"];
+
+            ReportViewer1.LocalReport.ReportPath = rutaEntregaSolicitudProducto;
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            //viewer.LocalReport.Refresh();      
+            ReportViewer1.LocalReport.DataSources.Add(DSEntregaProductosCamiones);
+
+            ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void ReporteProductoCamionEntrega()

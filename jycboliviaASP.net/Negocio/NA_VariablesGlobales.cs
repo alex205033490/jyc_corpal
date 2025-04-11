@@ -22,8 +22,8 @@ namespace jycboliviaASP.net.Negocio
         public static string baseDedatosContenedor = "db_Cochabamba";
         public static string baseDedatosImportacion = "db_jyciasrl";
         //public static string fechaInicialProduccion = "'2023-12-01'";  Saldo Inicial 1
-        public static string fechaInicialProduccion = "'2024-03-11'";
-        public static string fechaInicialentregaProducto = "'2024-03-12'";
+        public static string fechaInicialProduccion = "'2025-04-01'";
+        public static string fechaInicialentregaProducto = "'2025-04-01'";
 
         public int get_VCAJAenbasedeDatosActual(string baseDatos)
         {
@@ -359,11 +359,11 @@ namespace jycboliviaASP.net.Negocio
                 " where   " +
                 " ss.codigo = dss.codsolicitud and   " +
                 " ss.estado = 1 and   " +
-                " ss.estadosolicitud = 'Cerrado' and  " +
+           /*     " ss.estadosolicitud = 'Cerrado' and  " +
                 " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
                 " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
-                " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
-                // NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " + */
+                " ss.fechaentrega between "+ NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
                 " group by dss.codproducto   " +
                 " ) as t2 ON pp.codigo = t2.codproducto   " +
                 " WHERE   " +
@@ -413,11 +413,11 @@ namespace jycboliviaASP.net.Negocio
                     " where   " +
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
-                    " ss.estadosolicitud = 'Cerrado' and  " +
-                    " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
-                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
-                    " TIMESTAMP(DATE_SUB(" + fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
-                    // NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
+                    /*    " ss.estadosolicitud = 'Cerrado' and  " +
+                        " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
+                        " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
+                        " TIMESTAMP(DATE_SUB(" + fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " + */
+                    " ss.fechaentrega between "+ NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
                     " group by dss.codproducto   " +
                     " ) as t2 ON pp.codigo = t2.codproducto   " +
                     " WHERE   " +
@@ -466,11 +466,11 @@ namespace jycboliviaASP.net.Negocio
                     " where   " +
                     " ss.codigo = dss.codsolicitud and   " +
                     " ss.estado = 1 and   " +
-                    " ss.estadosolicitud = 'Cerrado' and  " +
+               /*     " ss.estadosolicitud = 'Cerrado' and  " +
                     " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
                     " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
-                    " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +
-                    //NA_VariablesGlobales.fechaInicialProduccion + " and current_date()   " +
+                    " TIMESTAMP(DATE_SUB(current_date(), INTERVAL - 1 DAY), '06:00:00') " +  */
+                    " ss.fechaentrega between "+ NA_VariablesGlobales.fechaInicialProduccion + " and current_date() " +
                     " group by dss.codproducto   " +
                     " ) as t2 ON pp.codigo = t2.codproducto   " +
                     " WHERE   " +

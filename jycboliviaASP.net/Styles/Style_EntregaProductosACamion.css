@@ -73,3 +73,10 @@
     background-color: #ff920082 !important;
     border:1px solid white !important;
 }
+
+.vista1 {
+    border: double #666666;
+    width: auto;
+    height: 250px;
+    overflow: auto;
+}

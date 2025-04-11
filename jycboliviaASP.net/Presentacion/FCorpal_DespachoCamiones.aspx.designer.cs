@@ -15,24 +15,6 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
-        /// Control updatePanelLimpiar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelLimpiar;
-
-        /// <summary>
-        /// Control updatePanelRetirarSol.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelRetirarSol;
-
-        /// <summary>
         /// Control Label8.
         /// </summary>
         /// <remarks>
@@ -60,22 +42,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control tx_fechaEngrega.
+        /// Control tx_fechaDesdeDespacho.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_fechaEngrega;
+        protected global::System.Web.UI.WebControls.TextBox tx_fechaDesdeDespacho;
 
         /// <summary>
-        /// Control tx_fechaEngrega_CalendarExtender.
+        /// Control tx_fechaDesdeDespacho_CalendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender tx_fechaEngrega_CalendarExtender;
+        protected global::AjaxControlToolkit.CalendarExtender tx_fechaDesdeDespacho_CalendarExtender;
 
         /// <summary>
         /// Control Label6.
@@ -87,49 +69,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// Control tx_horaentrega.
+        /// Control tx_fechaHastaDespacho.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_horaentrega;
+        protected global::System.Web.UI.WebControls.TextBox tx_fechaHastaDespacho;
 
         /// <summary>
-        /// Control Label1.
+        /// Control tx_fechaHastaDespacho_CalendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// Control dd_estadoCierre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_estadoCierre;
-
-        /// <summary>
-        /// Control Label31.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label31;
-
-        /// <summary>
-        /// Control dd_motivoCierre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_motivoCierre;
+        protected global::AjaxControlToolkit.CalendarExtender tx_fechaHastaDespacho_CalendarExtender;
 
         /// <summary>
         /// Control Label10.
@@ -150,49 +105,58 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_SolicitanteProducto;
 
         /// <summary>
-        /// Control tx_entregoSolicitud.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_entregoSolicitud;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// Control bt_actualizar.
+        /// Control dd_estadoCierre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_actualizar;
+        protected global::System.Web.UI.WebControls.DropDownList dd_estadoCierre;
 
         /// <summary>
-        /// Control bt_limpiar.
+        /// Control bt_limpiar1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_limpiar;
+        protected global::System.Web.UI.WebControls.Button bt_limpiar1;
 
         /// <summary>
-        /// Control bt_verRecibo.
+        /// Control bt_buscar1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_verRecibo;
+        protected global::System.Web.UI.WebControls.Button bt_buscar1;
 
         /// <summary>
-        /// Control btn_anularSolicitud.
+        /// Control bt_actualizar1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_anularSolicitud;
+        protected global::System.Web.UI.WebControls.Button bt_actualizar1;
+
+        /// <summary>
+        /// Control bt_verRecibo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_verRecibo1;
 
         /// <summary>
         /// Control updatePanelDDUpdate.
@@ -213,12 +177,12 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control gv_solicitudesProductos.
+        /// Control gv_despachos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_solicitudesProductos;
+        protected global::System.Web.UI.WebControls.GridView gv_despachos;
     }
 }

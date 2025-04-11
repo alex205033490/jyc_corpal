@@ -69,5 +69,25 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.get_EntregasProductoaCamion(codigoCamion);
         }
+
+        internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
+        {
+            return datos.get_despachosdeCamiones( fechadesde,  fechahasta,  estado, codVehiculo);
+        }
+
+        internal bool update_despachodeproductosCamiones(int codigo, string estado, int codresp)
+        {
+            return datos.update_despachodeproductosCamiones( codigo,  estado, codresp);
+        }
+
+        internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
+        {
+            return datos.get_DespachoProductoaCamion( codigoDespacho);
+        }
+
+        internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
+        {
+            return datos.get_DespachoBoletasProdEntrega(codigoDespacho);
+        }
     }
 }

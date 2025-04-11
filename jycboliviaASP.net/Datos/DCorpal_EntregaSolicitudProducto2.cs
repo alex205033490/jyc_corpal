@@ -197,5 +197,105 @@ namespace jycboliviaASP.net.Datos
                     consulta +=  " order by v.marca, v.modelo asc";
             return conexion.consultaMySql(consulta);
         }
+
+        internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
+        {
+            string consulta = "select  " +
+                               " dd.codigo, " +
+                               " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
+                               " dd.horagra, dd.detalle , " +
+                               " concat(vv.placa,'_',vv.marca) as 'Vehiculo', " +
+                               " res.nombre as 'Conductor', " +
+                               " dd.estadodespacho " +
+                               " from tbcorpal_despachovehiculo dd, " +
+                               " tbcorpal_vehiculos vv " +
+                               " left join tb_responsable res on vv.codconductor = res.codigo " +
+                               " where " +
+                               " dd.codvehiculo = vv.codigo and " +
+                               " dd.estado = 1 and "+
+                               " dd.estadodespacho = '"+estado+"'";
+            if (codVehiculo > 0) {
+                consulta = consulta + " and dd.codvehiculo = "+codVehiculo;
+            }
+                               
+            if (!string.IsNullOrEmpty(fechadesde) && !string.IsNullOrEmpty(fechahasta) &&                
+                !fechadesde.Equals("null") && !fechahasta.Equals("null"))
+            {
+                consulta = consulta + " and dd.fechagra between " + fechadesde + " and " + fechahasta; ;
+            }
+            consulta += " order by dd.codigo asc";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal bool update_despachodeproductosCamiones(int codigo, string estado, int codResp)
+        {
+            string consulta = "update tbcorpal_despachovehiculo set "+
+                               " tbcorpal_despachovehiculo.estadodespacho = '"+estado+"', "+
+                               " tbcorpal_despachovehiculo.fechacierre = current_date(), "+
+                               " tbcorpal_despachovehiculo.horacierre = current_time(), "+
+                               " tbcorpal_despachovehiculo.codrespcierre = "+codResp+
+                               " where "+
+                               " tbcorpal_despachovehiculo.codigo = "+ codigo;
+            return conexion.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
+        {
+            string consulta = "select  "+ 
+                               " dd.codigo, "+ 
+                               " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', "+
+                               " dd.horagra, dd.detalle , "+
+                               " vv.marca as 'Vehiculo', "+
+                               " res.nombre as 'Conductor', "+
+                               " pp.codigo as 'CodProd' , "+
+                               " pp.producto, "+
+                               " sum(dv.cantentregada) as 'CantEntregar', "+
+                               " vv.placa "+
+                               " from tbcorpal_despachovehiculo dd, tbcorpal_detalleproddespacho dv, "+
+                               " tbcorpal_producto pp, tbcorpal_vehiculos vv "+ 
+                               " left join tb_responsable res on vv.codconductor = res.codigo "+ 
+                               " where "+
+                               " dd.codigo = dv.coddespacho and "+
+                               " dv.codprod = pp.codigo and "+
+                               " dd.codvehiculo = vv.codigo and "+
+                               " dd.estado = 1 and "+
+                               " dd.codigo = "+codigoDespacho +
+                               " group by dd.codigo, dv.codprod";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
+        {
+            string consulta = "select  "+
+                   " dp.codigo as 'codSolicitud', "+
+                   " dp.nroboleta,  "+
+                   " dp.personalsolicitud, "+
+                   " cc.tiendaname as 'Cliente', "+
+                   " dd.codigo as 'codDespacho', "+
+                   " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', "+
+                   " dd.horagra, "+ 
+                   " dd.detalle , "+
+                   " vv.marca as 'Vehiculo', "+
+                   " res.nombre as 'Conductor', "+
+                   " pp.codigo as 'CodProd' , "+
+                   " pp.producto, "+
+                   " dv.cantentregada, "+
+                   " vv.placa "+
+                   " from "+
+                   " tbcorpal_solicitudentregaproducto dp "+
+                   " left join tbcorpal_cliente cc on dp.codcliente = cc.codigo, "+
+                   " tbcorpal_detalleproddespacho dv, "+
+                   " tbcorpal_despachovehiculo dd,  "+ 
+                   " tbcorpal_producto pp, tbcorpal_vehiculos vv  "+
+                   " left join tb_responsable res on vv.codconductor = res.codigo  "+
+                   " where "+
+                   " dp.codigo = dv.codpedido  and "+
+                   " dv.coddespacho = dd.codigo   and "+
+                   " dv.codprod = pp.codigo and "+
+                   " dd.codvehiculo = vv.codigo and "+
+                   " dd.estado = 1 and "+
+                   " dd.codigo = "+ codigoDespacho;
+            return conexion.consultaMySql(consulta);
+        }
     }
 }

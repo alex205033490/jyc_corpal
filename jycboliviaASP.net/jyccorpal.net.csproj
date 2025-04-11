@@ -2056,8 +2056,10 @@
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DespachoBoletasProdEntrega.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Detalle_objetivoProduccion_Vs_EntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_QRActivos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DespachoProdVehiculo.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboEntregaProductosCamion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboAsignacionProductosCamion.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
