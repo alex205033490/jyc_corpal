@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Data.Entity.Core.Metadata.Edm;
+using jycboliviaASP.net.Presentacion;
 
 
 
@@ -388,6 +389,37 @@ namespace jycboliviaASP.net.Negocio
             {
                 MySqlConexion.Close();
                 return false;
+            }
+        }
+
+        public int ejecutarScalarMySql(string consulta, List<MySqlParameter> parametros)
+        {
+            try
+            {
+                int result = -1;
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MySqlConexion))
+                {
+                    if (MySqlConexion.State != ConnectionState.Open)
+                        MySqlConexion.Open();
+
+                    foreach(var parametro in parametros)
+                    {
+                        cmd.Parameters.Add(parametro);
+                    }
+
+                    object scalar = cmd.ExecuteScalar();
+                    if(scalar != null)
+                    {
+                        result = Convert.ToInt32(scalar);
+                    }
+                }
+                MySqlConexion.Close();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                MySqlConexion.Close();
+                return -1;
             }
         }
 

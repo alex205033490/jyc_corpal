@@ -52,10 +52,7 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
         }
 
-        internal bool update_cantProductosEntregados(int codigoSolicitud, int codigoProducto, float cantidadEntregado, float restarStock, int coduser)
-        {
-            return datos.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregado, restarStock, coduser);
-        }
+        
         internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int> codProducto)
         {
             return datos.update_RetirarSolicitud(codSolicitud, codProducto);
@@ -81,5 +78,37 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.UPDATE_ADDvehiculoAPedido(codVehiculo, codUser, codSolicitud, codProducto);
         }
+        internal DataSet get_obtenerCodigoProducto(string nombre)
+        {
+            return datos.GET_obtenerCodProducto(nombre);
+        }
+        /*  DESPACHO - DETALLE DESPACHO*/
+
+        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio)
+        {
+            return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio);
+        }
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad)
+        {
+            try
+            {
+                return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad);
+                
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error en capa negocio (POST_INSERTdetalleDespacho):" + ex.Message);
+                throw;
+            }
+        }
+
+        /* POST DETALLE SOLICITUD PEDIDO */
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, int coduser, int codVehiculo)
+        {
+            return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, coduser, codVehiculo);
+        }
+
+
+
     }
 }
