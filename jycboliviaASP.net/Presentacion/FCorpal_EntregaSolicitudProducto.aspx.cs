@@ -98,9 +98,23 @@ namespace jycboliviaASP.net.Presentacion
        
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {
-            
+            limpiarForm();
         }
 
+        private void limpiarForm()
+        {
+            GET_MostrarSolicitudProductos("Abierto");
+
+            gv_despachoProductos.DataSource = null;
+            gv_despachoProductos.DataBind();
+
+            dd_listVehiculo.SelectedIndex = 0;
+
+            gv_detCar.DataSource = null;
+            gv_detCar.DataBind();
+
+            txt_detalleRegistro.Text = string.Empty;
+        }
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
@@ -183,19 +197,9 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error al insertar la venta. {ex.Message}");
             }
-        }
-        */
+        }*/
+      
 
-
-
-        
-        
-
-
-
-
-        
-       
 
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -285,7 +289,6 @@ namespace jycboliviaASP.net.Presentacion
         protected void btn_registrarDespacho_Click(object sender, EventArgs e)
         {
 
-            
             string detalle = txt_detalleRegistro.Text.Trim();
             int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
 
@@ -303,18 +306,94 @@ namespace jycboliviaASP.net.Presentacion
                 return; 
             }
 
-            if (RegistrarDetalle(codDespacho))
+            if (RegistrarDetalleDespacho(codDespacho))
             {
-                showalert($"despacho insertado: {codDespacho}, registros seleccionados.");
+                //showalert($"Detalle de despacho Nro: {codDespacho} registrado.");
             }
             foreach (GridViewRow row in gv_solicitudesProductos.Rows)
             {
                 ProcesarRegistroSolicitudPedido(row);
-            }
-            
 
+                int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                int codigoCliente = int.Parse(row.Cells[11].Text);
+                string solicitante = (row.Cells[10].Text);
+                string fechaEntregarow = (row.Cells[9].Text);
+                string fechaEntrega = aFecha2(fechaEntregarow);
+
+                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                if (chk != null && chk.Checked)
+                {
+                    registrarVentaAut(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
+                    showalert($"Solicitud registrada123 {codigoSolicitud}, {codigoCliente}, {solicitante}, {fechaEntrega}");
+                    limpiarForm();
+                    GET_MostrarSolicitudProductos("Abierto");
+                }
+            }
         }
-        private bool RegistrarDetalle(int codigodespacho)
+        /*  REGISTRAR VENTA */
+        private void registrarVentaAut(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
+        {
+            try
+            {
+                int codigoMetodoPago = 1;
+                decimal montoTotal = 0;
+                decimal montoTotalMoneda = montoTotal;
+                int codigoMoneda = 1;
+                decimal tipoCambio = decimal.Parse("6.96");
+                decimal descuentoAdicional = decimal.Parse("0");
+                string leyendaF = "leyendaNinguna";
+                int factura = 0;
+
+                NA_Responsables Nresp = new NA_Responsables();
+                NCorpal_Cliente Ncliente = new NCorpal_Cliente();
+                DataSet tuplasCLI = Ncliente.get_ClienteCodigo(codigoCliente);
+                int codigoSolicitante = 1;
+                //Datos Clientes
+                string tiendaName = "", tiendaCorreoCliente = "", municipio = "", tiendaTelefono = "", tiendaDir = "", tiendaNombreRazonSocial = "", numeroDocumento = "";
+                string numeroFactura = "";
+
+                if (tuplasCLI.Tables[0].Rows.Count > 0)
+                {
+                    tiendaName = tuplasCLI.Tables[0].Rows[0][1].ToString();
+                    tiendaDir = tuplasCLI.Tables[0].Rows[0][2].ToString();
+                    tiendaTelefono = tuplasCLI.Tables[0].Rows[0][3].ToString();
+                    municipio = tuplasCLI.Tables[0].Rows[0][4].ToString();
+                    tiendaCorreoCliente = tuplasCLI.Tables[0].Rows[0][11].ToString();
+                    tiendaNombreRazonSocial = tuplasCLI.Tables[0].Rows[0][12].ToString();
+                    numeroDocumento = tuplasCLI.Tables[0].Rows[0][13].ToString();
+                }
+
+                NCorpal_Venta Nventa = new NCorpal_Venta();
+                bool resultado = Nventa.crearVentas3(codigoCliente, tiendaName, codigoSolicitud,
+                    tiendaCorreoCliente, municipio, tiendaTelefono, numeroFactura, tiendaDir,
+                    tiendaNombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda,
+                    tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitante, factura,
+                    fechaEntrega, codigoSolicitud);
+
+                if (!resultado)
+                {
+                    showalert($"Error al registrar la venta.");
+                    return;
+                }
+                bool resultadoProductoVentas = Nventa.insertarTodoslosProductosAVenta3(codigoSolicitud);
+
+                if (resultadoProductoVentas)
+                {
+                    showalert("Productos insertados en la venta.");
+                }
+                else
+                {
+                    showalert($"Error al insertar los productos del codigo: {codigoSolicitud}");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al insertar la venta. {ex.Message}");
+            }
+        }
+
+        /* REGISTRAR DETALLE DESPACHO */
+        private bool RegistrarDetalleDespacho(int codigodespacho)
         {
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
             bool resultadoGeneral = true;
@@ -345,15 +424,13 @@ namespace jycboliviaASP.net.Presentacion
                     }
                     else
                     {
-                        showalert("detalles insertadors ");
+                        //showalert("Detalle de despacho insertado correctamente");
                     }
-                    showalert($"los datos son  codigo despacho:{codigodespacho}, codigo pedido: {codPedido}, codigoprod: {codigoProducto}, cantidad : {cantidadEntregar} ");
                 }
-                
             }
             return resultadoGeneral;
         }
-
+        /*  REGISTRO DETALLE SOLICITUD PEDIDO*/
         private void ProcesarRegistroSolicitudPedido(GridViewRow row)
         {
             CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
@@ -376,10 +453,10 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     txtCantidadAEntregar.Text = "0";
                 }
-
                 ActualizarDetalleSolicitudPedido(codigoSolicitud, codigoProducto, txtCantidadAEntregar, tipoEntrega, lblCantEntregada, codigoVehiculo);
             }
         }
+        /*  DETALLE SOLICITUD Y CIERRE AUT DE SOLICITUD PEDIDO*/
         private void ActualizarDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, string estadoProducto, Label lblCantEntregada, int codVehiculo)
         {
             try

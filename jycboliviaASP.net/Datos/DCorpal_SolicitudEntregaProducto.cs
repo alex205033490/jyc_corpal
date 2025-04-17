@@ -41,7 +41,6 @@ namespace jycboliviaASP.net.Datos
         }
 
 
-
         internal DataSet get_siguentenumeroRecibo(int codUser)
         {
             string consulta = "select CONCAT( "+

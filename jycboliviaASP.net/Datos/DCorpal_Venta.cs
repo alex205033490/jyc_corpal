@@ -100,7 +100,6 @@ namespace jycboliviaASP.net.Datos
 
             new MySqlParameter("@codigoSolicitud", codigoSolicitud)
         };
-
                 return cnx.ejecutarMySql2arg(consulta, parametros);
             }
             catch (Exception ex)
@@ -215,5 +214,15 @@ namespace jycboliviaASP.net.Datos
                 return false;
             }
         }
+
+        // obtener datos del producto 
+        internal DataSet get_productoCodProducto(int codigo)
+        {
+            string consulta = "Select p.medida, p.precio, " +
+                "from tbcorpal_producto p where p.codigo = " + codigo + "";
+
+            return cnx.consultaMySql(consulta);
+        }
+
     }
 }

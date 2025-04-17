@@ -41,13 +41,13 @@ namespace jycboliviaASP.net.Datos
                 "ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' " +
                 "from tbcorpal_solicitudentregaproducto sep " +
                 "left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud " +
-                "left join tbcorpal_vehiculos v ON dsp.codvehiculo = v.codigo " +
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" +consultaStock+ ") as pp on dsp.codproducto = pp.codigo " +
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' " +
                 "and sep.estado = true " +
                 "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
+                "and dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null " +
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 
             return conexion.consultaMySql(consulta);
