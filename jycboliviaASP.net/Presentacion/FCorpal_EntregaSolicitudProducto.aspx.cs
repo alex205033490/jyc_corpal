@@ -108,6 +108,8 @@ namespace jycboliviaASP.net.Presentacion
             gv_despachoProductos.DataSource = null;
             gv_despachoProductos.DataBind();
 
+            Session["despachoListGV"] = null;
+
             dd_listVehiculo.SelectedIndex = 0;
 
             gv_detCar.DataSource = null;
@@ -288,7 +290,61 @@ namespace jycboliviaASP.net.Presentacion
         /***********************************   VW solicitud entrega producto     *************************************/
         protected void btn_registrarDespacho_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
+                string detalle = txt_detalleRegistro.Text.Trim();
+                int codResponsable = obtenerCodResponsable();
 
+                if(dd_listVehiculo.SelectedIndex == 0)
+                {
+                    showalert("Por favor seleccione un vehiculo válido");
+                    return;
+
+                }
+
+                int codDespacho = CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
+                if (codDespacho <= 0)
+                {
+                    showalert("Error al registrar el despacho principal.");
+                    return;
+                }
+
+                if (!RegistrarDetalleDespacho(codDespacho))
+                {
+                    showalert("Error al registrar el detalle del despacho.");
+                    return;
+                }
+
+                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+                {
+                    CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                    if (chk != null && chk.Checked)
+                    {
+                        ProcesarRegistroSolicitudPedido123(row, codVehiculo);
+
+                        int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                        int codigoCliente = int.Parse(row.Cells[11].Text);
+                        string solicitante = row.Cells[10].Text;
+                        string fechaEntrega = aFecha2(row.Cells[9].Text);
+
+                        RegistrarVentaConDetalle123(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
+                    }
+                }
+
+                limpiarForm();
+                GET_MostrarSolicitudProductos("Abierto");
+                showalert("Registro insertado exitosamente.");
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error inesperado: {ex.Message}");
+            }
+
+
+
+
+            /*
             string detalle = txt_detalleRegistro.Text.Trim();
             int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
 
@@ -324,12 +380,154 @@ namespace jycboliviaASP.net.Presentacion
                 if (chk != null && chk.Checked)
                 {
                     registrarVentaAut(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
-                    showalert($"Solicitud registrada123 {codigoSolicitud}, {codigoCliente}, {solicitante}, {fechaEntrega}");
+                    showalert($"Solicitud registrada.");
                     limpiarForm();
                     GET_MostrarSolicitudProductos("Abierto");
                 }
             }
+            */
         }
+
+
+        /*PARTE 2 AUTOCORR*/
+        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
+        {
+            try
+            {
+                var clienteData = new NCorpal_Cliente().get_ClienteCodigo(codigoCliente);
+
+                if (clienteData.Tables[0].Rows.Count == 0)
+                {
+                    showalert("Cliente no encontrado.");
+                    return;
+                }
+
+                var row = clienteData.Tables[0].Rows[0];
+                string tiendaName = row["tiendaname"].ToString();
+                string direccion = row["tiendadir"].ToString();
+                string telefono = row["tiendatelefono"].ToString();
+                string municipio = row["tiendadepartamento"].ToString();
+                string correo = row["propietariocorreo"].ToString();
+                string razonSocial = row["facturar_a"].ToString();
+                string documento = row["facturar_nit"].ToString();
+                decimal tipoCambio = decimal.Parse("6.96");
+
+                int codResponsable = obtenerCodResponsable();
+
+                NCorpal_Venta nventa = new NCorpal_Venta();
+
+                bool ventaCreada = nventa.crearVentas3(
+                    codigoCliente, tiendaName, codigoSolicitud, correo, municipio, telefono,
+                    "", direccion, razonSocial, documento,
+                    1, 0, 1, tipoCambio, 0, 0, "LeyendaNinguna",
+                    codResponsable, solicitante, 0, fechaEntrega, codigoSolicitud);
+
+                if (!ventaCreada)
+                {
+                    showalert("Error al crear la venta");
+                    return;
+                }
+                else
+                {
+                    
+                    bool productosInsertados = nventa.insertarTodoslosProductosAVenta3(codigoSolicitud);
+                    if (!productosInsertados)
+                    {
+                        showalert($"Error al insertar productos de la venta {codigoSolicitud}");
+                    }
+                    
+                }
+
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al registrar la venta: {ex.Message}");
+            }
+        }
+
+        private void ProcesarRegistroSolicitudPedido123(GridViewRow row, int codVehiculo)
+        {
+            try
+            {
+                int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                int codigoProducto = int .Parse(row.Cells[3].Text);
+                TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                Label lblCantidadActual = (Label)row.FindControl("lb_cantentregada");
+                CheckBox chkTipoEntrega = (CheckBox)row.FindControl("chkTipoEntrega");
+
+                if(!float.TryParse(txtCantidad.Text, out float cantidadNueva)) cantidadNueva = 0;
+                if(!float.TryParse(lblCantidadActual.Text, out float cantidadActual)) cantidadActual = 0;
+
+                float totalEntregado = cantidadNueva + cantidadActual;
+                float stockARestar = cantidadNueva;
+                string estadoEntrega = chkTipoEntrega != null && chkTipoEntrega.Checked ? "parcial" : "total";
+
+                int codResponsable = obtenerCodResponsable();
+                string personal = tx_entregoSolicitud.Text.Trim();
+
+                NCorpal_EntregaSolicitudProducto2 nentrega_solicitud = new NCorpal_EntregaSolicitudProducto2();
+                bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, estadoEntrega, stockARestar, codResponsable, codVehiculo);
+
+                if (actualizado)
+                {
+                    nentrega_solicitud.update_CierreAutSolicitudProd(codigoSolicitud, codResponsable, personal);
+                }
+                else
+                {
+                    showalert($"Error al actualizar solicitud {codigoSolicitud} - producto {codigoProducto}");
+                }
+            }
+
+            catch(Exception ex)
+            {
+                showalert($"Error en solicitud producto: {ex.Message}");
+            }
+        }
+        
+        private bool RegistrarDestalleDespacho123(int codigoDespacho)
+        {
+            bool resultadoGeneral = true;
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+            {
+                CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
+                if (chkSelect != null && chkSelect.Checked)
+                {
+                    int codPedido = int.Parse(row.Cells[1].Text);
+                    int codigoProducto = int.Parse(row.Cells[3].Text);
+                    TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+
+                    if (!float.TryParse(txtCantidad.Text, out float cantidadEntregar)) cantidadEntregar = 0;
+
+                    if (!negocio.POST_INSERTdetalleDespacho(codigoDespacho, codPedido, codigoProducto, cantidadEntregar))
+                    {
+                        resultadoGeneral = false;
+                        break;
+                    }
+                }
+            }
+
+            return resultadoGeneral;
+        }
+
+        private int CrearDespachoPrincipal123(string detalle, int codVehiculo, int codResponsable)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
+        }
+      
+
+
+
+
+
+
+        /*FIN*/
+
+
+
+
         /*  REGISTRAR VENTA */
         private void registrarVentaAut(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
         {
@@ -377,13 +575,9 @@ namespace jycboliviaASP.net.Presentacion
                 }
                 bool resultadoProductoVentas = Nventa.insertarTodoslosProductosAVenta3(codigoSolicitud);
 
-                if (resultadoProductoVentas)
+                if (!resultadoProductoVentas)
                 {
-                    showalert("Productos insertados en la venta.");
-                }
-                else
-                {
-                    showalert($"Error al insertar los productos del codigo: {codigoSolicitud}");
+                    showalert("Error al insertar productos de la venta.");
                 }
             }
             catch(Exception ex)
@@ -498,6 +692,16 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error al actualizar la cantidad. {ex.Message  }");
             }
         }
+
+
+
+        /* Mj cod
+         
+         
+         
+         
+         
+         */
 
         private int obtenerCodResponsable()
         {

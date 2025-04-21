@@ -46,8 +46,8 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' " +
                 "and sep.estado = true " +
-                "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
-                "and dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null " +
+                "and sep.fechaGRA >= CURDATE() - INTERVAL 2 WEEK " +
+                "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 
             return conexion.consultaMySql(consulta);
@@ -324,10 +324,10 @@ namespace jycboliviaASP.net.Datos
                 "sep.personalentregoproducto = @personal, " +
                 "sep.estadosolicitud = 'Cerrado' " +
                 "WHERE sep.codigo = @codigo " +
-                "AND NOT EXISTS ( " +
-                "SELECT 1 FROM tbcorpal_detalle_solicitudproducto dsp " +
+                "AND ( " +
+                "SELECT count(*) FROM tbcorpal_detalle_solicitudproducto dsp " +
                 "WHERE dsp.codsolicitud = @codigo " +
-                "AND dsp.estadoprodsolicitud != 'total'); ";
+                "AND dsp.estadoprodsolicitud != 'total') = 0; ";
 
             using (MySqlCommand comand = new MySqlCommand(consulta))
             {

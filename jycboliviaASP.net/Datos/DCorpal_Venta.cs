@@ -210,7 +210,7 @@ namespace jycboliviaASP.net.Datos
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"Error al insertar los productos a la venta: " + ex.Message);
+                Console.WriteLine($"Error al insertar los productos a la venta123123: " + ex.Message);
                 return false;
             }
         }

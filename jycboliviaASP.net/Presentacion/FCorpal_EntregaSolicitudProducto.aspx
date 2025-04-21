@@ -87,11 +87,7 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-                                                <ContentTemplate>
                                                     <asp:CheckBox runat="server" ID="chkSelect" AutoPostBack="true" OnCheckedChanged="chk_seleccionar_CheckedChanged" />
-                                                </ContentTemplate>
-                                            </asp:UpdatePanel>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
