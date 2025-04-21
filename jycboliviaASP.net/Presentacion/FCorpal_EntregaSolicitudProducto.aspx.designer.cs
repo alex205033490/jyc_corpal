@@ -15,49 +15,22 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
-        /// Control updatePanelLimpiarForm.
+        /// Control gv_solicitudesProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelLimpiarForm;
+        protected global::System.Web.UI.WebControls.GridView gv_solicitudesProductos;
 
         /// <summary>
-        /// Control updatePanelDDdetalleCar.
+        /// Control gv_despachoProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelDDdetalleCar;
-
-        /// <summary>
-        /// Control Label8.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
-
-        /// <summary>
-        /// Control dd_listVehiculo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_listVehiculo;
-
-        /// <summary>
-        /// Control gv_detCar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_detCar;
+        protected global::System.Web.UI.WebControls.GridView gv_despachoProductos;
 
         /// <summary>
         /// Control tx_entregoSolicitud.
@@ -69,13 +42,67 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_entregoSolicitud;
 
         /// <summary>
-        /// Control btn_RegistrarSolicitud.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_RegistrarSolicitud;
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// Control dd_listVehiculo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dd_listVehiculo;
+
+        /// <summary>
+        /// Control updatePanelGVdetCar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanelGVdetCar;
+
+        /// <summary>
+        /// Control gv_detCar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_detCar;
+
+        /// <summary>
+        /// Control lb_detalleRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_detalleRegistro;
+
+        /// <summary>
+        /// Control txt_detalleRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_detalleRegistro;
+
+        /// <summary>
+        /// Control btn_registrarDespacho.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_registrarDespacho;
 
         /// <summary>
         /// Control bt_limpiar.
@@ -94,32 +121,5 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_verRecibo;
-
-        /// <summary>
-        /// Control btn_anularSolicitud.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_anularSolicitud;
-
-        /// <summary>
-        /// Control gv_solicitudesProductos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_solicitudesProductos;
-
-        /// <summary>
-        /// Control gv_despachoProductos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_despachoProductos;
     }
 }

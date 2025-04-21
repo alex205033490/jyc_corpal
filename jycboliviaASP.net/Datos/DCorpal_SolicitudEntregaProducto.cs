@@ -41,7 +41,6 @@ namespace jycboliviaASP.net.Datos
         }
 
 
-
         internal DataSet get_siguentenumeroRecibo(int codUser)
         {
             string consulta = "select CONCAT( "+
@@ -79,25 +78,6 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);
         }
 
-        internal DataSet get_solicitudesRealizadasProductos(string nroSolicitud, string solicitante, string estadoSolicitud)
-        {
-            string consulta = "select  pp.codigo, pp.nroboleta,  date_format(pp.fechaGRA,'%d/%m/%Y') as 'Fecha Grabacion', "+
-                                " pp.horaGRA,  date_format(pp.fechaentrega,'%d/%m/%Y') as 'Fecha Entrega', "+
-                                " pp.horaentrega,  pp.personalsolicitud, pp.montototal,  pp.estadosolicitud, "+ 
-                                " cc.tiendaname as 'Cliente' "+ 
-                                " from  tbcorpal_solicitudentregaproducto pp " +
-                                " left join tbcorpal_cliente cc on pp.codcliente = cc.codigo " +
-                                " where " +
-                                " pp.estadosolicitud = '" + estadoSolicitud + "' and " +
-                                " pp.estado = true and " +
-                                " pp.nroboleta like '%" + nroSolicitud + "%' "+
-                                " order by pp.codigo desc";
-            if(!string.IsNullOrEmpty(solicitante)){
-            consulta = consulta + " and pp.personalsolicitud like '%"+solicitante+"%'";
-            }
-
-            return conexion.consultaMySql(consulta);
-        }
 
         internal DataSet get_datosSolicitudProductos(int codigoSolicitud)
         {

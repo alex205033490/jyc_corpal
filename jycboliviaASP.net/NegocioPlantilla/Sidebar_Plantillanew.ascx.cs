@@ -45,7 +45,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
 
             mn_consultaIngresoEgreso.Visible = false;
             mn_solicitudproductos.Visible = false;
-            mn_entregaSolicitudProducto.Visible = false;
+            mn_entregaSolicitudProducto.Visible = true;
             mn_detallesolicitudproductos.Visible = false;
             mn_entregaProduccion.Visible = false;
             mn_activosjyc.Visible = false;

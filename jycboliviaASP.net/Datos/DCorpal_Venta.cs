@@ -100,7 +100,6 @@ namespace jycboliviaASP.net.Datos
 
             new MySqlParameter("@codigoSolicitud", codigoSolicitud)
         };
-
                 return cnx.ejecutarMySql2arg(consulta, parametros);
             }
             catch (Exception ex)
@@ -211,9 +210,19 @@ namespace jycboliviaASP.net.Datos
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"Error al insertar los productos a la venta: " + ex.Message);
+                Console.WriteLine($"Error al insertar los productos a la venta123123: " + ex.Message);
                 return false;
             }
         }
+
+        // obtener datos del producto 
+        internal DataSet get_productoCodProducto(int codigo)
+        {
+            string consulta = "Select p.medida, p.precio, " +
+                "from tbcorpal_producto p where p.codigo = " + codigo + "";
+
+            return cnx.consultaMySql(consulta);
+        }
+
     }
 }

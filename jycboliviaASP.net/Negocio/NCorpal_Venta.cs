@@ -71,5 +71,12 @@ namespace jycboliviaASP.net.Negocio
         {
             return dv.insertarTodoslosProducosAVenta3( codigoSolicitud);
         }
+
+        internal DataSet get_productoCodProducto(int codigo)
+        {
+            DataSet tuplaV = dv.get_productoCodProducto(codigo);
+                return tuplaV;
+
+        }
     }
 }

@@ -10,6 +10,9 @@ using System.Configuration;
 using static jycboliviaASP.net.Negocio.NA_APIcompras;
 using System.Globalization;
 using AjaxControlToolkit;
+using MySql.Data.MySqlClient;
+using MaterialDesignThemes.Wpf.Converters;
+using ZstdSharp.Unsafe;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -18,16 +21,15 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = Session["BaseDatos"].ToString();
-            if (tienePermisoDeIngreso(119) == false)
+            /*if (tienePermisoDeIngreso(119) == false)
             {                   
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
-            }
+            }*/
             if (!IsPostBack)
             {
                 GET_MostrarSolicitudProductos("Abierto");
                 cargarRegistroVehiculosDD();
-                //buscarDatosSolicitud("","","Abierto");
             }
 
             NA_Responsables Nresp = new NA_Responsables();
@@ -36,7 +38,7 @@ namespace jycboliviaASP.net.Presentacion
             int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
             tx_entregoSolicitud.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
         }
-        // mostrar registro en gv principal
+        // VW PRINCIPAL LISTA DE SOLICITUDES DE PEDIDOS 
         private void GET_MostrarSolicitudProductos(string estadoSolicitud)
         {
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
@@ -56,158 +58,6 @@ namespace jycboliviaASP.net.Presentacion
             return npermiso.tienePermisoResponsable(permiso, codUser);
         }
 
-        /*protected void bt_buscar_Click(object sender, EventArgs e)
-        {
-            string nroSolicitud = tx_nrosolicitud.Text;
-            string solicitante = tx_SolicitanteProducto.Text;
-            string estado = dd_estadoCierre.SelectedItem.Text;
-            buscarDatosSolicitud(nroSolicitud, solicitante, estado);
-        }*/
-
-        private void buscarDatosSolicitud(string nroSolicitud, string solicitante, string estadoSolicitud)
-        {
-            NCorpal_SolicitudEntregaProducto ncc = new NCorpal_SolicitudEntregaProducto();
-            DataSet datos = ncc.get_solicitudesRealizadasProductos(nroSolicitud, solicitante, estadoSolicitud);
-            gv_solicitudesProductos.DataSource = datos;
-            gv_solicitudesProductos.DataBind();
-        }
-        /*
-        protected void gv_solicitudesProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-
-            GridViewRow row = gv_solicitudesProductos.SelectedRow;
-
-            TextBox tx_cantidadEntregarOK = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-            string cantidadEntregarText = tx_cantidadEntregarOK.Text.Trim();
-
-            if (string.IsNullOrEmpty(cantidadEntregarText) || float.Parse(cantidadEntregarText) == 0)
-            {
-                showalert("La cantidad no puede ser 0 o estar vacia.");
-                return;
-            }
-
-            int codigoSolicitud = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Value);
-            int codigoProducto = Convert.ToInt32(((Label)row.FindControl("lbl_codigoProducto")).Text);
-
-            float cantidadEntregada = float.Parse(cantidadEntregarText);
-
-            float restarStock = cantidadEntregada;
-
-            bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadEntregada, restarStock);
-
-            if (resultado)
-            {
-                showalert($"Datos actualizados");
-            }
-            else
-            {
-                showalert("Hubo un error al actualizar los datos ");
-            }
-
-
-
-        }
-        */
-        /*private void seleccionarDatos()
-        {
-            if(gv_solicitudesProductos.SelectedIndex > -1){
-                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
-                string nroboleta = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[3].Text);
-                string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
-                string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
-                string personaSolicitud = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
-
-                dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
-
-                string detalleCierre = HttpUtility.HtmlDecode(gv_solicitudesProductos.SelectedRow.Cells[11].Text);
-                if (!string.IsNullOrEmpty(detalleCierre) && !detalleCierre.Equals("&nbsp;"))
-                {
-                    dd_motivoCierre.SelectedValue = detalleCierre;
-                }
-                else
-                    dd_motivoCierre.SelectedIndex = 0;
-
-
-                tx_nrosolicitud.Text = nroboleta;
-                tx_SolicitanteProducto.Text = personaSolicitud;
-                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[5].Text);
-                int codigoProducto = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[8].Text);
-                string nroboleta = gv_solicitudesProductos.SelectedRow.Cells[6].Text;
-                string fechaentrega = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
-                string horaentrega = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
-                string personaSolicitud = gv_solicitudesProductos.SelectedRow.Cells[7].Text;
-                tx_SolicitanteProducto.Text = HttpUtility.HtmlDecode(personaSolicitud);
-                
-                dd_estadoCierre.SelectedValue = gv_solicitudesProductos.SelectedRow.Cells[12].Text;
-                
-                tx_fechaEngrega.Text = fechaentrega;
-                tx_horaentrega.Text = horaentrega;
-
-                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-                DataSet datos = negocio.get_detSolicitudProducto(codigoSolicitud, codigoProducto);
-
-            }
-        }*/
-
-        protected void btn_anularSolicitud_click(object sender, EventArgs e)
-        {
-            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-            List<int> selectCodSolicitud = new List<int>();
-            List<int> selectCodProducto = new List<int>();
-
-
-            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-            {
-                CheckBox chkAnular = (CheckBox)row.FindControl("chkSelect");
-
-                if(chkAnular != null && chkAnular.Checked)
-                {
-                    int codigo = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Value);
-                    int codProducto = Convert.ToInt32(((Label)row.FindControl("lb_codproducto")).Text);
-
-                    selectCodSolicitud.Add(codigo);
-                    selectCodProducto.Add(codProducto);
-                }
-            }
-            if (selectCodSolicitud.Count > 0)
-            {
-                bool exito = negocio.update_RetirarSolicitud(selectCodSolicitud, selectCodProducto);
-
-                if (exito)
-                {
-                    showalert($"Se han anulado los registros exitosamente.");
-                    limpiarDatos();
-                }
-                else
-                {
-                    string solicitudesStr = string.Join(",", selectCodSolicitud);
-                    string productosStr = string.Join(",", selectCodProducto);
-                    showalert($"Hubo un error al anular el registro : {solicitudesStr}, {productosStr}");
-                }
-            }
-            else
-            {
-                showalert("Por favor, seleccione al menos un registro");
-            }
-        }
-
-        private void eliminarSolicitud()
-        {
-            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-            {
-                CheckBox cbokeliminar = row.Cells[1].FindControl("cbk_eliminar") as CheckBox;
-                if (cbokeliminar.Checked)
-                {
-                    int codigoSolicitud = int.Parse(row.Cells[2].Text);
-                    NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-                    bool bandera = nss.eliminarSolicitud(codigoSolicitud);
-                }
-            }
-            buscarDatosSolicitud("", "", "Abierto");
-        }
-
-        
         public string aFecha2(string fecha)
         {
             if (string.IsNullOrEmpty(fecha) || fecha == "&nbsp;")
@@ -233,7 +83,6 @@ namespace jycboliviaASP.net.Presentacion
             {
                 return fecha = "null";
             }
-
             else
             {
                 DateTime fecha_ = Convert.ToDateTime(fecha);
@@ -244,137 +93,30 @@ namespace jycboliviaASP.net.Presentacion
                 return _fecha;
             }
         }
-        /*
-        private void actualizarTodoslosDatos()
-        {
-            NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            if (gv_solicitudesProductos.SelectedIndex > -1)
-            {
-                int codigoSolicitud = int.Parse(gv_solicitudesProductos.SelectedRow.Cells[2].Text);
-               // float sumStock = nss.get_SumStockTotal(codigoSolicitud);
-                bool banderaerror = false;
-                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-                {                    
-                    int codProducto ;
-                    int.TryParse(row.Cells[0].Text, out codProducto);
-                    string tipoSolicitud = row.Cells[4].Text;
-                    float StockProductos = nss.get_Stock(codProducto, tipoSolicitud);
-
-                    float cantAentregar;
-                    TextBox tx_cant2 = row.Cells[6].FindControl("tx_cantidadEntregarOK") as TextBox;
-                    float.TryParse(tx_cant2.Text, out cantAentregar);
-                    if (cantAentregar > StockProductos) {
-                        banderaerror = true;
-                    }                   
-                }
-
-                if (banderaerror == false) {
-                    foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-                    {
-                        int codProducto;
-                        int.TryParse(row.Cells[0].Text, out codProducto);
-                        float cantAentrego;
-                        Label tx_cant = row.Cells[5].FindControl("lb_cantentregado") as Label;
-                        float.TryParse(tx_cant.Text, out cantAentrego);
-
-                        float cantAentregar;
-                        TextBox tx_cant2 = row.Cells[6].FindControl("tx_cantidadEntregarOK") as TextBox;
-                        float.TryParse(tx_cant2.Text, out cantAentregar);
-
-                        float totalEntregado = cantAentrego + cantAentregar;
-                        bool bb = nss.update_cantProductosEntregados(codigoSolicitud, codProducto, totalEntregado, cantAentregar);
-                    }
-
-                    NA_Responsables Nresp = new NA_Responsables();
-                    string usuarioAux = Session["NameUser"].ToString();
-                    string passwordAux = Session["passworuser"].ToString();
-                    int codresponsable = Nresp.getCodUsuario(usuarioAux, passwordAux);
-                    string nombreResponsable = Nresp.get_responsable(codresponsable).Tables[0].Rows[0][1].ToString();
-                    string fechaEntrega = aFecha(tx_fechaEngrega.Text);
-                    string horaEntrega = tx_horaentrega.Text;
-
-                    string estadoCierre = dd_estadoCierre.SelectedItem.Text;
-                    string motivoCierre = dd_motivoCierre.SelectedItem.Text;
-                    string EstadoActual = gv_solicitudesProductos.SelectedRow.Cells[10].Text;
-
-                    bool cerrado = nss.update_cerrarSolicitud(codigoSolicitud, codresponsable, nombreResponsable, estadoCierre, motivoCierre, fechaEntrega, horaEntrega);
-                    if (cerrado == true)
-                    {                                                
-                        if (estadoCierre.Equals("Cerrado") && EstadoActual.Equals("Abierto")) {
-                            string cliente = gv_solicitudesProductos.SelectedRow.Cells[11].Text;
-                            NCorpal_Cliente nc = new NCorpal_Cliente();
-                            DataSet tuplaCli = nc.get_ClienteNombreEspecifico(cliente);
-                            int codCliente = 0;
-                            string tiendaName = "";
-                            string direccion = "";
-                            string correoCliente = "";
-                            string municipio = "Santa Cruz";
-                            string telefono = "";
-                            string nombreRazonSocial = "";
-                            string numeroDocumento = "";
-                            int codigoMetodoPago = 1;
-                            bool factura = false;
-                            string numeroFactura = codigoSolicitud.ToString();
-                            int codigoMoneda = 1;
-                            decimal descuentoAdicional = decimal.Parse("0");
-                            string leyendaF = "LeyendaNinguna";
-                            decimal tipoCambio = decimal.Parse("6,96");
-                            decimal montoTotal = decimal.Parse(gv_solicitudesProductos.SelectedRow.Cells[9].Text);
-                            decimal montoTotalMoneda = montoTotal;
-                            string solicitandte  = tx_SolicitanteProducto.Text;
-                            int codigoSolicitante = Nresp.getCodigo_NombreResponsable(solicitandte);
 
 
-
-                            if (tuplaCli.Tables[0].Rows.Count > 0)
-                            {
-                                codCliente = int.Parse(tuplaCli.Tables[0].Rows[0][0].ToString());
-                                tiendaName = tuplaCli.Tables[0].Rows[0][1].ToString();
-                                direccion = tuplaCli.Tables[0].Rows[0][2].ToString();
-                                telefono = tuplaCli.Tables[0].Rows[0][3].ToString();
-                                municipio = tuplaCli.Tables[0].Rows[0][4].ToString();
-                                correoCliente = tuplaCli.Tables[0].Rows[0][14].ToString();
-                                nombreRazonSocial = tuplaCli.Tables[0].Rows[0][12].ToString();
-                                numeroDocumento = tuplaCli.Tables[0].Rows[0][13].ToString();
-                            }
-
-                            NCorpal_Venta nv = new NCorpal_Venta();
-                            bool banderaV = nv.crearVenta(codCliente, tiendaName, correoCliente, municipio, telefono, direccion, numeroFactura, nombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, 
-                                codigoMoneda, tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitandte, factura, fechaEntrega, codigoSolicitud);
-                            int codigoVenta = nv.get_codigoVentaUltimoInsertado(cliente, nombreRazonSocial, nombreResponsable);
-                            bool banderaAllTodosProducto = nv.insertarTodoslosProductosAVenta(codigoVenta, codigoSolicitud);
-
-                        }
-
-                        limpiarDatos();
-                        buscarDatosSolicitud("", "", estadoCierre);
-                        Session["codigoEntregaSolicitudProducto"] = codigoSolicitud;
-                        Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
-                    }
-                }
-                else
-                    Response.Write("<script type='text/javascript'> alert('Error: Suma Entrega mayor a Stock') </script>");  
-
-                }else
-                    Response.Write("<script type='text/javascript'> alert('Error: Suma Entrega mayor a Stock') </script>");
-        }*/
-
+       
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {
-            limpiarDatos();
+            limpiarForm();
         }
 
-        private void limpiarDatos()
+        private void limpiarForm()
         {
-
             GET_MostrarSolicitudProductos("Abierto");
+
+            gv_despachoProductos.DataSource = null;
+            gv_despachoProductos.DataBind();
+
+            Session["despachoListGV"] = null;
+
             dd_listVehiculo.SelectedIndex = 0;
+
             gv_detCar.DataSource = null;
             gv_detCar.DataBind();
-        }
 
-        protected void gv_detallesolicitud_SelectedIndexChanged(object sender, EventArgs e)
-        {}
+            txt_detalleRegistro.Text = string.Empty;
+        }
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
@@ -384,7 +126,6 @@ namespace jycboliviaASP.net.Presentacion
                 Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
                 Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
             }
-            
         }
 
         private void verReciboSeleccionado()
@@ -397,70 +138,6 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Seleccionar Entrega') </script>");
             
-        }
-
-        ///* ////////////////////////////////////////////////////////////////////-------- P2 -------/////////////////////////////////////////////////////// */
-        //Mostrar Registros
-        protected void btn_RegistrarSolicitud_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(!ValidarVehiculoSeleccionado() || !HayRegistrosSeleccionados())
-                {
-                    showalert("Por favor, selecciona un vehiculo disponible.");
-                    return;
-                }
-                if (!HayRegistrosSeleccionados())
-                {
-                    showalert("Por favor, selecciona al menos 1 registro");
-                    return;
-                }
-
-
-
-
-                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-                {
-                    ProcesarFila(row);
-                }
-                int codigo; 
-                int.TryParse(dd_listVehiculo.SelectedValue, out codigo);
-                Session["codigoCamion"] = codigo;                
-                Session["ReporteGeneral"] = "Reporte_ProductoCamionEntrega";
-                //Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-            }
-            catch (Exception ex)
-            {
-                showalert($"Error al registrar la solicitud btn registrar: {ex.Message}");
-                //limpiarDatos();
-            }
-        }
-        private bool HayRegistrosSeleccionados()
-        {
-            foreach(GridViewRow row in gv_solicitudesProductos.Rows)
-            {
-                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
-                if(chkSelect != null && chkSelect.Checked)
-                {
-                    return true; //hay registro
-                }
-            }
-            return false; // no se selecciono ningun registro
-        }
-        private int obtenerCodResponsable()
-        {
-            try
-            {
-                NA_Responsables negocio = new NA_Responsables();
-                string usuario = Session["NameUser"].ToString();
-                string password = Session["passworuser"].ToString();
-                return negocio.getCodUsuario(usuario, password);
-            }
-            catch(Exception ex)
-            {
-                showalert($"Error al obtener el codigo del responsable.{ex.Message}");
-                return 0;
-            }
         }
      
         /*
@@ -522,144 +199,525 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error al insertar la venta. {ex.Message}");
             }
-        }
-        */
-        private void ProcesarFila(GridViewRow row)
+        }*/
+      
+
+
+        protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
-            if (chkSelect != null && chkSelect.Checked)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                int codigoSolicitud = Convert.ToInt32(row.Cells[1].Text);
-                int codigoProducto = Convert.ToInt32(row.Cells[3].Text);
+                CheckBox chkSelect = (CheckBox)e.Row.FindControl("chkSelect");
+                
+                if (chkSelect != null )
+                {
+                    List<Product> despachoList = (List<Product>)Session["despachoListGV"];
 
-                TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-                Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
+                    if(despachoList != null)
+                    {
+                        string nroBoleta = e.Row.Cells[1].Text;
+                        string producto = e.Row.Cells[2].Text;
 
-                if (string.IsNullOrEmpty(txtCantidadAEntregar.Text) )
-                {
-                    txtCantidadAEntregar.Text = "0"; //asignar valor por defecto si esta vacio
-                }
-                bool vehiculoAsignado = RegistrarVehiculoAPedido();
-                if (vehiculoAsignado)
-                {
-                    ActualizarCantidad(codigoSolicitud, codigoProducto, txtCantidadAEntregar, lblCantEntregada);
-                    showalert($"se ha registrado la solicitud exitosamente.");
-                    GET_MostrarSolicitudProductos("Abierto");
-                    dd_listVehiculo.SelectedIndex = 0;
-                }
-                else
-                {
-                    showalert("Error al asignar el vehiculo al pedido");
+                        var selectedProduct = despachoList.FirstOrDefault(p => p.nroboleta == nroBoleta && p.producto == producto);
+
+                        if(selectedProduct != null )
+                        {
+                            chkSelect.Checked = true;
+                            e.Row.CssClass += "highlighted";
+                        }
+                        else
+                        {
+                            chkSelect.Checked = false;
+                            e.Row.CssClass = e.Row.CssClass.Replace("highlighted", "").Trim();
+                        }
+                    }
                 }
             }
         }
-        //METODO para registrar vehiculo a la solicitud 
-        private bool RegistrarVehiculoAPedido()
+
+       
+
+        public class Product
         {
-            bool resultadoGeneral = true;
-            NA_SolicitudEntregaProductoACamion negocioSolicitudEntrega = new NA_SolicitudEntregaProductoACamion();
+            public int codigoSolicitud {  get; set; }
+            public string nroboleta { get; set; }
+            public string producto { get; set; }
+            public int cantidadEntregada {  get; set; }
+        }
+        protected void chk_seleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chkBox = sender as CheckBox;
+            GridViewRow row = (chkBox.NamingContainer as GridViewRow);
+
+            int codigoSolicitud = int.Parse(row.Cells[1].Text);
+            string nroBoleta = row.Cells[2].Text;
+            string producto = row.Cells[4].Text;
+
+            TextBox txtCantidadEntregada = row.FindControl("tx_cantidadEntregarOK") as TextBox;
+            int cantidadEntregada = 0;
+            int.TryParse(txtCantidadEntregada.Text, out cantidadEntregada);
+
+            Product selectedProduct = new Product
+            {
+                codigoSolicitud = codigoSolicitud,
+                nroboleta = nroBoleta,
+                producto = producto,
+                cantidadEntregada = cantidadEntregada
+            };
+            List<Product> despachoList = (List <Product>) Session["despachoListGV"];
+            if(despachoList == null)
+            {
+                despachoList = new List<Product>();
+            }
+            if (chkBox.Checked)
+            {
+                despachoList.Add(selectedProduct);
+            }
+            else
+            {
+                despachoList.RemoveAll(p => 
+                p.codigoSolicitud == codigoSolicitud && 
+                p.nroboleta == nroBoleta && 
+                p.producto == producto );
+            }
+
+            Session["despachoListGV"] = despachoList;
+
+            gv_despachoProductos.DataSource = despachoList;
+            gv_despachoProductos.DataBind();
+        }
+
+        /***********************************   VW solicitud entrega producto     *************************************/
+        protected void btn_registrarDespacho_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
+                string detalle = txt_detalleRegistro.Text.Trim();
+                int codResponsable = obtenerCodResponsable();
+
+                if(dd_listVehiculo.SelectedIndex == 0)
+                {
+                    showalert("Por favor seleccione un vehiculo válido");
+                    return;
+
+                }
+
+                int codDespacho = CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
+                if (codDespacho <= 0)
+                {
+                    showalert("Error al registrar el despacho principal.");
+                    return;
+                }
+
+                if (!RegistrarDetalleDespacho(codDespacho))
+                {
+                    showalert("Error al registrar el detalle del despacho.");
+                    return;
+                }
+
+                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+                {
+                    CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                    if (chk != null && chk.Checked)
+                    {
+                        ProcesarRegistroSolicitudPedido123(row, codVehiculo);
+
+                        int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                        int codigoCliente = int.Parse(row.Cells[11].Text);
+                        string solicitante = row.Cells[10].Text;
+                        string fechaEntrega = aFecha2(row.Cells[9].Text);
+
+                        RegistrarVentaConDetalle123(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
+                    }
+                }
+
+                limpiarForm();
+                GET_MostrarSolicitudProductos("Abierto");
+                showalert("Registro insertado exitosamente.");
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error inesperado: {ex.Message}");
+            }
+
+
+
+
+            /*
+            string detalle = txt_detalleRegistro.Text.Trim();
+            int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
+
+            NA_Responsables NResponsable = new NA_Responsables();
+            string usu = Session["NameUser"].ToString();
+            string pass = Session["passworuser"].ToString();
+            int codResponsable = NResponsable.getCodUsuario(usu, pass);
+
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            int codDespacho = negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
+
+            if (codDespacho <= 0)
+            {
+                showalert("Error al registrar el despacho principal");
+                return; 
+            }
+
+            if (RegistrarDetalleDespacho(codDespacho))
+            {
+                //showalert($"Detalle de despacho Nro: {codDespacho} registrado.");
+            }
             foreach (GridViewRow row in gv_solicitudesProductos.Rows)
             {
-                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
+                ProcesarRegistroSolicitudPedido(row);
+
+                int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                int codigoCliente = int.Parse(row.Cells[11].Text);
+                string solicitante = (row.Cells[10].Text);
+                string fechaEntregarow = (row.Cells[9].Text);
+                string fechaEntrega = aFecha2(fechaEntregarow);
+
+                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                if (chk != null && chk.Checked)
+                {
+                    registrarVentaAut(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
+                    showalert($"Solicitud registrada.");
+                    limpiarForm();
+                    GET_MostrarSolicitudProductos("Abierto");
+                }
+            }
+            */
+        }
+
+
+        /*PARTE 2 AUTOCORR*/
+        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
+        {
+            try
+            {
+                var clienteData = new NCorpal_Cliente().get_ClienteCodigo(codigoCliente);
+
+                if (clienteData.Tables[0].Rows.Count == 0)
+                {
+                    showalert("Cliente no encontrado.");
+                    return;
+                }
+
+                var row = clienteData.Tables[0].Rows[0];
+                string tiendaName = row["tiendaname"].ToString();
+                string direccion = row["tiendadir"].ToString();
+                string telefono = row["tiendatelefono"].ToString();
+                string municipio = row["tiendadepartamento"].ToString();
+                string correo = row["propietariocorreo"].ToString();
+                string razonSocial = row["facturar_a"].ToString();
+                string documento = row["facturar_nit"].ToString();
+                decimal tipoCambio = decimal.Parse("6.96");
+
+                int codResponsable = obtenerCodResponsable();
+
+                NCorpal_Venta nventa = new NCorpal_Venta();
+
+                bool ventaCreada = nventa.crearVentas3(
+                    codigoCliente, tiendaName, codigoSolicitud, correo, municipio, telefono,
+                    "", direccion, razonSocial, documento,
+                    1, 0, 1, tipoCambio, 0, 0, "LeyendaNinguna",
+                    codResponsable, solicitante, 0, fechaEntrega, codigoSolicitud);
+
+                if (!ventaCreada)
+                {
+                    showalert("Error al crear la venta");
+                    return;
+                }
+                else
+                {
+                    
+                    bool productosInsertados = nventa.insertarTodoslosProductosAVenta3(codigoSolicitud);
+                    if (!productosInsertados)
+                    {
+                        showalert($"Error al insertar productos de la venta {codigoSolicitud}");
+                    }
+                    
+                }
+
+            }
+            catch(Exception ex)
+            {
+                showalert($"Error al registrar la venta: {ex.Message}");
+            }
+        }
+
+        private void ProcesarRegistroSolicitudPedido123(GridViewRow row, int codVehiculo)
+        {
+            try
+            {
+                int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                int codigoProducto = int .Parse(row.Cells[3].Text);
+                TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                Label lblCantidadActual = (Label)row.FindControl("lb_cantentregada");
+                CheckBox chkTipoEntrega = (CheckBox)row.FindControl("chkTipoEntrega");
+
+                if(!float.TryParse(txtCantidad.Text, out float cantidadNueva)) cantidadNueva = 0;
+                if(!float.TryParse(lblCantidadActual.Text, out float cantidadActual)) cantidadActual = 0;
+
+                float totalEntregado = cantidadNueva + cantidadActual;
+                float stockARestar = cantidadNueva;
+                string estadoEntrega = chkTipoEntrega != null && chkTipoEntrega.Checked ? "parcial" : "total";
+
+                int codResponsable = obtenerCodResponsable();
+                string personal = tx_entregoSolicitud.Text.Trim();
+
+                NCorpal_EntregaSolicitudProducto2 nentrega_solicitud = new NCorpal_EntregaSolicitudProducto2();
+                bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, estadoEntrega, stockARestar, codResponsable, codVehiculo);
+
+                if (actualizado)
+                {
+                    nentrega_solicitud.update_CierreAutSolicitudProd(codigoSolicitud, codResponsable, personal);
+                }
+                else
+                {
+                    showalert($"Error al actualizar solicitud {codigoSolicitud} - producto {codigoProducto}");
+                }
+            }
+
+            catch(Exception ex)
+            {
+                showalert($"Error en solicitud producto: {ex.Message}");
+            }
+        }
+        
+        private bool RegistrarDestalleDespacho123(int codigoDespacho)
+        {
+            bool resultadoGeneral = true;
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+            {
+                CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
                 if (chkSelect != null && chkSelect.Checked)
                 {
-                    int codigoSolicitud = Convert.ToInt32(row.Cells[1].Text);
-                    int codProducto = Convert.ToInt32(row.Cells[3].Text);
-                    int codResponsable = obtenerCodResponsable();
-                    int codCar = ObtenerCodigoVehiculoSeleccionado();
+                    int codPedido = int.Parse(row.Cells[1].Text);
+                    int codigoProducto = int.Parse(row.Cells[3].Text);
+                    TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
 
-                    bool resultado = negocioSolicitudEntrega.UpdateADDVehiculoAPedido(codCar, codResponsable, codigoSolicitud, codProducto);
+                    if (!float.TryParse(txtCantidad.Text, out float cantidadEntregar)) cantidadEntregar = 0;
 
-                    if (!resultado)
+                    if (!negocio.POST_INSERTdetalleDespacho(codigoDespacho, codPedido, codigoProducto, cantidadEntregar))
                     {
                         resultadoGeneral = false;
                         break;
                     }
                 }
             }
+
             return resultadoGeneral;
         }
-        private bool ValidarVehiculoSeleccionado()
+
+        private int CrearDespachoPrincipal123(string detalle, int codVehiculo, int codResponsable)
         {
-            int codigoVehiculo;
-            return int.TryParse(dd_listVehiculo.SelectedValue, out codigoVehiculo) && codigoVehiculo > 0;
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
         }
-        private int ObtenerCodigoVehiculoSeleccionado()
-        {
-            int codigoVehiculo = 0;
-            int.TryParse(dd_listVehiculo.SelectedValue, out codigoVehiculo);
-            return codigoVehiculo;
-        }
+      
 
 
-        //METODO para actualizar cantidad de producto de la solicitud
-        private void ActualizarCantidad(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, Label lblCantEntregada)
+
+
+
+
+        /*FIN*/
+
+
+
+
+        /*  REGISTRAR VENTA */
+        private void registrarVentaAut(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
         {
             try
             {
-                float cantidadEntregar = float.Parse(txtCantidadAEntregar.Text);
-                float cantActual = float.Parse(lblCantEntregada.Text);
-                float cantidadTotalEntregada = cantidadEntregar + cantActual;
-                float restarStock = cantidadEntregar - cantActual;
+                int codigoMetodoPago = 1;
+                decimal montoTotal = 0;
+                decimal montoTotalMoneda = montoTotal;
+                int codigoMoneda = 1;
+                decimal tipoCambio = decimal.Parse("6.96");
+                decimal descuentoAdicional = decimal.Parse("0");
+                string leyendaF = "leyendaNinguna";
+                int factura = 0;
 
-                int codResponsable = obtenerCodResponsable();
-                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-                bool resultado = negocio.update_cantProductosEntregados(codigoSolicitud, codigoProducto, cantidadTotalEntregada, restarStock, codResponsable);
+                NA_Responsables Nresp = new NA_Responsables();
+                NCorpal_Cliente Ncliente = new NCorpal_Cliente();
+                DataSet tuplasCLI = Ncliente.get_ClienteCodigo(codigoCliente);
+                int codigoSolicitante = 1;
+                //Datos Clientes
+                string tiendaName = "", tiendaCorreoCliente = "", municipio = "", tiendaTelefono = "", tiendaDir = "", tiendaNombreRazonSocial = "", numeroDocumento = "";
+                string numeroFactura = "";
+
+                if (tuplasCLI.Tables[0].Rows.Count > 0)
+                {
+                    tiendaName = tuplasCLI.Tables[0].Rows[0][1].ToString();
+                    tiendaDir = tuplasCLI.Tables[0].Rows[0][2].ToString();
+                    tiendaTelefono = tuplasCLI.Tables[0].Rows[0][3].ToString();
+                    municipio = tuplasCLI.Tables[0].Rows[0][4].ToString();
+                    tiendaCorreoCliente = tuplasCLI.Tables[0].Rows[0][11].ToString();
+                    tiendaNombreRazonSocial = tuplasCLI.Tables[0].Rows[0][12].ToString();
+                    numeroDocumento = tuplasCLI.Tables[0].Rows[0][13].ToString();
+                }
+
+                NCorpal_Venta Nventa = new NCorpal_Venta();
+                bool resultado = Nventa.crearVentas3(codigoCliente, tiendaName, codigoSolicitud,
+                    tiendaCorreoCliente, municipio, tiendaTelefono, numeroFactura, tiendaDir,
+                    tiendaNombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda,
+                    tipoCambio, montoTotalMoneda, descuentoAdicional, leyendaF, codigoSolicitante, solicitante, factura,
+                    fechaEntrega, codigoSolicitud);
 
                 if (!resultado)
                 {
-                    showalert($"Error al actualizar el producto con código: {codigoProducto}");
+                    showalert($"Error al registrar la venta.");
+                    return;
+                }
+                bool resultadoProductoVentas = Nventa.insertarTodoslosProductosAVenta3(codigoSolicitud);
+
+                if (!resultadoProductoVentas)
+                {
+                    showalert("Error al insertar productos de la venta.");
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                showalert($"Error al actualizar la cantidad: {ex.Message}");
+                showalert($"Error al insertar la venta. {ex.Message}");
             }
         }
 
-
-        // validar cantidad no sea mayor al stock
-        private bool validarCantidad(TextBox txtCantidadAEntregar, Label lblCantEntregada)
+        /* REGISTRAR DETALLE DESPACHO */
+        private bool RegistrarDetalleDespacho(int codigodespacho)
         {
-            try
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            bool resultadoGeneral = true;
+
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
             {
+                CheckBox chkSelect = (CheckBox)row.Cells[0].FindControl("chkSelect");
+                if (chkSelect != null && chkSelect.Checked)
+                {
+
+                    int codPedido = int.Parse(row.Cells[1].Text);
+                    string producto = row.Cells[4].Text;
+                    int codigoProducto = int.Parse(row.Cells[3].Text);
+
+                    TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                    float cantidadEntregar;
+                    if (!float.TryParse(txtCantidadAEntregar.Text, out cantidadEntregar))
+                    {
+                        cantidadEntregar = 0;
+                    }
+
+                    bool resultado = negocio.POST_INSERTdetalleDespacho(codigodespacho, codPedido, codigoProducto, cantidadEntregar);
+
+                    if (!resultado)
+                    {
+                        resultadoGeneral = false;
+                        break;
+                    }
+                    else
+                    {
+                        //showalert("Detalle de despacho insertado correctamente");
+                    }
+                }
+            }
+            return resultadoGeneral;
+        }
+        /*  REGISTRO DETALLE SOLICITUD PEDIDO*/
+        private void ProcesarRegistroSolicitudPedido(GridViewRow row)
+        {
+            CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
+            if(chkSelect != null && chkSelect.Checked)
+            {
+                int codigoSolicitud = Convert.ToInt32(row.Cells[1].Text);
+                int codigoProducto = Convert.ToInt32(row.Cells[3].Text);
+
+                TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+
+                CheckBox chkTipoEntrega = (CheckBox)row.FindControl("chkTipoEntrega");
+
+                string tipoEntrega = chkTipoEntrega != null && chkTipoEntrega.Checked ? "parcial" : "total";
+
+                Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
+
+                int codigoVehiculo = dd_listVehiculo.SelectedIndex;
+
                 if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
                 {
                     txtCantidadAEntregar.Text = "0";
-                    return true;
+                }
+                ActualizarDetalleSolicitudPedido(codigoSolicitud, codigoProducto, txtCantidadAEntregar, tipoEntrega, lblCantEntregada, codigoVehiculo);
+            }
+        }
+        /*  DETALLE SOLICITUD Y CIERRE AUT DE SOLICITUD PEDIDO*/
+        private void ActualizarDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, string estadoProducto, Label lblCantEntregada, int codVehiculo)
+        {
+            try
+            {
+
+                float cantidadEntregar2 = 0;
+                if(!float.TryParse(txtCantidadAEntregar.Text, out cantidadEntregar2)){
+                    showalert("La cantidad a entregar no es válida");
+                    return;
                 }
 
-                if (!float.TryParse(txtCantidadAEntregar.Text, out float cantidadEntregar))
-                {
-                    showalert("la cantidad ingresada no es un número válido.");
-                    return false;
-                }
-
-                if (cantidadEntregar < 0)
-                {
-                    showalert("La cantidad no puede ser negativa.");
-                    return false;
+                float cantActual2 = 0;
+                if(!float.TryParse(lblCantEntregada.Text, out cantActual2)){
+                    showalert("La cantidad entregada previamente no es váliad.");
+                    return;
                 }
 
                 float cantActual = float.Parse(lblCantEntregada.Text);
+                float cantidadTotalEntregada = cantidadEntregar2 + cantActual;
+                float restarStock = cantidadEntregar2;
 
-                GridViewRow row = (GridViewRow)txtCantidadAEntregar.NamingContainer;
-                int stockDisponible = int.Parse(((Label)row.FindControl("lb_stockAlmacen")).Text);
+                int codResponsable = obtenerCodResponsable();
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
-                if (cantidadEntregar > stockDisponible)
+                string personal = tx_entregoSolicitud.Text.Trim();
+
+                bool resultado = negocio.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadTotalEntregada, estadoProducto, restarStock, codResponsable, codVehiculo);
+                if (!resultado)
                 {
-                    showalert("Cantidad no válida. Supera el stock disponible.");
-                    return false;
+                    showalert($"Error al acttualizar la solicitud : {codigoSolicitud} - codigo Producto: {codigoProducto}");
                 }
-                return true;
+                else
+                {
+                    bool cierreAut = negocio.update_CierreAutSolicitudProd(codigoSolicitud, codigoSolicitud, personal);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                showalert($"error al validar la cantidad: {ex.Message}");
-                return false;
+                showalert($"Error al actualizar la cantidad. {ex.Message  }");
             }
         }
 
+
+
+        /* Mj cod
+         
+         
+         
+         
+         
+         */
+
+        private int obtenerCodResponsable()
+        {
+            try
+            {
+                NA_Responsables negocio = new NA_Responsables();
+                string usuario = Session["NameUser"].ToString();
+                string password = Session["passworuser"].ToString();
+                return negocio.getCodUsuario(usuario, password);
+            }
+            catch (Exception ex)
+            {
+                showalert($"Error al obtener el codigo del responsable.{ex.Message}");
+                return 0;
+            }
+        }
         // cargar datos (det Car) en gridview
         protected void dd_listVehiculo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -672,17 +730,17 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (carData.Tables[0].Rows.Count > 0)
                 {
-                    
+
                     gv_detCar.DataSource = carData;
                     gv_detCar.DataBind();
                     gv_detCar.Visible = true;
                 }
                 else
                 {
-                    gv_detCar.Visible = false; 
+                    gv_detCar.Visible = false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert($"Error al cargar los datos. {ex.Message}");
             }
@@ -693,7 +751,7 @@ namespace jycboliviaASP.net.Presentacion
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
             DataSet dsCar = negocio.get_showVehiculosDD();
 
-            if(dsCar != null && dsCar.Tables.Count > 0)
+            if (dsCar != null && dsCar.Tables.Count > 0)
             {
                 dd_listVehiculo.DataSource = dsCar.Tables[0];
                 dd_listVehiculo.DataTextField = "detalle";
@@ -712,66 +770,6 @@ namespace jycboliviaASP.net.Presentacion
         {
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
-        }
-       
-
-        protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                CheckBox chkSelect = (CheckBox)e.Row.FindControl("chkSelect");
-                if (chkSelect != null && chkSelect.Checked)
-                {
-                    e.Row.CssClass += "highlighted";
-                }
-            }
-        }
-
-       
-
-        public class Product
-        {
-            public string nroboleta { get; set; }
-            public string producto { get; set; }
-        }
-
-        protected void gv_solProductos_OnRowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "SeleccionarProducto")
-            {
-                // Obtén el índice de la fila seleccionada
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
-                GridViewRow row = gv_solicitudesProductos.Rows[rowIndex];
-
-                // Obtén los valores de la fila seleccionada
-                string nroBoleta = row.Cells[1].Text;  // El índice de las celdas depende de cómo esté estructurado tu GridView
-                string producto = row.Cells[2].Text;
-
-                // Crea un nuevo objeto que contendrá estos datos
-                Product selectedProduct = new Product
-                {
-                    nroboleta = nroBoleta,
-                    producto = producto
-                };
-
-                // Recupera la lista de productos en la sesión
-                List<Product> despachoList = (List<Product>)Session["despachoList"];
-
-                if (despachoList == null)
-                {
-                    despachoList = new List<Product>();
-                }
-
-                // Agrega el producto seleccionado a la lista
-                despachoList.Add(selectedProduct);
-
-                // Guarda la lista de productos en la sesión
-                Session["despachoList"] = despachoList;
-
-                // Vuelve a vincular el GridView de despacho con la lista actualizada
-                gv_despachoProductos.DataSource = despachoList;
-                gv_despachoProductos.DataBind();
-            }
         }
     }
 }
