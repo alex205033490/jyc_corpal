@@ -42,33 +42,6 @@
 
     </script>
 
-    <style>
-        .error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .container_detCar {
-            margin-top: 0.3rem;
-            font-size: 0.8rem;
-        }
-
-        .txtdetalle {
-            Height: 70px;
-            Font-Size: 0.8rem;
-            resize: none;
-        }
-
-        .ddVehiculo {
-            margin-bottom: 0.3rem;
-        }
-
-        .gv_detCar {
-            font-size: 0.7rem;
-        }
-    </style>
-
     <div class="card">
         <div class="card-header bg-warning text-black">Entrega de Solicitud Productos</div>
         <div class="container-form">
@@ -138,7 +111,7 @@
                         <div class="container_despachoDProductos border-2">
                             <div class="lista_despachos col-lg-6">
 
-                                <asp:GridView ID="gv_despachoProductos" runat="server" CssClass="table table-striped"
+                                <asp:GridView ID="gv_despachoProductos" runat="server" CssClass="gv_despachoProductos table table-striped"
                                     AutoGenerateColumns="false" Visible="true">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Número de solicitud">

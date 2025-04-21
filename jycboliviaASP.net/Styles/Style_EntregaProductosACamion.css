@@ -106,3 +106,46 @@
     box-shadow: 0 0 11px 1px #4f3e3ea6 !important;
 
 }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.container_detCar {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+}
+
+.txtdetalle {
+    Height: 70px;
+    Font-Size: 0.8rem;
+    resize: none;
+}
+
+.ddVehiculo {
+    margin-bottom: 0.3rem;
+}
+
+.gv_detCar {
+    font-size: 0.7rem;
+}
+
+/*LISTA GV DESPACHOS*/
+.lista_despachos{
+    font-size: 0.65rem;
+}
+
+.gv_solicitudesProductos td:nth-child(8),
+.gv_solicitudesProductos td:nth-child(9) {
+    background-color: #ffa20042;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.gv_solicitudesProductos td:nth-child(5),
+.gv_solicitudesProductos td:nth-child(11),
+.gv_solicitudesProductos td:nth-child(13) {
+    font-size: 0.7rem;
+}
