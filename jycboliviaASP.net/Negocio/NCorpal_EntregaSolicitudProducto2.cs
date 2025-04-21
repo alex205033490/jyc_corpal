@@ -86,6 +86,7 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
         {
             return datos.get_DespachoBoletasProdEntrega(codigoDespacho);
+        }
 
         internal DataSet get_showVehiculosDD()
         {

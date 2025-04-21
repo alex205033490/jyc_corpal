@@ -46,7 +46,7 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
                 "WHERE sep.estadosolicitud = '"+estadoSolicitud+"' " +
                 "and sep.estado = true " +
-                "and sep.fechaGRA >= CURDATE() - INTERVAL 2 WEEK " +
+                "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
                 "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 

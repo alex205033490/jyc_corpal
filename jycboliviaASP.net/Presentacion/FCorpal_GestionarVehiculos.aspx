@@ -133,13 +133,13 @@
 
                         <asp:TemplateField HeaderText="Capacidad (Tn)">
                             <ItemTemplate>
-                                <asp:TextBox ID="tx_capacidadCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("capacidad") %>'></asp:TextBox>
+                                <asp:TextBox ID="tx_capacidadCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("capacidad") %>' oninput="convertdotcomma(event)"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Capacidad Cajas">
                             <ItemTemplate>
-                                <asp:TextBox ID="tx_cargacajasCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("estado") %>'></asp:TextBox>
+                                <asp:TextBox ID="tx_cargacajasCar" runat="server" BackColor="Yellow" AutoComplete="off" Width="80%" Text='<%# Bind("cargacajas") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
 
