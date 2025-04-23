@@ -202,7 +202,6 @@ namespace jycboliviaASP.net.Presentacion
         }*/
       
 
-
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -234,8 +233,6 @@ namespace jycboliviaASP.net.Presentacion
                 }
             }
         }
-
-       
 
         public class Product
         {
