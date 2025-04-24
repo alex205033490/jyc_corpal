@@ -42,26 +42,6 @@
             }
         })
 
-        $(document).ready(function () {
-            function addCheckboxChangeListener() {
-                var gridViewId = $(".container-gvRegistros").data("clientid");
-
-                $("#" + gridViewId + " input[type='checkbox']").change(function () {
-                    var row = $(this).closest("tr");
-
-                    if ($(this).is(":checked")) {
-                        row.addClass("highlighted");
-                    } else {
-                        row.removeClass("highlighted");
-                    }
-                });
-            }
-            addCheckboxChangeListener();
-            Sys.Application.add_load(function () {
-                addCheckboxChangeListener();
-            });
-        });
-
 
 
     </script>
@@ -86,7 +66,7 @@
                         CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
                         Style="background-color: white !important;">
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="chkSelect" runat="server" CssClass="chkSelect" AutoPostBack="true" OnCheckedChanged="chk_seleccionar_CheckedChanged" />
                                 </ItemTemplate>

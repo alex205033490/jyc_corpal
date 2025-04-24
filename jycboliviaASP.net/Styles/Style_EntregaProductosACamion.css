@@ -47,7 +47,7 @@
 }
 
 .container-gvRegistros th{
-    padding:10px;
+    padding:5px;
 }
 .container-gvRegistros td{
     padding:5px;
@@ -104,7 +104,6 @@
 .dropdown-toggle:focus-visible {
     background-color: #1f1d1dd1 !important;
     box-shadow: 0 0 11px 1px #4f3e3ea6 !important;
-
 }
 
 .error-message {
@@ -148,4 +147,26 @@
 .gv_solicitudesProductos td:nth-child(11),
 .gv_solicitudesProductos td:nth-child(13) {
     font-size: 0.7rem;
+}
+
+.gv_solicitudesProductos th{
+    text-align:center !important;
+    vertical-align: middle !important;
+}
+
+.gv_solicitudesProductos td:nth-child(1){
+    vertical-align:middle;
+    text-align: center;
+    color: black !important;
+}
+
+.gv_solicitudesProductos th:nth-child(1){
+    color:black !important;
+    background-color: #ffffff !important;
+}
+
+
+table .chkSelect input[type="checkbox"] {
+    transform: scale(2) !important;
+    margin: 5px 2px !important;
 }

@@ -28,6 +28,7 @@ namespace jycboliviaASP.net.Presentacion
             }*/
             if (!IsPostBack)
             {
+                Session["despachoListGV"] = null;
                 GET_MostrarSolicitudProductos("Abierto");
                 cargarRegistroVehiculosDD();
             }
@@ -689,16 +690,6 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error al actualizar la cantidad. {ex.Message  }");
             }
         }
-
-
-
-        /* Mj cod
-         
-         
-         
-         
-         
-         */
 
         private int obtenerCodResponsable()
         {
