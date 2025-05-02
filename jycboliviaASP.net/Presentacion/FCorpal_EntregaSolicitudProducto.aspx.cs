@@ -21,11 +21,11 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = Session["BaseDatos"].ToString();
-            /*if (tienePermisoDeIngreso(119) == false)
+            if (tienePermisoDeIngreso(146) == false)
             {                   
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
-            }*/
+            }
             if (!IsPostBack)
             {
                 Session["despachoListGV"] = null;
@@ -332,7 +332,10 @@ namespace jycboliviaASP.net.Presentacion
 
                 limpiarForm();
                 GET_MostrarSolicitudProductos("Abierto");
-                showalert("Registro insertado exitosamente.");
+                //  showalert("Registro insertado exitosamente.");
+                Session["codigoDespacho"] = codDespacho;
+                Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";                
+                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
             }
             catch(Exception ex)
             {

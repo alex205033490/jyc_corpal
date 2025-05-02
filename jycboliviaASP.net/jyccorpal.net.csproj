@@ -206,6 +206,12 @@
   <ItemGroup>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="DS_Produccion.xsc">
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS_Produccion.xss">
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
+    </Content>
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -610,6 +616,33 @@
     <Content Include="Presentacion\FCorpal_RutaEntrega.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_RutaCobrador_ColocarBancos.aspx" />
     <Content Include="Presentacion\Presentacion old\FA_VaciadoR148.aspx" />
+    <Content Include="DS_CalidadProductoEnProceso.xsc">
+      <DependentUpon>DS_CalidadProductoEnProceso.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_CalidadProductoEnProceso.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_CalidadProductoEnProceso.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_CalidadProductoEnProceso.xss">
+      <DependentUpon>DS_CalidadProductoEnProceso.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_Produccion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Produccion1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_ProductosAlmacen.xsc">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_ProductosAlmacen.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ProductosAlmacen.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DS_ProductosAlmacen.xss">
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -880,6 +913,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Activos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DS_CalidadProductoEnProceso.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_CalidadProductoEnProceso.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_CallCenter.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -902,6 +940,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_Produccion1.Designer.cs">
+      <DependentUpon>DS_Produccion.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="DS_ProductosAlmacen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_Proyectos.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2133,6 +2181,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\Receta\SubReport_detalleInsumoCreado.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadFormadora.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado - Copia.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />
@@ -2246,13 +2297,6 @@
     </None>
     <None Include="DS_Mantenimiento.xss">
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
-    </None>
-    <None Include="DS_ProductosAlmacen.xsc">
-      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
-    </None>
-    <None Include="DS_ProductosAlmacen.xsd" />
-    <None Include="DS_ProductosAlmacen.xss">
-      <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
     </None>
     <None Include="DS_Proyectos.xsc">
       <DependentUpon>DS_Proyectos.xsd</DependentUpon>

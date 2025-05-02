@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>F:\WebSite\jyc_naxSnax_New2</_PublishTargetUrl>
-    <History>True|2025-04-07T12:59:30.8708117Z||;True|2025-04-05T12:59:22.1839163-04:00||;True|2025-03-18T10:30:25.5130084-04:00||;True|2025-03-17T17:53:49.5987989-04:00||;True|2025-03-12T15:01:49.1807166-04:00||;True|2025-02-13T10:01:44.5881950-04:00||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
+    <History>True|2025-04-28T22:27:45.1091648Z||;True|2025-04-07T08:59:30.8708117-04:00||;True|2025-04-05T12:59:22.1839163-04:00||;True|2025-03-18T10:30:25.5130084-04:00||;True|2025-03-17T17:53:49.5987989-04:00||;True|2025-03-12T15:01:49.1807166-04:00||;True|2025-02-13T10:01:44.5881950-04:00||;True|2025-02-04T10:31:56.7453776-04:00||;True|2025-02-03T15:39:12.6692526-04:00||;True|2025-01-29T17:54:58.7828285-04:00||;True|2025-01-10T18:03:13.4005244-04:00||;True|2025-01-10T11:08:06.0605951-04:00||;True|2024-12-11T14:55:29.7484269-04:00||;True|2024-12-06T15:01:22.0122657-04:00||;True|2024-12-03T17:58:03.8968716-04:00||;True|2024-12-01T00:00:55.9910768-04:00||;True|2024-11-29T17:57:03.8722936-04:00||;True|2024-11-18T16:23:50.5259888-04:00||;True|2024-11-12T09:32:07.0654683-04:00||;True|2024-11-12T09:30:59.1893571-04:00||;True|2024-11-11T11:47:10.2520295-04:00||;True|2024-11-07T11:56:51.2298351-04:00||;True|2024-11-04T17:27:17.0355049-04:00||;True|2024-11-01T10:24:20.6660563-04:00||;True|2024-11-01T09:42:53.7383867-04:00||;True|2024-10-31T15:15:03.3483723-04:00||;False|2024-10-28T15:28:19.5895965-04:00||;True|2024-08-23T10:33:00.0784702-04:00||;False|2024-08-23T10:32:24.4660751-04:00||;True|2024-08-14T10:54:07.4507391-04:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -31,19 +31,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -64,19 +64,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/es/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/es/Microsoft.ReportViewer.Design.resources.dll">
+    <File Include="bin/es/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -106,19 +106,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/fr/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/fr/Microsoft.ReportViewer.Design.resources.dll">
+    <File Include="bin/fr/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -133,10 +133,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/Google.Protobuf.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>03/27/2024 14:10:34</publishTime>
     </File>
     <File Include="bin/Google.Protobuf.pdb">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>03/27/2024 13:38:20</publishTime>
     </File>
     <File Include="bin/he/AjaxControlToolkit.resources.dll">
       <publishTime>10/11/2024 08:24:59</publishTime>
@@ -154,19 +154,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/it/Microsoft.ReportViewer.WebDesign.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/it/Microsoft.ReportViewer.WebForms.resources.dll">
+    <File Include="bin/it/Microsoft.ReportViewer.WebDesign.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/it/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -178,19 +178,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -199,16 +199,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.dll">
-      <publishTime>04/10/2025 16:28:19</publishTime>
+      <publishTime>04/28/2025 18:27:33</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.pdb">
-      <publishTime>04/10/2025 16:28:19</publishTime>
+      <publishTime>04/28/2025 18:27:33</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>03/17/2024 17:56:16</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.Streams.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>03/17/2024 17:56:18</publishTime>
     </File>
     <File Include="bin/K4os.Hash.xxHash.dll">
       <publishTime>11/08/2022 14:08:14</publishTime>
@@ -217,19 +217,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/ko/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/ko/Microsoft.ReportViewer.Design.resources.dll">
+    <File Include="bin/ko/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -237,8 +237,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ko/Microsoft.SqlServer.Types.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
+    <File Include="bin/MaterialDesignColors.dll">
+      <publishTime>01/10/2025 03:04:44</publishTime>
+    </File>
+    <File Include="bin/MaterialDesignColors.pdb">
+      <publishTime>01/10/2025 03:04:44</publishTime>
+    </File>
+    <File Include="bin/MaterialDesignThemes.Wpf.dll">
+      <publishTime>01/10/2025 03:05:12</publishTime>
+    </File>
+    <File Include="bin/MaterialDesignThemes.Wpf.pdb">
+      <publishTime>01/10/2025 03:05:12</publishTime>
+    </File>
     <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>09/16/2024 19:14:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>09/16/2024 19:15:42</publishTime>
     </File>
     <File Include="bin/Microsoft.Maps.MapControl.WPF.dll">
       <publishTime>02/18/2015 06:10:06</publishTime>
@@ -247,25 +265,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2009 19:51:18</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Common.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.DataVisualization.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Design.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/Microsoft.ReportViewer.WebDesign.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
+    <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebDesign.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
+    <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
+    </File>
     <File Include="bin/Microsoft.ReportViewer.WinForms.dll">
-      <publishTime>02/06/2016 13:43:16</publishTime>
+      <publishTime>06/02/2016 13:43:16</publishTime>
     </File>
     <File Include="bin/Microsoft.SqlServer.Types.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -276,8 +294,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.WindowsAzure.Storage.dll">
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
+    <File Include="bin/Microsoft.Xaml.Behaviors.dll">
+      <publishTime>11/18/2021 02:30:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Xaml.Behaviors.pdb">
+      <publishTime>11/18/2021 02:26:08</publishTime>
+    </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>01/30/2013 17:01:52</publishTime>
+    </File>
+    <File Include="bin/MySqlConnector.dll">
+      <publishTime>11/12/2024 08:50:28</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -289,19 +316,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -316,19 +343,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.Design.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -358,13 +385,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/System.Configuration.ConfigurationManager.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>10/31/2023 11:04:12</publishTime>
     </File>
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>03/19/2024 15:38:18</publishTime>
     </File>
     <File Include="bin/System.IO.Pipelines.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>02/15/2022 13:10:38</publishTime>
     </File>
     <File Include="bin/System.Memory.dll">
       <publishTime>10/11/2024 08:25:10</publishTime>
@@ -418,19 +445,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.DataVisualization.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/zh-CHS/Microsoft.ReportViewer.Design.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebDesign.resources.dll">
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.Design.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>06/01/2024 16:18:50</publishTime>
+      <publishTime>01/06/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHS/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>
@@ -439,19 +466,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:24:59</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.Common.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
-    </File>
-    <File Include="bin/zh-CHT/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
-    <File Include="bin/zh-CHT/Microsoft.ReportViewer.Design.resources.dll">
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.DataVisualization.resources.dll">
       <publishTime>01/06/2024 16:18:50</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebDesign.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>01/06/2024 16:18:50</publishTime>
+      <publishTime>06/01/2024 16:18:50</publishTime>
     </File>
     <File Include="bin/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>01/17/2024 18:08:54</publishTime>
@@ -463,7 +490,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:09</publishTime>
     </File>
     <File Include="bin/ZstdSharp.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/24/2024 14:36:24</publishTime>
+    </File>
+    <File Include="Content/font-awesome.css">
+      <publishTime>04/11/2025 15:32:05</publishTime>
+    </File>
+    <File Include="Content/font-awesome.min.css">
+      <publishTime>04/11/2025 15:32:05</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>10/11/2024 08:24:59</publishTime>
@@ -480,8 +513,272 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="DS_Recetas.xss">
       <publishTime>11/11/2024 17:24:48</publishTime>
     </File>
+    <File Include="fonts/font-awesome-4.7.0/css/font-awesome.css">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.svg">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/fonts/FontAwesome.otf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/HELP-US-OUT.txt">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/animated.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/bordered-pulled.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/core.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/fixed-width.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/font-awesome.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/icons.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/larger.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/list.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/mixins.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/path.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/rotated-flipped.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/screen-reader.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/stacked.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/less/variables.less">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/font-awesome.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_animated.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_bordered-pulled.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_core.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_fixed-width.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_icons.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_larger.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_list.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_mixins.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_path.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_rotated-flipped.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_screen-reader.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_stacked.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/font-awesome-4.7.0/scss/_variables.scss">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.eot">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.svg">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.ttf">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff2">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/FontAwesome.otf">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/css/material-design-iconic-font.css">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/css/material-design-iconic-font.min.css">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/fonts/Material-Design-Iconic-Font.eot">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/fonts/Material-Design-Iconic-Font.svg">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/fonts/Material-Design-Iconic-Font.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/fonts/Material-Design-Iconic-Font.woff">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/iconic/fonts/Material-Design-Iconic-Font.woff2">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-Bold.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-BoldItalic.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-Italic.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-Light.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-LightItalic.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-Regular.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-SemiBold.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-SemiBoldItalic.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-Thin.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/JosefinSans-ThinItalic.ttf">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/JosefinSans/OFL.txt">
+      <publishTime>10/11/2024 08:25:03</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/OFL.txt">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-Black.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-BlackItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-Bold.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-BoldItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-ExtraLight.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-ExtraLightItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-Italic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-Light.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-LightItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-Regular.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-SemiBold.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/source-sans-pro/SourceSansPro-SemiBoldItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-Bold.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-BoldItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-Italic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-Light.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-LightItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-Medium.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-MediumItalic.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/Ubuntu-Regular.ttf">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
+    <File Include="fonts/ubuntu/UFL.txt">
+      <publishTime>10/11/2024 08:25:04</publishTime>
+    </File>
     <File Include="jquery/bootstrap/css/bootstrap.css">
-      <publishTime>11/01/2024 16:09:37</publishTime>
+      <publishTime>01/11/2024 16:09:37</publishTime>
     </File>
     <File Include="jquery/bootstrap/css/bootstrap.min.css">
       <publishTime>10/11/2024 08:25:04</publishTime>
@@ -550,7 +847,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/12/2024 09:46:49</publishTime>
     </File>
     <File Include="js/mainCorpal.js">
-      <publishTime>03/17/2025 17:46:03</publishTime>
+      <publishTime>04/11/2025 15:32:07</publishTime>
     </File>
     <File Include="NegocioPlantilla/assets/css/style.css">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -1789,7 +2086,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/20/2025 10:55:30</publishTime>
     </File>
     <File Include="NegocioPlantilla/Sidebar_Plantillanew.ascx">
-      <publishTime>04/09/2025 12:10:38</publishTime>
+      <publishTime>04/11/2025 15:32:06</publishTime>
     </File>
     <File Include="PlantillaNew.Master">
       <publishTime>03/10/2025 11:49:24</publishTime>
@@ -1876,7 +2173,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_ConsutaProduccion.aspx">
-      <publishTime>03/12/2024 16:34:20</publishTime>
+      <publishTime>12/03/2024 16:34:20</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_DespachoCamiones.aspx">
       <publishTime>04/09/2025 11:58:42</publishTime>
@@ -1888,10 +2185,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProducto.aspx">
-      <publishTime>04/05/2025 12:15:03</publishTime>
+      <publishTime>04/28/2025 18:00:14</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx">
-      <publishTime>03/13/2025 15:03:36</publishTime>
+      <publishTime>04/11/2025 15:32:06</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_Facturacion.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -1911,8 +2208,11 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Presentacion/FCorpal_GestionarTiendaPropietario.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
     </File>
+    <File Include="Presentacion/FCorpal_GestionarVehiculos.aspx">
+      <publishTime>04/28/2025 14:50:31</publishTime>
+    </File>
     <File Include="Presentacion/FCorpal_GestionExtintores.aspx">
-      <publishTime>03/17/2025 17:46:03</publishTime>
+      <publishTime>04/11/2025 15:32:06</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_GestonarResponsable.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -1930,13 +2230,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2024 11:25:41</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_prueba.aspx">
-      <publishTime>11/01/2024 11:32:09</publishTime>
+      <publishTime>01/11/2024 11:32:09</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_PruebaInventarioIngresos.aspx">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_Recetas.aspx">
-      <publishTime>11/01/2024 11:32:09</publishTime>
+      <publishTime>01/11/2024 11:32:09</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_RecibioMaterialInsumos.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -1978,10 +2278,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/13/2025 11:22:43</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_VaciadoUponPedido.aspx">
-      <publishTime>01/13/2025 11:56:17</publishTime>
+      <publishTime>04/11/2025 15:32:06</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_VaciadoUponVenta.aspx">
-      <publishTime>01/13/2025 11:56:07</publishTime>
+      <publishTime>04/11/2025 15:32:06</publishTime>
     </File>
     <File Include="Presentacion/FUpon_CargaCompras.aspx">
       <publishTime>10/11/2024 08:25:01</publishTime>
@@ -2394,6 +2694,24 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Reportes/Voucher_ReciboEntregaProduccion.rdlc">
       <publishTime>08/05/2024 18:15:20</publishTime>
     </File>
+    <File Include="Scripts/jquery-3.7.1.js">
+      <publishTime>04/11/2025 15:32:06</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.js">
+      <publishTime>04/11/2025 15:32:06</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.map">
+      <publishTime>04/11/2025 15:32:06</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.js">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.js">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.map">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
     <File Include="Site1.Master">
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
@@ -2452,7 +2770,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Styles/Style_AgregarInsumoCreado.css">
-      <publishTime>11/01/2024 16:09:36</publishTime>
+      <publishTime>01/11/2024 16:09:36</publishTime>
     </File>
     <File Include="Styles/Style_APIUpon.css">
       <publishTime>02/20/2025 10:55:30</publishTime>
@@ -2518,7 +2836,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Styles/Style_CorpalEntregaProdCamion.css">
-      <publishTime>03/10/2025 11:49:24</publishTime>
+      <publishTime>04/11/2025 15:32:07</publishTime>
     </File>
     <File Include="Styles/Style_CostosPolizasImportacion.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
@@ -2539,7 +2857,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Styles/Style_EntregaProductosACamion.css">
-      <publishTime>04/08/2025 16:32:46</publishTime>
+      <publishTime>04/28/2025 14:50:31</publishTime>
     </File>
     <File Include="Styles/Style_EstadisticaParqueAscensores.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
@@ -2586,8 +2904,11 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Styles/Style_GestionarProyEncargadoPago.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
+    <File Include="Styles/Style_gestionarVehiculo.css">
+      <publishTime>04/11/2025 15:32:07</publishTime>
+    </File>
     <File Include="Styles/Style_GestionExtintores.css">
-      <publishTime>03/17/2025 17:46:03</publishTime>
+      <publishTime>04/11/2025 15:32:07</publishTime>
     </File>
     <File Include="Styles/Style_GestionSeguimientoInstalacion.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
@@ -2653,7 +2974,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/13/2025 11:57:56</publishTime>
     </File>
     <File Include="Styles/Style_SimecModificar.css">
-      <publishTime>11/04/2024 15:15:14</publishTime>
+      <publishTime>04/11/2024 15:15:14</publishTime>
     </File>
     <File Include="Styles/Style_ViewCuadroXXX.css">
       <publishTime>10/11/2024 08:25:03</publishTime>
@@ -2674,7 +2995,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/11/2024 08:25:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/10/2025 16:28:31</publishTime>
+      <publishTime>04/28/2025 18:27:34</publishTime>
     </File>
     <File Include="x64/SqlServerSpatial160.dll">
       <publishTime>10/11/2024 08:25:09</publishTime>

@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using jycboliviaASP.net.Presentacion;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -75,6 +76,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_ConsultaGraficaProduccion.Visible = false;
 
             mn_despachoCamion.Visible = false;
+            mn_entregaSolicitudProducto.Visible = false;
         }
 
 
@@ -222,6 +224,9 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 mn_ConsultaGraficaProduccion.Visible = true;
                                 break;
                             case 146:
+                                mn_entregaSolicitudProducto.Visible = true;
+                                break;
+                            case 148:
                                 mn_despachoCamion.Visible = true;
                                 break;
 

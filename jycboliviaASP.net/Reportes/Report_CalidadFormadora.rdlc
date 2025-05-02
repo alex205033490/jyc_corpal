@@ -2,96 +2,58 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Textbox Name="Textbox1">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Actividades Pesonales</Value>
-                <Style>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.94403cm</Top>
-        <Left>23.6982cm</Left>
-        <Height>1.235cm</Height>
-        <Width>11.44292cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.49999cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.49999cm</Width>
+              <Width>2.23542cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.86021cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.00271cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.92334cm</Width>
+              <Width>4.77542cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.97812cm</Width>
+              <Width>6.46875cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.49999cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.57459cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.46334cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.89687cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.46334cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.12478cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>6.31cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.49999cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.49999cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.49999cm</Width>
+              <Width>7.15667cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>1.07625cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -198,7 +160,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Actividad</Value>
+                              <Value>Turno</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -230,7 +192,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Asignacion</Value>
+                              <Value>Responsable</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -255,14 +217,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox12">
+                    <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Hora Asignacion</Value>
+                              <Value>Nombre operario</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -271,7 +233,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -287,14 +249,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox14">
+                    <Textbox Name="Textbox11">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Ejecucion</Value>
+                              <Value>Nro formadora</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -303,7 +265,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox14</rd:DefaultName>
+                      <rd:DefaultName>Textbox11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -319,14 +281,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox16">
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Hora Ejecucion</Value>
+                              <Value>Porcentaje humedad</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -335,7 +297,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox16</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -351,14 +313,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox18">
+                    <Textbox Name="Textbox15">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Detalle Personal Asignado</Value>
+                              <Value>Peso (gr) hojuela</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -367,7 +329,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox18</rd:DefaultName>
+                      <rd:DefaultName>Textbox15</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -383,14 +345,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox20">
+                    <Textbox Name="Textbox17">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Personal Asignado</Value>
+                              <Value>Accion correctiva</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -399,7 +361,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <rd:DefaultName>Textbox17</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -415,14 +377,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="Textbox19">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha Limite</Value>
+                              <Value>Velocidad</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -431,7 +393,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -447,14 +409,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox24">
+                    <Textbox Name="Textbox21">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Inicio Actividad</Value>
+                              <Value>Parametro normal</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -463,7 +425,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox24</rd:DefaultName>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -479,14 +441,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox26">
+                    <Textbox Name="Textbox23">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Detalle Cierre</Value>
+                              <Value>Parametro medio</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -495,7 +457,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox26</rd:DefaultName>
+                      <rd:DefaultName>Textbox23</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -511,14 +473,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox28">
+                    <Textbox Name="Textbox25">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cierre Actividad</Value>
+                              <Value>Diferencia</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -527,7 +489,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <rd:DefaultName>Textbox25</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -543,14 +505,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox30">
+                    <Textbox Name="Textbox27">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cierre Fecha</Value>
+                              <Value>Comentarios</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -559,71 +521,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox30</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox32">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Hora Cierre</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox32</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox3">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Pasaje</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Textbox27</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -673,21 +571,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fecha">
+                    <Textbox Name="Fecha_Gra">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fecha.Value</Value>
+                              <Value>=Fields!Fecha_Gra.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fecha</rd:DefaultName>
+                      <rd:DefaultName>Fecha_Gra</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -702,21 +600,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="hora">
+                    <Textbox Name="horagra">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!hora.Value</Value>
+                              <Value>=Fields!horagra.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>hora</rd:DefaultName>
+                      <rd:DefaultName>horagra</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -731,21 +629,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Actividad">
+                    <Textbox Name="turno">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Actividad.Value</Value>
+                              <Value>=Fields!turno.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Actividad</rd:DefaultName>
+                      <rd:DefaultName>turno</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -760,21 +658,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FechaAsignacion">
+                    <Textbox Name="responsable">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!FechaAsignacion.Value</Value>
+                              <Value>=Fields!responsable.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>FechaAsignacion</rd:DefaultName>
+                      <rd:DefaultName>responsable</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -789,21 +687,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="HoraAsignacion">
+                    <Textbox Name="formadora_nomboperario">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!HoraAsignacion.Value</Value>
+                              <Value>=Fields!formadora_nomboperario.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>HoraAsignacion</rd:DefaultName>
+                      <rd:DefaultName>formadora_nomboperario</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -818,21 +716,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FechaEjecucion">
+                    <Textbox Name="formadora_nroformadora">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!FechaEjecucion.Value</Value>
+                              <Value>=Fields!formadora_nroformadora.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>FechaEjecucion</rd:DefaultName>
+                      <rd:DefaultName>formadora_nroformadora</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -847,21 +745,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="HoraEjecucion">
+                    <Textbox Name="formadora_porcentajehumedad">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!HoraEjecucion.Value</Value>
+                              <Value>=Fields!formadora_porcentajehumedad.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>HoraEjecucion</rd:DefaultName>
+                      <rd:DefaultName>formadora_porcentajehumedad</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -876,21 +774,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Detalle_PersonalAsignado">
+                    <Textbox Name="formadora_pesogrhojuela">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Detalle_PersonalAsignado.Value</Value>
+                              <Value>=Fields!formadora_pesogrhojuela.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Detalle_PersonalAsignado</rd:DefaultName>
+                      <rd:DefaultName>formadora_pesogrhojuela</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -905,21 +803,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PersonalAsignado">
+                    <Textbox Name="formadora_accioncorrectiva">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PersonalAsignado.Value</Value>
+                              <Value>=Fields!formadora_accioncorrectiva.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>PersonalAsignado</rd:DefaultName>
+                      <rd:DefaultName>formadora_accioncorrectiva</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -934,21 +832,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FechaLimite">
+                    <Textbox Name="formadora_velocidad">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!FechaLimite.Value</Value>
+                              <Value>=Fields!formadora_velocidad.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>FechaLimite</rd:DefaultName>
+                      <rd:DefaultName>formadora_velocidad</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -963,21 +861,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="InicioActividad">
+                    <Textbox Name="formadora_parametronormal">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!InicioActividad.Value</Value>
+                              <Value>=Fields!formadora_parametronormal.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>InicioActividad</rd:DefaultName>
+                      <rd:DefaultName>formadora_parametronormal</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -992,21 +890,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="detallecierre">
+                    <Textbox Name="formadora_parametromedio">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!detallecierre.Value</Value>
+                              <Value>=Fields!formadora_parametromedio.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>detallecierre</rd:DefaultName>
+                      <rd:DefaultName>formadora_parametromedio</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1021,21 +919,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="CierreActividad">
+                    <Textbox Name="formadora_diferencia">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CierreActividad.Value</Value>
+                              <Value>=Fields!formadora_diferencia.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>CierreActividad</rd:DefaultName>
+                      <rd:DefaultName>formadora_diferencia</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1050,79 +948,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="CierreFecha">
+                    <Textbox Name="formadora_comentarios">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CierreFecha.Value</Value>
+                              <Value>=Fields!formadora_comentarios.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>CierreFecha</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="horacierre">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!horacierre.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>horacierre</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Pasaje">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Pasaje.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Pasaje</rd:DefaultName>
+                      <rd:DefaultName>formadora_comentarios</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1156,8 +996,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1166,16 +1004,15 @@
               <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <Group Name="Details" />
+              <Group Name="Detalles" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DS_ActividadesPersonal</DataSetName>
-        <Top>2.82258cm</Top>
-        <Left>0.81174cm</Left>
-        <Height>1.2cm</Height>
-        <Width>65.09725cm</Width>
-        <ZIndex>1</ZIndex>
+        <DataSetName>DS_RemojadoyLavado</DataSetName>
+        <Top>0.80229cm</Top>
+        <Left>0.63182cm</Left>
+        <Height>1.67625cm</Height>
+        <Width>48.13626cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1186,8 +1023,54 @@
     <Height>3.5625in</Height>
     <Style />
   </Body>
-  <Width>26.29217in</Width>
+  <Width>19.4917in</Width>
   <Page>
+    <PageHeader>
+      <Height>2.60766cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>FORMADORA</Value>
+                  <Style>
+                    <FontSize>24pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.81703cm</Top>
+          <Left>13.0937cm</Left>
+          <Height>1.15562cm</Height>
+          <Width>15.64979cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
@@ -1199,18 +1082,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DS_SGI">
+    <DataSource Name="DS_CalidadProductoEnProceso">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>7e8fd206-d6cb-4222-ac1f-80e939b32057</rd:DataSourceID>
+      <rd:DataSourceID>8fdd9109-ef67-4274-a412-52e8f847f69f</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DS_ActividadesPersonal">
+    <DataSet Name="DS_RemojadoyLavado">
       <Query>
-        <DataSourceName>DS_SGI</DataSourceName>
+        <DataSourceName>DS_CalidadProductoEnProceso</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1218,75 +1101,219 @@
           <DataField>codigo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="fecha">
-          <DataField>fecha</DataField>
+        <Field Name="Fecha_Gra">
+          <DataField>Fecha_Gra</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="hora">
-          <DataField>hora</DataField>
+        <Field Name="horagra">
+          <DataField>horagra</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Actividad">
-          <DataField>Actividad</DataField>
+        <Field Name="turno">
+          <DataField>turno</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FechaAsignacion">
-          <DataField>FechaAsignacion</DataField>
+        <Field Name="codresp">
+          <DataField>codresp</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="HoraAsignacion">
-          <DataField>HoraAsignacion</DataField>
+        <Field Name="responsable">
+          <DataField>responsable</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FechaEjecucion">
-          <DataField>FechaEjecucion</DataField>
+        <Field Name="codprod">
+          <DataField>codprod</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="HoraEjecucion">
-          <DataField>HoraEjecucion</DataField>
+        <Field Name="producto">
+          <DataField>producto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Detalle_PersonalAsignado">
-          <DataField>Detalle_PersonalAsignado</DataField>
+        <Field Name="remojadolavado_nrobolsasmaizremojadas">
+          <DataField>remojadolavado_nrobolsasmaizremojadas</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PersonalAsignado">
-          <DataField>PersonalAsignado</DataField>
+        <Field Name="remojadolavado_calidaddelmaizlavado">
+          <DataField>remojadolavado_calidaddelmaizlavado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FechaLimite">
-          <DataField>FechaLimite</DataField>
+        <Field Name="remojadolavado_saldotachosmaizremojado">
+          <DataField>remojadolavado_saldotachosmaizremojado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="InicioActividad">
-          <DataField>InicioActividad</DataField>
+        <Field Name="remojadolavado_comentarios">
+          <DataField>remojadolavado_comentarios</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="detallecierre">
-          <DataField>detallecierre</DataField>
+        <Field Name="molinos_nomboperador">
+          <DataField>molinos_nomboperador</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CierreActividad">
-          <DataField>CierreActividad</DataField>
+        <Field Name="molinos_nromolino">
+          <DataField>molinos_nromolino</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CierreFecha">
-          <DataField>CierreFecha</DataField>
+        <Field Name="molinos_estado">
+          <DataField>molinos_estado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="horacierre">
-          <DataField>horacierre</DataField>
+        <Field Name="molinos_comentarios">
+          <DataField>molinos_comentarios</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Pasaje">
-          <DataField>Pasaje</DataField>
+        <Field Name="formadora_nombliderlinea">
+          <DataField>formadora_nombliderlinea</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_nomboperario">
+          <DataField>formadora_nomboperario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_nroformadora">
+          <DataField>formadora_nroformadora</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_porcentajehumedad">
+          <DataField>formadora_porcentajehumedad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_pesogrhojuela">
+          <DataField>formadora_pesogrhojuela</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_accioncorrectiva">
+          <DataField>formadora_accioncorrectiva</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_velocidad">
+          <DataField>formadora_velocidad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_parametronormal">
+          <DataField>formadora_parametronormal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_parametromedio">
+          <DataField>formadora_parametromedio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_diferencia">
+          <DataField>formadora_diferencia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="formadora_comentarios">
+          <DataField>formadora_comentarios</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_nomfritador">
+          <DataField>fritadora_nomfritador</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_nrofritadora">
+          <DataField>fritadora_nrofritadora</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_porcentajecpt">
+          <DataField>fritadora_porcentajecpt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_pesogrhojuela">
+          <DataField>fritadora_pesogrhojuela</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_accionescorrectivas">
+          <DataField>fritadora_accionescorrectivas</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_velocidad">
+          <DataField>fritadora_velocidad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_temperatura">
+          <DataField>fritadora_temperatura</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_parametronormal">
+          <DataField>fritadora_parametronormal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_parametromedido">
+          <DataField>fritadora_parametromedido</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_parametrodiferencia">
+          <DataField>fritadora_parametrodiferencia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fritadora_comentario">
+          <DataField>fritadora_comentario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_nombsazonador">
+          <DataField>sazonado_nombsazonador</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_nrosazonadora">
+          <DataField>sazonado_nrosazonadora</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_color">
+          <DataField>sazonado_color</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_sabor">
+          <DataField>sazonado_sabor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_textura">
+          <DataField>sazonado_textura</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_velocidadsazonador">
+          <DataField>sazonado_velocidadsazonador</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sazonado_comentario">
+          <DataField>sazonado_comentario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_nomboperador">
+          <DataField>envasadora_nomboperador</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_nroenvasadora">
+          <DataField>envasadora_nroenvasadora</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_prodenvasado">
+          <DataField>envasadora_prodenvasado</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_velocidad">
+          <DataField>envasadora_velocidad</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_temphorizontal">
+          <DataField>envasadora_temphorizontal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_tempvertical">
+          <DataField>envasadora_tempvertical</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_cantcajas_avanceproduccion">
+          <DataField>envasadora_cantcajas_avanceproduccion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="envasadora_comentarios">
+          <DataField>envasadora_comentarios</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>DS_SGI</rd:DataSetName>
-        <rd:SchemaPath>D:\Users\SISTEMA\Documents\GitHub\cuadrosxxx\jycboliviaASP.net\jycboliviaASP.net\DS_SGI.xsd</rd:SchemaPath>
-        <rd:TableName>DS_ActividadesPersonal</rd:TableName>
+        <rd:DataSetName>DS_CalidadProductoEnProceso</rd:DataSetName>
+        <rd:SchemaPath>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_CalidadProductoEnProceso.xsd</rd:SchemaPath>
+        <rd:TableName>DS_CalidadProductoEnProceso</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
