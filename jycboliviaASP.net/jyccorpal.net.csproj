@@ -2181,6 +2181,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\Receta\SubReport_detalleInsumoCreado.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadEnvasadora.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadSazonadoControlSensorial.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadFritadora.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadFormadora.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado - Copia.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />

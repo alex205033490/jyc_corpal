@@ -21,7 +21,13 @@
               <Width>4.77542cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.18584cm</Width>
+              <Width>5.43688cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.5cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>4.69604cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5cm</Width>
@@ -33,25 +39,10 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.53188cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>6.68042cm</Width>
+              <Width>7.05083cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -227,7 +218,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre fritador</Value>
+                              <Value>Nombre operador</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -259,7 +250,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nro fritadora</Value>
+                              <Value>Nro envasadora</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -291,7 +282,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Porcentaje CPT</Value>
+                              <Value>Producto envasado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -323,7 +314,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Peso (gr) hojuela</Value>
+                              <Value>Velocidad</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -355,7 +346,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Acciones correctivas</Value>
+                              <Value>Temperatura horizontal</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -387,7 +378,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Velocidad</Value>
+                              <Value>Temperatura vertical</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -419,7 +410,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Temperatura</Value>
+                              <Value>cantidad cajas (avance produccion)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -451,7 +442,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Parametro normal</Value>
+                              <Value>Comentarios</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -461,102 +452,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox23">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Parametro medido</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox23</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox25">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Parametro diferencia</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox25</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox27">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Comentario</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox27</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -722,21 +617,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_nomfritador">
+                    <Textbox Name="envasadora_nomboperador">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_nomfritador.Value</Value>
+                              <Value>=Fields!envasadora_nomboperador.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_nomfritador</rd:DefaultName>
+                      <rd:DefaultName>envasadora_nomboperador</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -751,21 +646,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_nrofritadora">
+                    <Textbox Name="envasadora_nroenvasadora">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_nrofritadora.Value</Value>
+                              <Value>=Fields!envasadora_nroenvasadora.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_nrofritadora</rd:DefaultName>
+                      <rd:DefaultName>envasadora_nroenvasadora</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -780,21 +675,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_porcentajecpt">
+                    <Textbox Name="envasadora_prodenvasado">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_porcentajecpt.Value</Value>
+                              <Value>=Fields!envasadora_prodenvasado.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_porcentajecpt</rd:DefaultName>
+                      <rd:DefaultName>envasadora_prodenvasado</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -809,21 +704,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_pesogrhojuela">
+                    <Textbox Name="envasadora_velocidad">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_pesogrhojuela.Value</Value>
+                              <Value>=Fields!envasadora_velocidad.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_pesogrhojuela</rd:DefaultName>
+                      <rd:DefaultName>envasadora_velocidad</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -838,21 +733,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_accionescorrectivas">
+                    <Textbox Name="envasadora_temphorizontal">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_accionescorrectivas.Value</Value>
+                              <Value>=Fields!envasadora_temphorizontal.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_accionescorrectivas</rd:DefaultName>
+                      <rd:DefaultName>envasadora_temphorizontal</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -867,21 +762,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_velocidad">
+                    <Textbox Name="envasadora_tempvertical">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_velocidad.Value</Value>
+                              <Value>=Fields!envasadora_tempvertical.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_velocidad</rd:DefaultName>
+                      <rd:DefaultName>envasadora_tempvertical</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -896,21 +791,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_temperatura">
+                    <Textbox Name="envasadora_cantcajas_avanceproduccion">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_temperatura.Value</Value>
+                              <Value>=Fields!envasadora_cantcajas_avanceproduccion.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_temperatura</rd:DefaultName>
+                      <rd:DefaultName>envasadora_cantcajas_avanceproduccion</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -925,108 +820,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fritadora_parametronormal">
+                    <Textbox Name="envasadora_comentarios">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fritadora_parametronormal.Value</Value>
+                              <Value>=Fields!envasadora_comentarios.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fritadora_parametronormal</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fritadora_parametromedido">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fritadora_parametromedido.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>fritadora_parametromedido</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fritadora_parametrodiferencia">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fritadora_parametrodiferencia.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>fritadora_parametrodiferencia</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fritadora_comentario">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fritadora_comentario.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>fritadora_comentario</rd:DefaultName>
+                      <rd:DefaultName>envasadora_comentarios</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -1058,9 +866,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
-            <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1077,7 +882,7 @@
         <Top>0.80229cm</Top>
         <Left>0.63182cm</Left>
         <Height>1.67625cm</Height>
-        <Width>48.8771cm</Width>
+        <Width>45.22647cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1088,7 +893,7 @@
     <Height>3.5625in</Height>
     <Style />
   </Body>
-  <Width>19.4917in</Width>
+  <Width>18.28361in</Width>
   <Page>
     <PageHeader>
       <Height>2.60766cm</Height>
@@ -1102,7 +907,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>FRITADORA</Value>
+                  <Value>ENVASADORA</Value>
                   <Style>
                     <FontSize>24pt</FontSize>
                     <FontWeight>Bold</FontWeight>
