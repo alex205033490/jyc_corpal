@@ -511,5 +511,35 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen( fechahasta);
         }
+
+        internal DataSet get_calidadNachosProceso_RemojadoyLavado(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_RemojadoyLavado( fechadesde,  fechahasta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Molinos(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_Molinos(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Formadora(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_Formadora(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Fritadora(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_Fritadora(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_calidadNachosProceso_SazonadoControlSensorial(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_SazonadoControlSensorial(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Envasadora(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_calidadNachosProceso_Envasadora(fechadesde, fechahasta);
+        }
     }
 }

@@ -985,5 +985,434 @@ namespace jycboliviaASP.net.Datos
             string consulta = "call 1_objetivoproduccion_vs_entregaproduccion_consalidaalmacen("+fechahasta+")";
             return Conx.consultaMySql(consulta);
         }
+
+        internal DataSet get_calidadNachosProceso_RemojadoyLavado(string fechadesde, string fechahasta)
+        {
+            string consulta = "select "+
+                                 " codigo, "+
+                                 " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', "+
+                                 " horagra, "+
+                                 " turno, "+
+                                 " codresp, "+
+                                 " responsable, "+
+                                 " codprod, "+
+                                 " producto, "+
+                                 " remojadolavado_nrobolsasmaizremojadas, "+
+                                 " remojadolavado_calidaddelmaizlavado, "+
+                                 " remojadolavado_saldotachosmaizremojado, "+
+                                 " remojadolavado_comentarios, "+
+                                 " molinos_nomboperador, "+
+                                 " molinos_nromolino, "+
+                                 " molinos_estado, "+
+                                 " molinos_comentarios, "+
+                                 " formadora_nombliderlinea, "+
+                                 " formadora_nomboperario, "+
+                                 " formadora_nroformadora, "+
+                                 " formadora_porcentajehumedad, "+
+                                 " formadora_pesogrhojuela, "+
+                                 " formadora_accioncorrectiva, "+
+                                 " formadora_velocidad, "+
+                                 " formadora_parametronormal, "+
+                                 " formadora_parametromedio, "+
+                                 " formadora_diferencia, "+
+                                 " formadora_comentarios, "+
+                                 " fritadora_nomfritador, "+
+                                 " fritadora_nrofritadora, "+
+                                 " fritadora_porcentajecpt, "+
+                                 " fritadora_pesogrhojuela, "+
+                                 " fritadora_accionescorrectivas, "+
+                                 " fritadora_velocidad, "+
+                                 " fritadora_temperatura, "+
+                                 " fritadora_parametronormal, "+
+                                 " fritadora_parametromedido, "+
+                                 " fritadora_parametrodiferencia, "+
+                                 " fritadora_comentario, "+
+                                 " sazonado_nombsazonador, "+
+                                 " sazonado_nrosazonadora, "+
+                                 " sazonado_color, "+
+                                 " sazonado_sabor, "+
+                                 " sazonado_textura, "+
+                                 " sazonado_velocidadsazonador, "+
+                                 " sazonado_comentario, "+
+                                 " envasadora_nomboperador, "+
+                                 " envasadora_nroenvasadora, "+
+                                 " envasadora_prodenvasado, "+
+                                 " envasadora_velocidad, "+
+                                 " envasadora_temphorizontal, "+
+                                 " envasadora_tempvertical, "+
+                                 " envasadora_cantcajas_avanceproduccion, "+
+                                 " envasadora_comentarios "+
+                                 " from  "+
+                                 " tbcorpal_formularionachosproceso ff "+
+                                 " where ff.estado = 1 and "+
+                                 " ff.fechagra between "+fechadesde+" and "+fechahasta+
+                                 " and "+
+                                 " (remojadolavado_nrobolsasmaizremojadas is not null OR  "+ 
+                                 " remojadolavado_calidaddelmaizlavado is not null OR "+
+                                 " remojadolavado_saldotachosmaizremojado is not null OR "+
+                                 " remojadolavado_comentarios is not null) " ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Molinos(string fechadesde, string fechahasta)
+        {
+            string consulta = "select " +
+                                  " codigo, " +
+                                  " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', " +
+                                  " horagra, " +
+                                  " turno, " +
+                                  " codresp, " +
+                                  " responsable, " +
+                                  " codprod, " +
+                                  " producto, " +
+                                  " remojadolavado_nrobolsasmaizremojadas, " +
+                                  " remojadolavado_calidaddelmaizlavado, " +
+                                  " remojadolavado_saldotachosmaizremojado, " +
+                                  " remojadolavado_comentarios, " +
+                                  " molinos_nomboperador, " +
+                                  " molinos_nromolino, " +
+                                  " molinos_estado, " +
+                                  " molinos_comentarios, " +
+                                  " formadora_nombliderlinea, " +
+                                  " formadora_nomboperario, " +
+                                  " formadora_nroformadora, " +
+                                  " formadora_porcentajehumedad, " +
+                                  " formadora_pesogrhojuela, " +
+                                  " formadora_accioncorrectiva, " +
+                                  " formadora_velocidad, " +
+                                  " formadora_parametronormal, " +
+                                  " formadora_parametromedio, " +
+                                  " formadora_diferencia, " +
+                                  " formadora_comentarios, " +
+                                  " fritadora_nomfritador, " +
+                                  " fritadora_nrofritadora, " +
+                                  " fritadora_porcentajecpt, " +
+                                  " fritadora_pesogrhojuela, " +
+                                  " fritadora_accionescorrectivas, " +
+                                  " fritadora_velocidad, " +
+                                  " fritadora_temperatura, " +
+                                  " fritadora_parametronormal, " +
+                                  " fritadora_parametromedido, " +
+                                  " fritadora_parametrodiferencia, " +
+                                  " fritadora_comentario, " +
+                                  " sazonado_nombsazonador, " +
+                                  " sazonado_nrosazonadora, " +
+                                  " sazonado_color, " +
+                                  " sazonado_sabor, " +
+                                  " sazonado_textura, " +
+                                  " sazonado_velocidadsazonador, " +
+                                  " sazonado_comentario, " +
+                                  " envasadora_nomboperador, " +
+                                  " envasadora_nroenvasadora, " +
+                                  " envasadora_prodenvasado, " +
+                                  " envasadora_velocidad, " +
+                                  " envasadora_temphorizontal, " +
+                                  " envasadora_tempvertical, " +
+                                  " envasadora_cantcajas_avanceproduccion, " +
+                                  " envasadora_comentarios " +
+                                  " from  " +
+                                  " tbcorpal_formularionachosproceso ff " +
+                                  " where ff.estado = 1 and " +
+                                  " ff.fechagra between " + fechadesde + " and " + fechahasta+
+                                   " and "+
+                                   "   ( molinos_nomboperador is not null OR "+
+                                   "   molinos_nromolino is not null  OR "+
+                                   "   molinos_estado is not null OR "+
+                                   "   molinos_comentarios is not null ) "  ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Formadora(string fechadesde, string fechahasta)
+        {
+            string consulta = "select " +
+                                  " codigo, " +
+                                  " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', " +
+                                  " horagra, " +
+                                  " turno, " +
+                                  " codresp, " +
+                                  " responsable, " +
+                                  " codprod, " +
+                                  " producto, " +
+                                  " remojadolavado_nrobolsasmaizremojadas, " +
+                                  " remojadolavado_calidaddelmaizlavado, " +
+                                  " remojadolavado_saldotachosmaizremojado, " +
+                                  " remojadolavado_comentarios, " +
+                                  " molinos_nomboperador, " +
+                                  " molinos_nromolino, " +
+                                  " molinos_estado, " +
+                                  " molinos_comentarios, " +
+                                  " formadora_nombliderlinea, " +
+                                  " formadora_nomboperario, " +
+                                  " formadora_nroformadora, " +
+                                  " formadora_porcentajehumedad, " +
+                                  " formadora_pesogrhojuela, " +
+                                  " formadora_accioncorrectiva, " +
+                                  " formadora_velocidad, " +
+                                  " formadora_parametronormal, " +
+                                  " formadora_parametromedio, " +
+                                  " formadora_diferencia, " +
+                                  " formadora_comentarios, " +
+                                  " fritadora_nomfritador, " +
+                                  " fritadora_nrofritadora, " +
+                                  " fritadora_porcentajecpt, " +
+                                  " fritadora_pesogrhojuela, " +
+                                  " fritadora_accionescorrectivas, " +
+                                  " fritadora_velocidad, " +
+                                  " fritadora_temperatura, " +
+                                  " fritadora_parametronormal, " +
+                                  " fritadora_parametromedido, " +
+                                  " fritadora_parametrodiferencia, " +
+                                  " fritadora_comentario, " +
+                                  " sazonado_nombsazonador, " +
+                                  " sazonado_nrosazonadora, " +
+                                  " sazonado_color, " +
+                                  " sazonado_sabor, " +
+                                  " sazonado_textura, " +
+                                  " sazonado_velocidadsazonador, " +
+                                  " sazonado_comentario, " +
+                                  " envasadora_nomboperador, " +
+                                  " envasadora_nroenvasadora, " +
+                                  " envasadora_prodenvasado, " +
+                                  " envasadora_velocidad, " +
+                                  " envasadora_temphorizontal, " +
+                                  " envasadora_tempvertical, " +
+                                  " envasadora_cantcajas_avanceproduccion, " +
+                                  " envasadora_comentarios " +
+                                  " from  " +
+                                  " tbcorpal_formularionachosproceso ff " +
+                                  " where ff.estado = 1 and " +
+                                  " ff.fechagra between " + fechadesde + " and " + fechahasta+
+                                  " AND  "+ 
+                                  " ( formadora_nombliderlinea is not null OR "+
+                                  "  formadora_nomboperario is not null OR "+ 
+                                  "  formadora_nroformadora is not null OR "+
+                                  "  formadora_porcentajehumedad is not null OR "+
+                                  "  formadora_pesogrhojuela is not null OR "+
+                                  "  formadora_accioncorrectiva is not null OR "+
+                                  "  formadora_velocidad is not null OR "+
+                                  "  formadora_parametronormal is not null OR "+
+                                  "  formadora_parametromedio is not null OR "+
+                                  "  formadora_diferencia is not null OR "+
+                                  "  formadora_comentarios is not null) " ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Fritadora(string fechadesde, string fechahasta)
+        {
+            string consulta = "select " +
+                                  " codigo, " +
+                                  " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', " +
+                                  " horagra, " +
+                                  " turno, " +
+                                  " codresp, " +
+                                  " responsable, " +
+                                  " codprod, " +
+                                  " producto, " +
+                                  " remojadolavado_nrobolsasmaizremojadas, " +
+                                  " remojadolavado_calidaddelmaizlavado, " +
+                                  " remojadolavado_saldotachosmaizremojado, " +
+                                  " remojadolavado_comentarios, " +
+                                  " molinos_nomboperador, " +
+                                  " molinos_nromolino, " +
+                                  " molinos_estado, " +
+                                  " molinos_comentarios, " +
+                                  " formadora_nombliderlinea, " +
+                                  " formadora_nomboperario, " +
+                                  " formadora_nroformadora, " +
+                                  " formadora_porcentajehumedad, " +
+                                  " formadora_pesogrhojuela, " +
+                                  " formadora_accioncorrectiva, " +
+                                  " formadora_velocidad, " +
+                                  " formadora_parametronormal, " +
+                                  " formadora_parametromedio, " +
+                                  " formadora_diferencia, " +
+                                  " formadora_comentarios, " +
+                                  " fritadora_nomfritador, " +
+                                  " fritadora_nrofritadora, " +
+                                  " fritadora_porcentajecpt, " +
+                                  " fritadora_pesogrhojuela, " +
+                                  " fritadora_accionescorrectivas, " +
+                                  " fritadora_velocidad, " +
+                                  " fritadora_temperatura, " +
+                                  " fritadora_parametronormal, " +
+                                  " fritadora_parametromedido, " +
+                                  " fritadora_parametrodiferencia, " +
+                                  " fritadora_comentario, " +
+                                  " sazonado_nombsazonador, " +
+                                  " sazonado_nrosazonadora, " +
+                                  " sazonado_color, " +
+                                  " sazonado_sabor, " +
+                                  " sazonado_textura, " +
+                                  " sazonado_velocidadsazonador, " +
+                                  " sazonado_comentario, " +
+                                  " envasadora_nomboperador, " +
+                                  " envasadora_nroenvasadora, " +
+                                  " envasadora_prodenvasado, " +
+                                  " envasadora_velocidad, " +
+                                  " envasadora_temphorizontal, " +
+                                  " envasadora_tempvertical, " +
+                                  " envasadora_cantcajas_avanceproduccion, " +
+                                  " envasadora_comentarios " +
+                                  " from  " +
+                                  " tbcorpal_formularionachosproceso ff " +
+                                  " where ff.estado = 1 and " +
+                                  " ff.fechagra between " + fechadesde + " and " + fechahasta+
+                                  "  and "+
+                                 " (fritadora_nomfritador is not null OR "+
+                                 " fritadora_nrofritadora is not null OR "+
+                                 " fritadora_porcentajecpt is not null OR "+
+                                 " fritadora_pesogrhojuela is not null OR "+
+                                 " fritadora_accionescorrectivas is not null OR "+
+                                 " fritadora_velocidad is not null OR "+
+                                 " fritadora_temperatura is not null OR "+
+                                 " fritadora_parametronormal is not null OR "+
+                                 " fritadora_parametromedido is not null OR "+
+                                 " fritadora_parametrodiferencia is not null OR "+
+                                 " fritadora_comentario is not null) " ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_calidadNachosProceso_SazonadoControlSensorial(string fechadesde, string fechahasta)
+        {
+            string consulta = "select " +
+                                  " codigo, " +
+                                  " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', " +
+                                  " horagra, " +
+                                  " turno, " +
+                                  " codresp, " +
+                                  " responsable, " +
+                                  " codprod, " +
+                                  " producto, " +
+                                  " remojadolavado_nrobolsasmaizremojadas, " +
+                                  " remojadolavado_calidaddelmaizlavado, " +
+                                  " remojadolavado_saldotachosmaizremojado, " +
+                                  " remojadolavado_comentarios, " +
+                                  " molinos_nomboperador, " +
+                                  " molinos_nromolino, " +
+                                  " molinos_estado, " +
+                                  " molinos_comentarios, " +
+                                  " formadora_nombliderlinea, " +
+                                  " formadora_nomboperario, " +
+                                  " formadora_nroformadora, " +
+                                  " formadora_porcentajehumedad, " +
+                                  " formadora_pesogrhojuela, " +
+                                  " formadora_accioncorrectiva, " +
+                                  " formadora_velocidad, " +
+                                  " formadora_parametronormal, " +
+                                  " formadora_parametromedio, " +
+                                  " formadora_diferencia, " +
+                                  " formadora_comentarios, " +
+                                  " fritadora_nomfritador, " +
+                                  " fritadora_nrofritadora, " +
+                                  " fritadora_porcentajecpt, " +
+                                  " fritadora_pesogrhojuela, " +
+                                  " fritadora_accionescorrectivas, " +
+                                  " fritadora_velocidad, " +
+                                  " fritadora_temperatura, " +
+                                  " fritadora_parametronormal, " +
+                                  " fritadora_parametromedido, " +
+                                  " fritadora_parametrodiferencia, " +
+                                  " fritadora_comentario, " +
+                                  " sazonado_nombsazonador, " +
+                                  " sazonado_nrosazonadora, " +
+                                  " sazonado_color, " +
+                                  " sazonado_sabor, " +
+                                  " sazonado_textura, " +
+                                  " sazonado_velocidadsazonador, " +
+                                  " sazonado_comentario, " +
+                                  " envasadora_nomboperador, " +
+                                  " envasadora_nroenvasadora, " +
+                                  " envasadora_prodenvasado, " +
+                                  " envasadora_velocidad, " +
+                                  " envasadora_temphorizontal, " +
+                                  " envasadora_tempvertical, " +
+                                  " envasadora_cantcajas_avanceproduccion, " +
+                                  " envasadora_comentarios " +
+                                  " from  " +
+                                  " tbcorpal_formularionachosproceso ff " +
+                                  " where ff.estado = 1 and " +
+                                  " ff.fechagra between " + fechadesde + " and " + fechahasta+
+                                  "  and "+
+                                 " (  sazonado_nombsazonador is not null OR "+
+                                 " sazonado_nrosazonadora is not null OR "+
+                                 " sazonado_color is not null OR "+
+                                 " sazonado_sabor is not null OR "+
+                                 " sazonado_textura is not null OR "+
+                                 " sazonado_velocidadsazonador is not null OR "+
+                                 " sazonado_comentario is not null  ) " ;
+            return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_calidadNachosProceso_Envasadora(string fechadesde, string fechahasta)
+        {
+            string consulta = "select " +
+                                  " codigo, " +
+                                  " date_format(fechagra, '%d/%m/%Y') as 'Fecha_Gra', " +
+                                  " horagra, " +
+                                  " turno, " +
+                                  " codresp, " +
+                                  " responsable, " +
+                                  " codprod, " +
+                                  " producto, " +
+                                  " remojadolavado_nrobolsasmaizremojadas, " +
+                                  " remojadolavado_calidaddelmaizlavado, " +
+                                  " remojadolavado_saldotachosmaizremojado, " +
+                                  " remojadolavado_comentarios, " +
+                                  " molinos_nomboperador, " +
+                                  " molinos_nromolino, " +
+                                  " molinos_estado, " +
+                                  " molinos_comentarios, " +
+                                  " formadora_nombliderlinea, " +
+                                  " formadora_nomboperario, " +
+                                  " formadora_nroformadora, " +
+                                  " formadora_porcentajehumedad, " +
+                                  " formadora_pesogrhojuela, " +
+                                  " formadora_accioncorrectiva, " +
+                                  " formadora_velocidad, " +
+                                  " formadora_parametronormal, " +
+                                  " formadora_parametromedio, " +
+                                  " formadora_diferencia, " +
+                                  " formadora_comentarios, " +
+                                  " fritadora_nomfritador, " +
+                                  " fritadora_nrofritadora, " +
+                                  " fritadora_porcentajecpt, " +
+                                  " fritadora_pesogrhojuela, " +
+                                  " fritadora_accionescorrectivas, " +
+                                  " fritadora_velocidad, " +
+                                  " fritadora_temperatura, " +
+                                  " fritadora_parametronormal, " +
+                                  " fritadora_parametromedido, " +
+                                  " fritadora_parametrodiferencia, " +
+                                  " fritadora_comentario, " +
+                                  " sazonado_nombsazonador, " +
+                                  " sazonado_nrosazonadora, " +
+                                  " sazonado_color, " +
+                                  " sazonado_sabor, " +
+                                  " sazonado_textura, " +
+                                  " sazonado_velocidadsazonador, " +
+                                  " sazonado_comentario, " +
+                                  " envasadora_nomboperador, " +
+                                  " envasadora_nroenvasadora, " +
+                                  " envasadora_prodenvasado, " +
+                                  " envasadora_velocidad, " +
+                                  " envasadora_temphorizontal, " +
+                                  " envasadora_tempvertical, " +
+                                  " envasadora_cantcajas_avanceproduccion, " +
+                                  " envasadora_comentarios " +
+                                  " from  " +
+                                  " tbcorpal_formularionachosproceso ff " +
+                                  " where ff.estado = 1 and " +
+                                  " ff.fechagra between " + fechadesde + " and " + fechahasta+
+                                  " AND   "+
+                                  " (envasadora_nomboperador is not null OR "+
+                                  "  envasadora_nroenvasadora is not null OR "+
+                                  "  envasadora_prodenvasado is not null OR "+
+                                  "  envasadora_velocidad is not null OR "+
+                                  "  envasadora_temphorizontal is not null OR "+
+                                  "  envasadora_tempvertical is not null OR "+
+                                  "  envasadora_cantcajas_avanceproduccion is not null OR "+
+                                  "  envasadora_comentarios is not null) "  ;
+            return Conx.consultaMySql(consulta);
+        }
     }
 }

@@ -2185,7 +2185,7 @@
     <EmbeddedResource Include="Reportes\Report_CalidadSazonadoControlSensorial.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadFritadora.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadFormadora.rdlc" />
-    <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado - Copia.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />

@@ -135,10 +135,137 @@ namespace jycboliviaASP.net.Presentacion
                             {
                                 get_detalleEntregaSolicitudProductos(fechadesde, fechahasta, Responsable);
                             }
-                        
+                            else
+                                 if (dd_consulta.SelectedIndex == 6)
+                            {
+                                get_calidadnachosproceso_remojadoyLavado(fechadesde, fechahasta, Responsable);
+                                }
+                                else
+                                  if (dd_consulta.SelectedIndex == 7)
+                                {
+                                    get_calidadnachosproceso_Molinos(fechadesde, fechahasta, Responsable);
+                                }
+                                else
+                                 if (dd_consulta.SelectedIndex == 8)
+                                {
+                                    get_calidadnachosproceso_Formadora(fechadesde, fechahasta, Responsable);
+                                }
+                                    else
+                                       if (dd_consulta.SelectedIndex == 9)
+                                    {
+                                        get_calidadnachosproceso_Fritadora(fechadesde, fechahasta, Responsable);
+                                    }
+                                        else
+                                            if (dd_consulta.SelectedIndex == 10)
+                                        {
+                                            get_calidadnachosproceso_SazonadoControlSensorial(fechadesde, fechahasta, Responsable);
+                                        }
+                                        else
+                                           if (dd_consulta.SelectedIndex == 11)
+                                        {
+                                            get_calidadnachosproceso_Envasadora(fechadesde, fechahasta, Responsable);
+                                        }
+
+
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+        }
+
+        private void get_calidadnachosproceso_Envasadora(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadEnvasadora.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_Envasadora(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void get_calidadnachosproceso_SazonadoControlSensorial(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadSazonadoControlSensorial.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_SazonadoControlSensorial(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void get_calidadnachosproceso_Fritadora(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadFritadora.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_Fritadora(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void get_calidadnachosproceso_Formadora(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadFormadora.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_Formadora(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void get_calidadnachosproceso_Molinos(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadMolinos.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_Molinos(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+        }
+
+        private void get_calidadnachosproceso_remojadoyLavado(string fechadesde, string fechahasta, string responsable)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_CalidadRemojadoyLavado.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_calidadNachosProceso_RemojadoyLavado(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
+            
+            ReportDataSource DS_StockProduccto = new ReportDataSource("DS_RemojadoyLavado", DSconsulta);
+
+            ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
         private void get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta, string Responsable)

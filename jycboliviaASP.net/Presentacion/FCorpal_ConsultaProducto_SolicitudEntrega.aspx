@@ -81,6 +81,12 @@
         <asp:ListItem>Entrega Produccion</asp:ListItem>
         <asp:ListItem>Stock Producto</asp:ListItem>
         <asp:ListItem>Detalle Entrega Productos</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Remojado y Lavado</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Molinos</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Formadora</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Fritadora</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Sazonadora-Control Sensorial</asp:ListItem>
+        <asp:ListItem>Calidad Proceso Nacho Envasadora</asp:ListItem>
     </asp:DropDownList>
     </td>
 <td><asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar"  onclick="bt_buscar_Click"  />    </td>
