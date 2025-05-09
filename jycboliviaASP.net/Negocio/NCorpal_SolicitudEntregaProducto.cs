@@ -188,5 +188,16 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.anularPedidoVaciadoUpon(codigoPedido, bandera);
         }
+
+        internal DataSet get_mostrarProductos_quesoloestenvigente2(string producto)
+        {
+            return dsp.get_mostrarProductos_quesoloestenvigente2(producto);
+        }
+
+        internal DataSet get_producto(int codprod)
+        {
+            DataSet listproductos = dsp.get_Producto(codprod);
+            return listproductos;
+        }
     }
 }

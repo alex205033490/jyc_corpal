@@ -323,6 +323,7 @@ namespace jycboliviaASP.net.Negocio
             string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1',   " +
                 " (ifnull(t1.ingreso,0) - ifnull(t2.salidaCajas,0)) as 'StockAlmacen',   " +
                 " (ifnull(t1.ingresopackferial,0) - ifnull(t2.salidaPackFerial,0)) as 'StockPackFerial'  " +
+                " ,pp.codupon, pp.codumupon, pp.codigosimec " +
                 " FROM tbcorpal_producto pp   " +
                 " LEFT JOIN    " +
                 " (   " +
@@ -377,6 +378,7 @@ namespace jycboliviaASP.net.Negocio
             string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1',   " +
                     " (ifnull(t1.ingreso,0) - ifnull(t2.salidaCajas,0)) as 'StockAlmacen',   " +
                     " (ifnull(t1.ingresopackferial,0) - ifnull(t2.salidaPackFerial,0)) as 'StockPackFerial'  " +
+                    " ,pp.codupon, pp.codumupon, pp.codigosimec " +
                     " FROM tbcorpal_producto pp   " +
                     " LEFT JOIN    " +
                     " (   " +
@@ -430,6 +432,7 @@ namespace jycboliviaASP.net.Negocio
             string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1',   " +
                     " (ifnull(t1.ingreso,0) - ifnull(t2.salidaCajas,0)) as 'StockAlmacen',   " +
                     " (ifnull(t1.ingresopackferial,0) - ifnull(t2.salidaPackFerial,0)) as 'StockPackFerial'  " +
+                    " ,pp.codupon, pp.codumupon, pp.codigosimec " +
                     " FROM tbcorpal_producto pp   " +
                     " LEFT JOIN    " +
                     " (   " +

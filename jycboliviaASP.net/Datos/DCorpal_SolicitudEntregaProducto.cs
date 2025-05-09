@@ -5,6 +5,7 @@ using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using static System.Data.Entity.Infrastructure.Design.Executor;
+using static jycboliviaASP.net.Presentacion.FCorpal_APIProduccion;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -530,6 +531,30 @@ namespace jycboliviaASP.net.Datos
                 " tbcorpal_solicitudentregaproducto.vaciadoupon = " + bandera +
                 " where  tbcorpal_solicitudentregaproducto.codigo = " + codigoPedido;
             return conexion.ejecutarMySql(consulta);
+        }
+
+        internal DataSet get_mostrarProductos_quesoloestenvigente2(string producto)
+        {
+            string consulta = "select "+
+                                 " pp.codigo,"+
+                                 " concat('(', ifnull(pp.codupon,'No Codigo') ,') ', pp.producto) as 'producto' "+
+                                 " , pp.medida "+
+                                 " FROM tbcorpal_producto pp " +
+                                 " where "+ 
+                                 " pp.producto like '%"+producto+"%' and "+
+                                 " pp.estado = 1 ";
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_Producto(int codprod)
+        {
+            string consulta = "select " +
+                                 " pp.codigo,pp.producto, pp.medida " +
+                                 " FROM tbcorpal_producto pp " +
+                                 " where " +
+                                 " pp.codigo = "+codprod +" and "+
+                                 " pp.estado = 1 ";
+            return conexion.consultaMySql(consulta);
         }
     }
 }

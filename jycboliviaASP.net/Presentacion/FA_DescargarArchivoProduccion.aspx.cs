@@ -42,6 +42,11 @@ namespace jycboliviaASP.net.Presentacion
             string nroorden = datoResult.Tables[0].Rows[0][6].ToString();
             string productoNax = datoResult.Tables[0].Rows[0][7].ToString();
             string cantcajas = datoResult.Tables[0].Rows[0][8].ToString();
+            
+            N_numLetra converN = new N_numLetra();
+            string cantcajasLetras = "";
+            cantcajasLetras = converN.Convertir(cantcajas, false, "Cajas");
+
             string unidadsuelta = datoResult.Tables[0].Rows[0][9].ToString();
             string kgrdesperdicio = datoResult.Tables[0].Rows[0][10].ToString();
             string kgrparamix = datoResult.Tables[0].Rows[0][11].ToString();
@@ -69,6 +74,7 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_kgrdesperdicioconaceite = new ReportParameter("p_kgrdesperdicioconaceite", kgrdesperdicio_conaceite);
             ReportParameter p_kgrdesperdiciosinaceite = new ReportParameter("p_kgrdesperdiciosinaceite", kgrdesperdicio_sinaceite);
             ReportParameter p_packferial = new ReportParameter("p_packferial", pack_ferial);
+            ReportParameter p_cantcajasLetras = new ReportParameter("p_cantcajasLetras", cantcajasLetras);
 
             string rutaReciboIngreso = ConfigurationManager.AppSettings["repo_ReciboEntregaProduccion_Voucher"];
             LocalReport ReportViewer1 = new LocalReport();
@@ -94,6 +100,8 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.SetParameters(p_kgrdesperdicioconaceite);
             ReportViewer1.SetParameters(p_kgrdesperdiciosinaceite);
             ReportViewer1.SetParameters(p_packferial);
+
+            ReportViewer1.SetParameters(p_cantcajasLetras);
 
             ReportViewer1.Refresh();
 

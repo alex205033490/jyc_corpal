@@ -477,6 +477,11 @@ namespace jycboliviaASP.net.Presentacion
             string nroorden = datoResult.Tables[0].Rows[0][6].ToString();
             string productoNax = datoResult.Tables[0].Rows[0][7].ToString();
             string cantcajas = datoResult.Tables[0].Rows[0][8].ToString();
+
+            N_numLetra converN = new N_numLetra();
+            string cantcajasLetras = "";
+            cantcajasLetras = converN.Convertir(cantcajas, false, "Cajas");
+
             string unidadsuelta = datoResult.Tables[0].Rows[0][9].ToString();
             string kgrdesperdicio = datoResult.Tables[0].Rows[0][10].ToString();
             string kgrparamix = datoResult.Tables[0].Rows[0][11].ToString();
@@ -504,6 +509,8 @@ namespace jycboliviaASP.net.Presentacion
             ReportParameter p_kgrdesperdicio_conaceite = new ReportParameter("p_kgrDesperdicioConAceite", kgrdesperdicio_conaceite);
             ReportParameter p_kgrdesperdicio_sinaceite = new ReportParameter("p_kgrDesperdicioSinAceite", kgrdesperdicio_sinaceite);
             ReportParameter p_pack_ferial = new ReportParameter("p_PackFerial", pack_ferial);
+
+            ReportParameter p_cantcajasLetras = new ReportParameter("p_cantcajasLetras", cantcajasLetras);
 
             //ReportParameter p_edificio = new ReportParameter("p_edificio", HttpUtility.HtmlDecode(datoResult.Tables[0].Rows[0][3].ToString()));
             /*
@@ -553,10 +560,11 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio);
 
             ReportViewer1.LocalReport.SetParameters(p_medidaentregada);
-             ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio_conaceite);
+            ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio_conaceite);
             ReportViewer1.LocalReport.SetParameters(p_kgrdesperdicio_sinaceite);
             ReportViewer1.LocalReport.SetParameters(p_pack_ferial);
 
+            ReportViewer1.LocalReport.SetParameters(p_cantcajasLetras);
 
             ReportViewer1.LocalReport.Refresh();
 

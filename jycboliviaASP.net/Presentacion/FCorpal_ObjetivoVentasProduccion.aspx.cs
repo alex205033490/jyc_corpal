@@ -8,6 +8,7 @@ using jycboliviaASP.net.Negocio;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using static jycboliviaASP.net.Presentacion.FCorpal_APIProduccion;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -38,7 +39,7 @@ namespace jycboliviaASP.net.Presentacion
         private void llenarProductosNax()
         {
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos("");
+            DataSet tuplas = pp.get_mostrarProductos_quesoloestenvigente2("");
 
             dd_productosNax.DataSource = tuplas;
             dd_productosNax.DataValueField = "codigo";
@@ -49,6 +50,7 @@ namespace jycboliviaASP.net.Presentacion
 
             string medida = tuplas.Tables[0].Rows[0][2].ToString();
             tx_medida.Text = medida;
+
         }
 
         private bool tienePermisoDeIngreso(int permiso)
@@ -111,8 +113,17 @@ namespace jycboliviaASP.net.Presentacion
             string fechalimite = convertirFecha(tx_fechalimite.Text);
 
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+
+            int codprod;
+            int.TryParse(dd_productosNax.SelectedValue, out codprod);
+            
+            DataSet tuplas = pp.get_producto(codprod);
+            string producto = tuplas.Tables[0].Rows[0][1].ToString();
+
+            /*
             string producto = dd_productosNax.SelectedItem.Text;
             int codprod = pp.get_CodigoProductos(producto);    
+            */
 
             float cantidadprod;
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantidadprod );                    
@@ -178,9 +189,11 @@ namespace jycboliviaASP.net.Presentacion
 
                 string fechalimite = convertirFecha(tx_fechalimite.Text);
 
+                int codprod;
+                int.TryParse(dd_productosNax.SelectedValue, out codprod);
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                string producto = dd_productosNax.SelectedItem.Text;
-                int codprod = pp.get_CodigoProductos(producto);
+                DataSet tuplas = pp.get_producto(codprod);
+                string producto = tuplas.Tables[0].Rows[0][1].ToString();
 
                 float cantidadprod;
                 float.TryParse(tx_cantcajas.Text.Replace('.', ','), out cantidadprod);
@@ -259,9 +272,15 @@ namespace jycboliviaASP.net.Presentacion
 
         private void cargarDatosSeleccionado()
         {
+            /*
             string producto = dd_productosNax.SelectedItem.Text;
+            */
+            int codigoProducto;
+            int.TryParse(dd_productosNax.SelectedValue, out codigoProducto);
+
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos(producto);
+            // DataSet tuplas = pp.get_mostrarProductos(producto);
+            DataSet tuplas = pp.get_producto(codigoProducto);
             string medida = tuplas.Tables[0].Rows[0][2].ToString();
             tx_medida.Text = medida;            
         }
@@ -295,7 +314,14 @@ namespace jycboliviaASP.net.Presentacion
         {
             string fechalimite = convertirFecha(tx_fechalimite.Text);
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            string producto = dd_productosNax.SelectedItem.Text;
+            // string producto = dd_productosNax.SelectedItem.Text;
+
+            int codigoProducto;
+            int.TryParse(dd_productosNax.SelectedValue, out codigoProducto);
+            
+            DataSet tuplas = pp.get_producto(codigoProducto);
+            string producto= tuplas.Tables[0].Rows[0][1].ToString();
+
 
             NCorpal_Produccion np = new NCorpal_Produccion();
             if (!(gv_objetivoProduccion.SelectedIndex >= 0))

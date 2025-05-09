@@ -2655,6 +2655,12 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnStockPackFerial;
             
+            private global::System.Data.DataColumn columncodupon;
+            
+            private global::System.Data.DataColumn columncodumupon;
+            
+            private global::System.Data.DataColumn columncodigosimec;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_StockProducctoDataTable() {
@@ -2746,6 +2752,30 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn coduponColumn {
+                get {
+                    return this.columncodupon;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codumuponColumn {
+                get {
+                    return this.columncodumupon;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codigosimecColumn {
+                get {
+                    return this.columncodigosimec;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2781,7 +2811,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_StockProducctoRow AddDS_StockProducctoRow(string codigo, string producto, string medida, string Ingreso1, string Salida1, string StockAlmacen, string StockPackFerial) {
+            public DS_StockProducctoRow AddDS_StockProducctoRow(string codigo, string producto, string medida, string Ingreso1, string Salida1, string StockAlmacen, string StockPackFerial, string codupon, string codumupon, string codigosimec) {
                 DS_StockProducctoRow rowDS_StockProducctoRow = ((DS_StockProducctoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -2790,7 +2820,10 @@ namespace jycboliviaASP.net {
                         Ingreso1,
                         Salida1,
                         StockAlmacen,
-                        StockPackFerial};
+                        StockPackFerial,
+                        codupon,
+                        codumupon,
+                        codigosimec};
                 rowDS_StockProducctoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_StockProducctoRow);
                 return rowDS_StockProducctoRow;
@@ -2820,6 +2853,9 @@ namespace jycboliviaASP.net {
                 this.columnSalida1 = base.Columns["Salida1"];
                 this.columnStockAlmacen = base.Columns["StockAlmacen"];
                 this.columnStockPackFerial = base.Columns["StockPackFerial"];
+                this.columncodupon = base.Columns["codupon"];
+                this.columncodumupon = base.Columns["codumupon"];
+                this.columncodigosimec = base.Columns["codigosimec"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2839,6 +2875,12 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnStockAlmacen);
                 this.columnStockPackFerial = new global::System.Data.DataColumn("StockPackFerial", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStockPackFerial);
+                this.columncodupon = new global::System.Data.DataColumn("codupon", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodupon);
+                this.columncodumupon = new global::System.Data.DataColumn("codumupon", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodumupon);
+                this.columncodigosimec = new global::System.Data.DataColumn("codigosimec", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodigosimec);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7882,6 +7924,54 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codupon {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_StockProduccto.coduponColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codupon\' de la tabla \'DS_StockProduccto\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_StockProduccto.coduponColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codumupon {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_StockProduccto.codumuponColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codumupon\' de la tabla \'DS_StockProduccto\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_StockProduccto.codumuponColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codigosimec {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_StockProduccto.codigosimecColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codigosimec\' de la tabla \'DS_StockProduccto\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_StockProduccto.codigosimecColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_StockProduccto.codigoColumn);
             }
@@ -7962,6 +8052,42 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetStockPackFerialNull() {
                 this[this.tableDS_StockProduccto.StockPackFerialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscoduponNull() {
+                return this.IsNull(this.tableDS_StockProduccto.coduponColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcoduponNull() {
+                this[this.tableDS_StockProduccto.coduponColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodumuponNull() {
+                return this.IsNull(this.tableDS_StockProduccto.codumuponColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodumuponNull() {
+                this[this.tableDS_StockProduccto.codumuponColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodigosimecNull() {
+                return this.IsNull(this.tableDS_StockProduccto.codigosimecColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodigosimecNull() {
+                this[this.tableDS_StockProduccto.codigosimecColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -23,7 +23,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>1.69306cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>1.73271cm</Width>
             <Style>
@@ -54,7 +54,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>2.29306cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>1.73271cm</Width>
             <ZIndex>1</ZIndex>
@@ -86,7 +86,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
             <Top>2.89306cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>1.73271cm</Width>
             <ZIndex>2</ZIndex>
@@ -118,7 +118,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>3.49306cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>1.73271cm</Width>
             <ZIndex>3</ZIndex>
@@ -150,6 +150,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>16.35133cm</Top>
+            <Left>0.04445cm</Left>
             <Height>0.6cm</Height>
             <Width>5.08445cm</Width>
             <ZIndex>4</ZIndex>
@@ -184,7 +185,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>19.02362cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
             <ZIndex>5</ZIndex>
@@ -222,6 +223,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>20.18778cm</Top>
+            <Left>0.04445cm</Left>
             <Height>2.31979cm</Height>
             <Width>5.08445cm</Width>
             <ZIndex>6</ZIndex>
@@ -253,7 +255,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>4.12833cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
             <ZIndex>7</ZIndex>
@@ -283,7 +285,7 @@
             </Paragraphs>
             <rd:DefaultName>p_nroorden</rd:DefaultName>
             <Top>1.69333cm</Top>
-            <Left>1.77716cm</Left>
+            <Left>1.82161cm</Left>
             <Height>0.6cm</Height>
             <Width>3.30729cm</Width>
             <ZIndex>8</ZIndex>
@@ -313,7 +315,7 @@
             </Paragraphs>
             <rd:DefaultName>p_turno</rd:DefaultName>
             <Top>2.29306cm</Top>
-            <Left>1.85654cm</Left>
+            <Left>1.90099cm</Left>
             <Height>0.6cm</Height>
             <Width>3.22791cm</Width>
             <ZIndex>9</ZIndex>
@@ -343,7 +345,7 @@
             </Paragraphs>
             <rd:DefaultName>p_entregaproduccion</rd:DefaultName>
             <Top>4.76361cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
             <ZIndex>10</ZIndex>
@@ -375,7 +377,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>5.36361cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
             <ZIndex>11</ZIndex>
@@ -405,6 +407,7 @@
             </Paragraphs>
             <rd:DefaultName>p_recepcionproduccion</rd:DefaultName>
             <Top>5.96361cm</Top>
+            <Left>0.04445cm</Left>
             <Height>0.6cm</Height>
             <Width>5.08445cm</Width>
             <ZIndex>12</ZIndex>
@@ -436,7 +439,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>6.56361cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>3.34666cm</Width>
             <ZIndex>13</ZIndex>
@@ -466,6 +469,7 @@
             </Paragraphs>
             <rd:DefaultName>p_produccionnax</rd:DefaultName>
             <Top>7.16361cm</Top>
+            <Left>0.04445cm</Left>
             <Height>1.87cm</Height>
             <Width>5.08445cm</Width>
             <ZIndex>14</ZIndex>
@@ -497,7 +501,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>9.03361cm</Top>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>0.6cm</Height>
             <Width>2.52645cm</Width>
             <ZIndex>15</ZIndex>
@@ -528,7 +532,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>9.63361cm</Top>
+            <Top>10.26889cm</Top>
             <Left>0.018cm</Left>
             <Height>0.6cm</Height>
             <Width>2.93301cm</Width>
@@ -560,7 +564,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>10.23361cm</Top>
+            <Top>10.86889cm</Top>
             <Left>0.018cm</Left>
             <Height>0.6cm</Height>
             <Width>2.93301cm</Width>
@@ -592,7 +596,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>10.83361cm</Top>
+            <Top>11.46889cm</Top>
             <Left>0.018cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
@@ -623,7 +627,7 @@
             </Paragraphs>
             <rd:DefaultName>p_cantcajas</rd:DefaultName>
             <Top>9.03361cm</Top>
-            <Left>2.55414cm</Left>
+            <Left>2.59859cm</Left>
             <Height>0.6cm</Height>
             <Width>2.53031cm</Width>
             <ZIndex>19</ZIndex>
@@ -652,7 +656,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>p_unidadsuelta</rd:DefaultName>
-            <Top>9.63361cm</Top>
+            <Top>10.26889cm</Top>
             <Left>2.95101cm</Left>
             <Height>0.6cm</Height>
             <Width>2.13344cm</Width>
@@ -682,7 +686,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>p_kgrparamix</rd:DefaultName>
-            <Top>10.23361cm</Top>
+            <Top>10.86889cm</Top>
             <Left>2.95101cm</Left>
             <Height>0.6cm</Height>
             <Width>2.13344cm</Width>
@@ -713,7 +717,7 @@
             </Paragraphs>
             <rd:DefaultName>p_fecha</rd:DefaultName>
             <Top>2.89306cm</Top>
-            <Left>1.85654cm</Left>
+            <Left>1.90099cm</Left>
             <Height>0.6cm</Height>
             <Width>3.22791cm</Width>
             <ZIndex>22</ZIndex>
@@ -743,7 +747,7 @@
             </Paragraphs>
             <rd:DefaultName>p_hora</rd:DefaultName>
             <Top>3.49306cm</Top>
-            <Left>1.85654cm</Left>
+            <Left>1.90099cm</Left>
             <Height>0.6cm</Height>
             <Width>3.22791cm</Width>
             <ZIndex>23</ZIndex>
@@ -777,7 +781,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0.018cm</Left>
+            <Left>0.06245cm</Left>
             <Height>1.46403cm</Height>
             <Width>5.08445cm</Width>
             <ZIndex>24</ZIndex>
@@ -806,7 +810,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>p_kgrdesperdicioconaceite</rd:DefaultName>
-            <Top>11.43361cm</Top>
+            <Top>12.06889cm</Top>
             <Left>0.04445cm</Left>
             <Height>0.6cm</Height>
             <Width>5.04cm</Width>
@@ -838,7 +842,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>12.03361cm</Top>
+            <Top>12.66889cm</Top>
             <Left>0.018cm</Left>
             <Height>0.6cm</Height>
             <Width>5.06645cm</Width>
@@ -868,7 +872,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>p_kgrdesperdiciosinaceite</rd:DefaultName>
-            <Top>12.63361cm</Top>
+            <Top>13.26889cm</Top>
             <Left>0.04445cm</Left>
             <Height>0.6cm</Height>
             <Width>5.04cm</Width>
@@ -900,7 +904,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>13.23361cm</Top>
+            <Top>13.86889cm</Top>
             <Height>0.6cm</Height>
             <Width>2.23541cm</Width>
             <ZIndex>28</ZIndex>
@@ -929,7 +933,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>p_packferial</rd:DefaultName>
-            <Top>13.23361cm</Top>
+            <Top>13.86889cm</Top>
             <Left>2.23541cm</Left>
             <Height>0.6cm</Height>
             <Width>2.84904cm</Width>
@@ -944,11 +948,41 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="p_cantcajasLetras">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!p_cantcajasLetras.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>p_cantcajasLetras</rd:DefaultName>
+            <Top>9.66889cm</Top>
+            <Left>0.0889cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.04cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>8.97211in</Height>
+        <Height>9.04503in</Height>
         <Style />
       </Body>
-      <Width>2.00884in</Width>
+      <Width>2.02634in</Width>
       <Page>
         <PageHeight>23cm</PageHeight>
         <PageWidth>5.4cm</PageWidth>
@@ -1046,11 +1080,17 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="p_cantcajasLetras">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>2</NumberOfColumns>
-      <NumberOfRows>7</NumberOfRows>
+      <NumberOfRows>8</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1121,6 +1161,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>p_packferial</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>p_cantcajasLetras</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
