@@ -186,8 +186,14 @@ namespace jycboliviaASP.net.Presentacion
             foreach (var pedido in pedidoAEnviar)
             {
                 string resultado = await EnviarPedidoAsync(pedido, token);
+
+                if (resultado.StartsWith("Error"))
+                {
+                    showalert($"Error al vaciar el pedido : {resultado}");
+                    continue;
+                }
                 anularPedido();
-                showalert($"Vaciado completado.");
+                showalert($"Vaciado completado. Codigo: {resultado}");
             }
         }
 
@@ -215,14 +221,21 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
-                string fecha = "2025-04-01T00:00:00";
-                string referencia = "Referencia PruebaRef Vaciado";
+                string fecha = "2025-03-31T00:00:00";
+                string referencia = "prueba referencia 19/05/2025 16:40";
                 int codigoCliente = Convert.ToInt32(row.Cells[5].Text);
                 decimal importeProductos = Convert.ToDecimal(row.Cells[7].Text);
                 decimal importeTotal = Convert.ToDecimal(row.Cells[7].Text);
-                string glosa = "Glosa PruebaGlo Vaciado";
+                string glosa = "prueba glosa 19/05/2025 16:40";
                 List<ItemPedidoDTO> detalles = ObtenerDetalleProducto(codSolicitud);
                 string usuario = "adm";
+
+                if (detalles == null || detalles.Count == 0)
+                {
+                    showalert($"Pedido sin detalles. No se enviará. codSolicitud: {codSolicitud}");
+                    return null;
+                }
+
 
                 return new PedidoDTO
                 {
@@ -235,8 +248,9 @@ namespace jycboliviaASP.net.Presentacion
                     ImporteTotal = importeTotal,
                     Glosa = glosa,
                     DetalleProductos = detalles,
-                    Usuario = usuario
-                };               
+                    Usuario = usuario,
+                  
+                };         
             } catch (Exception ex)
             {
                 showalert($"Error al crear pedido: {ex.Message}");
@@ -259,7 +273,6 @@ namespace jycboliviaASP.net.Presentacion
         private List<ItemPedidoDTO> ObtenerDetalleProducto(int codsolicitud)
         {
             List<ItemPedidoDTO> detalles = new List<ItemPedidoDTO>();
-
             try
             {
                 NCorpal_SolicitudEntregaProducto negocio = new NCorpal_SolicitudEntregaProducto();
@@ -281,21 +294,26 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error al obtener detalles del producto: {ex.Message}");
             }
-
             return detalles;
         }
         private ItemPedidoDTO MapItemPedido(DataRow row)
         {
             try
             {
+                string codigoProd = row["CodigoProducto"].ToString();
+                decimal cantidad = Convert.ToDecimal(row["cantidad"]);
+                int unidadMedida = Convert.ToInt32(row["CodigoUnidadMedida"]);
+                decimal precioUnitario = Convert.ToDecimal(row["PrecioUnitario"]);
+                decimal importeTotal = Convert.ToDecimal(row["ImporteTotal"]);
+
                 return new ItemPedidoDTO
                 {
-                    CodigoProducto = row["CodigoProducto"].ToString(),
-                    Cantidad = Convert.ToDecimal(row["Cantidad"]),
-                    CodigoUnidadMedida = Convert.ToInt32(row["CodigoUnidadMedida"]),
-                    PrecioUnitario = Convert.ToDecimal(row["PrecioUnitario"]),
-                    ImporteDescuento = 0,
-                    ImporteTotal = Convert.ToDecimal(row["ImporteTotal"])
+                    CodigoProducto = codigoProd,
+                    Cantidad = cantidad,
+                    CodigoUnidadMedida = unidadMedida,
+                    PrecioUnitario = precioUnitario,//precioUnitario,
+                    ImporteDescuento = 0,//importeTotal
+                    ImporteTotal = importeTotal
                 };
 
             } catch (Exception ex)

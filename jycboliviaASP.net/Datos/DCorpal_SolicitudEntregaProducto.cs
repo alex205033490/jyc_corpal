@@ -505,7 +505,7 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_allPedidosVWParaVaciado(string cliente)
         {
             string consulta = "select ss.codigo, ss.nroboleta, date_format(ss.fechaentrega, '%d/%m/%Y') as 'fecha_entrega', " +
-                " ss.horaentrega, cc.tiendaname AS 'Cliente', cc.cod_clienteupon as CodClienteUpon, dsp.preciototal as 'ImporteProductos' from tbcorpal_solicitudentregaproducto ss " +
+                " ss.horaentrega, cc.tiendaname AS 'Cliente', cc.cod_clienteupon as CodClienteUpon, SUM(dsp.preciototal) as 'ImporteProductos' from tbcorpal_solicitudentregaproducto ss " +
                 " left join tbcorpal_cliente cc ON ss.codcliente = cc.codigo " +
                 " inner join tbcorpal_detalle_solicitudproducto dsp ON ss.codigo = dsp.codsolicitud " +
                 " where ss.estado = 1 and ss.estadosolicitud = 'Cerrado' and ss.vaciadoupon = false " +
@@ -514,13 +514,13 @@ namespace jycboliviaASP.net.Datos
         }
         internal DataSet get_ObtenerDetalleProductoAsync(int codsolicitud)
         {
-            string consulta = "SELECT pr.codupon as 'CodigoProducto', dsp.cant as Cantidad, pr.codumupon as CodigoUnidadMedida, dsp.precio as PrecioUnitario, " +
-                              " dsp.precioTotal as ImporteTotal " +
+            string consulta = "SELECT pr.codupon as 'CodigoProducto', dsp.cant as 'Cantidad', pr.codumupon as 'CodigoUnidadMedida', dsp.precio as 'PrecioUnitario', " +
+                              " dsp.precioTotal as 'ImporteTotal' " +
                               " FROM tbcorpal_solicitudentregaproducto sep  " +
                               " INNER JOIN tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud " +
                               " INNER JOIN tbcorpal_producto pr ON pr.codigo = dsp.codproducto " +
                               " WHERE dsp.`codsolicitud`= "+ codsolicitud +" AND sep.estado = 1 AND sep.estadosolicitud = 'Cerrado' " +
-                              " AND sep.vaciadoupon = false;";
+                              " AND sep.vaciadoupon = 0;";
             return conexion.consultaMySql(consulta);
         }
 
