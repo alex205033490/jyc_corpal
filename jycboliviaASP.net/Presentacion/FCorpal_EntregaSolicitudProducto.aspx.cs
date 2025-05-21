@@ -411,7 +411,7 @@ namespace jycboliviaASP.net.Presentacion
                 string correo = row["propietariocorreo"].ToString();
                 string razonSocial = row["facturar_a"].ToString();
                 string documento = row["facturar_nit"].ToString();
-                decimal tipoCambio = decimal.Parse("6.96");
+                decimal tipoCambio = decimal.Parse("6,96");
 
                 int codResponsable = obtenerCodResponsable();
 

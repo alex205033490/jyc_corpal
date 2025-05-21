@@ -584,7 +584,6 @@
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
     <Content Include="Presentacion\FCorpal_OrdenProduccion.aspx" />
-    <Content Include="Presentacion\FCorpal_prueba.aspx" />
     <Content Include="Presentacion\FCorpal_Recetas.aspx" />
     <Content Include="Presentacion\FCorpal_RecibioMaterialInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
@@ -816,6 +815,7 @@
     <Content Include="Styles\Style_saldosCuentasGeneral.css" />
     <Content Include="Styles\Style_SeguimientosMorosos.css" />
     <Content Include="Styles\Style_SimecModificar.css" />
+    <Content Include="Styles\Style_UponPedidoVaciado.css" />
     <Content Include="Styles\Style_ViewCuadroXXX.css" />
     <Content Include="Styles\Style_ViewEstadoMantenimiento.css" />
     <Content Include="Styles\Style_ViewSeguimientoMantenimientoXXX.css" />
@@ -1324,13 +1324,6 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_OrdenProduccion.aspx.designer.cs">
       <DependentUpon>FCorpal_OrdenProduccion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_prueba.aspx.cs">
-      <DependentUpon>FCorpal_prueba.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Presentacion\FCorpal_prueba.aspx.designer.cs">
-      <DependentUpon>FCorpal_prueba.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_Recetas.aspx.cs">
       <DependentUpon>FCorpal_Recetas.aspx</DependentUpon>

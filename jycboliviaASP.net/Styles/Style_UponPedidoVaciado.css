@@ -1,0 +1,95 @@
+﻿.btn-danger:hover {
+    box-shadow: 0px 0px 6px 1px #ff0000;
+}
+
+.btn-success:hover {
+    box-shadow: 0px 0px 6px 1px #2b7c16;
+}
+
+.btn-primary:hover {
+    box-shadow: 0px 0px 6px 1px #0033ff;
+}
+
+.btn-info:hover {
+    box-shadow: 0px 0px 6px 1px #00dbff;
+}
+
+.gv_datosCobros tr.highlighted {
+    background-color: #ee791a63 !important;
+    box-shadow: 2px 2px 9px 2px #000000cc;
+}
+
+.table-sticky th {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ff8800 !important;
+    color: white !important;
+    z-index: 100 !important;
+    border: 1px solid white !important;
+}
+
+.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListMighlightedItem {
+    background-color: Green;
+    color: White;
+    /* color: Lime;
+        padding: 3px 20px;
+         text-decoration: none;           
+         background-repeat: repeat-x;
+         outline: 0;*/
+}
+
+.style1 {
+    width: 20px;
+}
+
+.Centrar {
+    margin: 0 auto;
+    width: 950px;
+}
+
+.titulo {
+    height: 40px;
+    margin-top: 20px;
+}
+
+.sc1 {
+    float: left;
+    height: 120px;
+    width: 940px;
+}
+
+.container-listaPedidosVaciado {
+    float: left;
+    height: 300px;
+    overflow: auto;
+    margin: 25px;
+    border: 2px solid #86807a;
+    margin: 25px;
+    box-shadow: 1px -1px 5px 2px #676c65;
+}
+
+.form-control:focus {
+    color: #212529 !important;
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    outline: 0 !important;
+    box-shadow: 0px 0px 0.6rem 0.2rem rgb(0 0 0 / 25%) !important;
+}

@@ -133,7 +133,7 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_ItemVendidos(int codigoVendido)
         {
-            string consulta = "select     " +
+            string consulta = "select " +
                 " dv.codventa,  dv.codprod,  dv.descripcion,  dv.cantidad,   " +
                 " dv.codmedida,  dv.medida,  dv.precioUnitario,  dv.montoDescuento,   " +
                 " dv.precioTotal, pp.codupon, pp.codumupon   " +

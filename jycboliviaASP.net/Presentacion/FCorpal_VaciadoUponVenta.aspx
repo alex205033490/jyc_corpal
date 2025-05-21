@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-md-3">
                             <asp:Label ID="Label2" for="lb_passUpon" runat="server" Text="Password Upon:" Font-Size="Small"></asp:Label>
-                            <asp:TextBox ID="tx_passUpon" type="password" CssClass="form-control" runat="server" Font-Size="Small" Text="123"></asp:TextBox>
+                            <asp:TextBox ID="tx_passUpon" type="password" CssClass="form-control" runat="server" Font-Size="Small" Text="Corpal205010180"></asp:TextBox>
                         </div>
                         <div class="col-md-9">
                             <asp:Label ID="Label3" for="tx_cliente" runat="server" Text="Cliente:" Font-Size="Small"></asp:Label>

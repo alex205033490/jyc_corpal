@@ -45,10 +45,10 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_regiboEgreso.Visible = false;
 
             mn_consultaIngresoEgreso.Visible = false;
-            mn_solicitudproductos.Visible = false;
-            mn_entregaSolicitudProducto.Visible = true;
-            mn_detallesolicitudproductos.Visible = false;
-            mn_entregaProduccion.Visible = false;
+            //mn_solicitudproductos.Visible = false;
+            //mn_entregaSolicitudProducto.Visible = true;
+            //mn_detallesolicitudproductos.Visible = false;
+            //mn_entregaProduccion.Visible = false;
             mn_activosjyc.Visible = false;
             mn_consultaActividades.Visible = false;
             //------------------------------
@@ -65,12 +65,12 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_Insumos.Visible = false;
             mn_InsumosCompuesto.Visible = false;
             mn_consultaRecetaInsumo.Visible = false;
-            mn_vaciadoUponPedido.Visible = false;
-            mn_vaciadoUponVenta.Visible = false;
+            //mn_vaciadoUponPedido.Visible = false;
+            //mn_vaciadoUponVenta.Visible = false;
             mn_CargaExcelComprasUpon.Visible = false;
             mn_CargaExcelVentasUpon.Visible = false;
 
-            mn_apiclientes.Visible = false;
+            //mn_apiclientes.Visible = false;
             mn_entregaSolicitudProductoACamion.Visible = false;
             mn_GestionExtintores.Visible = true;
             mn_ConsultaGraficaProduccion.Visible = false;

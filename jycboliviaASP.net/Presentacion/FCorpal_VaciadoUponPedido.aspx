@@ -4,6 +4,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Style_UponPedidoVaciado.css" rel="stylesheet" type="text/css" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -38,82 +40,7 @@
 
     </script>
 
-    <style type="text/css">
-        .btn:hover {
-            box-shadow: 0px 0px 10px 4px #0d0e0e;
-        }
-
-
-        .gv_datosCobros tr.highlighted {
-            background-color: #ee791a63 !important;
-            box-shadow: 2px 2px 9px 2px #000000cc;
-        }
-
-        .table-sticky th {
-            position: sticky !important;
-            top: 0 !important;
-            background-color: #ff8800 !important;
-            color: white !important;
-            z-index: 100 !important;
-            border: 1px solid white !important;
-        }
-
-        .CompletionList {
-            padding: 5px 0;
-            margin: 2px 0 0;
-            /*  position:absolute;  */
-            height: 150px;
-            width: 200px;
-            background-color: White;
-            cursor: pointer;
-            border: solid;
-            border-width: 1px;
-            font-size: x-small;
-            overflow: auto;
-        }
-
-        .CompletionlistItem {
-            font-size: x-small;
-        }
-
-        .CompletionListMighlightedItem {
-            background-color: Green;
-            color: White;
-            /* color: Lime;
-        padding: 3px 20px;
-         text-decoration: none;           
-         background-repeat: repeat-x;
-         outline: 0;*/
-        }
-
-        .style1 {
-            width: 20px;
-        }
-
-        .Centrar {
-            margin: 0 auto;
-            width: 950px;
-        }
-
-        .titulo {
-            height: 40px;
-            margin-top: 20px;
-        }
-
-        .sc1 {
-            float: left;
-            height: 120px;
-            width: 940px;
-        }
-
-        .container-listaPedidosVaciado {
-            float: left;
-            height: 300px;
-            overflow: auto;
-            padding-left: 20px;
-        }
-
-    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -149,7 +76,7 @@
                             <asp:Button ID="bt_vaciarAlUpon" CssClass="btn btn-success" runat="server" OnClick="bt_vaciarAlSimec_Click" Text="Vaciar al Upon" />
                         </div>
                         <div class="col-4 col-sm-4 col-md-3">
-                            <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" OnClick="Button1_Click" Text="Excel" />
+                            <asp:Button ID="btn_Excel" CssClass="btn btn-primary" runat="server" OnClick="Button1_Click" Text="Excel" />
                         </div>
                     </div>
 
@@ -190,10 +117,10 @@
             </div>
 
         </div>
-        <div class="list-group-item">
+        <div class="list-group-item" style="padding: 0px 20px 20px 20px;">
             <div class="row">
                 <div class="col-md-12">
-                    <asp:Label ID="Label6" runat="server" Text="Cantidad Equipos :"></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Text="Cantidad Registros :"></asp:Label>
                     <asp:Label ID="lb_cantDatos" runat="server" Text="0"></asp:Label>
                 </div>
             </div>

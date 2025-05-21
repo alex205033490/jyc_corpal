@@ -266,22 +266,21 @@ namespace jycboliviaASP.net.Presentacion
                             Item.NumeroItem = DetProd_NumeroItem;
                             Item.CodigoProducto = criterioBusqueda;
                             Item.Cantidad = DetProd_Cantidad;
-                            Item.CodigoUnidadMedida = product.UnidadMedida;
-                            Item.PrecioUnitario = product.PrecioUnitario;
+                            Item.CodigoUnidadMedida = 14;//product.UnidadMedida;
+                            Item.PrecioUnitario = 1;//product.PrecioUnitario;
                             //Item.ImporteDescuento = product.DescuentosPermitido;
                             Item.ImporteDescuento = 0;
-                            Item.ImporteTotal = (product.PrecioUnitario * DetProd_Cantidad);
+                            Item.ImporteTotal = (1 * DetProd_Cantidad);
                             Item.NumeroItemOrigen = DetProd_NumeroItem;
                             listaProductosV.Add(Item);
                             /** -------------- datos para sumar --------- */
                             decimal montoUnitario;
-                            decimal.TryParse(product.PrecioUnitario.ToString(), out montoUnitario);
+                            decimal.TryParse(("1").ToString(), out montoUnitario);
                             ImporteProductos = ImporteProductos + montoUnitario;
                             ImporteTotal = ImporteTotal + montoUnitario;
                             Cobros_TotalEfectivo = Cobros_TotalEfectivo + montoUnitario;
 
                             /** -------------- datos para sumar --------- */
-
                         }
 
                         if (errorDatos == false)
@@ -298,13 +297,17 @@ namespace jycboliviaASP.net.Presentacion
                                 if (banderaUpon == true)
                                 {
                                     bool bandera = nupon.updateVaciadoOk(CodigoVendido);
+                                    showalert("Se ha vaciado Correctamente!");
+                                }
+                                else
+                                {
+                                    showalert($"Error al vaciar el registro.");
                                 }
                             }
                         }
                         else {
                             Console.WriteLine("Error de guardar.");
                         }
-
                     }
                 }
             }
@@ -343,6 +346,11 @@ namespace jycboliviaASP.net.Presentacion
 
                 }
             }
+        }
+
+        private void showalert(string mensaje)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
         }
     }
 }

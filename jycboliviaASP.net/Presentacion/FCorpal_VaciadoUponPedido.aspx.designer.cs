@@ -69,13 +69,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button bt_vaciarAlUpon;
 
         /// <summary>
-        /// Control Button1.
+        /// Control btn_Excel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btn_Excel;
 
         /// <summary>
         /// Control gv_datosCobros.
