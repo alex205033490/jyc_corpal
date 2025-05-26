@@ -178,8 +178,8 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_vaciarAlSimec_Click(object sender, EventArgs e)
         {
-            string usuario = tx_usuarioUpon.Text;
-            string password = tx_passUpon.Text;
+            string usuario = "adm";
+            string password = "Corpal205010180";
             vaciaraUponVentasRealizadas(usuario, password);
         }
 

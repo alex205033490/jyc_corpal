@@ -4,8 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Login JyC</title>
-    <link rel="Shortcut Icon" href="../Images/jyc_icono.ico" />   
+    <title>Corpal</title>
+    <link rel="Shortcut Icon" href="../Images/naxsnax.png" />   
    
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
 <!--===============================================================================================-->		

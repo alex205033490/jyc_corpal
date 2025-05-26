@@ -1,0 +1,60 @@
+﻿.CompletionList {
+    padding: 5px 0;
+    margin: 2px 0 0;
+    /*  position:absolute;  */
+    height: 150px;
+    width: 200px;
+    background-color: White;
+    cursor: pointer;
+    border: solid;
+    border-width: 1px;
+    font-size: x-small;
+    overflow: auto;
+}
+
+.CompletionlistItem {
+    font-size: x-small;
+}
+
+.CompletionListMighlightedItem {
+    background-color: Green;
+    color: White;
+    /* color: Lime;
+       padding: 3px 20px;
+        text-decoration: none;           
+        background-repeat: repeat-x;
+        outline: 0;*/
+}
+
+.style1 {
+    width: 20px;
+}
+
+.btn:hover {
+    box-shadow: 2px -2px 6px 0px black;
+}
+
+.container_datosUponVentas {
+    height: 300px;
+    width: auto;
+    overflow: auto;
+    padding-left: 20px;
+}
+
+.gv_datosCobros tr.highlighted {
+    background-color: #fb9651b5 !important;
+    box-shadow: 0px 0px 9px 2px var(--bs-black) !important;
+}
+
+.table-sticky th {
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #ff8800 !important;
+    color: white !important;
+    z-index: 100 !important;
+    border: 1px solid white !important;
+}
+
+.cant_equiposVentas{
+    padding: 1rem;
+}

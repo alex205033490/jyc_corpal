@@ -4,6 +4,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_SeguimientosMorosos.css" rel="stylesheet" />
+    <link href="../Styles/Style_VaciadoUponCompraVentas.css" rel="stylesheet"/>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -38,65 +40,6 @@
 
     </script>
 
-    <style type="text/css">
-        .CompletionList {
-            padding: 5px 0;
-            margin: 2px 0 0;
-            /*  position:absolute;  */
-            height: 150px;
-            width: 200px;
-            background-color: White;
-            cursor: pointer;
-            border: solid;
-            border-width: 1px;
-            font-size: x-small;
-            overflow: auto;
-        }
-
-        .CompletionlistItem {
-            font-size: x-small;
-        }
-
-        .CompletionListMighlightedItem {
-            background-color: Green;
-            color: White;
-            /* color: Lime;
-       padding: 3px 20px;
-        text-decoration: none;           
-        background-repeat: repeat-x;
-        outline: 0;*/
-        }
-
-        .style1 {
-            width: 20px;
-        }
-
-        .btn:hover {
-            box-shadow: 2px 2px 2px black;
-        }
-
-        .container_datosUponVentas{
-            height: 300px;
-            width: auto;
-            overflow: auto;
-            padding-left: 20px;
-        }
-
-        .gv_datosCobros tr.highlighted{
-            background-color: #fb9651b5 !important;
-            box-shadow: 0px 0px 9px 2px var(--bs-black) !important;
-        }
-
-        .table-sticky th{
-            position: sticky !important;
-            top: 0 !important;
-            background-color: #ff8800 !important;
-            color: white !important;
-            z-index: 100 !important;
-            border: 1px solid white !important;
-        }
-
-    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -107,15 +50,8 @@
             <div class="list-group list-group-flush">
                 <div class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
-                            <asp:Label ID="Label1" for="lb_usuarioUpon" runat="server" Text="Usuario Upon:" Font-Size="Small"></asp:Label>
-                            <asp:TextBox ID="tx_usuarioUpon" CssClass="form-control" runat="server" Font-Size="Small" Text="adm"></asp:TextBox>
-                        </div>
-                        <div class="col-md-3">
-                            <asp:Label ID="Label2" for="lb_passUpon" runat="server" Text="Password Upon:" Font-Size="Small"></asp:Label>
-                            <asp:TextBox ID="tx_passUpon" type="password" CssClass="form-control" runat="server" Font-Size="Small" Text="Corpal205010180"></asp:TextBox>
-                        </div>
-                        <div class="col-md-9">
+                        
+                        <div class="col-md-4 mb-2">
                             <asp:Label ID="Label3" for="tx_cliente" runat="server" Text="Cliente:" Font-Size="Small"></asp:Label>
                             <asp:TextBox ID="tx_cliente" CssClass="form-control" runat="server" Font-Size="Small"></asp:TextBox>
                             <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server"
@@ -128,15 +64,16 @@
                                 CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
                             </asp:AutoCompleteExtender>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <br />
                             <asp:Button ID="bt_buscar" CssClass="btn btn-info" runat="server" Text="Buscar" OnClick="bt_buscar_Click" />
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <asp:CheckBox ID="cb_selecciontodo" Text="Seleccionar Todo" runat="server" AutoPostBack="true" OnCheckedChanged="cb_selecciontodo_CheckedChanged" />
                         </div>
 
                     </div>
+
                     <div class="row">
                         <div class="col-md-3">
                             <asp:Button ID="bt_anularPago" CssClass="btn btn-danger" runat="server" OnClick="bt_anularPago_Click" Text="Anular" />
@@ -191,7 +128,7 @@
                 </div>
            
         </div>
-        <div class="list-group-item">
+        <div class="list-group-item cant_equiposVentas">
             <div class="row">
                 <div class="col-md-12">
                     <asp:Label ID="Label6" runat="server" Text="Cantidad Equipos :"></asp:Label>
