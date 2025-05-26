@@ -70,9 +70,11 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_CargaExcelComprasUpon.Visible = false;
             mn_CargaExcelVentasUpon.Visible = false;
 
+            mn_GestionarVehiculos.Visible = false;
+
             //mn_apiclientes.Visible = false;
             mn_entregaSolicitudProductoACamion.Visible = false;
-            mn_GestionExtintores.Visible = true;
+            mn_GestionExtintores.Visible = false;
             mn_ConsultaGraficaProduccion.Visible = false;
 
             mn_despachoCamion.Visible = false;

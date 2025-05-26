@@ -816,6 +816,7 @@
     <Content Include="Styles\Style_SeguimientosMorosos.css" />
     <Content Include="Styles\Style_SimecModificar.css" />
     <Content Include="Styles\Style_UponPedidoVaciado.css" />
+    <Content Include="Styles\Style_VaciadoUponCompraVentas.css" />
     <Content Include="Styles\Style_ViewCuadroXXX.css" />
     <Content Include="Styles\Style_ViewEstadoMantenimiento.css" />
     <Content Include="Styles\Style_ViewSeguimientoMantenimientoXXX.css" />

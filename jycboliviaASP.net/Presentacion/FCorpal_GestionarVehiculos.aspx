@@ -46,13 +46,13 @@
     </script>
 
     <div class="card">
-        <div class="card-header bg-warning text-black">
+        <div class="card-header container_tittle text-black">
             <h1>Gestionar Vehiculos</h1>
         </div>
 
         <div class="list-group list-group-flush">
             <div class="container_RegistroVehiculo">
-                <h2 class="p-3">Registro de Vehiculo</h2>
+                <h2 class="p-3"><span class="tittle_2">Registro de Vehiculo</span></h2>
                 <div class="form-registro p-3 m-3 row" >
                     <div class="form-p1 p-2 col-lg-3 col-md-6 col-sm-6">
                         <label>Marca:</label>
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="p-2 col-lg-3">
-                        <asp:Button ID="btn_registrarForm" runat="server" CssClass="btn btn-success" Font-Size="20px" Text="Registrar" OnClick="btn_registrarForm_Click" />
+                        <asp:Button ID="btn_registrarForm" runat="server" CssClass="btn btn-success btn_rcar" Font-Size="20px" Text="Registrar" OnClick="btn_registrarForm_Click" />
                     </div>
 
 

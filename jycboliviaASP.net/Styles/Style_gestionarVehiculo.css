@@ -37,3 +37,23 @@ box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 63% ) !important
     background-color: #f67d00 !important;
     box-shadow: 0px 0px 3px 1px black;
 }
+
+.container_tittle{
+    background-color: rgb(255 141 0 / 83%) !important;
+}
+
+.tittle_2{
+    background-color: #ff7d00a8;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 5px 3px 5px 1px #000000;
+    font-family: 'Open Sans';
+    font-size: 1.8rem;
+}
+
+.btn_rcar{
+    font-size: 20px;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
