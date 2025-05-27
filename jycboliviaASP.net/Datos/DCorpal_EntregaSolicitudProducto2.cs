@@ -417,8 +417,8 @@ namespace jycboliviaASP.net.Datos
 
         internal bool update_CierreAutSolicitudProd(int codSolicitud, int codper, string personal)
         {
-            
-            string consulta = "UPDATE tbcorpal_solicitudentregaproducto sep " +
+
+            /*string consulta = "UPDATE tbcorpal_solicitudentregaproducto sep " +
                 "SET sep.fechacierre = current_date(), " +
                 "sep.horacierre = current_time(), " +
                 "sep.codperentregoproducto = @codper, " +
@@ -429,9 +429,9 @@ namespace jycboliviaASP.net.Datos
                 "SELECT 1 FROM tbcorpal_detalle_solicitudproducto dsp " +
                 "WHERE dsp.codsolicitud = @codigo " +
                 "AND dsp.estadoprodsolicitud != 'total'); ";
-            
-            /*
-            string consulta = "UPDATE tbcorpal_solicitudentregaproducto sep " +
+            */
+
+            string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep " +
                 "SET sep.fechacierre = current_date(), " +
                 "sep.horacierre = current_time(), " +
                 "sep.codperentregoproducto = @codper, " +
@@ -439,10 +439,12 @@ namespace jycboliviaASP.net.Datos
                 "sep.estadosolicitud = 'Cerrado' " +
                 "WHERE sep.codigo = @codigo " +
                 "AND ( " +
-                "SELECT count(*) FROM tbcorpal_detalle_solicitudproducto dsp " +
+                "SELECT COUNT(*) FROM tbcorpal_detalle_solicitudproducto dsp WHERE " +
+                "dsp.codsolicitud = @codigo) = ( " +
+                "SELECT COUNT(*) FROM tbcorpal_detalle_solicitudproducto dsp " +
                 "WHERE dsp.codsolicitud = @codigo " +
-                "AND dsp.estadoprodsolicitud != 'total') = 0; ";
-           */
+                "AND dsp.estadoprodsolicitud = 'total');";
+           
             using (MySqlCommand comand = new MySqlCommand(consulta))
             {
                 comand.Parameters.AddWithValue("@codigo", codSolicitud);

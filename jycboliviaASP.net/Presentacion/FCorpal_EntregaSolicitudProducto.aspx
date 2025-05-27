@@ -24,16 +24,12 @@
                 container.scrollTop = scrollPos;
             }
         }
-
         Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(function () {
             saveScroll();
         });
-
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
             restoreScroll();
         });
-
-
         $(document).ready(function () {
             var table = $(".sticky-table");
             if (table.find("thead").length === 0) {
@@ -47,7 +43,7 @@
     </script>
 
     <div class="card">
-        <div class="card-header bg-warning text-black">Entrega de Solicitud Productos</div>
+        <div class="card-header  text-black">Entrega de Solicitud Productos</div>
 
         <div class="container-form">
 
@@ -145,15 +141,14 @@
 
                 <!-- DETALLE VEHICULO Y DETALLE-->
 
-                <div class="form_buscarCar col-sm-6 col-md-5 col-lg-12 mb-2 row">
+                <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
-                    <div class="col-lg-3">
+                    <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
                         <asp:Label runat="server" Font-Size="Small" Text="Encargado de entrega"></asp:Label>
                         <asp:TextBox ID="tx_entregoSolicitud" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
                         <asp:Label ID="Label1" runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
                         <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select ddVehiculo" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                         </asp:DropDownList>
-
                         <asp:UpdatePanel ID="updatePanelGVdetCar" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:GridView ID="gv_detCar" runat="server" CssClass="table table-striped gv_detCar" AutoGenerateColumns="false">
@@ -168,15 +163,14 @@
                                 <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
                             </Triggers>
                         </asp:UpdatePanel>
-
                     </div>
 
-                    <div class="container_detalle col-lg-3">
+                    <div class="mb-3 container_detalle col-lg-3 col-md-4 col-sm-6">
                         <asp:Label ID="lb_detalleRegistro" runat="server" Font-Size="Small" Text="Detalle:"></asp:Label>
                         <asp:TextBox ID="txt_detalleRegistro" runat="server" CssClass="form-control txtdetalle" TextMode="MultiLine"></asp:TextBox>
                     </div>
 
-                    <div class="container_btnRegistro d-flex flex-column gap-3 col-lg-3">
+                    <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-8">
                         <asp:Button ID="btn_registrarDespacho" runat="server" CssClass="btn btn-success" Text="Registrar Despacho" OnClick="btn_registrarDespacho_Click" />
                         <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                         <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-warning"
