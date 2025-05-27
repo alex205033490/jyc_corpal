@@ -138,7 +138,6 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Redirect("../Presentacion/FCorpal_ReporteEntregaSolicitudProducto.aspx");
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Seleccionar Entrega') </script>");
-            
         }
      
         /*
@@ -338,52 +337,6 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert($"Error inesperado: {ex.Message}");
             }
-
-
-
-
-            /*
-            string detalle = txt_detalleRegistro.Text.Trim();
-            int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
-
-            NA_Responsables NResponsable = new NA_Responsables();
-            string usu = Session["NameUser"].ToString();
-            string pass = Session["passworuser"].ToString();
-            int codResponsable = NResponsable.getCodUsuario(usu, pass);
-
-            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-            int codDespacho = negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
-
-            if (codDespacho <= 0)
-            {
-                showalert("Error al registrar el despacho principal");
-                return; 
-            }
-
-            if (RegistrarDetalleDespacho(codDespacho))
-            {
-                //showalert($"Detalle de despacho Nro: {codDespacho} registrado.");
-            }
-            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-            {
-                ProcesarRegistroSolicitudPedido(row);
-
-                int codigoSolicitud = int.Parse(row.Cells[1].Text);
-                int codigoCliente = int.Parse(row.Cells[11].Text);
-                string solicitante = (row.Cells[10].Text);
-                string fechaEntregarow = (row.Cells[9].Text);
-                string fechaEntrega = aFecha2(fechaEntregarow);
-
-                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
-                if (chk != null && chk.Checked)
-                {
-                    registrarVentaAut(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
-                    showalert($"Solicitud registrada.");
-                    limpiarForm();
-                    GET_MostrarSolicitudProductos("Abierto");
-                }
-            }
-            */
         }
 
 
@@ -750,8 +703,6 @@ namespace jycboliviaASP.net.Presentacion
                 dd_listVehiculo.Items.Insert(0, li);
             }
         }
-
-
 
 
         private void showalert(string mensaje)

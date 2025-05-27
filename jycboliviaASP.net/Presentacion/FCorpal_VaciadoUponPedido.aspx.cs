@@ -220,13 +220,17 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+                DateTime Actual = DateTime.Now;
+                string fechaHoraActual = Actual.ToString("dd/MM/yyyy HH:mm");
+
+                string referencia = $"Referencia {fechaHoraActual} ";
+                string glosa = $"Glosa {fechaHoraActual} ";
+
                 int codSolicitud = Convert.ToInt32(row.Cells[1].Text);
                 string fecha = "2025-03-31T00:00:00";
-                string referencia = "prueba referencia 19/05/2025 16:40";
                 int codigoCliente = Convert.ToInt32(row.Cells[5].Text);
                 decimal importeProductos = Convert.ToDecimal(row.Cells[7].Text);
                 decimal importeTotal = Convert.ToDecimal(row.Cells[7].Text);
-                string glosa = "prueba glosa 19/05/2025 16:40";
                 List<ItemPedidoDTO> detalles = ObtenerDetalleProducto(codSolicitud);
                 string usuario = "adm";
 
