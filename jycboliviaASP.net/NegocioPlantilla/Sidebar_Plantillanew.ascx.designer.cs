@@ -321,6 +321,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaGraficaProduccion;
 
         /// <summary>
+        /// Control mn_ConsultaGeneral.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaGeneral;
+
+        /// <summary>
         /// Control mn_agenda.
         /// </summary>
         /// <remarks>

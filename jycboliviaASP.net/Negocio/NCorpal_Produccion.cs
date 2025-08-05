@@ -541,5 +541,15 @@ namespace jycboliviaASP.net.Negocio
         {
             return dproduccion.get_calidadNachosProceso_Envasadora(fechadesde, fechahasta);
         }
+
+        internal DataSet get_CorrespondeAlmuerzoFichada(string fechadesde, string fechahasta)
+        {
+            return dproduccion.get_CorrespondeAlmuerzoFichada(fechadesde, fechahasta);
+        }
+
+        internal DataSet get_MarcacionPersonal(DateTime fechadesde, DateTime fechahasta)
+        {
+            return dproduccion.get_MarcacionPersonal(fechadesde, fechahasta);
+        }
     }
 }

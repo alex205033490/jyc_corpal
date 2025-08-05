@@ -556,6 +556,7 @@
     <Content Include="NegocioPlantilla\Header_planillanew.ascx" />
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
     <Content Include="Presentacion\FACorpal_ConsultaGrafica.aspx" />
+    <Content Include="Presentacion\FACorpal_ConsultaGeneral.aspx" />
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
@@ -625,6 +626,17 @@
     </None>
     <Content Include="DS_CalidadProductoEnProceso.xss">
       <DependentUpon>DS_CalidadProductoEnProceso.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS_Fichada.xsc">
+      <DependentUpon>DS_Fichada.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_Fichada.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Fichada.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_Fichada.xss">
+      <DependentUpon>DS_Fichada.xsd</DependentUpon>
     </Content>
     <None Include="DS_Produccion.xsd">
       <SubType>Designer</SubType>
@@ -932,6 +944,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Equipos.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DS_Fichada.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Fichada.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_Importacion.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1129,6 +1146,13 @@
     </Compile>
     <Compile Include="Presentacion\FACorpal_ConsultaGrafica.aspx.designer.cs">
       <DependentUpon>FACorpal_ConsultaGrafica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGeneral.aspx.cs">
+      <DependentUpon>FACorpal_ConsultaGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_ConsultaGeneral.aspx.designer.cs">
+      <DependentUpon>FACorpal_ConsultaGeneral.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FA_Dashboard.aspx.cs">
       <DependentUpon>FA_Dashboard.aspx</DependentUpon>
@@ -2181,6 +2205,8 @@
     <EmbeddedResource Include="Reportes\Report_CalidadFormadora.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_Marcacion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_CorrespondeAlmuerzoFichada.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
     <EmbeddedResource Include="Reportes\Receta\Report_Receta_Todos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaListadeInsumosTurnos.rdlc" />

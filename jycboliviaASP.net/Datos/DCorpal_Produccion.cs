@@ -7,6 +7,7 @@ using System.Data;
 using jycboliviaASP.net.Presentacion;
 using Microsoft.Reporting.Map.WebForms;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -1418,6 +1419,153 @@ namespace jycboliviaASP.net.Datos
                                   "  envasadora_cantcajas_avanceproduccion is not null OR "+
                                   "  envasadora_comentarios is not null) "  ;
             return Conx.consultaMySql(consulta);
+        }
+
+        internal DataSet get_CorrespondeAlmuerzoFichada(string fechadesde, string fechahasta)
+        {
+            string connectionString = "Data Source=192.168.11.236;Initial Catalog=Asistencia;User ID=personal;Password=personal";
+
+            DateTime fechadesdeAux;
+            DateTime fechahastaAux;
+            DateTime.TryParseExact(fechadesde, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fechadesdeAux);
+            DateTime.TryParseExact(fechahasta, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out fechahastaAux);
+
+
+            string query = @" WITH Marcaciones AS (
+                                    SELECT  
+                                        ff.id,
+                                        ff.codigo AS CI,    
+                                        ff.fecha,
+                                        CAST(ff.fecha AS TIME) AS hora,
+                                        CAST(ff.fecha AS DATE) AS fecha_sola,
+                                        ff.hostname,
+                                        ff.id_sucursal,
+                                        per.nombres,
+                                        per.apellidos,
+                                        CASE 
+                                            WHEN CAST(ff.fecha AS TIME) >= '06:00:00' AND CAST(ff.fecha AS TIME) < '14:00:00' THEN 'Turno Día'
+                                            WHEN CAST(ff.fecha AS TIME) >= '14:00:00' AND CAST(ff.fecha AS TIME) < '22:00:00' THEN 'Turno Tarde'
+                                            ELSE 'Turno Noche'
+                                        END AS turno
+                                    FROM Fichada ff
+                                    JOIN Persona per ON ff.codigo = per.codigo
+                                    JOIN PersonaSucursal ps ON per.id = ps.id_persona
+                                    JOIN Sucursal ss ON ps.id_sucursal = ss.id
+                                    WHERE 
+                                        ss.codigo IN (12, 13) AND
+                                        CAST(ff.fecha AS DATE) BETWEEN @FechaDesde AND @FechaHasta
+                                ),
+                                MarcacionesValidas AS (
+                                    SELECT *,
+                                           ROW_NUMBER() OVER (PARTITION BY CI, fecha_sola ORDER BY fecha) AS rn
+                                    FROM Marcaciones m
+                                    WHERE m.hora BETWEEN '05:00:00' AND '08:00:00'
+                                      AND NOT EXISTS (
+                                            SELECT 1
+                                            FROM Marcaciones m2
+                                            WHERE m2.CI = m.CI
+                                              AND m2.fecha_sola = m.fecha_sola
+                                              AND m2.hora < '04:59:59'
+                                        )
+                                )
+                                SELECT 
+                                    id, CI, fecha, hora, fecha_sola, hostname, id_sucursal,
+                                    nombres, apellidos, turno,
+                                    'Sí' AS corresponde_almuerzo
+                                FROM MarcacionesValidas
+                                WHERE rn = 1
+                                ORDER BY fecha, CI;";
+
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                var formato = "yyyy-MM-dd";
+                var cultura = System.Globalization.CultureInfo.InvariantCulture;
+                string pp = fechadesdeAux.ToString("yyyy-MM-dd");
+                string pp2 = fechahastaAux.ToString("yyyy-MM-dd");
+                cmd.Parameters.AddWithValue("@FechaDesde", DateTime.ParseExact(fechadesdeAux.ToString("yyyy-MM-dd"), formato, cultura));
+                cmd.Parameters.AddWithValue("@FechaHasta", DateTime.ParseExact(fechahastaAux.ToString("yyyy-MM-dd"), formato, cultura));
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(ds);
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de errores (puedes registrar o lanzar la excepción según tu necesidad)
+                    throw new Exception("Error al ejecutar la consulta de almuerzos.", ex);
+                }
+
+                return ds;
+            }
+
+
+        }
+
+        internal DataSet get_MarcacionPersonal(DateTime fechadesde, DateTime fechahasta)
+        {
+            string connectionString = "Data Source=192.168.11.236;Initial Catalog=Asistencia;User ID=personal;Password=personal";
+            
+            string query = @"
+                          SELECT    
+                            Nombre_Completo,
+                            CONVERT(VARCHAR(10), Fecha_Marcacion, 120) as Fecha_Marcacion,
+                            STRING_AGG(Hora_Marcacion, ', ') AS Hora_Marcacion,
+                            COUNT(*) AS Total,
+                            Cargo, 
+                            CI  
+                        FROM (
+                            SELECT  
+                                persona.nombres + ' ' + persona.apellidos AS Nombre_Completo,
+                                persona.cargo as Cargo,
+                                persona.codigo as CI,
+                                CONVERT(DATE, fichada.fecha) AS Fecha_Marcacion, 
+                                CONVERT(VARCHAR(8), fichada.fecha, 108) AS Hora_Marcacion
+                            FROM 
+                                fichada
+                            JOIN 
+                                persona ON persona.codigo = fichada.codigo 
+                            JOIN 
+                                sucursal ON sucursal.id = fichada.id_sucursal
+                            WHERE 
+                                fichada.hostname = 'JORNAL'
+                                AND persona.cargo LIKE 'JORNAL%'
+                                AND fichada.fecha BETWEEN @FechaDesde AND @FechaHasta
+                        ) AS FichadasPorPersona
+                        GROUP BY 
+                            Cargo,CI,Nombre_Completo, Fecha_Marcacion
+                        ORDER BY 
+                            Cargo, Nombre_Completo, Fecha_Marcacion;";
+
+            
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+
+                cmd.Parameters.Add("@FechaDesde", SqlDbType.DateTime).Value = fechadesde;
+                cmd.Parameters.Add("@FechaHasta", SqlDbType.DateTime).Value = fechahasta;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+
+                try
+                {
+                    conn.Open();
+                    da.Fill(ds);
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de errores (puedes registrar o lanzar la excepción según tu necesidad)
+                    throw new Exception("Error al ejecutar la consulta de almuerzos.", ex);
+                }
+
+                return ds;
+            }
         }
     }
 }

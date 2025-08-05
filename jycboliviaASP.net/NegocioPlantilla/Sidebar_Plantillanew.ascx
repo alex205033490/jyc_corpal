@@ -139,6 +139,7 @@
             </a>
             <ul id="consultaG-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li><a href="../Presentacion/FACorpal_ConsultaGrafica.aspx" id="mn_ConsultaGraficaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Grafica</span></a></li>
+                <li><a href="../Presentacion/FACorpal_ConsultaGeneral.aspx" id="mn_ConsultaGeneral" runat="server"><i class="bi bi-circle"></i><span>Consulta General</span></a></li>
             </ul>
         </li>
 
