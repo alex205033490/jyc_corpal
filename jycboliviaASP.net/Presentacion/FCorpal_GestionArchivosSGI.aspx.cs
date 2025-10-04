@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using jycboliviaASP.net.Negocio;
+using System.Threading;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -26,13 +27,8 @@ namespace jycboliviaASP.net.Presentacion
                  string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                  Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
              } 
-
-             string baseDatos = Session["BaseDatos"].ToString();
-             if (!baseDatos.Equals("Santa Cruz") && !baseDatos.Equals("La Paz") && !baseDatos.Equals("Cochabamba") && !baseDatos.Equals("Corpal") )
-             {
-                 baseDatos = "JyC";
-             }
-             rutaArchivo = rutaArchivo + baseDatos + "/";
+ 
+           
             
         }
 
@@ -83,87 +79,114 @@ namespace jycboliviaASP.net.Presentacion
         {
             if(TreeView1.SelectedNode.ChildNodes.Count == 0){  //es hoja                
                 string treeNodeName = TreeView1.SelectedNode.Value.ToString();
-
                 string baseDatos = Session["BaseDatos"].ToString();
-                if (!baseDatos.Equals("Santa Cruz") && !baseDatos.Equals("La Paz") && !baseDatos.Equals("Cochabamba"))
-                {
-                    baseDatos = "JyC";
-                }
-
-                string dato = rutaArchivo.Remove(rutaArchivo.Length-(baseDatos.Length+1));
-                //string ruta = rutaArchivo.Replace(baseDatos + "/",string.Empty) + TreeView1.SelectedNode.ValuePath.ToString().Replace(treeNodeName, string.Empty);
-               string ruta = dato + TreeView1.SelectedNode.ValuePath.ToString().Replace(treeNodeName, string.Empty);
-               descargarArchivo(ruta,treeNodeName);
+                // string dato = rutaArchivo;
+                string ruta = rutaArchivo.Replace(baseDatos,string.Empty) + TreeView1.SelectedNode.ValuePath.ToString().Replace(treeNodeName, string.Empty);
+               //string ruta = dato + TreeView1.SelectedNode.ValuePath.ToString().Replace(treeNodeName, string.Empty);
+               descargarArchivo(@ruta,treeNodeName);
             }
         }
 
-        private void descargarArchivo(string RutaArchivo, string nombreArchivo)
+
+        private void descargarArchivo(string rutaArchivo, string nombreArchivo)
         {
             try
             {
-                if (!Directory.Exists(RutaArchivo))
-                    Directory.CreateDirectory(RutaArchivo);
+                // 1. Decodificar posibles entidades HTML (acentos, ñ, etc.)
+                rutaArchivo = System.Web.HttpUtility.HtmlDecode(rutaArchivo);
+                nombreArchivo = System.Web.HttpUtility.HtmlDecode(nombreArchivo);
 
-                RutaArchivo = RutaArchivo + "/" + nombreArchivo;
-             
-                // Limpiamos la salida
+                // 2. Normalizar barras
+                rutaArchivo = rutaArchivo.Replace("/", "\\").TrimEnd('\\');
+
+                // 3. Unir correctamente
+                string rutaCompleta = Path.Combine(rutaArchivo, nombreArchivo);
+
+                // (Opcional: mostrar ruta para depurar)
+                Response.Write("<script>alert('Ruta buscada: " + rutaCompleta.Replace("\\", "\\\\") + "');</script>");
+
+                if (!File.Exists(rutaCompleta))
+                {
+                    Response.Write("<script>alert('El archivo no existe en: " + rutaCompleta.Replace("\\", "\\\\") + "');</script>");
+                    return;
+                }
+
+                // 4. Preparar la respuesta de descarga
                 Response.Clear();
-                // Con esto le decimos al browser que la salida sera descargable
+                Response.ClearHeaders();
                 Response.ContentType = "application/octet-stream";
-                // esta linea es opcional, en donde podemos cambiar el nombre del fichero a descargar (para que sea diferente al original)
-                string nombreAux = nombreArchivo.Replace(" ","_");
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreAux);
-                // Escribimos el fichero a enviar 
-                Response.WriteFile(RutaArchivo);
-                // volcamos el stream 
+
+                string nombreDescarga = Path.GetFileName(nombreArchivo);
+                string nombreCodificado = Uri.EscapeDataString(nombreDescarga);
+
+                Response.AddHeader("Content-Disposition",
+                    $"attachment; filename=\"{nombreDescarga}\"; filename*=UTF-8''{nombreCodificado}");
+
+                Response.TransmitFile(rutaCompleta);
                 Response.Flush();
-                // Enviamos todo el encabezado ahora
                 Response.End();
             }
-            catch (Exception)
+            catch (ThreadAbortException)
             {
-              //  Response.Write("<script type='text/javascript'> alert('ERROR: " + ex.Message + "') </script>");
+                // Ignorar: Response.End()
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
             }
         }
+
+
+
 
         public void buscarArchivo(string rutaArchivo, string Archivo)
         {
             DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("Archivo", typeof(string)), new DataColumn("Ruta", typeof(string)), new DataColumn("Subido al SGI", typeof(string)) });
+            dt.Columns.AddRange(new DataColumn[3] {
+        new DataColumn("Archivo", typeof(string)),
+        new DataColumn("Ruta", typeof(string)),
+        new DataColumn("Subido al SGI", typeof(string))
+    });
 
-            foreach (string d in Directory.GetDirectories(rutaArchivo)) {
-                foreach (string f in Directory.GetFiles(d, "*" + Archivo + "*"))
-                {
-                    String rutaF = f.Replace("\\","/");
-                    int index = rutaF.LastIndexOf('/');
-                    string archivoF = rutaF.Substring(index+1);
-                    FileInfo fileInfoServidor = new FileInfo(rutaF);
-                    string fechaModi = fileInfoServidor.LastWriteTime.Day + "/" + fileInfoServidor.LastWriteTime.Month + "/" + fileInfoServidor.LastWriteTime.Year;
-                    dt.Rows.Add(archivoF, rutaF,fechaModi);                   
-                }
-                buscarArchivo(d,Archivo);
-            }
-
-            foreach (string f in Directory.GetFiles(rutaArchivo, "*" + Archivo + "*"))
-            {
-                String rutaF = f.Replace("\\", "/");
-                int index = rutaF.LastIndexOf('/');
-                string archivoF = rutaF.Substring(index + 1);
-                FileInfo fileInfoServidor = new FileInfo(rutaF);
-                string fechaModi = fileInfoServidor.LastWriteTime.Day + "/" + fileInfoServidor.LastWriteTime.Month + "/" + fileInfoServidor.LastWriteTime.Year;
-                dt.Rows.Add(archivoF, rutaF, fechaModi);
-            }
+            buscarArchivoRecursivo(rutaArchivo, Archivo, dt);
 
             gv_tabla.DataSource = dt;
             gv_tabla.DataBind();
-            
         }
+
+        private void buscarArchivoRecursivo(string rutaActual, string Archivo, DataTable dt)
+        {
+            try
+            {
+                // Buscar archivos en la carpeta actual
+                foreach (string f in Directory.GetFiles(rutaActual, "*" + Archivo + "*"))
+                {
+                    string rutaF = f.Replace("\\", "/");
+                    string archivoF = Path.GetFileName(rutaF);
+                    FileInfo fileInfoServidor = new FileInfo(rutaF);
+                    string fechaModi = $"{fileInfoServidor.LastWriteTime:dd/MM/yyyy}";
+                    dt.Rows.Add(archivoF, rutaF, fechaModi);
+                }
+
+                // Recorrer las subcarpetas recursivamente
+                foreach (string d in Directory.GetDirectories(rutaActual))
+                {
+                    buscarArchivoRecursivo(d, Archivo, dt);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Ignorar carpetas sin permisos
+            }
+        }
+
+
 
         protected void gv_tabla_SelectedIndexChanged(object sender, EventArgs e)
         {
             string Name = gv_tabla.SelectedRow.Cells[1].Text;
             string ruta =gv_tabla.SelectedRow.Cells[2].Text.Replace(Name, string.Empty);
-            descargarArchivo(ruta, HttpUtility.HtmlDecode(Name));
+            descargarArchivo(@ruta, HttpUtility.HtmlDecode(Name));
         }
 
 
