@@ -131,11 +131,11 @@ namespace jycboliviaASP.net.Negocio
             return nrr.eliminarIngresobancarizacion( fecha,  cuentaBanco,  coduser,  montoRestar);
         }
 
-        internal DataTable get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, double SaldoInicial, string responsable)
+        internal DataTable get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, double SaldoInicial, string responsable, string moneda)
         {
            // return nrr.get_allrecibosIngresoVsEgreso( fechadesde,  fechahasta);
 
-            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, responsable);
+            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, responsable, moneda);
 
             DataTable TablaR = Datos.Tables[0];
             TablaR.Columns.Add("Saldo", typeof(double));
@@ -169,10 +169,10 @@ namespace jycboliviaASP.net.Negocio
             return nrr.get_SaldosInicialesResponsable(fechadesde, responsable);
         }
 
-        internal DataTable get_allrecibosIngresoVsEgreso2(string fechadesde, string fechahasta, double SaldoInicial, string nameResp)
+        internal DataTable get_allrecibosIngresoVsEgreso2(string fechadesde, string fechahasta, double SaldoInicial, string nameResp, string moneda)
         {
 
-            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, nameResp);
+            DataSet Datos = nrr.get_allrecibosIngresoVsEgreso(fechadesde, fechahasta, nameResp, moneda);
 
             DataTable TablaR = Datos.Tables[0];
             TablaR.Columns.Add("Saldo", typeof(double));
@@ -206,6 +206,8 @@ namespace jycboliviaASP.net.Negocio
             if (TablaR.Rows.Count == 0)
             {
                 DataRow filanueva = TablaR.NewRow();
+                filanueva["Fecha_Recibo"] = string.Empty;
+                filanueva["moneda"] = moneda;
                 filanueva["Saldo"] = SaldoInicial;
                 filanueva["SaldoInicial"] = SaldoInicial;
                 filanueva["fechadesde"] = fechadesde;

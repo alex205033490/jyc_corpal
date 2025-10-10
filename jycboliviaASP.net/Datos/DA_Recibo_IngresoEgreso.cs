@@ -306,7 +306,7 @@ namespace jycboliviaASP.net.Datos
             
         }
 
-        internal DataSet get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, string responsable)
+        internal DataSet get_allrecibosIngresoVsEgreso(string fechadesde, string fechahasta, string responsable, string moneda)
         {
             string consulta = "SELECT "+
                             " t1.codigo, "+
@@ -391,7 +391,8 @@ namespace jycboliviaASP.net.Datos
                             " ) AS t1, tb_responsable res "+
                             " where "+
                             " t1.codrespgra = res.codigo and "+
-                            " res.nombre = '"+responsable+"' "+
+                            " t1.moneda = '" + moneda + "' and " +
+                            " res.nombre = '" +responsable+"' "+
                             " order by t1.Fecha_Recibo asc";
             return ConecRes.consultaMySql(consulta);
         }
@@ -413,36 +414,8 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_SaldosInicialesResponsable(string fechadesde, string responsable)
         {
-          /*  string consulta = " SELECT "+
-                               " t1.codrespgra, "+
-                               " res.nombre as 'responsable', "+
-                               " SUM(t1.ingreso) AS 'Total_ingreso', "+
-                               " SUM(t1.egreso) AS 'Total_egreso', "+
-                               " SUM(t1.ingreso) - SUM(t1.egreso) AS 'SALDO' "+
-                               " FROM ( "+
-                               " SELECT "+
-                               " ri.codrespgra, "+
-                               " SUM(ri.monto) AS ingreso, "+
-                               " '0' AS egreso "+ 
-                               " FROM tbcorpal_reciboingreso ri "+
-                               " WHERE ri.estadoingreso = 1  and "+
-                               " fecharecibo < "+fechadesde+
-                               " GROUP BY ri.codrespgra "+
-                               " UNION ALL "+
-                               " SELECT "+
-                               " re.codrespgra, "+
-                               " '0' AS ingreso, "+
-                               " SUM(re.monto) AS egreso "+    
-                               " FROM tbcorpal_reciboegreso re "+
-                               " WHERE re.estadoegreso = 1 AND "+
-                               " re.fechaegreso < "+fechadesde+
-                               " GROUP BY re.codrespgra "+
-                               " ) AS t1, tb_responsable res "+
-                               " where "+
-                               " t1.codrespgra = res.codigo and "+      
-                               " res.nombre like '%"+responsable+"%' "+
-                               " GROUP BY t1.codrespgra"; */
-            string consulta = "SELECT "+
+      
+           /* string consulta = "SELECT "+
                                 " t1.codrespgra, "+
                                 " t1.nombre as 'responsable', "+
                                 " ifnull(t2.Total_ingreso,0) as 'Total_ingreso', "+ 
@@ -495,7 +468,65 @@ namespace jycboliviaASP.net.Datos
                                 " ) AS t2   ON t1.codrespgra = t2.codrespgra "+
                                 " WHERE "+
                                 " t1.nombre like '%"+responsable+"%' "+
-                                " GROUP BY t1.codrespgra";
+                                " GROUP BY t1.codrespgra";*/
+           string consulta = "SELECT " +
+                                "    t1.codrespgra, " +
+                                "    t1.nombre AS 'responsable', " +
+                                "    t1.moneda, " +
+                                "    IFNULL(t2.Total_ingreso, 0) AS 'Total_ingreso', " +
+                                "    IFNULL(t2.Total_egreso, 0) AS 'Total_egreso', " +
+                                "    IFNULL(t2.SALDO, 0) AS 'SALDO' " +
+                                "FROM ( " +
+                                "    SELECT " +
+                                "        ri.codrespgra, " +
+                                "        res.nombre, " +
+                                "        ri.moneda " +
+                                "    FROM tbcorpal_reciboingreso ri " +
+                                "    INNER JOIN tb_responsable res ON ri.codrespgra = res.codigo " +
+                                "    WHERE ri.estadoingreso = 1 " +
+                                "    GROUP BY ri.codrespgra, ri.moneda " +
+                                "    UNION ALL " +
+                                "    SELECT " +
+                                "        re.codrespgra, " +
+                                "        resp.nombre, " +
+                                "        re.moneda " +
+                                "    FROM tbcorpal_reciboegreso re " +
+                                "    INNER JOIN tb_responsable resp ON re.codrespgra = resp.codigo " +
+                                "    WHERE re.estadoegreso = 1 " +
+                                "    GROUP BY re.codrespgra, re.moneda " +
+                                ") AS t1 " +
+                                "LEFT JOIN ( " +
+                                "    SELECT " +
+                                "        tt.codrespgra, " +
+                                "        tt.moneda, " +
+                                "        SUM(tt.ingreso) AS 'Total_ingreso', " +
+                                "        SUM(tt.egreso) AS 'Total_egreso', " +
+                                "        SUM(tt.ingreso) - SUM(tt.egreso) AS 'SALDO' " +
+                                "    FROM ( " +
+                                "        SELECT " +
+                                "            ri.codrespgra, " +
+                                "            ri.moneda, " +
+                                "            SUM(ri.monto) AS ingreso, " +
+                                "            0 AS egreso " +
+                                "        FROM tbcorpal_reciboingreso ri " +
+                                "        WHERE ri.estadoingreso = 1 " +
+                                "          AND ri.fecharecibo < " + fechadesde + " " +
+                                "        GROUP BY ri.codrespgra, ri.moneda " +
+                                "        UNION ALL " +
+                                "        SELECT " +
+                                "            re.codrespgra, " +
+                                "            re.moneda, " +
+                                "            0 AS ingreso, " +
+                                "            SUM(re.monto) AS egreso " +
+                                "        FROM tbcorpal_reciboegreso re " +
+                                "        WHERE re.estadoegreso = 1 " +
+                                "          AND re.fechaegreso < " + fechadesde + " " +
+                                "        GROUP BY re.codrespgra, re.moneda " +
+                                "    ) AS tt " +
+                                "    GROUP BY tt.codrespgra, tt.moneda " +
+                                ") AS t2 ON t1.codrespgra = t2.codrespgra AND t1.moneda = t2.moneda " +
+                                "WHERE t1.nombre LIKE '%" + responsable + "%' " +
+                                "GROUP BY t1.codrespgra, t1.moneda";
 
             return ConecRes.consultaMySql(consulta);
         }

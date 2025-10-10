@@ -179,9 +179,10 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string codigoR = TablaR1.Rows[i][0].ToString();
                 string nameResp = TablaR1.Rows[i][1].ToString();
+                string moneda = TablaR1.Rows[i][2].ToString();
                 double SaldoInicial;
-                double.TryParse(TablaR1.Rows[i][4].ToString(), out SaldoInicial);
-                DataTable DSconsulta = nre.get_allrecibosIngresoVsEgreso2(fechadesde, fechahasta, SaldoInicial, nameResp);
+                double.TryParse(TablaR1.Rows[i][5].ToString(), out SaldoInicial);
+                DataTable DSconsulta = nre.get_allrecibosIngresoVsEgreso2(fechadesde, fechahasta, SaldoInicial, nameResp, moneda);
                                
                 foreach (DataRow fila in DSconsulta.Rows)
                 {
