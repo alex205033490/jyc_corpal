@@ -96,6 +96,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudproductos;
 
         /// <summary>
+        /// Control mn_solicitudesPedidoaCredito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudesPedidoaCredito;
+
+        /// <summary>
         /// Control mn_entregaSolicitudProductoACamion.
         /// </summary>
         /// <remarks>

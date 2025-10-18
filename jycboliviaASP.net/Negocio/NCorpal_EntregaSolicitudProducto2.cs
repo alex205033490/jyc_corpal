@@ -131,6 +131,16 @@ namespace jycboliviaASP.net.Negocio
             return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, coduser, codVehiculo);
         }
 
+        /* SOLICITUDES PEDIDOS A CREDITO */
+        internal DataSet get_listaPedidosACredito()
+        {
+            return datos.get_listaPedidosACredito();
+
+        }
+        internal DataSet get_listDetallePedidoaCredito(int codigo)
+        {
+            return datos.get_listDetallePedidoaCredito(codigo);
+        }
 
 
     }

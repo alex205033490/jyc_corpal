@@ -457,6 +457,58 @@ namespace jycboliviaASP.net.Datos
         }
 
 
+        /************   PEDIDO A CREDITO   ************/
+        internal DataSet get_listaPedidosACredito()
+        {
+            NA_VariablesGlobales negocio = new NA_VariablesGlobales();
+            string consultaStock = negocio.get_consultaStockProductosActual();
+
+            string consulta = "SELECT " +
+                "sep.codigo, " +
+                "CONCAT(date_format(sep.fechaGRA, '%d-%m-%Y'), ' - ', TIME_FORMAT(sep.horaGRA, '%H:%i:%s')) AS 'fechaHoraGRA', " +
+                "sep.nroboleta, " +
+                "sep.personalsolicitud, " +
+                "cc.tiendaname, " +
+                "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', " +
+                "sep.horaentrega " +
+                "from tbcorpal_solicitudentregaproducto sep " +
+                "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
+                "WHERE sep.estadosolicitud = 'Abierto' " +
+                "and sep.cod_modcobranza = 2 " +
+                "and sep.estado = true " +
+                "order by sep.fechaGRA asc, sep.nroboleta asc";
+
+            return conexion.consultaMySql(consulta);
+        }
+
+        internal DataSet get_listDetallePedidoaCredito(int codigo)
+        {
+            try
+            {
+                string consulta = @"SELECT  
+                            sep.nroboleta,  
+                            p.producto,  
+                            dsp.cant as 'cantSolicitada' 
+                            from tbcorpal_solicitudentregaproducto sep 
+                            left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud 
+                            left join tbcorpal_producto p ON dsp.codproducto = p.codigo 
+                            WHERE sep.estadosolicitud = 'Abierto' 
+                            and sep.cod_modcobranza = 2 
+                            and sep.estado = true 
+                            and sep.`codigo` = @codigo 
+                            order by sep.fechaGRA asc, sep.nroboleta asc;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codigo", codigo)
+                };
+                    return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta de datos. Detalle de solicitud." + ex.Message);
+            }
+        }
 
     }
 }

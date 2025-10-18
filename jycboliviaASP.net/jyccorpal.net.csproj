@@ -224,6 +224,7 @@
     <Content Include="fonts\JosefinSans\OFL.txt" />
     <Content Include="fonts\source-sans-pro\OFL.txt" />
     <Content Include="fonts\ubuntu\UFL.txt" />
+    <Content Include="Global.asax" />
     <Content Include="jquery\bootstrap\css\bootstrap.css" />
     <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
     <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -593,6 +594,7 @@
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
     <Content Include="Presentacion\FCorpal_VaciadoUponPedido.aspx" />
@@ -999,6 +1001,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="NegocioApi\J_Compras.cs" />
     <Compile Include="NegocioApi\J_Ventas.cs" />
@@ -1412,6 +1417,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudesPedidoaCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudesPedidoaCredito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.cs">
       <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>
