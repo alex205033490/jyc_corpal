@@ -48,6 +48,8 @@ namespace jycboliviaASP.net.Datos
                 "and sep.estado = true " +
                 "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
                 "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
+                "and (sep.cod_modcobranza !=2 " +
+                "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1)) "+
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 
             return conexion.consultaMySql(consulta);

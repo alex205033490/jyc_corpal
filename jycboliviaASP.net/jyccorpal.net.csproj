@@ -224,7 +224,6 @@
     <Content Include="fonts\JosefinSans\OFL.txt" />
     <Content Include="fonts\source-sans-pro\OFL.txt" />
     <Content Include="fonts\ubuntu\UFL.txt" />
-    <Content Include="Global.asax" />
     <Content Include="jquery\bootstrap\css\bootstrap.css" />
     <Content Include="jquery\bootstrap\css\bootstrap.min.css" />
     <Content Include="jquery\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -1001,9 +1000,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="NegocioApi\J_Compras.cs" />
     <Compile Include="NegocioApi\J_Ventas.cs" />
