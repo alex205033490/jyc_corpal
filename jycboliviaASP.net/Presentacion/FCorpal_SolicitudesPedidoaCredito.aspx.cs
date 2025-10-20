@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MaterialDesignThemes.Wpf.Converters;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,6 +26,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 ListaSolicitudesPedidoCredito();
                 gv_listProductos.Visible=false;
+                getResponsable();
 
             }
            
@@ -39,6 +41,30 @@ namespace jycboliviaASP.net.Presentacion
             DataSet datos = nego.get_listaPedidosACredito();
             gv_solicitudesProductos.DataSource = datos;
             gv_solicitudesProductos.DataBind();
+        }
+
+        /* DATOS Responsable */
+        private void getResponsable()
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usu = Session["NameUser"].ToString();
+            string pass = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usu, pass);
+
+            DataSet ds = Nresp.get_responsable(codUser);
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+                tx_responsable.Text = row["nombre"].ToString();
+            }
+            else
+            {
+                tx_responsable.Text = "";
+            }
+
+            
+
         }
 
         private bool tienePermiso(int permiso)
@@ -122,6 +148,73 @@ namespace jycboliviaASP.net.Presentacion
         {
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
+        protected void btn_registrarAprobacion_Click(object sender, EventArgs e)
+        {
+            bool result = registrarAprobacionCredito();
+            if (result)
+            {
+                limpiarForm();
+                showalert("Solicitud Aprobada. Ok");
+            }
+            else
+            {
+                showalert("La solicitud no pudo ser aprobada");
+            }
+        }
+
+        private void limpiarForm()
+        {
+            ListaSolicitudesPedidoCredito();
+            gv_listProductos.DataSource = null;
+            gv_listProductos.DataBind();
+            gv_listProductos.Visible = false;
+        }
+
+        private bool registrarAprobacionCredito()
+        {
+            try
+            {
+                NCorpal_EntregaSolicitudProducto2 Nent = new NCorpal_EntregaSolicitudProducto2();
+                NA_Responsables Nresp = new NA_Responsables();
+
+                string usu = Session["NameUser"].ToString();
+                string pass = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usu, pass);
+
+                if(codUser != 11 && codUser != 5)
+                {
+                    showalert("No tienes permisos para aprobar solicitudes");
+                    return false;
+                }
+
+                foreach(GridViewRow row in gv_solicitudesProductos.Rows)
+                {
+                    CheckBox chk = (CheckBox)row.FindControl("chkSolicitud");
+
+                    if(chk != null && chk.Checked)
+                    {
+                        int codSol = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex]["codigo"]);
+                        string nroBoleta = gv_solicitudesProductos.DataKeys[row.RowIndex]["nroboleta"].ToString();
+
+                        bool result = Nent.POST_aprobacionSolCredito(codUser, codSol, nroBoleta);
+
+                        return result;
+                    }
+                }
+                return false;
+            }
+            catch(Exception ex)
+            {
+                showalert("Error en el metodo de aprobación de credito. " + ex.Message);
+                return false;
+            }
+        }
+
+        protected void bt_limpiar_Click(object sender, EventArgs e)
+        {
+            limpiarForm();
         }
     }
 }

@@ -80,7 +80,7 @@
                         <div class="container-gvRegistros table-responsive mb-2 col-lg-8" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                             <asp:GridView ID="gv_solicitudesProductos" runat="server"
                                 CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
-                                Style="background-color: white !important;" DataKeyNames="codigo">
+                                Style="background-color: white !important;" DataKeyNames="codigo, nroboleta">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Seleccionar">
                                         <ItemTemplate>
@@ -108,7 +108,7 @@
                                 Style="background-color: white !important;">
                                 <Columns>
                                     <asp:BoundField DataField="nroboleta" HeaderText="Nro de Boleta" />
-                                    <asp:BoundField DataField="producto" HeaderText="producto" HtmlEncode="false" />
+                                    <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
                                     <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad Solicitada" />
                                 </Columns>
                             </asp:GridView>
@@ -122,14 +122,14 @@
                         <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
                             <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
-                                <asp:Label runat="server" Font-Size="Small" Text="Encargado:"></asp:Label>
-                                <asp:TextBox ID="tx_entregoSolicitud" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
+                                <asp:Label runat="server" Font-Size="Small" Text="Responsable:"></asp:Label>
+                                <asp:TextBox ID="tx_responsable" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
                             </div>
 
 
                             <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-8">
-                                <asp:Button ID="btn_registrarDespacho" runat="server" CssClass="btn btn-success" Text="Registrar Despacho"  />
-                                <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar"  />
+                                <asp:Button ID="btn_registrarAprobacion" runat="server" CssClass="btn btn-success" Text="Aprobar Credito" OnClick="btn_registrarAprobacion_Click" />
+                                <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                             </div>
                         </div>
                     </div>

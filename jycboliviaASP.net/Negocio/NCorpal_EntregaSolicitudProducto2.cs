@@ -142,6 +142,10 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_listDetallePedidoaCredito(codigo);
         }
 
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta)
+        {
+            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta);
+        }
 
     }
 }

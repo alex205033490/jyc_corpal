@@ -42,22 +42,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_listProductos;
 
         /// <summary>
-        /// Control tx_entregoSolicitud.
+        /// Control tx_responsable.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_entregoSolicitud;
+        protected global::System.Web.UI.WebControls.TextBox tx_responsable;
 
         /// <summary>
-        /// Control btn_registrarDespacho.
+        /// Control btn_registrarAprobacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_registrarDespacho;
+        protected global::System.Web.UI.WebControls.Button btn_registrarAprobacion;
 
         /// <summary>
         /// Control bt_limpiar.
