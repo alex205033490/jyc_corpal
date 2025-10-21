@@ -14,7 +14,6 @@
             overflow-y: auto;
             margin: 10px;
             padding: 0px;
-            width: 700px;
         }
         .container-gvListProductos{
             height: 250px;
@@ -72,17 +71,17 @@
                 <ContentTemplate>
 
                     <div class="container-lista1 row col-lg-12">
-                        <div>
+                        <div class="container_title">
                             <h3>| LISTA DE PEDIDOS AL CRÉDITO|
                             </h3>
                         </div>
                         <!-- LISTA DE SOLICITUDES DE PRODUCTO -->
-                        <div class="container-gvRegistros table-responsive mb-2 col-lg-8" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
+                        <div class="container-gvRegistros table-responsive mb-2 col-lg-7 col-md-7 col-11" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                             <asp:GridView ID="gv_solicitudesProductos" runat="server"
                                 CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
                                 Style="background-color: white !important;" DataKeyNames="codigo, nroboleta">
                                 <Columns>
-                                    <asp:TemplateField HeaderText="Seleccionar">
+                                    <asp:TemplateField HeaderText="Accion">
                                         <ItemTemplate>
                                             <asp:CheckBox ID="chkSolicitud" runat="server" CssClass="chkSelect" AutoPostBack="true" OnCheckedChanged="chkSolicitud_CheckedChanged"/>
                                         </ItemTemplate>
@@ -102,7 +101,7 @@
 
 
                         <!--  Lista productos  -->
-                        <div class="container-gvListProductos table-responsive mb-2 col-lg-4" data-clientid="<%= gv_listProductos.ClientID %>">
+                        <div class="container-gvListProductos table-responsive mb-2 col-lg-4 col-md-4 col-8" data-clientid="<%= gv_listProductos.ClientID %>">
                             <asp:GridView ID="gv_listProductos" runat="server"
                                 CssClass="table table-striped sticky-table gv_listProductos" AutoGenerateColumns="false"
                                 Style="background-color: white !important;">
@@ -121,13 +120,13 @@
 
                         <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
-                            <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
+                            <div class="mb-3 col-lg-3 col-md-4 col-sm-5 col-6">
                                 <asp:Label runat="server" Font-Size="Small" Text="Responsable:"></asp:Label>
                                 <asp:TextBox ID="tx_responsable" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
                             </div>
 
 
-                            <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-8">
+                            <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-6 col-5">
                                 <asp:Button ID="btn_registrarAprobacion" runat="server" CssClass="btn btn-success" Text="Aprobar Credito" OnClick="btn_registrarAprobacion_Click" />
                                 <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                             </div>
