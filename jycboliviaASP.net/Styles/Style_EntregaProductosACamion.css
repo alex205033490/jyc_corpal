@@ -80,9 +80,9 @@
     overflow: auto;
 }
 
-.form-control:focus, .form-select:focus{
-    border: 2px solid black !important;
-    box-shadow: 0 0 7px 2px black !important;
+.form-control:focus, .form-select:focus {
+    border: 1px solid black !important;
+    box-shadow: 0 0 5px 1px black !important;
 }
 
 .btn-success:hover{
@@ -175,6 +175,6 @@ table .chkSelect input[type="checkbox"] {
     background-color: darkorange;
 
 }
-.card{
-    box-shadow: 2px 2px 10px 5px black;
+.card {
+    box-shadow: 0px 0px 7px 1px black;
 }

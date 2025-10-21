@@ -393,6 +393,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_activosjyc;
 
         /// <summary>
+        /// Control mn_cargaDocsIndividuales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_cargaDocsIndividuales;
+
+        /// <summary>
         /// Control mn_vaciadoUponPedido.
         /// </summary>
         /// <remarks>

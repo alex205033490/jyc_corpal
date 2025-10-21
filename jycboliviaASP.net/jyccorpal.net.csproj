@@ -572,6 +572,7 @@
     <Content Include="Presentacion\FCorpal_APIProductos.aspx" />
     <Content Include="Presentacion\FCorpal_APIVentas.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
+    <Content Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaReceta.aspx" />
     <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
@@ -1259,6 +1260,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.designer.cs">
       <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx.cs">
+      <DependentUpon>FCorpal_CargarDocsIndividuales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx.designer.cs">
+      <DependentUpon>FCorpal_CargarDocsIndividuales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>

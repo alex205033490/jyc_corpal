@@ -157,6 +157,7 @@
                 <li><a href="../Presentacion/FCorpal_ConsultaSGI.aspx" id="mn_consultaActividades" runat="server"><i class="bi bi-circle"></i><span>Consulta SGI Actividades</span></a></li>                               
                 <li><a href="../Presentacion/FCorpal_agendanegociacion.aspx" id="mn_agendaTrabajo" runat="server"><i class="bi bi-circle"></i><span>Agenda de Trabajo</span></a></li>                                   
                 <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><i class="bi bi-circle"></i><span>Activos JYC</span></a></li>                       
+                <li><a href="../Presentacion/FCorpal_CargarDocsIndividuales.aspx" id="mn_cargaDocsIndividuales" runat="server"><i class="bi bi-circle"></i><span>Carga/Descarga Documentos Individuales</span></a></li>                       
             </ul>
         </li><!-- End Tables Nav -->
 
