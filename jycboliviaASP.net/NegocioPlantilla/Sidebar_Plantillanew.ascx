@@ -66,6 +66,8 @@
                 <li role="separator" class="divider"></li>                                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
+                <li><a href="../Presentacion/FCorpal_ConsultaStockVendedores.aspx" id="mn_ConsultaStockVendedores" runat="server"><i class="bi bi-circle"></i><span>Control de Stock por Vendedor</span></a></li>
+
           </ul>
         </li><!-- End Forms Nav -->
 

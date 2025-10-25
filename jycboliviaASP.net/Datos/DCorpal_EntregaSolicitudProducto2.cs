@@ -49,7 +49,7 @@ namespace jycboliviaASP.net.Datos
                 "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
                 "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
                 "and (sep.cod_modcobranza !=2 " +
-                "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1)) "+
+                "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) "+
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 
             return conexion.consultaMySql(consulta);
@@ -538,6 +538,38 @@ namespace jycboliviaASP.net.Datos
             catch (Exception ex)
             {
                 throw new Exception("Hubo un error en la consulta de aprobación de credito." + ex.Message);
+            }
+        }
+
+        internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    sol.`codpersolicitante`
+                                    from tbcorpal_solicitudentregaproducto sol
+                                    where sol.`estado` = 1
+                                    and sol.`codigo` = @cod
+                                    ";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", cod)
+
+                };
+                DataSet ds = conexion.consultaMySqlParametros(consulta, parametros);
+
+                if(ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToInt32(ds.Tables[0].Rows[0]["codpersolicitante"]);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta al obtener el codVendedor. " + ex.Message);
             }
         }
 

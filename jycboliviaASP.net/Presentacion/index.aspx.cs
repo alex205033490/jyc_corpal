@@ -11,6 +11,7 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Title = Session["BaseDatos"].ToString();
 
         }
 

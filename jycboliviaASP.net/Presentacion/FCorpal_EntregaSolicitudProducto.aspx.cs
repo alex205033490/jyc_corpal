@@ -95,7 +95,6 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-
        
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {
@@ -139,69 +138,7 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Seleccionar Entrega') </script>");
         }
-     
-        /*
-        private void RegistrarVentaAut2(int codigoSolicitud, int codigoCliente, string solicitante, string fechaentrega)
-        {
-            try
-            {
-                int codigoMetodoPago = 1;
-                decimal montoTotal = 0;
-                decimal montoTotalMoneda = montoTotal;
-                int codigoMoneda = 1;
-                decimal tipoCambio = decimal.Parse("6,96");
-                decimal descuentoAdicional = decimal.Parse("0");
-                string leyendaF = "leyendaNingun";
-                int factura = 0;
-
-                NA_Responsables Nresp = new NA_Responsables();
-                NCorpal_Cliente negocioCLiente = new NCorpal_Cliente();
-                DataSet tuplaCLI = negocioCLiente.get_ClienteCodigo(codigoCliente);
-
-                int codSolicitante = Nresp.getCodigo_NombreResponsable(solicitante);
-                // Datos Cliente
-                string tiendaName = "", tiendaCorreoCliente = "", municipio = "", tiendaTelefono = "", tiendaDir = "", tiendaNombreRazonSocial = "", numeroDocumento = "";
-                string numeroFactura = "";
-                
-                if (tuplaCLI.Tables[0].Rows.Count > 0)
-                {
-                    tiendaName = tuplaCLI.Tables[0].Rows[0][1].ToString();
-                    tiendaDir = tuplaCLI.Tables[0].Rows[0][2].ToString();
-                    tiendaTelefono = tuplaCLI.Tables[0].Rows[0][3].ToString();
-                    municipio = tuplaCLI.Tables[0].Rows[0][4].ToString();
-                    tiendaCorreoCliente = tuplaCLI.Tables[0].Rows[0][11].ToString();
-                    tiendaNombreRazonSocial = tuplaCLI.Tables[0].Rows[0][12].ToString();
-                    numeroDocumento = tuplaCLI.Tables[0].Rows[0][13].ToString();
-                }
-                NCorpal_Venta negocioVenta = new NCorpal_Venta();
-                bool resultado = negocioVenta.crearVentas3(codigoCliente, tiendaName, codigoSolicitud, tiendaCorreoCliente, municipio, tiendaTelefono, numeroFactura, tiendaDir,
-                    tiendaNombreRazonSocial, numeroDocumento, codigoMetodoPago, montoTotal, codigoMoneda, tipoCambio, montoTotalMoneda, 
-                    descuentoAdicional, leyendaF, codSolicitante, solicitante, factura, fechaentrega, codigoSolicitud);
-                if (!resultado)
-                {
-                    showalert("Error al registrar la venta.");
-                    return;
-                }
-
-                bool resultadoProductosVenta = negocioVenta.insertarTodoslosProductosAVenta3(codigoSolicitud);
-               
-                if (resultadoProductosVenta)
-                {
-                    //showalert("Productos insertados en la venta ");
-                }
-                else
-                {
-                    showalert($"error al insertar los productos: {codigoSolicitud}");
-                }
-                
-            }
-            catch( Exception ex )
-            {
-                showalert($"Error al insertar la venta. {ex.Message}");
-            }
-        }*/
-      
-
+   
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -289,16 +226,34 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+                if (!ValidarForm())
+                    return;
+
                 int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
                 string detalle = txt_detalleRegistro.Text.Trim();
                 int codResponsable = obtenerCodResponsable();
 
-                if(dd_listVehiculo.SelectedIndex == 0)
+                int codDespacho = RegistrarDespachoPrincipal(detalle, codVehiculo, codResponsable);
+                if(codDespacho <= 0)
                 {
-                    showalert("Por favor seleccione un vehiculo válido");
+                    showalert("Error al registrar el despacho principal.");
                     return;
-
                 }
+
+                if (!RegistrarDetalleDespacho(codDespacho))
+                {
+                    showalert("Error al registrar el detalle del despacho.");
+                    return;
+                }
+
+                ProcesarSolicitudesSeleccionadas(codVehiculo);
+                FinalizarRegistro(codVehiculo);
+                /*
+                int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
+                string detalle = txt_detalleRegistro.Text.Trim();
+                int codResponsable = obtenerCodResponsable();
+
+                ValidarForm();
 
                 int codDespacho = CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
                 if (codDespacho <= 0)
@@ -321,9 +276,23 @@ namespace jycboliviaASP.net.Presentacion
                         ProcesarRegistroSolicitudPedido123(row, codVehiculo);
 
                         int codigoSolicitud = int.Parse(row.Cells[1].Text);
+                        int codProducto = int.Parse(row.Cells[3].Text);
+                        string producto = row.Cells[4].Text;
                         int codigoCliente = int.Parse(row.Cells[11].Text);
                         string solicitante = row.Cells[10].Text;
                         string fechaEntrega = aFecha2(row.Cells[9].Text);
+
+                        NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+                        int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codigoSolicitud);
+
+                        TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                        int cantidad = 0;
+                        if (!string.IsNullOrEmpty(txt_cantidad.Text))
+                        {
+                            int.TryParse(txt_cantidad.Text, out cantidad);
+                        }
+
+                        RegistrarIngresoAlmacenDinamico(codigoSolicitud, codProducto, producto, cantidad, codVendedor);
 
                         RegistrarVentaConDetalle123(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
                     }
@@ -335,6 +304,7 @@ namespace jycboliviaASP.net.Presentacion
                 Session["codigoDespacho"] = codDespacho;
                 Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";                
                 Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+                */
             }
             catch(Exception ex)
             {
@@ -342,9 +312,61 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        /* Validar Formulario */
+        private bool ValidarForm()
+        {
+            if (dd_listVehiculo.SelectedIndex == 0)
+            {
+                showalert("Por favor seleccione un vehículo válido.");
+                return false;
+            }
+            return true;
+        }
+        private int RegistrarDespachoPrincipal(string detalle, int codVehiculo, int codResponsable) 
+        {
+            return CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
+        }
+        private void ProcesarSolicitudesSeleccionadas(int codVehiculo)
+        {
+            foreach(GridViewRow row in gv_solicitudesProductos.Rows)
+            {
+                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                if (chk == null || !chk.Checked)
+                    continue;
+
+                ProcesarRegistroSolicitudPedido123(row, codVehiculo);
+
+                int codSolicitud = int.Parse(row.Cells[1].Text);
+                int codProducto = int.Parse(row.Cells[3].Text);
+                string producto = row.Cells[4].Text;
+                int codCliente = int.Parse(row.Cells[11].Text);
+                string solicitante = row.Cells[10].Text;
+                string fechaEntrega = aFecha2(row.Cells[9].Text);
+
+                NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+                int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codSolicitud);
+
+                TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
+                int cantidad = 0;
+                int.TryParse(txt_cantidad.Text, out cantidad);
+
+                RegistrarIngresoAlmacenDinamico(codVendedor, codProducto, producto, cantidad);
+                RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega);
+            }
+        }
+        private void FinalizarRegistro(int codDespacho)
+        {
+            limpiarForm();
+            GET_MostrarSolicitudProductos("Abierto");
+
+            Session["codigoDespacho"] = codDespacho;
+            Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";
+
+            Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+        }
 
         /*PARTE 2 AUTOCORR*/
-        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
+        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente,string solicitante, string fechaEntrega)
         {
             try
             {
@@ -366,7 +388,7 @@ namespace jycboliviaASP.net.Presentacion
                 string documento = row["facturar_nit"].ToString();
                 decimal tipoCambio = decimal.Parse("6,96");
 
-                int codResponsable = obtenerCodResponsable();
+                int codResponsable = obtenerCodVendedorSolicitud(codigoSolicitud);
 
                 NCorpal_Venta nventa = new NCorpal_Venta();
 
@@ -389,9 +411,7 @@ namespace jycboliviaASP.net.Presentacion
                     {
                         showalert($"Error al insertar productos de la venta {codigoSolicitud}");
                     }
-                    
                 }
-
             }
             catch(Exception ex)
             {
@@ -471,18 +491,25 @@ namespace jycboliviaASP.net.Presentacion
             return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
         }
       
-
-
-
-
+        /* Registro stock dinamico por vendedor*/
+        private bool RegistrarIngresoAlmacenDinamico(int codVendedor, int codProducto, string producto,
+            int cantidad)
+        {
+            try
+            {
+                NCorpal_StockVendedores neg = new NCorpal_StockVendedores();
+                neg.POST_registroEntradaStock(codVendedor, codProducto, producto, cantidad);
+                return true;
+            } catch(Exception ex)
+            {
+                showalert("Error inesperado en el metodo RegistroIngresoAlmacen. " + ex.Message);
+                return false;
+            }
+        }
 
 
         /*FIN*/
-
-
-
-
-        /*  REGISTRAR VENTA */
+        /*******************************  REGISTRAR VENTA *******************************/
         private void registrarVentaAut(int codigoSolicitud, int codigoCliente, string solicitante, string fechaEntrega)
         {
             try
@@ -662,6 +689,21 @@ namespace jycboliviaASP.net.Presentacion
                 return 0;
             }
         }
+        private int obtenerCodVendedorSolicitud(int codSolicitud)
+        {
+            try
+            {
+                NCorpal_EntregaSolicitudProducto2 Nentrega = new NCorpal_EntregaSolicitudProducto2();
+                int codVendedor = Nentrega.ObtenerCodVendedor_EntregaSolProductos(codSolicitud);
+                return codVendedor;
+            }
+            catch(Exception ex)
+            {
+                showalert("Error al obtener el codigo del vendedor. " + ex.Message);
+                return 0;
+            }
+        }
+
         // cargar datos (det Car) en gridview
         protected void dd_listVehiculo_SelectedIndexChanged(object sender, EventArgs e)
         {
