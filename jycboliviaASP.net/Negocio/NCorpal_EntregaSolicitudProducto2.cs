@@ -151,5 +151,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.ObtenerCodVendedor_EntregaSolProductos(cod);
         }
+
+        internal int Obtener_codMetodoPagoSolicitud(int cod)
+        {
+            return datos.Obtener_codMetodoPagoSolicitud(cod);
+        }
     }
 }

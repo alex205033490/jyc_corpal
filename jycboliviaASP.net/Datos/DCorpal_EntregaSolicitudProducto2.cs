@@ -573,5 +573,33 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal int Obtener_codMetodoPagoSolicitud(int cod)
+        {
+            try
+            {
+                string consulta = @"select sol.cod_modcobranza from 
+                                tbcorpal_solicitudentregaproducto sol 
+                                where sol.estado = 1 and sol.codigo = @cod";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", cod)
+                };
+                DataSet ds = conexion.consultaMySqlParametros(consulta, parametros);
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return Convert.ToInt32(ds.Tables[0].Rows[0]["cod_modcobranza"]);
+                }
+                else
+                {
+                    return 0;
+                }
+            } catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta al obtener el codigoMetodoPago. " + ex.Message);
+            }
+        }
+
     }
 }

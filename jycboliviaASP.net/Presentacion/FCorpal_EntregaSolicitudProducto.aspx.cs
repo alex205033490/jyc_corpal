@@ -345,13 +345,19 @@ namespace jycboliviaASP.net.Presentacion
 
                 NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
                 int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codSolicitud);
+                int codMetPagoSol = nego.Obtener_codMetodoPagoSolicitud(codSolicitud);
 
                 TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
                 int cantidad = 0;
                 int.TryParse(txt_cantidad.Text, out cantidad);
 
-                RegistrarIngresoAlmacenDinamico(codVendedor, codProducto, producto, cantidad);
-                RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega);
+                bool RegistroIngresoAlmacen = RegistrarIngresoAlmacenDinamico(codVendedor, codProducto, producto, cantidad);
+                if (!RegistroIngresoAlmacen)
+                {
+                    showalert("No se pudo ingresar el stock al almacén. ");
+                    return;
+                }
+                RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
             }
         }
         private void FinalizarRegistro(int codDespacho)
@@ -366,7 +372,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         /*PARTE 2 AUTOCORR*/
-        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente,string solicitante, string fechaEntrega)
+        private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente,string solicitante, string fechaEntrega, int codMetPago)
         {
             try
             {
@@ -395,7 +401,7 @@ namespace jycboliviaASP.net.Presentacion
                 bool ventaCreada = nventa.crearVentas3(
                     codigoCliente, tiendaName, codigoSolicitud, correo, municipio, telefono,
                     "", direccion, razonSocial, documento,
-                    1, 0, 1, tipoCambio, 0, 0, "LeyendaNinguna",
+                    codMetPago, 0, 1, tipoCambio, 0, 0, "LeyendaNinguna",
                     codResponsable, solicitante, 0, fechaEntrega, codigoSolicitud);
 
                 if (!ventaCreada)
