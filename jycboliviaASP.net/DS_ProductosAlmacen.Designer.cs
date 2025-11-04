@@ -2661,6 +2661,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columncodigosimec;
             
+            private global::System.Data.DataColumn columnStockParcialAlmacen;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_StockProducctoDataTable() {
@@ -2776,6 +2778,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn StockParcialAlmacenColumn {
+                get {
+                    return this.columnStockParcialAlmacen;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2811,7 +2821,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_StockProducctoRow AddDS_StockProducctoRow(string codigo, string producto, string medida, string Ingreso1, string Salida1, string StockAlmacen, string StockPackFerial, string codupon, string codumupon, string codigosimec) {
+            public DS_StockProducctoRow AddDS_StockProducctoRow(string codigo, string producto, string medida, string Ingreso1, string Salida1, string StockAlmacen, string StockPackFerial, string codupon, string codumupon, string codigosimec, string StockParcialAlmacen) {
                 DS_StockProducctoRow rowDS_StockProducctoRow = ((DS_StockProducctoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -2823,7 +2833,8 @@ namespace jycboliviaASP.net {
                         StockPackFerial,
                         codupon,
                         codumupon,
-                        codigosimec};
+                        codigosimec,
+                        StockParcialAlmacen};
                 rowDS_StockProducctoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_StockProducctoRow);
                 return rowDS_StockProducctoRow;
@@ -2856,6 +2867,7 @@ namespace jycboliviaASP.net {
                 this.columncodupon = base.Columns["codupon"];
                 this.columncodumupon = base.Columns["codumupon"];
                 this.columncodigosimec = base.Columns["codigosimec"];
+                this.columnStockParcialAlmacen = base.Columns["StockParcialAlmacen"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2881,6 +2893,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columncodumupon);
                 this.columncodigosimec = new global::System.Data.DataColumn("codigosimec", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncodigosimec);
+                this.columnStockParcialAlmacen = new global::System.Data.DataColumn("StockParcialAlmacen", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStockParcialAlmacen);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7972,6 +7986,23 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string StockParcialAlmacen {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_StockProduccto.StockParcialAlmacenColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'StockParcialAlmacen\' de la tabla \'DS_StockProduccto\' es D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_StockProduccto.StockParcialAlmacenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_StockProduccto.codigoColumn);
             }
@@ -8088,6 +8119,18 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetcodigosimecNull() {
                 this[this.tableDS_StockProduccto.codigosimecColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsStockParcialAlmacenNull() {
+                return this.IsNull(this.tableDS_StockProduccto.StockParcialAlmacenColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetStockParcialAlmacenNull() {
+                this[this.tableDS_StockProduccto.StockParcialAlmacenColumn] = global::System.Convert.DBNull;
             }
         }
         

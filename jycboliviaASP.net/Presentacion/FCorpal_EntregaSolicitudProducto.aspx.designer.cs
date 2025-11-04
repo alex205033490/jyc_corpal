@@ -42,22 +42,31 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_despachoProductos;
 
         /// <summary>
-        /// Control tx_entregoSolicitud.
+        /// Control hf_codChofer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_entregoSolicitud;
+        protected global::System.Web.UI.WebControls.HiddenField hf_codChofer;
 
         /// <summary>
-        /// Control Label1.
+        /// Control tx_chofer.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.TextBox tx_chofer;
+
+        /// <summary>
+        /// Control tx_chofer_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_chofer_AutoCompleteExtender;
 
         /// <summary>
         /// Control dd_listVehiculo.

@@ -126,9 +126,17 @@ namespace jycboliviaASP.net.Negocio
         }
 
         /* POST DETALLE SOLICITUD PEDIDO */
-        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, int coduser, int codVehiculo)
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, 
+                                                            int coduser, int codVehiculo, int codChofer, string nomChofer)
         {
-            return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, coduser, codVehiculo);
+            try
+            {
+                return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, 
+                                                                coduser, codVehiculo, codChofer, nomChofer);
+            } catch(Exception ex)
+            {
+                throw new Exception("Error inesperado: " + ex.Message);
+            }
         }
 
         /* SOLICITUDES PEDIDOS A CREDITO */

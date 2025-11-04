@@ -36,7 +36,16 @@
                 table.prepend("<thead>" + table.find("tr:first").html() + "</thead>");
                 table.find("tr:first").remove();
             }
-        })
+        });
+
+        function onResponsableSelected(sender, e) {
+            const valor = e.get_value();
+            const partes = valor.split(" - ");
+            if (partes.length >= 2) {
+                document.getElementById("<%= hf_codChofer.ClientID %>").value = partes[0];
+                document.getElementById("<%= tx_chofer.ClientID %>").value = partes[1];
+            }
+        }
 
 
 
@@ -75,6 +84,8 @@
                             <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" HtmlEncode="false" />
 
                             <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
+                            
+                            <asp:BoundField DataField="StockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
 
                             <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad Solicitada" />
 
@@ -144,16 +155,24 @@
                 <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
                     <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
-                        <asp:Label runat="server" Font-Size="Small" Text="Encargado de entrega"></asp:Label>
-                        <asp:TextBox ID="tx_entregoSolicitud" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
-                        <asp:Label ID="Label1" runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
+                        <asp:HiddenField ID="hf_codChofer" runat="server"/>
+                        
+                        <asp:Label runat="server" Font-Size="Small" Text="Chofer"></asp:Label>
+                        <asp:TextBox ID="tx_chofer" runat="server" CssClass="form-control mb-2" Font-Size="Small"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="tx_chofer_AutoCompleteExtender" runat="server"
+                             TargetControlID="tx_chofer" CompletionSetCount="12" MinimumPrefixLength="2"
+                             ServiceMethod="getListResponsable" UseContextKey="true" CompletionListCssClass="CompletionList" 
+                             CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
+                             CompletionInterval="10" OnClientItemSelected="onResponsableSelected"></asp:AutoCompleteExtender>
+
+
+                        <asp:Label runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
                         <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select ddVehiculo" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                         </asp:DropDownList>
                         <asp:UpdatePanel ID="updatePanelGVdetCar" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <asp:GridView ID="gv_detCar" runat="server" CssClass="table table-striped gv_detCar" AutoGenerateColumns="false">
                                     <Columns>
-                                        <asp:BoundField DataField="conductor" HeaderText="Conductor" />
                                         <asp:BoundField DataField="cargacajas" HeaderText="Capacidad Cajas" />
                                         <asp:BoundField DataField="capacidad" HeaderText="Capacidad (Tn)" />
                                     </Columns>

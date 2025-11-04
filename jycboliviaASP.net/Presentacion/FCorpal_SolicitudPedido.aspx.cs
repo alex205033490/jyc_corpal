@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIproductos;
+using System.Security.Cryptography;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -46,6 +47,10 @@ namespace jycboliviaASP.net.Presentacion
                 gv_adicionados.DataSource = datoRepuesto;
                 gv_adicionados.DataBind();
                 Session["listaSolicitudProducto"] = datoRepuesto;
+
+                /*CARGAR mod Pago*/
+
+                cargarDatosModPago();
             }
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
@@ -68,6 +73,33 @@ namespace jycboliviaASP.net.Presentacion
             return npermiso.tienePermisoResponsable(permiso, codUser);
         }
 
+        private void cargarDatosModPago()
+        {
+            try
+            {
+                NCorpal_SolicitudEntregaProducto nSol = new NCorpal_SolicitudEntregaProducto();
+                DataSet ds = nSol.get_obtenerModalidadPago();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    dd_metodoPago.DataSource = ds.Tables[0];
+                    dd_metodoPago.DataTextField = "nombre";
+                    dd_metodoPago.DataValueField = "codigo";
+                    dd_metodoPago.DataBind();
+
+                    dd_metodoPago.Items.Insert(0, new ListItem("Seleccione un valor", "0"));
+                }
+                else
+                {
+                    dd_metodoPago.Items.Clear();
+                    showalert("Error al cargar los datos Metodo de Pago");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert("Error inesperado en el metodo cargarDatosModPago. " + ex.Message );
+            }
+        }
 
         
         // webservice que me permite la autocompletacion
@@ -157,7 +189,17 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_adicionar_Click(object sender, EventArgs e)
         {
-            adicionar_productos();
+            int cantidadIngresada;
+            if (!int.TryParse(tx_cantidadProducto.Text.Trim(), out cantidadIngresada))
+            {
+                showalert("Ingrese una cantidad válida");
+                return;
+            }
+
+            if (validadCantidadStockParcial())
+            {
+                adicionar_productos();
+            }
         }
 
         private void adicionar_productos()
@@ -223,7 +265,48 @@ namespace jycboliviaASP.net.Presentacion
                 Response.Write("<script type='text/javascript'> alert('Error: Cantidad igual 0') </script>");
             
         }
+        private bool validadCantidadStockParcial()
+        {
+            bool esValido = true;
 
+            int cantidadIngresada = int.Parse(tx_cantidadProducto.Text.Trim());
+
+            if(cantidadIngresada <= 0)
+            {
+                showalert("La cantidad debe ser mayor que cero.");
+                return false;
+            }
+
+            foreach(GridViewRow row in gv_Productos.Rows)
+            {
+                CheckBox chk = row.FindControl("CheckBox1") as CheckBox;
+                if(chk != null && chk.Checked)
+                {
+                    int stockParcial = 0;
+
+                    if (gv_Productos.DataKeys[row.RowIndex] != null)
+                    {
+                        stockParcial = Convert.ToInt32(gv_Productos.DataKeys[row.RowIndex].Value);
+                    }
+                    else
+                    {
+                        stockParcial = Convert.ToInt32(row.Cells[6].Text);
+                    }
+
+                    if(cantidadIngresada > stockParcial)
+                    {
+                        showalert($"No cuentas con stock disponible. Stock disponible: {stockParcial} ");
+                        esValido = false;
+                        break;
+                    }
+                }
+            }
+            return esValido;
+        }
+
+
+
+        /*  --------------   BTN GUARDAR SOLICITUD  ----------------  */
         protected void bt_guardar_Click(object sender, EventArgs e)
         {
             guardarSolicitud();
@@ -231,6 +314,13 @@ namespace jycboliviaASP.net.Presentacion
 
         private void guardarSolicitud()
         {
+            int codMetPago = dd_metodoPago.SelectedIndex;
+            if (codMetPago == 0)
+            {
+                showalert("Por favor, seleccione un Metodo de Pago válido");
+                return;
+            }
+
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
             if(datoRepuesto.Rows.Count > 0){
                 NA_Responsables Nresp = new NA_Responsables();
@@ -240,7 +330,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 string nroboleta = tx_nrodocumento.Text;
                 string personalsolicitud = tx_solicitante.Text;
-                string fechaentrega = convertidorFecha(tx_fechaEntrega.Text);
+                string fechaentrega = DateTime.Parse(tx_fechaEntrega.Text).ToString("yyyy-MM-dd");
                 string horaentrega = tx_horaEntrega.Text;
 
                 NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
@@ -267,7 +357,7 @@ namespace jycboliviaASP.net.Presentacion
                 }
 
                 if (codigCliente > 0) {
-                    if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente))
+                    if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
 
                     {
                         int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
@@ -307,11 +397,13 @@ namespace jycboliviaASP.net.Presentacion
                         limpiarDatos();
                         buscarProductos("");
                         Session["codigoSolicitudProducto"] = ultimoinsertado;
-                        Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
+                        // ocultar temp
+                        //Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
                         //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                     }
                     else
-                        Response.Write("<script type='text/javascript'> alert('Error: No se pudo realizar la Solicitud') </script>");
+                        showalert($"Error: No se pudo realizar la Solicitud. " +
+                            $"{nroboleta}, {fechaentrega}, {horaentrega}, {personalsolicitud}, {codpersolicitante}, {codigCliente}, {codMetPago}");
                 }
                 else
                     Response.Write("<script type='text/javascript'> alert('Error: El Cliente no existe') </script>");
@@ -473,6 +565,13 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
 
+        }
+
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
     }

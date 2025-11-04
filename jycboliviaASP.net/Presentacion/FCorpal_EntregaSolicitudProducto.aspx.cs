@@ -13,6 +13,8 @@ using AjaxControlToolkit;
 using MySql.Data.MySqlClient;
 using MaterialDesignThemes.Wpf.Converters;
 using ZstdSharp.Unsafe;
+using System.Web.Services;
+using System.Web.Script.Services;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -33,11 +35,6 @@ namespace jycboliviaASP.net.Presentacion
                 cargarRegistroVehiculosDD();
             }
 
-            NA_Responsables Nresp = new NA_Responsables();
-            string usuarioAux = Session["NameUser"].ToString();
-            string passwordAux = Session["passworuser"].ToString();
-            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
-            tx_entregoSolicitud.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
         }
         // VW PRINCIPAL LISTA DE SOLICITUDES DE PEDIDOS 
         private void GET_MostrarSolicitudProductos(string estadoSolicitud)
@@ -315,6 +312,33 @@ namespace jycboliviaASP.net.Presentacion
         /* Validar Formulario */
         private bool ValidarForm()
         {
+            bool RegistroSolicitudSeleccionado = false;
+            foreach(GridViewRow row in gv_solicitudesProductos.Rows)
+            {
+                CheckBox chk = (CheckBox)row.FindControl("chkSelect");
+                if(chk != null &&  chk.Checked )
+                {
+                    RegistroSolicitudSeleccionado = true;
+                    break;
+                }
+            }
+            if (!RegistroSolicitudSeleccionado)
+            {
+                showalert("Debe seleccionar al menos 1 registro");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(tx_chofer.Text.Trim()) && string.IsNullOrEmpty(hf_codChofer.Value))
+            {
+                showalert("Debe seleccionar un Chofer Válido");
+                return false;
+            }
+            if(string.IsNullOrEmpty(hf_codChofer.Value))
+            {
+                showalert("Debe seleccionar un chofer válido.");
+                return false;
+            }
+
             if (dd_listVehiculo.SelectedIndex == 0)
             {
                 showalert("Por favor seleccione un vehículo válido.");
@@ -429,6 +453,11 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
                 int codigoSolicitud = int.Parse(row.Cells[1].Text);
                 int codigoProducto = int .Parse(row.Cells[3].Text);
                 TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
@@ -443,10 +472,14 @@ namespace jycboliviaASP.net.Presentacion
                 string estadoEntrega = chkTipoEntrega != null && chkTipoEntrega.Checked ? "parcial" : "total";
 
                 int codResponsable = obtenerCodResponsable();
-                string personal = tx_entregoSolicitud.Text.Trim();
+                string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
+
+                int codChofer = Convert.ToInt32(hf_codChofer.Value);
+                string chofer = tx_chofer.Text.Trim();
 
                 NCorpal_EntregaSolicitudProducto2 nentrega_solicitud = new NCorpal_EntregaSolicitudProducto2();
-                bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, estadoEntrega, stockARestar, codResponsable, codVehiculo);
+                bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, 
+                                                        estadoEntrega, stockARestar, codResponsable, codVehiculo, codChofer, chofer);
 
                 if (actualizado)
                 {
@@ -642,6 +675,13 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+              
+
+
 
                 float cantidadEntregar2 = 0;
                 if(!float.TryParse(txtCantidadAEntregar.Text, out cantidadEntregar2)){
@@ -662,9 +702,12 @@ namespace jycboliviaASP.net.Presentacion
                 int codResponsable = obtenerCodResponsable();
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
-                string personal = tx_entregoSolicitud.Text.Trim();
+                string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
+                int codChofer = Convert.ToInt32(hf_codChofer.Value);
+                string chofer = tx_chofer.Text.Trim(); 
 
-                bool resultado = negocio.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadTotalEntregada, estadoProducto, restarStock, codResponsable, codVehiculo);
+                bool resultado = negocio.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadTotalEntregada, estadoProducto, 
+                                                        restarStock, codResponsable, codVehiculo, codChofer, chofer);
                 if (!resultado)
                 {
                     showalert($"Error al acttualizar la solicitud : {codigoSolicitud} - codigo Producto: {codigoProducto}");
@@ -753,6 +796,28 @@ namespace jycboliviaASP.net.Presentacion
                 System.Web.UI.WebControls.ListItem li = new System.Web.UI.WebControls.ListItem("Seleccione un vehiculo", "0");
                 dd_listVehiculo.Items.Insert(0, li);
             }
+        }
+        // cargar list choferes 
+        [WebMethod]
+        [ScriptMethod]
+        public static string[] getListResponsable (string prefixText, int count)
+        {
+            string nombre = prefixText;
+            NA_Responsables nResp = new NA_Responsables();
+            DataSet tuplas = nResp.mostrarTodosDatos2(nombre);
+
+            int fin = tuplas.Tables[0].Rows.Count;
+            string [] lista = new string [fin];
+
+            for(int i=0; i<fin; i++)
+            {
+                string cod = tuplas.Tables[0].Rows[i]["codigo"].ToString();
+                string nomResp = tuplas.Tables[0].Rows[i]["nombre"].ToString();
+
+                lista[i] = $"{cod} - {nomResp}";
+
+            }
+            return lista;
         }
 
 

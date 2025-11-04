@@ -29,6 +29,7 @@ namespace jycboliviaASP.net.Datos
                 "sep.personalsolicitud, " +
                 "dsp.codproducto, " +
                 "p.producto, " +
+                "pp.StockAlmacen, " +
                 "cc.codigo as 'codCliente', " +
                 "cc.tiendaname, " +
                 "date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', " +
@@ -44,9 +45,10 @@ namespace jycboliviaASP.net.Datos
                 "left join tbcorpal_producto p ON dsp.codproducto = p.codigo " +
                 "left join (" + consultaStock + ") as pp on dsp.codproducto = pp.codigo " +
                 "left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo " +
+
                 "WHERE sep.estadosolicitud = '" + estadoSolicitud + "' " +
                 "and sep.estado = true " +
-                "and sep.fechaGRA >= CURDATE() - INTERVAL 3 WEEK " +
+                "and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY " +
                 "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
                 "and (sep.cod_modcobranza !=2 " +
                 "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) "+
@@ -203,6 +205,7 @@ namespace jycboliviaASP.net.Datos
                                " tbcorpal_vehiculos vv " +
                                " left join tb_responsable res on vv.codconductor = res.codigo " +
                                " where " +
+                               " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and "+
                                " dd.codvehiculo = vv.codigo and " +
                                " dd.estado = 1 and " +
                                " dd.estadodespacho = '" + estado + "'";
@@ -389,7 +392,8 @@ namespace jycboliviaASP.net.Datos
         }
 
         /* POST INSERTAR DETALLES DE SOLICITUD PEDIDO*/
-        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock, int coduser, int codVehiculo)
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock, 
+                                                            int coduser, int codVehiculo, int codChofer, string nomChofer)
         {
             bool banderaResultado = false;
             string consulta0 = "UPDATE tbcorpal_producto set tbcorpal_producto.stock = tbcorpal_producto.stock - " +
@@ -407,7 +411,8 @@ namespace jycboliviaASP.net.Datos
                     " dsp.horaentrega_car = current_time(), " +
                     " dsp.horaasignacion_car = current_time(), " +
                     " dsp.coduserentrega_car = " + coduser + ", " +
-                    " dsp.coduserasignacion_car = " + coduser + ", " +
+                    " dsp.coduserasignacion_car = " + codChofer + ", " +
+                    " dsp.userasignacion_car = '"+nomChofer+"', " +
                     " dsp.codvehiculo = " + codVehiculo + ", " +
                     " dsp.estadoprodsolicitud = '" + estadoProducto + "' " +
                     " where dsp.codsolicitud = " + codigoSolicitud + " and " +
