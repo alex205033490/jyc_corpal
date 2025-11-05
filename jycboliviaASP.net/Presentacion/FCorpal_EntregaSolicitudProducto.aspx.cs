@@ -108,11 +108,15 @@ namespace jycboliviaASP.net.Presentacion
             Session["despachoListGV"] = null;
 
             dd_listVehiculo.SelectedIndex = 0;
+           
 
             gv_detCar.DataSource = null;
             gv_detCar.DataBind();
 
             txt_detalleRegistro.Text = string.Empty;
+
+            tx_chofer.Text = string.Empty;
+            hf_codChofer.Value = string.Empty;
         }
 
         protected void bt_verRecibo_Click(object sender, EventArgs e)
