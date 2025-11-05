@@ -189,8 +189,8 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_adicionar_Click(object sender, EventArgs e)
         {
-            int cantidadIngresada;
-            if (!int.TryParse(tx_cantidadProducto.Text.Trim(), out cantidadIngresada))
+            decimal cantidadIngresada;
+            if (!decimal.TryParse(tx_cantidadProducto.Text.Trim(), out cantidadIngresada))
             {
                 showalert("Ingrese una cantidad válida");
                 return;
@@ -269,7 +269,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             bool esValido = true;
 
-            int cantidadIngresada = int.Parse(tx_cantidadProducto.Text.Trim());
+            decimal cantidadIngresada = decimal.Parse(tx_cantidadProducto.Text.Trim());
 
             if(cantidadIngresada <= 0)
             {
@@ -282,15 +282,15 @@ namespace jycboliviaASP.net.Presentacion
                 CheckBox chk = row.FindControl("CheckBox1") as CheckBox;
                 if(chk != null && chk.Checked)
                 {
-                    int stockParcial = 0;
+                    decimal stockParcial = 0;
 
                     if (gv_Productos.DataKeys[row.RowIndex] != null)
                     {
-                        stockParcial = Convert.ToInt32(gv_Productos.DataKeys[row.RowIndex].Value);
+                        stockParcial = Convert.ToDecimal(gv_Productos.DataKeys[row.RowIndex].Value);
                     }
                     else
                     {
-                        stockParcial = Convert.ToInt32(row.Cells[6].Text);
+                        stockParcial = Convert.ToDecimal(row.Cells[6].Text);
                     }
 
                     if(cantidadIngresada > stockParcial)
@@ -340,6 +340,7 @@ namespace jycboliviaASP.net.Presentacion
                 int codigCliente;
                 NCorpal_Cliente nc = new NCorpal_Cliente();
                 codigCliente = nc.get_CodigoCliente(cliente);
+
               /*  if (codigCliente == 0) { 
                   string propietario = tx_propietario.Text;
                   string razonSocial = tx_razonSocial.Text;
@@ -348,6 +349,7 @@ namespace jycboliviaASP.net.Presentacion
                     codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
                 }
                 */
+
                 bool banderaActualizar = cb_actualizarCliente.Checked;
                 if (codigCliente!=0 && banderaActualizar == true) {
                     string propietario = tx_propietario.Text;
@@ -397,9 +399,9 @@ namespace jycboliviaASP.net.Presentacion
                         limpiarDatos();
                         buscarProductos("");
                         Session["codigoSolicitudProducto"] = ultimoinsertado;
-                        // ocultar temp
-                        //Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
-                        //Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
+                        
+                        Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
+                        Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                     }
                     else
                         showalert($"Error: No se pudo realizar la Solicitud. " +

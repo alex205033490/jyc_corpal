@@ -116,7 +116,7 @@
                                 <div class="row col-lg-12">
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <asp:Label runat="server" class="form-label">Cantidad</asp:Label>
-                                        <asp:TextBox ID="tx_cantidadProducto" runat="server" class="form-control mb-2" Font-Size="Small"></asp:TextBox>
+                                        <asp:TextBox ID="tx_cantidadProducto" runat="server" class="form-control mb-2" Font-Size="Small" oninput="convertdotcomma(event)"></asp:TextBox>
 
                                         <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
                                         <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
@@ -212,7 +212,7 @@
                             <asp:TextBox ID="tx_nrodocumento" runat="server" class="form-control mb-2"></asp:TextBox>
 
                             <asp:label runat="server" class="form-label" for="tx_fechaEntrega">Fecha Entrega</asp:label>
-                            <asp:TextBox ID="tx_fechaEntrega" runat="server" class="form-control mb-2"></asp:TextBox>
+                            <asp:TextBox ID="tx_fechaEntrega" runat="server" class="form-control mb-2" AutoComplete="off"></asp:TextBox>
                             <asp:CalendarExtender ID="tx_fechaEntrega_CalendarExtender" runat="server"
                                 TargetControlID="tx_fechaEntrega"></asp:CalendarExtender>
 
@@ -243,7 +243,7 @@
                             <asp:TextBox ID="tx_solicitante" runat="server" class="form-control mb-2" Font-Size="Smaller"></asp:TextBox>
 
                             <asp:label runat="server" class="form-label" for="tx_horaEntrega">Hora Entrega</asp:label>
-                            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control mb-2"></asp:TextBox>
+                            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control mb-2" AutoComplete="off"></asp:TextBox>
 
                             <asp:Label ID="Label1" for="tx_propietario" runat="server" Text="Propietario:"></asp:Label>
                             <asp:TextBox ID="tx_propietario" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
@@ -253,7 +253,7 @@
                             </asp:DropDownList>
 
                             <asp:Label ID="Label3" for="tx_nit" runat="server" Text="Nit:"></asp:Label>
-                            <asp:TextBox ID="tx_nit" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
+                            <asp:TextBox ID="tx_nit" CssClass="form-control mb-2" runat="server" Font-Size="Smaller" AutoComplete="off"></asp:TextBox>
                         
                         </div>
                         <div class="col-lg-12">
@@ -452,4 +452,7 @@
             </div>
     
     -->
+<script type="text/javascript" src="../js/mainCorpal.js"></script>
 </asp:Content>
+
+

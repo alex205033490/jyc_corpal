@@ -12,7 +12,7 @@ namespace jycboliviaASP.net.Negocio
         DCorpal_StockVendedores nego = new DCorpal_StockVendedores();
 
 
-        internal bool POST_registroEntradaStock(int codVendedor, int codProducto, string producto, int cantidad)
+        internal bool POST_registroEntradaStock(int codVendedor, int codProducto, string producto, decimal cantidad)
         {
             return nego.POST_registroEntradaStock(codVendedor, codProducto, producto, cantidad);
         }

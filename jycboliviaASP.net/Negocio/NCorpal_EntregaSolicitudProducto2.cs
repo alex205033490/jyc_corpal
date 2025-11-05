@@ -107,16 +107,15 @@ namespace jycboliviaASP.net.Negocio
         }
         /*  DESPACHO - DETALLE DESPACHO*/
 
-        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio)
+        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio, int codconductor, string conductor)
         {
-            return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio);
+            return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio, codconductor, conductor);
         }
         internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad)
         {
             try
             {
                 return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad);
-                
             }
             catch(Exception ex)
             {
@@ -127,13 +126,14 @@ namespace jycboliviaASP.net.Negocio
 
         /* POST DETALLE SOLICITUD PEDIDO */
         internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, 
-                                                            int coduser, int codVehiculo, int codChofer, string nomChofer)
+                                                            int coduser, int codVehiculo)
         {
             try
             {
                 return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, 
-                                                                coduser, codVehiculo, codChofer, nomChofer);
-            } catch(Exception ex)
+                                                                    coduser, codVehiculo);
+            } 
+            catch(Exception ex)
             {
                 throw new Exception("Error inesperado: " + ex.Message);
             }

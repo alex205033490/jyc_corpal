@@ -305,7 +305,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             catch(Exception ex)
             {
-                showalert($"Error inesperado: {ex.Message}");
+                showalert($"Error inesperado en el boton: {ex.Message}");
             }
         }
 
@@ -346,10 +346,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             return true;
         }
-        private int RegistrarDespachoPrincipal(string detalle, int codVehiculo, int codResponsable) 
-        {
-            return CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
-        }
+        
         private void ProcesarSolicitudesSeleccionadas(int codVehiculo)
         {
             foreach(GridViewRow row in gv_solicitudesProductos.Rows)
@@ -363,17 +360,17 @@ namespace jycboliviaASP.net.Presentacion
                 int codSolicitud = int.Parse(row.Cells[1].Text);
                 int codProducto = int.Parse(row.Cells[3].Text);
                 string producto = row.Cells[4].Text;
-                int codCliente = int.Parse(row.Cells[11].Text);
-                string solicitante = row.Cells[10].Text;
-                string fechaEntrega = aFecha2(row.Cells[9].Text);
+                int codCliente = int.Parse(row.Cells[12].Text);
+                string solicitante = row.Cells[11].Text;
+                string fechaEntrega = aFecha2(row.Cells[10].Text);
 
                 NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
                 int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codSolicitud);
                 int codMetPagoSol = nego.Obtener_codMetodoPagoSolicitud(codSolicitud);
 
                 TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-                int cantidad = 0;
-                int.TryParse(txt_cantidad.Text, out cantidad);
+                decimal cantidad = 0;
+                decimal.TryParse(txt_cantidad.Text, out cantidad);
 
                 bool RegistroIngresoAlmacen = RegistrarIngresoAlmacenDinamico(codVendedor, codProducto, producto, cantidad);
                 if (!RegistroIngresoAlmacen)
@@ -474,12 +471,11 @@ namespace jycboliviaASP.net.Presentacion
                 int codResponsable = obtenerCodResponsable();
                 string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-                int codChofer = Convert.ToInt32(hf_codChofer.Value);
-                string chofer = tx_chofer.Text.Trim();
+
 
                 NCorpal_EntregaSolicitudProducto2 nentrega_solicitud = new NCorpal_EntregaSolicitudProducto2();
                 bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, 
-                                                        estadoEntrega, stockARestar, codResponsable, codVehiculo, codChofer, chofer);
+                                                        estadoEntrega, stockARestar, codResponsable, codVehiculo);
 
                 if (actualizado)
                 {
@@ -524,15 +520,18 @@ namespace jycboliviaASP.net.Presentacion
             return resultadoGeneral;
         }
 
-        private int CrearDespachoPrincipal123(string detalle, int codVehiculo, int codResponsable)
+        private int RegistrarDespachoPrincipal(string detalle, int codVehiculo, int codResponsable)
         {
+            int codConductor = Convert.ToInt32(hf_codChofer.Value);
+            string conductor = tx_chofer.Text.Trim();
+
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-            return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable);
+            return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable, codConductor, conductor);
         }
       
         /* Registro stock dinamico por vendedor*/
         private bool RegistrarIngresoAlmacenDinamico(int codVendedor, int codProducto, string producto,
-            int cantidad)
+                                                        decimal cantidad)
         {
             try
             {
@@ -703,11 +702,9 @@ namespace jycboliviaASP.net.Presentacion
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
                 string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
-                int codChofer = Convert.ToInt32(hf_codChofer.Value);
-                string chofer = tx_chofer.Text.Trim(); 
 
                 bool resultado = negocio.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadTotalEntregada, estadoProducto, 
-                                                        restarStock, codResponsable, codVehiculo, codChofer, chofer);
+                                                        restarStock, codResponsable, codVehiculo);
                 if (!resultado)
                 {
                     showalert($"Error al acttualizar la solicitud : {codigoSolicitud} - codigo Producto: {codigoProducto}");

@@ -13,7 +13,7 @@ namespace jycboliviaASP.net.Datos
         private conexionMySql cnx = new conexionMySql();
 
 
-        internal bool POST_registroEntradaStock(int codVendedor, int codProducto, string producto, int cantidad)
+        internal bool POST_registroEntradaStock(int codVendedor, int codProducto, string producto, decimal cantidad)
         {
             try
             {

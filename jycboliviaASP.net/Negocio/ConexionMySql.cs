@@ -421,7 +421,7 @@ namespace jycboliviaASP.net.Negocio
                 MySqlConexion.Close();
                 return result;
             }
-            catch(Exception ex)
+            catch(Exception )
             {
                 MySqlConexion.Close();
                 return -1;

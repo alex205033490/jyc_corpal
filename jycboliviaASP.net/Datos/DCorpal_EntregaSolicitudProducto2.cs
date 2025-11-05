@@ -346,19 +346,22 @@ namespace jycboliviaASP.net.Datos
 
         /*  ----    DESPACHO Y DETALLE DESPACHO     ----*/
         /* POST DESPACHO */
-        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio)
+        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio, int codconductor, string conductor)
         {
             try
             {
                 string consulta01 = "INSERT INTO tbcorpal_despachovehiculo(fechagra, horagra, detalle, codvehiculo, codrespinicio, " +
-                    "estado, estadodespacho) values (current_date(), current_time(), @detalle, @codvehiculo, @codrespinicio, 1, 'abierto'); " +
+                    "estado, estadodespacho, codconductor, conductor) values (current_date(), current_time(), @detalle, @codvehiculo, @codrespinicio, 1, 'abierto', " +
+                    "@codconductor, @conductor); " +
                     "SELECT LAST_INSERT_ID();";
 
                 var parametros = new List<MySqlParameter>
                 {
                     new MySqlParameter("@detalle", detalle),
                     new MySqlParameter("@codvehiculo", codvehiculo),
-                    new MySqlParameter("@codrespinicio", codrespinicio)
+                    new MySqlParameter("@codrespinicio", codrespinicio),
+                    new MySqlParameter("@codconductor", codconductor),
+                    new MySqlParameter("@conductor", conductor),
                 };
                 return conexion.ejecutarScalarMySql(consulta01, parametros);
             }
@@ -393,7 +396,7 @@ namespace jycboliviaASP.net.Datos
 
         /* POST INSERTAR DETALLES DE SOLICITUD PEDIDO*/
         internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock, 
-                                                            int coduser, int codVehiculo, int codChofer, string nomChofer)
+                                                            int coduser, int codVehiculo)
         {
             bool banderaResultado = false;
             string consulta0 = "UPDATE tbcorpal_producto set tbcorpal_producto.stock = tbcorpal_producto.stock - " +
@@ -411,8 +414,7 @@ namespace jycboliviaASP.net.Datos
                     " dsp.horaentrega_car = current_time(), " +
                     " dsp.horaasignacion_car = current_time(), " +
                     " dsp.coduserentrega_car = " + coduser + ", " +
-                    " dsp.coduserasignacion_car = " + codChofer + ", " +
-                    " dsp.userasignacion_car = '"+nomChofer+"', " +
+                    " dsp.coduserasignacion_car = " + coduser + ", " +
                     " dsp.codvehiculo = " + codVehiculo + ", " +
                     " dsp.estadoprodsolicitud = '" + estadoProducto + "' " +
                     " where dsp.codsolicitud = " + codigoSolicitud + " and " +
