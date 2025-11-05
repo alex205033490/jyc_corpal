@@ -243,7 +243,7 @@
                             <asp:TextBox ID="tx_solicitante" runat="server" class="form-control mb-2" Font-Size="Smaller"></asp:TextBox>
 
                             <asp:label runat="server" class="form-label" for="tx_horaEntrega">Hora Entrega</asp:label>
-                            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control mb-2" AutoComplete="off"></asp:TextBox>
+                            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control mb-2" type="time" AutoComplete="off"></asp:TextBox>
 
                             <asp:Label ID="Label1" for="tx_propietario" runat="server" Text="Propietario:"></asp:Label>
                             <asp:TextBox ID="tx_propietario" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
