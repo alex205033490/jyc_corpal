@@ -559,6 +559,7 @@
     <Content Include="Presentacion\FACorpal_ConsultaGeneral.aspx" />
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_AgregarInsumoCreado.aspx" />
     <Content Include="Presentacion\FCorpal_APIClientes.aspx" />
@@ -572,6 +573,7 @@
     <Content Include="Presentacion\FCorpal_APIProductos.aspx" />
     <Content Include="Presentacion\FCorpal_APIVentas.aspx" />
     <Content Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx" />
+    <Content Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx" />
     <Content Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaReceta.aspx" />
     <Content Include="Presentacion\FCorpal_ConsutaProduccion.aspx" />
@@ -593,6 +595,7 @@
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx" />
     <Content Include="Presentacion\FCorpal_SolicitudPedido.aspx" />
     <Content Include="Presentacion\FCorpal_VaciadoUponPedido.aspx" />
@@ -917,6 +920,7 @@
     <Compile Include="Datos\Datos old\DProyecto.cs" />
     <Compile Include="Datos\Datos old\DTipoPago.cs" />
     <Compile Include="Datos\DCorpal_SolicitudEntregaProductoACamion.cs" />
+    <Compile Include="Datos\DCorpal_StockVendedores.cs" />
     <Compile Include="Datos\DCorpal_Vehiculo.cs" />
     <Compile Include="Datos\DCorpal_Venta.cs" />
     <Compile Include="Datos\DUpon_compras.cs" />
@@ -1107,6 +1111,7 @@
     <Compile Include="Negocio\NCargaFechaExpedicion.cs" />
     <Compile Include="Negocio\NCorpal_SolicitudEntregaProducto.cs" />
     <Compile Include="Negocio\NCorpal_Cliente.cs" />
+    <Compile Include="Negocio\NCorpal_StockVendedores.cs" />
     <Compile Include="Negocio\NCorpal_Vehiculos.cs" />
     <Compile Include="Negocio\NCorpal_Venta.cs" />
     <Compile Include="Negocio\NEncargadoPago.cs" />
@@ -1167,6 +1172,13 @@
     </Compile>
     <Compile Include="Presentacion\FA_DescargarArchivoProduccion.aspx.designer.cs">
       <DependentUpon>FA_DescargarArchivoProduccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaStockVendedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaStockVendedores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ActivosJYC.aspx.cs">
       <DependentUpon>FCorpal_ActivosJYC.aspx</DependentUpon>
@@ -1258,6 +1270,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_AprobacionDevolucionProductoTerminado.aspx.designer.cs">
       <DependentUpon>FCorpal_AprobacionDevolucionProductoTerminado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx.cs">
+      <DependentUpon>FCorpal_CargarDocsIndividuales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_CargarDocsIndividuales.aspx.designer.cs">
+      <DependentUpon>FCorpal_CargarDocsIndividuales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_CompraDeMaterialeInsumos.aspx.cs">
       <DependentUpon>FCorpal_CompraDeMaterialeInsumos.aspx</DependentUpon>
@@ -1412,6 +1431,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_ReporteSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx.cs">
+      <DependentUpon>FCorpal_SolicitudesPedidoaCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_SolicitudesPedidoaCredito.aspx.designer.cs">
+      <DependentUpon>FCorpal_SolicitudesPedidoaCredito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_SolicitudInsumosMateriales.aspx.cs">
       <DependentUpon>FCorpal_SolicitudInsumosMateriales.aspx</DependentUpon>

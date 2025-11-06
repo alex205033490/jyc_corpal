@@ -53,7 +53,8 @@
             <i class="bi bi-journal-text"></i><span>Productos</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="producto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>                                             
+                <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>
+                <li><a href="../Presentacion/FCorpal_SolicitudesPedidoaCredito.aspx" id="mn_solicitudesPedidoaCredito" runat="server"><i class="bi bi-circle"></i><span>Pedidos a Crédito</span></a></li>
                 <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Asignación de Productos a Camión</span></a></li>
               
                 <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><i class="bi bi-circle"></i><span>Entrega Solicitud Productos</span></a></li>                    
@@ -65,6 +66,8 @@
                 <li role="separator" class="divider"></li>                                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
+                <li><a href="../Presentacion/FCorpal_ConsultaStockVendedores.aspx" id="mn_ConsultaStockVendedores" runat="server"><i class="bi bi-circle"></i><span>Control de Stock por Vendedor</span></a></li>
+
           </ul>
         </li><!-- End Forms Nav -->
 
@@ -160,6 +163,7 @@
                 <li><a href="../Presentacion/FCorpal_ConsultaSGI.aspx" id="mn_consultaActividades" runat="server"><i class="bi bi-circle"></i><span>Consulta SGI Actividades</span></a></li>                               
                 <li><a href="../Presentacion/FCorpal_agendanegociacion.aspx" id="mn_agendaTrabajo" runat="server"><i class="bi bi-circle"></i><span>Agenda de Trabajo</span></a></li>                                   
                 <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><i class="bi bi-circle"></i><span>Activos JYC</span></a></li>                       
+                <li><a href="../Presentacion/FCorpal_CargarDocsIndividuales.aspx" id="mn_cargaDocsIndividuales" runat="server"><i class="bi bi-circle"></i><span>Carga/Descarga Documentos Individuales</span></a></li>                       
             </ul>
         </li><!-- End Tables Nav -->
 

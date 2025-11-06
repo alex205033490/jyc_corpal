@@ -173,7 +173,7 @@ namespace jycboliviaASP.net.Negocio
             DataSet datosR = resp.getDatos(consulta);
             return datosR;
         }
-
+        
         public DataSet mostrarSoloAutorizados_AutoComplit(string nombreResponsable, string listaAutorizados)
         {
             string consulta = "select res.nombre from tb_responsable res where res.estado = 1 " +

@@ -96,6 +96,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudproductos;
 
         /// <summary>
+        /// Control mn_solicitudesPedidoaCredito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_solicitudesPedidoaCredito;
+
+        /// <summary>
         /// Control mn_entregaSolicitudProductoACamion.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_AprobaciondevolucionProductoTerminado;
+
+        /// <summary>
+        /// Control mn_ConsultaStockVendedores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaStockVendedores;
 
         /// <summary>
         /// Control mn_ordendeProduccion.
@@ -386,6 +404,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_activosjyc;
+
+        /// <summary>
+        /// Control mn_cargaDocsIndividuales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_cargaDocsIndividuales;
 
         /// <summary>
         /// Control mn_vaciadoUponPedido.

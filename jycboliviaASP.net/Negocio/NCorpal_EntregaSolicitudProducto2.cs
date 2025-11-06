@@ -107,16 +107,15 @@ namespace jycboliviaASP.net.Negocio
         }
         /*  DESPACHO - DETALLE DESPACHO*/
 
-        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio)
+        public int POST_INSERTdespachoRetornoID(string detalle, int codvehiculo, int codrespinicio, int codconductor, string conductor)
         {
-            return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio);
+            return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio, codconductor, conductor);
         }
         internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad)
         {
             try
             {
                 return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad);
-                
             }
             catch(Exception ex)
             {
@@ -126,12 +125,44 @@ namespace jycboliviaASP.net.Negocio
         }
 
         /* POST DETALLE SOLICITUD PEDIDO */
-        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, int coduser, int codVehiculo)
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, 
+                                                            int coduser, int codVehiculo)
         {
-            return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, coduser, codVehiculo);
+            try
+            {
+                return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, 
+                                                                    coduser, codVehiculo);
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado: " + ex.Message);
+            }
         }
 
+        /* SOLICITUDES PEDIDOS A CREDITO */
+        internal DataSet get_listaPedidosACredito()
+        {
+            return datos.get_listaPedidosACredito();
 
+        }
+        internal DataSet get_listDetallePedidoaCredito(int codigo)
+        {
+            return datos.get_listDetallePedidoaCredito(codigo);
+        }
 
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta)
+        {
+            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta);
+        }
+
+        internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
+        {
+            return datos.ObtenerCodVendedor_EntregaSolProductos(cod);
+        }
+
+        internal int Obtener_codMetodoPagoSolicitud(int cod)
+        {
+            return datos.Obtener_codMetodoPagoSolicitud(cod);
+        }
     }
 }

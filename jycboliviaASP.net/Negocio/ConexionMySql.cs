@@ -311,6 +311,11 @@ namespace jycboliviaASP.net.Negocio
                 Console.WriteLine($"Error en consulta Mysql: {ex.Message}");
                 return null;
             }
+            finally
+            {
+                if (MySqlConexion.State == ConnectionState.Open)
+                    MySqlConexion.Close();
+            }
         }
 
 
@@ -416,7 +421,7 @@ namespace jycboliviaASP.net.Negocio
                 MySqlConexion.Close();
                 return result;
             }
-            catch(Exception ex)
+            catch(Exception )
             {
                 MySqlConexion.Close();
                 return -1;

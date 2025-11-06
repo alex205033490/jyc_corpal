@@ -40,13 +40,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.05021cm</Width>
-            </TablixColumn>
-            <TablixColumn>
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.88668cm</Width>
+              <Width>2.05021cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>5.33635cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.34668cm</Width>
@@ -58,19 +61,19 @@
               <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.87043cm</Width>
+              <Width>2.4471cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.66417cm</Width>
+              <Width>2.9445cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.95983cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox2">
+                    <Textbox Name="Textbox33">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -88,7 +91,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <rd:DefaultName>Textbox33</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -104,14 +107,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox9">
+                    <Textbox Name="Textbox2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>codupon</Value>
+                              <Value>Codigo upon</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -122,7 +125,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -157,6 +160,40 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox10">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Stock Parcial</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox10</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -347,7 +384,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="codigo">
+                    <Textbox Name="codigo1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -358,10 +395,12 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>codigo</rd:DefaultName>
+                      <rd:DefaultName>codigo1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -376,7 +415,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="codupon">
+                    <Textbox Name="codupon2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -387,10 +426,12 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>codupon</rd:DefaultName>
+                      <rd:DefaultName>codupon2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -405,7 +446,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="producto">
+                    <Textbox Name="producto1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -416,10 +457,43 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>producto</rd:DefaultName>
+                      <rd:DefaultName>producto1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="StockParcialAlmacen1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!StockParcialAlmacen.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>StockParcialAlmacen1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -445,7 +519,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>medida</rd:DefaultName>
@@ -463,7 +539,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Ingreso1">
+                    <Textbox Name="Ingreso11">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -474,10 +550,12 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Ingreso1</rd:DefaultName>
+                      <rd:DefaultName>Ingreso11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -503,7 +581,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Salida1</rd:DefaultName>
@@ -532,7 +612,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>StockAlmacen</rd:DefaultName>
@@ -561,7 +643,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>StockPackFerial</rd:DefaultName>
@@ -591,6 +675,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -606,8 +691,8 @@
         <DataSetName>DS_StockProductos</DataSetName>
         <Top>2.76966cm</Top>
         <Left>1.28799cm</Left>
-        <Height>1.2cm</Height>
-        <Width>25.31815cm</Width>
+        <Height>1.55983cm</Height>
+        <Width>26.12482cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -619,7 +704,7 @@
     <Height>3.53125in</Height>
     <Style />
   </Body>
-  <Width>11.08436in</Width>
+  <Width>12.44336in</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21.59cm</PageWidth>
@@ -687,10 +772,14 @@
           <DataField>codigosimec</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="StockParcialAlmacen">
+          <DataField>StockParcialAlmacen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS_ProductosAlmacen</rd:DataSetName>
-        <rd:SchemaPath>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
         <rd:TableName>DS_StockProduccto</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

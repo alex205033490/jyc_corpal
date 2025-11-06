@@ -6,6 +6,7 @@ using jycboliviaASP.net.Negocio;
 using System.Data;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using static jycboliviaASP.net.Presentacion.FCorpal_APIProduccion;
+using MySql.Data.MySqlClient;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -19,7 +20,7 @@ namespace jycboliviaASP.net.Datos
             NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
             string consultaStockActual = vlocal.get_consultaStockProductosActual();
 
-            string consulta = "select pp.codigo, pp.producto, pp.medida, 0 as 'precio', t1.StockAlmacen , t1.StockPackFerial " +
+            string consulta = "select pp.codigo, pp.producto, pp.medida, 0 as 'precio', t1.StockAlmacen ,t1.StockParcialAlmacen, t1.StockPackFerial " +
                                " from tbcorpal_producto pp " +
                                " left join (" +
                                consultaStockActual+
@@ -30,15 +31,44 @@ namespace jycboliviaASP.net.Datos
             return lista;
         }
 
-        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, int codpersolicitante, bool estado, int codcliente)
+        internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, 
+                                    int codpersolicitante, bool estado, int codcliente, int codModPago)
         {
+            try
+            {
+                string consulta = @"insert into tbcorpal_solicitudentregaproducto ( 
+                              nroboleta, fechaGRA, horaGRA, fechaentrega, horaentrega,  personalsolicitud, 
+                              codpersolicitante,   estado, estadosolicitud, vaciadoupon, codcliente, cod_modcobranza) 
+                              values( @nroboleta, current_date(), current_time(), @fechaentrega, @horaentrega, @personalsolicitud, @codpersolicitante, 
+                              @estado, 'Abierto', false, @codcliente, @cod_modpago)";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@nroboleta", nroboleta);
+                    cmd.Parameters.AddWithValue("@fechaentrega", fechaentrega);
+                    cmd.Parameters.AddWithValue("@horaentrega", horaentrega);
+                    cmd.Parameters.AddWithValue("@personalsolicitud", personalsolicitud);
+                    cmd.Parameters.AddWithValue("@codpersolicitante", codpersolicitante);
+                    cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.Parameters.AddWithValue("@codcliente", codcliente);
+                    cmd.Parameters.AddWithValue("@cod_modpago", codModPago);
+
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurro un error inesperado. " + ex.Message);
+            }
+            /*
             string consulta = "insert into tbcorpal_solicitudentregaproducto ( "+
                              " nroboleta, fechaGRA, horaGRA, fechaentrega, horaentrega,  personalsolicitud, "+
-                             " codpersolicitante,   estado, estadosolicitud, vaciadoupon, codcliente) " +
+                             " codpersolicitante,   estado, estadosolicitud, vaciadoupon, codcliente, cod_modcobranza) " +
                              " values( "+
                              " '"+nroboleta+"', current_date(), current_time(), "+fechaentrega+", '"+horaentrega+"',  '"+personalsolicitud+"',"+
                               codpersolicitante + ", " + estado + ", 'Abierto', false, "+codcliente+" )";
             return conexion.ejecutarMySql(consulta);
+            */
         }
 
 
@@ -556,5 +586,22 @@ namespace jycboliviaASP.net.Datos
                                  " pp.estado = 1 ";
             return conexion.consultaMySql(consulta);
         }
+
+        internal DataSet get_obtenerModalidadPago()
+        {
+            try
+            {
+                string consulta = @"select mc.codigo, mc.nombre 
+                                    from tbcorpal_modalidadcobranza mc 
+                                    where mc.estado = 1 order by mc.nombre asc";
+
+                return conexion.consultaMySql(consulta);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al cargar datos Modalidad Pago" + ex.Message);
+            }
+        }
+
     }
 }

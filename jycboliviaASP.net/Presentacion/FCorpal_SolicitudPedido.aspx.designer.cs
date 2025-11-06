@@ -42,15 +42,6 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_cantidadProducto;
 
         /// <summary>
-        /// Control dd_tipoSolicitud.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_tipoSolicitud;
-
-        /// <summary>
         /// Control cb_itemPackFerial.
         /// </summary>
         /// <remarks>
@@ -60,22 +51,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.CheckBox cb_itemPackFerial;
 
         /// <summary>
-        /// Control bt_limpiar.
+        /// Control dd_tipoSolicitud.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_limpiar;
-
-        /// <summary>
-        /// Control bt_adicionar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_adicionar;
+        protected global::System.Web.UI.WebControls.DropDownList dd_tipoSolicitud;
 
         /// <summary>
         /// Control bt_buscar.
@@ -87,6 +69,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button bt_buscar;
 
         /// <summary>
+        /// Control bt_adicionar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_adicionar;
+
+        /// <summary>
         /// Control bt_prueba.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bt_prueba;
+
+        /// <summary>
+        /// Control bt_limpiar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_limpiar;
 
         /// <summary>
         /// Control gv_Productos.
@@ -114,15 +114,6 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_nrodocumento;
 
         /// <summary>
-        /// Control tx_solicitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_solicitante;
-
-        /// <summary>
         /// Control tx_fechaEntrega.
         /// </summary>
         /// <remarks>
@@ -139,15 +130,6 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender tx_fechaEntrega_CalendarExtender;
-
-        /// <summary>
-        /// Control tx_horaEntrega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_horaEntrega;
 
         /// <summary>
         /// Control tx_cliente.
@@ -186,6 +168,42 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button bt_verificar;
 
         /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// Control tx_razonSocial.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_razonSocial;
+
+        /// <summary>
+        /// Control tx_solicitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_solicitante;
+
+        /// <summary>
+        /// Control tx_horaEntrega.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_horaEntrega;
+
+        /// <summary>
         /// Control Label1.
         /// </summary>
         /// <remarks>
@@ -204,22 +222,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_propietario;
 
         /// <summary>
-        /// Control Label2.
+        /// Control dd_metodoPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// Control tx_razonSocial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_razonSocial;
+        protected global::System.Web.UI.WebControls.DropDownList dd_metodoPago;
 
         /// <summary>
         /// Control Label3.
