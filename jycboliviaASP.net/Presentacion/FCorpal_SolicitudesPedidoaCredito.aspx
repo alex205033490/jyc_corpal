@@ -120,7 +120,7 @@
 
                         <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
-                            <div class="mb-3 col-lg-3 col-md-4 col-sm-5 col-6">
+                            <div class="mb-3 col-lg-8 col-md-4 col-sm-5 col-6">
                                 <asp:Label runat="server" Font-Size="Small" Text="Responsable:"></asp:Label>
                                 <asp:TextBox ID="tx_responsable" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
                             </div>

@@ -85,232 +85,251 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-success text-white">
-                    Solicitud Producto
-                </div>
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-
-                        <div class="row col-lg-8 col-md-10 mb-2" style="font-size: small;">
-                            <div class="col-lg-5 col-md-6 col-sm-6 col-6">
-                                <div>
-                                    <asp:Label runat="server" for="inputName5" class="form-label">Producto</asp:Label>
-                                    <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small"></asp:TextBox>
-                                    <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server"
-                                        TargetControlID="tx_producto"
-                                        CompletionSetCount="12"
-                                        MinimumPrefixLength="1" ServiceMethod="GetlistaProductos"
-                                        UseContextKey="True"
-                                        CompletionListCssClass="CompletionList"
-                                        CompletionListItemCssClass="CompletionlistItem"
-                                        CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                    </asp:AutoCompleteExtender>
-
-                                </div>
-                                
-                                <div class="row col-lg-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <asp:Label runat="server" class="form-label">Cantidad</asp:Label>
-                                        <asp:TextBox ID="tx_cantidadProducto" runat="server" class="form-control mb-2" Font-Size="Small" oninput="convertdotcomma(event)"></asp:TextBox>
-
-                                        <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
-                                        <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 col-sm-6" style="padding=0.5rem;">
-                                        <asp:Label runat="server" class="form-label">Tipo Solicitud</asp:Label>
-                                        <asp:DropDownList ID="dd_tipoSolicitud" class="form-select mb-2" Font-Size="X-Small" runat="server">
-                                            <asp:ListItem>VENTA</asp:ListItem>
-                                            <asp:ListItem>DEGUSTACION</asp:ListItem>
-                                            <asp:ListItem>MUESTRA</asp:ListItem>
-                                            <asp:ListItem>OTROS</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-
-
-
-                            <div class="col-3 col-md-3 col-sm-4 col-6 d-flex flex-column align-items-center">
-                                <asp:Button ID="bt_buscar" runat="server" class="btn btn-primary mb-1 w-100" OnClick="bt_buscar_Click" Text="Buscar" />
-                                <asp:Button ID="bt_adicionar" runat="server" class="btn btn-success mb-1 w-100" OnClick="bt_adicionar_Click" Text="Adicionar" />                                
-                                <asp:Button ID="bt_limpiar" runat="server" class="btn btn-secondary mb-1 w-100" OnClick="bt_limpiar_Click" Text="Limpiar" />
-                                <!--
-                                <asp:Button ID="bt_prueba" runat="server" class="btn btn-primary mb-1 w-100" OnClick="bt_prueba_Click" Text="Prueba" />
-                                -->
-                            </div>
-
-                        </div>
-
-                        <div class="text-center col-lg-8 col-md-8 col-sm-10 col-12">
-                            
-
-                        </div>
-                    </li>
-
-                    <!--------    GRIDVIEW BUSQUEDA PRODUCTO    ------->
-                    <li class="list-group-item">
-
-                        <div class="container_gvProductos table-responsive col-lg-7">
-                            <asp:GridView ID="gv_Productos" runat="server" BackColor="White"
-                                BorderColor="#b4b4b4" BorderStyle="Ridge" BorderWidth="1px" CellPadding="7"
-                                Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="false"
-                                CssClass="gv_Productos table table-striped table-sticky" DataKeyNames="StockParcialAlmacen">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="Asignar">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" />
-                                    <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
-                                    <asp:BoundField DataField="medida" HeaderText="Medida" HtmlEncode="false" />
-                                    <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
-                                    <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
-                                    <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
-                                    <asp:BoundField DataField="StockPackFerial" HeaderText="Stock Pack Ferial" HtmlEncode="false" />
-                                </Columns>
-                                <AlternatingRowStyle BackColor="#CCCCCC" />
-                                <FooterStyle BackColor="#CCCCCC" />
-                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#383838" />
-                            </asp:GridView>
-                        </div>
-
-                    </li>
-                </ul>
-
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white fw-bold">
+                Solicitud Producto
             </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <!-- Fila principal -->
+                    <div class="row g-3">
+                        <!-- PRODUCTO -->
+                        <div class="col-12">
+                            <asp:Label runat="server" AssociatedControlID="tx_producto" CssClass="form-label">Producto</asp:Label>
+                            <asp:TextBox ID="tx_producto" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                            <asp:AutoCompleteExtender 
+                                ID="tx_producto_AutoCompleteExtender" 
+                                runat="server"
+                                TargetControlID="tx_producto"
+                                CompletionSetCount="12"
+                                MinimumPrefixLength="1" 
+                                ServiceMethod="GetlistaProductos"
+                                UseContextKey="True"
+                                CompletionListCssClass="CompletionList"
+                                CompletionListItemCssClass="CompletionlistItem"
+                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem"
+                                CompletionInterval="10">
+                            </asp:AutoCompleteExtender>
+                        </div>
+
+                        <!-- CANTIDAD -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <asp:Label runat="server" CssClass="form-label">Cantidad</asp:Label>
+                            <asp:TextBox 
+                                ID="tx_cantidadProducto" 
+                                runat="server" 
+                                CssClass="form-control form-control-sm"
+                                oninput="convertdotcomma(event)">
+                            </asp:TextBox>
+                        </div>
+
+                        <!-- TIPO SOLICITUD -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <asp:Label runat="server" CssClass="form-label">Tipo Solicitud</asp:Label>
+                            <asp:DropDownList 
+                                ID="dd_tipoSolicitud" 
+                                runat="server" 
+                                CssClass="form-select form-select-sm">
+                                <asp:ListItem>VENTA</asp:ListItem>
+                                <asp:ListItem>DEGUSTACION</asp:ListItem>
+                                <asp:ListItem>MUESTRA</asp:ListItem>
+                                <asp:ListItem>OTROS</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                        <!-- ITEM PACK FERIAL -->
+                        <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center mt-4">
+                            <div class="form-check mb-0">
+                                <asp:CheckBox ID="cb_itemPackFerial" runat="server" CssClass="form-check-input" />
+                                <asp:Label runat="server" CssClass="form-check-label ms-1">Item Pack Ferial</asp:Label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila de botones -->
+                    <div class="row mt-3">
+                        <div class="col-12 d-flex flex-wrap justify-content-start align-items-center gap-2">
+                            <asp:Button ID="bt_buscar" runat="server" CssClass="btn btn-primary btn-sm" Text="Buscar" OnClick="bt_buscar_Click" />
+                            <asp:Button ID="bt_adicionar" runat="server" CssClass="btn btn-success btn-sm" Text="Adicionar" OnClick="bt_adicionar_Click" />
+                            <asp:Button ID="bt_limpiar" runat="server" CssClass="btn btn-secondary btn-sm" Text="Limpiar" OnClick="bt_limpiar_Click" />
+                        </div>
+                    </div>
+                </li>
+
+                <!-- GRIDVIEW -->
+                <li class="list-group-item">
+                    <div class="table-responsive">
+                        <asp:GridView 
+                            ID="gv_Productos" 
+                            runat="server"
+                            CssClass="table table-striped table-bordered table-sm text-center align-middle"
+                            AutoGenerateColumns="False"
+                            DataKeyNames="StockParcialAlmacen"
+                            Font-Size="Small"
+                            GridLines="None">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Asignar">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="codigo" HeaderText="Código" />
+                                <asp:BoundField DataField="producto" HeaderText="Producto" />
+                                <asp:BoundField DataField="medida" HeaderText="Medida" />
+                                <asp:BoundField DataField="precio" HeaderText="Precio" />
+                                <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
+                                <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacén" />
+                                <asp:BoundField DataField="StockPackFerial" HeaderText="Stock Pack Ferial" />
+                            </Columns>
+                            <HeaderStyle CssClass="bg-dark text-white" />
+                        </asp:GridView>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 
+    
     <!-------------------------------------------------------- CARD 2 ------------------------------------------------------------------>
 
-    <div class="card col-lg-12">
-        <div class="card-header bg-success text-white">
-            Adición de Producto
-        </div>
-        <div class="container_card2">
-            <div class="container_adicionProductos">
 
-                <div class="container_columns row col-lg-12">
-
-                    <div class="container_column1 row col-lg-5" style="font-size: small;">
-
-                        <div class="column1 col-lg-6 col-md-3 col-sm-4 col-6">
-                            <asp:label runat="server" class="form-label" for="tx_nrodocumento">Nro</asp:label>
-                            <asp:TextBox ID="tx_nrodocumento" runat="server" class="form-control mb-2"></asp:TextBox>
-
-                            <asp:label runat="server" class="form-label" for="tx_fechaEntrega">Fecha Entrega</asp:label>
-                            <asp:TextBox ID="tx_fechaEntrega" runat="server" class="form-control mb-2" AutoComplete="off"></asp:TextBox>
-                            <asp:CalendarExtender ID="tx_fechaEntrega_CalendarExtender" runat="server"
-                                TargetControlID="tx_fechaEntrega"></asp:CalendarExtender>
-
-                            <div class="group_verificar mb-2" style="box-shadow: 1px 0px 2px 0px #7f7d7d;padding: 3px; border: 1px solid #00000026;">
-                                <asp:label runat="server" class="form-label" for="tx_cliente">Tienda:</asp:label>
-                                <asp:TextBox ID="tx_cliente" runat="server" class="form-control mb-1" style="font-size: smaller;"></asp:TextBox>
-                                <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server"
-                                    TargetControlID="tx_cliente"
-                                    CompletionSetCount="12"
-                                    MinimumPrefixLength="1" ServiceMethod="GetlistaClientes222"
-                                    UseContextKey="True"
-                                    CompletionListCssClass="CompletionList"
-                                    CompletionListItemCssClass="CompletionlistItem"
-                                    CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
-                                </asp:AutoCompleteExtender> 
-
-                                <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
-                                <asp:Button ID="bt_verificar" CssClass="btn btn-info mb-2" runat="server" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
-                            </div>
-
-                           
-                            <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Razon Social:"></asp:Label>
-                            <asp:TextBox ID="tx_razonSocial" CssClass="form-control mb-2" Font-Size="Smaller" runat="server"></asp:TextBox>
-                        </div>
-
-                        <div class="column2 col-lg-6 col-md-3 col-sm-4 col-6">
-                            <asp:label class="form-label" runat="server" for="tx_solicitante">Solicitante</asp:label>
-                            <asp:TextBox ID="tx_solicitante" runat="server" class="form-control mb-2" Font-Size="Smaller"></asp:TextBox>
-
-                            <asp:label runat="server" class="form-label" for="tx_horaEntrega">Hora Entrega</asp:label>
-                            <asp:TextBox ID="tx_horaEntrega" runat="server" class="form-control mb-2" type="time" AutoComplete="off"></asp:TextBox>
-
-                            <asp:Label ID="Label1" for="tx_propietario" runat="server" Text="Propietario:"></asp:Label>
-                            <asp:TextBox ID="tx_propietario" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
-
-                            <asp:Label runat="server" class="form-label">Metodo de Pago</asp:Label>
-                            <asp:DropDownList ID="dd_metodoPago" class="form-select mb-2" Font-Size="Small" runat="server">
-                            </asp:DropDownList>
-
-                            <asp:Label ID="Label3" for="tx_nit" runat="server" Text="Nit:"></asp:Label>
-                            <asp:TextBox ID="tx_nit" CssClass="form-control mb-2" runat="server" Font-Size="Smaller" AutoComplete="off"></asp:TextBox>
-                        
-                        </div>
-                        <div class="col-lg-12">
-                            <asp:Button ID="bt_guardar" runat="server" class="btn btn-success" Text="Guardar" OnClick="bt_guardar_Click" />
-                        </div>
-
-
-                    </div>
-
-                    <div class="container_column2 col-lg-7 col-md-7 col-sm-10 col-12">
-                        <div class="container_gvListProductos table-responsive">
-                            <asp:GridView ID="gv_adicionados" runat="server" BackColor="White"
-                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
-                                Font-Size="X-Small" ForeColor="Black" GridLines="Vertical"
-                                OnRowCancelingEdit="gv_adicionados_RowCancelingEdit"
-                                OnRowDeleting="gv_adicionados_RowDeleting"
-                                OnRowEditing="gv_adicionados_RowEditing" AutoGenerateColumns="false"
-                                OnRowUpdating="gv_adicionados_RowUpdating" CssClass="gv_adicionados table-sticky">
-                                <AlternatingRowStyle BackColor="#CCCCCC" />
-                                <Columns>
-                                    <asp:CommandField ShowEditButton="True" />
-                                    <asp:CommandField ShowDeleteButton="True" />
-
-                                    <asp:BoundField DataField="Codigo" HeaderText="Codigo" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Producto" HeaderText="Producto" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Tipo" HeaderText="Tipo" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Precio" HeaderText="Precio" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="PrecioTotal" HeaderText="Precio Total" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="ItemPackFerial" HeaderText="Item Pack Ferial" HtmlEncode="false"/>
-
-                                </Columns>
-
-                                <FooterStyle BackColor="#CCCCCC" />
-                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#383838" />
-                            </asp:GridView>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
+  <div class="row">
+  <div class="col-12">
+      <div class="card shadow-sm">
+            <div class="card-header bg-success text-white fw-bold">
+                Adición de Producto
             </div>
-        </div>
+
+      <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+            <!-- Fila principal -->
+            <div class="row g-3">
+             <!-- NRO DOCUMENTO -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_nrodocumento" CssClass="form-label">Nro</asp:Label>
+                     <asp:TextBox ID="tx_nrodocumento" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                 </div>
+
+                 <!-- FECHA ENTREGA -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_fechaEntrega" CssClass="form-label">Fecha Entrega</asp:Label>
+                     <asp:TextBox ID="tx_fechaEntrega" runat="server" CssClass="form-control form-control-sm" AutoComplete="off"></asp:TextBox>
+                     <asp:CalendarExtender ID="tx_fechaEntrega_CalendarExtender" runat="server" TargetControlID="tx_fechaEntrega"></asp:CalendarExtender>
+                 </div>
+
+                 <!-- TIENDA -->
+                 <div class="col-12">
+                     <div class="p-2 border rounded" style="background-color:#f8f9fa;">
+                         <asp:Label runat="server" AssociatedControlID="tx_cliente" CssClass="form-label">Tienda</asp:Label>
+                         <asp:TextBox ID="tx_cliente" runat="server" CssClass="form-control form-control-sm mb-2"></asp:TextBox>
+                         <asp:AutoCompleteExtender 
+                             ID="tx_cliente_AutoCompleteExtender" 
+                             runat="server"
+                             TargetControlID="tx_cliente"
+                             CompletionSetCount="12"
+                             MinimumPrefixLength="1" 
+                             ServiceMethod="GetlistaClientes222"
+                             UseContextKey="True"
+                             CompletionListCssClass="CompletionList"
+                             CompletionListItemCssClass="CompletionlistItem"
+                             CompletionListHighlightedItemCssClass="CompletionListMighlightedItem"
+                             CompletionInterval="10">
+                         </asp:AutoCompleteExtender>
+
+                         <div class="d-flex align-items-center flex-wrap gap-2">
+                             <asp:CheckBox ID="cb_actualizarCliente" runat="server" CssClass="form-check-input" />
+                             <asp:Label runat="server" AssociatedControlID="cb_actualizarCliente" CssClass="form-check-label me-3">Actualizar Tienda</asp:Label>
+                             <asp:Button ID="bt_verificar" runat="server" CssClass="btn btn-info btn-sm" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
+                         </div>
+                     </div>
+                 </div>
+
+                 <!-- RAZÓN SOCIAL -->
+                 <div class="col-12">
+                     <asp:Label runat="server" AssociatedControlID="tx_razonSocial" CssClass="form-label">Razón Social</asp:Label>
+                     <asp:TextBox ID="tx_razonSocial" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                 </div>
+
+                 <!-- SOLICITANTE -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_solicitante" CssClass="form-label">Solicitante</asp:Label>
+                     <asp:TextBox ID="tx_solicitante" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                 </div>
+
+                 <!-- HORA ENTREGA -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_horaEntrega" CssClass="form-label">Hora Entrega</asp:Label>
+                     <asp:TextBox ID="tx_horaEntrega" runat="server" CssClass="form-control form-control-sm" type="time" AutoComplete="off"></asp:TextBox>
+                 </div>
+
+                 <!-- PROPIETARIO -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_propietario" CssClass="form-label">Propietario</asp:Label>
+                     <asp:TextBox ID="tx_propietario" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+                 </div>
+
+                 <!-- MÉTODO DE PAGO -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="dd_metodoPago" CssClass="form-label">Método de Pago</asp:Label>
+                     <asp:DropDownList ID="dd_metodoPago" runat="server" CssClass="form-select form-select-sm"></asp:DropDownList>
+                 </div>
+
+                 <!-- NIT -->
+                 <div class="col-12 col-md-6">
+                     <asp:Label runat="server" AssociatedControlID="tx_nit" CssClass="form-label">NIT</asp:Label>
+                     <asp:TextBox ID="tx_nit" runat="server" CssClass="form-control form-control-sm" AutoComplete="off"></asp:TextBox>
+                 </div>
+
+                 <!-- BOTÓN GUARDAR -->
+                 <div class="col-12 ">
+                     <asp:Button ID="bt_guardar" runat="server" CssClass="btn btn-success btn-sm px-4" Text="Guardar" OnClick="bt_guardar_Click" />
+                 </div>
+            </div>
+        </li>
+          <li class="list-group-item">
+              <div class="row g-3">
+                    <!-- COLUMNA DERECHA -->
+  <div class="col-12 col-lg-12">
+      <div class="table-responsive">
+          <asp:GridView 
+              ID="gv_adicionados" 
+              runat="server"
+              CssClass="table table-striped table-bordered table-sm text-center align-middle"
+              Font-Size="Small"
+              AutoGenerateColumns="False"
+              OnRowCancelingEdit="gv_adicionados_RowCancelingEdit"
+              OnRowDeleting="gv_adicionados_RowDeleting"
+              OnRowEditing="gv_adicionados_RowEditing"
+              OnRowUpdating="gv_adicionados_RowUpdating"
+              DataKeyNames="Codigo">
+              <Columns>
+                  <asp:CommandField ShowEditButton="True" />
+                  <asp:CommandField ShowDeleteButton="True" />
+                  <asp:BoundField DataField="Codigo" HeaderText="Código" />
+                  <asp:BoundField DataField="Producto" HeaderText="Producto" />
+                  <asp:BoundField DataField="Medida" HeaderText="Medida" />
+                  <asp:BoundField DataField="Tipo" HeaderText="Tipo" />
+                  <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                  <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                  <asp:BoundField DataField="PrecioTotal" HeaderText="Precio Total" />
+                  <asp:BoundField DataField="ItemPackFerial" HeaderText="Item Pack Ferial" />
+              </Columns>
+              <HeaderStyle CssClass="bg-dark text-white" />
+          </asp:GridView>
+      </div>
+  </div>
+              </div>
+          </li>
+          </ul>
     </div>
+      </div>
+      </div>
+
+
 
 
 
