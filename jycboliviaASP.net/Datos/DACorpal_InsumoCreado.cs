@@ -89,6 +89,9 @@ namespace jycboliviaASP.net.Datos
                 throw new ArgumentException("Cantidad no es un valor decimal válido.");
             }
 
+
+            // Usamos parámetros para prevenir inyección SQL
+
             string update2 = @"
                 UPDATE tbcorpal_detinsumocreado AS dic
                 INNER JOIN tbcorpal_insumoscreados AS ic ON ic.codigo = dic.codinsumocreado
@@ -106,6 +109,7 @@ namespace jycboliviaASP.net.Datos
                 // Ejecutar la consulta
                 return ConecIns.ejecutarMySql2(comando);
             }
+
         }
 
         // UPDATE INSUMOCREADO
@@ -125,6 +129,7 @@ namespace jycboliviaASP.net.Datos
 
                 return ConecIns.ejecutarMySql2(comando);
             }
+
         }
 
 
