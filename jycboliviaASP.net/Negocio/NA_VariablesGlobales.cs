@@ -23,8 +23,8 @@ namespace jycboliviaASP.net.Negocio
         public static string baseDedatosContenedor = "db_Cochabamba";
         public static string baseDedatosImportacion = "db_jyciasrl";
         //public static string fechaInicialProduccion = "'2023-12-01'";  Saldo Inicial 1
-        public static string fechaInicialProduccion = "'2025-04-01'";
-        public static string fechaInicialentregaProducto = "'2025-04-01'";
+        public static string fechaInicialProduccion = "'2025-11-08'";
+        public static string fechaInicialentregaProducto = "'2025-11-08'";
 
         public int get_VCAJAenbasedeDatosActual(string baseDatos)
         {
