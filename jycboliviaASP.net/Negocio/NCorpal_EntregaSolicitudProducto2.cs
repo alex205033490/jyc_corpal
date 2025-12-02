@@ -164,5 +164,16 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.Obtener_codMetodoPagoSolicitud(cod);
         }
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta)
+        {
+            try
+            {
+                return datos.POST_rechazarSolCredito(codResp, codSol, nroBoleta);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al rechazar la solicitud de credito. " + ex.Message);
+            }
+        }
     }
 }

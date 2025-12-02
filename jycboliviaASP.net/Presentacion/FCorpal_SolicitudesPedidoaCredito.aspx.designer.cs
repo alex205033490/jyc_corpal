@@ -60,6 +60,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_registrarAprobacion;
 
         /// <summary>
+        /// Control btn_rechazarCredito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_rechazarCredito;
+
+        /// <summary>
         /// Control bt_limpiar.
         /// </summary>
         /// <remarks>

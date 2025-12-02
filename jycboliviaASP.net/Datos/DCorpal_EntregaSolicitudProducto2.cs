@@ -548,6 +548,7 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+       
         internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
         {
             try
@@ -605,6 +606,33 @@ namespace jycboliviaASP.net.Datos
             } catch(Exception ex)
             {
                 throw new Exception("Error en la consulta al obtener el codigoMetodoPago. " + ex.Message);
+            }
+        }
+
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta)
+        {
+            try
+            {
+                string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep 
+                                SET sep.resp_aprobarcredito = @codResp, 
+                                sep.fecha_aprobarcredito = current_date(), 
+                                sep.hora_aprobarcredito = current_time(), 
+                                sep.estado_aprobarcredito = 0 
+                                WHERE sep.estado = 1 and sep.codigo = @codSol and sep.nroboleta = @nroBoleta;";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codResp", codResp);
+                    cmd.Parameters.AddWithValue("@codSol", codSol);
+                    cmd.Parameters.AddWithValue("@nroBoleta", nroBoleta);
+
+                    bool result = conexion.ejecutarMySql2(cmd);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Hubo un error en la consulta de aprobación de credito." + ex.Message);
             }
         }
 
