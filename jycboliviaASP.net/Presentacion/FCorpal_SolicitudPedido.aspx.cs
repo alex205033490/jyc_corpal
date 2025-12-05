@@ -199,6 +199,7 @@ namespace jycboliviaASP.net.Presentacion
             if (validadCantidadStockParcial())
             {
                 adicionar_productos();
+                limpiarCamposADDProducto();
             }
         }
 
@@ -263,7 +264,6 @@ namespace jycboliviaASP.net.Presentacion
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Cantidad igual 0') </script>");
-            
         }
         private bool validadCantidadStockParcial()
         {
@@ -292,13 +292,14 @@ namespace jycboliviaASP.net.Presentacion
                     {
                         stockParcial = Convert.ToDecimal(row.Cells[6].Text);
                     }
-
+                    /*
                     if(cantidadIngresada > stockParcial)
                     {
                         showalert($"No cuentas con stock disponible. Stock disponible: {stockParcial} ");
                         esValido = false;
                         break;
                     }
+                    */
                 }
             }
             return esValido;
@@ -567,6 +568,13 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
 
+        }
+        private void limpiarCamposADDProducto()
+        {
+            txt_nomProducto.Text = string.Empty;
+            txt_cantProducto.Text = string.Empty;
+            gv_Productos.DataSource = null;
+            gv_Productos.DataBind();
         }
 
 
