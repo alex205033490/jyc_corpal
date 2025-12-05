@@ -405,42 +405,7 @@ namespace jycboliviaASP.net.Datos
         }
 
         internal DataSet get_StockProducctos(string fechaHasta)
-        {
-           /* string consulta = "select "+
-                               " pp.codigo, pp.producto, pp.medida, ifnull(pp.stock,0) as 'stock' " +
-				               " from tbcorpal_producto pp "+
-				               " where pp.estado = 1";
-            
-            string consulta = "SELECT "+
-                               " pp.codigo, pp.producto, pp.medida, "+
-                               " ifnull(t1.ingreso,0) as 'Ingreso1', "+
-                               " ifnull(t2.salida,0) as 'Salida1', "+
-                               " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'Stock' "+ 
-                               " FROM tbcorpal_producto pp "+
-                               " LEFT JOIN "+ 
-                               " ( "+
-                               " select "+ 
-                               " oo.codProductonax, sum(oo.cantcajas) as 'ingreso' "+  
-                               " from tbcorpal_entregasordenproduccion oo "+
-                               " where "+
-                               " oo.estado = 1 and "+
-                               " oo.fechagra between "+NA_VariablesGlobales.fechaInicialProduccion+" and " +fechaHasta+
-                               " group by oo.codProductonax "+
-                               " ) as t1  ON pp.codigo = t1.codProductonax "+
-                               " LEFT JOIN "+
-                               " ( "+
-                               " select dss.codproducto, sum(dss.cantentregada) as 'salida' "+ 
-                               " from tbcorpal_solicitudentregaproducto ss, "+ 
-                               " tbcorpal_detalle_solicitudproducto dss "+
-                               " where "+
-                               " ss.codigo = dss.codsolicitud and "+
-                               " ss.estado = 1 and "+
-                               " ss.estadosolicitud = 'Cerrado' and "+
-                               " ss.fechaentrega between " + NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta +
-                               " group by dss.codproducto "+
-                               " ) as t2 ON pp.codigo = t2.codproducto "+
-                               " WHERE "+
-                               " pp.estado = 1"; */
+        {         
            NA_VariablesGlobales nv = new NA_VariablesGlobales();
             string consulta = nv.get_consultaStockProductosActual_fecha(fechaHasta);
             return conexion.consultaMySql(consulta);
