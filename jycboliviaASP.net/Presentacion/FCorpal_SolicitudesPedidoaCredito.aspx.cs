@@ -211,10 +211,62 @@ namespace jycboliviaASP.net.Presentacion
                 return false;
             }
         }
+        private bool rechazarSolCredito()
+        {
+            try
+            {
+                NCorpal_EntregaSolicitudProducto2 Nent = new NCorpal_EntregaSolicitudProducto2();
+                NA_Responsables Nresp = new NA_Responsables();
+
+                string usu = Session["NameUser"].ToString();
+                string pass = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usu, pass);
+
+                if(codUser != 11 && codUser != 5)
+                {
+                    showalert("No tienes permisos para rechazar solicitudes");
+                    return false;
+                }
+                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
+                {
+                    CheckBox chk = (CheckBox)row.FindControl("chkSolicitud");
+                    if(chk != null && chk.Checked)
+                    {
+                        int codSol = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex]["codigo"]);
+                        string nroBoleta = gv_solicitudesProductos.DataKeys[row.RowIndex]["nroboleta"].ToString();
+
+                        bool result = Nent.POST_rechazarSolCredito(codUser, codSol, nroBoleta);
+
+                        return result;
+                    }
+                }
+                return false;
+            }
+            catch(Exception ex)
+            {
+                showalert("Error en el metodo Rechazar Solicitud Credito. " + ex.Message);
+                return false;
+            }
+        }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {
             limpiarForm();
+        }
+
+        protected void btn_rechazarCredito_Click(object sender, EventArgs e)
+        {
+            bool result = rechazarSolCredito();
+            if (result)
+            {
+                limpiarForm();
+                showalert("La solicitud de credito ha sido Rechazada.");
+            }
+            else
+            {
+                showalert("La solicitud no pudo ser rechazada");
+            }
+
         }
     }
 }

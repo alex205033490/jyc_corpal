@@ -128,6 +128,7 @@
 
                             <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-6 col-5">
                                 <asp:Button ID="btn_registrarAprobacion" runat="server" CssClass="btn btn-success" Text="Aprobar Credito" OnClick="btn_registrarAprobacion_Click" />
+                                <asp:Button ID="btn_rechazarCredito" runat="server" CssClass="btn btn-danger" Text="Rechazar Credito" OnClick="btn_rechazarCredito_Click" />
                                 <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                             </div>
                         </div>
