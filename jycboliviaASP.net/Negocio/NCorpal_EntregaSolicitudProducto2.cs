@@ -175,5 +175,30 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al rechazar la solicitud de credito. " + ex.Message);
             }
         }
+        internal bool POST_RegistroAsignacionChoferAVehiculo(int codCar, int codChofer, int codUserGra, string userGra)
+        {
+            try
+            {
+                return datos.POST_RegistroAsignacionChoferAVehiculo(codCar, codChofer, codUserGra, userGra);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar la asignacion de chofer. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtener_UltConductorVehiculo(int codVehiculo)
+        {
+            try
+            {
+                return datos.GET_obtener_UltConductorVehiculo(codVehiculo);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al cargar los datos del conductor. "+ex.Message);
+            }
+        }
+
+
     }
 }

@@ -69,6 +69,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::AjaxControlToolkit.AutoCompleteExtender tx_chofer_AutoCompleteExtender;
 
         /// <summary>
+        /// Control btn_newChofer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_newChofer;
+
+        /// <summary>
         /// Control dd_listVehiculo.
         /// </summary>
         /// <remarks>

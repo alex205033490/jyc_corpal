@@ -157,15 +157,17 @@
                     <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
                         <asp:HiddenField ID="hf_codChofer" runat="server"/>
                         
+                        
                         <asp:Label runat="server" Font-Size="Small" Text="Chofer"></asp:Label>
-                        <asp:TextBox ID="tx_chofer" runat="server" CssClass="form-control mb-2" Font-Size="Small"></asp:TextBox>
+                        <asp:TextBox ID="tx_chofer" runat="server" CssClass="form-control mb-1" Font-Size="Small"></asp:TextBox>
                         <asp:AutoCompleteExtender ID="tx_chofer_AutoCompleteExtender" runat="server"
-                             TargetControlID="tx_chofer" CompletionSetCount="12" MinimumPrefixLength="2"
-                             ServiceMethod="getListResponsable" UseContextKey="true" CompletionListCssClass="CompletionList" 
-                             CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
-                             CompletionInterval="10" OnClientItemSelected="onResponsableSelected"></asp:AutoCompleteExtender>
-
-
+                                     TargetControlID="tx_chofer" CompletionSetCount="12" MinimumPrefixLength="2"
+                                     ServiceMethod="getListResponsable" UseContextKey="true" CompletionListCssClass="CompletionList" 
+                                     CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
+                                     CompletionInterval="10" OnClientItemSelected="onResponsableSelected"></asp:AutoCompleteExtender>
+                            
+                        <asp:Button runat="server" ID="btn_newChofer" CssClass="btn btn-dark w-100 mb-2" Text="Nuevo Chofer" Style="height: 35px; font-size: 0.75rem;" OnClick="btn_newChofer_Click" />
+                        
                         <asp:Label runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
                         <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select ddVehiculo" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                         </asp:DropDownList>

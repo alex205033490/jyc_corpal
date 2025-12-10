@@ -51,7 +51,7 @@ namespace jycboliviaASP.net.Datos
                 "and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY " +
                 "and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) " +
                 "and (sep.cod_modcobranza !=2 " +
-                "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) "+
+                "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) " +
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
 
             return conexion.consultaMySql(consulta);
@@ -205,7 +205,7 @@ namespace jycboliviaASP.net.Datos
                                " tbcorpal_vehiculos vv " +
                                " left join tb_responsable res on vv.codconductor = res.codigo " +
                                " where " +
-                               " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and "+
+                               " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and " +
                                " dd.codvehiculo = vv.codigo and " +
                                " dd.estado = 1 and " +
                                " dd.estadodespacho = '" + estado + "'";
@@ -395,7 +395,7 @@ namespace jycboliviaASP.net.Datos
         }
 
         /* POST INSERTAR DETALLES DE SOLICITUD PEDIDO*/
-        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock, 
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock,
                                                             int coduser, int codVehiculo)
         {
             bool banderaResultado = false;
@@ -485,7 +485,7 @@ namespace jycboliviaASP.net.Datos
                 "WHERE sep.estadosolicitud = 'Abierto' " +
                 "and sep.cod_modcobranza = 2 " +
                 "and sep.estado = true " +
-                "and sep.estado_aprobarcredito is null "+
+                "and sep.estado_aprobarcredito is null " +
                 "order by sep.fechaGRA asc, sep.nroboleta asc";
 
             return conexion.consultaMySql(consulta);
@@ -548,7 +548,7 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-       
+
         internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
         {
             try
@@ -566,7 +566,7 @@ namespace jycboliviaASP.net.Datos
                 };
                 DataSet ds = conexion.consultaMySqlParametros(consulta, parametros);
 
-                if(ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     return Convert.ToInt32(ds.Tables[0].Rows[0]["codpersolicitante"]);
                 }
@@ -575,7 +575,7 @@ namespace jycboliviaASP.net.Datos
                     return 0;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error en la consulta al obtener el codVendedor. " + ex.Message);
             }
@@ -603,7 +603,7 @@ namespace jycboliviaASP.net.Datos
                 {
                     return 0;
                 }
-            } catch(Exception ex)
+            } catch (Exception ex)
             {
                 throw new Exception("Error en la consulta al obtener el codigoMetodoPago. " + ex.Message);
             }
@@ -636,5 +636,53 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal bool POST_RegistroAsignacionChoferAVehiculo(int codCar, int codChofer, int codUserGra, string userGra)
+        {
+            try
+            {
+                string consulta = @"INSERT INTO tbcorpal_asignacion_conductor_vehiculo 
+                    (codvehiculo, codconductor, fecha_asignacion, hora_asignacion, 
+                    estado, coduser_gra, usuario_gra, fecha_gra, hora_gra) values (
+                    @codvehiculo, @codconductor, current_date(), current_time(), 
+                    1, @coduser_gra, @user_gra, current_date(), current_time())";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+                cmd.Parameters.AddWithValue("@codvehiculo", codCar);
+                cmd.Parameters.AddWithValue("@codconductor", codChofer);
+                cmd.Parameters.AddWithValue("@coduser_gra", codUserGra);
+                cmd.Parameters.AddWithValue("@user_gra", userGra);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en la Consulta RegistroAsignacionChofer. " + ex.Message);
+                return false;
+            }
+        }
+
+        internal DataSet GET_obtener_UltConductorVehiculo(int codVehiculo)
+        {
+            try
+            {
+                string consulta = @"select ac.fecha_asignacion, ac.hora_asignacion, r.codigo, 
+                                r.nombre, ac.codvehiculo from tb_responsable r inner join 
+                                tbcorpal_asignacion_conductor_vehiculo ac ON r.codigo = ac.codconductor 
+                                where ac.codvehiculo = @codcar order by ac.codigo desc limit 1 ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codcar", codVehiculo)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obetener datos del conductor. " + ex.Message);
+            }
+        }
+
+        
+    
     }
 }
