@@ -38,6 +38,7 @@
 
 
 .container-gvRegistros {
+    background-color: white;
     height: 350px;
     border: 2px solid black;
     font-size: 12px;

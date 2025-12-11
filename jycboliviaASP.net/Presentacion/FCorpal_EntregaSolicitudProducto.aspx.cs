@@ -106,10 +106,10 @@ namespace jycboliviaASP.net.Presentacion
             gv_despachoProductos.DataBind();
 
             Session["despachoListGV"] = null;
+            Session["ItemsTotalListGV"] = null;
 
             dd_listVehiculo.SelectedIndex = 0;
            
-
             gv_detCar.DataSource = null;
             gv_detCar.DataBind();
 
@@ -199,6 +199,45 @@ namespace jycboliviaASP.net.Presentacion
                 producto = producto,
                 cantidadEntregada = cantidadEntregada
             };
+
+            // P2 
+            List<Product> sumTotalItems = (List<Product>) Session["ItemsTotalListGV"];
+            if(sumTotalItems == null)
+            {
+                sumTotalItems = new List<Product>();
+            }
+
+            var existente = sumTotalItems.FirstOrDefault(p => p.producto == producto);
+
+            if (chkBox.Checked)
+            {
+                if(existente != null)
+                {
+                    existente.cantidadEntregada += cantidadEntregada;
+                }
+                else
+                {
+                    sumTotalItems.Add(selectedProduct);
+                }
+            }
+            else
+            {
+                if(existente != null)
+                {
+                    existente.cantidadEntregada -= cantidadEntregada;
+
+                    if(existente.cantidadEntregada <= 0)
+                    {
+                        sumTotalItems.Remove(existente);
+                    }
+                }
+                /*sumTotalItems.RemoveAll(p =>
+                p.codigoSolicitud == codigoSolicitud &&
+                p.producto == producto &&
+                p.cantidadEntregada == cantidadEntregada);*/
+            }
+
+            //P1
             List<Product> despachoList = (List <Product>) Session["despachoListGV"];
             if(despachoList == null)
             {
@@ -217,9 +256,13 @@ namespace jycboliviaASP.net.Presentacion
             }
 
             Session["despachoListGV"] = despachoList;
+            Session["ItemsTotalListGV"] = sumTotalItems;
 
             gv_despachoProductos.DataSource = despachoList;
             gv_despachoProductos.DataBind();
+
+            gv_sumTotalItems.DataSource = sumTotalItems;
+            gv_sumTotalItems.DataBind();
         }
 
         /***********************************   VW solicitud entrega producto     *************************************/
@@ -892,4 +935,5 @@ namespace jycboliviaASP.net.Presentacion
         }
     }
 }
+
 
