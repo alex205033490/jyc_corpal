@@ -113,10 +113,15 @@
                             <asp:BoundField DataField="tiendaname" HeaderText="Cliente" HtmlEncode="false" />
                         </Columns>
                     </asp:GridView>
-
-                </div>
+                </div>                
             </div>
-
+            <asp:Button 
+    ID="bt_exportar" 
+    runat="server" 
+    Text="Excel" 
+    OnClick="Button1_Click"  
+    CssClass="btn btn-success" 
+    UseSubmitBehavior="true" />
 
             <div class="container-lista2">
                 <div>
@@ -198,6 +203,10 @@
                 </div>
             </div>
                 </ContentTemplate>
+                <Triggers>
+                    <asp:PostBackTrigger ControlID="bt_exportar" />
+                </Triggers>
+
 </asp:UpdatePanel>
 
             <br />

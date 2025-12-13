@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.UI.WebControls;   // ✅ ESTE ES EL ÚNICO CheckBox QUE NECESITAS
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.Configuration;
-using static jycboliviaASP.net.Negocio.NA_APIcompras;
 using System.Globalization;
-using AjaxControlToolkit;
-using MySql.Data.MySqlClient;
-using MaterialDesignThemes.Wpf.Converters;
-using ZstdSharp.Unsafe;
 using System.Web.Services;
 using System.Web.Script.Services;
+using System.IO;
+
+
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -139,28 +137,31 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('Error: Seleccionar Entrega') </script>");
         }
-   
+
+
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                CheckBox chkSelect = (CheckBox)e.Row.FindControl("chkSelect");
-                
-                if (chkSelect != null )
+                System.Web.UI.WebControls.CheckBox chkSelect =
+                    (System.Web.UI.WebControls.CheckBox)e.Row.FindControl("chkSelect");
+
+                if (chkSelect != null)
                 {
                     List<Product> despachoList = (List<Product>)Session["despachoListGV"];
 
-                    if(despachoList != null)
+                    if (despachoList != null)
                     {
                         string nroBoleta = e.Row.Cells[1].Text;
                         string producto = e.Row.Cells[2].Text;
 
-                        var selectedProduct = despachoList.FirstOrDefault(p => p.nroboleta == nroBoleta && p.producto == producto);
+                        var selectedProduct = despachoList
+                            .FirstOrDefault(p => p.nroboleta == nroBoleta && p.producto == producto);
 
-                        if(selectedProduct != null )
+                        if (selectedProduct != null)
                         {
                             chkSelect.Checked = true;
-                            e.Row.CssClass += "highlighted";
+                            e.Row.CssClass += " highlighted";
                         }
                         else
                         {
@@ -172,6 +173,8 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+
+
         public class Product
         {
             public int codigoSolicitud {  get; set; }
@@ -181,16 +184,23 @@ namespace jycboliviaASP.net.Presentacion
         }
         protected void chk_seleccionar_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox chkBox = sender as CheckBox;
-            GridViewRow row = (chkBox.NamingContainer as GridViewRow);
+            System.Web.UI.WebControls.CheckBox chkBox = sender as System.Web.UI.WebControls.CheckBox;
+
+            if (chkBox == null) return;
+
+            GridViewRow row = chkBox.NamingContainer as GridViewRow;
+            if (row == null) return;
 
             int codigoSolicitud = int.Parse(row.Cells[1].Text);
             string nroBoleta = row.Cells[2].Text;
             string producto = row.Cells[4].Text;
 
-            TextBox txtCantidadEntregada = row.FindControl("tx_cantidadEntregarOK") as TextBox;
+            System.Web.UI.WebControls.TextBox txtCantidadEntregada =
+                row.FindControl("tx_cantidadEntregarOK") as System.Web.UI.WebControls.TextBox;
+
             int cantidadEntregada = 0;
-            int.TryParse(txtCantidadEntregada.Text, out cantidadEntregada);
+            if (txtCantidadEntregada != null)
+                int.TryParse(txtCantidadEntregada.Text, out cantidadEntregada);
 
             Product selectedProduct = new Product
             {
@@ -199,21 +209,23 @@ namespace jycboliviaASP.net.Presentacion
                 producto = producto,
                 cantidadEntregada = cantidadEntregada
             };
-            List<Product> despachoList = (List <Product>) Session["despachoListGV"];
-            if(despachoList == null)
+
+            List<Product> despachoList = (List<Product>)Session["despachoListGV"];
+            if (despachoList == null)
             {
                 despachoList = new List<Product>();
             }
+
             if (chkBox.Checked)
             {
                 despachoList.Add(selectedProduct);
             }
             else
             {
-                despachoList.RemoveAll(p => 
-                p.codigoSolicitud == codigoSolicitud && 
-                p.nroboleta == nroBoleta && 
-                p.producto == producto );
+                despachoList.RemoveAll(p =>
+                    p.codigoSolicitud == codigoSolicitud &&
+                    p.nroboleta == nroBoleta &&
+                    p.producto == producto);
             }
 
             Session["despachoListGV"] = despachoList;
@@ -221,6 +233,7 @@ namespace jycboliviaASP.net.Presentacion
             gv_despachoProductos.DataSource = despachoList;
             gv_despachoProductos.DataBind();
         }
+
 
         /***********************************   VW solicitud entrega producto     *************************************/
         protected void btn_registrarDespacho_Click(object sender, EventArgs e)
@@ -317,15 +330,19 @@ namespace jycboliviaASP.net.Presentacion
         private bool ValidarForm()
         {
             bool RegistroSolicitudSeleccionado = false;
-            foreach(GridViewRow row in gv_solicitudesProductos.Rows)
+
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
             {
-                CheckBox chk = (CheckBox)row.FindControl("chkSelect");
-                if(chk != null &&  chk.Checked )
+                System.Web.UI.WebControls.CheckBox chk =
+                    row.FindControl("chkSelect") as System.Web.UI.WebControls.CheckBox;
+
+                if (chk != null && chk.Checked)
                 {
                     RegistroSolicitudSeleccionado = true;
                     break;
                 }
             }
+
             if (!RegistroSolicitudSeleccionado)
             {
                 showalert("Debe seleccionar al menos 1 registro");
@@ -337,7 +354,8 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Debe seleccionar un Chofer Válido");
                 return false;
             }
-            if(string.IsNullOrEmpty(hf_codChofer.Value))
+
+            if (string.IsNullOrEmpty(hf_codChofer.Value))
             {
                 showalert("Debe seleccionar un chofer válido.");
                 return false;
@@ -348,14 +366,18 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Por favor seleccione un vehículo válido.");
                 return false;
             }
+
             return true;
         }
-        
+
+
         private void ProcesarSolicitudesSeleccionadas(int codVehiculo)
         {
-            foreach(GridViewRow row in gv_solicitudesProductos.Rows)
+            foreach (GridViewRow row in gv_solicitudesProductos.Rows)
             {
-                CheckBox chk = row.FindControl("chkSelect") as CheckBox;
+                System.Web.UI.WebControls.CheckBox chk =
+                    row.FindControl("chkSelect") as System.Web.UI.WebControls.CheckBox;
+
                 if (chk == null || !chk.Checked)
                     continue;
 
@@ -372,19 +394,28 @@ namespace jycboliviaASP.net.Presentacion
                 int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codSolicitud);
                 int codMetPagoSol = nego.Obtener_codMetodoPagoSolicitud(codSolicitud);
 
-                TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-                decimal cantidad = 0;
-                decimal.TryParse(txt_cantidad.Text, out cantidad);
+                System.Web.UI.WebControls.TextBox txt_cantidad =
+                    row.FindControl("tx_cantidadEntregarOK") as System.Web.UI.WebControls.TextBox;
 
-                bool RegistroIngresoAlmacen = RegistrarIngresoAlmacenDinamico(codVendedor, codProducto, producto, cantidad);
+                decimal cantidad = 0;
+                if (txt_cantidad != null)
+                    decimal.TryParse(txt_cantidad.Text, out cantidad);
+
+                bool RegistroIngresoAlmacen = RegistrarIngresoAlmacenDinamico(
+                    codVendedor, codProducto, producto, cantidad);
+
                 if (!RegistroIngresoAlmacen)
                 {
-                    showalert("No se pudo ingresar el stock al almacén. ");
+                    showalert("No se pudo ingresar el stock al almacén.");
                     return;
                 }
-                RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
+
+                RegistrarVentaConDetalle123(
+                    codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
             }
         }
+
+
         private void FinalizarRegistro(int codDespacho)
         {
             limpiarForm();
@@ -826,6 +857,46 @@ namespace jycboliviaASP.net.Presentacion
         {
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+        }
+
+
+        private void ExportarExcel(DataSet datos)
+        {
+            HttpResponse response = HttpContext.Current.Response;
+            response.Clear();
+            response.Buffer = true;
+            response.Charset = "";
+            response.ContentType = "application/vnd.ms-excel";
+
+            string nombre = "Entrega_Solicitud" + Session["BaseDatos"].ToString() + ".xls";
+            response.AddHeader("Content-Disposition", "attachment;filename=" + nombre);
+
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    DataGrid dg = new DataGrid();
+                    dg.DataSource = datos;
+                    dg.DataBind();
+                    dg.RenderControl(htw);
+
+                    response.Output.Write(sw.ToString());
+                    response.Flush();
+                    response.End();   // AQUÍ SÍ VA
+                }
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet datos = negocio.get_VWRegistrosEntregaSolicitudProductos("Abierto");
+
+            ExportarExcel(datos);
         }
     }
 }
