@@ -102,8 +102,28 @@ namespace jycboliviaASP.net.Datos
                 Console.WriteLine($"Error general: {ex.Message}. stacktrace: {ex.Message}");
                 return false;
             }
-
-
         }
+
+        internal DataSet get_showVehiculoDD()
+        {
+            try
+            {
+                String consulta = @"select 
+                                    v.`codigo`,
+                                    concat(v.`marca`, ' ','Placa: ', v.`placa` ) as 'detalle' 
+                                    from tbcorpal_vehiculos v 
+                                    left join tbcorpal_despachovehiculo dv ON v.`codigo` = dv.`codvehiculo` 
+                                    group by dv.`codvehiculo` 
+                                    order by v.`marca` asc";
+                return conexion.consultaMySql(consulta);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener los datos del vehiculo" + ex.Message);
+            }
+        }
+
+
+
     }
 }
