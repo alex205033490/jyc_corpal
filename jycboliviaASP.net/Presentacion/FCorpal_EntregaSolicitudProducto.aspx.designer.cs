@@ -51,31 +51,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.GridView gv_despachoProductos;
 
         /// <summary>
-        /// Control hf_codChofer.
+        /// Control gv_sumTotalItems.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hf_codChofer;
-
-        /// <summary>
-        /// Control tx_chofer.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_chofer;
-
-        /// <summary>
-        /// Control tx_chofer_AutoCompleteExtender.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender tx_chofer_AutoCompleteExtender;
+        protected global::System.Web.UI.WebControls.GridView gv_sumTotalItems;
 
         /// <summary>
         /// Control dd_listVehiculo.
@@ -103,6 +85,42 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_detCar;
+
+        /// <summary>
+        /// Control hf_codChofer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_codChofer;
+
+        /// <summary>
+        /// Control tx_chofer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_chofer;
+
+        /// <summary>
+        /// Control tx_chofer_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_chofer_AutoCompleteExtender;
+
+        /// <summary>
+        /// Control btn_newChofer.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_newChofer;
 
         /// <summary>
         /// Control lb_detalleRegistro.

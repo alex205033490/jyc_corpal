@@ -128,8 +128,8 @@
                     <h3>| DESPACHO DE PRODUCTOS |</h3>
                 </div>
 
-                <div class="container_despachoDProductos border-2">
-                    <div class="lista_despachos col-lg-6">
+                <div class="container_despachoDProductos border-2 row">
+                    <div class="lista_despachos col-lg-6 col-md-6 col-sm-6">
 
                                 <asp:GridView ID="gv_despachoProductos" runat="server" CssClass="gv_despachoProductos table table-striped"
                                     AutoGenerateColumns="false" Visible="true">
@@ -153,6 +153,27 @@
                                 </asp:GridView>
 
                     </div>
+
+                    <div class="lista_SumaProductosDespacho col-lg-4 col-md-4 col-sm-5">
+                        <asp:GridView ID="gv_sumTotalItems" runat="server" CssClass="gv_totalCantProducto table table-striped" 
+                                AutoGenerateColumns="false" Visible="true" style="font-size: 0.65rem;">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Item">
+                                    <ItemTemplate>
+                                        <asp:Label id="lbl_productoSum" runat="server" Text='<%# Bind("producto") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Cantidad Total">
+                                    <ItemTemplate>
+                                        <asp:Label id="lbl_cantidadSum" runat="server" Text='<%# Bind("cantidadEntregada") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+
+                        </asp:GridView>
+                    </div>
+
                 </div>
 
                 <!-- DETALLE VEHICULO Y DETALLE-->
@@ -160,17 +181,7 @@
                 <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
                     <div class="mb-3 col-lg-3 col-md-4 col-sm-6">
-                        <asp:HiddenField ID="hf_codChofer" runat="server"/>
                         
-                        <asp:Label runat="server" Font-Size="Small" Text="Chofer"></asp:Label>
-                        <asp:TextBox ID="tx_chofer" runat="server" CssClass="form-control mb-2" Font-Size="Small"></asp:TextBox>
-                        <asp:AutoCompleteExtender ID="tx_chofer_AutoCompleteExtender" runat="server"
-                             TargetControlID="tx_chofer" CompletionSetCount="12" MinimumPrefixLength="2"
-                             ServiceMethod="getListResponsable" UseContextKey="true" CompletionListCssClass="CompletionList" 
-                             CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
-                             CompletionInterval="10" OnClientItemSelected="onResponsableSelected"></asp:AutoCompleteExtender>
-
-
                         <asp:Label runat="server" Font-Size="Small" Text="Vehiculo:"></asp:Label>
                         <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select ddVehiculo" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                         </asp:DropDownList>
@@ -187,6 +198,18 @@
                                 <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
                             </Triggers>
                         </asp:UpdatePanel>
+                        
+                        <asp:HiddenField ID="hf_codChofer" runat="server"/>
+                        <asp:Label runat="server" Font-Size="Small" Text="Chofer"></asp:Label>
+                        <asp:TextBox ID="tx_chofer" runat="server" CssClass="form-control mb-1" Font-Size="Small"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="tx_chofer_AutoCompleteExtender" runat="server"
+                                     TargetControlID="tx_chofer" CompletionSetCount="12" MinimumPrefixLength="2"
+                                     ServiceMethod="getListResponsable" UseContextKey="true" CompletionListCssClass="CompletionList" 
+                                     CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
+                                     CompletionInterval="10" OnClientItemSelected="onResponsableSelected"></asp:AutoCompleteExtender>
+                            
+                        <asp:Button runat="server" ID="btn_newChofer" CssClass="btn btn-dark w-100 mb-2" Text="Nuevo Chofer" Style="height: 35px; font-size: 0.75rem;" OnClick="btn_newChofer_Click" />
+                        
                     </div>
 
                     <div class="mb-3 container_detalle col-lg-3 col-md-4 col-sm-6">
@@ -194,7 +217,7 @@
                         <asp:TextBox ID="txt_detalleRegistro" runat="server" CssClass="form-control txtdetalle" TextMode="MultiLine"></asp:TextBox>
                     </div>
 
-                    <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-8">
+                    <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-6">
                         <asp:Button ID="btn_registrarDespacho" runat="server" CssClass="btn btn-success" Text="Registrar Despacho" OnClick="btn_registrarDespacho_Click" />
                         <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                         <asp:Button ID="bt_verRecibo" runat="server" class="btn btn-warning"

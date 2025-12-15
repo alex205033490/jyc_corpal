@@ -104,10 +104,10 @@ namespace jycboliviaASP.net.Presentacion
             gv_despachoProductos.DataBind();
 
             Session["despachoListGV"] = null;
+            Session["ItemsTotalListGV"] = null;
 
             dd_listVehiculo.SelectedIndex = 0;
            
-
             gv_detCar.DataSource = null;
             gv_detCar.DataBind();
 
@@ -210,8 +210,51 @@ namespace jycboliviaASP.net.Presentacion
                 cantidadEntregada = cantidadEntregada
             };
 
+
             List<Product> despachoList = (List<Product>)Session["despachoListGV"];
             if (despachoList == null)
+
+            // P2 
+            List<Product> sumTotalItems = (List<Product>) Session["ItemsTotalListGV"];
+            if(sumTotalItems == null)
+            {
+                sumTotalItems = new List<Product>();
+            }
+
+            var existente = sumTotalItems.FirstOrDefault(p => p.producto == producto);
+
+            if (chkBox.Checked)
+            {
+                if(existente != null)
+                {
+                    existente.cantidadEntregada += cantidadEntregada;
+                }
+                else
+                {
+                    sumTotalItems.Add(selectedProduct);
+                }
+            }
+            else
+            {
+                if(existente != null)
+                {
+                    existente.cantidadEntregada -= cantidadEntregada;
+
+                    if(existente.cantidadEntregada <= 0)
+                    {
+                        sumTotalItems.Remove(existente);
+                    }
+                }
+                /*sumTotalItems.RemoveAll(p =>
+                p.codigoSolicitud == codigoSolicitud &&
+                p.producto == producto &&
+                p.cantidadEntregada == cantidadEntregada);*/
+            }
+
+            //P1
+            List<Product> despachoList = (List <Product>) Session["despachoListGV"];
+            if(despachoList == null)
+
             {
                 despachoList = new List<Product>();
             }
@@ -229,9 +272,13 @@ namespace jycboliviaASP.net.Presentacion
             }
 
             Session["despachoListGV"] = despachoList;
+            Session["ItemsTotalListGV"] = sumTotalItems;
 
             gv_despachoProductos.DataSource = despachoList;
             gv_despachoProductos.DataBind();
+
+            gv_sumTotalItems.DataSource = sumTotalItems;
+            gv_sumTotalItems.DataBind();
         }
 
 
@@ -248,7 +295,16 @@ namespace jycboliviaASP.net.Presentacion
                 int codResponsable = obtenerCodResponsable();
 
                 int codDespacho = RegistrarDespachoPrincipal(detalle, codVehiculo, codResponsable);
-                if(codDespacho <= 0)
+
+                bool result_AsignacionChoferCamion = Registro_AsignacionChoferCamion();
+
+                if (!result_AsignacionChoferCamion)
+                {
+                    showalert("Error no se pudo asignar el chofer al Camión");
+                    return;
+                }
+
+                if (codDespacho <= 0)
                 {
                     showalert("Error al registrar el despacho principal.");
                     return;
@@ -563,6 +619,39 @@ namespace jycboliviaASP.net.Presentacion
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
             return negocio.POST_INSERTdespachoRetornoID(detalle, codVehiculo, codResponsable, codConductor, conductor);
         }
+
+        private bool Registro_AsignacionChoferCamion()
+        {
+            try
+            {
+                NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+
+                NA_Responsables Nresp = new NA_Responsables();
+                string usuarioAux = Session["NameUser"].ToString();
+                string passwordAux = Session["passworuser"].ToString();
+                int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+                DataSet dsResp = Nresp.get_responsable(codUser);
+                string nameResp = "";
+
+                if(dsResp != null && dsResp.Tables[0].Rows.Count > 0)
+                {
+                    nameResp = dsResp.Tables[0].Rows[0]["nombre"].ToString();
+                }
+
+                int codigoVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
+                
+                int codChofer = int.Parse(hf_codChofer.Value);
+
+                nego.POST_RegistroAsignacionChoferAVehiculo(codigoVehiculo, codChofer, codUser, nameResp);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                showalert("Error inesperado en el metodo RegistroAsignacionChoferCamion" + ex.Message);
+                return false;
+            }
+        }
       
         /* Registro stock dinamico por vendedor*/
         private bool RegistrarIngresoAlmacenDinamico(int codVendedor, int codProducto, string producto,
@@ -695,7 +784,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 Label lblCantEntregada = (Label)row.FindControl("lb_cantentregada");
 
-                int codigoVehiculo = dd_listVehiculo.SelectedIndex;
+                int codigoVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
 
                 if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
                 {
@@ -785,7 +874,7 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        // cargar datos (det Car) en gridview
+        // cargar datos (det Car y ConductorCar) en gridview
         protected void dd_listVehiculo_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -793,8 +882,23 @@ namespace jycboliviaASP.net.Presentacion
                 int codigo = int.Parse(dd_listVehiculo.SelectedValue);
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
+                DataSet conductorData = negocio.GET_obtener_UltConductorVehiculo(codigo);
+
                 DataSet carData = negocio.get_detVehiculoGV(codigo);
 
+                if (conductorData.Tables[0].Rows.Count > 0)
+                {
+                    DataRow row = conductorData.Tables[0].Rows[0];
+
+                    hf_codChofer.Value = row["codigo"].ToString();
+                    tx_chofer.Text = row["nombre"].ToString();
+                }
+                else
+                {
+                    hf_codChofer.Value = "";
+                    tx_chofer.Text = "";
+                }
+                    
                 if (carData.Tables[0].Rows.Count > 0)
                 {
 
@@ -859,6 +963,7 @@ namespace jycboliviaASP.net.Presentacion
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
+
         public override void VerifyRenderingInServerForm(Control control)
         {
         }
@@ -897,7 +1002,14 @@ namespace jycboliviaASP.net.Presentacion
             DataSet datos = negocio.get_VWRegistrosEntregaSolicitudProductos("Abierto");
 
             ExportarExcel(datos);
+
+        protected void btn_newChofer_Click(object sender, EventArgs e)
+        {
+            tx_chofer.Text = string.Empty;
+            hf_codChofer.Value = string.Empty;
+
         }
     }
 }
+
 
