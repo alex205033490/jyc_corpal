@@ -79,6 +79,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
 
             mn_despachoCamion.Visible = false;
             mn_entregaSolicitudProducto.Visible = false;
+            mn_asignacionRutaCamion.Visible = false;
         }
 
 

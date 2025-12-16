@@ -72,6 +72,17 @@
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#rutasCamion-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Rutas de Entrega</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+
+          <ul id="rutasCamion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li><a href="../Presentacion/FCorpal_AsignacionRuta_Camion.aspx" id="mn_asignacionRutaCamion" runat="server"><i class="bi bi-circle"></i><span>Asignación de rutas</span></a></li>
+                
+          </ul>
+        </li><!-- End Forms Nav -->
+
+        <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#produccion-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layout-text-window-reverse"></i><span>Produccion</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>

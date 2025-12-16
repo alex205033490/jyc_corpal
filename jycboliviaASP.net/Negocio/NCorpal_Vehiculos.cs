@@ -34,5 +34,16 @@ namespace jycboliviaASP.net.Negocio
             return datos.post_updateRegistroVehiculos(codigo, placa, marca, modelo, detalle, conductor,
              capacidad, cargacajas);
         }
+
+        internal DataSet get_showVehiculoDD()
+        {
+            try
+            {
+                return datos.get_showVehiculoDD();
+            } catch(Exception ex)
+            {
+                throw new Exception("Error inesperado al obtener datos. " + ex.Message);
+            }
+        }
     }
 }
