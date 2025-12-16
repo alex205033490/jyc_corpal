@@ -29,6 +29,7 @@ namespace jycboliviaASP.net.Presentacion
             if (!IsPostBack)
             {
                 Session["despachoListGV"] = null;
+                Session["ItemsTotalListGV"] = null;
                 GET_MostrarSolicitudProductos("Abierto");
                 cargarRegistroVehiculosDD();
             }
@@ -210,10 +211,7 @@ namespace jycboliviaASP.net.Presentacion
                 cantidadEntregada = cantidadEntregada
             };
 
-
-            List<Product> despachoList = (List<Product>)Session["despachoListGV"];
-            if (despachoList == null)
-
+            
             // P2 
             List<Product> sumTotalItems = (List<Product>) Session["ItemsTotalListGV"];
             if(sumTotalItems == null)
@@ -1002,7 +1000,7 @@ namespace jycboliviaASP.net.Presentacion
             DataSet datos = negocio.get_VWRegistrosEntregaSolicitudProductos("Abierto");
 
             ExportarExcel(datos);
-
+        }
         protected void btn_newChofer_Click(object sender, EventArgs e)
         {
             tx_chofer.Text = string.Empty;
