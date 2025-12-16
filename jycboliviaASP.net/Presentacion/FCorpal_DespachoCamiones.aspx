@@ -123,6 +123,8 @@
 
             </div>
 
+            <div class="col-lg-9">
+
 
             <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -160,6 +162,8 @@
                 </Triggers>
             </asp:UpdatePanel>
 
+
+                            </div>
         </div>
 
     </div>

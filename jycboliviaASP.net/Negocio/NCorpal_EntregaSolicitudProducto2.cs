@@ -199,6 +199,43 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        /*  REGISTRO RUTAS DESPACHO  */
+        internal int post_RegistroRutaEntrega_despacho(int codCar, string car, int codChofer, string chofer)
+        {
+            try
+            {
+                return datos.post_RegistroRutaEntrega_despacho(codCar, car, codChofer, chofer);
 
+            }catch(Exception ex)
+            {
+                throw new Exception("Error la registrar ruta entrega. " + ex.Message);
+            }
+        }
+
+        internal bool post_RegistroRutaEntregaPuntos_despacho(int orden, int codRuta, int codCliente, string cliente,
+                                            int codDespacho, string descripcion, string lat, string lng)
+        {
+            try
+            {
+                return datos.post_RegistroRutaEntregaPuntos_despacho(orden, codRuta, codCliente, cliente,
+                                    codDespacho, descripcion, lat, lng);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error la registrar puntos de la ruta. "+ ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtenerDatosClienteDespacho(int codDespacho)
+        {
+            try
+            {
+                return datos.GET_obtenerDatosClienteDespacho(codDespacho);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos del Cliente. "+ex.Message);
+            }
+        }
     }
 }
