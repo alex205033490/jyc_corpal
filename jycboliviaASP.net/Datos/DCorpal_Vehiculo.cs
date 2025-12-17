@@ -123,6 +123,86 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet get_showRutasVehiculosDespachos(int codCar)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    rp.`cliente`, 
+                                    rp.`orden`,
+                                    rp.`lat`,
+                                    rp.`lng` 
+                                    from tbcorpal_rutasentrega re 
+                                    left join tbcorpal_rutapuntos rp ON re.`codigo` = rp.`codruta` 
+                                    where re.`fecharuta` = current_date() 
+                                    and re.`estado` = 1 
+                                    and re.`estadoruta` = 'PENDIENTE' 
+                                    and rp.`estado` = 1 
+                                    and rp.`estadopunta` = 'PENDIENTE' 
+                                    and re.`codvehiculo` = @codCar 
+                                    group by rp.`cliente` 
+                                    order by rp.`orden` asc";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCar", codCar)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            } catch(Exception ex)
+            {
+                throw new Exception($"Erro al obtener las rutas de despacho.  {ex.Message}");
+            }
+        }
+
+        /*  REGISTRO RUTAA  */
+        internal int post_NewRegistroRutaEntrega_Asignacion(int codCar, string car)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutasentrega(fechagra, horagra, fecharuta, horaruta, 
+                    codvehiculo, vehiculo, nombre_ruta, estado) values 
+                    (current_date(), current_time(), current_date, current_time(), 
+                    @codCar, @car, 'Nueva ruta creado desde el formulario', 1); SELECT LAST_INSERT_ID();";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCar", codCar),
+                    new MySqlParameter("@car", car)
+                };
+                return conexion.ejecutarScalarMySql(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar la ruta de entrega. " + ex.Message);
+                return -1;
+            }
+        }
+
+        internal bool post_NewRegistroRutaEntregaPuntos_Asignacion(int orden, int codRuta, int codCliente, string cliente,
+                                            string lat, string lng)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutapuntos(orden, codruta, codcliente, cliente, 
+                            descripcion, estado, lat, lng) values 
+                            (@orden, @codRuta, @codCliente, @cliente, 'Nuevo punto creado desde el formulario.', 1, @lat, @lng )";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+                cmd.Parameters.AddWithValue("@orden", orden);
+                cmd.Parameters.AddWithValue("@codRuta", codRuta);
+                cmd.Parameters.AddWithValue("@codCliente", codCliente);
+                cmd.Parameters.AddWithValue("@cliente", cliente);
+                cmd.Parameters.AddWithValue("@lat", lat);
+                cmd.Parameters.AddWithValue("@lng", lng);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar los puntos. " + ex.Message);
+                return false;
+            }
+        }
 
 
     }

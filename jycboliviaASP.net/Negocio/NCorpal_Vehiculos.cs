@@ -23,7 +23,7 @@ namespace jycboliviaASP.net.Negocio
 
         }
 
-        internal bool anular_registro (List<int> codigo)
+        internal bool anular_registro(List<int> codigo)
         {
             return datos.anular_RegistroVehiculo(codigo);
         }
@@ -40,10 +40,50 @@ namespace jycboliviaASP.net.Negocio
             try
             {
                 return datos.get_showVehiculoDD();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error inesperado al obtener datos. " + ex.Message);
             }
+        }
+
+        internal DataSet get_showRutasVehiculosDespachos(int codCar)
+        {
+            try
+            {
+                return datos.get_showRutasVehiculosDespachos(codCar);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error inesperado al obtener datos. " + ex.Message);
+            }
+        }
+
+        internal int post_NewRegistroRutaEntrega_Asignacion(int codCar, string car)
+        {
+            try
+            {
+                return datos.post_NewRegistroRutaEntrega_Asignacion(codCar, car);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error inesperado registrar la ruta. " + ex.Message);
+            }
+        }
+
+        internal bool post_NewRegistroRutaEntregaPuntos_Asignacion(int orden, int codRuta, int codCliente, string cliente,
+                                            string lat, string lng)
+        {
+            try
+            {
+                return datos.post_NewRegistroRutaEntregaPuntos_Asignacion(orden, codRuta, codCliente, cliente,
+                                                                            lat, lng);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error inesperado al registrar los puntos. " + ex.Message);
+            }
+
         }
     }
 }
