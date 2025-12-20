@@ -2250,6 +2250,7 @@
     <EmbeddedResource Include="Reportes\Report_DespachoProdVehiculo.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboEntregaProductosCamion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ReciboAsignacionProductosCamion.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_SolicitadoEntregado.rdlc" />
     <EmbeddedResource Include="Reportes\Voucher_ReciboEntregaProduccion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_IngresoVSEgreso_SaldoInicial.rdlc" />

@@ -1567,5 +1567,52 @@ namespace jycboliviaASP.net.Datos
                 return ds;
             }
         }
+        internal DataSet get_SolicitadoEntregado(string fechadesde, string fechahasta,string responsable, string producto)
+        {
+            string consulta = "SELECT " +
+                                "    sep.codigo AS Codigo, " +
+                                "    sep.nroboleta AS NroBoleta, " +
+                                "    sep.personalsolicitud AS PersonalSolicitante, " +
+                                "    dsp.codproducto AS CodigoProducto, " +
+                                "    p.producto AS Producto, " +
+                                "    DATE_FORMAT(sep.fechaentrega, '%d/%m/%Y') AS FechaEntrega, " +
+                                "    sep.horaentrega AS HoraEntrada, " +
+                                "    DATE_FORMAT(sep.fechacierre, '%d/%m/%Y') AS FechaCierre, " +
+                                "    sep.horacierre AS HoraCierre, " +
+                                "    dsp.cant AS CantidadSolicitada, " +
+                                "    IFNULL(dd.cantentregada, 0) AS CantidadEntregada, " +
+                                "    sep.estadosolicitud AS EstadoSolicitud, " +
+                                "    cc.tiendaname AS Cliente, " +
+                                "    dsp.tiposolicitud, " +
+                                "    dv.conductor AS Conductor, " +
+                                "    v.placa AS PlacaVehiculo " +
+                                "FROM tbcorpal_solicitudentregaproducto sep " +
+                                "LEFT JOIN tbcorpal_detalle_solicitudproducto dsp " +
+                                "       ON sep.codigo = dsp.codsolicitud " +
+                                "LEFT JOIN tbcorpal_producto p " +
+                                "       ON dsp.codproducto = p.codigo " +
+                                "LEFT JOIN tbcorpal_cliente cc " +
+                                "       ON sep.codcliente = cc.codigo " +
+                                "LEFT JOIN tbcorpal_detalleproddespacho dd " +
+                                "       ON dd.codpedido = sep.codigo " +
+                                "      AND dd.codprod = dsp.codproducto " +
+                                "LEFT JOIN tbcorpal_despachovehiculo dv " +
+                                "       ON dv.codigo = dd.coddespacho " +
+                                "LEFT JOIN tbcorpal_vehiculos v " +
+                                "       ON v.codigo = dv.codvehiculo " +
+                                "WHERE sep.fechaGRA BETWEEN " + fechadesde + " and " + fechahasta +
+                                "  AND sep.personalsolicitud LIKE '%" + responsable + "%' " +
+                                "  AND p.producto LIKE '%" + producto + "%' " +
+                                "  AND ( " +
+                                "        sep.cod_modcobranza <> 2 " +
+                                "        OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) " +
+                                "        OR sep.cod_modcobranza IS NULL " +
+                                "      ) " +
+                                "ORDER BY sep.codigo DESC;";
+
+            return Conx.consultaMySql(consulta);
+        }
+
+
     }
 }

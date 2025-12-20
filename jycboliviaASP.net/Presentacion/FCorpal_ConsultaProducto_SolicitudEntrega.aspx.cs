@@ -10,6 +10,10 @@ using Microsoft.Reporting.WebForms;
 using System.Data;
 using System.Web.Services;
 using System.Web.Script.Services;
+using Microsoft.Reporting.WinForms;
+using LocalReport = Microsoft.Reporting.WebForms.LocalReport;
+using ReportDataSource = Microsoft.Reporting.WebForms.ReportDataSource;
+using ReportParameter = Microsoft.Reporting.WebForms.ReportParameter;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -165,12 +169,41 @@ namespace jycboliviaASP.net.Presentacion
                                         {
                                             get_calidadnachosproceso_Envasadora(fechadesde, fechahasta, Responsable);
                                         }
+                                        else
+                                            if (dd_consulta.SelectedIndex == 12)
+                                        {
+                                            get_SolicitadoyEntregado(fechadesde, fechahasta, Responsable, producto);
+                                        }
 
 
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
         }
+
+        private void get_SolicitadoyEntregado(string fechadesde, string fechahasta, string responsable, string producto)
+        {
+            LocalReport localreport = ReportViewer1.LocalReport;
+            localreport.ReportPath = "Reportes/Report_SolicitadoEntregado.rdlc";
+
+            NCorpal_Produccion nss = new NCorpal_Produccion();
+            DataSet consulta1 = nss.get_SolicitadoEntregado(fechadesde, fechahasta, responsable, producto);
+            DataTable DSconsulta = consulta1.Tables[0];
+
+            ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+            ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_EntregadoSolicitado = new ReportDataSource("DS_EntregadoSolicitado", DSconsulta);
+
+            ReportViewer1.LocalReport.SetParameters(p_fecha1);
+            ReportViewer1.LocalReport.SetParameters(p_fecha2);
+            ReportViewer1.LocalReport.DataSources.Add(DS_EntregadoSolicitado);
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
+
+
+
+        }
+
 
         private void get_calidadnachosproceso_Envasadora(string fechadesde, string fechahasta, string responsable)
         {
