@@ -6,10 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using System.Management.Instrumentation;
+using Newtonsoft.Json.Linq;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -25,7 +26,8 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        // Cargar Clientes 
+
+        // ################ Cargar Clientes DD ################# //
         [WebMethod]
         [ScriptMethod]
         // se devuelve un arreglo con la informacion
@@ -39,7 +41,7 @@ namespace jycboliviaASP.net.Presentacion
             int fin = tuplas.Tables[0].Rows.Count;
 
             string[] lista = new string[fin];
-            
+
             for (int i = 0; i < fin; i++)
             {
                 string codigo = tuplas.Tables[0].Rows[i][0].ToString();
@@ -51,7 +53,7 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        // Cargar datos Vehiculo DD
+        //########### Cargar datos Vehiculo ########### //
         private void cargarVehiculosDD()
         {
             NCorpal_Vehiculos Nve = new NCorpal_Vehiculos();
@@ -69,6 +71,8 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+
+        //######### CARGAR DATOS RUTAS EN GV #########//
         protected void dd_listVehiculo_selectedIndexChanged(object sender, EventArgs e)
         {
             int codCar = int.Parse(dd_listVehiculo.SelectedValue);
@@ -83,7 +87,6 @@ namespace jycboliviaASP.net.Presentacion
                 gv_listaRutasDespacho.DataBind();
             }
         }
-
         private void CargarRutasVehiculo(int codCar)
         {
             try
@@ -101,46 +104,28 @@ namespace jycboliviaASP.net.Presentacion
             {
                 Console.WriteLine("Error al cargar ruta vehiculos. " + ex.Message);
             }
-
         }
 
-        protected void btn_dibujarPuntos_Click(object sender, EventArgs e)
-        {
-            var puntos = new List<object>();
 
-            foreach (GridViewRow row in gv_listaRutasDespacho.Rows)
-            {
-                string lat = row.Cells[2].Text;
-                string lng = row.Cells[3].Text;
-
-                puntos.Add(new
-                {
-                    lat = lat,
-                    lng = lng
-                });
-            }
-
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            string jsonPuntos = js.Serialize(puntos);
-
-            ScriptManager.RegisterStartupScript(
-                    this,
-                    GetType(),
-                    "dibujarPuntos",
-                    $"dibujarPuntosMapa({jsonPuntos})",
-                    true
-         );           
-
-        }
-
+        //###################   REGISTRAR NUEVO PUNTO - MAPS ################//
         protected void btn_registrarNuevoPunto_Click(object sender, EventArgs e)
         {
             int codCar = int.Parse(dd_listVehiculo.SelectedValue);
             string car = dd_listVehiculo.SelectedItem.ToString();
+            int codCli = int.Parse(hf_codCliente.Value);
 
+            if (codCar <= 0)
+            {
+                showalert("Debes seleccionar un Vehiculo válido");
+                return;
+            }
+            if (codCli <= 0)
+            {
+                showalert("Debes seleccionar un Cliente válido");
+                return;
+            }
             RegistrarNewRutaPuntoEntrega(codCar, car);
         }
-
         private void RegistrarNewRutaPuntoEntrega(int codCar, string car)
         {
             try
@@ -162,7 +147,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 DataSet dsCli = nCli.get_ClienteCodigo(codCli);
 
-                foreach(DataRow rowCli in dsCli.Tables[0].Rows)
+                foreach (DataRow rowCli in dsCli.Tables[0].Rows)
                 {
                     string dir_lat = rowCli["direccion_lat"].ToString();
                     string dir_lng = rowCli["direccion_lng"].ToString();
@@ -185,9 +170,44 @@ namespace jycboliviaASP.net.Presentacion
             {
                 showalert("Error en el metodo registro nuevo punto. " + ex.Message);
             }
+        }
 
 
 
+        protected void btn_dibujarPuntos_Click(object sender, EventArgs e)
+        { }
+
+        protected void btn_dibujarPuntosGV_Click(object sender, EventArgs e)
+        {
+            var puntos = new List<object>();
+
+            foreach (GridViewRow row in gv_listaRutasDespacho.Rows)
+            {
+                TextBox txtOrden = (TextBox)row.FindControl("txtOrden");
+
+                string orden = txtOrden.Text;
+                string cli = row.Cells[1].Text;
+                string lat = row.Cells[2].Text;
+                string lng = row.Cells[3].Text;
+
+                puntos.Add(new
+                {
+                    orden = orden,
+                    cliente = cli,
+                    lat = lat,
+                    lng = lng
+                });
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string json = js.Serialize(puntos);
+
+            ScriptManager.RegisterStartupScript(
+                    this,
+                    GetType(),
+                    "dibujarDesdeGV",
+                    $"dibujarPuntosDesdeGv({json});",
+                    true
+                );
         }
 
 
@@ -197,11 +217,68 @@ namespace jycboliviaASP.net.Presentacion
             tx_newCliente.Text = string.Empty;
             hf_codCliente.Value = "";
         }
+
+
         private void showalert(string mensaje)
         {
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
+        protected void btn_guardarOrden_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                actualizarOrdenRutas_asignacion();
+                
+            }
+            catch(Exception ex)
+            {
+                showalert("Error al actualizar los campos. " + ex.Message);
+            }
+        }
+
+        private void actualizarOrdenRutas_asignacion()
+        {
+            try
+            {
+                if (dd_listVehiculo.SelectedIndex == 0)
+                {
+                    showalert("Debes seleccionar un vehiculo válido");
+                    return;
+                }
+
+                int codCar = Convert.ToInt32(dd_listVehiculo.SelectedValue);
+                NCorpal_Vehiculos nVec = new NCorpal_Vehiculos();
+
+                foreach (GridViewRow row in gv_listaRutasDespacho.Rows)
+                {
+                    if (row.RowType != DataControlRowType.DataRow)
+                        continue;
+
+                    TextBox txtOrden = (TextBox)row.FindControl("txtOrden");
+                    if (txtOrden == null || string.IsNullOrWhiteSpace(txtOrden.Text))
+                        continue;
+
+                    int orden = Convert.ToInt32(txtOrden.Text);
+
+                    int codCli = Convert.ToInt32(
+                            gv_listaRutasDespacho.DataKeys[row.RowIndex].Value
+                        );
+
+                    bool result = nVec.update_ordenRutaEntrega_asignacion(codCar, orden, codCli);
+
+                    if (result)
+                    {
+                        CargarRutasVehiculo(codCar);
+                        showalert("Registro actualizado correctamente.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                showalert("Error en el metodo actualizar rutas. " + ex.Message);
+            }
+        }
     }
 }

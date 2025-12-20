@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MaterialDesignThemes.Wpf.Converters;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -131,7 +132,8 @@ namespace jycboliviaASP.net.Datos
                                     rp.`cliente`, 
                                     rp.`orden`,
                                     rp.`lat`,
-                                    rp.`lng` 
+                                    rp.`lng`,
+                                    rp.codcliente 
                                     from tbcorpal_rutasentrega re 
                                     left join tbcorpal_rutapuntos rp ON re.`codigo` = rp.`codruta` 
                                     where re.`fecharuta` = current_date() 
@@ -200,6 +202,34 @@ namespace jycboliviaASP.net.Datos
             catch (Exception ex)
             {
                 Console.WriteLine("Error al registrar los puntos. " + ex.Message);
+                return false;
+            }
+        }
+
+        internal bool update_ordenRutaEntrega_asignacion (int codCar, int orden, int codCli)
+        {
+
+            try
+            {
+                string consulta = @"update tbcorpal_rutasentrega re 
+                        inner join tbcorpal_rutapuntos rp ON re.codigo = rp.codruta 
+                        set rp.orden = @nroOrden 
+                        where re.estado = 1 and re.codvehiculo = @codCar
+                        and re.fecharuta = current_date() and re.estadoruta = 'PENDIENTE' 
+                        and rp.estado = 1 and rp.estadopunta = 'PENDIENTE' 
+                        and rp.codcliente = @codCli";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+
+                cmd.Parameters.AddWithValue("@nroOrden", orden);
+                cmd.Parameters.AddWithValue("@codCar", codCar);
+                cmd.Parameters.AddWithValue("@codCli", codCli);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error al actualizar los datos. " + ex.Message);
                 return false;
             }
         }

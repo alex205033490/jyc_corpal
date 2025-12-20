@@ -33,6 +33,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Button btn_dibujarPuntos;
 
         /// <summary>
+        /// Control btn_dibujarPuntosGV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_dibujarPuntosGV;
+
+        /// <summary>
         /// Control hf_codCliente.
         /// </summary>
         /// <remarks>
@@ -94,5 +103,32 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_listaRutasDespacho;
+
+        /// <summary>
+        /// Control updatePanel_containerMaps.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel_containerMaps;
+
+        /// <summary>
+        /// Control btn_guardarOrden.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_guardarOrden;
+
+        /// <summary>
+        /// Control btn_limpiarMaps.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_limpiarMaps;
     }
 }

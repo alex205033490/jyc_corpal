@@ -85,5 +85,19 @@ namespace jycboliviaASP.net.Negocio
             }
 
         }
-    }
+
+        internal bool update_ordenRutaEntrega_asignacion(int codCar, int orden, int codCli)
+        {
+            try
+            {
+                return datos.update_ordenRutaEntrega_asignacion(codCar, orden, codCli);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado al actualizar los datos. " + ex.Message);
+            }
+        }
+
+
+        }
 }
