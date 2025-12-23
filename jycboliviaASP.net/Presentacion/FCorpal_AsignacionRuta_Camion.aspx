@@ -24,7 +24,6 @@
 
         <div class="container-form">
 
-
             <div class="container-lista1">
                 <div>
                     <h3>| ASIGNACIÓN DE RUTAS |
@@ -43,13 +42,11 @@
                                 <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select ddVehiculo" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_selectedIndexChanged">
                                 </asp:DropDownList>
 
-                                <asp:Button ID="btn_dibujarPuntos" runat="server" Text="Optimizar Puntos"
-                                    CssClass="btn btn-success mt-2" OnClick="btn_dibujarPuntos_Click" OnClientClick="optimizarRutasGoogle(); return false;"/>
-
-                                <asp:Button ID="btn_dibujarPuntosGV" runat="server" Text="Dibujar Orden GV"
+                                <asp:Button ID="btn_dibujarPuntosGV" runat="server" Text="Dibujar Rutas"
                                     CssClass="btn btn-success mt-2" OnClick="btn_dibujarPuntosGV_Click" />
 
-
+                                <asp:Button ID="btn_dibujarPuntos" runat="server" Text="Reordenar Rutas"
+                                    CssClass="btn mt-2 btn-info" OnClick="btn_dibujarPuntos_Click" OnClientClick="optimizarRutasGoogle(); return false;"/>
 
                             </div>
 
@@ -73,7 +70,7 @@
                                 </asp:AutoCompleteExtender>
 
                                 <asp:Button ID="btn_registrarNuevoPunto" CssClass="btn btn-success"
-                                    runat="server" Text="Agregar Nuevo Punto" OnClick="btn_registrarNuevoPunto_Click" />
+                                    runat="server" Text="Agregar Ruta" OnClick="btn_registrarNuevoPunto_Click" />
 
                             </div>
 
@@ -104,6 +101,7 @@
                                                 <asp:BoundField DataField="cliente" HeaderText="Cliente" />
                                                 <asp:BoundField DataField="lat" HeaderText="Lat" />
                                                 <asp:BoundField DataField="lng" HeaderText="lng" />
+                                                <asp:BoundField DataField="codcliente" HeaderText="codCli" Visible="false"/>
                                             </Columns>
                                         </asp:GridView>
 
@@ -112,6 +110,7 @@
                                         <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
                                         <asp:AsyncPostBackTrigger ControlID="btn_dibujarPuntosGV" EventName="Click" />
                                         <asp:AsyncPostBackTrigger ControlID="btn_guardarOrden" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="btn_registrarNuevoPunto" EventName="Click"/>
                                     </Triggers>
                                 </asp:UpdatePanel>
 
@@ -140,18 +139,14 @@
                                 <asp:Button ID="btn_guardarOrden" runat="server" CssClass="btn btn-success" Text="Guardar Orden" OnClick="btn_guardarOrden_Click" />
 
                                 <asp:Button ID="btn_limpiarMaps" runat="server" Text="Limpiar Mapa"
-                                    CssClass="btn btn-danger" OnClientClick="limpiarMapa(); return false;" />
+                                    CssClass="btn btn-danger" OnClientClick="limpiarMapa(); return false;" OnClick="btn_limpiarMaps_Click" />
                             </div>
-
 
                         </div>
 
-
                     </div>
 
-
                 </div>
-
 
             </div>
         </div>

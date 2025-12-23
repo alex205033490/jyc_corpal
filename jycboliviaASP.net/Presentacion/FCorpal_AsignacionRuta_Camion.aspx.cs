@@ -110,21 +110,36 @@ namespace jycboliviaASP.net.Presentacion
         //###################   REGISTRAR NUEVO PUNTO - MAPS ################//
         protected void btn_registrarNuevoPunto_Click(object sender, EventArgs e)
         {
-            int codCar = int.Parse(dd_listVehiculo.SelectedValue);
-            string car = dd_listVehiculo.SelectedItem.ToString();
-            int codCli = int.Parse(hf_codCliente.Value);
+            try
+            {
+                int codCar;
+                int codCli;
 
-            if (codCar <= 0)
-            {
-                showalert("Debes seleccionar un Vehiculo válido");
-                return;
+                if(!int.TryParse(dd_listVehiculo.SelectedValue, out codCar) || codCar <= 0)
+                {
+                    showalert("Debe seleccionar un vehiculo válido");
+                    return;
+                }
+                if(string.IsNullOrEmpty(tx_newCliente.Text))
+                {
+                    showalert("Debes seleccionar un cliente válido");
+                    return;
+                }
+
+                if(!int.TryParse(hf_codCliente.Value, out codCli) || codCli <= 0)
+                {
+                    showalert("Debes seleccionar un cliente válido");
+                    return;
+                }
+
+                string car = dd_listVehiculo.SelectedItem.ToString();
+
+                RegistrarNewRutaPuntoEntrega(codCar, car);
             }
-            if (codCli <= 0)
+            catch(Exception ex)
             {
-                showalert("Debes seleccionar un Cliente válido");
-                return;
+                showalert("Error inesperado al agregar nuevo punto. "+ ex.Message);
             }
-            RegistrarNewRutaPuntoEntrega(codCar, car);
         }
         private void RegistrarNewRutaPuntoEntrega(int codCar, string car)
         {
@@ -162,7 +177,7 @@ namespace jycboliviaASP.net.Presentacion
                     }
                     nroOrden++;
                 }
-                showalert("Nuevo punto de entrega registrado correctamente");
+                showalert("Punto agregado. OK");
                 CargarRutasVehiculo(codCar);
                 limpiarCampoCliente();
             }
@@ -270,15 +285,21 @@ namespace jycboliviaASP.net.Presentacion
 
                     if (result)
                     {
-                        CargarRutasVehiculo(codCar);
+                        //CargarRutasVehiculo(codCar);
                         showalert("Registro actualizado correctamente.");
                     }
                 }
+                CargarRutasVehiculo(codCar);
             }
             catch (Exception ex)
             {
                 showalert("Error en el metodo actualizar rutas. " + ex.Message);
             }
+        }
+
+        protected void btn_limpiarMaps_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

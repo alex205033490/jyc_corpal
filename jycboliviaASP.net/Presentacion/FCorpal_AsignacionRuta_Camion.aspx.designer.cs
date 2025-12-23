@@ -24,15 +24,6 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.DropDownList dd_listVehiculo;
 
         /// <summary>
-        /// Control btn_dibujarPuntos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_dibujarPuntos;
-
-        /// <summary>
         /// Control btn_dibujarPuntosGV.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_dibujarPuntosGV;
+
+        /// <summary>
+        /// Control btn_dibujarPuntos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_dibujarPuntos;
 
         /// <summary>
         /// Control hf_codCliente.

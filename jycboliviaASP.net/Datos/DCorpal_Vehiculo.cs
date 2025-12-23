@@ -142,7 +142,7 @@ namespace jycboliviaASP.net.Datos
                                     and rp.`estado` = 1 
                                     and rp.`estadopunta` = 'PENDIENTE' 
                                     and re.`codvehiculo` = @codCar 
-                                    group by rp.`cliente` 
+                                    group by rp.codcliente  
                                     order by rp.`orden` asc";
                 var parametros = new List<MySqlParameter>
                 {
