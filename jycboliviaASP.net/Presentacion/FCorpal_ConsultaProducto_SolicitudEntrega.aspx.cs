@@ -50,6 +50,30 @@ namespace jycboliviaASP.net.Presentacion
             return lista;
         }
 
+        [WebMethod]
+        [ScriptMethod]
+        public static string[]GetListClientes(string prefixText, int count)
+        {
+            string nombreCliente = prefixText;
+
+            NCorpal_Cliente nCli = new NCorpal_Cliente();
+            DataSet tuplas = nCli.listarTiendas(nombreCliente);
+
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+            
+            int fin = tuplas.Tables[0].Rows.Count;
+
+            for(int i = 0; i < fin; i++)
+            {
+                lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
+            }
+            return lista;
+
+
+        }
+
+
+
         // webservice que me permite la autocompletacion
         [WebMethod]
         [ScriptMethod]
@@ -98,78 +122,136 @@ namespace jycboliviaASP.net.Presentacion
 
         private void consultadedatos()
         {
-            ReportViewer1.LocalReport.DataSources.Clear();
-            string fechadesde = convertidorFecha(tx_desdeFecha.Text);
-            string fechahasta = convertidorFecha(tx_hastaFecha.Text);
-            //  int codigoCobrador = Convert.ToInt32(dd_cobrador.SelectedValue.ToString());
-            //  string nombreCobrador = dd_cobrador.SelectedItem.Text;
-            string Responsable = tx_responsable.Text;
-            string producto = tx_producto.Text;
+            try
+            {
+                ReportViewer1.LocalReport.DataSources.Clear();
+                string fechadesde = convertidorFecha(tx_desdeFecha.Text);
+                string fechahasta = convertidorFecha(tx_hastaFecha.Text);
+                //  int codigoCobrador = Convert.ToInt32(dd_cobrador.SelectedValue.ToString());
+                //  string nombreCobrador = dd_cobrador.SelectedItem.Text;
+                string Responsable = tx_responsable.Text;
+                string producto = tx_producto.Text;
 
-            if (dd_consulta.SelectedIndex == 4 && !fechahasta.Equals("null"))
-            {
-                get_StockProducctos(fechahasta);
-            }else
-            
-            if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null"))
-            {
-                if (dd_consulta.SelectedIndex == 0)
+                
+
+                if (dd_consulta.SelectedIndex == 4 && !fechahasta.Equals("null"))
                 {
-                    get_datosProductosSolicitados(fechadesde, fechahasta, Responsable);
-                }else
-                if (dd_consulta.SelectedIndex == 1)
-                {
-                    get_datosProductosSolicitados_VS_entregados(fechadesde, fechahasta);
+                    get_StockProducctos(fechahasta);
                 }
                 else
-                    if (dd_consulta.SelectedIndex == 2)
+
+                if (dd_consulta.SelectedIndex > -1 && !fechadesde.Equals("null") && !fechahasta.Equals("null"))
+                {
+                    if (dd_consulta.SelectedIndex == 0)
+                    {
+                        get_datosProductosSolicitados(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                    if (dd_consulta.SelectedIndex == 1)
+                    {
+                        get_datosProductosSolicitados_VS_entregados(fechadesde, fechahasta);
+                    }
+                    else
+                        if (dd_consulta.SelectedIndex == 2)
                     {
                         get_datosSolicitadoEntregadoProducto_porPersona(fechadesde, fechahasta, Responsable, producto);
                     }
                     else
-                        if (dd_consulta.SelectedIndex == 3)
+                            if (dd_consulta.SelectedIndex == 3)
+                    {
+                        get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
+                    }
+                    else
+                                if (dd_consulta.SelectedIndex == 5)
+                    {
+                        get_detalleEntregaSolicitudProductos(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                     if (dd_consulta.SelectedIndex == 6)
+                    {
+                        get_calidadnachosproceso_remojadoyLavado(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                      if (dd_consulta.SelectedIndex == 7)
+                    {
+                        get_calidadnachosproceso_Molinos(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                     if (dd_consulta.SelectedIndex == 8)
+                    {
+                        get_calidadnachosproceso_Formadora(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                           if (dd_consulta.SelectedIndex == 9)
+                    {
+                        get_calidadnachosproceso_Fritadora(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                                if (dd_consulta.SelectedIndex == 10)
+                    {
+                        get_calidadnachosproceso_SazonadoControlSensorial(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                                               if (dd_consulta.SelectedIndex == 11)
+                    {
+                        get_calidadnachosproceso_Envasadora(fechadesde, fechahasta, Responsable);
+                    }
+                    else
+                    {
+                        if (dd_consulta.SelectedIndex == 12)
                         {
-                            get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
-                        }else
-                            if (dd_consulta.SelectedIndex == 5)
-                            {
-                                get_detalleEntregaSolicitudProductos(fechadesde, fechahasta, Responsable);
-                            }
-                            else
-                                 if (dd_consulta.SelectedIndex == 6)
-                            {
-                                get_calidadnachosproceso_remojadoyLavado(fechadesde, fechahasta, Responsable);
-                                }
-                                else
-                                  if (dd_consulta.SelectedIndex == 7)
-                                {
-                                    get_calidadnachosproceso_Molinos(fechadesde, fechahasta, Responsable);
-                                }
-                                else
-                                 if (dd_consulta.SelectedIndex == 8)
-                                {
-                                    get_calidadnachosproceso_Formadora(fechadesde, fechahasta, Responsable);
-                                }
-                                    else
-                                       if (dd_consulta.SelectedIndex == 9)
-                                    {
-                                        get_calidadnachosproceso_Fritadora(fechadesde, fechahasta, Responsable);
-                                    }
-                                        else
-                                            if (dd_consulta.SelectedIndex == 10)
-                                        {
-                                            get_calidadnachosproceso_SazonadoControlSensorial(fechadesde, fechahasta, Responsable);
-                                        }
-                                        else
-                                           if (dd_consulta.SelectedIndex == 11)
-                                        {
-                                            get_calidadnachosproceso_Envasadora(fechadesde, fechahasta, Responsable);
-                                        }
+                            get_ReporteSolicitudEntregaProductos_DespachoVenta(Responsable);
+                        }
+                    }
 
+                }
+                else
+                    Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+            }
+            catch(Exception ex)
+            {
+                showalert("Error al obtener el reporte. " + ex.Message);
+            }
+            
+        }
+
+        private void get_ReporteSolicitudEntregaProductos_DespachoVenta(string vendedor)
+        {
+            try
+            {
+                DateTime fechaDesde, fechaHasta;
+
+                if (!DateTime.TryParse(tx_desdeFecha.Text, out fechaDesde) ||
+                    !DateTime.TryParse(tx_hastaFecha.Text, out fechaHasta))
+                {
+                    showalert("Formato de fecha inválido");
+                    return;
+                }
+                string cliente = tx_cliente.Text.Trim();
+
+
+                LocalReport localreport = ReportViewer1.LocalReport;
+                localreport.ReportPath = "Reportes/Report_ConsultaEntregaProducto_DespachoVenta.rdlc";
+
+                NCorpal_EntregaSolicitudProducto2 nes = new NCorpal_EntregaSolicitudProducto2();
+                DataSet consulta1 = nes.GET_ReportSolicitudEntregaProducto(fechaDesde, fechaHasta, vendedor, cliente);
+                DataTable dtConsulta = consulta1.Tables[0];
+
+                ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+                ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+                ReportDataSource DS_solicitudEntregaProducto = new ReportDataSource("DS_entregaProdSalida", dtConsulta);
+
+                ReportViewer1.LocalReport.SetParameters(p_fecha1);
+                ReportViewer1.LocalReport.SetParameters(p_fecha2);
+                ReportViewer1.LocalReport.DataSources.Add(DS_solicitudEntregaProducto);
+                this.ReportViewer1.LocalReport.Refresh();
+                this.ReportViewer1.DataBind();
 
             }
-            else
-                Response.Write("<script type='text/javascript'> alert('Error: Datos incorrectos') </script>");
+            catch (Exception ex)
+            {
+                showalert("Error en el metodo al obtener los datos. "+ ex.Message);
+            }
         }
 
         private void get_calidadnachosproceso_Envasadora(string fechadesde, string fechahasta, string responsable)
@@ -389,6 +471,12 @@ namespace jycboliviaASP.net.Presentacion
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
             consultadedatos();
+        }
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
     }
 }

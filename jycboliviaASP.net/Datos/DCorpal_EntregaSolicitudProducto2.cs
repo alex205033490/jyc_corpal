@@ -762,6 +762,81 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet GET_ReportSolicitudEntregaProducto( DateTime fechaIni, DateTime fechaFin,
+                                                        string vendedor, string cliente)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    dv.`codigo` as 'codDespacho',
+                                    ddv.`codpedido` as 'codSolicitud',
+                                    v2.`codigo` as codVenta,
+                                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
+                                    dv.`conductor` as 'conductor',
+
+                                    v2.`cliente` as 'cliente',
+                                    v2.`responsable` as 'vendedor',
+
+                                    p.`producto` as 'producto',
+                                    ddv.`cantentregada` as 'cantidadRecibida',
+                                    dvp.`cantidad` as 'cantidadEntregada', 
+                                    CASE
+                                        when dvp.cantidad is null or dvp.cantidad = 0 
+                                            then ddv.cantentregada 
+                                        ELSE ddv.cantentregada - dvp.cantidad 
+                                    END as cantidadSobrante, 
+                                    DATE(v.fechaEmision) as 'fechaEntregaProductosCliente',
+
+                                    v.`estadoventa` as 'estadoventa' 
+
+                                    from  
+                                    tbcorpal_despachovehiculo dv 
+                                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo` 
+
+                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
+                                    inner join tbcorpal_producto p ON ddv.`codprod` = p.`codigo` 
+
+                                    left join tbcorpal_venta v2 on ddv.`codpedido` = v2.`codsolicitudentregaproducto` 
+
+                                    left join tbcorpal_venta v 
+                                         ON ddv.`codpedido` = v.`codsolicitudentregaproducto` 
+                                         and v.`estado` = 1 
+                                         and v.`estadoventa` = 'Cerrado' 
+                                    left join tbcorpal_detalleventasproducto dvp ON v.`codigo` = dvp.`codventa` 
+
+                                    where 
+                                    dv.`estado` = 1 and dv.`estadodespacho` = 'Cerrado' 
+                                    and dv.`fechagra` between @fechaIni and @fechaFin ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechaFin", fechaFin)
+                };
+                
+                if (!string.IsNullOrEmpty(cliente))
+                {
+                    consulta += " and v2.cliente = @cliente ";
+                    parametros.Add(new MySqlParameter("@cliente", cliente));
+                }
+
+                if (!string.IsNullOrEmpty(vendedor))
+                {
+                    consulta += " and v2.responsable = @vendedor ";
+                    parametros.Add(new MySqlParameter("@vendedor", vendedor));
+                }
+                
+                consulta += "order by dv.codigo asc ";
+
+                
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            } catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
     
     
     }

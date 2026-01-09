@@ -96,6 +96,24 @@ namespace jycboliviaASP.net.Presentacion
         protected global::AjaxControlToolkit.AutoCompleteExtender tx_producto_AutoCompleteExtender;
 
         /// <summary>
+        /// Control tx_cliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_cliente;
+
+        /// <summary>
+        /// Control tx_cliente_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_cliente_AutoCompleteExtender;
+
+        /// <summary>
         /// Control Label3.
         /// </summary>
         /// <remarks>

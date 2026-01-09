@@ -658,6 +658,17 @@
     <Content Include="DS_ProductosAlmacen.xss">
       <DependentUpon>DS_ProductosAlmacen.xsd</DependentUpon>
     </Content>
+    <Content Include="DS_ReporteProductos.xsc">
+      <DependentUpon>DS_ReporteProductos.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_ReporteProductos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_ReporteProductos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_ReporteProductos.xss">
+      <DependentUpon>DS_ReporteProductos.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -991,6 +1002,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_ReciboIngresoEgreso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS_ReporteProductos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_ReporteProductos.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_ReporteRepuesto.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2239,6 +2255,7 @@
     <EmbeddedResource Include="Reportes\Report_CalidadFormadora.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProducto_DespachoVenta.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Marcacion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CorrespondeAlmuerzoFichada.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
