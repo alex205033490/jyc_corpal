@@ -224,5 +224,89 @@ namespace jycboliviaASP.net.Datos
             return cnx.consultaMySql(consulta);
         }
 
+        internal DataSet GET_reportVentasObjVentasProductos(DateTime fechaini, DateTime fechafin)
+        {
+            try
+            {
+                string consulta = @"
+                select 
+                venta1.codprod,
+                venta1.descripcion,
+                ifnull(venta2.domingo, 0) as domingo,
+                ifnull(venta2.lunes, 0) as lunes,
+                ifnull(venta2.martes, 0) as martes,
+                ifnull(venta2.miercoles, 0) as miercoles,
+                ifnull(venta2.jueves, 0) as jueves,
+                ifnull(venta2.viernes, 0) as viernes,
+                ifnull(venta2.sabado, 0) as sabado,
+                venta1.cantidad_total_vendida,
+                objventa2.cantidadprod as 'obj_ventas',
+                round((venta1.cantidad_total_vendida / nullif(objventa2.cantidadprod, 0)) * 100, 2) as 'cumplimiento_%', 
+                objventa2.fechalimite
+
+                from (
+                     select
+                     dv.`codprod`,
+                     dv.`descripcion`,
+                     SUM(dv.`cantidad`) AS cantidad_total_vendida 
+                     from tbcorpal_venta v 
+                     inner join tbcorpal_detalleventasproducto dv ON v.codigo = dv.`codventa` 
+                     where 
+                           v.`fechaEmision` >= @fechaini and v.`fechaEmision` <= @fechafin
+                           and v.estado = 1 and v.`estadoventa` = 'Cerrado' 
+                     group by dv.`codprod` 
+                ) venta1 
+
+                left join (
+                     select dv.codprod,
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 1 THEN dv.`cantidad` ELSE 0 END) AS 'domingo',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 2 THEN dv.`cantidad` ELSE 0 END) AS 'lunes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 3 THEN dv.`cantidad` ELSE 0 END) AS 'martes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 4 THEN dv.`cantidad` ELSE 0 END) AS 'miercoles',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 5 THEN dv.`cantidad` ELSE 0 END) AS 'jueves',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 6 THEN dv.`cantidad` ELSE 0 END) AS 'viernes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 7 THEN dv.`cantidad` ELSE 0 END) AS 'sabado' 
+                     from tbcorpal_venta v 
+                     inner join tbcorpal_detalleventasproducto dv ON v.codigo = dv.`codventa` 
+                     where 
+                     v.`estado` = 1 
+                     and v.`estadoventa` = 'Cerrado' 
+                     and week(v.`fechaEmision`, 1) = week(current_date(), 1) 
+                     and year(v.`fechaEmision`) = year(current_date()) 
+     
+                     group by dv.`codprod` 
+                ) venta2 ON venta2.codprod = venta1.codprod 
+
+                left join ( 
+                     select  
+                      op.codprod,
+                       max(op.`fechalimite`) as 'fechaMax' 
+                      from tbcorpal_objetivosproduccion op 
+                      where op.`estado` = 1 
+                       and op.`fechalimite` <= @fechafin 
+                      group by op.`codprod` 
+                      ) objmax on objmax.codprod = venta1.codprod 
+
+                left join tbcorpal_objetivosproduccion objventa2 
+                     on objventa2.codprod = objmax.codprod 
+                     and objventa2.fechalimite = objmax.fechamax 
+                     and objventa2.estado = 1 GROUP BY objventa2.codprod";
+
+                var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@fechaini", (fechaini)),
+                new MySqlParameter("@fechafin", (fechafin))
+            };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+            
+        } 
+
+
     }
 }

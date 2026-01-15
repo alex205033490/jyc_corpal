@@ -78,5 +78,18 @@ namespace jycboliviaASP.net.Negocio
                 return tuplaV;
 
         }
+
+        internal DataSet GET_reportVentasObjVentasProductos(DateTime fechaini, DateTime fechafin)
+        {
+            try
+            {
+                return dv.GET_reportVentasObjVentasProductos(fechaini, fechafin);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado. " + ex.Message);
+            }
+        }
+
     }
 }
