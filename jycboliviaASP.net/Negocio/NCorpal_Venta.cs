@@ -91,5 +91,17 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        internal DataSet get_tiempoEntregaProducto_despachoVenta(DateTime fechaIni, DateTime fechaFin)
+        {
+            try
+            {
+                return dv.get_tiempoEntregaProducto_despachoVenta(fechaIni, fechaFin);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado. " + ex.Message);
+            }
+        }
+
     }
 }

@@ -307,6 +307,71 @@ namespace jycboliviaASP.net.Datos
             
         } 
 
+        internal DataSet get_tiempoEntregaProducto_despachoVenta(DateTime fechaIni, DateTime fechaFin)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT 
+                    dv.`codigo` as 'codDespacho',
+                    dv.`fechacierre` as 'fechaDespacho',
+                    dv.`horacierre` as 'horaDespacho',
+                    dv.`conductor` as conductor,
+                    dpd.`cantentregada` as 'cantidadEntregadaCamion',
+
+                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
+                    sep.`codigo`,
+                    v.`codigo` as 'codVenta',
+                    v.`fechaEmision`,
+                    v.`horaEmision`,
+
+                    ##tiempo HH:mm
+                    time_format(
+                       SEC_TO_TIME(
+                         TIMESTAMPDIFF(
+                         SECOND,
+                         TIMESTAMP(dv.`fechacierre`, dv.`horacierre`),
+                         TIMESTAMP(v.`fechaEmision`, v.`horaemision`)
+                        )
+                        ), '%H:%i'
+                        ) as 'Tiempo Entrega HH:mm',
+
+                    v.`codsolicitudentregaproducto`
+
+                    from
+                    tbcorpal_solicitudentregaproducto sep
+                    left join tbcorpal_detalleproddespacho dpd ON sep.`codigo` = dpd.`codpedido`
+                    inner join tbcorpal_despachovehiculo dv ON dpd.`coddespacho` = dv.`codigo`
+                    left join tbcorpal_venta v ON sep.`codigo` = v.`codsolicitudentregaproducto`
+                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo`
+
+                    where dv.`fechacierre` >= @fechaIni
+                    and dv.`fechacierre` <= @fechaFin
+                    and dv.`estadodespacho` = 'Cerrado'
+                    and dv.`estado` = 1
+
+                    group by
+                    dv.codigo
+
+                    order by 
+                    dv.`fechacierre`, dv.horacierre";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechafin", fechaFin)
+                };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado en la consulta. " + ex.Message);
+            }
+
+        }
+
+
+
 
     }
 }
