@@ -593,6 +593,7 @@
     <Content Include="Presentacion\FCorpal_ConsultaProducto_SolicitudEntrega.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaSGI.aspx" />
     <Content Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx" />
+    <Content Include="Presentacion\FCorpal_ReporteDespachoProductos.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteGeneral.aspx" />
     <Content Include="Presentacion\FCorpal_ReporteSolicitudProducto.aspx" />
@@ -1434,6 +1435,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_EntregaSolicitudProducto.aspx.designer.cs">
       <DependentUpon>FCorpal_EntregaSolicitudProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteDespachoProductos.aspx.cs">
+      <DependentUpon>FCorpal_ReporteDespachoProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ReporteDespachoProductos.aspx.designer.cs">
+      <DependentUpon>FCorpal_ReporteDespachoProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ReporteEntregaSolicitudProducto.aspx.cs">
       <DependentUpon>FCorpal_ReporteEntregaSolicitudProducto.aspx</DependentUpon>

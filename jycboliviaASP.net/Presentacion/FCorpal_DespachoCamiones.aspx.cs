@@ -126,7 +126,6 @@ namespace jycboliviaASP.net.Presentacion
                 if (bandera) {
 
                     Registro_RutaPuntosDEntrega_Despacho(codigo, vehiculo);
-
                     Session["codigoDespacho"] = codigo;
                     Session["ReporteGeneral"] = "Reporte_DespachoProductoCamionEntrega";
                     Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");

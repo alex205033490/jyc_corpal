@@ -234,6 +234,52 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet GET_obtenerDespachoEspecifico(int codD)
+        {
+            try
+            {
+                string consulta = @"select 
+                                dv.codigo as 'codDespacho', dv.codvehiculo, 
+                                dv.fechacierre, dv.horacierre, dv.conductor 
+                                from tbcorpal_despachovehiculo dv 
+                                where dv.estado = 1 and dv.estadodespacho = 'Cerrado' and dv.codigo = @cod";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", codD)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error al obtener los datos del despacho. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtenerDetalleDespachoEspecifico(int codD)
+        {
+            try
+            {
+                string consulta = @"select 
+                                dv.codigo, ddv.codpedido, 
+                                p.producto, ddv.cantentregada 
+                                from tbcorpal_despachovehiculo dv 
+                                inner join tbcorpal_detalleproddespacho ddv ON dv.codigo = ddv.coddespacho 
+                                left join tbcorpal_producto p ON ddv.codprod = p.codigo 
+                                where dv.estado = 1 and dv.estadodespacho = 'Cerrado' 
+                                and dv.codigo = @cod";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", codD)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error al obtener datos del despacho. " + ex.Message);
+            }
+        }
+
+
 
     }
 }

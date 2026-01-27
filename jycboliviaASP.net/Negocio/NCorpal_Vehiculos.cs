@@ -92,12 +92,36 @@ namespace jycboliviaASP.net.Negocio
             {
                 return datos.update_ordenRutaEntrega_asignacion(codCar, orden, codCli);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error inesperado al actualizar los datos. " + ex.Message);
             }
         }
 
-
+        internal DataSet GET_obtenerDespachoEspecifico(int codD)
+        {
+            try
+            {
+                return datos.GET_obtenerDespachoEspecifico(codD);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error inesperado al obtener datos. " + ex.Message);
+            }
         }
+
+        internal DataSet GET_obtenerDetalleDespachoEspecifico(int codD)
+        {
+            try
+            {
+                return datos.GET_obtenerDetalleDespachoEspecifico(codD);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado al obtener datos. " + ex.Message);
+            }
+        }
+
+
+    }
 }

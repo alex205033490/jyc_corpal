@@ -245,14 +245,12 @@ namespace jycboliviaASP.net.Datos
                                " pp.producto, " +
                                " sum(dv.cantentregada) as 'CantEntregar', " +
                                " vv.placa, vv.codigo as 'codVehiculo', dd.codconductor as 'codConductor' " +
-                               " from tbcorpal_despachovehiculo dd, tbcorpal_detalleproddespacho dv, " +
-                               " tbcorpal_producto pp, tbcorpal_vehiculos vv, " +
-                               " tb_responsable res " +
+                               " from tbcorpal_despachovehiculo dd " +
+                               " inner join tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho " +
+                               " left join tbcorpal_producto pp ON dv.codprod = pp.codigo " +
+                               " left join tbcorpal_vehiculos vv on dd.codvehiculo = vv.codigo " +
+                               " left join tb_responsable res ON dd.codconductor = res.codigo" +
                                " where " +
-                               " dd.codigo = dv.coddespacho and " +
-                               " dv.codprod = pp.codigo and " +
-                               " dd.codvehiculo = vv.codigo and " +
-                               " dd.codconductor = res.codigo and " +
                                " dd.estado = 1 and " +
                                " dd.codigo = " + codigoDespacho +
                                " group by dd.codigo, dv.codprod";
