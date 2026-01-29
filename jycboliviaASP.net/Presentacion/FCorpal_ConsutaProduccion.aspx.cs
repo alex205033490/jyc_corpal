@@ -220,7 +220,6 @@ namespace jycboliviaASP.net.Presentacion
                 ReportViewer1.LocalReport.DataSources.Add(DS_reportVentaObjetivosProductos);
                 this.ReportViewer1.LocalReport.Refresh();
                 this.ReportViewer1.DataBind();
-
             }
             catch(Exception ex)
             {

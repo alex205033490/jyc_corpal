@@ -1007,7 +1007,7 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnfechalimite;
             
-            private global::System.Data.DataColumn _columncumplimiento__;
+            private global::System.Data.DataColumn columncumplimiento_porc;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -1140,9 +1140,9 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn _cumplimiento__Column {
+            public global::System.Data.DataColumn cumplimiento_porcColumn {
                 get {
-                    return this._columncumplimiento__;
+                    return this.columncumplimiento_porc;
                 }
             }
             
@@ -1183,7 +1183,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_reportVentasObjVentasProductosRow AddDS_reportVentasObjVentasProductosRow(string codprod, string descripcion, string domingo, string lunes, string martes, string miercoles, string jueves, string viernes, string sabado, string cantidad_total_vendida, string obj_ventas, string fechalimite, string _cumplimiento__) {
+            public DS_reportVentasObjVentasProductosRow AddDS_reportVentasObjVentasProductosRow(string codprod, string descripcion, string domingo, string lunes, string martes, string miercoles, string jueves, string viernes, string sabado, string cantidad_total_vendida, string obj_ventas, string fechalimite, string cumplimiento_porc) {
                 DS_reportVentasObjVentasProductosRow rowDS_reportVentasObjVentasProductosRow = ((DS_reportVentasObjVentasProductosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codprod,
@@ -1198,7 +1198,7 @@ namespace jycboliviaASP.net {
                         cantidad_total_vendida,
                         obj_ventas,
                         fechalimite,
-                        _cumplimiento__};
+                        cumplimiento_porc};
                 rowDS_reportVentasObjVentasProductosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_reportVentasObjVentasProductosRow);
                 return rowDS_reportVentasObjVentasProductosRow;
@@ -1233,7 +1233,7 @@ namespace jycboliviaASP.net {
                 this.columncantidad_total_vendida = base.Columns["cantidad_total_vendida"];
                 this.columnobj_ventas = base.Columns["obj_ventas"];
                 this.columnfechalimite = base.Columns["fechalimite"];
-                this._columncumplimiento__ = base.Columns["cumplimiento_%"];
+                this.columncumplimiento_porc = base.Columns["cumplimiento_porc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1263,10 +1263,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnobj_ventas);
                 this.columnfechalimite = new global::System.Data.DataColumn("fechalimite", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfechalimite);
-                this._columncumplimiento__ = new global::System.Data.DataColumn("cumplimiento_%", typeof(string), null, global::System.Data.MappingType.Element);
-                this._columncumplimiento__.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columncumplimiento__");
-                this._columncumplimiento__.ExtendedProperties.Add("Generator_UserColumnName", "cumplimiento_%");
-                base.Columns.Add(this._columncumplimiento__);
+                this.columncumplimiento_porc = new global::System.Data.DataColumn("cumplimiento_porc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncumplimiento_porc);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1988,18 +1986,18 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string _cumplimiento__ {
+            public string cumplimiento_porc {
                 get {
                     try {
-                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos._cumplimiento__Column]));
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cumplimiento_%\' de la tabla \'DS_reportVentasObjVentasProd" +
-                                "uctos\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cumplimiento_porc\' de la tabla \'DS_reportVentasObjVentasP" +
+                                "roductos\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDS_reportVentasObjVentasProductos._cumplimiento__Column] = value;
+                    this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn] = value;
                 }
             }
             
@@ -2149,14 +2147,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Is_cumplimiento__Null() {
-                return this.IsNull(this.tableDS_reportVentasObjVentasProductos._cumplimiento__Column);
+            public bool Iscumplimiento_porcNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Set_cumplimiento__Null() {
-                this[this.tableDS_reportVentasObjVentasProductos._cumplimiento__Column] = global::System.Convert.DBNull;
+            public void Setcumplimiento_porcNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn] = global::System.Convert.DBNull;
             }
         }
         

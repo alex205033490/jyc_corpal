@@ -65,8 +65,8 @@
           <DataField>fechalimite</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="cumplimiento_%">
-          <DataField>cumplimiento_%</DataField>
+        <Field Name="cumplimiento_porc">
+          <DataField>cumplimiento_porc</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -246,13 +246,13 @@
                   <Width>2.0555cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>3.15617cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.26717cm</Width>
+                  <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.77517cm</Width>
@@ -627,14 +627,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox5">
+                        <Textbox Name="Textbox6">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Cumplimiento (%)</Value>
+                                  <Value>cumplimiento (%)</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -643,7 +643,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1031,21 +1031,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="cumplimiento_">
+                        <Textbox Name="cumplimiento_porc">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!cumplimiento_%.Value</Value>
+                                  <Value>=Fields!cumplimiento_porc.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>cumplimiento_</rd:DefaultName>
+                          <rd:DefaultName>cumplimiento_porc</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1126,7 +1126,7 @@
             <Top>4.3307cm</Top>
             <Left>0.68537cm</Left>
             <Height>1.581cm</Height>
-            <Width>27.59271cm</Width>
+            <Width>28.48171cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1175,7 +1175,7 @@
         <Height>4.50833in</Height>
         <Style />
       </Body>
-      <Width>12.57769in</Width>
+      <Width>12.70069in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>

@@ -241,7 +241,7 @@ namespace jycboliviaASP.net.Datos
                 ifnull(venta2.sabado, 0) as sabado,
                 venta1.cantidad_total_vendida,
                 objventa2.cantidadprod as 'obj_ventas',
-                round((venta1.cantidad_total_vendida / nullif(objventa2.cantidadprod, 0)) * 100, 2) as 'cumplimiento_%', 
+                round((venta1.cantidad_total_vendida / nullif(objventa2.cantidadprod, 0)) * 100, 2) as 'cumplimiento_porc', 
                 objventa2.fechalimite
 
                 from (
