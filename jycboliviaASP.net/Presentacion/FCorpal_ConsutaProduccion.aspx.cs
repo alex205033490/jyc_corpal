@@ -120,6 +120,10 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.DataSources.Clear();
             string fechadesde = convertidorFecha(tx_desdeFecha.Text);
             string fechahasta = convertidorFecha(tx_hastaFecha.Text);
+
+            string fechadesde1 = (tx_desdeFecha.Text);
+            string fechahasta2 = (tx_hastaFecha.Text);
+
             string Responsable = tx_responsable.Text;
             string producto = tx_producto.Text;
 
@@ -136,6 +140,11 @@ namespace jycboliviaASP.net.Presentacion
                     if (dd_consulta.SelectedIndex == 2)
                         {
                             get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(fechadesde, fechahasta, producto);
+                        }
+                    else
+                    if(dd_consulta.SelectedIndex == 3)
+                        {
+                            get_ventasProductos_vs_objetivosVentasSalidas();
                         }
             }
             else
@@ -180,6 +189,49 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.DataSources.Add(DS_detalleproductosSolicitados);
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();
+        }
+
+        private void get_ventasProductos_vs_objetivosVentasSalidas()
+        {
+            try
+            {
+                DateTime fechaDesde, fechaHasta;
+                if(!DateTime.TryParse(tx_desdeFecha.Text, out fechaDesde) || 
+                    !DateTime.TryParse(tx_hastaFecha.Text, out fechaHasta))
+                {
+                    showalert("Formato de fecha inválido");
+                    return;
+                }
+
+
+                LocalReport localreport = ReportViewer1.LocalReport;
+                localreport.ReportPath = "Reportes/Report_ventasVSObjetivosProductos.rdlc";
+
+                NCorpal_Venta nVentas = new NCorpal_Venta();
+                DataSet consulta = nVentas.GET_reportVentasObjVentasProductos(fechaDesde, fechaHasta);
+                DataTable DTConsulta = consulta.Tables[0];
+
+                ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+                ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+                ReportDataSource DS_reportVentaObjetivosProductos = new ReportDataSource("DS_reportVentasOBJventas", DTConsulta);
+
+                ReportViewer1.LocalReport.SetParameters(p_fecha1);
+                ReportViewer1.LocalReport.SetParameters(p_fecha2);
+                ReportViewer1.LocalReport.DataSources.Add(DS_reportVentaObjetivosProductos);
+                this.ReportViewer1.LocalReport.Refresh();
+                this.ReportViewer1.DataBind();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado. " + ex.Message); ;
+            }
+
+        }
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
         protected void bt_buscar_Click(object sender, EventArgs e)

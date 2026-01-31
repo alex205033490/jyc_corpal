@@ -199,11 +199,10 @@ namespace jycboliviaASP.net.Datos
                                " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
                                " dd.horagra, dd.detalle , " +
                                " concat(vv.placa,'_',vv.marca) as 'Vehiculo', " +
-                               " res.nombre as 'Conductor', " +
+                               " dd.conductor, " +
                                " dd.estadodespacho " +
                                " from tbcorpal_despachovehiculo dd, " +
                                " tbcorpal_vehiculos vv " +
-                               " left join tb_responsable res on vv.codconductor = res.codigo " +
                                " where " +
                                " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and " +
                                " dd.codvehiculo = vv.codigo and " +
@@ -245,14 +244,13 @@ namespace jycboliviaASP.net.Datos
                                " pp.codigo as 'CodProd' , " +
                                " pp.producto, " +
                                " sum(dv.cantentregada) as 'CantEntregar', " +
-                               " vv.placa " +
-                               " from tbcorpal_despachovehiculo dd, tbcorpal_detalleproddespacho dv, " +
-                               " tbcorpal_producto pp, tbcorpal_vehiculos vv " +
-                               " left join tb_responsable res on vv.codconductor = res.codigo " +
+                               " vv.placa, vv.codigo as 'codVehiculo', dd.codconductor as 'codConductor' " +
+                               " from tbcorpal_despachovehiculo dd " +
+                               " inner join tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho " +
+                               " left join tbcorpal_producto pp ON dv.codprod = pp.codigo " +
+                               " left join tbcorpal_vehiculos vv on dd.codvehiculo = vv.codigo " +
+                               " left join tb_responsable res ON dd.codconductor = res.codigo" +
                                " where " +
-                               " dd.codigo = dv.coddespacho and " +
-                               " dv.codprod = pp.codigo and " +
-                               " dd.codvehiculo = vv.codigo and " +
                                " dd.estado = 1 and " +
                                " dd.codigo = " + codigoDespacho +
                                " group by dd.codigo, dv.codprod";
@@ -682,7 +680,162 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-        
+        /*  REGISTRO RUTAA  */
+        internal int post_RegistroRutaEntrega_despacho(int codCar, string car, int codChofer, string chofer)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutasentrega(fechagra, horagra, fecharuta, horaruta, 
+                    codvehiculo, vehiculo, codchofer, chofer, estado) values 
+                    (current_date(), current_time(), current_date, current_time(), 
+                    @codCar, @car, @codChofer, @chofer, 1); SELECT LAST_INSERT_ID();";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCar", codCar),
+                    new MySqlParameter("@car", car),
+                    new MySqlParameter("@codChofer", codChofer),
+                    new MySqlParameter("@chofer", chofer),
+                };
+                return conexion.ejecutarScalarMySql(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar la ruta de entrega. " + ex.Message);
+                return -1;
+            }
+        }
+
+        internal bool post_RegistroRutaEntregaPuntos_despacho(int orden, int codRuta, int codCliente, string cliente,
+                                            int codDespacho, string descripcion, string lat, string lng)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutapuntos(orden, codruta, codcliente, cliente, coddespacho, 
+                            descripcion, estado, lat, lng) values 
+                            (@orden, @codRuta, @codCliente, @cliente, @codDespacho, @descripcion, 1, @lat, @lng )";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+                cmd.Parameters.AddWithValue("@orden", orden);
+                cmd.Parameters.AddWithValue("@codRuta", codRuta);
+                cmd.Parameters.AddWithValue("@codCliente", codCliente);
+                cmd.Parameters.AddWithValue("@cliente", cliente);
+                cmd.Parameters.AddWithValue("@codDespacho", codDespacho);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@lat", lat);
+                cmd.Parameters.AddWithValue("@lng", lng);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar los puntos. " + ex.Message);
+                return false;
+            }
+        }
+
+        /*  DATOS cliente   */
+        internal DataSet GET_obtenerDatosClienteDespacho(int codDespacho)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    cli.`codigo` as 'codCli', cli.`tiendaname`,
+                                    cli.`direccion_lat`, cli.`direccion_lng` 
+                                    from tbcorpal_despachovehiculo dv 
+                                    inner join tbcorpal_detalleproddespacho dpd ON dv.`codigo` = dpd.`coddespacho` 
+                                    inner join tbcorpal_solicitudentregaproducto sol ON dpd.`codpedido` = sol.`codigo` 
+                                    inner join tbcorpal_cliente cli ON sol.`codcliente` = cli.`codigo` 
+                                    where dv.`codigo` = @codDespacho ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos del cliente. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_ReportSolicitudEntregaProducto( DateTime fechaIni, DateTime fechaFin,
+                                                        string vendedor, string cliente)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    dv.`codigo` as 'codDespacho',
+                                    ddv.`codpedido` as 'codSolicitud',
+                                    v2.`codigo` as codVenta,
+                                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
+                                    dv.`conductor` as 'conductor',
+
+                                    v2.`cliente` as 'cliente',
+                                    v2.`responsable` as 'vendedor',
+
+                                    p.`producto` as 'producto',
+                                    ddv.`cantentregada` as 'cantidadRecibida',
+                                    dvp.`cantidad` as 'cantidadEntregada', 
+                                    CASE
+                                        when dvp.cantidad is null or dvp.cantidad = 0 
+                                            then ddv.cantentregada 
+                                        ELSE ddv.cantentregada - dvp.cantidad 
+                                    END as cantidadSobrante, 
+                                    DATE(v.fechaEmision) as 'fechaEntregaProductosCliente',
+
+                                    v.`estadoventa` as 'estadoventa' 
+
+                                    from  
+                                    tbcorpal_despachovehiculo dv 
+                                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo` 
+
+                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
+                                    inner join tbcorpal_producto p ON ddv.`codprod` = p.`codigo` 
+
+                                    left join tbcorpal_venta v2 on ddv.`codpedido` = v2.`codsolicitudentregaproducto` 
+
+                                    left join tbcorpal_venta v 
+                                         ON ddv.`codpedido` = v.`codsolicitudentregaproducto` 
+                                         and v.`estado` = 1 
+                                         and v.`estadoventa` = 'Cerrado' 
+                                    left join tbcorpal_detalleventasproducto dvp ON v.`codigo` = dvp.`codventa` 
+
+                                    where 
+                                    dv.`estado` = 1 and dv.`estadodespacho` = 'Cerrado' 
+                                    and dv.`fechagra` between @fechaIni and @fechaFin ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechaFin", fechaFin)
+                };
+                
+                if (!string.IsNullOrEmpty(cliente))
+                {
+                    consulta += " and v2.cliente = @cliente ";
+                    parametros.Add(new MySqlParameter("@cliente", cliente));
+                }
+
+                if (!string.IsNullOrEmpty(vendedor))
+                {
+                    consulta += " and v2.responsable = @vendedor ";
+                    parametros.Add(new MySqlParameter("@vendedor", vendedor));
+                }
+                
+                consulta += "order by dv.codigo asc ";
+
+                
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            } catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
+    
     
     }
 }

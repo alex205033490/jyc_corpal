@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using MaterialDesignThemes.Wpf.Converters;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -120,6 +121,161 @@ namespace jycboliviaASP.net.Datos
             catch (Exception ex)
             {
                 throw new Exception($"Error al obtener los datos del vehiculo" + ex.Message);
+            }
+        }
+
+        internal DataSet get_showRutasVehiculosDespachos(int codCar)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    rp.`cliente`, 
+                                    rp.`orden`,
+                                    rp.`lat`,
+                                    rp.`lng`,
+                                    rp.codcliente 
+                                    from tbcorpal_rutasentrega re 
+                                    left join tbcorpal_rutapuntos rp ON re.`codigo` = rp.`codruta` 
+                                    where re.`fecharuta` = current_date() 
+                                    and re.`estado` = 1 
+                                    and re.`estadoruta` = 'PENDIENTE' 
+                                    and rp.`estado` = 1 
+                                    and rp.`estadopunta` = 'PENDIENTE' 
+                                    and re.`codvehiculo` = @codCar 
+                                    group by rp.codcliente  
+                                    order by rp.`orden` asc";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCar", codCar)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            } catch(Exception ex)
+            {
+                throw new Exception($"Erro al obtener las rutas de despacho.  {ex.Message}");
+            }
+        }
+
+        /*  REGISTRO RUTAA  */
+        internal int post_NewRegistroRutaEntrega_Asignacion(int codCar, string car)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutasentrega(fechagra, horagra, fecharuta, horaruta, 
+                    codvehiculo, vehiculo, nombre_ruta, estado) values 
+                    (current_date(), current_time(), current_date, current_time(), 
+                    @codCar, @car, 'Nueva ruta creado desde el formulario', 1); SELECT LAST_INSERT_ID();";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCar", codCar),
+                    new MySqlParameter("@car", car)
+                };
+                return conexion.ejecutarScalarMySql(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar la ruta de entrega. " + ex.Message);
+                return -1;
+            }
+        }
+
+        internal bool post_NewRegistroRutaEntregaPuntos_Asignacion(int orden, int codRuta, int codCliente, string cliente,
+                                            string lat, string lng)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_rutapuntos(orden, codruta, codcliente, cliente, 
+                            descripcion, estado, lat, lng) values 
+                            (@orden, @codRuta, @codCliente, @cliente, 'Nuevo punto creado desde el formulario.', 1, @lat, @lng )";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+                cmd.Parameters.AddWithValue("@orden", orden);
+                cmd.Parameters.AddWithValue("@codRuta", codRuta);
+                cmd.Parameters.AddWithValue("@codCliente", codCliente);
+                cmd.Parameters.AddWithValue("@cliente", cliente);
+                cmd.Parameters.AddWithValue("@lat", lat);
+                cmd.Parameters.AddWithValue("@lng", lng);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al registrar los puntos. " + ex.Message);
+                return false;
+            }
+        }
+
+        internal bool update_ordenRutaEntrega_asignacion (int codCar, int orden, int codCli)
+        {
+
+            try
+            {
+                string consulta = @"update tbcorpal_rutasentrega re 
+                        inner join tbcorpal_rutapuntos rp ON re.codigo = rp.codruta 
+                        set rp.orden = @nroOrden 
+                        where re.estado = 1 and re.codvehiculo = @codCar
+                        and re.fecharuta = current_date() and re.estadoruta = 'PENDIENTE' 
+                        and rp.estado = 1 and rp.estadopunta = 'PENDIENTE' 
+                        and rp.codcliente = @codCli";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+
+                cmd.Parameters.AddWithValue("@nroOrden", orden);
+                cmd.Parameters.AddWithValue("@codCar", codCar);
+                cmd.Parameters.AddWithValue("@codCli", codCli);
+
+                return conexion.ejecutarMySql2(cmd);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error al actualizar los datos. " + ex.Message);
+                return false;
+            }
+        }
+
+        internal DataSet GET_obtenerDespachoEspecifico(int codD)
+        {
+            try
+            {
+                string consulta = @"select 
+                                dv.codigo as 'codDespacho', dv.codvehiculo, 
+                                dv.fechacierre, dv.horacierre, dv.conductor 
+                                from tbcorpal_despachovehiculo dv 
+                                where dv.estado = 1 and dv.estadodespacho = 'Cerrado' and dv.codigo = @cod";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", codD)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error al obtener los datos del despacho. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtenerDetalleDespachoEspecifico(int codD)
+        {
+            try
+            {
+                string consulta = @"select 
+                                dv.codigo, ddv.codpedido, 
+                                p.producto, ddv.cantentregada 
+                                from tbcorpal_despachovehiculo dv 
+                                inner join tbcorpal_detalleproddespacho ddv ON dv.codigo = ddv.coddespacho 
+                                left join tbcorpal_producto p ON ddv.codprod = p.codigo 
+                                where dv.estado = 1 and dv.estadodespacho = 'Cerrado' 
+                                and dv.codigo = @cod";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@cod", codD)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error al obtener datos del despacho. " + ex.Message);
             }
         }
 

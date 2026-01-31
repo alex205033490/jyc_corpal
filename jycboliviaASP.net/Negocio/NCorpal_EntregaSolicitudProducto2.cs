@@ -20,7 +20,7 @@ namespace jycboliviaASP.net.Negocio
         internal DataSet get_VWRegistrosEntregaSolicitudProductoXCamion(string estadoSolicitud, int codVehiculo)
         {
             return datos.get_VWRegistrosEntregaSolicitudProductoXCamion(estadoSolicitud, codVehiculo);
-        } 
+        }
 
         /*internal DataSet get_detSolicitudProducto(int codSolicitud, int codProducto)
         {
@@ -52,12 +52,12 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
         }
 
-        
+
         internal bool update_RetirarSolicitud(List<int> codSolicitud, List<int> codProducto)
         {
             return datos.update_RetirarSolicitud(codSolicitud, codProducto);
         }
-        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codPer,string personal)
+        internal bool update_CierreAutSolicitudProd(int codSolicitud, int codPer, string personal)
         {
             return datos.update_CierreAutSolicitudProd(codSolicitud, codPer, personal);
         }
@@ -70,17 +70,17 @@ namespace jycboliviaASP.net.Negocio
 
         internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
         {
-            return datos.get_despachosdeCamiones( fechadesde,  fechahasta,  estado, codVehiculo);
+            return datos.get_despachosdeCamiones(fechadesde, fechahasta, estado, codVehiculo);
         }
 
         internal bool update_despachodeproductosCamiones(int codigo, string estado, int codresp)
         {
-            return datos.update_despachodeproductosCamiones( codigo,  estado, codresp);
+            return datos.update_despachodeproductosCamiones(codigo, estado, codresp);
         }
 
         internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
         {
-            return datos.get_DespachoProductoaCamion( codigoDespacho);
+            return datos.get_DespachoProductoaCamion(codigoDespacho);
         }
 
         internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
@@ -117,7 +117,7 @@ namespace jycboliviaASP.net.Negocio
             {
                 return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en capa negocio (POST_INSERTdetalleDespacho):" + ex.Message);
                 throw;
@@ -125,15 +125,15 @@ namespace jycboliviaASP.net.Negocio
         }
 
         /* POST DETALLE SOLICITUD PEDIDO */
-        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock, 
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock,
                                                             int coduser, int codVehiculo)
         {
             try
             {
-                return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock, 
+                return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock,
                                                                     coduser, codVehiculo);
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error inesperado: " + ex.Message);
             }
@@ -193,11 +193,64 @@ namespace jycboliviaASP.net.Negocio
             {
                 return datos.GET_obtener_UltConductorVehiculo(codVehiculo);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("Error al cargar los datos del conductor. "+ex.Message);
+                throw new Exception("Error al cargar los datos del conductor. " + ex.Message);
             }
         }
+
+        /*  REGISTRO RUTAS DESPACHO  */
+        internal int post_RegistroRutaEntrega_despacho(int codCar, string car, int codChofer, string chofer)
+        {
+            try
+            {
+                return datos.post_RegistroRutaEntrega_despacho(codCar, car, codChofer, chofer);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error la registrar ruta entrega. " + ex.Message);
+            }
+        }
+
+        internal bool post_RegistroRutaEntregaPuntos_despacho(int orden, int codRuta, int codCliente, string cliente,
+                                            int codDespacho, string descripcion, string lat, string lng)
+        {
+            try
+            {
+                return datos.post_RegistroRutaEntregaPuntos_despacho(orden, codRuta, codCliente, cliente,
+                                    codDespacho, descripcion, lat, lng);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error la registrar puntos de la ruta. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtenerDatosClienteDespacho(int codDespacho)
+        {
+            try
+            {
+                return datos.GET_obtenerDatosClienteDespacho(codDespacho);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos del Cliente. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_ReportSolicitudEntregaProducto(DateTime fechaIni, DateTime fechaFin, string vendedor, string cliente)
+        {
+            try
+            {
+                return datos.GET_ReportSolicitudEntregaProducto(fechaIni, fechaFin, vendedor, cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos de la solicitud. " + ex.Message);
+            }
+        }
+
 
 
     }

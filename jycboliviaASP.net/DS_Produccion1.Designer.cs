@@ -28,6 +28,8 @@ namespace jycboliviaASP.net {
         
         private DS_listaInsumosCreadosDataTable tableDS_listaInsumosCreados;
         
+        private DS_reportVentasObjVentasProductosDataTable tableDS_reportVentasObjVentasProductos;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -61,6 +63,9 @@ namespace jycboliviaASP.net {
                 }
                 if ((ds.Tables["DS_listaInsumosCreados"] != null)) {
                     base.Tables.Add(new DS_listaInsumosCreadosDataTable(ds.Tables["DS_listaInsumosCreados"]));
+                }
+                if ((ds.Tables["DS_reportVentasObjVentasProductos"] != null)) {
+                    base.Tables.Add(new DS_reportVentasObjVentasProductosDataTable(ds.Tables["DS_reportVentasObjVentasProductos"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -97,6 +102,16 @@ namespace jycboliviaASP.net {
         public DS_listaInsumosCreadosDataTable DS_listaInsumosCreados {
             get {
                 return this.tableDS_listaInsumosCreados;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DS_reportVentasObjVentasProductosDataTable DS_reportVentasObjVentasProductos {
+            get {
+                return this.tableDS_reportVentasObjVentasProductos;
             }
         }
         
@@ -173,6 +188,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_listaInsumosCreados"] != null)) {
                     base.Tables.Add(new DS_listaInsumosCreadosDataTable(ds.Tables["DS_listaInsumosCreados"]));
                 }
+                if ((ds.Tables["DS_reportVentasObjVentasProductos"] != null)) {
+                    base.Tables.Add(new DS_reportVentasObjVentasProductosDataTable(ds.Tables["DS_reportVentasObjVentasProductos"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -218,6 +236,12 @@ namespace jycboliviaASP.net {
                     this.tableDS_listaInsumosCreados.InitVars();
                 }
             }
+            this.tableDS_reportVentasObjVentasProductos = ((DS_reportVentasObjVentasProductosDataTable)(base.Tables["DS_reportVentasObjVentasProductos"]));
+            if ((initTable == true)) {
+                if ((this.tableDS_reportVentasObjVentasProductos != null)) {
+                    this.tableDS_reportVentasObjVentasProductos.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -232,6 +256,8 @@ namespace jycboliviaASP.net {
             base.Tables.Add(this.tableDS_listaInsumosProduccion);
             this.tableDS_listaInsumosCreados = new DS_listaInsumosCreadosDataTable();
             base.Tables.Add(this.tableDS_listaInsumosCreados);
+            this.tableDS_reportVentasObjVentasProductos = new DS_reportVentasObjVentasProductosDataTable();
+            base.Tables.Add(this.tableDS_reportVentasObjVentasProductos);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -243,6 +269,12 @@ namespace jycboliviaASP.net {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeDS_listaInsumosCreados() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDS_reportVentasObjVentasProductos() {
             return false;
         }
         
@@ -306,6 +338,9 @@ namespace jycboliviaASP.net {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void DS_listaInsumosCreadosRowChangeEventHandler(object sender, DS_listaInsumosCreadosRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DS_reportVentasObjVentasProductosRowChangeEventHandler(object sender, DS_reportVentasObjVentasProductosRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -942,6 +977,421 @@ namespace jycboliviaASP.net {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DS_reportVentasObjVentasProductosDataTable : global::System.Data.TypedTableBase<DS_reportVentasObjVentasProductosRow> {
+            
+            private global::System.Data.DataColumn columncodprod;
+            
+            private global::System.Data.DataColumn columndescripcion;
+            
+            private global::System.Data.DataColumn columndomingo;
+            
+            private global::System.Data.DataColumn columnlunes;
+            
+            private global::System.Data.DataColumn columnmartes;
+            
+            private global::System.Data.DataColumn columnmiercoles;
+            
+            private global::System.Data.DataColumn columnjueves;
+            
+            private global::System.Data.DataColumn columnviernes;
+            
+            private global::System.Data.DataColumn columnsabado;
+            
+            private global::System.Data.DataColumn columncantidad_total_vendida;
+            
+            private global::System.Data.DataColumn columnobj_ventas;
+            
+            private global::System.Data.DataColumn columnfechalimite;
+            
+            private global::System.Data.DataColumn columncumplimiento_porc;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosDataTable() {
+                this.TableName = "DS_reportVentasObjVentasProductos";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_reportVentasObjVentasProductosDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DS_reportVentasObjVentasProductosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codprodColumn {
+                get {
+                    return this.columncodprod;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn descripcionColumn {
+                get {
+                    return this.columndescripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn domingoColumn {
+                get {
+                    return this.columndomingo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn lunesColumn {
+                get {
+                    return this.columnlunes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn martesColumn {
+                get {
+                    return this.columnmartes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn miercolesColumn {
+                get {
+                    return this.columnmiercoles;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn juevesColumn {
+                get {
+                    return this.columnjueves;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn viernesColumn {
+                get {
+                    return this.columnviernes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sabadoColumn {
+                get {
+                    return this.columnsabado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cantidad_total_vendidaColumn {
+                get {
+                    return this.columncantidad_total_vendida;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn obj_ventasColumn {
+                get {
+                    return this.columnobj_ventas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fechalimiteColumn {
+                get {
+                    return this.columnfechalimite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cumplimiento_porcColumn {
+                get {
+                    return this.columncumplimiento_porc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosRow this[int index] {
+                get {
+                    return ((DS_reportVentasObjVentasProductosRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_reportVentasObjVentasProductosRowChangeEventHandler DS_reportVentasObjVentasProductosRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_reportVentasObjVentasProductosRowChangeEventHandler DS_reportVentasObjVentasProductosRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_reportVentasObjVentasProductosRowChangeEventHandler DS_reportVentasObjVentasProductosRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_reportVentasObjVentasProductosRowChangeEventHandler DS_reportVentasObjVentasProductosRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDS_reportVentasObjVentasProductosRow(DS_reportVentasObjVentasProductosRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosRow AddDS_reportVentasObjVentasProductosRow(string codprod, string descripcion, string domingo, string lunes, string martes, string miercoles, string jueves, string viernes, string sabado, string cantidad_total_vendida, string obj_ventas, string fechalimite, string cumplimiento_porc) {
+                DS_reportVentasObjVentasProductosRow rowDS_reportVentasObjVentasProductosRow = ((DS_reportVentasObjVentasProductosRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        codprod,
+                        descripcion,
+                        domingo,
+                        lunes,
+                        martes,
+                        miercoles,
+                        jueves,
+                        viernes,
+                        sabado,
+                        cantidad_total_vendida,
+                        obj_ventas,
+                        fechalimite,
+                        cumplimiento_porc};
+                rowDS_reportVentasObjVentasProductosRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDS_reportVentasObjVentasProductosRow);
+                return rowDS_reportVentasObjVentasProductosRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DS_reportVentasObjVentasProductosDataTable cln = ((DS_reportVentasObjVentasProductosDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DS_reportVentasObjVentasProductosDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncodprod = base.Columns["codprod"];
+                this.columndescripcion = base.Columns["descripcion"];
+                this.columndomingo = base.Columns["domingo"];
+                this.columnlunes = base.Columns["lunes"];
+                this.columnmartes = base.Columns["martes"];
+                this.columnmiercoles = base.Columns["miercoles"];
+                this.columnjueves = base.Columns["jueves"];
+                this.columnviernes = base.Columns["viernes"];
+                this.columnsabado = base.Columns["sabado"];
+                this.columncantidad_total_vendida = base.Columns["cantidad_total_vendida"];
+                this.columnobj_ventas = base.Columns["obj_ventas"];
+                this.columnfechalimite = base.Columns["fechalimite"];
+                this.columncumplimiento_porc = base.Columns["cumplimiento_porc"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncodprod = new global::System.Data.DataColumn("codprod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodprod);
+                this.columndescripcion = new global::System.Data.DataColumn("descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndescripcion);
+                this.columndomingo = new global::System.Data.DataColumn("domingo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndomingo);
+                this.columnlunes = new global::System.Data.DataColumn("lunes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlunes);
+                this.columnmartes = new global::System.Data.DataColumn("martes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmartes);
+                this.columnmiercoles = new global::System.Data.DataColumn("miercoles", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmiercoles);
+                this.columnjueves = new global::System.Data.DataColumn("jueves", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnjueves);
+                this.columnviernes = new global::System.Data.DataColumn("viernes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnviernes);
+                this.columnsabado = new global::System.Data.DataColumn("sabado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsabado);
+                this.columncantidad_total_vendida = new global::System.Data.DataColumn("cantidad_total_vendida", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncantidad_total_vendida);
+                this.columnobj_ventas = new global::System.Data.DataColumn("obj_ventas", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobj_ventas);
+                this.columnfechalimite = new global::System.Data.DataColumn("fechalimite", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfechalimite);
+                this.columncumplimiento_porc = new global::System.Data.DataColumn("cumplimiento_porc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncumplimiento_porc);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosRow NewDS_reportVentasObjVentasProductosRow() {
+                return ((DS_reportVentasObjVentasProductosRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DS_reportVentasObjVentasProductosRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DS_reportVentasObjVentasProductosRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DS_reportVentasObjVentasProductosRowChanged != null)) {
+                    this.DS_reportVentasObjVentasProductosRowChanged(this, new DS_reportVentasObjVentasProductosRowChangeEvent(((DS_reportVentasObjVentasProductosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DS_reportVentasObjVentasProductosRowChanging != null)) {
+                    this.DS_reportVentasObjVentasProductosRowChanging(this, new DS_reportVentasObjVentasProductosRowChangeEvent(((DS_reportVentasObjVentasProductosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DS_reportVentasObjVentasProductosRowDeleted != null)) {
+                    this.DS_reportVentasObjVentasProductosRowDeleted(this, new DS_reportVentasObjVentasProductosRowChangeEvent(((DS_reportVentasObjVentasProductosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DS_reportVentasObjVentasProductosRowDeleting != null)) {
+                    this.DS_reportVentasObjVentasProductosRowDeleting(this, new DS_reportVentasObjVentasProductosRowChangeEvent(((DS_reportVentasObjVentasProductosRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDS_reportVentasObjVentasProductosRow(DS_reportVentasObjVentasProductosRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DS_Produccion ds = new DS_Produccion();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DS_reportVentasObjVentasProductosDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class DS_listaInsumosProduccionRow : global::System.Data.DataRow {
@@ -1317,6 +1767,398 @@ namespace jycboliviaASP.net {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DS_reportVentasObjVentasProductosRow : global::System.Data.DataRow {
+            
+            private DS_reportVentasObjVentasProductosDataTable tableDS_reportVentasObjVentasProductos;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_reportVentasObjVentasProductosRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDS_reportVentasObjVentasProductos = ((DS_reportVentasObjVentasProductosDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codprod {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.codprodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codprod\' de la tabla \'DS_reportVentasObjVentasProductos\' " +
+                                "es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.codprodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string descripcion {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.descripcionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'descripcion\' de la tabla \'DS_reportVentasObjVentasProduct" +
+                                "os\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.descripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string domingo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.domingoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'domingo\' de la tabla \'DS_reportVentasObjVentasProductos\' " +
+                                "es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.domingoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string lunes {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.lunesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'lunes\' de la tabla \'DS_reportVentasObjVentasProductos\' es" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.lunesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string martes {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.martesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'martes\' de la tabla \'DS_reportVentasObjVentasProductos\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.martesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string miercoles {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.miercolesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'miercoles\' de la tabla \'DS_reportVentasObjVentasProductos" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.miercolesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string jueves {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.juevesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'jueves\' de la tabla \'DS_reportVentasObjVentasProductos\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.juevesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string viernes {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.viernesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'viernes\' de la tabla \'DS_reportVentasObjVentasProductos\' " +
+                                "es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.viernesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string sabado {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.sabadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'sabado\' de la tabla \'DS_reportVentasObjVentasProductos\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.sabadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cantidad_total_vendida {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.cantidad_total_vendidaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantidad_total_vendida\' de la tabla \'DS_reportVentasObjVe" +
+                                "ntasProductos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.cantidad_total_vendidaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string obj_ventas {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.obj_ventasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'obj_ventas\' de la tabla \'DS_reportVentasObjVentasProducto" +
+                                "s\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.obj_ventasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fechalimite {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.fechalimiteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechalimite\' de la tabla \'DS_reportVentasObjVentasProduct" +
+                                "os\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.fechalimiteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cumplimiento_porc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cumplimiento_porc\' de la tabla \'DS_reportVentasObjVentasP" +
+                                "roductos\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodprodNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.codprodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodprodNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.codprodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdescripcionNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.descripcionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdescripcionNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.descripcionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdomingoNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.domingoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdomingoNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.domingoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IslunesNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.lunesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetlunesNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.lunesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsmartesNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.martesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetmartesNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.martesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsmiercolesNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.miercolesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetmiercolesNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.miercolesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsjuevesNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.juevesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetjuevesNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.juevesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsviernesNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.viernesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetviernesNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.viernesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IssabadoNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.sabadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetsabadoNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.sabadoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscantidad_total_vendidaNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.cantidad_total_vendidaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcantidad_total_vendidaNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.cantidad_total_vendidaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isobj_ventasNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.obj_ventasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setobj_ventasNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.obj_ventasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsfechalimiteNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.fechalimiteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetfechalimiteNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.fechalimiteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscumplimiento_porcNull() {
+                return this.IsNull(this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcumplimiento_porcNull() {
+                this[this.tableDS_reportVentasObjVentasProductos.cumplimiento_porcColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -1370,6 +2212,40 @@ namespace jycboliviaASP.net {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_listaInsumosCreadosRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DS_reportVentasObjVentasProductosRowChangeEvent : global::System.EventArgs {
+            
+            private DS_reportVentasObjVentasProductosRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosRowChangeEvent(DS_reportVentasObjVentasProductosRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_reportVentasObjVentasProductosRow Row {
                 get {
                     return this.eventRow;
                 }

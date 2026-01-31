@@ -224,5 +224,154 @@ namespace jycboliviaASP.net.Datos
             return cnx.consultaMySql(consulta);
         }
 
+        internal DataSet GET_reportVentasObjVentasProductos(DateTime fechaini, DateTime fechafin)
+        {
+            try
+            {
+                string consulta = @"
+                select 
+                venta1.codprod,
+                venta1.descripcion,
+                ifnull(venta2.domingo, 0) as domingo,
+                ifnull(venta2.lunes, 0) as lunes,
+                ifnull(venta2.martes, 0) as martes,
+                ifnull(venta2.miercoles, 0) as miercoles,
+                ifnull(venta2.jueves, 0) as jueves,
+                ifnull(venta2.viernes, 0) as viernes,
+                ifnull(venta2.sabado, 0) as sabado,
+                venta1.cantidad_total_vendida,
+                objventa2.cantidadprod as 'obj_ventas',
+                round((venta1.cantidad_total_vendida / nullif(objventa2.cantidadprod, 0)) * 100, 2) as 'cumplimiento_porc', 
+                objventa2.fechalimite
+
+                from (
+                     select
+                     dv.`codprod`,
+                     dv.`descripcion`,
+                     SUM(dv.`cantidad`) AS cantidad_total_vendida 
+                     from tbcorpal_venta v 
+                     inner join tbcorpal_detalleventasproducto dv ON v.codigo = dv.`codventa` 
+                     where 
+                           v.`fechaEmision` >= @fechaini and v.`fechaEmision` <= @fechafin
+                           and v.estado = 1 and v.`estadoventa` = 'Cerrado' 
+                     group by dv.`codprod` 
+                ) venta1 
+
+                left join (
+                     select dv.codprod,
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 1 THEN dv.`cantidad` ELSE 0 END) AS 'domingo',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 2 THEN dv.`cantidad` ELSE 0 END) AS 'lunes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 3 THEN dv.`cantidad` ELSE 0 END) AS 'martes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 4 THEN dv.`cantidad` ELSE 0 END) AS 'miercoles',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 5 THEN dv.`cantidad` ELSE 0 END) AS 'jueves',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 6 THEN dv.`cantidad` ELSE 0 END) AS 'viernes',
+                     SUM(CASE WHEN DAYOFWEEK(v.`fechaEmision`) = 7 THEN dv.`cantidad` ELSE 0 END) AS 'sabado' 
+                     from tbcorpal_venta v 
+                     inner join tbcorpal_detalleventasproducto dv ON v.codigo = dv.`codventa` 
+                     where 
+                     v.`estado` = 1 
+                     and v.`estadoventa` = 'Cerrado' 
+                     and week(v.`fechaEmision`, 1) = week(current_date(), 1) 
+                     and year(v.`fechaEmision`) = year(current_date()) 
+     
+                     group by dv.`codprod` 
+                ) venta2 ON venta2.codprod = venta1.codprod 
+
+                left join ( 
+                     select  
+                      op.codprod,
+                       max(op.`fechalimite`) as 'fechaMax' 
+                      from tbcorpal_objetivosproduccion op 
+                      where op.`estado` = 1 
+                       and op.`fechalimite` <= @fechafin 
+                      group by op.`codprod` 
+                      ) objmax on objmax.codprod = venta1.codprod 
+
+                left join tbcorpal_objetivosproduccion objventa2 
+                     on objventa2.codprod = objmax.codprod 
+                     and objventa2.fechalimite = objmax.fechamax 
+                     and objventa2.estado = 1 GROUP BY objventa2.codprod";
+
+                var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@fechaini", (fechaini)),
+                new MySqlParameter("@fechafin", (fechafin))
+            };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+            
+        } 
+
+        internal DataSet get_tiempoEntregaProducto_despachoVenta(DateTime fechaIni, DateTime fechaFin)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT 
+                    dv.`codigo` as 'codDespacho',
+                    dv.`fechacierre` as 'fechaDespacho',
+                    dv.`horacierre` as 'horaDespacho',
+                    dv.`conductor` as conductor,
+                    dpd.`cantentregada` as 'cantidadEntregadaCamion',
+
+                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
+                    sep.`codigo`,
+                    v.`codigo` as 'codVenta',
+                    v.`fechaEmision`,
+                    v.`horaEmision`,
+
+                    ##tiempo HH:mm
+                    time_format(
+                       SEC_TO_TIME(
+                         TIMESTAMPDIFF(
+                         SECOND,
+                         TIMESTAMP(dv.`fechacierre`, dv.`horacierre`),
+                         TIMESTAMP(v.`fechaEmision`, v.`horaemision`)
+                        )
+                        ), '%H:%i'
+                        ) as 'Tiempo Entrega HH:mm',
+
+                    v.`codsolicitudentregaproducto`
+
+                    from
+                    tbcorpal_solicitudentregaproducto sep
+                    left join tbcorpal_detalleproddespacho dpd ON sep.`codigo` = dpd.`codpedido`
+                    inner join tbcorpal_despachovehiculo dv ON dpd.`coddespacho` = dv.`codigo`
+                    left join tbcorpal_venta v ON sep.`codigo` = v.`codsolicitudentregaproducto`
+                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo`
+
+                    where dv.`fechacierre` >= @fechaIni
+                    and dv.`fechacierre` <= @fechaFin
+                    and dv.`estadodespacho` = 'Cerrado'
+                    and dv.`estado` = 1
+
+                    group by
+                    dv.codigo
+
+                    order by 
+                    dv.`fechacierre`, dv.horacierre";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechafin", fechaFin)
+                };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado en la consulta. " + ex.Message);
+            }
+
+        }
+
+
+
+
     }
 }

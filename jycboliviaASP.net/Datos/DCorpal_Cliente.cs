@@ -146,7 +146,7 @@ namespace jycboliviaASP.net.Datos
                             " tiendadepartamento,  tiendazona,  propietarioname, " +
                             " propietarioci,  propietariodir,  propietariocelular, " +
                             " propietarionit,  propietariocorreo, facturar_a, " +
-                            " facturar_nit, observacion " +
+                            " facturar_nit, observacion, direccion_lat, direccion_lng " +
                             " from tbcorpal_cliente tt " +
                            "  where tt.codigo = " + codigo + "";
             DataSet lista = conexion.consultaMySql(consulta);
@@ -171,5 +171,7 @@ namespace jycboliviaASP.net.Datos
                  " where tbcorpal_cliente.codigo = " + codigCliente;
             return conexion.ejecutarMySql(consulta);    
         }
+
+
     }
 }
