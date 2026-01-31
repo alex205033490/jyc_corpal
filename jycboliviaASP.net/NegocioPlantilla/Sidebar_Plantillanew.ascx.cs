@@ -232,7 +232,9 @@ namespace jycboliviaASP.net.NegocioPlantilla
                             case 148:
                                 mn_despachoCamion.Visible = true;
                                 break;
-
+                            case 149:
+                                mn_asignacionRutaCamion.Visible = true;
+                                break;
                             default:
                                 Console.WriteLine("Default case");
                                 break;
