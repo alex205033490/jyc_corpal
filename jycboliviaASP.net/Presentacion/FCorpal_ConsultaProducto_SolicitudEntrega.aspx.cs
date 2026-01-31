@@ -389,36 +389,38 @@ namespace jycboliviaASP.net.Presentacion
             localreport.ReportPath = "Reportes/Report_DetalleProductosSolicitados_VS_Entregados.rdlc";
 
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            DataSet consulta1 = nss.get_DetalleProductosSolicitados_vs_entregados(fechadesde, fechahasta);
-            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_DetalleProductosSolicitados_vs_Entregados", consulta1.Tables[0]);
+            DataSet consulta1 = nss.get_alldetalleProductoSolicitud_VS_Entregado(fechadesde, fechahasta);
+            DataTable DSconsulta = consulta1.Tables[0];
 
             ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
             ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_Solicitados_VS_Entregado", DSconsulta);
 
             ReportViewer1.LocalReport.SetParameters(p_fecha1);
             ReportViewer1.LocalReport.SetParameters(p_fecha2);
             ReportViewer1.LocalReport.DataSources.Add(DS_detalleproductosSolicitados);
-            ReportViewer1.LocalReport.Refresh();
-            ReportViewer1.DataBind();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
 
-        private void get_datosProductosSolicitados(string fechadesde, string fechahasta, string responsable)
+        private void get_datosProductosSolicitados(string fechadesde, string fechahasta, string personalsolicitud)
         {
             LocalReport localreport = ReportViewer1.LocalReport;
-            localreport.ReportPath = "Reportes/Report_DetalleProductosSolicitados.rdlc";
+            localreport.ReportPath = "Reportes/Report_DetalleProductosSolicitadosEntregados.rdlc";
 
             NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-            DataSet consulta1 = nss.get_DetalleProductosSolicitados(fechadesde, fechahasta, responsable);
-            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_DetalleProductosSolicitados", consulta1.Tables[0]);
+            DataSet consulta1 = nss.get_alldetalleProductoSolicitudEntregado(fechadesde, fechahasta, personalsolicitud);
+            DataTable DSconsulta = consulta1.Tables[0];
 
             ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
             ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+            ReportDataSource DS_detalleproductosSolicitados = new ReportDataSource("DS_detalleproductosSolicitados", DSconsulta);
 
             ReportViewer1.LocalReport.SetParameters(p_fecha1);
             ReportViewer1.LocalReport.SetParameters(p_fecha2);
             ReportViewer1.LocalReport.DataSources.Add(DS_detalleproductosSolicitados);
-            ReportViewer1.LocalReport.Refresh();
-            ReportViewer1.DataBind();
+            this.ReportViewer1.LocalReport.Refresh();
+            this.ReportViewer1.DataBind();
         }
     }
 }
