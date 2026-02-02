@@ -80,6 +80,8 @@ namespace jycboliviaASP.net.Presentacion
             if (codCar >= 1)
             {
                 CargarRutasVehiculo(codCar);
+
+                DibujarPuntosDesdeGridView();
             }
             else
             {
@@ -224,6 +226,41 @@ namespace jycboliviaASP.net.Presentacion
                     true
                 );
         }
+
+        private void DibujarPuntosDesdeGridView()
+        {
+            var puntos = new List<object>();
+
+            foreach (GridViewRow row in gv_listaRutasDespacho.Rows)
+            {
+                TextBox txtOrden = (TextBox)row.FindControl("txtOrden");
+
+                string orden = txtOrden.Text;
+                string cli = row.Cells[1].Text;
+                string lat = row.Cells[2].Text;
+                string lng = row.Cells[3].Text;
+
+                puntos.Add(new
+                {
+                    orden = orden,
+                    cliente = cli,
+                    lat = lat,
+                    lng = lng
+                });
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            string json = js.Serialize(puntos);
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "dibujarDesdeGV",
+                $"dibujarPuntosDesdeGv({json});",
+                true
+            );
+        }
+
 
 
 

@@ -259,36 +259,46 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
         {
-            string consulta = "select  " +
-                   " dp.codigo as 'codSolicitud', " +
-                   " dp.nroboleta,  " +
-                   " dp.personalsolicitud, " +
-                   " cc.tiendaname as 'Cliente', " +
-                   " dd.codigo as 'codDespacho', " +
-                   " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
-                   " dd.horagra, " +
-                   " dd.detalle , " +
-                   " vv.marca as 'Vehiculo', " +
-                   " res.nombre as 'Conductor', " +
-                   " pp.codigo as 'CodProd' , " +
-                   " pp.producto, " +
-                   " dv.cantentregada, " +
-                   " vv.placa " +
-                   " from " +
-                   " tbcorpal_solicitudentregaproducto dp " +
-                   " left join tbcorpal_cliente cc on dp.codcliente = cc.codigo, " +
-                   " tbcorpal_detalleproddespacho dv, " +
-                   " tbcorpal_despachovehiculo dd,  " +
-                   " tbcorpal_producto pp, tbcorpal_vehiculos vv  " +
-                   " left join tb_responsable res on vv.codconductor = res.codigo  " +
-                   " where " +
-                   " dp.codigo = dv.codpedido  and " +
-                   " dv.coddespacho = dd.codigo   and " +
-                   " dv.codprod = pp.codigo and " +
-                   " dd.codvehiculo = vv.codigo and " +
-                   " dd.estado = 1 and " +
-                   " dd.codigo = " + codigoDespacho;
-            return conexion.consultaMySql(consulta);
+            try
+            {
+                string consulta = @"select  
+                    dp.codigo as 'codSolicitud',
+                    dp.nroboleta,  
+                    dp.personalsolicitud,
+                    cc.tiendaname as 'Cliente', 
+                    dd.codigo as 'codDespacho', 
+                    date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', 
+                    dd.horagra, 
+                    dd.detalle , 
+                    vv.marca as 'Vehiculo', 
+                    res.nombre as 'Conductor', 
+                    pp.codigo as 'CodProd' , 
+                    pp.producto, 
+                    dv.cantentregada, 
+                    vv.placa 
+                    from 
+                    tbcorpal_solicitudentregaproducto dp 
+                    left join tbcorpal_cliente cc on dp.codcliente = cc.codigo
+                    left join tbcorpal_detalleproddespacho dv on dp.`codigo` = dv.`codpedido`
+                    inner join tbcorpal_despachovehiculo dd on dv.`coddespacho` = dd.`codigo`  
+                    left join tbcorpal_producto pp on dv.`codprod` = pp.`codigo`
+                    left join tbcorpal_vehiculos vv on dd.`codvehiculo` = vv.`codigo`
+                    left join tb_responsable res on dd.codconductor = res.codigo  
+                    where  
+                    dp.estado = 1 and
+                    dd.estado = 1 and 
+                    dd.codigo = @codDespacho ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codigoDespacho)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            } catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos del despacho. " + ex.Message);
+            }
         }
 
         //mostrar vehiculo en dd
