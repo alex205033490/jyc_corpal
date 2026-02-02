@@ -71,13 +71,13 @@
                         <div class="filtroBusqueda mb-2">
                             <asp:Label ID="Label2" runat="server" Text="Consulta:"></asp:Label><br />
                             
-                                <asp:DropDownList ID="dd_consulta" class="btn btn-secondary dropdown-toggle" Width="70%" runat="server">        
+                                <asp:DropDownList ID="dd_consulta" CssClass="btn btn-secondary dropdown-toggle" Width="70%" runat="server">        
                                     <asp:ListItem>Entrega Produccion</asp:ListItem>        
                                     <asp:ListItem>Entrega Produccion Fecha Turno</asp:ListItem>
                                     <asp:ListItem>Objetivo Produccion vs Entrega Produccion con salida almacen</asp:ListItem>
                                     <asp:ListItem>Reporte de Ventas y Cumplimiento de Objetivos por Producto</asp:ListItem>
                                 </asp:DropDownList>
-                            <asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar"  onclick="bt_buscar_Click"  />
+                            <asp:Button ID="bt_buscar" runat="server" CssClass="btn btn-success" Text="Buscar"  onclick="bt_buscar_Click"  />
                         </div>
 
                          <asp:Label ID="Label5" runat="server" Text="Responsable:"></asp:Label>
@@ -90,7 +90,7 @@
                                 </asp:AutoCompleteExtender>
                         
                             <asp:Label ID="Label6" runat="server" Text="Producto:"></asp:Label> 
-                            <asp:TextBox ID="tx_producto" class="form-control mb-2" runat="server" Width="300px"></asp:TextBox>
+                            <asp:TextBox ID="tx_producto" CssClass="form-control mb-2" runat="server" Width="300px"></asp:TextBox>
                                 <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server" 
                                     TargetControlID="tx_producto"
                                     CompletionSetCount="12" 
