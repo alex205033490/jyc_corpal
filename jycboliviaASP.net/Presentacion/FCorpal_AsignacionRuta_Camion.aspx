@@ -92,7 +92,7 @@
                                                 <asp:TemplateField HeaderText="Orden">
                                                     <ItemTemplate>
                                                         <asp:TextBox ID="txtOrden" runat="server"
-                                                            Text='<%# Eval("Orden") %>' CssClass="form-control text-center"
+                                                            Text='<%# Eval("Orden") %>' CssClass="form-control text-center txtOrdenGV"
                                                             Width="60px">
                                                         </asp:TextBox>
                                                     </ItemTemplate>
@@ -155,7 +155,7 @@
     <script type="text/javascript">
 
         let map;
-        let markerReferencial;
+        let markerReferencia;
         let markers = [];
 
         let directionsService;
@@ -264,6 +264,9 @@
                     ordenGoogle.forEach((idx, nuevoOrden) => {
                         markers[idx].setLabel((nuevoOrden + 1).toString());
                     });
+
+                    actualizarOrdenGridView(ordenGoogle);
+
                 } else {
                     alert("Error al optimizar las rutas. " + status);
                 }
@@ -294,6 +297,17 @@
 
             document.getElementById('<%= hf_codCliente.ClientID %>').value = codigo;
             document.getElementById('<%= tx_newCliente.ClientID %>').value = tienda;
+        }
+
+        // ###############################################################################
+        function actualizarOrdenGridView(ordenGoogle) {
+            const txtOrdenes = document.querySelectorAll(".txtOrdenGV");
+
+            ordenGoogle.forEach((idx, nuevoOrden) => {
+                if (txtOrdenes[idx]) {
+                    txtOrdenes[idx].value = nuevoOrden + 1;
+                }
+            });
         }
 
     </script>

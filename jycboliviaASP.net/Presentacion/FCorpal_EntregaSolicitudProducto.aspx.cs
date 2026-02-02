@@ -33,6 +33,7 @@ namespace jycboliviaASP.net.Presentacion
                 Session["despachoListGV"] = null;
                 GET_MostrarSolicitudProductos("Abierto");
                 cargarRegistroVehiculosDD();
+                limpiarForm();
             }
 
         }
@@ -300,7 +301,9 @@ namespace jycboliviaASP.net.Presentacion
                 }
 
                 ProcesarSolicitudesSeleccionadas(codVehiculo);
-                FinalizarRegistro(codVehiculo);
+                FinalizarRegistro(codDespacho);
+
+                
                 /*
                 int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
                 string detalle = txt_detalleRegistro.Text.Trim();
@@ -439,9 +442,8 @@ namespace jycboliviaASP.net.Presentacion
         }
         private void FinalizarRegistro(int codDespacho)
         {
-            limpiarForm();
-            GET_MostrarSolicitudProductos("Abierto");
-
+            //limpiarForm();
+            //GET_MostrarSolicitudProductos("Abierto");
             Session["codigoDespacho"] = codDespacho;
             Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";
 

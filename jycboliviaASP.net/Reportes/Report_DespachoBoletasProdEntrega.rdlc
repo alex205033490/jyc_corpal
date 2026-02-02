@@ -654,10 +654,10 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>codDespacho</rd:DefaultName>
-                              <Top>1.58806cm</Top>
+                              <Top>1.5175cm</Top>
                               <Left>11.05696cm</Left>
                               <Height>0.6cm</Height>
-                              <Width>4.31271cm</Width>
+                              <Width>2.81813cm</Width>
                               <ZIndex>8</ZIndex>
                               <Style>
                                 <Border>
@@ -1149,6 +1149,7 @@
                             </Border>
                           </Style>
                         </Rectangle>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
