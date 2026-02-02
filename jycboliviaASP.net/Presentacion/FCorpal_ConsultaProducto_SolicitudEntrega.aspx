@@ -6,7 +6,7 @@
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845DCD8080CC91" 
     namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
-<!-- Contenido del Head -->
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_ConsultaRutas.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -46,7 +46,7 @@
     </style>
 </asp:Content>
 
-<!-- Contenido Principal -->
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 <div class="card">
