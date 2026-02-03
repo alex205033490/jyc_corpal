@@ -161,6 +161,11 @@
         let directionsService;
         let directionsRenderer;
 
+        let LocationFabrica123 = {
+            lat: -17.752107,
+            lng: -63.132962
+        };
+
         function initMap() {
 
             //Punto referencia MAP
@@ -185,7 +190,6 @@
                 scale: 1.2,                
                 anchor: new google.maps.Point(12, 21) 
             };
-
             // MARKER UNICO
             markerReferencia = new google.maps.Marker({
                 position: LocationFabrica,
@@ -197,15 +201,19 @@
 
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer({
-                suppressMarkers: true
+                suppressMarkers: true,
+                polylineOptions: {
+                    strokeColor: "#1976D2",
+                    strokeWeight: 5
+                }
             });
             directionsRenderer.setMap(map);
         }
+        
 
         // ############################################################################## 
         // FUNCION DIBUJAR PUNTOS DESDE GV
         function dibujarPuntosDesdeGv(puntos) {
-
             markers.forEach(m => m.setMap(null));
             markers = [];
 
@@ -223,15 +231,48 @@
                     map: map,
                     title: p.cliente,
                     label: p.orden.toString()
-
                 });
 
                 markers.push(marker);
                 bounds.extend(marker.getPosition());
             });
             map.fitBounds(bounds);
-        }
 
+            // Waypoints
+            /*
+            let origin = new google.maps.LatLng(puntos[0].lat, puntos[0].lng);
+            let destination = new google.maps.LatLng(
+                puntos[puntos.length - 1].lat,
+                puntos[puntos.length - 1].lng
+            );
+            */
+            let origin = LocationFabrica123;
+            let destination = new google.maps.LatLng(
+                parseFloat(puntos[puntos.length - 1].lat),
+                parseFloat(puntos[puntos.length - 1].lng)
+            );
+            
+            let waypoints = puntos.slice(0, puntos.length - 1).map(p => ({
+                location: new google.maps.LatLng(p.lat, p.lng),
+                stopover: true
+            }));
+
+            let request = {
+                origin: origin,
+                destination: destination,
+                waypoints: waypoints,
+                travelMode: google.maps.TravelMode.DRIVING,
+                optimizeWaypoints: false
+            };
+
+            directionsService.route(request, function (result, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    console.error("Error en directions: ", status);
+                }
+            });
+        }
 
         // ##############################################################################
         // FUNCION DIBUJAR PUNTOS OPTIMIZADO 
@@ -264,16 +305,12 @@
                     ordenGoogle.forEach((idx, nuevoOrden) => {
                         markers[idx].setLabel((nuevoOrden + 1).toString());
                     });
-
                     actualizarOrdenGridView(ordenGoogle);
-
                 } else {
                     alert("Error al optimizar las rutas. " + status);
                 }
             });
         }
-
-
 
         // ##############################################################################
         // LIMPIAR MAPS
@@ -283,7 +320,6 @@
 
             directionsRenderer.set('directions', null);
         }
-
 
         // ###############################################################################
         /* SEPARADOR AUTOCOMPLETE CLIENTE */
@@ -302,7 +338,6 @@
         // ###############################################################################
         function actualizarOrdenGridView(ordenGoogle) {
             const txtOrdenes = document.querySelectorAll(".txtOrdenGV");
-
             ordenGoogle.forEach((idx, nuevoOrden) => {
                 if (txtOrdenes[idx]) {
                     txtOrdenes[idx].value = nuevoOrden + 1;
