@@ -310,17 +310,40 @@ namespace jycboliviaASP.net.Presentacion
         /*  --------------   BTN GUARDAR SOLICITUD  ----------------  */
         protected void bt_guardar_Click(object sender, EventArgs e)
         {
+            if (!validarGuardado())
+                return;
             guardarSolicitud();
+        }
+
+        private bool validarGuardado()
+        {
+            string fechaentrega = tx_fechaEntrega.Text.Trim();
+            string horaentrega = tx_horaEntrega.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(fechaentrega))
+            {
+                showalert("Ingrese una fecha válida");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(horaentrega))
+            {
+                showalert("Ingrese una hora válida");
+                return false;
+            }
+
+            int codMetPago = dd_metodoPago.SelectedIndex;
+            if (codMetPago == 0)
+            {
+                showalert("Por favor, seleccione un Metodo de Pago válido");
+                return false;
+            }
+            return true;
         }
 
         private void guardarSolicitud()
         {
             int codMetPago = dd_metodoPago.SelectedIndex;
-            if (codMetPago == 0)
-            {
-                showalert("Por favor, seleccione un Metodo de Pago válido");
-                return;
-            }
+            
 
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
             if(datoRepuesto.Rows.Count > 0){
