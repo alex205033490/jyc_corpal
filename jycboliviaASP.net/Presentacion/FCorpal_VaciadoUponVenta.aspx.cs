@@ -204,7 +204,7 @@ namespace jycboliviaASP.net.Presentacion
                         int NumeroPedido = 0;
                         //int.TryParse(tuplaVenta.Tables[0].Rows[0][0].ToString(), out NumeroPedido);
                         DateTime Fecha;
-                        DateTime.TryParse("2024-11-30", out Fecha);
+                        DateTime.TryParse("2026-01-03", out Fecha);
                         // DateTime.TryParse(tuplaVenta.Tables[0].Rows[0][2].ToString(), out Fecha);
                         int CodigoCliente;
                         int.TryParse(tuplaVenta.Tables[0].Rows[0][3].ToString(), out CodigoCliente);
