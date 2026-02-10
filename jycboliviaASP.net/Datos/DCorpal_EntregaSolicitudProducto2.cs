@@ -380,18 +380,19 @@ namespace jycboliviaASP.net.Datos
             }
         }
         /* POST DETALLE DESPACHO */
-        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad)
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, int codCli)
         {
             try
             {
-                string consulta = "INSERT INTO tbcorpal_detalleproddespacho(coddespacho, codpedido, codprod, cantentregada) " +
-                        "values (@cdespacho, @cpedido, @cproducto, @cant);";
+                string consulta = "INSERT INTO tbcorpal_detalleproddespacho(coddespacho, codpedido, codprod, cantentregada, codcliente) " +
+                        "values (@cdespacho, @cpedido, @cproducto, @cant, @codcliente);";
 
                 MySqlCommand comando = new MySqlCommand(consulta);
                 comando.Parameters.AddWithValue("@cdespacho", coddespacho);
                 comando.Parameters.AddWithValue("@cpedido", codpedido);
                 comando.Parameters.AddWithValue("@cproducto", codprod);
                 comando.Parameters.AddWithValue("@cant", cantidad);
+                comando.Parameters.AddWithValue("@codcli", codCli);
 
                 return conexion.ejecutarMySql2(comando);
             }
