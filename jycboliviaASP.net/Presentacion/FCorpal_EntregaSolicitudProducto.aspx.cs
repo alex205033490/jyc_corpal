@@ -563,11 +563,12 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     int codPedido = int.Parse(row.Cells[1].Text);
                     int codigoProducto = int.Parse(row.Cells[3].Text);
+                    int codClie = int.Parse(row.Cells[13].Text);
                     TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
 
                     if (!float.TryParse(txtCantidad.Text, out float cantidadEntregar)) cantidadEntregar = 0;
 
-                    if (!negocio.POST_INSERTdetalleDespacho(codigoDespacho, codPedido, codigoProducto, cantidadEntregar))
+                    if (!negocio.POST_INSERTdetalleDespacho(codigoDespacho, codPedido, codigoProducto, cantidadEntregar, codClie))
                     {
                         resultadoGeneral = false;
                         break;
@@ -711,6 +712,7 @@ namespace jycboliviaASP.net.Presentacion
                     int codPedido = int.Parse(row.Cells[1].Text);
                     string producto = row.Cells[4].Text;
                     int codigoProducto = int.Parse(row.Cells[3].Text);
+                    int codCli = int.Parse(row.Cells[12].Text);
 
                     TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
                     float cantidadEntregar;
@@ -719,7 +721,7 @@ namespace jycboliviaASP.net.Presentacion
                         cantidadEntregar = 0;
                     }
 
-                    bool resultado = negocio.POST_INSERTdetalleDespacho(codigodespacho, codPedido, codigoProducto, cantidadEntregar);
+                    bool resultado = negocio.POST_INSERTdetalleDespacho(codigodespacho, codPedido, codigoProducto, cantidadEntregar, codCli);
 
                     if (!resultado)
                     {
