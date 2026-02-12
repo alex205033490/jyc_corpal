@@ -84,7 +84,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <div class="row">
         <div class="col-12">
@@ -96,7 +96,13 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
 
+                            <asp:UpdatePanel ID="updatePanel_Producto" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
                         <div class="row col-lg-8 col-md-10 mb-2" style="font-size: small;">
+
+
+                                
+
                             <div class="col-lg-5 col-md-6 col-sm-6 col-6">
                                 <div>
                                     <asp:Label runat="server" for="inputName5" class="form-label">Producto</asp:Label>
@@ -133,9 +139,7 @@
                                     </div>
                                 </div>
 
-                                
                             </div>
-
 
 
                             <div class="col-3 col-md-3 col-sm-4 col-6 d-flex flex-column align-items-center">
@@ -146,49 +150,57 @@
                             </div>
 
                         </div>
+                                                                            </ContentTemplate>
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click"/>
+    </Triggers>
+</asp:UpdatePanel>
 
-                        <div class="text-center col-lg-8 col-md-8 col-sm-10 col-12">
-                            
-
-                        </div>
                     </li>
 
                     <!--------    GRIDVIEW BUSQUEDA PRODUCTO    ------->
-                    <li class="list-group-item">
 
-                        <div class="container_gvProductos table-responsive col-lg-7">
-                            <asp:GridView ID="gv_Productos" runat="server" BackColor="White"
-                                BorderColor="#b4b4b4" BorderStyle="Ridge" BorderWidth="1px" CellPadding="7"
-                                Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="false"
-                                CssClass="gv_Productos table table-striped table-sticky" DataKeyNames="StockParcialAlmacen">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="Asignar">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" />
-                                    <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
-                                    <asp:BoundField DataField="medida" HeaderText="Medida" HtmlEncode="false" />
-                                    <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
-                                    <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
-                                    <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
-                                    <asp:BoundField DataField="StockPackFerial" HeaderText="Stock Pack Ferial" HtmlEncode="false" />
-                                </Columns>
-                                <AlternatingRowStyle BackColor="#CCCCCC" />
-                                <FooterStyle BackColor="#CCCCCC" />
-                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#383838" />
-                            </asp:GridView>
-                        </div>
+                    <div class="container_gvProductos table-responsive col-lg-7">
+                        <asp:UpdatePanel ID="updatePanel_solicitudProd" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
 
-                    </li>
+                                <asp:GridView ID="gv_Productos" runat="server" BackColor="White"
+                                    BorderColor="#b4b4b4" BorderStyle="Ridge" BorderWidth="1px" CellPadding="7"
+                                    Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="false"
+                                    CssClass="gv_Productos table table-striped table-sticky" DataKeyNames="StockParcialAlmacen">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Asignar">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="CheckBox1" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" />
+                                        <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
+                                        <asp:BoundField DataField="medida" HeaderText="Medida" HtmlEncode="false" />
+                                        <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
+                                        <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
+                                        <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
+                                    </Columns>
+                                    <AlternatingRowStyle BackColor="#CCCCCC" />
+                                    <FooterStyle BackColor="#CCCCCC" />
+                                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#808080" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                                </asp:GridView>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click"/>
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </div>
+                                    
                 </ul>
+
 
             </div>
         </div>
@@ -205,7 +217,13 @@
 
                 <div class="container_columns row col-lg-12">
 
-                    <div class="container_column1 row col-lg-5" style="font-size: small;">
+
+                    <div class="container_column1 row col-lg-5">
+                    <asp:UpdatePanel ID="updatePanel_datosFactura" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                        <div class="row" style="font-size: small;">
+
+                        
 
                         <div class="column1 col-lg-6 col-md-3 col-sm-4 col-6">
                             <asp:label runat="server" class="form-label" for="tx_nrodocumento">Nro</asp:label>
@@ -229,8 +247,10 @@
                                     CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
                                 </asp:AutoCompleteExtender> 
 
-                                <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
-                                <asp:Button ID="bt_verificar" CssClass="btn btn-info mb-2" runat="server" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
+                                    <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
+
+                                    <asp:Button ID="bt_verificar" CssClass="btn btn-info mb-2" runat="server" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
+
                             </div>
 
                            
@@ -260,11 +280,23 @@
                             <asp:Button ID="bt_guardar" runat="server" class="btn btn-success" Text="Guardar" OnClick="bt_guardar_Click" />
                         </div>
 
-
+                            </div>
+                                </ContentTemplate>
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
+        <asp:AsyncPostBackTrigger ControlID="bt_verificar" EventName="click" />
+        <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
+    </Triggers>
+</asp:UpdatePanel>
                     </div>
+
 
                     <div class="container_column2 col-lg-7 col-md-7 col-sm-10 col-12">
                         <div class="container_gvListProductos table-responsive">
+
+                            <asp:UpdatePanel ID="updatePanel_GVadicionados" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+
                             <asp:GridView ID="gv_adicionados" runat="server" BackColor="White"
                                 BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
                                 Font-Size="X-Small" ForeColor="Black" GridLines="Vertical"
@@ -297,162 +329,20 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                             </asp:GridView>
+                                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                            <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
 
-
-
-
-    <!--    Solicitud Pedido UPON    -->
-    <!--
-    <div class="row">
-        <div class="col-md-12">
-            <div class ="container-POSTPedido card">
-                <div class="card-header bg-success text-white">
-                  Solicitud de Pedido
-                </div>
-               
-                <div class="row">
-                    <!-- col 1 -->
-    <!--
-                    <div class="col1-solicitudPedido col-lg-6 row">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                            <label class="form-label">Referencia:</label>
-                            <asp:TextBox ID="txt_Referencia" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                            <label class="form-label">Cliente:</label>
-                            <asp:TextBox ID="txt_nomCliente" runat="server" CssClass="form-control" placeholder="Ingrese un nombre" autocomplete="off" ></asp:TextBox>
-
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-6">
-                            <label class="form-label">Telefono:</label>
-                            <asp:TextBox ID="txt_telefono" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6">
-                            <label class="form-label">Correo Electronico:</label>
-                            <asp:TextBox ID="txt_correoE" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                    </div>
-                    
-                    <!-- COL 2 -->
-    <!--
-                    <div class="col2-solicitudPedido col-lg-6 row mb-2">
-
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                            <label class="form-label">NIT:</label>
-                            <asp:TextBox ID="txt_nit" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6">
-                            <label class="form-label">Razón social:</label>
-                            <asp:TextBox ID="txt_razonsocial" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-6">
-                            <label class="form-label">Importe Descuentos:</label>
-                            <asp:TextBox ID="txt_impDescuentos" runat="server" CssClass="form-control" Text="0,00" autocomplete="off"></asp:TextBox>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6">
-                            <label class="form-label">Glosa:</label>
-                            <asp:TextBox ID="txt_glosa" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                        </div>
-
-                    </div>
-                    <div class="container_gvClientesPedidos col-lg-6">
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <asp:GridView ID="gvPedidoClientes" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" >
-                                    <Columns>
-                                        <asp:CommandField ShowSelectButton="true" HeaderText="Selecciona un cliente" SelectText="Seleccionar" />
-                                        <asp:BoundField DataField="NombreCompleto" HeaderText="Nombre" SortExpression="NombreCompleto" />
-                                        <asp:BoundField DataField="CodigoContacto" HeaderText="Codigo" SortExpression="CodigoContacto" />
-                                    </Columns>
-                                </asp:GridView>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                </div>
-                              
-                <br />
-           
-                <div class="container_addProductos border rounded">
-                    <h5 runat="server"> Formulario de Productos </h5>
-                    <div class="row mb-1 col-lg-12">
-                        <div class="item_nomProducto col-lg-3">
-                            <p class="item-name mb-1">Producto:</p>
-                            <asp:TextBox ID="txt_nomProducto" runat="server" class="form-control mb-1" AutoPostBack="true" placeholder="Ingrese un nombre" AutoComplete="off" ></asp:TextBox>
-                        </div>
-                        <div class="item_cantidad col-lg-2">
-                            <p class="item-name mb-1">Cantidad:</p>
-                            <asp:TextBox ID="txt_cantProducto" runat="server" class="form-control" oninput="replaceDotWithComma(this)" AutoComplete="off" placeholder="Ingrese una cantidad"></asp:TextBox>
-                        </div>
-                        <div class="item_precioU col-lg-2">
-                            <p class="item-name mb-1">Precio:</p>
-                            <asp:TextBox ID="txt_precProducto" runat="server" class="form-control" aria-label="Card Holder" aria-describedby="basic-addon1" oninput="replaceDotWithComma(this)" AutoComplete="off"></asp:TextBox>
-                        </div>
-                        <div class="item_impDescProd col-lg-2">
-                            <p class="item-name mb-1">Descuento:</p>
-                            <asp:TextBox ID="txt_descProducto" runat="server" class="form-control" aria-label="Card Holder" aria-describedby="basic-addon1" Text="0,00" oninput="replaceDotWithComma(this)"></asp:TextBox>
-                        </div>
-                        <div class="item-btnAddProducto col-lg-3 align-items-center d-flex">
-                            <asp:Button ID="btn_ADDproducto" runat="server" Text="Agregar Producto" CssClass="btn btn-dark btn-sm" />
-                        </div>
-                    </div>
-                    <div class="table-responsive col-lg-8">
-                        <asp:GridView ID="gv_PedidoGetProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" >
-                            <Columns>
-                                <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" />
-                                <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="CodProd" />
-                                <asp:BoundField DataField="Nombre" HeaderText="Producto" SortExpression="NomProd" />
-                                <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CUM" SortExpression="CodUM" />
-                                <asp:BoundField DataField="CostoUnitario" HeaderText="Precio" SortExpression="Prec" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                </div>
-          
-                <div class="container_ListaProductosPedido">
-
-                    <asp:GridView ID="gv_pedidoListaProductos" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered" >
-                        <Columns>
-                          <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                          <asp:BoundField DataField="CodigoProducto" HeaderText="Codigo" SortExpression="CodigoProducto" />
-                          <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" />
-                          <asp:BoundField DataField="CodigoUnidadMedida" HeaderText="CUMedida" SortExpression="CodigoUnidadMedida" />
-                          <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio" SortExpression="PrecioUnitario" />
-                          <asp:BoundField DataField="ImporteDescuento" HeaderText="Descuento" SortExpression="ImporteDescuento" />
-                          <asp:BoundField DataField="ImporteTotal" HeaderText="Total" SortExpression="ImporteTotal" />
-              
-                          <asp:TemplateField>
-                              <ItemTemplate>
-                                  <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="Eliminar" CommandArgument ='<%# Eval("CodigoProducto") %>' CssClass="btn btn-danger btn-sm" />
-                              </ItemTemplate>
-                          </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                <asp:Button ID="btn_PostPedido" runat="server" Text="Registrar Pedido " CssClass="btn btn-success btn-sm"/>
-            </div>
-                
-                </div>
-
-                </div>
-
-            </div>
-    
-    -->
-<script type="text/javascript" src="../js/mainCorpal.js"></script>
+    <script src="../js/mainCorpal.js"></script>
 </asp:Content>
 
 

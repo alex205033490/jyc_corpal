@@ -15,7 +15,20 @@ namespace jycboliviaASP.net.Negocio
 
         public NCorpal_SolicitudEntregaProducto() { }
 
-        public DataSet get_mostrarProductos(string producto)
+        internal DataSet get_mostrarProductosClienteLista(string producto, int codCliente)
+        {
+            try
+            {
+                return dsp.get_mostrarProductosClienteLista(producto, codCliente);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al mostrar productos" + ex.Message);
+            }
+        }
+
+
+            public DataSet get_mostrarProductos(string producto)
         {            
             return dsp.get_mostrarProductos(producto);
         }

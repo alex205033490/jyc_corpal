@@ -15,6 +15,44 @@ namespace jycboliviaASP.net.Datos
         private conexionMySql conexion = new conexionMySql();
         public DCorpal_SolicitudEntregaProducto() { }
 
+        internal DataSet get_mostrarProductosClienteLista(string producto, int codCliente)
+        {
+            try
+            {
+                NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
+                string consultaStockActual = vlocal.get_consultaStockProductosActual();
+
+                string consulta = $@"select 
+                                    pp.`codigo`,
+                                    pp.`producto`,
+                                    pp.medida,
+                                    dlp.`precio`,
+                                    t1.StockAlmacen,
+                                    t1.StockParcialAlmacen
+                                    
+                                    from 
+                                    tbcorpal_cliente cl
+                                    inner join tbcorpal_listaprecio lp on cl.`id_listaprecio` = lp.`codigo`
+                                    left join tbcorpal_detallelistaprecio dlp on lp.`codigo` = dlp.`id_listaprecio`
+                                    inner join tbcorpal_producto pp on dlp.`id_producto` = pp.`codigo`
+                                    left join ({consultaStockActual}) as t1 on t1.codigo = pp.codigo 
+                                    where pp.`estado` = 1 and lp.`estado` = 1 and dlp.`estado` = 1 
+                                    and cl.`codigo` = @codcliente
+                                    and pp.`producto` like @producto ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codcliente", codCliente),
+                    new MySqlParameter("@producto", "%"+producto+"%")
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)            
+            {
+                throw new Exception("Error al consultar datos. " + ex.Message);
+            }
+        }
+
         internal DataSet get_mostrarProductos(string producto)
         {
             NA_VariablesGlobales vlocal = new NA_VariablesGlobales();

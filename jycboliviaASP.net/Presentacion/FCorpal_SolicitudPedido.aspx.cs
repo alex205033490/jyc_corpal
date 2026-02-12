@@ -175,16 +175,35 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
-            string producto = tx_producto.Text;
-            buscarProductos(producto);
+         
+            buscarProductos();
         }
 
-        private void buscarProductos(string producto)
+        private void buscarProductos()
         {
-            NCorpal_SolicitudEntregaProducto npp = new NCorpal_SolicitudEntregaProducto();
-            DataSet datos = npp.get_mostrarProductos(producto);
-            gv_Productos.DataSource = datos;
-            gv_Productos.DataBind();
+            try
+            {
+                string producto = tx_producto.Text.Trim();
+                string cliente = tx_cliente.Text;
+                int codigCliente;
+                NCorpal_Cliente nc = new NCorpal_Cliente();
+                codigCliente = nc.get_CodigoCliente(cliente);
+
+                if (codigCliente <= 0)
+                {
+                    showalert("Error ingrese un cliente válido.");
+                    return;
+                }
+
+                NCorpal_SolicitudEntregaProducto npp = new NCorpal_SolicitudEntregaProducto();
+                DataSet datos = npp.get_mostrarProductosClienteLista(producto, codigCliente);
+                gv_Productos.DataSource = datos;
+                gv_Productos.DataBind();
+            }
+            catch(Exception ex)
+            {
+                showalert("Error al encontrar datos. " + ex.Message);
+            }
         }
 
         protected void bt_adicionar_Click(object sender, EventArgs e)
@@ -421,7 +440,7 @@ namespace jycboliviaASP.net.Presentacion
                          bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
                         //----------------fin envio de correo---------                    
                         limpiarDatos();
-                        buscarProductos("");
+                        buscarProductos();
                         Session["codigoSolicitudProducto"] = ultimoinsertado;
                         
                         Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
@@ -594,8 +613,8 @@ namespace jycboliviaASP.net.Presentacion
         }
         private void limpiarCamposADDProducto()
         {
-            txt_nomProducto.Text = string.Empty;
-            txt_cantProducto.Text = string.Empty;
+            tx_producto.Text = string.Empty;
+            tx_cantidadProducto.Text = string.Empty;
             gv_Productos.DataSource = null;
             gv_Productos.DataBind();
         }
