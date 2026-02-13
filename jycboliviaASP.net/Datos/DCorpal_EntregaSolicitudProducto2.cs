@@ -392,7 +392,7 @@ namespace jycboliviaASP.net.Datos
                 comando.Parameters.AddWithValue("@cpedido", codpedido);
                 comando.Parameters.AddWithValue("@cproducto", codprod);
                 comando.Parameters.AddWithValue("@cant", cantidad);
-                comando.Parameters.AddWithValue("@codcli", codCli);
+                comando.Parameters.AddWithValue("@codcliente", codCli);
 
                 return conexion.ejecutarMySql2(comando);
             }

@@ -296,71 +296,13 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (!RegistrarDetalleDespacho(codDespacho))
                 {
-                    showalert("Error al registrar el detalle del despacho.");
+                    showalert("Error al registrar el detalle del despacho. ");
                     return;
                 }
 
                 ProcesarSolicitudesSeleccionadas(codVehiculo);
                 FinalizarRegistro(codDespacho);
 
-                
-                /*
-                int codVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
-                string detalle = txt_detalleRegistro.Text.Trim();
-                int codResponsable = obtenerCodResponsable();
-
-                ValidarForm();
-
-                int codDespacho = CrearDespachoPrincipal123(detalle, codVehiculo, codResponsable);
-                if (codDespacho <= 0)
-                {
-                    showalert("Error al registrar el despacho principal.");
-                    return;
-                }
-
-                if (!RegistrarDetalleDespacho(codDespacho))
-                {
-                    showalert("Error al registrar el detalle del despacho.");
-                    return;
-                }
-
-                foreach (GridViewRow row in gv_solicitudesProductos.Rows)
-                {
-                    CheckBox chk = row.FindControl("chkSelect") as CheckBox;
-                    if (chk != null && chk.Checked)
-                    {
-                        ProcesarRegistroSolicitudPedido123(row, codVehiculo);
-
-                        int codigoSolicitud = int.Parse(row.Cells[1].Text);
-                        int codProducto = int.Parse(row.Cells[3].Text);
-                        string producto = row.Cells[4].Text;
-                        int codigoCliente = int.Parse(row.Cells[11].Text);
-                        string solicitante = row.Cells[10].Text;
-                        string fechaEntrega = aFecha2(row.Cells[9].Text);
-
-                        NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
-                        int codVendedor = nego.ObtenerCodVendedor_EntregaSolProductos(codigoSolicitud);
-
-                        TextBox txt_cantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
-                        int cantidad = 0;
-                        if (!string.IsNullOrEmpty(txt_cantidad.Text))
-                        {
-                            int.TryParse(txt_cantidad.Text, out cantidad);
-                        }
-
-                        RegistrarIngresoAlmacenDinamico(codigoSolicitud, codProducto, producto, cantidad, codVendedor);
-
-                        RegistrarVentaConDetalle123(codigoSolicitud, codigoCliente, solicitante, fechaEntrega);
-                    }
-                }
-
-                limpiarForm();
-                GET_MostrarSolicitudProductos("Abierto");
-                //  showalert("Registro insertado exitosamente.");
-                Session["codigoDespacho"] = codDespacho;
-                Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";                
-                Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-                */
             }
             catch(Exception ex)
             {
@@ -417,9 +359,10 @@ namespace jycboliviaASP.net.Presentacion
                 ProcesarRegistroSolicitudPedido123(row, codVehiculo);
 
                 int codSolicitud = int.Parse(row.Cells[1].Text);
-                int codProducto = int.Parse(row.Cells[3].Text);
+                int codProducto = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codproducto"]);
+
                 string producto = row.Cells[4].Text;
-                int codCliente = int.Parse(row.Cells[12].Text);
+                int codCliente = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codCliente"]);
                 string solicitante = row.Cells[11].Text;
                 string fechaEntrega = aFecha2(row.Cells[10].Text);
 
@@ -437,12 +380,13 @@ namespace jycboliviaASP.net.Presentacion
                     showalert("No se pudo ingresar el stock al almacén. ");
                     return;
                 }
-                RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
+                // Registrar Venta Aut
+                //RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
             }
         }
         private void FinalizarRegistro(int codDespacho)
         {
-            //limpiarForm();
+            //limpiarForm(); 
             //GET_MostrarSolicitudProductos("Abierto");
             Session["codigoDespacho"] = codDespacho;
             Session["ReporteGeneral"] = "Report_DespachoBoletasProdEntrega";
@@ -450,7 +394,7 @@ namespace jycboliviaASP.net.Presentacion
             Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
         }
 
-        /*PARTE 2 AUTOCORR*/
+        /*PARTE 2 Registro Venta Deshabilitado*/
         private void RegistrarVentaConDetalle123(int codigoSolicitud, int codigoCliente,string solicitante, string fechaEntrega, int codMetPago)
         {
             try
@@ -514,7 +458,8 @@ namespace jycboliviaASP.net.Presentacion
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
                 int codigoSolicitud = int.Parse(row.Cells[1].Text);
-                int codigoProducto = int .Parse(row.Cells[3].Text);
+                int codigoProducto = Convert.ToInt32(
+                    gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codproducto"]);
                 TextBox txtCantidad = (TextBox)row.FindControl("tx_cantidadEntregarOK");
                 Label lblCantidadActual = (Label)row.FindControl("lb_cantentregada");
                 CheckBox chkTipoEntrega = (CheckBox)row.FindControl("chkTipoEntrega");
@@ -711,8 +656,12 @@ namespace jycboliviaASP.net.Presentacion
 
                     int codPedido = int.Parse(row.Cells[1].Text);
                     string producto = row.Cells[4].Text;
-                    int codigoProducto = int.Parse(row.Cells[3].Text);
-                    int codCli = int.Parse(row.Cells[12].Text);
+
+                    int codigoProducto = Convert.ToInt32(
+                        gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codproducto"]);
+
+                    int codCli = Convert.ToInt32(
+                        gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codCliente"]);
 
                     TextBox txtCantidadAEntregar = (TextBox)row.FindControl("tx_cantidadEntregarOK");
                     float cantidadEntregar;
