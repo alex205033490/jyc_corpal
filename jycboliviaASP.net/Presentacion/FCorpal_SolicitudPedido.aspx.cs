@@ -38,7 +38,7 @@ namespace jycboliviaASP.net.Presentacion
                 datoRepuesto.Columns.Add("Codigo", typeof(string));
                 datoRepuesto.Columns.Add("Producto", typeof(string));
                 datoRepuesto.Columns.Add("Medida", typeof(string));
-                datoRepuesto.Columns.Add("Tipo", typeof(string));                  
+                datoRepuesto.Columns.Add("Tipo", typeof(string));
                 datoRepuesto.Columns.Add("Precio", typeof(string));
                 datoRepuesto.Columns.Add("Cantidad", typeof(string));
                 datoRepuesto.Columns.Add("PrecioTotal", typeof(string));
@@ -95,13 +95,13 @@ namespace jycboliviaASP.net.Presentacion
                     showalert("Error al cargar los datos Metodo de Pago");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                showalert("Error inesperado en el metodo cargarDatosModPago. " + ex.Message );
+                showalert("Error inesperado en el metodo cargarDatosModPago. " + ex.Message);
             }
         }
 
-        
+
         // webservice que me permite la autocompletacion
         [WebMethod]
         [ScriptMethod]
@@ -119,7 +119,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
-            return lista;          
+            return lista;
         }
 
 
@@ -130,10 +130,10 @@ namespace jycboliviaASP.net.Presentacion
         public static string[] GetlistaProductos(string prefixText, int count)
         {
             string nombreProducto = prefixText;
-            
+
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
             DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
-         
+
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
             for (int i = 0; i < fin; i++)
@@ -141,7 +141,7 @@ namespace jycboliviaASP.net.Presentacion
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
             return lista;
-            
+
             /*
             NA_endpoints napi = new NA_endpoints();
             dynamic tuplas = napi.get_productoAlmacen(nombreProducto, "adm", "123");            
@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
-         
+
             buscarProductos();
         }
 
@@ -200,7 +200,7 @@ namespace jycboliviaASP.net.Presentacion
                 gv_Productos.DataSource = datos;
                 gv_Productos.DataBind();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert("Error al encontrar datos. " + ex.Message);
             }
@@ -225,10 +225,11 @@ namespace jycboliviaASP.net.Presentacion
         private void adicionar_productos()
         {
             float cantidad;
-            float.TryParse(tx_cantidadProducto.Text, out cantidad);            
+            float.TryParse(tx_cantidadProducto.Text, out cantidad);
             bool itemPackFerial = cb_itemPackFerial.Checked;
 
-            if(cantidad > 0){
+            if (cantidad > 0)
+            {
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 CheckBox cb = null;
                 for (int i = 0; i < gv_Productos.Rows.Count; i++)
@@ -256,26 +257,26 @@ namespace jycboliviaASP.net.Presentacion
                             StockLimite = StockProducto;
                         
                         if (cantidad <= StockLimite) {  */
-                            DataRow tupla = datoRepuesto.NewRow();
-                            tupla["Codigo"] = codigo;
-                            tupla["producto"] = producto;
-                            tupla["Medida"] = Medida;
-                            tupla["Tipo"] = tipo;
-                            tupla["Precio"] = precio;
-                            tupla["Cantidad"] = cantidad;
-                            tupla["PrecioTotal"] = (precio * cantidad);
+                        DataRow tupla = datoRepuesto.NewRow();
+                        tupla["Codigo"] = codigo;
+                        tupla["producto"] = producto;
+                        tupla["Medida"] = Medida;
+                        tupla["Tipo"] = tipo;
+                        tupla["Precio"] = precio;
+                        tupla["Cantidad"] = cantidad;
+                        tupla["PrecioTotal"] = (precio * cantidad);
 
-                            if (itemPackFerial == true)
-                            {
-                                tupla["ItemPackFerial"] = itemPackFerial;
-                                tupla["Medida"] = "UNIDAD";
-                                tupla["Tipo"] = "ITEM PACK FERIAL";
-                            }
-                            else
-                                tupla["ItemPackFerial"] = false;
+                        if (itemPackFerial == true)
+                        {
+                            tupla["ItemPackFerial"] = itemPackFerial;
+                            tupla["Medida"] = "UNIDAD";
+                            tupla["Tipo"] = "ITEM PACK FERIAL";
+                        }
+                        else
+                            tupla["ItemPackFerial"] = false;
 
-                            datoRepuesto.Rows.Add(tupla);
-                      //  }                        
+                        datoRepuesto.Rows.Add(tupla);
+                        //  }                        
                     }
                 }
                 gv_adicionados.DataSource = datoRepuesto;
@@ -290,16 +291,16 @@ namespace jycboliviaASP.net.Presentacion
 
             decimal cantidadIngresada = decimal.Parse(tx_cantidadProducto.Text.Trim());
 
-            if(cantidadIngresada <= 0)
+            if (cantidadIngresada <= 0)
             {
                 showalert("La cantidad debe ser mayor que cero.");
                 return false;
             }
 
-            foreach(GridViewRow row in gv_Productos.Rows)
+            foreach (GridViewRow row in gv_Productos.Rows)
             {
                 CheckBox chk = row.FindControl("CheckBox1") as CheckBox;
-                if(chk != null && chk.Checked)
+                if (chk != null && chk.Checked)
                 {
                     decimal stockParcial = 0;
 
@@ -362,10 +363,11 @@ namespace jycboliviaASP.net.Presentacion
         private void guardarSolicitud()
         {
             int codMetPago = dd_metodoPago.SelectedIndex;
-            
+
 
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-            if(datoRepuesto.Rows.Count > 0){
+            if (datoRepuesto.Rows.Count > 0)
+            {
                 NA_Responsables Nresp = new NA_Responsables();
                 string usuarioAux = Session["NameUser"].ToString();
                 string passwordAux = Session["passworuser"].ToString();
@@ -384,24 +386,26 @@ namespace jycboliviaASP.net.Presentacion
                 NCorpal_Cliente nc = new NCorpal_Cliente();
                 codigCliente = nc.get_CodigoCliente(cliente);
 
-              /*  if (codigCliente == 0) { 
-                  string propietario = tx_propietario.Text;
-                  string razonSocial = tx_razonSocial.Text;
-                  string nit = tx_nit.Text;
-                    bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
-                    codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
-                }
-                */
-
-                bool banderaActualizar = cb_actualizarCliente.Checked;
-                if (codigCliente!=0 && banderaActualizar == true) {
+                /*  if (codigCliente == 0) { 
                     string propietario = tx_propietario.Text;
                     string razonSocial = tx_razonSocial.Text;
-                    string nit = tx_nit.Text;                    
-                    banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente,cliente,propietario, razonSocial, nit, codpersolicitante);
+                    string nit = tx_nit.Text;
+                      bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
+                      codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
+                  }
+                  */
+
+                bool banderaActualizar = cb_actualizarCliente.Checked;
+                if (codigCliente != 0 && banderaActualizar == true)
+                {
+                    string propietario = tx_propietario.Text;
+                    string razonSocial = tx_razonSocial.Text;
+                    string nit = tx_nit.Text;
+                    banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente, cliente, propietario, razonSocial, nit, codpersolicitante);
                 }
 
-                if (codigCliente > 0) {
+                if (codigCliente > 0)
+                {
                     if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
 
                     {
@@ -442,7 +446,7 @@ namespace jycboliviaASP.net.Presentacion
                         limpiarDatos();
                         buscarProductos();
                         Session["codigoSolicitudProducto"] = ultimoinsertado;
-                        
+
                         Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
                         Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                     }
@@ -456,7 +460,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: No tiene pedido') </script>");
-            
+
         }
 
         protected void gv_adicionados_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -465,7 +469,7 @@ namespace jycboliviaASP.net.Presentacion
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();
-            
+
         }
 
         protected void gv_adicionados_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -480,7 +484,7 @@ namespace jycboliviaASP.net.Presentacion
 
             Session["listaSolicitudProducto"] = datoRepuesto;
             gv_adicionados.DataSource = datoRepuesto;
-            gv_adicionados.DataBind();            
+            gv_adicionados.DataBind();
         }
 
         protected void gv_adicionados_RowEditing(object sender, GridViewEditEventArgs e)
@@ -508,11 +512,11 @@ namespace jycboliviaASP.net.Presentacion
             auxtexto = (TextBox)row.Cells[6].Controls[0];
             auxtexto.ReadOnly = true;
             auxtexto.Enabled = false;
-            
+
             TextBox MontoPago = (TextBox)row.Cells[7].Controls[0];
             MontoPago.BackColor = Color.Yellow;
-            
-            
+
+
             auxtexto = (TextBox)row.Cells[8].Controls[0];
             auxtexto.ReadOnly = true;
             auxtexto.Enabled = false;
@@ -536,7 +540,7 @@ namespace jycboliviaASP.net.Presentacion
             Session["listaSolicitudProducto"] = datoRepuesto;
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();
-            
+
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -581,15 +585,15 @@ namespace jycboliviaASP.net.Presentacion
         protected void bt_prueba_Click(object sender, EventArgs e)
         {
             NA_endpoints napi = new NA_endpoints();
-            dynamic tuplas = napi.get_productoAlmacen("Nax","adm","123");
+            dynamic tuplas = napi.get_productoAlmacen("Nax", "adm", "123");
             string dato = "";
             JArray rowsArray = (JArray)tuplas["Resultado"];
             foreach (JObject obj in rowsArray)
-            { 
-                dato = dato + obj["Descripcion"].ToString()+";";
+            {
+                dato = dato + obj["Descripcion"].ToString() + ";";
             }
 
-                tx_cantidadProducto.Text = rowsArray.Count.ToString();
+            tx_cantidadProducto.Text = rowsArray.Count.ToString();
         }
 
 
@@ -603,11 +607,13 @@ namespace jycboliviaASP.net.Presentacion
             string tienda = tx_cliente.Text;
             NCorpal_Cliente ncli = new NCorpal_Cliente();
             DataSet tuplaCliente = ncli.get_ClienteNombreEspecifico(tienda);
-            if (tuplaCliente.Tables[0].Rows.Count>0) {
-                tx_propietario.Text = tuplaCliente.Tables[0].Rows[0][6].ToString(); 
+            if (tuplaCliente.Tables[0].Rows.Count > 0)
+            {
+                tx_propietario.Text = tuplaCliente.Tables[0].Rows[0][6].ToString();
                 tx_razonSocial.Text = tuplaCliente.Tables[0].Rows[0][12].ToString();
                 tx_nit.Text = tuplaCliente.Tables[0].Rows[0][13].ToString();
-            }else
+            }
+            else
                 Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
 
         }
