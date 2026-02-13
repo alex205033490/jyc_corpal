@@ -13,6 +13,141 @@ namespace jycboliviaASP.net.Negocio
 
         public NCorpal_Cliente() { }
 
+
+        public bool eliminar_cliente(int codigo)
+        {
+            try
+            {
+                DCorpal_Cliente dtienda = new DCorpal_Cliente();
+                return dtienda.eliminar_cliente(codigo);
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Reenviamos el error para mostrarlo en la alerta
+            }
+        }
+
+        public bool existeClienteParaModificar(string nombreCliente, int idActual)
+        {
+            DataSet tuplaUsuario = dtienda.get_clienteNombreExcluyendoID(nombreCliente, idActual);
+
+            // Si devuelve filas, significa que OTRO cliente ya tiene ese nombre
+            if (tuplaUsuario != null && tuplaUsuario.Tables.Count > 0 && tuplaUsuario.Tables[0].Rows.Count > 0)
+            {
+                return true; // Existe un duplicado (conflicto)
+            }
+            else
+            {
+                return false; // No hay conflicto (o es el mismo registro, o es nombre nuevo)
+            }
+        }
+
+        public bool modificar_cliente(
+            int codigo, // <--- EL ID ES OBLIGATORIO AQUÍ
+            string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
+            string propietarioname, string propietarioci, string propietariodir, string propietariocelular, string propietarionit, string propietariocorreo,
+            string facturar_a, string facturar_nit, string facturar_correo, string observacion,
+            int codUser,  string latitud, string longitud,
+            int id_tipocliente, int id_listaprecio)
+        {
+            try
+            {
+                return dtienda.modificar_cliente(
+                    codigo, // Pasamos el ID a la capa de datos
+                    tiendaname, tiendadir, tiendatelefono, tiendadepartamento, tiendazona,
+                    propietarioname, propietarioci, propietariodir, propietariocelular, propietarionit, propietariocorreo,
+                    facturar_a, facturar_nit, facturar_correo, observacion,
+                    codUser,  latitud, longitud,
+                    id_tipocliente, id_listaprecio
+                );
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+   
+
+
+        public bool insertar_cliente(
+                string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
+                string propietarioname, string propietarioci, string propietariodir, string propietariocelular, string propietarionit, string propietariocorreo,
+                string facturar_a, string facturar_nit, string facturar_correo, string observacion,
+
+                int codUser, // Este es codrespgra
+                string latitud,
+                string longitud,
+                int id_tipocliente,
+                int id_listaprecio)
+        {
+            try
+            {
+                // CORRECCIÓN 1: Agregar "return" antes de llamar al método.
+                // CORRECCIÓN 2: Agregar "null" (u 0) para el parámetro 'cod_clienteupon' que faltaba en medio.
+
+                return dtienda.insertar_cliente(
+                    tiendaname, tiendadir, tiendatelefono, tiendadepartamento, tiendazona,
+                    propietarioname, propietarioci, propietariodir, propietariocelular, propietarionit, propietariocorreo,
+                    facturar_a, facturar_nit, facturar_correo, observacion,
+
+                    codUser, // codrespgra
+                    
+                    latitud,
+                    longitud,
+
+                    id_tipocliente, id_listaprecio
+                );
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
+        public bool existeCliente(string nombreCliente)
+        {
+            DataSet tuplaUsuario = dtienda.get_clienteNombre(nombreCliente);
+
+            // VALIDACIÓN: Verificamos que no sea nulo Y que tenga filas
+            if (tuplaUsuario != null && tuplaUsuario.Tables.Count > 0 && tuplaUsuario.Tables[0].Rows.Count > 0)
+            {
+                return true; // Ya existe
+            }
+            else
+            {
+                return false; // No existe, puedes guardar
+            }
+        }
+
+        public DataSet mostrarListaPrecio()
+        {
+            DataSet lista = dtienda.mostrarListaPrecio();
+            return lista;
+        }
+        
+        public DataSet mostrarTipoCliente() {
+            DataSet lista = dtienda.mostrarTipoCliente();
+            return lista;
+        }
+
+
+        public DataSet get_cliente(int codigo)
+        {
+            DataSet lista = dtienda.get_cliente(codigo);
+            return lista;
+        }
+        
+
+
+        public DataSet listarTiendas2(string nombreTiendas)
+        {
+            DataSet lista = dtienda.listarTiendas2(nombreTiendas);
+            return lista;
+        }
+
         public DataSet listarTiendas(string nombreTiendas)
         {
             DataSet lista = dtienda.listarTiendas(nombreTiendas);
