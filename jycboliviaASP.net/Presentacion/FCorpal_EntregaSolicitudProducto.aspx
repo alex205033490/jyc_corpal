@@ -69,7 +69,7 @@
 
                     <asp:GridView ID="gv_solicitudesProductos" runat="server"
                         CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
-                        Style="background-color: white !important;">
+                        Style="background-color: white !important;" DataKeyNames="codproducto, codCliente">
                         <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
@@ -81,7 +81,7 @@
 
                             <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
 
-                            <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" HtmlEncode="false" />
+                            <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" HtmlEncode="false" Visible="false"/>
 
                             <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
                             
@@ -109,7 +109,7 @@
 
                             <asp:BoundField DataField="fechaentrega" HeaderText="Fecha Entrega" />
                             <asp:BoundField DataField="personalsolicitud" HeaderText="Personal Solicitante" HtmlEncode="false" />
-                            <asp:BoundField DataField="codCliente" HeaderText="Codigo Cliente" />
+                            <asp:BoundField DataField="codCliente" HeaderText="Codigo Cliente"  Visible="false"/>
                             <asp:BoundField DataField="tiendaname" HeaderText="Cliente" HtmlEncode="false" />
                         </Columns>
                     </asp:GridView>
