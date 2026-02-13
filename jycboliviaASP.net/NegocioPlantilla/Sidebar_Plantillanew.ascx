@@ -44,7 +44,9 @@
             <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="mn_rutaEntrega" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Ruta Entrega</span></a></li>       
             <li><a href="../Presentacion/FCorpal_ReciboIngreso.aspx" id="mn_regiboIngreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Ingreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ReciboEgreso.aspx" id="mn_regiboEgreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Egreso</span></a></li>          
-            <li><a href="../Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" id="mn_consultaIngresoEgreso" runat="server" ><i class="bi bi-circle"></i><span>Consulta Recibos (Ingreso/Egreso)</span></a></li>          
+            <li><a href="../Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" id="mn_consultaIngresoEgreso" runat="server" ><i class="bi bi-circle"></i><span>Consulta Recibos (Ingreso/Egreso)</span></a></li>
+            <li><a href="../Presentacion/FCorpal_GestionarCliente.aspx" id="mn_gestionarCliente" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Cliente</span></a></li>
+            
         </ul>
       </li><!-- End Forms Nav -->
 

@@ -80,6 +80,7 @@ namespace jycboliviaASP.net.NegocioPlantilla
             mn_despachoCamion.Visible = false;
             mn_entregaSolicitudProducto.Visible = false;
             //mn_asignacionRutaCamion.Visible = false;
+            mn_gestionarCliente.Visible = false;
         }
 
 
@@ -234,6 +235,9 @@ namespace jycboliviaASP.net.NegocioPlantilla
                                 break;
                             case 149:
                                 mn_asignacionRutaCamion.Visible = true;
+                                break;
+                            case 150:
+                                mn_gestionarCliente.Visible = true;
                                 break;
                             default:
                                 Console.WriteLine("Default case");
