@@ -175,7 +175,7 @@ namespace jycboliviaASP.net.Datos
                                " WHEN HOUR(ee.horagra) BETWEEN 0 AND 6 THEN 'Noche' " +
                                " ELSE 'Noche' " +
                                " END AS 'TurnoSistema' "+
-
+                               " ,cc.codupon "+
                                " from tbcorpal_entregasordenproduccion ee " +
                                " left join tbcorpal_producto cc on (ee.codProductonax = cc.codigo) "+
                                " where "+

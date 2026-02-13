@@ -82,6 +82,7 @@
               <xs:element name="Dia" msprop:Generator_ColumnPropNameInTable="DiaColumn" msprop:Generator_ColumnPropNameInRow="Dia" msprop:Generator_UserColumnName="Dia" msprop:Generator_ColumnVarNameInTable="columnDia" type="xs:string" minOccurs="0" />
               <xs:element name="FechaSistema" msprop:Generator_ColumnPropNameInTable="FechaSistemaColumn" msprop:Generator_ColumnPropNameInRow="FechaSistema" msprop:Generator_UserColumnName="FechaSistema" msprop:Generator_ColumnVarNameInTable="columnFechaSistema" type="xs:string" minOccurs="0" />
               <xs:element name="TurnoSistema" msprop:Generator_ColumnPropNameInTable="TurnoSistemaColumn" msprop:Generator_ColumnPropNameInRow="TurnoSistema" msprop:Generator_UserColumnName="TurnoSistema" msprop:Generator_ColumnVarNameInTable="columnTurnoSistema" type="xs:string" minOccurs="0" />
+              <xs:element name="codupon" msprop:Generator_UserColumnName="codupon" msprop:Generator_ColumnPropNameInTable="coduponColumn" msprop:Generator_ColumnPropNameInRow="codupon" msprop:Generator_ColumnVarNameInTable="columncodupon" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -105,10 +106,10 @@
               <xs:element name="Salida1" msprop:Generator_ColumnPropNameInTable="Salida1Column" msprop:Generator_ColumnPropNameInRow="Salida1" msprop:Generator_UserColumnName="Salida1" msprop:Generator_ColumnVarNameInTable="columnSalida1" type="xs:string" minOccurs="0" />
               <xs:element name="StockAlmacen" msprop:Generator_ColumnPropNameInTable="StockAlmacenColumn" msprop:Generator_ColumnPropNameInRow="StockAlmacen" msprop:Generator_UserColumnName="StockAlmacen" msprop:Generator_ColumnVarNameInTable="columnStockAlmacen" type="xs:string" minOccurs="0" />
               <xs:element name="StockPackFerial" msprop:Generator_ColumnPropNameInTable="StockPackFerialColumn" msprop:Generator_ColumnPropNameInRow="StockPackFerial" msprop:Generator_UserColumnName="StockPackFerial" msprop:Generator_ColumnVarNameInTable="columnStockPackFerial" type="xs:string" minOccurs="0" />
-              <xs:element name="codupon" msprop:Generator_UserColumnName="codupon" msprop:Generator_ColumnPropNameInTable="coduponColumn" msprop:Generator_ColumnPropNameInRow="codupon" msprop:Generator_ColumnVarNameInTable="columncodupon" type="xs:string" minOccurs="0" />
-              <xs:element name="codumupon" msprop:Generator_UserColumnName="codumupon" msprop:Generator_ColumnPropNameInTable="codumuponColumn" msprop:Generator_ColumnPropNameInRow="codumupon" msprop:Generator_ColumnVarNameInTable="columncodumupon" type="xs:string" minOccurs="0" />
-              <xs:element name="codigosimec" msprop:Generator_UserColumnName="codigosimec" msprop:Generator_ColumnPropNameInTable="codigosimecColumn" msprop:Generator_ColumnPropNameInRow="codigosimec" msprop:Generator_ColumnVarNameInTable="columncodigosimec" type="xs:string" minOccurs="0" />
-              <xs:element name="StockParcialAlmacen" msprop:Generator_ColumnPropNameInRow="StockParcialAlmacen" msprop:Generator_ColumnPropNameInTable="StockParcialAlmacenColumn" msprop:Generator_ColumnVarNameInTable="columnStockParcialAlmacen" msprop:Generator_UserColumnName="StockParcialAlmacen" type="xs:string" minOccurs="0" />
+              <xs:element name="codupon" msprop:Generator_ColumnPropNameInTable="coduponColumn" msprop:Generator_ColumnPropNameInRow="codupon" msprop:Generator_UserColumnName="codupon" msprop:Generator_ColumnVarNameInTable="columncodupon" type="xs:string" minOccurs="0" />
+              <xs:element name="codumupon" msprop:Generator_ColumnPropNameInTable="codumuponColumn" msprop:Generator_ColumnPropNameInRow="codumupon" msprop:Generator_UserColumnName="codumupon" msprop:Generator_ColumnVarNameInTable="columncodumupon" type="xs:string" minOccurs="0" />
+              <xs:element name="codigosimec" msprop:Generator_ColumnPropNameInTable="codigosimecColumn" msprop:Generator_ColumnPropNameInRow="codigosimec" msprop:Generator_UserColumnName="codigosimec" msprop:Generator_ColumnVarNameInTable="columncodigosimec" type="xs:string" minOccurs="0" />
+              <xs:element name="StockParcialAlmacen" msprop:Generator_ColumnPropNameInTable="StockParcialAlmacenColumn" msprop:Generator_ColumnPropNameInRow="StockParcialAlmacen" msprop:Generator_UserColumnName="StockParcialAlmacen" msprop:Generator_ColumnVarNameInTable="columnStockParcialAlmacen" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -128,6 +129,7 @@
               <xs:element name="horacierre" msprop:Generator_ColumnPropNameInTable="horacierreColumn" msprop:Generator_ColumnPropNameInRow="horacierre" msprop:Generator_UserColumnName="horacierre" msprop:Generator_ColumnVarNameInTable="columnhoracierre" type="xs:string" minOccurs="0" />
               <xs:element name="personalentregoproducto" msprop:Generator_ColumnPropNameInTable="personalentregoproductoColumn" msprop:Generator_ColumnPropNameInRow="personalentregoproducto" msprop:Generator_UserColumnName="personalentregoproducto" msprop:Generator_ColumnVarNameInTable="columnpersonalentregoproducto" type="xs:string" minOccurs="0" />
               <xs:element name="detallecierre" msprop:Generator_ColumnPropNameInTable="detallecierreColumn" msprop:Generator_ColumnPropNameInRow="detallecierre" msprop:Generator_UserColumnName="detallecierre" msprop:Generator_ColumnVarNameInTable="columndetallecierre" type="xs:string" minOccurs="0" />
+              <xs:element name="codupon" msprop:Generator_ColumnPropNameInRow="codupon" msprop:Generator_ColumnPropNameInTable="coduponColumn" msprop:Generator_ColumnVarNameInTable="columncodupon" msprop:Generator_UserColumnName="codupon" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

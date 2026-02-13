@@ -467,6 +467,7 @@ namespace jycboliviaASP.net.Datos
                                " ss.horacierre, " +
                                " ss.personalentregoproducto, " +
                                " ss.detallecierre  " +
+                               " ,pp.codupon "+
                                " from tbcorpal_solicitudentregaproducto ss, " +
                                " tbcorpal_detalle_solicitudproducto dss, " +
                                " tbcorpal_producto pp " +
