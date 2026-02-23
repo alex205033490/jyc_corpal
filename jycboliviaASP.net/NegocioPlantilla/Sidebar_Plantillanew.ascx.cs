@@ -239,6 +239,11 @@ namespace jycboliviaASP.net.NegocioPlantilla
                             case 150:
                                 mn_gestionarCliente.Visible = true;
                                 break;
+                            case 151:
+                                mn_gestionarLista.Visible = true;
+                                break;
+
+                                
                             default:
                                 Console.WriteLine("Default case");
                                 break;

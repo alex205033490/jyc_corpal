@@ -186,6 +186,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_asignacionRutaCamion;
 
         /// <summary>
+        /// Control mn_gestionarLista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_gestionarLista;
+
+        /// <summary>
         /// Control mn_ordendeProduccion.
         /// </summary>
         /// <remarks>

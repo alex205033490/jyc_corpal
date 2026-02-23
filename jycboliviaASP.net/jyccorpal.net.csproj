@@ -557,6 +557,7 @@
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
     <Content Include="Presentacion\FACorpal_ConsultaGrafica.aspx" />
     <Content Include="Presentacion\FACorpal_ConsultaGeneral.aspx" />
+    <Content Include="Presentacion\FACorpal_GestionListaPrecio.aspx" />
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_AsignacionRuta_Camion.aspx" />
@@ -1160,6 +1161,13 @@
     </Compile>
     <Compile Include="Presentacion\FACorpal_ConsultaGeneral.aspx.designer.cs">
       <DependentUpon>FACorpal_ConsultaGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_GestionListaPrecio.aspx.cs">
+      <DependentUpon>FACorpal_GestionListaPrecio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_GestionListaPrecio.aspx.designer.cs">
+      <DependentUpon>FACorpal_GestionListaPrecio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FA_Dashboard.aspx.cs">
       <DependentUpon>FA_Dashboard.aspx</DependentUpon>

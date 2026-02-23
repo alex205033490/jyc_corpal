@@ -67,8 +67,30 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
-   
 
+        public bool eliminarListaPrecio(int idListaProducto) {
+            try
+            {
+                // Llamamos directamente a la capa de datos y retornamos su resultado (true o false)
+                return dtienda.eliminarListaPrecio(idListaProducto);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool insertarListaPrecio(string nombre, string descripcion, decimal descuentogral)
+        {
+            try
+            {
+                // Llamamos directamente a la capa de datos y retornamos su resultado (true o false)
+                return dtienda.insertarListaPrecio(nombre, descripcion, descuentogral);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         public bool insertar_cliente(
                 string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
@@ -147,6 +169,21 @@ namespace jycboliviaASP.net.Negocio
             DataSet lista = dtienda.listarTiendas2(nombreTiendas);
             return lista;
         }
+
+        public DataSet listarListaProducto(string nombreLista)
+        {
+            DataSet lista = dtienda.listarListaProducto(nombreLista);
+            return lista;
+        }
+
+        
+
+        public DataSet listarDetalleListaProducto(int idLista)
+        {
+            DataSet lista = dtienda.listarDetalleListaProducto(idLista);
+            return lista;
+        }
+        
 
         public DataSet listarTiendas(string nombreTiendas)
         {
