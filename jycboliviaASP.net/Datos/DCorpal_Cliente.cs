@@ -97,6 +97,58 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        public bool eliminarListaPrecio(int idListaProducto) {
+            try
+            {
+                // Usamos interpolación ($@) para que el código quede limpio y fácil de leer.
+                // Cambiamos el estado a 0 (inactivo/eliminado) filtrando por el código de la lista.
+                string consulta = $@"
+                    UPDATE tbcorpal_listaprecio 
+                    SET estado = 0 
+                    WHERE codigo = {idListaProducto}";
+
+                // Ejecutamos la consulta en tu clase de conexión
+                conexion.consultaMySql(consulta);
+
+                return true; // Si todo sale bien, devolvemos true
+            }
+            catch (Exception)
+            {
+                return false; // Si hay algún error con la base de datos, devolvemos false
+            }
+
+
+        }
+
+        public bool insertarListaPrecio(string nombre, string descripcion, decimal descuentogral)
+        {
+            try
+            {
+                // Esto asegura que el decimal se convierta a texto usando un punto (ej. 15.50) y no una coma
+                string descFormateado = descuentogral.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                string consulta = "INSERT INTO tbcorpal_listaprecio " +
+                                  "(" +
+                                      "nombre, descripcion, " +
+                                      "estado, descuentogral_porcentaje" +
+                                  ") " +
+                                  "VALUES " +
+                                  "(" +
+                                      "'" + nombre + "', " +
+                                      "'" + descripcion + "', " +
+                                      "1, " +               // Estado activo por defecto (1)
+                                      descFormateado +      // El número decimal formateado (sin comillas simples)
+                                  ")";
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                // Considera hacer un throw; o registrar el error en un log para saber por qué falló
+                return false;
+            }
+        }
 
         public bool insertar_cliente(
     // Datos Tienda
@@ -246,6 +298,39 @@ namespace jycboliviaASP.net.Datos
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
+
+        internal DataSet listarListaProducto(string nombreLista)
+        {
+            string consulta = "SELECT " +
+                "    lp.codigo, " +
+                "    lp.nombre,  lp.descripcion, " +
+                "    lp.descuentogral_porcentaje " +
+                "FROM tbcorpal_listaprecio lp " +
+                "WHERE lp.estado = 1 " +
+                "AND lp.nombre LIKE '%" + nombreLista + "%' " +
+        
+                    "ORDER BY lp.codigo DESC";
+            DataSet lista = conexion.consultaMySql(consulta);
+            return lista;
+        }
+
+        internal DataSet listarDetalleListaProducto(int idLista)
+        {
+            string consulta = "SELECT " +
+            "    dlp.codigo, " +
+            "    pro.producto, " +
+            "    pro.medida, " +
+            "    dlp.precio, " +
+            "    dlp.precio_especial, " +
+            "    dlp.porcentaje_descuento " +
+            "FROM tbcorpal_detallelistaprecio dlp " +
+            "INNER JOIN tbcorpal_producto pro ON dlp.id_producto = pro.codigo " +
+            "WHERE dlp.estado = 1 " +
+            "AND dlp.id_listaprecio = " + idLista; 
+            DataSet lista = conexion.consultaMySql(consulta);
+            return lista;
+        }
+
 
 
         internal DataSet listarTiendas(string nombreTiendas)
