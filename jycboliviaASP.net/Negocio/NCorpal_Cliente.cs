@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-using System.Data;
 using jycboliviaASP.net.Datos;
+using static jycboliviaASP.net.Presentacion.FCorpal_APIProduccion;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -92,6 +94,27 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+
+        
+        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioEspecial, decimal descuento, decimal precio, string unidad, decimal cantidadDesde, int cantidadMinima, decimal aumento)
+        {
+            try
+            {
+                // Llamamos a la capa de datos pasándole todos los parámetros correctos
+                // (Asegúrate de que "dtienda" sea el nombre correcto de tu instancia de la capa de Datos)
+                return dtienda.insertarDetalleLista(idLista, idProducto, precioEspecial, descuento, precio, unidad, cantidadDesde, cantidadMinima, aumento);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
+
+
+
         public bool insertar_cliente(
                 string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
                 string propietarioname, string propietarioci, string propietariodir, string propietariocelular, string propietarionit, string propietariocorreo,
@@ -176,14 +199,62 @@ namespace jycboliviaASP.net.Negocio
             return lista;
         }
 
-        
+
+        public DataSet obtenerDatosProducto(int idProducto)
+        {
+            // dprod sería la instancia de tu capa de datos de producto
+            return dtienda.obtenerDatosProducto(idProducto);
+        }
+
 
         public DataSet listarDetalleListaProducto(int idLista)
         {
             DataSet lista = dtienda.listarDetalleListaProducto(idLista);
             return lista;
         }
-        
+
+        public DataSet listarProductosActivos() {
+            DataSet lista = dtienda.listarProductosActivos();
+            return lista;
+
+
+
+        }
+
+        // EN TU CAPA DE NEGOCIO
+        public bool eliminarDetalleLista(int codigoDetalle)
+        {
+            // Llamamos a la capa de datos (asegúrate de que 'dtienda' sea tu instancia correcta)
+            return dtienda.eliminarDetalleLista(codigoDetalle);
+        }
+
+        // EN TU CAPA DE NEGOCIO
+        public bool existeNombreLista(string nombreLista, int idListaActual = 0)
+        {
+            // Llamamos a la capa de datos
+            return dtienda.existeNombreLista(nombreLista, idListaActual);
+        }
+
+        // EN TU CAPA DE NEGOCIO
+        public bool actualizarListaPrecio(int codigoLista, string nombre, string descripcion, decimal descuentoGral)
+        {
+            return dtienda.actualizarListaPrecio(codigoLista, nombre, descripcion, descuentoGral);
+        }
+
+
+        // EN TU CAPA DE NEGOCIO
+        public bool existeProductoEnLista(int idLista, int idProducto, int codigoDetalleActual = 0)
+        {
+            return dtienda.existeProductoEnLista(idLista, idProducto, codigoDetalleActual);
+        }
+
+        // EN TU CAPA DE NEGOCIO
+        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado)
+        {
+            return dtienda.actualizarDetalleListaProducto(codigoDetalle, porcentajeDcto, porcentajeAumento, precioFinalCalculado);
+        }
+
+
 
         public DataSet listarTiendas(string nombreTiendas)
         {

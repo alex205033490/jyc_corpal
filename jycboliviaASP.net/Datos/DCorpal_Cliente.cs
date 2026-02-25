@@ -25,7 +25,7 @@ namespace jycboliviaASP.net.Datos
                 conexion.consultaMySql(consulta);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Nota: Con el borrado lógico, ya NO te darán errores de llaves foráneas 
                 // (por ventas o historial), así que es seguro retornar false si falla la conexión.
@@ -149,6 +149,51 @@ namespace jycboliviaASP.net.Datos
                 return false;
             }
         }
+
+        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioEspecial, decimal descuento, decimal precio, string unidad, decimal cantidadDesde, int cantidadMinima, decimal aumento)
+        {
+            try
+            {
+                // Formateo de TODOS los decimales para que usen punto en MySQL (ej. 15.50) y no exploten
+                string pEspecial = precioEspecial.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string pDcto = descuento.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string pPrecio = precio.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string pCantDesde = cantidadDesde.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string pAumento = aumento.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                // Armamos el INSERT concatenando exactamente como en tu otro método
+                string consulta = "INSERT INTO tbcorpal_detallelistaprecio " +
+                                  "(" +
+                                      "id_listaprecio, id_producto, precio_especial, " +
+                                      "porcentaje_descuento, estado, precio, " +
+                                      "unidad, cantidad_desde, cantidad_minima, porcentaje_aumento" +
+                                  ") " +
+                                  "VALUES " +
+                                  "(" +
+                                      idLista + ", " +                     // int (sin comillas)
+                                      idProducto + ", " +                  // int (sin comillas)
+                                      pEspecial + ", " +                   // decimal formateado
+                                      pDcto + ", " +                       // decimal formateado
+                                      "1, " +                              // estado activo (1)
+                                      pPrecio + ", " +                     // decimal formateado
+                                      "'" + unidad + "', " +               // string (CON comillas simples)
+                                      pCantDesde + ", " +                  // decimal formateado
+                                      cantidadMinima + ", " +              // int (sin comillas)
+                                      pAumento +                           // decimal formateado
+                                  ")";
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
+
 
         public bool insertar_cliente(
     // Datos Tienda
@@ -314,22 +359,191 @@ namespace jycboliviaASP.net.Datos
             return lista;
         }
 
+
+        public DataSet obtenerDatosProducto(int idProducto)
+        {
+            // Buscamos el precio base y la unidad (medida) del producto específico
+            string consulta = $@"
+        SELECT precio, medida 
+        FROM tbcorpal_producto 
+        WHERE codigo = {idProducto}";
+
+            return conexion.consultaMySql(consulta);
+        }
+
+
+        public DataSet listarProductosActivos()
+        {
+            // Buscamos solo el código y el nombre del producto. 
+            // Filtramos por estado = 1 (suponiendo que 1 es activo) y lo ordenamos alfabéticamente.
+            string consulta = "SELECT codigo, producto FROM tbcorpal_producto WHERE estado = 1 ORDER BY producto ASC";
+
+            return conexion.consultaMySql(consulta);
+        }
+
+
         internal DataSet listarDetalleListaProducto(int idLista)
         {
             string consulta = "SELECT " +
             "    dlp.codigo, " +
             "    pro.producto, " +
             "    pro.medida, " +
-            "    dlp.precio, " +
-            "    dlp.precio_especial, " +
-            "    dlp.porcentaje_descuento " +
+            "    dlp.porcentaje_descuento, " +            // <-- El % Dcto
+            "    dlp.porcentaje_aumento, " +              // <-- NUEVO: El % Aumento (Ajusta el nombre de tu columna aquí si es distinto)
+            "    pro.precio AS precio_base, " +           // <-- Precio Base
+            "    dlp.precio AS precio_final " +           // <-- Precio Final
             "FROM tbcorpal_detallelistaprecio dlp " +
             "INNER JOIN tbcorpal_producto pro ON dlp.id_producto = pro.codigo " +
             "WHERE dlp.estado = 1 " +
-            "AND dlp.id_listaprecio = " + idLista; 
+            "AND dlp.id_listaprecio = " + idLista;
+
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
+
+
+        // EN TU CAPA DE DATOS
+        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado)
+        {
+            try
+            {
+                // Formateamos con punto decimal para MySQL
+                string dctoSQL = porcentajeDcto.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                string aumentoSQL = porcentajeAumento.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                string precioSQL = precioFinalCalculado.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                string consulta = "UPDATE tbcorpal_detallelistaprecio SET " +
+                                  "porcentaje_descuento = " + dctoSQL + ", " +
+                                  "porcentaje_aumento = " + aumentoSQL + ", " +
+                                  "precio = " + precioSQL + " " +
+                                  "WHERE codigo = " + codigoDetalle;
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        public bool eliminarDetalleLista(int codigoDetalle)
+        {
+            try
+            {
+                // Hacemos el borrado lógico actualizando el estado a 0
+                string consulta = "UPDATE tbcorpal_detallelistaprecio SET estado = 0 WHERE codigo = " + codigoDetalle;
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
+
+
+        // EN TU CAPA DE DATOS
+        public bool existeNombreLista(string nombreLista, int idListaActual = 0)
+        {
+            try
+            {
+                // Buscamos si hay alguna lista con ese nombre, que esté activa (1),
+                // y que NO sea la misma lista que estamos editando.
+                string consulta = "SELECT codigo FROM tbcorpal_listaprecio " +
+                                  "WHERE nombre = '" + nombreLista.Trim() + "' " +
+                                  "AND codigo != " + idListaActual + " " +
+                                  "AND estado = 1";
+
+                DataSet ds = conexion.consultaMySql(consulta);
+
+                // Si trae resultados, significa que el nombre ya lo está usando otra lista
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return true; // SÍ EXISTE (está repetido)
+                }
+
+                return false; // NO EXISTE (el nombre está libre)
+            }
+            catch (Exception)
+            {
+                // Si hay un error de conexión, bloqueamos por seguridad
+                return true;
+            }
+        }
+
+        // EN TU CAPA DE DATOS
+        public bool actualizarListaPrecio(int codigoLista, string nombre, string descripcion, decimal descuentoGral)
+        {
+            try
+            {
+                // Convertimos el decimal a string con punto para que MySQL lo entienda bien (ej. 15.50)
+                string dctoSQL = descuentoGral.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                // 1. PRIMER UPDATE: Actualizamos la tabla principal (la Lista)
+                string updateLista = "UPDATE tbcorpal_listaprecio SET " +
+                                     "nombre = '" + nombre + "', " +
+                                     "descripcion = '" + descripcion + "', " +
+                                     "descuentogral_porcentaje = " + dctoSQL + " " +
+                                     "WHERE codigo = " + codigoLista;
+
+                conexion.consultaMySql(updateLista);
+
+                // 2. SEGUNDO UPDATE (EN CASCADA): Actualizamos los detalles
+                // Unimos la tabla detalle con la tabla producto para leer el 'precio base' real,
+                // le aplicamos el nuevo porcentaje y lo guardamos en el 'precio final' del detalle.
+                string updateDetalles = "UPDATE tbcorpal_detallelistaprecio d " +
+                                        "INNER JOIN tbcorpal_producto p ON d.id_producto = p.codigo " +
+                                        "SET d.porcentaje_descuento = " + dctoSQL + ", " +
+                                        "d.precio = p.precio - (p.precio * (" + dctoSQL + " / 100)) " +
+                                        "WHERE d.id_listaprecio = " + codigoLista;
+
+                conexion.consultaMySql(updateDetalles);
+
+                return true; // Si ambos pasaron, todo fue un éxito
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        // EN TU CAPA DE DATOS
+        public bool existeProductoEnLista(int idLista, int idProducto, int codigoDetalleActual = 0)
+        {
+            try
+            {
+                // Buscamos si ese producto ya está en esa lista específica,
+                // asegurándonos de que esté activo (estado = 1) y
+                // que NO sea la misma fila que podríamos estar editando.
+                string consulta = "SELECT codigo FROM tbcorpal_detallelistaprecio " +
+                                  "WHERE id_listaprecio = " + idLista + " " +
+                                  "AND id_producto = " + idProducto + " " +
+                                  "AND codigo != " + codigoDetalleActual + " " +
+                                  "AND estado = 1";
+
+                DataSet ds = conexion.consultaMySql(consulta);
+
+                // Si trae resultados, el producto ya existe en esta lista
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    return true; // SÍ EXISTE
+                }
+
+                return false; // NO EXISTE
+            }
+            catch (Exception)
+            {
+                return true; // Si falla la BD, bloqueamos por precaución
+            }
+        }
+
 
 
 

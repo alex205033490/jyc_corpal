@@ -141,22 +141,22 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Panel panelAgregarProducto;
 
         /// <summary>
-        /// Control ddlProductoAgregar.
+        /// Control txtBuscarProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProductoAgregar;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarProducto;
 
         /// <summary>
-        /// Control txtUnidadAgregar.
+        /// Control rptProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUnidadAgregar;
+        protected global::System.Web.UI.WebControls.Repeater rptProductos;
 
         /// <summary>
         /// Control txtPrecioAgregar.
@@ -168,13 +168,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txtPrecioAgregar;
 
         /// <summary>
-        /// Control txtPrecioEspecialAgregar.
+        /// Control txtUnidadAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioEspecialAgregar;
+        protected global::System.Web.UI.WebControls.TextBox txtUnidadAgregar;
 
         /// <summary>
         /// Control txtDctoAgregar.
@@ -184,6 +184,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDctoAgregar;
+
+        /// <summary>
+        /// Control txtPrecioEspecialAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioEspecialAgregar;
 
         /// <summary>
         /// Control txtCantidadDesdeAgregar.
@@ -211,24 +220,6 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAumentoAgregar;
-
-        /// <summary>
-        /// Control txtFechaInicioAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaInicioAgregar;
-
-        /// <summary>
-        /// Control txtFechaFinAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaFinAgregar;
 
         /// <summary>
         /// Control btnGuardarProducto.
