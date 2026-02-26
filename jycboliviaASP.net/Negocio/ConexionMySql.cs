@@ -349,6 +349,20 @@ namespace jycboliviaASP.net.Negocio
                 MySqlConexion.Close(); // Asegúrate de cerrar la conexión
             }
         }
+        public object ejecutarScalarObject(MySqlCommand comando)
+        {
+            try
+            {
+                comando.Connection = MySqlConexion;
+                MySqlConexion.Open();
+                var result = comando.ExecuteScalar();
+                return result;
+            }
+            finally
+            {
+                MySqlConexion.Close();
+            }
+        }
 
         public Boolean ejecutarMySql2arg(string consulta, List<MySqlParameter> parametros)
         {

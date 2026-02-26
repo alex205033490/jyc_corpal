@@ -7,6 +7,8 @@ using System.Data;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using static jycboliviaASP.net.Presentacion.FCorpal_APIProduccion;
 using MySql.Data.MySqlClient;
+using ZstdSharp.Unsafe;
+using Microsoft.ReportingServices.Interfaces;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -58,15 +60,15 @@ namespace jycboliviaASP.net.Datos
             NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
             string consultaStockActual = vlocal.get_consultaStockProductosActual();
 
-            string consulta = "select pp.codigo, pp.producto, pp.medida, 0 as 'precio', t1.StockAlmacen ,t1.StockParcialAlmacen, t1.StockPackFerial " +
-                               " from tbcorpal_producto pp " +
-                               " left join (" +
-                               consultaStockActual+
-                               " ) as t1 on t1.codigo = pp.codigo " +
-                               " where pp.producto like '%" + producto + "%' " +
-                               " and pp.estado = 1 ";
-            DataSet lista = conexion.consultaMySql(consulta);
-            return lista;
+            string consulta = @"select pp.codigo, pp.producto from  
+                                tbcorpal_producto pp 
+                                where pp.estado = 1 
+                                and pp.producto like @producto";
+            var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@producto", "%" +producto+ "%")
+            };
+            return conexion.consultaMySqlParametros(consulta, parametros);
         }
 
         internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, 
@@ -131,20 +133,77 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, double cantidad, double preciocompra, double total, string Tipo, string Medida)
+        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, decimal cantidad, 
+                                                decimal preciocompra, decimal total, string Tipo, string Medida)
         {
-            string consulta = "insert into tbcorpal_detalle_solicitudproducto( "+
-                           " codsolicitud,codproducto,cant,precio,precioTotal,tiposolicitud,medida) "+
-                           " values(" + ultimoinsertado + "," + codProducto + ",'" + cantidad.ToString().Replace(',', '.') + "','" + preciocompra.ToString().Replace(',', '.') + "','" + total.ToString().Replace(',', '.') + "','" + Tipo + "','" + Medida + "')";
-            return conexion.ejecutarMySql(consulta);
+            try
+            {
+                /*
+                double porcentajeDescuento = 0;
+                string consultaDescuento = @"select pr.porcentaje_descuento 
+                                        from tbcorpal_producto_descuento pr where 
+                                        pr.producto_codigo = @codProd and @cantidad between 
+                                        pr.cantidad_min and pr.cantidad_max limit 1";
+                using (MySqlCommand cmd = new MySqlCommand(consultaDescuento))
+                {
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@codProd", codProducto);
+                    var result = conexion.ejecutarScalarObject(cmd);
+
+                    if (result != null)
+                    {
+                        porcentajeDescuento = Convert.ToDouble(result);
+                    }
+                    if (porcentajeDescuento > 0)
+                    {
+                        total = total - (total * porcentajeDescuento / 100);
+                    }
+                }
+                */
+                string consultaGeneral = @"insert into tbcorpal_detalle_solicitudproducto 
+                                    (codsolicitud, codproducto, cant, precio, precioTotal, tiposolicitud, medida) values 
+                                    (@ultInsertado, @codProducto, @cantidad, @precio, @total, @tipo, @medida);";
+
+                using (MySqlCommand cmd = new MySqlCommand(consultaGeneral))
+                {
+                    cmd.Parameters.AddWithValue("@ultInsertado", ultimoinsertado);
+                    cmd.Parameters.AddWithValue("@codProducto", codProducto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@precio", preciocompra);
+                    cmd.Parameters.AddWithValue("@total", total);
+                    cmd.Parameters.AddWithValue("@tipo", Tipo);
+                    cmd.Parameters.AddWithValue("@medida", Medida);
+
+                    return conexion.ejecutarMySql2(cmd);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la consulta insertar Detalle Solicitud Producto. " + ex.Message);
+            }
         }
 
-        internal bool actualizarmontoTotal(int ultimoinsertado, double montoTotal)
+        internal bool actualizarmontoTotal(int ultimoinsertado)
         {
-            string consulta = "update tbcorpal_solicitudentregaproducto "+
-                               " set tbcorpal_solicitudentregaproducto.montototal = '"+montoTotal.ToString().Replace(',','.')+"'"+  
-                               " where tbcorpal_solicitudentregaproducto.codigo = "+ultimoinsertado;
-            return conexion.ejecutarMySql(consulta);
+            try
+            {
+                string consulta = @"update tbcorpal_solicitudentregaproducto s 
+                        set s.montoTotal = (
+                        select ifnull(sum(d.precioTotal), 0) 
+                        from tbcorpal_detalle_solicitudproducto d 
+                        where d.codsolicitud = @codigo 
+                        ) where s.codigo = @codigo";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codigo", ultimoinsertado);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al actualizar el monto Total. " + ex.Message);
+            }
         }
 
 
@@ -638,6 +697,62 @@ namespace jycboliviaASP.net.Datos
             catch (Exception ex)
             {
                 throw new Exception("Error al cargar datos Modalidad Pago" + ex.Message);
+            }
+        }
+
+        internal decimal obtenerPorcDescuentoCliNormal(int codProducto, decimal cantidad)
+        {
+            try
+            {
+                decimal porcentaje = 0;
+
+                string consulta = @"SELECT pr.porcentaje_descuento
+                                    FROM tbcorpal_producto_descuento pr
+                                    WHERE pr.producto_codigo = @codProd
+                                    AND @cantidad BETWEEN pr.cantidad_min AND pr.cantidad_max
+                                    LIMIT 1";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codProd", codProducto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+
+                    var result = conexion.ejecutarScalarObject(cmd);
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        porcentaje = Convert.ToDecimal(result);
+                    }
+                }
+                return porcentaje;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener el descuento. " + ex.Message);
+            }
+        }
+
+        internal int identificarTipoCliente (int codCli)
+        {
+            try
+            {
+                int tipoCli = 0;
+                string consulta = @"select c.id_tipocliente from tbcorpal_cliente c 
+                                    where c.codigo = @cod";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@cod", codCli);
+                    var result = conexion.ejecutarScalarObject(cmd);
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        tipoCli = Convert.ToInt32(result);
+                    }
+                }
+                return tipoCli;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al identificar al tipo cliente. " +ex.Message);
             }
         }
 
