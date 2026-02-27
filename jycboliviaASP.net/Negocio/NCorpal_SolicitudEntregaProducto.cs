@@ -75,14 +75,15 @@ namespace jycboliviaASP.net.Negocio
                 return -1;
         }
 
-        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, double cantidad, double preciocompra, double total, string Tipo, string Medida)
+        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, decimal cantidad, 
+                                            decimal preciocompra, decimal total, string Tipo, string Medida)
         {
            return dsp.insertarDetalleSolicitudProducto( ultimoinsertado,  codProducto,  cantidad,  preciocompra,  total,  Tipo,  Medida);
         }
 
-        internal bool actualizarmontoTotal(int ultimoinsertado, double montoTotal)
+        internal bool actualizarmontoTotal(int ultimoinsertado)
         {
-            return dsp.actualizarmontoTotal( ultimoinsertado,  montoTotal);
+            return dsp.actualizarmontoTotal( ultimoinsertado);
         }
 
 
@@ -219,5 +220,17 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.get_obtenerModalidadPago();
         }
+
+        internal decimal obtenerPorcDescuentoCliNormal(int codProducto, decimal cantidad)
+        {
+            return dsp.obtenerPorcDescuentoCliNormal(codProducto, cantidad);
+        }
+
+        internal int identificarTipoCliente(int codCli)
+        {
+            return dsp.identificarTipoCliente(codCli);
+        }
+
+
     }
 }

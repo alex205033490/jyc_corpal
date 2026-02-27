@@ -34,19 +34,21 @@ namespace jycboliviaASP.net.Presentacion
 
             if (!IsPostBack)
             {
-                DataTable datoRepuesto = new DataTable();
-                datoRepuesto.Columns.Add("Codigo", typeof(string));
-                datoRepuesto.Columns.Add("Producto", typeof(string));
-                datoRepuesto.Columns.Add("Medida", typeof(string));
-                datoRepuesto.Columns.Add("Tipo", typeof(string));
-                datoRepuesto.Columns.Add("Precio", typeof(string));
-                datoRepuesto.Columns.Add("Cantidad", typeof(string));
-                datoRepuesto.Columns.Add("PrecioTotal", typeof(string));
-                datoRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
 
-                gv_adicionados.DataSource = datoRepuesto;
+                DataTable dRepuesto = new DataTable();
+                dRepuesto.Columns.Add("Codigo", typeof(string));
+                dRepuesto.Columns.Add("Producto", typeof(string));
+                dRepuesto.Columns.Add("Medida", typeof(string));
+                dRepuesto.Columns.Add("Tipo", typeof(string));                  
+                dRepuesto.Columns.Add("Precio", typeof(string));
+                dRepuesto.Columns.Add("Descuento", typeof(string));
+                dRepuesto.Columns.Add("Cantidad", typeof(string));
+                dRepuesto.Columns.Add("PrecioTotal", typeof(string));
+                dRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
+
+                gv_adicionados.DataSource = dRepuesto;
                 gv_adicionados.DataBind();
-                Session["listaSolicitudProducto"] = datoRepuesto;
+                Session["listaSolicitudProducto"] = dRepuesto;
 
                 /*CARGAR mod Pago*/
 
@@ -129,6 +131,7 @@ namespace jycboliviaASP.net.Presentacion
         // se devuelve un arreglo con la informacion
         public static string[] GetlistaProductos(string prefixText, int count)
         {
+            
             string nombreProducto = prefixText;
 
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
@@ -205,7 +208,8 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Error al encontrar datos. " + ex.Message);
             }
         }
-
+        /*******************************************************************************/
+        /*      BOTTON AGREGAR PRODUCTO*/
         protected void bt_adicionar_Click(object sender, EventArgs e)
         {
             decimal cantidadIngresada;
@@ -224,12 +228,24 @@ namespace jycboliviaASP.net.Presentacion
 
         private void adicionar_productos()
         {
-            float cantidad;
-            float.TryParse(tx_cantidadProducto.Text, out cantidad);
+
+            decimal cantidad;
+            decimal.TryParse(tx_cantidadProducto.Text, out cantidad);            
             bool itemPackFerial = cb_itemPackFerial.Checked;
 
-            if (cantidad > 0)
+            string cliente = tx_cliente.Text;
+            int codigCliente;
+            NCorpal_Cliente nc = new NCorpal_Cliente();
+            codigCliente = nc.get_CodigoCliente(cliente);
+
+            if (codigCliente <= 0)
             {
+                showalert("Error ingrese un cliente válido.");
+                return;
+            }
+
+            if (cantidad > 0){
+
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 CheckBox cb = null;
                 for (int i = 0; i < gv_Productos.Rows.Count; i++)
@@ -237,34 +253,43 @@ namespace jycboliviaASP.net.Presentacion
                     cb = (CheckBox)gv_Productos.Rows[i].Cells[1].FindControl("CheckBox1");
                     if (cb != null && cb.Checked)
                     {
+                        NCorpal_SolicitudEntregaProducto Nsol = new NCorpal_SolicitudEntregaProducto();
+
                         string codigo = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[1].Text);
+                        int codProd = Convert.ToInt32(gv_Productos.DataKeys[i].Value);
                         string producto = gv_Productos.Rows[i].Cells[2].Text;
                         string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
-                        float precio;
-                        float.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
+                        decimal precio;
+                        decimal.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
                         string tipo = dd_tipoSolicitud.SelectedItem.Text;
                         float StockProducto;
                         float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
                         float StockPackFerial;
                         float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
-                        /*
-                        float StockLimite = 0;
 
-                        if (itemPackFerial == true)
+                        int id_tipoCliente = verificarTipoCliente(codigCliente);
+
+                        decimal subtotal = precio * cantidad;
+
+                        decimal porDescuento = 0;
+                        if (id_tipoCliente == 1)
                         {
-                            StockLimite = StockPackFerial;
-                        }else
-                            StockLimite = StockProducto;
+                            porDescuento = Nsol.obtenerPorcDescuentoCliNormal(codProd, cantidad);
+                            decimal montoDescuento = (subtotal * porDescuento) / 100;
+                            subtotal -= montoDescuento;
+                        }
+                        subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
                         
-                        if (cantidad <= StockLimite) {  */
-                        DataRow tupla = datoRepuesto.NewRow();
-                        tupla["Codigo"] = codigo;
-                        tupla["producto"] = producto;
-                        tupla["Medida"] = Medida;
-                        tupla["Tipo"] = tipo;
-                        tupla["Precio"] = precio;
-                        tupla["Cantidad"] = cantidad;
-                        tupla["PrecioTotal"] = (precio * cantidad);
+                            DataRow tupla = datoRepuesto.NewRow();
+                            tupla["Codigo"] = codigo;
+                            tupla["producto"] = producto;
+                            tupla["Medida"] = Medida;
+                            tupla["Tipo"] = tipo;
+                            tupla["Precio"] = precio;
+                            tupla["Descuento"] = porDescuento;
+                            tupla["Cantidad"] = cantidad;
+                            tupla["PrecioTotal"] = subtotal;
+
 
                         if (itemPackFerial == true)
                         {
@@ -283,8 +308,9 @@ namespace jycboliviaASP.net.Presentacion
                 gv_adicionados.DataBind();
             }
             else
-                Response.Write("<script type='text/javascript'> alert('Error: Cantidad igual 0') </script>");
+                showalert("Error: Cantidad igual 0");
         }
+
         private bool validadCantidadStockParcial()
         {
             bool esValido = true;
@@ -362,104 +388,93 @@ namespace jycboliviaASP.net.Presentacion
 
         private void guardarSolicitud()
         {
-            int codMetPago = dd_metodoPago.SelectedIndex;
 
-
-            DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-            if (datoRepuesto.Rows.Count > 0)
+            try
             {
-                NA_Responsables Nresp = new NA_Responsables();
-                string usuarioAux = Session["NameUser"].ToString();
-                string passwordAux = Session["passworuser"].ToString();
-                int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
-
-                string nroboleta = tx_nrodocumento.Text;
-                string personalsolicitud = tx_solicitante.Text;
-                string fechaentrega = DateTime.Parse(tx_fechaEntrega.Text).ToString("yyyy-MM-dd");
-                string horaentrega = tx_horaEntrega.Text;
-
-                NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-
-                string repuestosSolicitados = "";
-                string cliente = tx_cliente.Text;
-                int codigCliente;
-                NCorpal_Cliente nc = new NCorpal_Cliente();
-                codigCliente = nc.get_CodigoCliente(cliente);
-
-                /*  if (codigCliente == 0) { 
-                    string propietario = tx_propietario.Text;
-                    string razonSocial = tx_razonSocial.Text;
-                    string nit = tx_nit.Text;
-                      bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
-                      codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
-                  }
-                  */
-
-                bool banderaActualizar = cb_actualizarCliente.Checked;
-                if (codigCliente != 0 && banderaActualizar == true)
+                int codMetPago = dd_metodoPago.SelectedIndex;
+            
+                DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
+                if (datoRepuesto.Rows.Count > 0)
                 {
-                    string propietario = tx_propietario.Text;
-                    string razonSocial = tx_razonSocial.Text;
-                    string nit = tx_nit.Text;
-                    banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente, cliente, propietario, razonSocial, nit, codpersolicitante);
-                }
+                    NA_Responsables Nresp = new NA_Responsables();
+                    string usuarioAux = Session["NameUser"].ToString();
+                    string passwordAux = Session["passworuser"].ToString();
+                    int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
-                if (codigCliente > 0)
-                {
-                    if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
+                    string nroboleta = tx_nrodocumento.Text;
+                    string personalsolicitud = tx_solicitante.Text;
+                    string fechaentrega = DateTime.Parse(tx_fechaEntrega.Text).ToString("yyyy-MM-dd");
+                    string horaentrega = tx_horaEntrega.Text;
 
+
+                    NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+
+
+                    string repuestosSolicitados = "";
+                    string cliente = tx_cliente.Text;
+                    int codigCliente;
+                    NCorpal_Cliente nc = new NCorpal_Cliente();
+                    codigCliente = nc.get_CodigoCliente(cliente);
+
+
+                    bool banderaActualizar = cb_actualizarCliente.Checked;
+                    if (codigCliente != 0 && banderaActualizar == true)
                     {
-                        int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
-                        double montoTotal = 0;
-                        for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                        string propietario = tx_propietario.Text;
+                        string razonSocial = tx_razonSocial.Text;
+                        string nit = tx_nit.Text;
+                        banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente, cliente, propietario, razonSocial, nit, codpersolicitante);
+                    }
+
+                    if (codigCliente > 0)
+                    {
+                        if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
+
                         {
-                            int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                            double cantidad = Convert.ToDouble(datoRepuesto.Rows[i]["cantidad"].ToString());
-                            double preciocompra = Convert.ToDouble(datoRepuesto.Rows[i]["Precio"].ToString());
+                            int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
+                            decimal montoTotal = 0;
+                            for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                            {
+                                int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
+                                decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
+                                decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
 
-                            string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                            string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                            string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
-                            double total = preciocompra * cantidad;
+                                string producto = datoRepuesto.Rows[i]["producto"].ToString();
+                                string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
+                                string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
+                                decimal total = preciocompra * cantidad;
 
-                            repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
-                            nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
-                            montoTotal = montoTotal + total;
+                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
+                            
+                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
+
+                                montoTotal = montoTotal + total;
+                            }
+
+                            nss.actualizarmontoTotal(ultimoinsertado);
+               
+                            limpiarDatos();
+                            buscarProductos();
+                            Session["codigoSolicitudProducto"] = ultimoinsertado;
+
+                            Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
+                            Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                         }
 
-                        nss.actualizarmontoTotal(ultimoinsertado, montoTotal);
-                        //----------------envio de correo-------------
-                        /* string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
-                         string cuerpo = "Correo Automatico. <br><br>" +
-                                         "Se realizo la solicitud de los siguientes productos : <br>" +
-                                         "Nro Recibo = " + nroboleta + "<br>" +
-                                         "Solicitante = " + personalsolicitud + "<br>" +
-                                         "Fecha Entrega = " + fechaentrega + " <br>" +
-                                         "Hora Entrega = " + horaentrega + " <br>" +                                    
-                                         "Repuesto Solicitado: <br>" +
-                                         repuestosSolicitados +
-                                         "<br><br><br>" +
-                                         "Fin de Mensaje.";
-                         NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();                    
-                         bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
-                        //----------------fin envio de correo---------                    
-                        limpiarDatos();
-                        buscarProductos();
-                        Session["codigoSolicitudProducto"] = ultimoinsertado;
+                        else
+                            showalert($"Error: No se pudo realizar la Solicitud. ");
 
-                        Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
-                        Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                     }
                     else
-                        showalert($"Error: No se pudo realizar la Solicitud. " +
-                            $"{nroboleta}, {fechaentrega}, {horaentrega}, {personalsolicitud}, {codpersolicitante}, {codigCliente}, {codMetPago}");
+                        showalert("Error: El Cliente no existe");
                 }
                 else
-                    Response.Write("<script type='text/javascript'> alert('Error: El Cliente no existe') </script>");
-
+                    showalert("Error: No tiene Solicitud Pedido");
             }
-            else
-                Response.Write("<script type='text/javascript'> alert('Error: No tiene pedido') </script>");
+            catch(Exception ex)
+            {
+                showalert("Ocurrio un error inesperado al guardar la solicitud. " + ex.Message);
+            }
 
         }
 
@@ -625,12 +640,20 @@ namespace jycboliviaASP.net.Presentacion
             gv_Productos.DataBind();
         }
 
+        private int verificarTipoCliente(int codCli)
+        {
+            NCorpal_SolicitudEntregaProducto nsol = new NCorpal_SolicitudEntregaProducto();
+            int tipoCliente = nsol.identificarTipoCliente(codCli);
+
+            return tipoCliente;
+        }
 
         private void showalert(string mensaje)
         {
             string script = $"alert('{mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
+
 
     }
 }

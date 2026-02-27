@@ -80,6 +80,26 @@
             font-weight: bold;
         }
     </style>
+    <script type="text/javascript">
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+        var txtCliente = document.getElementById("<%= tx_cliente.ClientID %>");
+            var txtProducto = document.getElementById("<%= tx_producto.ClientID %>");
+
+            txtProducto.addEventListener("input", function () {
+            if (txtCliente.value.trim() === "") {
+                alert("Primero ingresa un cliente válido");
+            txtCliente.focus();
+            }
+        });
+
+    });
+
+
+
+    </script>
+
 
 </asp:Content>
 
@@ -105,6 +125,7 @@
 
                             <div class="col-lg-5 col-md-6 col-sm-6 col-6">
                                 <div>
+
                                     <asp:Label runat="server" for="inputName5" class="form-label">Producto</asp:Label>
                                     <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small"></asp:TextBox>
                                     <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server"
@@ -167,7 +188,7 @@
                                 <asp:GridView ID="gv_Productos" runat="server" BackColor="White"
                                     BorderColor="#b4b4b4" BorderStyle="Ridge" BorderWidth="1px" CellPadding="7"
                                     Font-Size="X-Small" ForeColor="Black" GridLines="Vertical" AutoGenerateColumns="false"
-                                    CssClass="gv_Productos table table-striped table-sticky" DataKeyNames="StockParcialAlmacen">
+                                    CssClass="gv_Productos table table-striped table-sticky" DataKeyNames="codigo, StockParcialAlmacen">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Asignar">
                                             <ItemTemplate>
@@ -303,7 +324,8 @@
                                 OnRowCancelingEdit="gv_adicionados_RowCancelingEdit"
                                 OnRowDeleting="gv_adicionados_RowDeleting"
                                 OnRowEditing="gv_adicionados_RowEditing" AutoGenerateColumns="false"
-                                OnRowUpdating="gv_adicionados_RowUpdating" CssClass="gv_adicionados table-sticky">
+                                OnRowUpdating="gv_adicionados_RowUpdating" CssClass="gv_adicionados table-sticky" 
+                                DataKeyNames="Medida, Tipo">
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:CommandField ShowEditButton="True" />
@@ -311,12 +333,12 @@
 
                                     <asp:BoundField DataField="Codigo" HeaderText="Codigo" HtmlEncode="false"/>
                                     <asp:BoundField DataField="Producto" HeaderText="Producto" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="Tipo" HeaderText="Tipo" HtmlEncode="false"/>
+                                    <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false" />
+                                    <asp:BoundField DataField="Tipo" HeaderText="Tipo" HtmlEncode="false" />
                                     <asp:BoundField DataField="Precio" HeaderText="Precio" HtmlEncode="false"/>
                                     <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" HtmlEncode="false"/>
+                                    <asp:BoundField DataField="Descuento" HeaderText="Descuento (%)"/>
                                     <asp:BoundField DataField="PrecioTotal" HeaderText="Precio Total" HtmlEncode="false"/>
-                                    <asp:BoundField DataField="ItemPackFerial" HeaderText="Item Pack Ferial" HtmlEncode="false"/>
 
                                 </Columns>
 
@@ -343,6 +365,7 @@
     </div>
 
     <script src="../js/mainCorpal.js"></script>
+    
 </asp:Content>
 
 

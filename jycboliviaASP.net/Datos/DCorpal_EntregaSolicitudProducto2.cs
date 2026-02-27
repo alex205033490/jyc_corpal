@@ -757,7 +757,8 @@ namespace jycboliviaASP.net.Datos
                                     inner join tbcorpal_detalleproddespacho dpd ON dv.`codigo` = dpd.`coddespacho` 
                                     inner join tbcorpal_solicitudentregaproducto sol ON dpd.`codpedido` = sol.`codigo` 
                                     inner join tbcorpal_cliente cli ON sol.`codcliente` = cli.`codigo` 
-                                    where dv.`codigo` = @codDespacho ";
+                                    where dv.`codigo` = @codDespacho 
+                                    group by dpd.codcliente";
 
                 var parametros = new List<MySqlParameter>
                 {

@@ -77,7 +77,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
 
-                            <asp:BoundField DataField="codigo" HeaderText="Número de Pedido" />
+                            <asp:BoundField DataField="codigo" HeaderText="Nro de Pedido" />
 
                             <asp:BoundField DataField="nroboleta" HeaderText="Nro Boleta" HtmlEncode="false" />
 
