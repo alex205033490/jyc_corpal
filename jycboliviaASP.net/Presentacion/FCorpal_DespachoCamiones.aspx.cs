@@ -174,8 +174,7 @@ namespace jycboliviaASP.net.Presentacion
                 }
 
                 // REGISTRO PUNTOS CLIENTES
-                int orden = 1;
-
+                int nOrden = 1;
                 foreach(DataRow rowCli in dsCli.Tables[0].Rows)
                 {
                     int codCli = Convert.ToInt32(rowCli["codCli"]);
@@ -185,7 +184,7 @@ namespace jycboliviaASP.net.Presentacion
                     string descripcion = "";
 
                     bool resultDet = nEntrega.post_RegistroRutaEntregaPuntos_despacho(
-                                    orden, idRuta, codCli, cliente, 
+                                    nOrden, idRuta, codCli, cliente, 
                                     codDespacho, descripcion, cliLat, cliLng);
 
                     if (!resultDet)
@@ -193,8 +192,7 @@ namespace jycboliviaASP.net.Presentacion
                         showalert("Error al registrar el punto del cliente: "+ cliente);
                         return;
                     }
-
-                    orden++;
+                    nOrden++;
                 }
 
                 showalert("ruta y puntos de entrega registrados correctamente.");                 

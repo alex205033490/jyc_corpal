@@ -384,104 +384,87 @@ namespace jycboliviaASP.net.Presentacion
 
         private void guardarSolicitud()
         {
-            int codMetPago = dd_metodoPago.SelectedIndex;
-            
-
-            DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-            if (datoRepuesto.Rows.Count > 0)
+            try
             {
-                NA_Responsables Nresp = new NA_Responsables();
-                string usuarioAux = Session["NameUser"].ToString();
-                string passwordAux = Session["passworuser"].ToString();
-                int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
-
-                string nroboleta = tx_nrodocumento.Text;
-                string personalsolicitud = tx_solicitante.Text;
-                string fechaentrega = DateTime.Parse(tx_fechaEntrega.Text).ToString("yyyy-MM-dd");
-                string horaentrega = tx_horaEntrega.Text;
-
-                NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
-
-                string repuestosSolicitados = "";
-                string cliente = tx_cliente.Text;
-                int codigCliente;
-                NCorpal_Cliente nc = new NCorpal_Cliente();
-                codigCliente = nc.get_CodigoCliente(cliente);
-
-                /*  if (codigCliente == 0) { 
-                    string propietario = tx_propietario.Text;
-                    string razonSocial = tx_razonSocial.Text;
-                    string nit = tx_nit.Text;
-                      bool okCliente = nc.set_clienteSolicitud(cliente, propietario, razonSocial, nit, codpersolicitante);
-                      codigCliente = nc.get_clienteUltimoIngresado(cliente, propietario, razonSocial, nit);
-                  }
-                  */
-
-                bool banderaActualizar = cb_actualizarCliente.Checked;
-                if (codigCliente != 0 && banderaActualizar == true)
+                int codMetPago = dd_metodoPago.SelectedIndex;
+            
+                DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
+                if (datoRepuesto.Rows.Count > 0)
                 {
-                    string propietario = tx_propietario.Text;
-                    string razonSocial = tx_razonSocial.Text;
-                    string nit = tx_nit.Text;
-                    banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente, cliente, propietario, razonSocial, nit, codpersolicitante);
-                }
+                    NA_Responsables Nresp = new NA_Responsables();
+                    string usuarioAux = Session["NameUser"].ToString();
+                    string passwordAux = Session["passworuser"].ToString();
+                    int codpersolicitante = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
-                if (codigCliente > 0)
-                {
-                    if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
+                    string nroboleta = tx_nrodocumento.Text;
+                    string personalsolicitud = tx_solicitante.Text;
+                    string fechaentrega = DateTime.Parse(tx_fechaEntrega.Text).ToString("yyyy-MM-dd");
+                    string horaentrega = tx_horaEntrega.Text;
 
+                    NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+
+                    string repuestosSolicitados = "";
+                    string cliente = tx_cliente.Text;
+                    int codigCliente;
+                    NCorpal_Cliente nc = new NCorpal_Cliente();
+                    codigCliente = nc.get_CodigoCliente(cliente);
+
+                    bool banderaActualizar = cb_actualizarCliente.Checked;
+                    if (codigCliente != 0 && banderaActualizar == true)
                     {
-                        int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
-                        decimal montoTotal = 0;
-                        for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                        string propietario = tx_propietario.Text;
+                        string razonSocial = tx_razonSocial.Text;
+                        string nit = tx_nit.Text;
+                        banderaActualizar = nc.updateDatosTiendaSolicitud(codigCliente, cliente, propietario, razonSocial, nit, codpersolicitante);
+                    }
+
+                    if (codigCliente > 0)
+                    {
+                        if (nss.set_guardarSolicitud(nroboleta, fechaentrega, horaentrega, personalsolicitud, codpersolicitante, true, codigCliente, codMetPago))
+
                         {
-                            int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                            decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
-                            decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
+                            int ultimoinsertado = nss.getultimaSolicitudproductoInsertado(codpersolicitante);
+                            decimal montoTotal = 0;
+                            for (int i = 0; i < datoRepuesto.Rows.Count; i++)
+                            {
+                                int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
+                                decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
+                                decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
 
-                            string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                            string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                            string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
-                            decimal total = preciocompra * cantidad;
+                                string producto = datoRepuesto.Rows[i]["producto"].ToString();
+                                string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
+                                string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
+                                decimal total = preciocompra * cantidad;
 
-                            repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
+                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
                             
-                            nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
+                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
 
-                            montoTotal = montoTotal + total;
+                                montoTotal = montoTotal + total;
+                            }
+
+                            nss.actualizarmontoTotal(ultimoinsertado);
+               
+                            limpiarDatos();
+                            buscarProductos();
+                            Session["codigoSolicitudProducto"] = ultimoinsertado;
+
+                            Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
+                            Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
                         }
-
-                        nss.actualizarmontoTotal(ultimoinsertado);
-                        //----------------envio de correo-------------
-                        /* string asunto = "(Corpal)" + " Solicitud de Pedido - Solicitante = " + personalsolicitud ;
-                         string cuerpo = "Correo Automatico. <br><br>" +
-                                         "Se realizo la solicitud de los siguientes productos : <br>" +
-                                         "Nro Recibo = " + nroboleta + "<br>" +
-                                         "Solicitante = " + personalsolicitud + "<br>" +
-                                         "Fecha Entrega = " + fechaentrega + " <br>" +
-                                         "Hora Entrega = " + horaentrega + " <br>" +                                    
-                                         "Repuesto Solicitado: <br>" +
-                                         repuestosSolicitados +
-                                         "<br><br><br>" +
-                                         "Fin de Mensaje.";
-                         NA_EnvioCorreo ncorreo = new NA_EnvioCorreo();                    
-                         bool bandera = ncorreo.enviar_Correo_SolicitudProducto(asunto, cuerpo); */
-                        //----------------fin envio de correo---------                    
-                        limpiarDatos();
-                        buscarProductos();
-                        Session["codigoSolicitudProducto"] = ultimoinsertado;
-
-                        Response.Redirect("../Presentacion/FCorpal_ReporteSolicitudProducto.aspx");
-                        Response.Write("<script type='text/javascript'> alert('Guardado: OK') </script>");
+                        else
+                            showalert($"Error: No se pudo realizar la Solicitud. ");
                     }
                     else
-                        showalert($"Error: No se pudo realizar la Solicitud. ");
+                        showalert("Error: El Cliente no existe");
                 }
                 else
-                    showalert("Error: El Cliente no existe");
+                    showalert("Error: No tiene Solicitud Pedido");
             }
-            else
-                showalert("Error: No tiene Solicitud Pedido");
+            catch(Exception ex)
+            {
+                showalert("Ocurrio un error inesperado al guardar la solicitud. " + ex.Message);
+            }
         }
 
         protected void gv_adicionados_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
