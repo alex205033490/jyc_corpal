@@ -155,18 +155,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label>Cant. Desde</label>
-                <asp:TextBox ID="txtCantidadDesdeAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="0.00"></asp:TextBox>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label>Cant. Mínima</label>
-                <asp:TextBox ID="txtCantidadMinimaAgregar" runat="server" CssClass="form-control" TextMode="Number" Text="1"></asp:TextBox>
-            </div>
-        </div>
+               
         <div class="col-md-2">
             <div class="form-group">
                 <label>% Aumento</label>

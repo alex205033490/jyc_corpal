@@ -186,24 +186,6 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox txtDctoAgregar;
 
         /// <summary>
-        /// Control txtCantidadDesdeAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadDesdeAgregar;
-
-        /// <summary>
-        /// Control txtCantidadMinimaAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadMinimaAgregar;
-
-        /// <summary>
         /// Control txtAumentoAgregar.
         /// </summary>
         /// <remarks>

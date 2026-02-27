@@ -45,7 +45,7 @@
             <li><a href="../Presentacion/FCorpal_ReciboIngreso.aspx" id="mn_regiboIngreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Ingreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ReciboEgreso.aspx" id="mn_regiboEgreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Egreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" id="mn_consultaIngresoEgreso" runat="server" ><i class="bi bi-circle"></i><span>Consulta Recibos (Ingreso/Egreso)</span></a></li>
-            <li><a href="../Presentacion/FCorpal_GestionarCliente.aspx" id="mn_gestionarCliente" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Cliente</span></a></li>
+            
             
         </ul>
       </li><!-- End Forms Nav -->
@@ -55,13 +55,9 @@
             <i class="bi bi-journal-text"></i><span>Productos</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="producto-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>
-                <li><a href="../Presentacion/FCorpal_SolicitudesPedidoaCredito.aspx" id="mn_solicitudesPedidoaCredito" runat="server"><i class="bi bi-circle"></i><span>Pedidos a Crédito</span></a></li>
+                
               <!--  <li><a href="../Presentacion/FCorpal_EntregaSolicitudProductoACamion.aspx" id="mn_entregaSolicitudProductoACamion" runat="server"> <i class="bi bi-circle"></i><span>Asignación de Productos a Camión</span></a></li>  -->
-              
-                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><i class="bi bi-circle"></i><span>Entrega Solicitud Productos</span></a></li>                    
-              
-                <li><a href="../Presentacion/FCorpal_DespachoCamiones.aspx" id="mn_despachoCamion" runat="server"> <i class="bi bi-circle"></i><span>Despacho Vehiculo</span></a></li>
+                             
 
                 <li role="separator" class="divider"></li>            
                 <li><a href="../Presentacion/FCorpal_ConsultaProducto_SolicitudEntrega.aspx" id="mn_detallesolicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Consulta Productos</span></a></li>                                                         
@@ -75,13 +71,18 @@
 
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#rutasCamion-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Rutas de Entrega</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-journal-text"></i><span>Pedido</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
 
           <ul id="rutasCamion-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li><a href="../Presentacion/FCorpal_AsignacionRuta_Camion.aspx" id="mn_asignacionRutaCamion" runat="server"><i class="bi bi-circle"></i><span>Asignación de rutas</span></a></li>
+                <li><a href="../Presentacion/FCorpal_SolicitudPedido.aspx" id="mn_solicitudproductos" runat="server"><i class="bi bi-circle"></i><span>Solicitud Productos</span></a></li>
+                <li><a href="../Presentacion/FCorpal_SolicitudesPedidoaCredito.aspx" id="mn_solicitudesPedidoaCredito" runat="server"><i class="bi bi-circle"></i><span>Pedidos a Crédito</span></a></li>
+                <li><a href="../Presentacion/FCorpal_EntregaSolicitudProducto.aspx" id="mn_entregaSolicitudProducto" runat="server"><i class="bi bi-circle"></i><span>Entrega Solicitud Productos</span></a></li>                                  
+                <li><a href="../Presentacion/FCorpal_DespachoCamiones.aspx" id="mn_despachoCamion" runat="server"> <i class="bi bi-circle"></i><span>Despacho Vehiculo</span></a></li>
+
+              <li><a href="../Presentacion/FCorpal_AsignacionRuta_Camion.aspx" id="mn_asignacionRutaCamion" runat="server"><i class="bi bi-circle"></i><span>Asignación de rutas</span></a></li>
               <li><a href="../Presentacion/FACorpal_GestionListaPrecio.aspx" id="mn_gestionarLista" runat="server"><i class="bi bi-circle"></i><span>Gestion Lista</span></a></li>
-              
+              <li><a href="../Presentacion/FCorpal_GestionarCliente.aspx" id="mn_gestionarCliente" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Cliente</span></a></li>
                 
           </ul>
         </li><!-- End Forms Nav -->

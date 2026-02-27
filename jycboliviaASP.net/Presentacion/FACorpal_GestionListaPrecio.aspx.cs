@@ -264,8 +264,8 @@ namespace jycboliviaASP.net.Presentacion
             txtPrecioAgregar.Text = "0.00";
             txtPrecioEspecialAgregar.Text = "0.00";
             txtDctoAgregar.Text = "0.00";
-            txtCantidadDesdeAgregar.Text = "0.00";
-            txtCantidadMinimaAgregar.Text = "1";
+          //  txtCantidadDesdeAgregar.Text = "0.00";
+          //  txtCantidadMinimaAgregar.Text = "1";
             txtAumentoAgregar.Text = "0.00";
             txtUnidadAgregar.Text = "";
             txtFechaInicioAgregar.Text = "";
