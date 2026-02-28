@@ -28,8 +28,7 @@ namespace jycboliviaASP.net.Presentacion
             }
             if (!IsPostBack)
             {
-                Session["despachoListGV"] = null;
-                Session["ItemsTotalListGV"] = null;
+
                 GET_MostrarSolicitudProductos("Abierto");
                 cargarRegistroVehiculosDD();
                 limpiarForm();
@@ -105,7 +104,7 @@ namespace jycboliviaASP.net.Presentacion
             gv_despachoProductos.DataSource = null;
             gv_despachoProductos.DataBind();
 
-            Session["despachoListGV"] = null;
+            //Session["despachoListGV"] = null;
             Session["ItemsTotalListGV"] = null;
 
             dd_listVehiculo.SelectedIndex = 0;
@@ -143,6 +142,7 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void gv_solicitudesProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            /*
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 System.Web.UI.WebControls.CheckBox chkSelect =
@@ -173,6 +173,7 @@ namespace jycboliviaASP.net.Presentacion
                     }
                 }
             }
+            */
         }
 
 
@@ -251,6 +252,7 @@ namespace jycboliviaASP.net.Presentacion
             }
 
             //P1
+            /*
             List<Product> despachoList = (List <Product>) Session["despachoListGV"];
             if(despachoList == null)
 
@@ -271,11 +273,11 @@ namespace jycboliviaASP.net.Presentacion
             }
 
             Session["despachoListGV"] = despachoList;
-            Session["ItemsTotalListGV"] = sumTotalItems;
 
             gv_despachoProductos.DataSource = despachoList;
             gv_despachoProductos.DataBind();
-
+            */
+            Session["ItemsTotalListGV"] = sumTotalItems;
             gv_sumTotalItems.DataSource = sumTotalItems;
             gv_sumTotalItems.DataBind();
         }
