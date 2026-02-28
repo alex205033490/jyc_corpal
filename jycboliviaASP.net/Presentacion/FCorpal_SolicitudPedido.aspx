@@ -9,8 +9,8 @@
             margin: 2px 0 0;
             /*  position:absolute;  */
             height: 150px;
-            width: 200px;
             background-color: White;
+            width: 200px;
             cursor: pointer;
             border: solid;
             border-width: 1px;

@@ -124,6 +124,8 @@
                 </div>
 
                 <div class="container_despachoDProductos border-2 row">
+
+                    <!--
                     <div class="lista_despachos col-lg-6 col-md-6 col-sm-6">
 
                                 <asp:GridView ID="gv_despachoProductos" runat="server" CssClass="gv_despachoProductos table table-striped"
@@ -148,18 +150,18 @@
                                 </asp:GridView>
 
                     </div>
-
+                    -->
                     <div class="lista_SumaProductosDespacho col-lg-4 col-md-4 col-sm-5">
                         <asp:GridView ID="gv_sumTotalItems" runat="server" CssClass="gv_totalCantProducto table table-striped" 
                                 AutoGenerateColumns="false" Visible="true" style="font-size: 0.65rem;">
                             <Columns>
-                                <asp:TemplateField HeaderText="Item">
+                                <asp:TemplateField HeaderText="Producto">
                                     <ItemTemplate>
                                         <asp:Label id="lbl_productoSum" runat="server" Text='<%# Bind("producto") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="Cantidad Total">
+                                <asp:TemplateField HeaderText="Cantidad">
                                     <ItemTemplate>
                                         <asp:Label id="lbl_cantidadSum" runat="server" Text='<%# Bind("cantidadEntregada") %>'></asp:Label>
                                     </ItemTemplate>

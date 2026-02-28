@@ -20,10 +20,56 @@ namespace jycboliviaASP.net.Datos
         // List principal gv registros
         internal DataSet get_VWRegistrosEntregaSolicitudProductos(string estadoSolicitud)
         {
-            NA_VariablesGlobales negocio = new NA_VariablesGlobales();
-            string consultaStock = negocio.get_consultaStockProductosActual();
+            try
+            {
+                NA_VariablesGlobales negocio = new NA_VariablesGlobales();
+                string consultaStock = negocio.get_consultaStockProductosActual();
 
-            string consulta = "SELECT " +
+                string consulta = $@"SELECT 
+                                sep.codigo, 
+                                sep.nroboleta, 
+                                sep.personalsolicitud, 
+                                dsp.codproducto, 
+                                p.producto, 
+                                pp.StockAlmacen, 
+                                cc.codigo as 'codCliente', 
+                                cc.tiendaname, 
+                                date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', 
+                                sep.horaentrega, 
+                                sep.estadosolicitud, 
+                                dsp.tiposolicitud, 
+                                dsp.cant as 'cantSolicitada', 
+                                ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
+                                CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 
+                                ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' 
+                                from tbcorpal_solicitudentregaproducto sep 
+                                left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud 
+                                left join tbcorpal_producto p ON dsp.codproducto = p.codigo 
+                                left join ({consultaStock}) as pp on dsp.codproducto = pp.codigo 
+                                left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo 
+
+                                WHERE sep.estadosolicitud like @estadoSol  
+                                and sep.estado = true 
+                                and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY 
+                                and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) 
+                                and (sep.cod_modcobranza !=2 
+                                OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) 
+                                order by sep.fechaGRA desc, sep.codigo desc;";
+                var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@estadoSol", "%"+estadoSolicitud+"%")
+            };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+
+                throw new Exception("" + ex.Message);
+            }
+
+
+            /*string consulta1 = "SELECT " +
                 "sep.codigo, " +
                 "sep.nroboleta, " +
                 "sep.personalsolicitud, " +
@@ -53,8 +99,9 @@ namespace jycboliviaASP.net.Datos
                 "and (sep.cod_modcobranza !=2 " +
                 "OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) " +
                 "order by sep.fechaGRA desc, sep.nroboleta desc";
-
+            
             return conexion.consultaMySql(consulta);
+            */
         }
 
         // LISTA DE REGISTROS POR VEHICULO
