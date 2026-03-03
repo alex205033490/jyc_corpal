@@ -231,6 +231,17 @@ namespace jycboliviaASP.net.Negocio
             return dsp.identificarTipoCliente(codCli);
         }
 
+        internal decimal obtenerDescuentoCategoriaSolProd(int codCategoria, decimal cantidad)
+        {
+            try
+            {
+                return dsp.obtenerDescuentoCategoriaSolProd(codCategoria, cantidad);
+            }
+            catch(Exception e)
+            {
+                throw new Exception("error al mostrar el descuento. " + e.Message);
+            }
+        }
 
     }
 }

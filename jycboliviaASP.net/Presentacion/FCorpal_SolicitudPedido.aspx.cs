@@ -44,6 +44,7 @@ namespace jycboliviaASP.net.Presentacion
                 dRepuesto.Columns.Add("Cantidad", typeof(string));
                 dRepuesto.Columns.Add("PrecioTotal", typeof(string));
                 dRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
+                dRepuesto.Columns.Add("idcategoriap", typeof(string));
 
                 gv_adicionados.DataSource = dRepuesto;
                 gv_adicionados.DataBind();
@@ -263,18 +264,16 @@ namespace jycboliviaASP.net.Presentacion
                         float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
                         float StockPackFerial;
                         float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
-
-                        int id_tipoCliente = verificarTipoCliente(codigCliente);
+                        int idcategiap;
+                        int.TryParse(gv_Productos.Rows[i].Cells[7].Text, out idcategiap);
 
                         decimal subtotal = precio * cantidad;
-
                         decimal porDescuento = 0;
-                        if (id_tipoCliente == 1)
-                        {
-                            porDescuento = Nsol.obtenerPorcDescuentoCliNormal(codProd, cantidad);
-                            decimal montoDescuento = (subtotal * porDescuento) / 100;
-                            subtotal -= montoDescuento;
-                        }
+
+                        
+                        
+                        
+                        
                         subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
                         
                             DataRow tupla = datoRepuesto.NewRow();
@@ -286,6 +285,7 @@ namespace jycboliviaASP.net.Presentacion
                             tupla["Descuento"] = porDescuento;
                             tupla["Cantidad"] = cantidad;
                             tupla["PrecioTotal"] = subtotal;
+                            tupla["idcategoriap"] = idcategiap;
 
                             if (itemPackFerial == true)
                             {
@@ -297,15 +297,21 @@ namespace jycboliviaASP.net.Presentacion
                                 tupla["ItemPackFerial"] = false;
 
                             datoRepuesto.Rows.Add(tupla);
-                      //  }                        
                     }
                 }
+                int id_tipoCliente = verificarTipoCliente(codigCliente);
+                if (id_tipoCliente == 1 || id_tipoCliente == 3)
+                {
+                    recalcularDescuentos(datoRepuesto);
+                }
+
                 gv_adicionados.DataSource = datoRepuesto;
                 gv_adicionados.DataBind();
             }
             else
                 showalert("Error: Cantidad igual 0");
         }
+
 
         private bool validadCantidadStockParcial()
         {
@@ -430,6 +436,7 @@ namespace jycboliviaASP.net.Presentacion
                                 int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
                                 decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
                                 decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
+                                decimal totalProd = Convert.ToDecimal(datoRepuesto.Rows[i]["PrecioTotal"].ToString());
 
                                 string producto = datoRepuesto.Rows[i]["producto"].ToString();
                                 string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
@@ -438,9 +445,9 @@ namespace jycboliviaASP.net.Presentacion
 
                                 repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
                             
-                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, total, Tipo, Medida);
+                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, totalProd, Tipo, Medida);
 
-                                montoTotal = montoTotal + total;
+                                montoTotal += totalProd;
                             }
 
                             nss.actualizarmontoTotal(ultimoinsertado);
@@ -473,7 +480,6 @@ namespace jycboliviaASP.net.Presentacion
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();
-            
         }
 
         protected void gv_adicionados_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -481,12 +487,15 @@ namespace jycboliviaASP.net.Presentacion
             int index = e.RowIndex;
 
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
+            
             datoRepuesto.Rows[index].Delete();
             datoRepuesto.AcceptChanges();
 
-            gv_adicionados.EditIndex = -1;
+            recalcularDescuentos(datoRepuesto);
 
             Session["listaSolicitudProducto"] = datoRepuesto;
+            
+            gv_adicionados.EditIndex = -1;
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();            
         }
@@ -634,6 +643,57 @@ namespace jycboliviaASP.net.Presentacion
 
             return tipoCliente;
         }
+
+        private void recalcularDescuentos(DataTable datoRepuesto)
+        {
+            if (datoRepuesto == null || datoRepuesto.Rows.Count == 0)
+                return;
+
+            Dictionary<int, decimal> totalesXcategoria = new Dictionary<int, decimal>();
+
+            foreach(DataRow fila in datoRepuesto.Rows)
+            {
+                int categoria = Convert.ToInt32(fila["idcategoriap"]);
+                decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
+
+                if (totalesXcategoria.ContainsKey(categoria))
+                    totalesXcategoria[categoria] += cantidadFila;
+                else
+                    totalesXcategoria.Add(categoria, cantidadFila);
+            }
+
+            NCorpal_SolicitudEntregaProducto nSol = new NCorpal_SolicitudEntregaProducto();
+            Dictionary<int, decimal> descuentoCategoria = new Dictionary<int, decimal>();
+
+            foreach(var item in totalesXcategoria)
+            {
+                decimal descuento = nSol.obtenerDescuentoCategoriaSolProd(item.Key, item.Value);
+                descuentoCategoria.Add(item.Key, descuento);
+            }
+
+            foreach(DataRow fila in datoRepuesto.Rows)
+            {
+                int categoria = Convert.ToInt32(fila["idcategoriap"]);
+                decimal precio = Convert.ToDecimal(fila["Precio"]);
+                decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
+
+                decimal porDescuento = descuentoCategoria.ContainsKey(categoria)
+                                        ? descuentoCategoria[categoria]
+                                        : 0;
+                fila["Descuento"] = porDescuento;
+                decimal subtotal = precio * cantidadFila;
+
+                if(porDescuento > 0)
+                {
+                    decimal montoDescuento = (subtotal * porDescuento) / 100;
+                    subtotal -= montoDescuento;
+                }
+                subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
+                fila["PrecioTotal"] = subtotal;
+            }
+        }
+
+
 
         private void showalert(string mensaje)
         {

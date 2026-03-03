@@ -201,6 +201,7 @@
                                         <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
                                         <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
                                         <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
+                                        <asp:BoundField DataField="codcategoriap" HeaderText="ID categoria" />
                                     </Columns>
                                     <AlternatingRowStyle BackColor="#CCCCCC" />
                                     <FooterStyle BackColor="#CCCCCC" />
@@ -307,6 +308,7 @@
         <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
         <asp:AsyncPostBackTrigger ControlID="bt_verificar" EventName="click" />
         <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
+        <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
     </Triggers>
 </asp:UpdatePanel>
                     </div>
@@ -328,12 +330,12 @@
                                 DataKeyNames="Medida, Tipo">
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                 <Columns>
-                                    <asp:CommandField ShowEditButton="True" />
                                     <asp:CommandField ShowDeleteButton="True" />
 
                                     <asp:BoundField DataField="Codigo" HeaderText="Codigo" HtmlEncode="false"/>
                                     <asp:BoundField DataField="Producto" HeaderText="Producto" HtmlEncode="false"/>
                                     <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false" />
+                                    <asp:BoundField DataField="idcategoriap" HeaderText="ID categoria" />
                                     <asp:BoundField DataField="Tipo" HeaderText="Tipo" HtmlEncode="false" />
                                     <asp:BoundField DataField="Precio" HeaderText="Precio" HtmlEncode="false"/>
                                     <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" HtmlEncode="false"/>
