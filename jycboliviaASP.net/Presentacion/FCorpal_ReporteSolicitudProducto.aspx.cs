@@ -17,6 +17,9 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Title = Session["BaseDatos"].ToString();
+
+            //int codigoSolicitudProducto = Convert.ToInt32(Session["codigoSolicitudProducto"].ToString());
+            //mostrarSolicitudProducto(codigoSolicitudProducto);
             if (!IsPostBack)
             {
                 int codigoSolicitudProducto = Convert.ToInt32(Session["codigoSolicitudProducto"].ToString());
@@ -49,17 +52,22 @@ namespace jycboliviaASP.net.Presentacion
             string horasolicitud = datoResult.Tables[0].Rows[0][3].ToString();
             string nombresolicitante = datoResult.Tables[0].Rows[0][4].ToString();
             string cliente = datoResult.Tables[0].Rows[0][6].ToString();
-
-
+            /*
             DataSet tuplasFilas = nie.get_productosSolicitudProducto(codigoSolicitudProducto);
             DataTable DSProductosAlmacen = tuplasFilas.Tables[0];
+            */
+            DataTable dtProducto = Session["listaSolicitudProducto"] as DataTable;
+            if (dtProducto == null || dtProducto.Rows.Count == 0)
+            {
+                return;
+            }
 
             ReportParameter p_nrocomprobante = new ReportParameter("p_nrodocumento", nrodocumento);
             ReportParameter p_fechasolicitud = new ReportParameter("p_fechasolicitud", fechasolicitud);
             ReportParameter p_nombresolicitante = new ReportParameter("p_nombresolicitante", nombresolicitante);
             ReportParameter p_horasolicitud = new ReportParameter("p_horasolicitud", horasolicitud);
             ReportParameter p_cliente = new ReportParameter("p_cliente", cliente);
-            ReportDataSource DS_ProductosAlmacen = new ReportDataSource("DS_ProductosAlmacen", DSProductosAlmacen);
+            ReportDataSource DS_ProductosAlmacen = new ReportDataSource("DS_SolicitudPedidoProd", dtProducto);
 
             string rutaEntregaSolicitudProducto = ConfigurationManager.AppSettings["repo_SolicitudProducto"];
 
@@ -78,7 +86,6 @@ namespace jycboliviaASP.net.Presentacion
             ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();
-            
         }
     }
 }

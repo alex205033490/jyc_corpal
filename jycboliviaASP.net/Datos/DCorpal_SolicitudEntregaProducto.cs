@@ -26,6 +26,7 @@ namespace jycboliviaASP.net.Datos
 
                 string consulta = $@"select 
                                     pp.`codigo`,
+                                    pp.codupon,
                                     pp.`producto`,
                                     pp.medida,
                                     dlp.`precio`,

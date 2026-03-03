@@ -38,13 +38,13 @@ namespace jycboliviaASP.net.Presentacion
                 dRepuesto.Columns.Add("Codigo", typeof(string));
                 dRepuesto.Columns.Add("Producto", typeof(string));
                 dRepuesto.Columns.Add("Medida", typeof(string));
-                dRepuesto.Columns.Add("Tipo", typeof(string));                  
                 dRepuesto.Columns.Add("Precio", typeof(string));
                 dRepuesto.Columns.Add("Descuento", typeof(string));
                 dRepuesto.Columns.Add("Cantidad", typeof(string));
                 dRepuesto.Columns.Add("PrecioTotal", typeof(string));
                 dRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
                 dRepuesto.Columns.Add("idcategoriap", typeof(string));
+                dRepuesto.Columns.Add("codupon", typeof(string));
 
                 gv_adicionados.DataSource = dRepuesto;
                 gv_adicionados.DataBind();
@@ -259,28 +259,26 @@ namespace jycboliviaASP.net.Presentacion
                         string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
                         decimal precio;
                         decimal.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
-                        string tipo = dd_tipoSolicitud.SelectedItem.Text;
+                        //string tipo = dd_tipoSolicitud.SelectedItem.Text;
                         float StockProducto;
                         float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
                         float StockPackFerial;
                         float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
                         int idcategiap;
                         int.TryParse(gv_Productos.Rows[i].Cells[7].Text, out idcategiap);
+                        string codupon = gv_Productos.Rows[i].Cells[8].Text;
 
                         decimal subtotal = precio * cantidad;
                         decimal porDescuento = 0;
 
-                        
-                        
-                        
-                        
                         subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
                         
                             DataRow tupla = datoRepuesto.NewRow();
                             tupla["Codigo"] = codigo;
+                            tupla["codupon"] = codupon;
                             tupla["producto"] = producto;
                             tupla["Medida"] = Medida;
-                            tupla["Tipo"] = tipo;
+                            //tupla["Tipo"] = tipo;
                             tupla["Precio"] = precio;
                             tupla["Descuento"] = porDescuento;
                             tupla["Cantidad"] = cantidad;
@@ -291,7 +289,7 @@ namespace jycboliviaASP.net.Presentacion
                             {
                                 tupla["ItemPackFerial"] = itemPackFerial;
                                 tupla["Medida"] = "UNIDAD";
-                                tupla["Tipo"] = "ITEM PACK FERIAL";
+                                //tupla["Tipo"] = "ITEM PACK FERIAL";
                             }
                             else
                                 tupla["ItemPackFerial"] = false;
@@ -440,7 +438,7 @@ namespace jycboliviaASP.net.Presentacion
 
                                 string producto = datoRepuesto.Rows[i]["producto"].ToString();
                                 string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                                string Tipo = datoRepuesto.Rows[i]["Tipo"].ToString();
+                                string Tipo = "";
                                 decimal total = preciocompra * cantidad;
 
                                 repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
@@ -452,7 +450,7 @@ namespace jycboliviaASP.net.Presentacion
 
                             nss.actualizarmontoTotal(ultimoinsertado);
                
-                            limpiarDatos();
+                            //limpiarDatos();
                             buscarProductos();
                             Session["codigoSolicitudProducto"] = ultimoinsertado;
 
