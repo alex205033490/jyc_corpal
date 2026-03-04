@@ -489,8 +489,16 @@ namespace jycboliviaASP.net.Presentacion
             datoRepuesto.Rows[index].Delete();
             datoRepuesto.AcceptChanges();
 
-            recalcularDescuentos(datoRepuesto);
-
+            string cliente = tx_cliente.Text;
+            int codigCliente;
+            NCorpal_Cliente nc = new NCorpal_Cliente();
+            codigCliente = nc.get_CodigoCliente(cliente);
+            int id_tipoCliente = verificarTipoCliente(codigCliente);
+            if (id_tipoCliente == 1 || id_tipoCliente == 3)
+            {
+                recalcularDescuentos(datoRepuesto);
+            }
+            
             Session["listaSolicitudProducto"] = datoRepuesto;
             
             gv_adicionados.EditIndex = -1;
