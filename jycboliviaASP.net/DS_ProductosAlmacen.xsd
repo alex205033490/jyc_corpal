@@ -265,6 +265,23 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DS_SolicitudPedidoProd" msprop:Generator_RowEvHandlerName="DS_SolicitudPedidoProdRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_SolicitudPedidoProdRowDeleted" msprop:Generator_RowDeletingName="DS_SolicitudPedidoProdRowDeleting" msprop:Generator_RowEvArgName="DS_SolicitudPedidoProdRowChangeEvent" msprop:Generator_TablePropName="DS_SolicitudPedidoProd" msprop:Generator_RowChangedName="DS_SolicitudPedidoProdRowChanged" msprop:Generator_UserTableName="DS_SolicitudPedidoProd" msprop:Generator_RowChangingName="DS_SolicitudPedidoProdRowChanging" msprop:Generator_RowClassName="DS_SolicitudPedidoProdRow" msprop:Generator_TableClassName="DS_SolicitudPedidoProdDataTable" msprop:Generator_TableVarName="tableDS_SolicitudPedidoProd">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" type="xs:string" minOccurs="0" />
+              <xs:element name="Producto" msprop:Generator_UserColumnName="Producto" msprop:Generator_ColumnPropNameInTable="ProductoColumn" msprop:Generator_ColumnPropNameInRow="Producto" msprop:Generator_ColumnVarNameInTable="columnProducto" type="xs:string" minOccurs="0" />
+              <xs:element name="Medida" msprop:Generator_UserColumnName="Medida" msprop:Generator_ColumnPropNameInTable="MedidaColumn" msprop:Generator_ColumnPropNameInRow="Medida" msprop:Generator_ColumnVarNameInTable="columnMedida" type="xs:string" minOccurs="0" />
+              <xs:element name="Tipo" msprop:Generator_UserColumnName="Tipo" msprop:Generator_ColumnPropNameInTable="TipoColumn" msprop:Generator_ColumnPropNameInRow="Tipo" msprop:Generator_ColumnVarNameInTable="columnTipo" type="xs:string" minOccurs="0" />
+              <xs:element name="Precio" msprop:Generator_UserColumnName="Precio" msprop:Generator_ColumnPropNameInTable="PrecioColumn" msprop:Generator_ColumnPropNameInRow="Precio" msprop:Generator_ColumnVarNameInTable="columnPrecio" type="xs:string" minOccurs="0" />
+              <xs:element name="Descuento" msprop:Generator_UserColumnName="Descuento" msprop:Generator_ColumnPropNameInTable="DescuentoColumn" msprop:Generator_ColumnPropNameInRow="Descuento" msprop:Generator_ColumnVarNameInTable="columnDescuento" type="xs:string" minOccurs="0" />
+              <xs:element name="Cantidad" msprop:Generator_UserColumnName="Cantidad" msprop:Generator_ColumnPropNameInTable="CantidadColumn" msprop:Generator_ColumnPropNameInRow="Cantidad" msprop:Generator_ColumnVarNameInTable="columnCantidad" type="xs:string" minOccurs="0" />
+              <xs:element name="PrecioTotal" msprop:Generator_UserColumnName="PrecioTotal" msprop:Generator_ColumnPropNameInTable="PrecioTotalColumn" msprop:Generator_ColumnPropNameInRow="PrecioTotal" msprop:Generator_ColumnVarNameInTable="columnPrecioTotal" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemPackFerial" msprop:Generator_UserColumnName="ItemPackFerial" msprop:Generator_ColumnPropNameInTable="ItemPackFerialColumn" msprop:Generator_ColumnPropNameInRow="ItemPackFerial" msprop:Generator_ColumnVarNameInTable="columnItemPackFerial" type="xs:string" minOccurs="0" />
+              <xs:element name="idcaregoriap" msprop:Generator_UserColumnName="idcaregoriap" msprop:Generator_ColumnPropNameInTable="idcaregoriapColumn" msprop:Generator_ColumnPropNameInRow="idcaregoriap" msprop:Generator_ColumnVarNameInTable="columnidcaregoriap" type="xs:string" minOccurs="0" />
+              <xs:element name="codupon" msprop:Generator_ColumnPropNameInRow="codupon" msprop:Generator_ColumnPropNameInTable="coduponColumn" msprop:Generator_ColumnVarNameInTable="columncodupon" msprop:Generator_UserColumnName="codupon" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

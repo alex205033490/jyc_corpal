@@ -26,9 +26,11 @@ namespace jycboliviaASP.net.Datos
 
                 string consulta = $@"select 
                                     pp.`codigo`,
+                                    pp.codupon,
                                     pp.`producto`,
                                     pp.medida,
                                     dlp.`precio`,
+                                    pp.codcategoriap,
                                     t1.StockAlmacen,
                                     t1.StockParcialAlmacen
                                     
@@ -721,6 +723,34 @@ namespace jycboliviaASP.net.Datos
                 throw new Exception("Error al identificar al tipo cliente. " +ex.Message);
             }
         }
+
+        internal decimal obtenerDescuentoCategoriaSolProd(int codCategoria, decimal cantidad)
+        {
+            try
+            {
+                decimal descuento = 0;
+                string consulta = @"select d.descuento from tbcorpal_categorias_descuento_rangos d 
+                                    where d.codigo_categoria = @codcategoria and @cantidad 
+                                    between d.cantidad_min and d.cantidad_max limit 1";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codcategoria", codCategoria);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    var result = conexion.ejecutarScalarObject(cmd);
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        descuento = Convert.ToDecimal(result);
+                    }
+                }
+                return descuento;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener el descuento categoria. " + ex.Message);
+            }
+        }
+
 
     }
 }
