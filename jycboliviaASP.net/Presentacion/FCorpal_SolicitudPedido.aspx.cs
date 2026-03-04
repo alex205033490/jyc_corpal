@@ -103,7 +103,6 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        
         // webservice que me permite la autocompletacion
         [WebMethod]
         [ScriptMethod]
@@ -125,10 +124,8 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-        // webservice que me permite la autocompletacion
         [WebMethod]
         [ScriptMethod]
-        // se devuelve un arreglo con la informacion
         public static string[] GetlistaProductos(string prefixText, int count)
         {
             
