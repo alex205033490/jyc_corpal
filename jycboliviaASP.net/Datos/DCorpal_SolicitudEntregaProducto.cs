@@ -58,11 +58,9 @@ namespace jycboliviaASP.net.Datos
         }
 
         internal DataSet get_mostrarProductos(string producto)
-        {
-            NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
-            string consultaStockActual = vlocal.get_consultaStockProductosActual();
+        {            
 
-            string consulta = @"select pp.codigo, pp.producto from  
+            string consulta = @"select pp.codigo, pp.producto, pp.medida  from  
                                 tbcorpal_producto pp 
                                 where pp.estado = 1 
                                 and pp.producto like @producto";
