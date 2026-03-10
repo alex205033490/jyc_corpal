@@ -264,7 +264,7 @@ namespace jycboliviaASP.net.Datos
             {
                 consulta = consulta + " and dd.fechagra between " + fechadesde + " and " + fechahasta; ;
             }
-            consulta += " order by dd.codigo asc";
+            consulta += " order by dd.codigo desc";
             return conexion.consultaMySql(consulta);
         }
 

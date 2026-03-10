@@ -561,6 +561,7 @@
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_AsignacionRuta_Camion.aspx" />
+    <Content Include="Presentacion\FCorpal_ConsultaPedidos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
     <Content Include="Presentacion\FCorpal_AgregarInsumoCreado.aspx" />
@@ -644,6 +645,17 @@
     </None>
     <Content Include="DS_Fichada.xss">
       <DependentUpon>DS_Fichada.xsd</DependentUpon>
+    </Content>
+    <Content Include="DS_OrdenDEntrega.xsc">
+      <DependentUpon>DS_OrdenDEntrega.xsd</DependentUpon>
+    </Content>
+    <None Include="DS_OrdenDEntrega.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_OrdenDEntrega.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DS_OrdenDEntrega.xss">
+      <DependentUpon>DS_OrdenDEntrega.xsd</DependentUpon>
     </Content>
     <None Include="DS_Produccion.xsd">
       <SubType>Designer</SubType>
@@ -967,6 +979,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Mantenimiento.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DS_OrdenDEntrega.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_OrdenDEntrega.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_Produccion1.Designer.cs">
       <DependentUpon>DS_Produccion.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -1190,6 +1207,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_AsignacionRuta_Camion.aspx.designer.cs">
       <DependentUpon>FCorpal_AsignacionRuta_Camion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaPedidos.aspx.cs">
+      <DependentUpon>FCorpal_ConsultaPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ConsultaPedidos.aspx.designer.cs">
+      <DependentUpon>FCorpal_ConsultaPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx.cs">
       <DependentUpon>FCorpal_ConsultaStockVendedores.aspx</DependentUpon>
@@ -2264,6 +2288,7 @@
     <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProducto_DespachoVenta.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaProductosSobrantes_ordenEntrega.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Marcacion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CorrespondeAlmuerzoFichada.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />

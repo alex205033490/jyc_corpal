@@ -5,6 +5,7 @@ using System.Data;
 using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
+using System.Windows.Forms;
 
 namespace jycboliviaASP.net.Negocio
 {
@@ -100,6 +101,19 @@ namespace jycboliviaASP.net.Negocio
             catch(Exception ex)
             {
                 throw new Exception("Error inesperado. " + ex.Message);
+            }
+        }
+
+        /*ORDEN ENTREGA*/
+        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, int codChofer)
+        {
+            try
+            {
+                return dv.get_mostrarProductosSobrantes_OrdenEntrega(fechaIni, fechaFin, codChofer);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex.Message);
             }
         }
 

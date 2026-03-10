@@ -83,7 +83,8 @@
               <li><a href="../Presentacion/FCorpal_AsignacionRuta_Camion.aspx" id="mn_asignacionRutaCamion" runat="server"><i class="bi bi-circle"></i><span>Asignación de rutas</span></a></li>
               <li><a href="../Presentacion/FACorpal_GestionListaPrecio.aspx" id="mn_gestionarLista" runat="server"><i class="bi bi-circle"></i><span>Gestion Lista</span></a></li>
               <li><a href="../Presentacion/FCorpal_GestionarCliente.aspx" id="mn_gestionarCliente" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Cliente</span></a></li>
-                
+              <li><a href="../Presentacion/FCorpal_ConsultaPedidos.aspx" id="mn_consultaPedidos" runat="server" ><i class="bi bi-circle"></i><span>Consulta Pedidos</span></a></li>
+               
           </ul>
         </li><!-- End Forms Nav -->
 
