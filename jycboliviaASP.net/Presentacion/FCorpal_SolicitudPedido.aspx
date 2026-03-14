@@ -265,7 +265,8 @@
                                                 UseContextKey="True"
                                                 CompletionListCssClass="CompletionList"
                                                 CompletionListItemCssClass="CompletionlistItem"
-                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
+                                                OnClientItemSelected="ClienteSeleccionado">
                                             </asp:AutoCompleteExtender>
 
                                             <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
@@ -275,7 +276,7 @@
                                         </div>
 
 
-                                        <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Razon Social:"></asp:Label>
+                                        <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Datos de la Factura:"></asp:Label>
                                         <asp:TextBox ID="tx_razonSocial" CssClass="form-control mb-2" Font-Size="Smaller" runat="server"></asp:TextBox>
                                     </div>
 
@@ -366,7 +367,19 @@
     </div>
 
     <script src="../js/mainCorpal.js"></script>
+    <script type="text/javascript"> 
+
+        function ClienteSeleccionado(source, eventArgs) {
+            var nomCliente = eventArgs.get_text();
+            PageMethods.obtenerCliente(nomCliente, function (resultado) {
+                document.getElementById("<%=tx_propietario.ClientID%>").value = resultado.propietario;
+                document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
+            });
+        }
+        
+
+
+    </script>
 
 </asp:Content>
-
 

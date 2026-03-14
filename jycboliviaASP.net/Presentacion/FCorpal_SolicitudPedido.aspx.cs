@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIproductos;
 using System.Security.Cryptography;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -696,6 +697,32 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        public class clsscliente
+        {
+            public string direccion { get; set; }
+            public string telefono { get; set; }
+            public string propietario { get; set; }
+            public string nit { get; set; }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static clsscliente obtenerCliente(string nombreCliente)
+        {
+            NCorpal_Cliente ncli = new NCorpal_Cliente();
+            DataSet ds = ncli.get_ClienteNombreEspecifico(nombreCliente);
+
+            clsscliente c = new clsscliente();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+
+                //c.direccion = row["tiendadir"].ToString();
+                //c.telefono = row["tiendatelefono"].ToString();
+                c.propietario = row["propietarioname"].ToString();
+                c.nit = row["propietarionit"].ToString();
+            }
+            return c;
+        }
 
 
         private void showalert(string mensaje)
