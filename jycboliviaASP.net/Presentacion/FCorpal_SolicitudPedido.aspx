@@ -374,6 +374,8 @@
             PageMethods.obtenerCliente(nomCliente, function (resultado) {
                 document.getElementById("<%=tx_propietario.ClientID%>").value = resultado.propietario;
                 document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
+                document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
+
             });
         }
         

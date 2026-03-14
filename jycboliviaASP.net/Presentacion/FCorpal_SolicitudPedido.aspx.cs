@@ -703,6 +703,7 @@ namespace jycboliviaASP.net.Presentacion
             public string telefono { get; set; }
             public string propietario { get; set; }
             public string nit { get; set; }
+            public string razonsocial { get; set; }
         }
 
         [System.Web.Services.WebMethod]
@@ -720,6 +721,7 @@ namespace jycboliviaASP.net.Presentacion
                 //c.telefono = row["tiendatelefono"].ToString();
                 c.propietario = row["propietarioname"].ToString();
                 c.nit = row["propietarionit"].ToString();
+                c.razonsocial = row["facturar_a"].ToString();
             }
             return c;
         }
