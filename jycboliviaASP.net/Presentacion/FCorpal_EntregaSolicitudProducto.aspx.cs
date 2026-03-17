@@ -12,8 +12,6 @@ using System.Web.Services;
 using System.Web.Script.Services;
 using System.IO;
 
-
-
 namespace jycboliviaASP.net.Presentacion
 {
     public partial class FCorpal_EntregaSolicitudProducto : System.Web.UI.Page
@@ -948,6 +946,46 @@ namespace jycboliviaASP.net.Presentacion
                 }
             }
         }
+        // **************************************************************************************** //
+        /* FILTRO BUSQUEDA orden entrega y solicitante */
+        [WebMethod]
+        [ScriptMethod]
+        public static string[] getListOrdenEntrega(string prefixText, int count)
+        {
+            string nombre = prefixText;
+            NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+            DataSet tuplas = nego.get_filtroBusquedaCodigoOrdenSolicitud(nombre);
+
+            int fin = tuplas.Tables[0].Rows.Count;
+            string[] lista = new string[fin];
+
+            for (int i = 0; i < fin; i++)
+            {
+                string codigo = tuplas.Tables[0].Rows[i]["codigo"].ToString();
+                lista[i] = $"{codigo}";
+            }
+            return lista;
+        }
+
+        [WebMethod]
+        [ScriptMethod]
+        public static string[] getListSolicitantes(string prefixText, int count)
+        {
+            string nombre = prefixText;
+            NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+            DataSet tuplas = nego.get_filtroBusquedaPersonalSolicitante(nombre);
+
+            int fin = tuplas.Tables[0].Rows.Count;
+            string[] lista = new string[fin];
+
+            for (int i=0; i < fin; i++)
+            {
+                string nom = tuplas.Tables[0].Rows[i]["nombre"].ToString();
+                lista[i] = $"{nom}";
+            }
+            return lista;
+        }
+
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -961,6 +999,35 @@ namespace jycboliviaASP.net.Presentacion
             tx_chofer.Text = string.Empty;
             hf_codChofer.Value = string.Empty;
 
+        }
+
+        protected void btn_busquedaSolicitudes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string ordenP = tx_busquedaOrdenP.Text.Trim();
+                string vendedor = tx_busquedaVendedor.Text.Trim();
+
+                NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+                DataSet datos = nego.get_mostrarSolicitudesEntregaProducto_filtroBusqueda(vendedor, ordenP);
+
+                if (datos != null && datos.Tables.Count > 0 && datos.Tables[0].Rows.Count > 0)
+                {
+                    gv_solicitudesProductos.DataSource = datos;
+                    gv_solicitudesProductos.DataBind();
+                }
+                else
+                {
+                    gv_solicitudesProductos.DataSource = null;
+                    gv_solicitudesProductos.DataBind();
+
+                    showalert("No se encontraron datos con los parametros proporcionados.");
+                }
+            }
+            catch(Exception ex)
+            {
+                showalert("Ocurrio un error al buscar los datos. " + ex.Message);
+            }
         }
     }
 }

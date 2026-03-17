@@ -67,7 +67,6 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_EntregasProductoaCamion(codigoCamion);
         }
 
-
         internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
         {
             return datos.get_despachosdeCamiones(fechadesde, fechahasta, estado, codVehiculo);
@@ -250,7 +249,41 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al obtener datos de la solicitud. " + ex.Message);
             }
         }
+        internal DataSet get_filtroBusquedaCodigoOrdenSolicitud(string codigo)
+        {
+            try
+            {
+                return datos.get_filtroBusquedaCodigoOrdenSolicitud(codigo);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
 
+        internal DataSet get_filtroBusquedaPersonalSolicitante(string solicitante)
+        {
+            try
+            {
+                return datos.get_filtroBusquedaPersonalSolicitante(solicitante);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
+
+        public DataSet get_mostrarSolicitudesEntregaProducto_filtroBusqueda(string vendedor, string codigo)
+        {
+            try
+            {
+                return datos.get_mostrarSolicitudesEntregaProducto_filtroBusqueda(vendedor, codigo);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
 
 
     }

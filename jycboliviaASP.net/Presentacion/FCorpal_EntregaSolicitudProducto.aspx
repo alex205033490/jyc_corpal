@@ -8,6 +8,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style type="text/css">
+        .container_filtradoBusqueda{
+            padding: 0.25rem;
+            box-shadow: 1px 1px 5px 0px black;
+            border-radius: 0.5rem;
+            background-color: #ff8c004a;
+        }
+
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
@@ -55,6 +64,38 @@
         <div class="card-header  text-black">Entrega de Solicitud Productos</div>
 
         <div class="container-form">
+
+            <div class="container_filtradoBusqueda mb-2 col-md-8 col-lg-6">
+
+                <div class="row" style="font-size:smaller;">
+                    <div class="col-md-3 col-sm-4 col-4">
+                        <asp:label runat="server">Nro Orden:</asp:label>
+                        <asp:TextBox ID="tx_busquedaOrdenP" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="autoCompleteExtender_ordenP" runat="server"
+                             TargetControlID="tx_busquedaOrdenP" CompletionSetCount="12" MinimumPrefixLength="1"
+                             ServiceMethod="getListOrdenEntrega" UseContextKey="true" CompletionListCssClass="CompletionList" 
+                             CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
+                             CompletionInterval="10"></asp:AutoCompleteExtender>
+
+
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-5">
+                        <asp:Label runat="server">Vendedor:</asp:Label>
+                        <asp:TextBox ID="tx_busquedaVendedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="autoCompleteExtender_vendedor" runat="server"
+                             TargetControlID="tx_busquedaVendedor" CompletionSetCount="12" MinimumPrefixLength="2"
+                             ServiceMethod="getListSolicitantes" UseContextKey="true" CompletionListCssClass="CompletionList" 
+                             CompletionListItemCssClass="CompletionlistItem" CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" 
+                             CompletionInterval="10"></asp:AutoCompleteExtender>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-3" style="align-content:end;">
+                        <asp:Button ID="btn_busquedaSolicitudes" runat="server" CssClass="btn btn-success"
+                            Text="Buscar" OnClick="btn_busquedaSolicitudes_Click" />
+                    </div>
+                </div>
+          
+            </div>
+
 
             <asp:UpdatePanel ID="updatePanelListaSolicitudes" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
