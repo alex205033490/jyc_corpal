@@ -133,17 +133,17 @@
                                 <asp:GridView ID="gv_despachos" CssClass="gv_despachos sticky-table"
                                     runat="server" BackColor="White" AutoGenerateColumns="false"
                                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="10"
-                                    Font-Size="Small" ForeColor="Black" GridLines="Vertical">
+                                    Font-Size="Small" ForeColor="Black" GridLines="Vertical" DataKeyNames="codigo, Vehiculo">
                                     <AlternatingRowStyle BackColor="#CCCCCC" />
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" />
+                                        <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" Visible="false"/>
                                         <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
                                         <asp:BoundField DataField="horagra" HeaderText="Hora" HtmlEncode="false" />
                                         <asp:BoundField DataField="detalle" HeaderText="Detalle" HtmlEncode="false" />
                                         <asp:BoundField DataField="Vehiculo" HeaderText="Vehiculo" HtmlEncode="false" />
                                         <asp:BoundField DataField="Conductor" HeaderText="Conductor" HtmlEncode="false" />
-                                        <asp:BoundField DataField="estadodespacho" HeaderText="Estado Despacho" HtmlEncode="false" />
+                                        <asp:BoundField DataField="estadodespacho" HeaderText="Estado" HtmlEncode="false" />
                                     </Columns>
                                     <FooterStyle BackColor="#CCCCCC" />
                                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
