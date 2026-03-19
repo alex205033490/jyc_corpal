@@ -960,5 +960,50 @@ namespace jycboliviaASP.net.Negocio
                 return false;
             }
         }
+
+        internal bool enviar_correo_aprobacionCreditoSolicitudProd(string asunto, string cuerpo)
+        {
+            try
+            {
+                MailMessage correo = new MailMessage();
+                correo.From = new MailAddress("notificacion@corpal-srl.com");
+
+                //correo.To.Add("angel.guidi.dom@gmail.com");
+                //correo.To.Add("fdd3@jycbolivia.com");
+                correo.To.Add("occ6@jycbolivia.com");
+                correo.Subject = asunto;
+                correo.Body = cuerpo;
+
+                correo.IsBodyHtml = true;
+                correo.Priority = MailPriority.Normal;
+
+                SmtpClient smtp = new SmtpClient();
+
+                smtp.Host = "mail.corpal-srl.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = new NetworkCredential("notificacion@corpal-srl.com", "Nikilo9H(z*o6fw#2Sc- Boli+");
+
+                smtp.EnableSsl = true;
+                try
+                {
+                    smtp.Send(correo);
+                    correo.Dispose();
+                    return true;
+                }
+                catch (Exception )
+                {
+                    return false;
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al enviar el correo - Aprobacion Credito Solicitud. " + ex.Message);
+            }
+        }
+
+
     }
 }

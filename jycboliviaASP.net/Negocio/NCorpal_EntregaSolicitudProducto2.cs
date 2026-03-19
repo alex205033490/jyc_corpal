@@ -149,9 +149,9 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_listDetallePedidoaCredito(codigo);
         }
 
-        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta, string obs)
         {
-            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta);
+            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta, obs);
         }
 
         internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
@@ -163,11 +163,11 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.Obtener_codMetodoPagoSolicitud(cod);
         }
-        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta, string observacion)
         {
             try
             {
-                return datos.POST_rechazarSolCredito(codResp, codSol, nroBoleta);
+                return datos.POST_rechazarSolCredito(codResp, codSol, nroBoleta, observacion);
             }
             catch (Exception ex)
             {

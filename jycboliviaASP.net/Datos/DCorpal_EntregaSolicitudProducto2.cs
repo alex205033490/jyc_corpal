@@ -542,7 +542,7 @@ namespace jycboliviaASP.net.Datos
                 "and sep.cod_modcobranza = 2 " +
                 "and sep.estado = true " +
                 "and sep.estado_aprobarcredito is null " +
-                "order by sep.fechaGRA asc, sep.nroboleta asc";
+                "order by sep.codigo desc";
 
             return conexion.consultaMySql(consulta);
         }
@@ -577,19 +577,21 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta, string obs)
         {
             try
             {
                 string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep 
                                 SET sep.resp_aprobarcredito = @codResp, 
                                 sep.fecha_aprobarcredito = current_date(), 
-                                sep.hora_aprobarcredito = current_time(), 
+                                sep.hora_aprobarcredito = current_time(),
+                                sep.observacion_aprobarcredito = @obs,
                                 sep.estado_aprobarcredito = 1 
                                 WHERE sep.estado = 1 and sep.codigo = @codSol and sep.nroboleta = @nroBoleta;";
 
                 using (MySqlCommand cmd = new MySqlCommand(consulta))
                 {
+                    cmd.Parameters.AddWithValue("@obs", obs);
                     cmd.Parameters.AddWithValue("@codResp", codResp);
                     cmd.Parameters.AddWithValue("@codSol", codSol);
                     cmd.Parameters.AddWithValue("@nroBoleta", nroBoleta);
@@ -665,14 +667,15 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta, string observacion)
         {
             try
             {
                 string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep 
                                 SET sep.resp_aprobarcredito = @codResp, 
                                 sep.fecha_aprobarcredito = current_date(), 
-                                sep.hora_aprobarcredito = current_time(), 
+                                sep.hora_aprobarcredito = current_time(),
+                                sep.observacion_aprobarcredito = @observacion,
                                 sep.estado_aprobarcredito = 0 
                                 WHERE sep.estado = 1 and sep.codigo = @codSol and sep.nroboleta = @nroBoleta;";
 
@@ -681,6 +684,7 @@ namespace jycboliviaASP.net.Datos
                     cmd.Parameters.AddWithValue("@codResp", codResp);
                     cmd.Parameters.AddWithValue("@codSol", codSol);
                     cmd.Parameters.AddWithValue("@nroBoleta", nroBoleta);
+                    cmd.Parameters.AddWithValue("@observacion", observacion);
 
                     bool result = conexion.ejecutarMySql2(cmd);
                     return result;

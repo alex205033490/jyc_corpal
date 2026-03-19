@@ -27,10 +27,7 @@ namespace jycboliviaASP.net.Presentacion
                 ListaSolicitudesPedidoCredito();
                 gv_listProductos.Visible=false;
                 getResponsable();
-
             }
-           
-
         }
 
 
@@ -62,9 +59,6 @@ namespace jycboliviaASP.net.Presentacion
             {
                 tx_responsable.Text = "";
             }
-
-            
-
         }
 
         private bool tienePermiso(int permiso)
@@ -170,6 +164,8 @@ namespace jycboliviaASP.net.Presentacion
             gv_listProductos.DataSource = null;
             gv_listProductos.DataBind();
             gv_listProductos.Visible = false;
+
+            tx_observacion.Text = string.Empty;
         }
 
         private bool registrarAprobacionCredito()
@@ -182,12 +178,23 @@ namespace jycboliviaASP.net.Presentacion
                 string usu = Session["NameUser"].ToString();
                 string pass = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usu, pass);
+                DataSet ds = Nresp.get_responsable(codUser);
+                string responsable = tx_responsable.Text.Trim();
+
+                int codSolicitud = 0;
+                string cliente = "";
+
+
+                string observacion = tx_observacion.Text.Trim();
+                string fechaAct = DateTime.Now.ToString();
 
                 if(codUser != 11 && codUser != 5)
                 {
                     showalert("No tienes permisos para aprobar solicitudes");
                     return false;
                 }
+
+                bool aprobacionRealizada = false;
 
                 foreach(GridViewRow row in gv_solicitudesProductos.Rows)
                 {
@@ -197,18 +204,119 @@ namespace jycboliviaASP.net.Presentacion
                     {
                         int codSol = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex]["codigo"]);
                         string nroBoleta = gv_solicitudesProductos.DataKeys[row.RowIndex]["nroboleta"].ToString();
+                        string tiendaName = gv_solicitudesProductos.DataKeys[row.RowIndex]["tiendaname"].ToString();
 
-                        bool result = Nent.POST_aprobacionSolCredito(codUser, codSol, nroBoleta);
+                        bool result = Nent.POST_aprobacionSolCredito(codUser, codSol, nroBoleta, observacion);
 
-                        return result;
+                        if (result)
+                        {
+                            aprobacionRealizada = true;
+                            codSolicitud = codSol;
+                            cliente = tiendaName;
+
+                        }
                     }
                 }
-                return false;
+                if (aprobacionRealizada)
+                {
+                    // ENVIO DE CORREO POR APROBACION DE CREDITO
+                    //envioCorreo_aprobacionCreditoSolicitudProducto(codSolicitud, cliente, responsable, fechaAct, observacion);
+                }
+                return aprobacionRealizada;
             }
             catch(Exception ex)
             {
                 showalert("Error en el metodo de aprobación de credito. " + ex.Message);
                 return false;
+            }
+        }
+
+        private void envioCorreo_aprobacionCreditoSolicitudProducto(int nroPedido, string cliente, string aprobadoPor, 
+                                                            string fechaAprobacion, string observacion)
+        {
+            try
+            {
+                /*####### ENVIO DE CORREO #######*/
+                string asunto = "(Corpal) Aprobación de crédito - Solicitud de producto";
+
+                string cuerpo = $@"
+                                    <html>
+                                    <body style='font-family: Arial, sans-serif; background-color:white; padding:20px;'>
+            
+                                        <div style='max-width:600px; margin:auto; background:#ffffff; border-radius:8px; padding:20px; border:1px solid black;'>
+
+                                            <h2 style='color:#2c3e50;'>(CORPAL) Aprobación de Crédito - Pedido N° {nroPedido}</h2>
+                                            <br>
+                                            <p style='font-size:14px; color:#555;'>
+                                                Estimado(a),
+                                            </p>
+
+                                            <p style='font-size:14px; color:#555;'>
+                                                La solicitud de crédito correspondiente al pedido ha sido <b style='color:green;'>APROBADA</b>.
+                                            </p>
+
+                                            <table style='width:60%; border-collapse:collapse; margin-top:15px; font-size: 12px;'>
+                                                <tr>
+                                                    <td style='padding:8px; border:1px solid #ddd; background:#f9f9f9;'><b>Nro. de Pedido</b></td>
+                                                    <td style='padding:8px; border:1px solid #ddd;'>{nroPedido}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding:8px; border:1px solid #ddd; background:#f9f9f9;'><b>Cliente</b></td>
+                                                    <td style='padding:8px; border:1px solid #ddd;'>{cliente}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding:8px; border:1px solid #ddd; background:#f9f9f9;'><b>Aprobado por</b></td>
+                                                    <td style='padding:8px; border:1px solid #ddd;'>{aprobadoPor}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding:8px; border:1px solid #ddd; background:#f9f9f9;'><b>Fecha de Aprobación</b></td>
+                                                    <td style='padding:8px; border:1px solid #ddd;'>{fechaAprobacion}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding:8px; border:1px solid #ddd; background:#f9f9f9;'><b>Observación</b></td>
+                                                    <td style='padding:8px; border:1px solid #ddd;'>{observacion}</td>
+                                                </tr>
+                                            </table>
+
+                                            <hr style='margin:20px 0;' />
+
+                                            <p style='font-size:12px; color:#999;'>
+                                                © Corpal
+                                            </p>
+
+                                        </div>
+
+                                    </body>
+                            </html>";
+
+                NA_EnvioCorreo nego = new NA_EnvioCorreo();
+                nego.enviar_correo_aprobacionCreditoSolicitudProd(asunto, cuerpo);
+            }
+            catch(Exception ex)
+            {
+                showalert("ERROR en el envio de correo. aprobacion de credito: " + ex.Message); 
+            }
+        }
+
+
+
+        
+
+        
+
+/*************************************************************************************************/
+                /*                  RECHAZAR CREDITO        */
+        protected void btn_rechazarCredito_Click(object sender, EventArgs e)
+        {
+            bool result = rechazarSolCredito();
+            if (result)
+            {
+                limpiarForm();
+                showalert("La solicitud de credito ha sido Rechazada.");
+            }
+            else
+            {
+                showalert("La solicitud no pudo ser rechazada");
             }
         }
         private bool rechazarSolCredito()
@@ -222,7 +330,9 @@ namespace jycboliviaASP.net.Presentacion
                 string pass = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usu, pass);
 
-                if(codUser != 11 && codUser != 5)
+                string obs = tx_observacion.Text.Trim();
+
+                if (codUser != 11 && codUser != 5)
                 {
                     showalert("No tienes permisos para rechazar solicitudes");
                     return false;
@@ -230,19 +340,19 @@ namespace jycboliviaASP.net.Presentacion
                 foreach (GridViewRow row in gv_solicitudesProductos.Rows)
                 {
                     CheckBox chk = (CheckBox)row.FindControl("chkSolicitud");
-                    if(chk != null && chk.Checked)
+                    if (chk != null && chk.Checked)
                     {
                         int codSol = Convert.ToInt32(gv_solicitudesProductos.DataKeys[row.RowIndex]["codigo"]);
                         string nroBoleta = gv_solicitudesProductos.DataKeys[row.RowIndex]["nroboleta"].ToString();
 
-                        bool result = Nent.POST_rechazarSolCredito(codUser, codSol, nroBoleta);
+                        bool result = Nent.POST_rechazarSolCredito(codUser, codSol, nroBoleta, obs);
 
                         return result;
                     }
                 }
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert("Error en el metodo Rechazar Solicitud Credito. " + ex.Message);
                 return false;
@@ -254,19 +364,5 @@ namespace jycboliviaASP.net.Presentacion
             limpiarForm();
         }
 
-        protected void btn_rechazarCredito_Click(object sender, EventArgs e)
-        {
-            bool result = rechazarSolCredito();
-            if (result)
-            {
-                limpiarForm();
-                showalert("La solicitud de credito ha sido Rechazada.");
-            }
-            else
-            {
-                showalert("La solicitud no pudo ser rechazada");
-            }
-
-        }
     }
 }

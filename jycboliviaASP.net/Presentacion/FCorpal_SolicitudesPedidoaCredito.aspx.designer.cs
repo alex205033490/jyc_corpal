@@ -51,6 +51,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_responsable;
 
         /// <summary>
+        /// Control tx_observacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_observacion;
+
+        /// <summary>
         /// Control btn_registrarAprobacion.
         /// </summary>
         /// <remarks>
