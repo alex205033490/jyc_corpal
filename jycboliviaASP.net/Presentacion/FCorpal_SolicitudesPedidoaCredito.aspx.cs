@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Threading.Tasks;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -71,8 +72,6 @@ namespace jycboliviaASP.net.Presentacion
             NA_DetallePermiso Nper = new NA_DetallePermiso();
             return Nper.tienePermisoResponsable(permiso, codUser);
         }
-
-
 
 
         /********    LISTA DE PRODUCTOS DE PEDIDO A CREDITO   ********/
@@ -150,7 +149,7 @@ namespace jycboliviaASP.net.Presentacion
             if (result)
             {
                 limpiarForm();
-                showalert("Solicitud Aprobada. Ok");
+                showalert("Solicitud Aprobada Exitosamente.");
             }
             else
             {
@@ -213,14 +212,13 @@ namespace jycboliviaASP.net.Presentacion
                             aprobacionRealizada = true;
                             codSolicitud = codSol;
                             cliente = tiendaName;
-
                         }
                     }
                 }
                 if (aprobacionRealizada)
                 {
-                    // ENVIO DE CORREO POR APROBACION DE CREDITO
-                    //envioCorreo_aprobacionCreditoSolicitudProducto(codSolicitud, cliente, responsable, fechaAct, observacion);
+                    // ENVIO DE CORREO POR APROBACION DE CREDITO - envio de prueba a occ6
+                    // Task.Run(() => envioCorreo_aprobacionCreditoSolicitudProducto(codSolicitud, cliente, responsable, fechaAct, observacion));
                 }
                 return aprobacionRealizada;
             }
@@ -230,6 +228,7 @@ namespace jycboliviaASP.net.Presentacion
                 return false;
             }
         }
+
 
         private void envioCorreo_aprobacionCreditoSolicitudProducto(int nroPedido, string cliente, string aprobadoPor, 
                                                             string fechaAprobacion, string observacion)
@@ -298,11 +297,6 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-
-
-        
-
-        
 
 /*************************************************************************************************/
                 /*                  RECHAZAR CREDITO        */
