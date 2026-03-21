@@ -72,6 +72,26 @@ namespace jycboliviaASP.net.Datos
             };
             return conexion.consultaMySqlParametros(consulta, parametros);
         }
+        internal DataSet get_mostrarListProductosCliente(int codCli, string producto)
+        {
+            NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
+            string consultaStockActual = vlocal.get_consultaStockProductosActual();
+
+            string consulta = @"select pp.codigo, pp.producto from  
+                                tbcorpal_cliente cl
+                                inner join tbcorpal_listaprecio lp on cl.id_listaprecio = lp.codigo
+                                inner join tbcorpal_detallelistaprecio dlp on lp.codigo = dlp.id_listaprecio
+                                left join tbcorpal_producto pp on dlp.id_producto = pp.codigo
+                                where pp.estado = 1 
+                                and cl.codigo = @codcli
+                                and pp.producto like @producto";
+            var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@producto", "%" +producto+ "%"),
+                new MySqlParameter("@codcli", codCli)
+            };
+            return conexion.consultaMySqlParametros(consulta, parametros);
+        }
 
         internal bool set_guardarSolicitud(string nroboleta, string fechaentrega, string horaentrega, string personalsolicitud, 
                                     int codpersolicitante, bool estado, int codcliente, int codModPago)

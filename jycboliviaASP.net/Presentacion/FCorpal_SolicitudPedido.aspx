@@ -125,7 +125,7 @@
                                         <div>
 
                                             <asp:Label runat="server" for="inputName5" class="form-label">Producto</asp:Label>
-                                            <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small"></asp:TextBox>
+                                            <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small" onkeyup="setClienteContextKey()"></asp:TextBox>
                                             <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server"
                                                 TargetControlID="tx_producto"
                                                 CompletionSetCount="12"
@@ -133,7 +133,8 @@
                                                 UseContextKey="True"
                                                 CompletionListCssClass="CompletionList"
                                                 CompletionListItemCssClass="CompletionlistItem"
-                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" 
+                                                onClientItemSelected="ProductoSeleccionado">
                                             </asp:AutoCompleteExtender>
 
                                         </div>
@@ -379,7 +380,29 @@
             });
         }
         
+        function setClienteContextKey() {
+            var inputCliente = document.getElementById('<%= tx_cliente.ClientID %>');
+    
+            if (!inputCliente) return;
 
+            var cliente = inputCliente.value;
+
+            if (!cliente) return; 
+
+                    var autoComplete = $find('<%= tx_producto_AutoCompleteExtender.ClientID %>');
+
+                    if (autoComplete) {
+                        autoComplete.set_contextKey(cliente);
+                    }
+        }
+
+        function ProductoSeleccionado(source, eventArgs) {
+            var producto = eventArgs.get_text();
+
+            document.getElementById("<%= tx_producto.ClientID %>").value = producto;
+
+            __doPostBack('<%= bt_buscar.UniqueID %>', '');
+        }
 
     </script>
 

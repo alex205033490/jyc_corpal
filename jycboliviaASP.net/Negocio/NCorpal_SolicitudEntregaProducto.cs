@@ -28,9 +28,27 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
-            public DataSet get_mostrarProductos(string producto)
-        {            
-            return dsp.get_mostrarProductos(producto);
+        public DataSet get_mostrarProductos(string producto)
+        {
+            try
+            {
+                return dsp.get_mostrarProductos(producto);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener los datos. " + ex.Message);
+            }
+        }
+        internal DataSet get_mostrarListProductosCliente(int codCli, string producto)
+        {
+            try
+            {
+                return dsp.get_mostrarListProductosCliente(codCli, producto);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
         }
 
         public int get_CodigoProductos(string producto)

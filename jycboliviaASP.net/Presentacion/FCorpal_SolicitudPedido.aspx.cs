@@ -127,14 +127,27 @@ namespace jycboliviaASP.net.Presentacion
 
         [WebMethod]
         [ScriptMethod]
-        public static string[] GetlistaProductos(string prefixText, int count)
+        public static string[] GetlistaProductos(string prefixText, int count, string contextKey)
         {
-            
+            if (string.IsNullOrEmpty(contextKey))
+                return new string[0];
+
             string nombreProducto = prefixText;
-            
+            string cliente = contextKey;
+
+            int codigCliente;
+            NCorpal_Cliente nc = new NCorpal_Cliente();
+            codigCliente = nc.get_CodigoCliente(cliente);
+
+            if (codigCliente == 0)
+                return new string[0];
+
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
-         
+            DataSet tuplas = pp.get_mostrarListProductosCliente(codigCliente, nombreProducto);
+
+            if (tuplas == null || tuplas.Tables.Count == 0 || tuplas.Tables[0].Rows.Count == 0)
+                return new string[0];
+
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
             for (int i = 0; i < fin; i++)
@@ -143,20 +156,6 @@ namespace jycboliviaASP.net.Presentacion
             }
             return lista;
             
-            /*
-            NA_endpoints napi = new NA_endpoints();
-            dynamic tuplas = napi.get_productoAlmacen(nombreProducto, "adm", "123");            
-            JArray rowsArray = (JArray)tuplas["Resultado"];
-            string[] lista = new string[rowsArray.Count];
-            int i = 0;
-            foreach (JObject obj in rowsArray)
-            {
-                lista[i] = obj["Descripcion"].ToString() ;
-                i++;
-            }
-            
-            return lista;
-            */
         }
 
         public string convertidorFecha(string fecha)
@@ -176,7 +175,6 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
-         
             buscarProductos();
         }
 
@@ -206,6 +204,22 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Error al encontrar datos. " + ex.Message);
             }
         }
+
+        /* cargar datos producto autocomplete */
+        public class clssProducto
+        {
+            public string codigo { get; set; }
+            public string producto { get; set; }
+            public string medida { get; set; }
+            public string precio { get; set; }
+            public string StockParcialAlmacen { get; set; }
+            public string stockAlmacen { get; set; }
+            public string codcategoriap { get; set; }
+            public string codupon { get; set; }
+
+        }
+        
+
         /*******************************************************************************/
         /*      BOTTON AGREGAR PRODUCTO*/
         protected void bt_adicionar_Click(object sender, EventArgs e)
