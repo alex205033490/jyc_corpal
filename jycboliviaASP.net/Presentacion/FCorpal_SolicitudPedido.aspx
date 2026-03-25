@@ -64,14 +64,14 @@
         }
 
         .gv_adicionados td {
-            padding: 10px;
+            padding: 5px;
         }
 
         .container_gvListProductos {
             height: 320px;
         }
 
-        .gv_Productos td:nth-child(6) {
+        .gv_Productos td:nth-child(7) {
             background-color: #9aff98;
             font-weight: bold;
         }
@@ -79,6 +79,15 @@
         .gv_adicionados td:nth-child(8) {
             background-color: #5d5c5d4a;
             font-weight: bold;
+        }
+
+        .group_cb{
+            box-shadow: 1px 1px 3px 0px darkgreen;
+            border-radius: 2px;
+            padding: 3px;
+            background-color: #70c77212;
+            font-weight: 700;
+            color: seagreen;
         }
     </style>
     <script type="text/javascript">
@@ -118,9 +127,6 @@
                             <ContentTemplate>
                                 <div class="row col-lg-8 col-md-10 mb-2" style="font-size: small;">
 
-
-
-
                                     <div class="col-lg-5 col-md-6 col-sm-6 col-6">
                                         <div>
 
@@ -144,8 +150,11 @@
                                                 <asp:Label runat="server" class="form-label">Cantidad</asp:Label>
                                                 <asp:TextBox ID="tx_cantidadProducto" runat="server" class="form-control mb-2" Font-Size="Small" oninput="convertdotcomma(event)"></asp:TextBox>
 
-                                                <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
-                                                <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
+                                                <div class="group_cb">
+                                                    <asp:CheckBox  ID="cb_precioFraccionado" runat="server" />
+                                                    <asp:Label runat="server" CssClass="form-label">Fraccionado</asp:Label>
+                                                </div>
+
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-6" style="padding=0.5rem;">
@@ -156,6 +165,9 @@
                                                     <asp:ListItem>MUESTRA</asp:ListItem>
                                                     <asp:ListItem>OTROS</asp:ListItem>
                                                 </asp:DropDownList>
+
+                                                <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
+                                                <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
                                             </div>
                                         </div>
 
@@ -198,6 +210,7 @@
                                         <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
                                         <asp:BoundField DataField="medida" HeaderText="Medida" HtmlEncode="false" />
                                         <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
+                                        <asp:BoundField DataField="precioFracc" HeaderText="Precio Fraccionado"/>
                                         <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
                                         <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
                                         <asp:BoundField DataField="codcategoriap" HeaderText="ID categoria" />
@@ -292,8 +305,11 @@
                                         <asp:TextBox ID="tx_propietario" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
 
                                         <asp:Label runat="server" class="form-label">Metodo de Pago</asp:Label>
-                                        <asp:DropDownList ID="dd_metodoPago" class="form-select mb-2" Font-Size="Small" runat="server">
+                                        <asp:DropDownList ID="dd_metodoPago" class="form-select mb-2" Font-Size="Small" runat="server" 
+                                            OnSelectedIndexChanged="dd_metodoPago_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:DropDownList>
+
+                                        <asp:TextBox ID="tx_diasCredito" runat="server" CssClass="form-control" placeholder="Dias de Credito" Visible="false"></asp:TextBox>
 
                                         <asp:Label ID="Label3" for="tx_nit" runat="server" Text="Nit:"></asp:Label>
                                         <asp:TextBox ID="tx_nit" CssClass="form-control mb-2" runat="server" Font-Size="Smaller" AutoComplete="off"></asp:TextBox>
@@ -310,6 +326,7 @@
                                 <asp:AsyncPostBackTrigger ControlID="bt_verificar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="dd_metodoPago" EventName="SelectedIndexChanged" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -338,10 +355,20 @@
                                             <asp:BoundField DataField="Producto" HeaderText="Producto" HtmlEncode="false" />
                                             <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false" />
                                             <asp:BoundField DataField="idcategoriap" HeaderText="ID categoria" />
+                                            
+
+
                                             <asp:BoundField DataField="Precio" HeaderText="Precio" HtmlEncode="false" />
                                             <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" HtmlEncode="false" />
                                             <asp:BoundField DataField="Descuento" HeaderText="Descuento (%)" />
-                                            <asp:BoundField DataField="PrecioTotal" HeaderText="Precio Total" HtmlEncode="false" />
+                                            <asp:BoundField DataField="PrecioTotal" HeaderText="Total" HtmlEncode="false" />
+
+                                            <asp:TemplateField HeaderText="Item Fraccionado">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox runat="server" ID="cb_itemFraccionado" Checked= '<%# Eval("cb_itemFraccionado") %>' 
+                                                        Enabled="false" CssClass="switch-input"/>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
                                         </Columns>
 
@@ -358,6 +385,7 @@
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
                                     <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
+                                    
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>

@@ -46,6 +46,7 @@ namespace jycboliviaASP.net.Presentacion
                 dRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
                 dRepuesto.Columns.Add("idcategoriap", typeof(string));
                 dRepuesto.Columns.Add("codupon", typeof(string));
+                dRepuesto.Columns.Add("cb_itemFraccionado", typeof(bool));
 
                 gv_adicionados.DataSource = dRepuesto;
                 gv_adicionados.DataBind();
@@ -258,6 +259,9 @@ namespace jycboliviaASP.net.Presentacion
             if (cantidad > 0){
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 CheckBox cb = null;
+
+                bool usarPrecioFraccionado = cb_precioFraccionado.Checked;
+
                 for (int i = 0; i < gv_Productos.Rows.Count; i++)
                 {
                     cb = (CheckBox)gv_Productos.Rows[i].Cells[1].FindControl("CheckBox1");
@@ -269,18 +273,33 @@ namespace jycboliviaASP.net.Presentacion
                         int codProd = Convert.ToInt32(gv_Productos.DataKeys[i].Value);
                         string producto = gv_Productos.Rows[i].Cells[2].Text;
                         string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
-                        decimal precio;
+
+                        if (usarPrecioFraccionado)
+                        {
+                            DataSet ds = Nsol.obtenerMedida_productoFraccionado(codigCliente, codProd);
+
+                            if(ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                Medida = ds.Tables[0].Rows[0]["medidacontenedorfraccionada"].ToString();
+                            }
+                        }
+
+                        decimal precio, precioFracc;
                         decimal.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
+                        decimal.TryParse(gv_Productos.Rows[i].Cells[5].Text, out precioFracc);
+
+                        // Seleccionar Precio
+                        decimal precioFinal = usarPrecioFraccionado ? precioFracc : precio; 
                         //string tipo = dd_tipoSolicitud.SelectedItem.Text;
                         float StockProducto;
-                        float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
+                        float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockProducto);
                         float StockPackFerial;
-                        float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
+                        float.TryParse(gv_Productos.Rows[i].Cells[7].Text, out StockPackFerial);
                         int idcategiap;
-                        int.TryParse(gv_Productos.Rows[i].Cells[7].Text, out idcategiap);
-                        string codupon = gv_Productos.Rows[i].Cells[8].Text;
+                        int.TryParse(gv_Productos.Rows[i].Cells[8].Text, out idcategiap);
+                        string codupon = gv_Productos.Rows[i].Cells[9].Text;
 
-                        decimal subtotal = precio * cantidad;
+                        decimal subtotal = precioFinal * cantidad;
                         decimal porDescuento = 0;
 
                         subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
@@ -291,11 +310,12 @@ namespace jycboliviaASP.net.Presentacion
                             tupla["producto"] = producto;
                             tupla["Medida"] = Medida;
                             //tupla["Tipo"] = tipo;
-                            tupla["Precio"] = precio;
+                            tupla["Precio"] = precioFinal;
                             tupla["Descuento"] = porDescuento;
                             tupla["Cantidad"] = cantidad;
                             tupla["PrecioTotal"] = subtotal;
                             tupla["idcategoriap"] = idcategiap;
+                            tupla["cb_itemFraccionado"] = usarPrecioFraccionado;
 
                             if (itemPackFerial == true)
                             {
@@ -312,6 +332,7 @@ namespace jycboliviaASP.net.Presentacion
                 int id_tipoCliente = verificarTipoCliente(codigCliente);
                 if (id_tipoCliente == 1 || id_tipoCliente == 3)
                 {
+                    // falta recalcular los q no son fraccionados
                     recalcularDescuentos(datoRepuesto);
                 }
 
@@ -444,20 +465,54 @@ namespace jycboliviaASP.net.Presentacion
                             for (int i = 0; i < datoRepuesto.Rows.Count; i++)
                             {
                                 int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                                decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
-                                decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
-                                decimal totalProd = Convert.ToDecimal(datoRepuesto.Rows[i]["PrecioTotal"].ToString());
+                                
+                                decimal VALORcantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
+                                decimal VALORprecio = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
+                                decimal VALORtotal = Convert.ToDecimal(datoRepuesto.Rows[i]["PrecioTotal"].ToString());
+
+                                string VALORmedida = datoRepuesto.Rows[i]["Medida"].ToString();
+                                string Tipo = "";
+
+                                bool esFraccionado = Convert.ToBoolean(datoRepuesto.Rows[i]["cb_itemFraccionado"]);
+
+                                decimal? cantidad = null;
+                                decimal? precio = null;
+                                decimal? total = null;
+                                string medida = null;
+
+                                decimal? cantFracc = null;
+                                decimal? precioFracc = null;
+                                string medidaFracc = null;
+
+                                if (esFraccionado)
+                                {
+                                    cantFracc = VALORcantidad;
+                                    precioFracc = VALORprecio;
+                                    medidaFracc = VALORmedida;
+
+                                    montoTotal = VALORcantidad * VALORprecio;
+                                } else
+                                {
+                                    
+                                    cantidad = VALORcantidad;
+                                    precio = VALORprecio;
+                                    medida = VALORmedida;
+                                    total = VALORtotal;
+
+                                    montoTotal = VALORtotal;
+                                }
+
+                                //preciototalsumando continuamente
 
                                 string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                                string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                                string Tipo = "";
-                                decimal total = preciocompra * cantidad;
+                                //decimal total = preciocompra * cantidad;
 
-                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
+                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + medida + ", Tipo=" + Tipo + "<br>";
                             
-                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, totalProd, Tipo, Medida);
+                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, precio, montoTotal, Tipo, 
+                                                                    medida, cantFracc, precioFracc, medidaFracc);
 
-                                montoTotal += totalProd;
+                                //montoTotal += totalProd;
                             }
 
                             nss.actualizarmontoTotal(ultimoinsertado);
@@ -652,6 +707,8 @@ namespace jycboliviaASP.net.Presentacion
             tx_cantidadProducto.Text = string.Empty;
             gv_Productos.DataSource = null;
             gv_Productos.DataBind();
+
+            cb_precioFraccionado.Checked = false;
         }
 
         private int verificarTipoCliente(int codCli)
@@ -671,6 +728,11 @@ namespace jycboliviaASP.net.Presentacion
 
             foreach(DataRow fila in datoRepuesto.Rows)
             {
+                bool esFraccionado = fila["cb_itemFraccionado"] != DBNull.Value
+                                        && Convert.ToBoolean(fila["cb_itemFraccionado"]);
+                if (esFraccionado)
+                    continue;
+
                 int categoria = Convert.ToInt32(fila["idcategoriap"]);
                 decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
 
@@ -691,6 +753,22 @@ namespace jycboliviaASP.net.Presentacion
 
             foreach(DataRow fila in datoRepuesto.Rows)
             {
+                bool esFraccionado = fila["cb_itemFraccionado"] != DBNull.Value
+                                    && Convert.ToBoolean(fila["cb_itemFraccionado"]);
+                if (esFraccionado)
+                {
+                    fila["Descuento"] = 0;
+                    decimal precio1 = Convert.ToDecimal(fila["Precio"]);
+                    decimal cantidadFila1 = Convert.ToDecimal(fila["Cantidad"]);
+
+                    decimal subtotal1 = precio1 * cantidadFila1;
+                    subtotal1 = Math.Round(subtotal1, 2, MidpointRounding.AwayFromZero);
+
+                    fila["PrecioTotal"] = subtotal1;
+                    continue;
+                }
+
+                
                 int categoria = Convert.ToInt32(fila["idcategoriap"]);
                 decimal precio = Convert.ToDecimal(fila["Precio"]);
                 decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
@@ -747,6 +825,16 @@ namespace jycboliviaASP.net.Presentacion
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
-
+        protected void dd_metodoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dd_metodoPago.SelectedIndex == 2)
+            {
+                tx_diasCredito.Visible = true;
+            }
+            else
+            {
+                tx_diasCredito.Visible = false;
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Data;
 using System.Configuration;
 using Microsoft.Reporting.WebForms;
 using System.Globalization;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -89,6 +90,11 @@ namespace jycboliviaASP.net.Presentacion
                 {
                     get_productosSobrantes_OrdenEntrega();
                 }
+                if(dd_consulta.SelectedIndex == 2) 
+                {
+                    
+                    
+                }
                 else
                 {
                     showalert("Seleccione una opcion de busqueda válida.");
@@ -145,6 +151,19 @@ namespace jycboliviaASP.net.Presentacion
             catch(Exception ex)
             {
                 showalert("Error en el metodo para obtener datos. " + ex.Message);
+            }
+        }
+
+        private void get_tiempoTardanzaEntregaDDespacho()
+        {
+            try
+            {
+                DateTime fecha1 = DateTime.ParseExact(tx_fdesde.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime fecha2 = DateTime.ParseExact(tx_fhasta.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            catch(Exception ex)
+            {
+                showalert("Error en el metodo. " + ex.Message);
             }
         }
 

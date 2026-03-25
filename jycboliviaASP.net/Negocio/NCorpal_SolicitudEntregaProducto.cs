@@ -93,10 +93,18 @@ namespace jycboliviaASP.net.Negocio
                 return -1;
         }
 
-        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, decimal cantidad, 
-                                            decimal preciocompra, decimal total, string Tipo, string Medida)
+        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto,
+                                                decimal? cantidad, decimal? precio, decimal total, string Tipo, string Medida,
+                                                decimal? cant_unidadFracc, decimal? precio_unidadFracc, string medida_unidadFracc)
         {
-           return dsp.insertarDetalleSolicitudProducto( ultimoinsertado,  codProducto,  cantidad,  preciocompra,  total,  Tipo,  Medida);
+            try
+            {
+               return dsp.insertarDetalleSolicitudProducto( ultimoinsertado,  codProducto,  cantidad,  precio,  total,  Tipo,  Medida,
+                                                                cant_unidadFracc, precio_unidadFracc, medida_unidadFracc);
+            }catch(Exception ex)
+            {
+                throw new Exception("Error al insertar datos. "+ ex.Message);
+            }
         }
 
         internal bool actualizarmontoTotal(int ultimoinsertado)
@@ -258,6 +266,18 @@ namespace jycboliviaASP.net.Negocio
             catch(Exception e)
             {
                 throw new Exception("error al mostrar el descuento. " + e.Message);
+            }
+        }
+
+        internal DataSet obtenerMedida_productoFraccionado(int codCli, int codProd)
+        {
+            try
+            {
+                return dsp.obtenerMedida_productoFraccionado(codCli, codProd);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al obtener datos. " +ex.Message);
             }
         }
 

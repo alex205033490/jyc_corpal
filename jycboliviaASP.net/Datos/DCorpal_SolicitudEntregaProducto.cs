@@ -30,6 +30,7 @@ namespace jycboliviaASP.net.Datos
                                     pp.`producto`,
                                     pp.medida,
                                     dlp.`precio`,
+                                    dlp.preciounidadcontenedorfraccionada as 'precioFracc',
                                     pp.codcategoriap,
                                     t1.StockAlmacen,
                                     t1.StockParcialAlmacen
@@ -155,46 +156,34 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, decimal cantidad, 
-                                                decimal preciocompra, decimal total, string Tipo, string Medida)
+        internal bool insertarDetalleSolicitudProducto(int ultimoinsertado, int codProducto, 
+                                                decimal? cantidad, decimal? precio, decimal total, string Tipo, string Medida,
+                                                decimal? cant_unidadFracc, decimal? precio_unidadFracc, string medida_unidadFracc)
         {
             try
             {
-                /*
-                double porcentajeDescuento = 0;
-                string consultaDescuento = @"select pr.porcentaje_descuento 
-                                        from tbcorpal_producto_descuento pr where 
-                                        pr.producto_codigo = @codProd and @cantidad between 
-                                        pr.cantidad_min and pr.cantidad_max limit 1";
-                using (MySqlCommand cmd = new MySqlCommand(consultaDescuento))
-                {
-                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                    cmd.Parameters.AddWithValue("@codProd", codProducto);
-                    var result = conexion.ejecutarScalarObject(cmd);
-
-                    if (result != null)
-                    {
-                        porcentajeDescuento = Convert.ToDouble(result);
-                    }
-                    if (porcentajeDescuento > 0)
-                    {
-                        total = total - (total * porcentajeDescuento / 100);
-                    }
-                }
-                */
                 string consultaGeneral = @"insert into tbcorpal_detalle_solicitudproducto 
-                                    (codsolicitud, codproducto, cant, precio, precioTotal, tiposolicitud, medida) values 
-                                    (@ultInsertado, @codProducto, @cantidad, @precio, @total, @tipo, @medida);";
+                                    (codsolicitud, codproducto, cant, precio, precioTotal, tiposolicitud, medida, 
+                                    cant_unidadcontenedorfraccionada, precio_unidadcontenedorfraccionado, medida_unidadcontenedorfraccionada, contenedorfraccionado) values 
+                                    (@ultInsertado, @codProducto, @cantidad, @precio, @total, @tipo, @medida,
+                                    @cant_unidadFracc, @precio_unidadFracc, @medida_unidadFracc, @contFraccionado);";
 
                 using (MySqlCommand cmd = new MySqlCommand(consultaGeneral))
                 {
                     cmd.Parameters.AddWithValue("@ultInsertado", ultimoinsertado);
                     cmd.Parameters.AddWithValue("@codProducto", codProducto);
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                    cmd.Parameters.AddWithValue("@precio", preciocompra);
+                    cmd.Parameters.AddWithValue("@precio", precio);
                     cmd.Parameters.AddWithValue("@total", total);
                     cmd.Parameters.AddWithValue("@tipo", Tipo);
                     cmd.Parameters.AddWithValue("@medida", Medida);
+
+                    object contFraccionado = cant_unidadFracc.HasValue ? (object)1 : DBNull.Value;
+                    cmd.Parameters.AddWithValue("@contFraccionado", contFraccionado);
+
+                    cmd.Parameters.AddWithValue("@cant_unidadFracc", (object)cant_unidadFracc ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@precio_unidadFracc", (object)precio_unidadFracc ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@medida_unidadFracc", (object)medida_unidadFracc ?? DBNull.Value);
 
                     return conexion.ejecutarMySql2(cmd);
                 }
@@ -770,6 +759,34 @@ namespace jycboliviaASP.net.Datos
                 throw new Exception("Error al obtener el descuento categoria. " + ex.Message);
             }
         }
+
+        internal DataSet obtenerMedida_productoFraccionado(int codCli, int codProd)
+        {
+            try
+            {
+                string consulta = @"select
+                                    dlp.`id_producto`,
+                                    dlp.`medidacontenedorfraccionada`
+                                    from 
+                                    tbcorpal_cliente cl
+                                    inner join tbcorpal_listaprecio lp on cl.`id_listaprecio` = lp.`codigo`
+                                    left join tbcorpal_detallelistaprecio dlp on lp.`codigo` = dlp.`id_listaprecio`
+                                    where cl.`codigo` = @codCli 
+                                    and dlp.`id_producto` = @codProd";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codCli", codCli),
+                    new MySqlParameter("@codProd", codProd)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos del producto. " + ex.Message);
+            }
+
+        }
+
 
 
     }

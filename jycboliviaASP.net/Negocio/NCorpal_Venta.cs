@@ -117,5 +117,17 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        internal DataSet get_rpTiempoTardanzaDespachoOrdenEntrega(DateTime fechaIni, DateTime fechaFin)
+        {
+            try
+            {
+                return dv.get_rpTiempoTardanzaDespachoOrdenEntrega(fechaIni, fechaFin);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex.Message);
+            }
+        }
+
     }
 }
