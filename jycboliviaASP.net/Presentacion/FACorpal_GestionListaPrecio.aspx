@@ -175,30 +175,32 @@
                 <datalist id="miListaDeProductos">
                     <asp:Repeater ID="rptProductos" runat="server">
                         <ItemTemplate>
-                            <%-- Mostraremos el código y el nombre. Ej: "15 - Tubo PVC" --%>
                             <option value='<%# Eval("codigo") + " - " + Eval("producto") %>'></option>
                         </ItemTemplate>
                     </asp:Repeater>
                 </datalist>
             </div>
         </div>
+        
         <div class="col-md-2">
             <div class="form-group">
                 <label>Precio Base</label>
                 <asp:TextBox ID="txtPrecioAgregar" runat="server" CssClass="form-control" ReadOnly="true" BackColor="#e9ecef"></asp:TextBox>
             </div>
         </div>
+        
         <div class="col-md-2">
             <div class="form-group">
                 <label>Unidad</label>
                 <asp:TextBox ID="txtUnidadAgregar" runat="server" CssClass="form-control" ReadOnly="true" BackColor="#e9ecef"></asp:TextBox>
             </div>
         </div>
-<div class="col-md-2">
+
+        <div class="col-md-2">
             <div class="form-group">
                 <label>% Dcto. Lista</label>
                 <asp:TextBox ID="txtDctoAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="0.00" 
-                    onkeyup="calcularPrecioFinal()" onchange="calcularPrecioFinal()"></asp:TextBox>
+                    onkeyup="calcularPrecioFinalAgregar()" onchange="calcularPrecioFinalAgregar()"></asp:TextBox>
             </div>
         </div>
         
@@ -208,6 +210,7 @@
                 <asp:TextBox ID="txtPrecioEspecialAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="0.00" ReadOnly="true" BackColor="#e9ecef"></asp:TextBox>
             </div>
         </div>
+    </div>
 
     <div class="row">
         <%-- Ocultamos la columna de Cant. Desde --%>
@@ -217,23 +220,44 @@
                 <asp:TextBox ID="txtCantidadDesdeAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="1.00"></asp:TextBox>
             </div>
         </div>
-<%-- Ocultamos la columna de Cant. Mínima --%>
+
+        <%-- Ocultamos la columna de Cant. Mínima --%>
         <div class="col-md-2" style="display: none;">
             <div class="form-group">
                 <label>Cant. Mínima</label>
                 <asp:TextBox ID="txtCantidadMinimaAgregar" runat="server" CssClass="form-control" TextMode="Number" Text="1"></asp:TextBox>
             </div>
         </div>
-        </div>
         
+        <%-- % Aumento --%>
         <div class="col-md-2">
             <div class="form-group">
                 <label>% Aumento</label>
                 <asp:TextBox ID="txtAumentoAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="0.00" 
-                    onkeyup="calcularPrecioFinal()" onchange="calcularPrecioFinal()"></asp:TextBox>
+                    onkeyup="calcularPrecioFinalAgregar()" onchange="calcularPrecioFinalAgregar()"></asp:TextBox>
             </div>
         </div>
         
+        <%-- NUEVO: Precio Fraccionado --%>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Precio Fracc.</label>
+                <asp:TextBox ID="txtPrecioFraccionadoAgregar" runat="server" CssClass="form-control" TextMode="Number" step="0.01" Text="0.00"></asp:TextBox>
+            </div>
+        </div>
+        <%-- NUEVO: Unidad Fraccionada (BLOQUEADO) --%>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Und. Fracc.</label>
+                <asp:TextBox ID="txtUnidadFraccionadaAgregar" runat="server" 
+                    CssClass="form-control" 
+                    ReadOnly="true" 
+                    BackColor="#e9ecef">
+                </asp:TextBox>
+            </div>
+        </div>
+        
+        <%-- Botones de Acción --%>
         <div class="col-md-6 text-right">
             <div class="form-group" style="margin-top: 25px;">
                 <asp:Button ID="btnGuardarProducto" runat="server" Text="Guardar Producto" CssClass="btn btn-success" OnClick="btnGuardarProducto_Click" />
@@ -264,18 +288,17 @@
                         <%-- 2. Medida (Bloqueado) --%>
                         <asp:BoundField DataField="medida" HeaderText="Medida" ReadOnly="True" />
                         
-<%-- 3. % Dcto. (EDITABLE) --%>
+                        <%-- 3. % Dcto. (EDITABLE) --%>
                         <asp:TemplateField HeaderText="% Dcto.">
                             <ItemTemplate>
                                 <asp:Label ID="lblDctoProd" runat="server" Text='<%# Eval("porcentaje_descuento", "{0:N2}") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-<asp:TextBox ID="txtEditDctoProd" runat="server" 
-    Text='<%# Eval("porcentaje_descuento").ToString().Replace(",", ".") %>' 
-    CssClass="form-control dcto-input" 
-    TextMode="Number" step="0.01" Width="80px"
-    oninput="calcularPrecioFinalEdicion(this)">
-</asp:TextBox>
+                                <asp:TextBox ID="txtEditDctoProd" runat="server" 
+                                    Text='<%# Eval("porcentaje_descuento").ToString().Replace(",", ".") %>' 
+                                    CssClass="form-control dcto-input" TextMode="Number" step="0.01" Width="80px"
+                                    oninput="calcularPrecioFinalEdicion(this)">
+                                </asp:TextBox>
                             </EditItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
@@ -286,29 +309,55 @@
                                 <asp:Label ID="lblAumentoProd" runat="server" Text='<%# Eval("porcentaje_aumento", "{0:N2}") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-<asp:TextBox ID="txtEditAumentoProd" runat="server" 
-    Text='<%# Eval("porcentaje_aumento").ToString().Replace(",", ".") %>' 
-    CssClass="form-control aumento-input" 
-    TextMode="Number" step="0.01" Width="80px"
-    oninput="calcularPrecioFinalEdicion(this)">
-</asp:TextBox>
+                                <asp:TextBox ID="txtEditAumentoProd" runat="server" 
+                                    Text='<%# Eval("porcentaje_aumento").ToString().Replace(",", ".") %>' 
+                                    CssClass="form-control aumento-input" TextMode="Number" step="0.01" Width="80px"
+                                    oninput="calcularPrecioFinalEdicion(this)">
+                                </asp:TextBox>
                             </EditItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
 
-                        <%-- 5. Precio Base --%>
+                        <%-- NUEVO 5: Precio Fraccionado (EDITABLE) --%>
+                        <asp:TemplateField HeaderText="Precio Fracc.">
+                            <ItemTemplate>
+                                <asp:Label ID="lblPrecioFracc" runat="server" Text='<%# Eval("preciounidadcontenedorfraccionada", "{0:N2}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtEditPrecioFracc" runat="server" 
+                                    Text='<%# Eval("preciounidadcontenedorfraccionada").ToString().Replace(",", ".") %>' 
+                                    CssClass="form-control" TextMode="Number" step="0.01" Width="80px">
+                                </asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
+                        </asp:TemplateField>
+    
+                        <%-- NUEVO 6: Unidad Fraccionada (BLOQUEADO) --%>
+                        <asp:TemplateField HeaderText="Und. Fracc.">
+                            <ItemTemplate>
+                                <asp:Label ID="lblUndFracc" runat="server" Text='<%# Eval("medidacontenedorfraccionada") %>'></asp:Label>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <%-- Cambiamos el TextBox por un Label para que solo sea de lectura --%>
+                                <asp:Label ID="lblEditUndFracc" runat="server" 
+                                    Text='<%# Eval("medidacontenedorfraccionada") %>'>
+                                </asp:Label>
+                            </EditItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+
+                        <%-- 7. Precio Base --%>
                         <asp:TemplateField HeaderText="Precio Base">
                             <ItemTemplate>
                                 <asp:Label ID="lblPrecioBase" runat="server" Text='<%# Eval("precio_base", "{0:N2}") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:Label ID="lblEditPrecioBase" runat="server" Text='<%# Eval("precio_base", "{0:N2}") %>' CssClass="precio-base-label"></asp:Label>
-
                             </EditItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                         
-                        <%-- 6. Precio Final (AHORA ES TEMPLATE PARA PODER EDITARLO EN VIVO) --%>
+                        <%-- 8. Precio Final --%>
                         <asp:TemplateField HeaderText="Precio Final" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Bold="true" ItemStyle-ForeColor="#0056b3">
                             <ItemTemplate>
                                 <asp:Label ID="lblPrecioFinal" runat="server" Text='<%# Eval("precio_final", "{0:N2}") %>'></asp:Label>
@@ -320,7 +369,7 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
                         
-                        <%-- 7. Acciones (Se mantiene igual que el paso anterior) --%>
+                        <%-- 9. Acciones --%>
                         <asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="150px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkEditarProducto" runat="server" CommandName="Edit" CssClass="btn btn-warning btn-sm">Editar</asp:LinkButton>

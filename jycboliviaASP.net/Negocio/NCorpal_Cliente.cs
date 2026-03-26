@@ -95,14 +95,14 @@ namespace jycboliviaASP.net.Negocio
         }
 
 
-        
-        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioEspecial, decimal descuento, decimal precio, string unidad, decimal cantidadDesde, int cantidadMinima, decimal aumento)
+
+        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioBase, decimal dcto, decimal precioFinal, string unidad, decimal cantDesde, int cantMinima, decimal aumento, decimal precioFraccionado, string unidadFraccionada)
         {
             try
             {
                 // Llamamos a la capa de datos pasándole todos los parámetros correctos
                 // (Asegúrate de que "dtienda" sea el nombre correcto de tu instancia de la capa de Datos)
-                return dtienda.insertarDetalleLista(idLista, idProducto, precioEspecial, descuento, precio, unidad, cantidadDesde, cantidadMinima, aumento);
+                return dtienda.insertarDetalleLista(idLista, idProducto, precioBase, dcto, precioFinal, unidad, cantDesde, cantMinima, aumento, precioFraccionado, unidadFraccionada);
             }
             catch (Exception)
             {
@@ -249,10 +249,12 @@ namespace jycboliviaASP.net.Negocio
         }
 
         // EN TU CAPA DE NEGOCIO
-        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado)
+        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado, decimal precioFraccionado, string unidadFraccionada)
         {
-            return dtienda.actualizarDetalleListaProducto(codigoDetalle, porcentajeDcto, porcentajeAumento, precioFinalCalculado);
+            // Le pasamos los 6 datos a tu capa de datos (dtienda)
+            return dtienda.actualizarDetalleListaProducto(codigoDetalle, porcentajeDcto, porcentajeAumento, precioFinalCalculado, precioFraccionado, unidadFraccionada);
         }
+
 
 
 

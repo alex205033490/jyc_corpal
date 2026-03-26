@@ -150,36 +150,38 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioEspecial, decimal descuento, decimal precio, string unidad, decimal cantidadDesde, int cantidadMinima, decimal aumento)
+        public bool insertarDetalleLista(int idLista, int idProducto, decimal precioEspecial, decimal descuento, decimal precio, string unidad, decimal cantidadDesde, int cantidadMinima, decimal aumento, decimal precioFraccionado, string unidadFraccionada)
         {
             try
             {
-                // Formateo de TODOS los decimales para que usen punto en MySQL (ej. 15.50) y no exploten
-                string pEspecial = precioEspecial.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                // Formateo de los decimales para que usen punto en MySQL (ej. 15.50)
                 string pDcto = descuento.ToString(System.Globalization.CultureInfo.InvariantCulture);
                 string pPrecio = precio.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                string pCantDesde = cantidadDesde.ToString(System.Globalization.CultureInfo.InvariantCulture);
                 string pAumento = aumento.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
-                // Armamos el INSERT concatenando exactamente como en tu otro método
+                // Formateamos el nuevo precio fraccionado
+                string pPrecioFracc = precioFraccionado.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                // Armamos el INSERT usando los nombres EXACTOS de tu script SQL
+                // (Quitamos precio_especial, cantidad_desde y cantidad_minima porque no existen en tu tabla)
                 string consulta = "INSERT INTO tbcorpal_detallelistaprecio " +
                                   "(" +
-                                      "id_listaprecio, id_producto, precio_especial, " +
+                                      "id_listaprecio, id_producto, " +
                                       "porcentaje_descuento, estado, precio, " +
-                                      "unidad, cantidad_desde, cantidad_minima, porcentaje_aumento" +
+                                      "unidad, porcentaje_aumento, " +
+                                      "preciounidadcontenedorfraccionada, medidacontenedorfraccionada" + // NOMBRES CORREGIDOS
                                   ") " +
                                   "VALUES " +
                                   "(" +
-                                      idLista + ", " +                     // int (sin comillas)
-                                      idProducto + ", " +                  // int (sin comillas)
-                                      pEspecial + ", " +                   // decimal formateado
+                                      idLista + ", " +                     // int 
+                                      idProducto + ", " +                  // int 
                                       pDcto + ", " +                       // decimal formateado
                                       "1, " +                              // estado activo (1)
                                       pPrecio + ", " +                     // decimal formateado
-                                      "'" + unidad + "', " +               // string (CON comillas simples)
-                                      pCantDesde + ", " +                  // decimal formateado
-                                      cantidadMinima + ", " +              // int (sin comillas)
-                                      pAumento +                           // decimal formateado
+                                      "'" + unidad + "', " +               // string 
+                                      pAumento + ", " +                    // decimal formateado
+                                      pPrecioFracc + ", " +                // decimal formateado
+                                      "'" + unidadFraccionada + "'" +      // string 
                                   ")";
 
                 conexion.consultaMySql(consulta);
@@ -190,7 +192,6 @@ namespace jycboliviaASP.net.Datos
                 return false;
             }
         }
-
 
 
 
@@ -364,7 +365,7 @@ namespace jycboliviaASP.net.Datos
         {
             // Buscamos el precio base y la unidad (medida) del producto específico
             string consulta = $@"
-        SELECT precio, medida 
+        SELECT precio, medida, medidaunidadcontenido, preciounidadcontenidofraccionada 
         FROM tbcorpal_producto 
         WHERE codigo = {idProducto}";
 
@@ -389,7 +390,9 @@ namespace jycboliviaASP.net.Datos
             "    pro.producto, " +
             "    pro.medida, " +
             "    dlp.porcentaje_descuento, " +            // <-- El % Dcto
-            "    dlp.porcentaje_aumento, " +              // <-- NUEVO: El % Aumento (Ajusta el nombre de tu columna aquí si es distinto)
+            "    dlp.porcentaje_aumento, " +              // <-- El % Aumento
+            "    dlp.preciounidadcontenedorfraccionada, " + // <-- NUEVO: Precio Fraccionado
+            "    dlp.medidacontenedorfraccionada, " +       // <-- NUEVO: Unidad Fraccionada
             "    pro.precio AS precio_base, " +           // <-- Precio Base
             "    dlp.precio AS precio_final " +           // <-- Precio Final
             "FROM tbcorpal_detallelistaprecio dlp " +
@@ -403,7 +406,7 @@ namespace jycboliviaASP.net.Datos
 
 
         // EN TU CAPA DE DATOS
-        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado)
+        public bool actualizarDetalleListaProducto(int codigoDetalle, decimal porcentajeDcto, decimal porcentajeAumento, decimal precioFinalCalculado, decimal precioFraccionado, string unidadFraccionada)
         {
             try
             {
@@ -412,10 +415,16 @@ namespace jycboliviaASP.net.Datos
                 string aumentoSQL = porcentajeAumento.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
                 string precioSQL = precioFinalCalculado.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
 
+                // NUEVO: Formateamos el precio fraccionado
+                string precioFraccSQL = precioFraccionado.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                // Armamos el UPDATE concatenando los nuevos campos con sus nombres exactos en la BD
                 string consulta = "UPDATE tbcorpal_detallelistaprecio SET " +
                                   "porcentaje_descuento = " + dctoSQL + ", " +
                                   "porcentaje_aumento = " + aumentoSQL + ", " +
-                                  "precio = " + precioSQL + " " +
+                                  "precio = " + precioSQL + ", " +
+                                  "preciounidadcontenedorfraccionada = " + precioFraccSQL + ", " +
+                                  "medidacontenedorfraccionada = '" + unidadFraccionada + "' " +
                                   "WHERE codigo = " + codigoDetalle;
 
                 conexion.consultaMySql(consulta);

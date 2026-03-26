@@ -336,9 +336,13 @@ namespace jycboliviaASP.net.Presentacion
                         // 1. Extraemos y asignamos precio base y unidad
                         string precioBD = fila["precio"].ToString();
                         string unidadBD = fila["medida"].ToString();
+                        string medidaFracc = fila["medidaunidadcontenido"].ToString();
+                        string precioFracc = fila["preciounidadcontenidofraccionada"].ToString();
 
                         txtPrecioAgregar.Text = string.IsNullOrEmpty(precioBD) ? "0.00" : precioBD.Replace(",", ".");
                         txtUnidadAgregar.Text = unidadBD;
+                        txtUnidadFraccionadaAgregar.Text = medidaFracc;
+                        txtPrecioFraccionadoAgregar.Text = string.IsNullOrEmpty(precioFracc) ? "0.00" : precioFracc.Replace(",", ".");
 
                         // =========================================================
                         // 2. MAGIA DE CÁLCULO EN C# (PRECIO ESPECIAL)
@@ -431,7 +435,6 @@ namespace jycboliviaASP.net.Presentacion
                 string[] partes = textoSeleccionado.Split('-');
                 int idProducto = Convert.ToInt32(partes[0].Trim());
 
-
                 NCorpal_Cliente Nproy = new NCorpal_Cliente();
 
                 // Solo le pasamos idLista e idProducto (asume codigoDetalle = 0)
@@ -462,6 +465,14 @@ namespace jycboliviaASP.net.Presentacion
                 int cantidadMinima = string.IsNullOrEmpty(txtCantidadMinimaAgregar.Text) ? 1 : Convert.ToInt32(txtCantidadMinimaAgregar.Text);
 
                 // =====================================================================
+                // NUEVO: RECOLECTAMOS LOS VALORES FRACCIONADOS
+                // =====================================================================
+                string precioFraccTexto = txtPrecioFraccionadoAgregar.Text.Replace(".", ",");
+                decimal precioFraccionado = string.IsNullOrEmpty(precioFraccTexto) ? 0 : Convert.ToDecimal(precioFraccTexto);
+
+                string unidadFraccionada = txtUnidadFraccionadaAgregar.Text.Trim();
+
+                // =====================================================================
                 // LÓGICA DE PRECIO: CÁLCULO DEL PRECIO ESPECIAL (FINAL)
                 // =====================================================================
                 // La "m" al final del 100 le dice a C# que es un número decimal exacto
@@ -477,14 +488,15 @@ namespace jycboliviaASP.net.Presentacion
                 // =====================================================================
                 NCorpal_Cliente Nlista = new NCorpal_Cliente();
 
-  
-                // y mandamos 'precioBase' directo a la columna de precio normal.
-                bool exito = Nlista.insertarDetalleLista(idLista, idProducto, 0, descuento, precioFinal, unidad, cantidadDesde, cantidadMinima, aumento);
-
+                // MODIFICACIÓN: Agregamos precioFraccionado y unidadFraccionada a tu método
+                bool exito = Nlista.insertarDetalleLista(idLista, idProducto, 0, descuento, precioFinal, unidad, cantidadDesde, cantidadMinima, aumento, precioFraccionado, unidadFraccionada);
 
                 // 6. Finalizamos
                 if (exito)
                 {
+                    // Solución que hablamos antes: Forzamos el cierre de cualquier edición por seguridad
+                    gvProductosLista.EditIndex = -1;
+
                     // Recargamos la grilla para que se vea el nuevo producto
                     CargarProductosDeLista(idLista);
 
@@ -492,6 +504,10 @@ namespace jycboliviaASP.net.Presentacion
                     panelAgregarProducto.Visible = false;
                     btnAbrirAgregar.Visible = true;
                     txtBuscarProducto.Text = "";
+
+                    // Limpiamos los nuevos campos para la próxima vez
+                    txtPrecioFraccionadoAgregar.Text = "0.00";
+                    txtUnidadFraccionadaAgregar.Text = "";
 
                     ScriptManager.RegisterStartupScript(this, GetType(), "exito", "alert('Producto agregado correctamente a la lista.');", true);
                 }
@@ -650,6 +666,8 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         // 3. Botón Guardar Producto (El disquete/check)
+
+
         protected void gvProductosLista_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -657,11 +675,16 @@ namespace jycboliviaASP.net.Presentacion
                 // 1. Obtenemos el ID del detalle (el DataKeyNames="codigo")
                 int codigoDetalle = Convert.ToInt32(gvProductosLista.DataKeys[e.RowIndex].Value);
 
-                // 2. Encontramos la fila y extraemos las cajitas y el Label del precio base
+                // 2. Encontramos la fila y extraemos los controles
                 GridViewRow fila = gvProductosLista.Rows[e.RowIndex];
                 TextBox txtDcto = (TextBox)fila.FindControl("txtEditDctoProd");
                 TextBox txtAumento = (TextBox)fila.FindControl("txtEditAumentoProd");
                 Label lblPrecioBase = (Label)fila.FindControl("lblEditPrecioBase");
+
+                TextBox txtPrecioFracc = (TextBox)fila.FindControl("txtEditPrecioFracc");
+
+                // MODIFICACIÓN AQUÍ: Ahora buscamos el Label en lugar del TextBox
+                Label lblUndFracc = (Label)fila.FindControl("lblEditUndFracc");
 
                 // ==========================================================
                 // 3. VALIDACIÓN 1: Que no estén vacíos o llenos de espacios
@@ -682,6 +705,13 @@ namespace jycboliviaASP.net.Presentacion
                 // TryParse intenta convertir. Si hay letras, devuelve false.
                 bool esDctoValido = decimal.TryParse(txtDcto.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out dcto);
                 bool esAumentoValido = decimal.TryParse(txtAumento.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out aumento);
+
+                // Convertimos el precio fraccionado
+                decimal precioFraccionado = 0;
+                decimal.TryParse(txtPrecioFracc.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out precioFraccionado);
+
+                // MODIFICACIÓN AQUÍ: Extraemos el texto del Label de forma segura
+                string unidadFraccionada = lblUndFracc != null ? lblUndFracc.Text.Trim() : "";
 
                 // El precio base siempre es válido porque viene de la BD, pero igual lo convertimos seguro
                 decimal.TryParse(lblPrecioBase.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out precioBase);
@@ -705,7 +735,7 @@ namespace jycboliviaASP.net.Presentacion
                 // 6. GUARDAMOS EN LA BASE DE DATOS
                 // ==========================================================
                 NCorpal_Cliente Nproy = new NCorpal_Cliente();
-                bool exito = Nproy.actualizarDetalleListaProducto(codigoDetalle, dcto, aumento, precioFinalCalculado);
+                bool exito = Nproy.actualizarDetalleListaProducto(codigoDetalle, dcto, aumento, precioFinalCalculado, precioFraccionado, unidadFraccionada);
 
                 if (exito)
                 {
@@ -731,6 +761,8 @@ namespace jycboliviaASP.net.Presentacion
                 ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Error inesperado al procesar los datos.');", true);
             }
         }
+
+
 
         private void eliminarProductoDetalleLista(int codigoDetalle)
         {
