@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;   // ✅ ESTE ES EL ÚNICO CheckBox QUE NECESITAS
+using System.Web.UI.WebControls;
 using jycboliviaASP.net.Negocio;
 using System.Data;
 using System.Configuration;
@@ -528,7 +528,7 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error en solicitud producto: {ex.Message}");
             }
         }
-        
+        /*
         private bool RegistrarDestalleDespacho123(int codigoDespacho)
         {
             bool resultadoGeneral = true;
@@ -556,7 +556,7 @@ namespace jycboliviaASP.net.Presentacion
 
             return resultadoGeneral;
         }
-
+        */
         private int RegistrarDespachoPrincipal(string detalle, int codVehiculo, int codResponsable)
         {
             int codConductor = Convert.ToInt32(hf_codChofer.Value);
@@ -693,6 +693,9 @@ namespace jycboliviaASP.net.Presentacion
                     int codigoProducto = Convert.ToInt32(
                         gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codproducto"]);
 
+                    CheckBox chkFracc = (CheckBox)row.FindControl("ck_conFraccionado");
+                    bool contFracc = chkFracc != null && chkFracc.Checked;
+
                     int codCli = Convert.ToInt32(
                         gv_solicitudesProductos.DataKeys[row.RowIndex].Values["codCliente"]);
 
@@ -703,7 +706,8 @@ namespace jycboliviaASP.net.Presentacion
                         cantidadEntregar = 0;
                     }
 
-                    bool resultado = negocio.POST_INSERTdetalleDespacho(codigodespacho, codPedido, codigoProducto, cantidadEntregar, codCli);
+                    bool resultado = negocio.POST_INSERTdetalleDespacho(codigodespacho, codPedido, codigoProducto, 
+                                                cantidadEntregar, codCli, contFracc);
 
                     if (!resultado)
                     {

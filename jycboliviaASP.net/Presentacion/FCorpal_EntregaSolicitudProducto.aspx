@@ -110,7 +110,7 @@
 
                     <asp:GridView ID="gv_solicitudesProductos" runat="server"
                         CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
-                        Style="background-color: white !important;" DataKeyNames="codproducto, codCliente">
+                        Style="background-color: white !important;" DataKeyNames="codproducto, codCliente, contenedorfraccionado">
                         <Columns>
                             <asp:TemplateField HeaderText="Seleccionar">
                                 <ItemTemplate>
@@ -125,6 +125,13 @@
                             <asp:BoundField DataField="codproducto" HeaderText="Codigo Producto" HtmlEncode="false" Visible="false"/>
 
                             <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
+
+                            <asp:TemplateField HeaderText="Fracc">
+                                <ItemTemplate>
+                                    <asp:checkbox runat="server" id="ck_conFraccionado" onclick="return false;"
+                                                Checked='<%# Eval("contenedorfraccionado") != DBNull.Value && Convert.ToBoolean(Eval("contenedorfraccionado"))  %>'></asp:checkbox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             
                             <asp:BoundField DataField="StockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
 

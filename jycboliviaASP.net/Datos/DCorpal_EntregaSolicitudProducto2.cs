@@ -30,7 +30,8 @@ namespace jycboliviaASP.net.Datos
                                 sep.nroboleta, 
                                 sep.personalsolicitud, 
                                 dsp.codproducto, 
-                                p.producto, 
+                                p.producto,
+                                dsp.contenedorfraccionado,
                                 pp.StockAlmacen, 
                                 cc.codigo as 'codCliente', 
                                 cc.tiendaname, 
@@ -38,7 +39,7 @@ namespace jycboliviaASP.net.Datos
                                 sep.horaentrega, 
                                 sep.estadosolicitud, 
                                 dsp.tiposolicitud, 
-                                dsp.cant as 'cantSolicitada', 
+                                COALESCE(dsp.cant, dsp.cant_unidadcontenedorfraccionada) as 'cantSolicitada',
                                 ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
                                 CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 
                                 ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' 
@@ -427,12 +428,14 @@ namespace jycboliviaASP.net.Datos
             }
         }
         /* POST DETALLE DESPACHO */
-        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, int codCli)
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, 
+                                                    float cantidad, int codCli, bool contFracc)
         {
             try
             {
-                string consulta = "INSERT INTO tbcorpal_detalleproddespacho(coddespacho, codpedido, codprod, cantentregada, codcliente) " +
-                        "values (@cdespacho, @cpedido, @cproducto, @cant, @codcliente);";
+                string consulta = @"INSERT INTO tbcorpal_detalleproddespacho(coddespacho, codpedido, codprod, 
+                                    cantentregada, codcliente, contenedorfraccionado) 
+                                    values (@cdespacho, @cpedido, @cproducto, @cant, @codcliente, @contFracc);";
 
                 MySqlCommand comando = new MySqlCommand(consulta);
                 comando.Parameters.AddWithValue("@cdespacho", coddespacho);
@@ -440,6 +443,7 @@ namespace jycboliviaASP.net.Datos
                 comando.Parameters.AddWithValue("@cproducto", codprod);
                 comando.Parameters.AddWithValue("@cant", cantidad);
                 comando.Parameters.AddWithValue("@codcliente", codCli);
+                comando.Parameters.AddWithValue("@contFracc", contFracc);
 
                 return conexion.ejecutarMySql2(comando);
             }
@@ -971,7 +975,8 @@ namespace jycboliviaASP.net.Datos
                                 sep.nroboleta, 
                                 sep.personalsolicitud, 
                                 dsp.codproducto, 
-                                p.producto, 
+                                p.producto,
+                                dsp.contenedorfraccionado,
                                 pp.StockAlmacen, 
                                 cc.codigo as 'codCliente', 
                                 cc.tiendaname, 

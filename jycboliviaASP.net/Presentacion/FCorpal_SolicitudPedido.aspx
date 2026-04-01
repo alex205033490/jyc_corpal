@@ -89,6 +89,13 @@
             font-weight: 700;
             color: seagreen;
         }
+
+        .container_total{
+            box-shadow: 0px 0px 5px 0px darkseagreen;
+            padding: 3px;
+            border-radius: 0.5rem;
+            background-color: darkseagreen;
+        }
     </style>
     <script type="text/javascript">
 
@@ -389,6 +396,25 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
+
+                        <!--  CAMPO Total  -->
+                        <asp:UpdatePanel ID="updatePanel_TXmostrarTotal" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="col-12 d-flex flex-column align-items-end">
+                                    <div class="container_total col-3">
+                                        <asp:Label runat="server">Total: </asp:Label>
+                                        <asp:TextBox ID="tx_total" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click"/>
+                                <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click"/>
+                                <asp:AsyncPostBackTrigger ControlID="gv_adicionados" EventName="RowDeleting"/>
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+
                     </div>
                 </div>
             </div>

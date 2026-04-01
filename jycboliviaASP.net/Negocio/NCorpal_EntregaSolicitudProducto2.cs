@@ -110,11 +110,12 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio, codconductor, conductor);
         }
-        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, int codcli)
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, 
+                                                    int codcli, bool contFracc)
         {
             try
             {
-                return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad, codcli);
+                return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad, codcli, contFracc);
             }
             catch (Exception ex)
             {
