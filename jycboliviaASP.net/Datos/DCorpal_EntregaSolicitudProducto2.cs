@@ -894,7 +894,127 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-    
-    
+
+
+        // -------------------------------------------------------------------------
+        // 1. OBTENER CABECERA DE RUTA (Consulta 2)
+        // -------------------------------------------------------------------------
+        public DataSet GET_CabeceraRutaParaAlmacen(int codDespacho)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT 
+                        ru.codruta, 
+                        rue.codchofer, 
+                        rue.codvehiculo
+                    FROM tbcorpal_rutapuntos ru
+                    INNER JOIN tbcorpal_rutasentrega rue 
+                        ON ru.codruta = rue.codigo
+                    WHERE ru.coddespacho = @codDespacho
+                    LIMIT 1;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho)
+                };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la cabecera de ruta para almacén. " + ex.Message);
+            }
+        }
+
+        // -------------------------------------------------------------------------
+        // 2. OBTENER PRODUCTOS AGRUPADOS (Corregido para admitir NULL)
+        // -------------------------------------------------------------------------
+        public DataSet GET_ProductosParaAlmacenMovil(int codDespacho)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT 
+                        dpd.coddespacho,
+                        dpd.codprod AS codproducto,
+                        pro.producto,
+                        SUM(dpd.cantentregada) AS cantidad_total,
+                        pro.medida,
+                        SUM(dsp.cant_unidadcontenedorfraccionada) AS cantidad_fraccionada_total,
+                        dsp.medida_unidadcontenedorfraccionada
+                    FROM tbcorpal_detalleproddespacho dpd
+                    INNER JOIN tbcorpal_detalle_solicitudproducto dsp 
+                        ON dpd.codpedido = dsp.codsolicitud AND dpd.codprod = dsp.codproducto
+                    INNER JOIN tbcorpal_producto pro 
+                        ON dpd.codprod = pro.codigo
+                    WHERE dpd.coddespacho = @codDespacho 
+                      AND (dpd.estadoentrega = 1 OR dpd.estadoentrega IS NULL)
+                    GROUP BY 
+                        dpd.coddespacho,
+                        dpd.codprod,
+                        pro.producto,
+                        pro.medida,
+                        dsp.medida_unidadcontenedorfraccionada;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho)
+                };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener productos para almacén móvil. " + ex.Message);
+            }
+        }
+
+        // -------------------------------------------------------------------------
+        // 3. GUARDAR EN LA NUEVA TABLA (INSERT)
+        // -------------------------------------------------------------------------
+        public bool POST_RegistroAlmacenMovil(int codDespacho, int codRuta, int codChofer, int codVehiculo,
+                                              int codProducto, string producto, decimal cantidad, string medida,
+                                              decimal cantFraccionada, string medidaFraccionada, int traspaso)
+        {
+            try
+            {
+                string consulta = @"
+                    INSERT INTO tbcorpal_almacenmovil 
+                    (fechagra, horagra, coddespacho, codruta, codchofer, codvehiculo, 
+                     codproducto, producto, cantidad, medida, 
+                     cant_unidadcontenedorfraccionada, medida_unidadcontenedorfraccionada, traspaso) 
+                    VALUES 
+                    (CURDATE(), CURTIME(), @codDespacho, @codRuta, @codChofer, @codVehiculo, 
+                     @codProducto, @producto, @cantidad, @medida, 
+                     @cantFraccionada, @medidaFraccionada, @traspaso);";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codDespacho", codDespacho);
+                    cmd.Parameters.AddWithValue("@codRuta", codRuta);
+                    cmd.Parameters.AddWithValue("@codChofer", codChofer);
+                    cmd.Parameters.AddWithValue("@codVehiculo", codVehiculo);
+                    cmd.Parameters.AddWithValue("@codProducto", codProducto);
+                    cmd.Parameters.AddWithValue("@producto", producto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@medida", medida);
+                    cmd.Parameters.AddWithValue("@cantFraccionada", cantFraccionada);
+                    cmd.Parameters.AddWithValue("@medidaFraccionada", medidaFraccionada);
+                    cmd.Parameters.AddWithValue("@traspaso", traspaso);
+
+                    // Usamos tu método existente que ejecuta MySqlCommand y retorna bool
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al insertar en Almacén Móvil: " + ex.Message);
+                return false;
+            }
+        }
+
+
+
     }
 }
