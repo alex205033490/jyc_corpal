@@ -5511,6 +5511,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnplaca;
             
+            private global::System.Data.DataColumn columnCanEntrFracc;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_EntregaDespachoProdVehiculoDataTable() {
@@ -5618,6 +5620,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CanEntrFraccColumn {
+                get {
+                    return this.columnCanEntrFracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5653,7 +5663,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_EntregaDespachoProdVehiculoRow AddDS_EntregaDespachoProdVehiculoRow(string codigo, string fecha, string horagra, string Vehiculo, string Conductor, string CodProd, string producto, string CantEntregar, string placa) {
+            public DS_EntregaDespachoProdVehiculoRow AddDS_EntregaDespachoProdVehiculoRow(string codigo, string fecha, string horagra, string Vehiculo, string Conductor, string CodProd, string producto, string CantEntregar, string placa, string CanEntrFracc) {
                 DS_EntregaDespachoProdVehiculoRow rowDS_EntregaDespachoProdVehiculoRow = ((DS_EntregaDespachoProdVehiculoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -5664,7 +5674,8 @@ namespace jycboliviaASP.net {
                         CodProd,
                         producto,
                         CantEntregar,
-                        placa};
+                        placa,
+                        CanEntrFracc};
                 rowDS_EntregaDespachoProdVehiculoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_EntregaDespachoProdVehiculoRow);
                 return rowDS_EntregaDespachoProdVehiculoRow;
@@ -5696,6 +5707,7 @@ namespace jycboliviaASP.net {
                 this.columnproducto = base.Columns["producto"];
                 this.columnCantEntregar = base.Columns["CantEntregar"];
                 this.columnplaca = base.Columns["placa"];
+                this.columnCanEntrFracc = base.Columns["CanEntrFracc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5719,6 +5731,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnCantEntregar);
                 this.columnplaca = new global::System.Data.DataColumn("placa", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnplaca);
+                this.columnCanEntrFracc = new global::System.Data.DataColumn("CanEntrFracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCanEntrFracc);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11380,6 +11394,23 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CanEntrFracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_EntregaDespachoProdVehiculo.CanEntrFraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CanEntrFracc\' de la tabla \'DS_EntregaDespachoProdVehiculo" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_EntregaDespachoProdVehiculo.CanEntrFraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_EntregaDespachoProdVehiculo.codigoColumn);
             }
@@ -11484,6 +11515,18 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetplacaNull() {
                 this[this.tableDS_EntregaDespachoProdVehiculo.placaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCanEntrFraccNull() {
+                return this.IsNull(this.tableDS_EntregaDespachoProdVehiculo.CanEntrFraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCanEntrFraccNull() {
+                this[this.tableDS_EntregaDespachoProdVehiculo.CanEntrFraccColumn] = global::System.Convert.DBNull;
             }
         }
         

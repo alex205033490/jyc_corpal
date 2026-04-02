@@ -280,29 +280,90 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);
         }
 
+        /*   internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
+           {
+               string consulta = "select  " +
+                                  " dd.codigo, " +
+                                  " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
+                                  " dd.horagra, dd.detalle , " +
+                                  " vv.marca as 'Vehiculo', " +
+                                  " res.nombre as 'Conductor', " +
+                                  " pp.codigo as 'CodProd' , " +
+                                  " pp.producto, " +
+                                  " sum(dv.cantentregada) as 'CantEntregar', " +
+                                  " vv.placa, vv.codigo as 'codVehiculo', dd.codconductor as 'codConductor' " +
+                                  " from tbcorpal_despachovehiculo dd " +
+                                  " inner join tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho " +
+                                  " left join tbcorpal_producto pp ON dv.codprod = pp.codigo " +
+                                  " left join tbcorpal_vehiculos vv on dd.codvehiculo = vv.codigo " +
+                                  " left join tb_responsable res ON dd.codconductor = res.codigo" +
+                                  " where " +
+                                  " dd.estado = 1 and " +
+                                  " dd.codigo = " + codigoDespacho +
+                                  " group by dd.codigo, dv.codprod";
+               return conexion.consultaMySql(consulta);
+           }
+        */
+
+
         internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
         {
-            string consulta = "select  " +
-                               " dd.codigo, " +
-                               " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
-                               " dd.horagra, dd.detalle , " +
-                               " vv.marca as 'Vehiculo', " +
-                               " res.nombre as 'Conductor', " +
-                               " pp.codigo as 'CodProd' , " +
-                               " pp.producto, " +
-                               " sum(dv.cantentregada) as 'CantEntregar', " +
-                               " vv.placa, vv.codigo as 'codVehiculo', dd.codconductor as 'codConductor' " +
-                               " from tbcorpal_despachovehiculo dd " +
-                               " inner join tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho " +
-                               " left join tbcorpal_producto pp ON dv.codprod = pp.codigo " +
-                               " left join tbcorpal_vehiculos vv on dd.codvehiculo = vv.codigo " +
-                               " left join tb_responsable res ON dd.codconductor = res.codigo" +
-                               " where " +
-                               " dd.estado = 1 and " +
-                               " dd.codigo = " + codigoDespacho +
-                               " group by dd.codigo, dv.codprod";
-            return conexion.consultaMySql(consulta);
+            try
+            {
+                string consulta = @"
+                    SELECT  
+                        dd.codigo, 
+                        date_format(dd.fechagra,'%d/%m/%Y') as 'fecha', 
+                        dd.horagra, 
+                        dd.detalle, 
+                        vv.marca as 'Vehiculo', 
+                        res.nombre as 'Conductor', 
+                        pp.codigo as 'CodProd', 
+                        pp.producto, 
+                        
+                        -- NUEVO: Columna para cantidad entera
+                        SUM(CASE 
+                            WHEN IFNULL(dv.contenedorfraccionado, 0) = 0 THEN dv.cantentregada 
+                            ELSE 0 
+                        END) AS 'CantEntregar', 
+                        
+                        -- NUEVO: Columna para cantidad fraccionada
+                        SUM(CASE 
+                            WHEN dv.contenedorfraccionado = 1 THEN dv.cantentregada 
+                            ELSE 0 
+                        END) AS 'CanEntrFracc',
+
+                        -- Traemos las medidas por si quieres concatenarlas en el reporte (Opcional)
+                        pp.medida,
+                        pp.medidaunidadcontenido AS 'medida_fraccionada',
+
+                        vv.placa, 
+                        vv.codigo as 'codVehiculo', 
+                        dd.codconductor as 'codConductor' 
+                    FROM tbcorpal_despachovehiculo dd 
+                    INNER JOIN tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho 
+                    LEFT JOIN tbcorpal_producto pp ON dv.codprod = pp.codigo 
+                    LEFT JOIN tbcorpal_vehiculos vv ON dd.codvehiculo = vv.codigo 
+                    LEFT JOIN tb_responsable res ON dd.codconductor = res.codigo
+                    WHERE dd.estado = 1 AND dd.codigo = @codigoDespacho
+                    GROUP BY 
+                        dd.codigo, 
+                        dv.codprod,
+                        dd.fechagra, dd.horagra, dd.detalle, vv.marca, res.nombre, pp.codigo, pp.producto, pp.medida, pp.medidaunidadcontenido, vv.placa, vv.codigo, dd.codconductor;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codigoDespacho", codigoDespacho)
+                };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos del reporte: " + ex.Message);
+            }
         }
+
 
         internal DataSet get_DespachoBoletasProdEntrega(int codigoDespacho)
         {
@@ -928,7 +989,7 @@ namespace jycboliviaASP.net.Datos
         }
 
         // -------------------------------------------------------------------------
-        // 2. OBTENER PRODUCTOS AGRUPADOS (Corregido para admitir NULL)
+        // 2. OBTENER PRODUCTOS AGRUPADOS (Consulta 1 - Orden ajustado)
         // -------------------------------------------------------------------------
         public DataSet GET_ProductosParaAlmacenMovil(int codDespacho)
         {
@@ -939,13 +1000,24 @@ namespace jycboliviaASP.net.Datos
                         dpd.coddespacho,
                         dpd.codprod AS codproducto,
                         pro.producto,
-                        SUM(dpd.cantentregada) AS cantidad_total,
+                        
+                        -- Columna 1: Suma la cantidad NORMAL (Si el flag es 0 o Null)
+                        SUM(CASE 
+                            WHEN IFNULL(dpd.contenedorfraccionado, 0) = 0 THEN dpd.cantentregada 
+                            ELSE 0 
+                        END) AS cantidad_total,
+                        
                         pro.medida,
-                        SUM(dsp.cant_unidadcontenedorfraccionada) AS cantidad_fraccionada_total,
-                        dsp.medida_unidadcontenedorfraccionada
+                        
+                        -- Columna 2: Suma la cantidad FRACCIONADA (Si el flag es 1)
+                        SUM(CASE 
+                            WHEN dpd.contenedorfraccionado = 1 THEN dpd.cantentregada 
+                            ELSE 0 
+                        END) AS cantidad_fraccionada_total,
+                        
+                        pro.medidaunidadcontenido AS medida_unidadcontenedorfraccionada
+
                     FROM tbcorpal_detalleproddespacho dpd
-                    INNER JOIN tbcorpal_detalle_solicitudproducto dsp 
-                        ON dpd.codpedido = dsp.codsolicitud AND dpd.codprod = dsp.codproducto
                     INNER JOIN tbcorpal_producto pro 
                         ON dpd.codprod = pro.codigo
                     WHERE dpd.coddespacho = @codDespacho 
@@ -955,7 +1027,7 @@ namespace jycboliviaASP.net.Datos
                         dpd.codprod,
                         pro.producto,
                         pro.medida,
-                        dsp.medida_unidadcontenedorfraccionada;";
+                        pro.medidaunidadcontenido;";
 
                 var parametros = new List<MySqlParameter>
                 {
