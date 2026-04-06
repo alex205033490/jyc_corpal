@@ -336,13 +336,13 @@ namespace jycboliviaASP.net.Negocio
             {
                 comando.Connection = MySqlConexion; // Asignar la conexión al comando
                 MySqlConexion.Open();
-                comando.ExecuteNonQuery();
-                MySqlConexion.Close();
-                return true;
+
+                int filas = comando.ExecuteNonQuery();
+                return filas > 0;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception("error ejecutando mysql: " + ex.Message) ;
             }
             finally
             {

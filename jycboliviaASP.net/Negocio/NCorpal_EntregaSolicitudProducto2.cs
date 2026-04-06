@@ -126,12 +126,12 @@ namespace jycboliviaASP.net.Negocio
 
         /* POST DETALLE SOLICITUD PEDIDO */
         internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock,
-                                                            int coduser, int codVehiculo)
+                                                            int coduser, int codVehiculo, bool estadoFraccionado)
         {
             try
             {
                 return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock,
-                                                                    coduser, codVehiculo);
+                                                                    coduser, codVehiculo, estadoFraccionado);
             }
             catch (Exception ex)
             {

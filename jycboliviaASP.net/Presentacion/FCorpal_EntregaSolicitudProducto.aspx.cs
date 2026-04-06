@@ -182,6 +182,7 @@ namespace jycboliviaASP.net.Presentacion
             public string nroboleta { get; set; }
             public string producto { get; set; }
             public int cantidadEntregada {  get; set; }
+            public bool contFraccionado { get; set; }
         }
         protected void chk_seleccionar_CheckedChanged(object sender, EventArgs e)
         {
@@ -196,6 +197,9 @@ namespace jycboliviaASP.net.Presentacion
             string nroBoleta = row.Cells[2].Text;
             string producto = row.Cells[4].Text;
 
+            CheckBox chkFracc = row.FindControl("ck_conFraccionado") as CheckBox;
+            bool checkFraccionado = chkFracc != null && chkFracc.Checked; 
+
             System.Web.UI.WebControls.TextBox txtCantidadEntregada =
                 row.FindControl("tx_cantidadEntregarOK") as System.Web.UI.WebControls.TextBox;
 
@@ -208,10 +212,10 @@ namespace jycboliviaASP.net.Presentacion
                 codigoSolicitud = codigoSolicitud,
                 nroboleta = nroBoleta,
                 producto = producto,
-                cantidadEntregada = cantidadEntregada
+                cantidadEntregada = cantidadEntregada,
+                contFraccionado = checkFraccionado
             };
 
-            
             // P2 
             List<Product> sumTotalItems = (List<Product>) Session["ItemsTotalListGV"];
             if(sumTotalItems == null)
@@ -219,7 +223,9 @@ namespace jycboliviaASP.net.Presentacion
                 sumTotalItems = new List<Product>();
             }
 
-            var existente = sumTotalItems.FirstOrDefault(p => p.producto == producto);
+            var existente = sumTotalItems.FirstOrDefault(p => 
+            p.producto == producto && 
+            p.contFraccionado == checkFraccionado );
 
             if (chkBox.Checked)
             {
@@ -243,38 +249,8 @@ namespace jycboliviaASP.net.Presentacion
                         sumTotalItems.Remove(existente);
                     }
                 }
-                /*sumTotalItems.RemoveAll(p =>
-                p.codigoSolicitud == codigoSolicitud &&
-                p.producto == producto &&
-                p.cantidadEntregada == cantidadEntregada);*/
             }
 
-            //P1
-            /*
-            List<Product> despachoList = (List <Product>) Session["despachoListGV"];
-            if(despachoList == null)
-
-            {
-                despachoList = new List<Product>();
-            }
-
-            if (chkBox.Checked)
-            {
-                despachoList.Add(selectedProduct);
-            }
-            else
-            {
-                despachoList.RemoveAll(p =>
-                    p.codigoSolicitud == codigoSolicitud &&
-                    p.nroboleta == nroBoleta &&
-                    p.producto == producto);
-            }
-
-            Session["despachoListGV"] = despachoList;
-
-            gv_despachoProductos.DataSource = despachoList;
-            gv_despachoProductos.DataBind();
-            */
             Session["ItemsTotalListGV"] = sumTotalItems;
             gv_sumTotalItems.DataSource = sumTotalItems;
             gv_sumTotalItems.DataBind();
@@ -409,10 +385,6 @@ namespace jycboliviaASP.net.Presentacion
                     showalert("No se pudo ingresar el stock al almacén.");
                     return;
                 }
-
-                // Registrar Venta Aut
-                //RegistrarVentaConDetalle123(codSolicitud, codCliente, solicitante, fechaEntrega, codMetPagoSol);
-
             }
         }
 
@@ -507,11 +479,12 @@ namespace jycboliviaASP.net.Presentacion
                 int codResponsable = obtenerCodResponsable();
                 string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
-
+                CheckBox chkFracc = row.FindControl("ck_conFraccionado") as CheckBox;
+                bool checkFraccionado = chkFracc != null && chkFracc.Checked;
 
                 NCorpal_EntregaSolicitudProducto2 nentrega_solicitud = new NCorpal_EntregaSolicitudProducto2();
                 bool actualizado = nentrega_solicitud.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, totalEntregado, 
-                                                        estadoEntrega, stockARestar, codResponsable, codVehiculo);
+                                                        estadoEntrega, stockARestar, codResponsable, codVehiculo, checkFraccionado);
 
                 if (actualizado)
                 {
@@ -522,10 +495,27 @@ namespace jycboliviaASP.net.Presentacion
                     showalert($"Error al actualizar solicitud {codigoSolicitud} - producto {codigoProducto}");
                 }
             }
-
             catch(Exception ex)
             {
                 showalert($"Error en solicitud producto: {ex.Message}");
+            }
+        }
+
+        private void CerrarSolicitudes(List<int> solicitudes)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            int codResponsable = obtenerCodResponsable();
+            string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
+
+            NCorpal_EntregaSolicitudProducto2 nego = new NCorpal_EntregaSolicitudProducto2();
+
+            foreach (int codSolicitud in solicitudes)
+            {
+                nego.update_CierreAutSolicitudProd(codSolicitud, codResponsable, personal);
             }
         }
         /*
@@ -723,6 +713,7 @@ namespace jycboliviaASP.net.Presentacion
             return resultadoGeneral;
         }
         /*  REGISTRO DETALLE SOLICITUD PEDIDO*/
+        /*
         private void ProcesarRegistroSolicitudPedido(GridViewRow row)
         {
             CheckBox chkSelect = (CheckBox)row.FindControl("chkSelect");
@@ -741,15 +732,22 @@ namespace jycboliviaASP.net.Presentacion
 
                 int codigoVehiculo = int.Parse(dd_listVehiculo.SelectedValue);
 
+                CheckBox chkFracc = row.FindControl("ck_conFraccionado") as CheckBox;
+                bool checkFraccionado = chkFracc != null && chkFracc.Checked;
+
                 if (string.IsNullOrEmpty(txtCantidadAEntregar.Text))
                 {
                     txtCantidadAEntregar.Text = "0";
                 }
-                ActualizarDetalleSolicitudPedido(codigoSolicitud, codigoProducto, txtCantidadAEntregar, tipoEntrega, lblCantEntregada, codigoVehiculo);
+                ActualizarDetalleSolicitudPedido(codigoSolicitud, codigoProducto, txtCantidadAEntregar, tipoEntrega, 
+                    lblCantEntregada, codigoVehiculo, checkFraccionado);
             }
         }
-        /*  DETALLE SOLICITUD Y CIERRE AUT DE SOLICITUD PEDIDO*/
-        private void ActualizarDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, string estadoProducto, Label lblCantEntregada, int codVehiculo)
+        */
+        /*
+        DETALLE SOLICITUD Y CIERRE AUT DE SOLICITUD PEDIDO*/
+        /*private void ActualizarDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, TextBox txtCantidadAEntregar, 
+            string estadoProducto, Label lblCantEntregada, int codVehiculo, bool estadoFracc)
         {
             try
             {
@@ -783,7 +781,7 @@ namespace jycboliviaASP.net.Presentacion
                 string personal = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
 
                 bool resultado = negocio.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadTotalEntregada, estadoProducto, 
-                                                        restarStock, codResponsable, codVehiculo);
+                                                        restarStock, codResponsable, codVehiculo, estadoFracc);
                 if (!resultado)
                 {
                     showalert($"Error al acttualizar la solicitud : {codigoSolicitud} - codigo Producto: {codigoProducto}");
@@ -798,7 +796,7 @@ namespace jycboliviaASP.net.Presentacion
                 showalert($"Error al actualizar la cantidad. {ex.Message  }");
             }
         }
-
+        */
         private int obtenerCodResponsable()
         {
             try

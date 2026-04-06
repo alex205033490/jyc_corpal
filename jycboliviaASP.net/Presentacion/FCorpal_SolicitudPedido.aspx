@@ -373,7 +373,7 @@
                                             <asp:TemplateField HeaderText="Item Fraccionado">
                                                 <ItemTemplate>
                                                     <asp:CheckBox runat="server" ID="cb_itemFraccionado" Checked= '<%# Eval("cb_itemFraccionado") %>' 
-                                                        Enabled="false" CssClass="switch-input"/>
+                                                        onclick="return false;" CssClass="switch-input"/>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 

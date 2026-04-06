@@ -219,6 +219,14 @@
                                         <asp:Label id="lbl_cantidadSum" runat="server" Text='<%# Bind("cantidadEntregada") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Fraccionado">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="chk_contFraccionado" runat="server"
+                                            Checked='<%# Eval("contFraccionado") %>' onclick="return false;"/>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
                             </Columns>
 
                         </asp:GridView>
