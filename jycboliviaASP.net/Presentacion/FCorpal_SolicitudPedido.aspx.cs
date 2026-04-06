@@ -670,6 +670,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_solicitante.Text = "";
             tx_fechaEntrega.Text = "";
             tx_horaEntrega.Text = "";
+            hf_tipoCliente.Value = "";
 
             DataTable datoRepuesto = new DataTable();
             datoRepuesto.Columns.Add("Codigo", typeof(string));
@@ -822,6 +823,7 @@ namespace jycboliviaASP.net.Presentacion
             public string propietario { get; set; }
             public string nit { get; set; }
             public string razonsocial { get; set; }
+            public int tipoCliente { get; set; }
         }
 
         [System.Web.Services.WebMethod]
@@ -840,6 +842,7 @@ namespace jycboliviaASP.net.Presentacion
                 c.propietario = row["propietarioname"].ToString();
                 c.nit = row["propietarionit"].ToString();
                 c.razonsocial = row["facturar_a"].ToString();
+                c.tipoCliente = Convert.ToInt32(row["id_tipocliente"].ToString());
             }
             return c;
         }

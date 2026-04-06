@@ -96,6 +96,12 @@
             border-radius: 0.5rem;
             background-color: darkseagreen;
         }
+
+        .lb_itemFraccionado{
+            color: red;
+            background-color: antiquewhite;
+            font-size: 0.7rem;
+        }
     </style>
     <script type="text/javascript">
 
@@ -161,7 +167,6 @@
                                                     <asp:CheckBox  ID="cb_precioFraccionado" runat="server" />
                                                     <asp:Label runat="server" CssClass="form-label">Fraccionado</asp:Label>
                                                 </div>
-
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-6" style="padding=0.5rem;">
@@ -175,6 +180,9 @@
 
                                                 <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
                                                 <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
+                                            </div>
+                                            <div>
+                                                <asp:Label ID="lb_itemFraccionado" runat="server" Text="" CssClass="lb_itemFraccionado"></asp:Label>
                                             </div>
                                         </div>
 
@@ -192,6 +200,7 @@
                             </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
 
@@ -243,7 +252,6 @@
 
                 </ul>
 
-
             </div>
         </div>
     </div>
@@ -277,6 +285,8 @@
                                             TargetControlID="tx_fechaEntrega"></asp:CalendarExtender>
 
                                         <div class="group_verificar mb-2" style="box-shadow: 1px 0px 2px 0px #7f7d7d; padding: 3px; border: 1px solid #00000026;">
+                                            <asp:HiddenField ID="hf_tipoCliente" runat="server"/>
+
                                             <asp:Label runat="server" class="form-label" for="tx_cliente">Tienda:</asp:Label>
                                             <asp:TextBox ID="tx_cliente" runat="server" class="form-control mb-1" Style="font-size: smaller;"></asp:TextBox>
                                             <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server"
@@ -423,7 +433,7 @@
 
     <script src="../js/mainCorpal.js"></script>
     <script type="text/javascript"> 
-
+        
         function ClienteSeleccionado(source, eventArgs) {
             var nomCliente = eventArgs.get_text();
             PageMethods.obtenerCliente(nomCliente, function (resultado) {
@@ -431,9 +441,31 @@
                 document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
                 document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
 
+                document.getElementById("<%= hf_tipoCliente.ClientID %>").value = resultado.tipoCliente;
+
+                aplicarReglaFraccionado(resultado.tipoCliente);
             });
         }
-        
+
+        function aplicarReglaFraccionado(tipoCliente) {
+            var chkFraccionado = document.getElementById("<%= cb_precioFraccionado.ClientID %>");
+            var lbl = document.getElementById("<%= lb_itemFraccionado.ClientID %>");
+
+            if (!chkFraccionado) return;
+
+            if (tipoCliente == 7) {
+                chkFraccionado.disabled = false;
+                if (lbl) lbl.innerText = "";
+            } else {
+                chkFraccionado.checked = false;
+                chkFraccionado.disabled = true;
+                if (lbl) lbl.innerText = "No se permite productos fraccionados";
+            }
+        }
+
+
+
+
         function setClienteContextKey() {
             var inputCliente = document.getElementById('<%= tx_cliente.ClientID %>');
     
@@ -454,10 +486,17 @@
             var producto = eventArgs.get_text();
 
             document.getElementById("<%= tx_producto.ClientID %>").value = producto;
-
+            
             __doPostBack('<%= bt_buscar.UniqueID %>', '');
         }
 
+        Sys.Application.add_load(function () {
+            var tipoCliente = document.getElementById("<%= hf_tipoCliente.ClientID %>").value;
+
+            if (tipoCliente) {
+                aplicarReglaFraccionado(tipoCliente);
+            }
+        })
     </script>
 
 </asp:Content>

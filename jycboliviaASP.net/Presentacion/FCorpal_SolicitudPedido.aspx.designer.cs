@@ -78,6 +78,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.CheckBox cb_itemPackFerial;
 
         /// <summary>
+        /// Control lb_itemFraccionado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_itemFraccionado;
+
+        /// <summary>
         /// Control bt_buscar.
         /// </summary>
         /// <remarks>
@@ -166,6 +175,15 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender tx_fechaEntrega_CalendarExtender;
+
+        /// <summary>
+        /// Control hf_tipoCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_tipoCliente;
 
         /// <summary>
         /// Control tx_cliente.

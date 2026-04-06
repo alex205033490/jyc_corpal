@@ -666,7 +666,7 @@ namespace jycboliviaASP.net.Datos
                         tiendatelefono, tiendadepartamento, tiendazona, 
                         propietarioname, propietarioci, propietariodir,
                         propietariocelular, propietarionit, propietariocorreo,
-                        facturar_a, facturar_nit, facturar_correo, observacion 
+                        facturar_a, facturar_nit, facturar_correo, observacion, id_tipocliente  
                         from tbcorpal_cliente tt 
                         where tt.tiendaname = @tiendaname";
                 var parametros = new List<MySqlParameter>
