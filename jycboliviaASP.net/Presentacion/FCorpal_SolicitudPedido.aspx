@@ -64,14 +64,14 @@
         }
 
         .gv_adicionados td {
-            padding: 10px;
+            padding: 5px;
         }
 
         .container_gvListProductos {
             height: 320px;
         }
 
-        .gv_Productos td:nth-child(6) {
+        .gv_Productos td:nth-child(7) {
             background-color: #9aff98;
             font-weight: bold;
         }
@@ -79,6 +79,28 @@
         .gv_adicionados td:nth-child(8) {
             background-color: #5d5c5d4a;
             font-weight: bold;
+        }
+
+        .group_cb{
+            box-shadow: 1px 1px 3px 0px darkgreen;
+            border-radius: 2px;
+            padding: 3px;
+            background-color: #70c77212;
+            font-weight: 700;
+            color: seagreen;
+        }
+
+        .container_total{
+            box-shadow: 0px 0px 5px 0px darkseagreen;
+            padding: 3px;
+            border-radius: 0.5rem;
+            background-color: darkseagreen;
+        }
+
+        .lb_itemFraccionado{
+            color: red;
+            background-color: antiquewhite;
+            font-size: 0.7rem;
         }
     </style>
     <script type="text/javascript">
@@ -118,14 +140,11 @@
                             <ContentTemplate>
                                 <div class="row col-lg-8 col-md-10 mb-2" style="font-size: small;">
 
-
-
-
                                     <div class="col-lg-5 col-md-6 col-sm-6 col-6">
                                         <div>
 
                                             <asp:Label runat="server" for="inputName5" class="form-label">Producto</asp:Label>
-                                            <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small"></asp:TextBox>
+                                            <asp:TextBox ID="tx_producto" runat="server" class="form-control mb-2" Font-Size="Small" onkeyup="setClienteContextKey()"></asp:TextBox>
                                             <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server"
                                                 TargetControlID="tx_producto"
                                                 CompletionSetCount="12"
@@ -133,7 +152,8 @@
                                                 UseContextKey="True"
                                                 CompletionListCssClass="CompletionList"
                                                 CompletionListItemCssClass="CompletionlistItem"
-                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" 
+                                                onClientItemSelected="ProductoSeleccionado">
                                             </asp:AutoCompleteExtender>
 
                                         </div>
@@ -143,8 +163,10 @@
                                                 <asp:Label runat="server" class="form-label">Cantidad</asp:Label>
                                                 <asp:TextBox ID="tx_cantidadProducto" runat="server" class="form-control mb-2" Font-Size="Small" oninput="convertdotcomma(event)"></asp:TextBox>
 
-                                                <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
-                                                <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
+                                                <div class="group_cb">
+                                                    <asp:CheckBox  ID="cb_precioFraccionado" runat="server" />
+                                                    <asp:Label runat="server" CssClass="form-label">Fraccionado</asp:Label>
+                                                </div>
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-6" style="padding=0.5rem;">
@@ -155,6 +177,12 @@
                                                     <asp:ListItem>MUESTRA</asp:ListItem>
                                                     <asp:ListItem>OTROS</asp:ListItem>
                                                 </asp:DropDownList>
+
+                                                <asp:CheckBox ID="cb_itemPackFerial" runat="server" />
+                                                <asp:Label runat="server" class="form-label">Item Pack Ferial</asp:Label>
+                                            </div>
+                                            <div>
+                                                <asp:Label ID="lb_itemFraccionado" runat="server" Text="" CssClass="lb_itemFraccionado"></asp:Label>
                                             </div>
                                         </div>
 
@@ -172,6 +200,7 @@
                             </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
 
@@ -197,6 +226,7 @@
                                         <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
                                         <asp:BoundField DataField="medida" HeaderText="Medida" HtmlEncode="false" />
                                         <asp:BoundField DataField="precio" HeaderText="Precio" HtmlEncode="false" />
+                                        <asp:BoundField DataField="precioFracc" HeaderText="Precio Fraccionado"/>
                                         <asp:BoundField DataField="StockParcialAlmacen" HeaderText="Stock Parcial" />
                                         <asp:BoundField DataField="stockAlmacen" HeaderText="Stock Almacen" HtmlEncode="false" />
                                         <asp:BoundField DataField="codcategoriap" HeaderText="ID categoria" />
@@ -221,7 +251,6 @@
                     </div>
 
                 </ul>
-
 
             </div>
         </div>
@@ -256,6 +285,8 @@
                                             TargetControlID="tx_fechaEntrega"></asp:CalendarExtender>
 
                                         <div class="group_verificar mb-2" style="box-shadow: 1px 0px 2px 0px #7f7d7d; padding: 3px; border: 1px solid #00000026;">
+                                            <asp:HiddenField ID="hf_tipoCliente" runat="server"/>
+
                                             <asp:Label runat="server" class="form-label" for="tx_cliente">Tienda:</asp:Label>
                                             <asp:TextBox ID="tx_cliente" runat="server" class="form-control mb-1" Style="font-size: smaller;"></asp:TextBox>
                                             <asp:AutoCompleteExtender ID="tx_cliente_AutoCompleteExtender" runat="server"
@@ -265,7 +296,8 @@
                                                 UseContextKey="True"
                                                 CompletionListCssClass="CompletionList"
                                                 CompletionListItemCssClass="CompletionlistItem"
-                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10">
+                                                CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
+                                                OnClientItemSelected="ClienteSeleccionado">
                                             </asp:AutoCompleteExtender>
 
                                             <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
@@ -275,7 +307,7 @@
                                         </div>
 
 
-                                        <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Razon Social:"></asp:Label>
+                                        <asp:Label ID="Label2" for="tx_razonSocial" runat="server" Text="Datos de la Factura:"></asp:Label>
                                         <asp:TextBox ID="tx_razonSocial" CssClass="form-control mb-2" Font-Size="Smaller" runat="server"></asp:TextBox>
                                     </div>
 
@@ -290,8 +322,11 @@
                                         <asp:TextBox ID="tx_propietario" CssClass="form-control mb-2" runat="server" Font-Size="Smaller"></asp:TextBox>
 
                                         <asp:Label runat="server" class="form-label">Metodo de Pago</asp:Label>
-                                        <asp:DropDownList ID="dd_metodoPago" class="form-select mb-2" Font-Size="Small" runat="server">
+                                        <asp:DropDownList ID="dd_metodoPago" class="form-select mb-2" Font-Size="Small" runat="server" 
+                                            OnSelectedIndexChanged="dd_metodoPago_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:DropDownList>
+
+                                        <asp:TextBox ID="tx_diasCredito" runat="server" CssClass="form-control" placeholder="Dias de Credito" Visible="false"></asp:TextBox>
 
                                         <asp:Label ID="Label3" for="tx_nit" runat="server" Text="Nit:"></asp:Label>
                                         <asp:TextBox ID="tx_nit" CssClass="form-control mb-2" runat="server" Font-Size="Smaller" AutoComplete="off"></asp:TextBox>
@@ -308,6 +343,7 @@
                                 <asp:AsyncPostBackTrigger ControlID="bt_verificar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="dd_metodoPago" EventName="SelectedIndexChanged" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -336,10 +372,20 @@
                                             <asp:BoundField DataField="Producto" HeaderText="Producto" HtmlEncode="false" />
                                             <asp:BoundField DataField="Medida" HeaderText="Medida" HtmlEncode="false" />
                                             <asp:BoundField DataField="idcategoriap" HeaderText="ID categoria" />
+                                            
+
+
                                             <asp:BoundField DataField="Precio" HeaderText="Precio" HtmlEncode="false" />
                                             <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" HtmlEncode="false" />
                                             <asp:BoundField DataField="Descuento" HeaderText="Descuento (%)" />
-                                            <asp:BoundField DataField="PrecioTotal" HeaderText="Precio Total" HtmlEncode="false" />
+                                            <asp:BoundField DataField="PrecioTotal" HeaderText="Total" HtmlEncode="false" />
+
+                                            <asp:TemplateField HeaderText="Item Fraccionado">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox runat="server" ID="cb_itemFraccionado" Checked= '<%# Eval("cb_itemFraccionado") %>' 
+                                                        onclick="return false;" CssClass="switch-input"/>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
                                         </Columns>
 
@@ -356,9 +402,29 @@
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
                                     <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
+                                    
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
+
+                        <!--  CAMPO Total  -->
+                        <asp:UpdatePanel ID="updatePanel_TXmostrarTotal" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="col-12 d-flex flex-column align-items-end">
+                                    <div class="container_total col-3">
+                                        <asp:Label runat="server">Total: </asp:Label>
+                                        <asp:TextBox ID="tx_total" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click"/>
+                                <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click"/>
+                                <asp:AsyncPostBackTrigger ControlID="gv_adicionados" EventName="RowDeleting"/>
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+
                     </div>
                 </div>
             </div>
@@ -366,7 +432,72 @@
     </div>
 
     <script src="../js/mainCorpal.js"></script>
+    <script type="text/javascript"> 
+        
+        function ClienteSeleccionado(source, eventArgs) {
+            var nomCliente = eventArgs.get_text();
+            PageMethods.obtenerCliente(nomCliente, function (resultado) {
+                document.getElementById("<%=tx_propietario.ClientID%>").value = resultado.propietario;
+                document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
+                document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
+
+                document.getElementById("<%= hf_tipoCliente.ClientID %>").value = resultado.tipoCliente;
+
+                aplicarReglaFraccionado(resultado.tipoCliente);
+            });
+        }
+
+        function aplicarReglaFraccionado(tipoCliente) {
+            var chkFraccionado = document.getElementById("<%= cb_precioFraccionado.ClientID %>");
+            var lbl = document.getElementById("<%= lb_itemFraccionado.ClientID %>");
+
+            if (!chkFraccionado) return;
+
+            if (tipoCliente == 7) {
+                chkFraccionado.disabled = false;
+                if (lbl) lbl.innerText = "";
+            } else {
+                chkFraccionado.checked = false;
+                chkFraccionado.disabled = true;
+                if (lbl) lbl.innerText = "No se permite productos fraccionados";
+            }
+        }
+
+
+
+
+        function setClienteContextKey() {
+            var inputCliente = document.getElementById('<%= tx_cliente.ClientID %>');
+    
+            if (!inputCliente) return;
+
+            var cliente = inputCliente.value;
+
+            if (!cliente) return; 
+
+                    var autoComplete = $find('<%= tx_producto_AutoCompleteExtender.ClientID %>');
+
+                    if (autoComplete) {
+                        autoComplete.set_contextKey(cliente);
+                    }
+        }
+
+        function ProductoSeleccionado(source, eventArgs) {
+            var producto = eventArgs.get_text();
+
+            document.getElementById("<%= tx_producto.ClientID %>").value = producto;
+            
+            __doPostBack('<%= bt_buscar.UniqueID %>', '');
+        }
+
+        Sys.Application.add_load(function () {
+            var tipoCliente = document.getElementById("<%= hf_tipoCliente.ClientID %>").value;
+
+            if (tipoCliente) {
+                aplicarReglaFraccionado(tipoCliente);
+            }
+        })
+    </script>
 
 </asp:Content>
-
 

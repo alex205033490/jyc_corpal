@@ -1,4 +1,5 @@
 ﻿using jycboliviaASP.net.Negocio;
+using jycboliviaASP.net.Presentacion;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -370,6 +371,142 @@ namespace jycboliviaASP.net.Datos
 
         }
 
+
+        /****************************************************************************/
+        /*********************************  ORDEN ENTREGA  *******************************************/
+        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, int codChofer)
+        {
+            try
+            {
+                string consulta = @"select 
+                                        dv.`codigo` as 'codDespacho',
+                                        ddv.`codcliente`,
+                                        cl.tiendaname as 'Cliente',
+                                        dv.`fechacierre`,
+                                        dv.`horacierre`,
+                                        dv.`conductor`,
+                                        concat(v.`placa`, ' - ', v.`marca`) as 'vehiculo',
+                                        p.`producto`,
+                                        ddv.`cantentregada` as 'cantEntregadoCamion' ,
+                                        tb_orden.codOrden as 'codOrdenEntregaCli',
+                                        tb_orden.cod_rutaentrega,
+                                        tb_orden.cantEntregadaCli,
+                                        tb_orden.montoDescuento,
+                                        (ddv.`cantentregada` - tb_orden.cantEntregadaCli) as 'cantidadSobrante'
+
+                                        from tbcorpal_despachovehiculo dv
+                                        inner join tbcorpal_detalleproddespacho ddv
+                                             on dv.`codigo` = ddv.`coddespacho`
+                                        left join tbcorpal_vehiculos v 
+                                             on dv.`codvehiculo` = v.`codigo`
+                                        inner join tbcorpal_producto p
+                                             on ddv.`codprod` = p.`codigo`
+                                        inner join tbcorpal_cliente cl
+                                             on ddv.`codcliente` = cl.`codigo`     
+                                        left join 
+                                             (select
+                                             oe.`codigo` as 'codOrden',
+                                             oe.`codigoCliente`,
+                                             oe.`cod_rutaentrega`,
+                                             oe.`cod_despachovehiculo`,
+                                             doe.`codprod`,
+                                             doe.`cantidad` as 'cantEntregadaCli',
+                                             doe.`montoDescuento`
+                                             from tbcorpal_ordenentregacliente oe
+                                             inner join tbcorpal_detalleproductoordenentregacliente doe
+                                                   on oe.codigo = doe.codventa) as tb_orden on dv.codigo = tb_orden.cod_despachovehiculo
+                                                   and ddv.codcliente = tb_orden.codigoCliente
+      
+                                        where 
+                                        dv.`estadodespacho` = 'Cerrado'
+                                        and dv.fechacierre between @fechaIni and @fechaFin 
+                                        and (@codChofer = 0 OR dv.codconductor = @codChofer);";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechaFin", fechaFin),
+                    new MySqlParameter("@codChofer", codChofer)
+
+                };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos de productos sobrantes. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_rpTiempoTardanzaDespachoOrdenEntrega(DateTime fechaIni, DateTime fechaFin)
+        {
+            try
+            {
+                string consulta = @"SELECT 
+                                        dv.`codigo` as codDespacho,
+                                        dv.`conductor`,
+                                        concat(v.`placa`,' - ', v.`marca`) as 'vehiculo',
+ 
+                                        oe.`cliente`,
+
+                                        timestamp(dv.fechacierre,dv.horacierre) as 'fechaDespacho2',
+
+                                        oe.codigo as 'codOrdenEntrega',
+                                        timestamp(oe.fechagra, oe.horagra) as 'fechaOrdenEntrega2',
+
+                                        -- DIFERENCIA EN HORAS
+                                        TIMESTAMPDIFF(HOUR,
+                                            CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                            CONCAT(oe.`fechagra`, ' ', oe.`horagra`)
+                                        ) as diferencia_horas,
+
+                                        -- DIFERENCIA COMPLETA FORMATEADA
+                                        CONCAT(
+                                            FLOOR(TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CONCAT(oe.`fechagra`, ' ', oe.`horagra`)
+                                            ) / 1440), ' dias ',
+    
+                                            FLOOR((TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CONCAT(oe.`fechagra`, ' ', oe.`horagra`)
+                                            ) % 1440) / 60), ' horas ',
+    
+                                            (TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CONCAT(oe.`fechagra`, ' ', oe.`horagra`)
+                                            ) % 60), ' minutos'
+                                        ) as diferencia_ddhhmm
+
+                                        FROM tbcorpal_despachovehiculo dv
+
+                                        LEFT JOIN tbcorpal_detalleproddespacho ddv
+                                            ON dv.`codigo` = ddv.`coddespacho`
+    
+                                        INNER JOIN tbcorpal_vehiculos v 
+                                            ON dv.`codvehiculo` = v.`codigo`
+    
+                                        LEFT JOIN tbcorpal_ordenentregacliente oe
+                                            ON dv.`codigo` = oe.`cod_despachovehiculo`
+                                            AND ddv.`codcliente` = oe.`codigoCliente`
+
+                                        WHERE dv.`estado` = 1
+                                        AND dv.`estadodespacho` = 'Cerrado'
+                                        AND oe.`estado` = 1
+                                        AND dv.`codigo` = 68
+                                        and dv.fechacierre between @fechaIni and @fechaFin";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechaIni),
+                    new MySqlParameter("@fechaFin", fechaFin)
+                };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error inesperado al cargar los datos. " + ex.Message);
+            }
+        }
 
 
 

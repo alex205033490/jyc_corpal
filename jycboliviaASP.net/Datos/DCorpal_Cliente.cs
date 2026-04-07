@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using jycboliviaASP.net.Negocio;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -668,6 +669,26 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_ClienteNombreEspecifico(string tiendanombre)
         {
+            try
+            {
+                string consulta = @"select codigo, tiendaname, tiendadir, 
+                        tiendatelefono, tiendadepartamento, tiendazona, 
+                        propietarioname, propietarioci, propietariodir,
+                        propietariocelular, propietarionit, propietariocorreo,
+                        facturar_a, facturar_nit, facturar_correo, observacion, id_tipocliente  
+                        from tbcorpal_cliente tt 
+                        where tt.tiendaname = @tiendaname";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@tiendaname", tiendanombre)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos del cliente. " + ex.Message);
+            }
+            /*
             string consulta = "Select " +
                             " codigo, " +
                             " tiendaname,  tiendadir,  tiendatelefono, " +
@@ -679,6 +700,7 @@ namespace jycboliviaASP.net.Datos
                            "  where tt.tiendaname = '" + tiendanombre + "'";
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
+            */
         }
         internal DataSet get_ClienteCodCliente(int codigo)
         {

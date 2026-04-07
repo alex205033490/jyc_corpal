@@ -67,7 +67,6 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_EntregasProductoaCamion(codigoCamion);
         }
 
-
         internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
         {
             return datos.get_despachosdeCamiones(fechadesde, fechahasta, estado, codVehiculo);
@@ -111,11 +110,12 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio, codconductor, conductor);
         }
-        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, int codcli)
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, 
+                                                    int codcli, bool contFracc)
         {
             try
             {
-                return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad, codcli);
+                return datos.POST_INSERTdetalleDespacho(coddespacho, codpedido, codprod, cantidad, codcli, contFracc);
             }
             catch (Exception ex)
             {
@@ -126,12 +126,12 @@ namespace jycboliviaASP.net.Negocio
 
         /* POST DETALLE SOLICITUD PEDIDO */
         internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock,
-                                                            int coduser, int codVehiculo)
+                                                            int coduser, int codVehiculo, bool estadoFraccionado)
         {
             try
             {
                 return datos.UPDATE_camposDetalleSolicitudPedido(codigoSolicitud, codigoProducto, cantidadEntregado, estadoProducto, restarStock,
-                                                                    coduser, codVehiculo);
+                                                                    coduser, codVehiculo, estadoFraccionado);
             }
             catch (Exception ex)
             {
@@ -150,9 +150,9 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_listDetallePedidoaCredito(codigo);
         }
 
-        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta, string obs)
         {
-            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta);
+            return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta, obs);
         }
 
         internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
@@ -164,11 +164,11 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.Obtener_codMetodoPagoSolicitud(cod);
         }
-        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta)
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta, string observacion)
         {
             try
             {
-                return datos.POST_rechazarSolCredito(codResp, codSol, nroBoleta);
+                return datos.POST_rechazarSolCredito(codResp, codSol, nroBoleta, observacion);
             }
             catch (Exception ex)
             {
@@ -250,7 +250,41 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al obtener datos de la solicitud. " + ex.Message);
             }
         }
+        internal DataSet get_filtroBusquedaCodigoOrdenSolicitud(string codigo)
+        {
+            try
+            {
+                return datos.get_filtroBusquedaCodigoOrdenSolicitud(codigo);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
 
+        internal DataSet get_filtroBusquedaPersonalSolicitante(string solicitante)
+        {
+            try
+            {
+                return datos.get_filtroBusquedaPersonalSolicitante(solicitante);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
+
+        public DataSet get_mostrarSolicitudesEntregaProducto_filtroBusqueda(string vendedor, string codigo)
+        {
+            try
+            {
+                return datos.get_mostrarSolicitudesEntregaProducto_filtroBusqueda(vendedor, codigo);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al obtener datos. " + ex.Message);
+            }
+        }
 
 
     }

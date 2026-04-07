@@ -16,9 +16,9 @@
             padding: 0px;
         }
         .container-gvListProductos{
-            height: 250px;
+            height: 150px;
             margin: 10px 0;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             padding: 0;
         }
 
@@ -79,7 +79,7 @@
                         <div class="container-gvRegistros table-responsive mb-2 col-lg-7 col-md-7 col-11" data-clientid="<%= gv_solicitudesProductos.ClientID %>">
                             <asp:GridView ID="gv_solicitudesProductos" runat="server"
                                 CssClass="table table-striped sticky-table gv_solicitudesProductos" AutoGenerateColumns="false"
-                                Style="background-color: white !important;" DataKeyNames="codigo, nroboleta">
+                                Style="background-color: white !important;" DataKeyNames="codigo, nroboleta, tiendaname">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Accion">
                                         <ItemTemplate>
@@ -108,7 +108,7 @@
                                 <Columns>
                                     <asp:BoundField DataField="nroboleta" HeaderText="Nro de Boleta" />
                                     <asp:BoundField DataField="producto" HeaderText="Producto" HtmlEncode="false" />
-                                    <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad Solicitada" />
+                                    <asp:BoundField DataField="cantSolicitada" HeaderText="Cantidad" />
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -120,13 +120,19 @@
 
                         <div class="form_buscarCar col-sm-12 col-md-12 col-lg-12 mb-2 row">
 
-                            <div class="mb-3 col-lg-8 col-md-4 col-sm-5 col-6">
-                                <asp:Label runat="server" Font-Size="Small" Text="Responsable:"></asp:Label>
-                                <asp:TextBox ID="tx_responsable" class="form-control" Style="background-color: #7080903b;" runat="server" ReadOnly="true"></asp:TextBox>
+                            <div class="mb-3 col-lg-6 col-md-8 col-sm-8 col-12 row">
+                                <div class="col-6">
+                                    <asp:Label runat="server" Font-Size="Small" Text="Responsable:"></asp:Label>
+                                    <asp:TextBox ID="tx_responsable" class="form-control" Style="background-color: #7080903b; font-size: 0.7rem;" runat="server" ReadOnly="true"></asp:TextBox>
+                                </div>
+                                <div class="col-6" >
+                                    <asp:Label runat="server" Font-Size="Small" Text="Observacion:"></asp:Label>
+                                    <asp:TextBox ID="tx_observacion" CssClass="form-control" TextMode="MultiLine" runat="server" Font-Size="Smaller" Height="110px"></asp:TextBox>
+                                </div>
                             </div>
 
 
-                            <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-4 col-sm-6 col-5">
+                            <div class="mb-3 container_btnRegistro d-flex flex-column gap-3 col-lg-3 col-md-3 col-sm-4 col-5">
                                 <asp:Button ID="btn_registrarAprobacion" runat="server" CssClass="btn btn-success" Text="Aprobar Credito" OnClick="btn_registrarAprobacion_Click" />
                                 <asp:Button ID="btn_rechazarCredito" runat="server" CssClass="btn btn-danger" Text="Rechazar Credito" OnClick="btn_rechazarCredito_Click" />
                                 <asp:Button ID="bt_limpiar" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />

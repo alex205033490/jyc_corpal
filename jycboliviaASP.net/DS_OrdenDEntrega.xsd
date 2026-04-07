@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_OrdenDEntrega" targetNamespace="http://tempuri.org/DS_OrdenDEntrega.xsd" xmlns:mstns="http://tempuri.org/DS_OrdenDEntrega.xsd" xmlns="http://tempuri.org/DS_OrdenDEntrega.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_OrdenDEntrega" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DS_OrdenDEntrega" msprop:Generator_DataSetName="DS_OrdenDEntrega">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DS_productosSobrantesOrdenEntrega" msprop:Generator_RowEvHandlerName="DS_productosSobrantesOrdenEntregaRowChangeEventHandler" msprop:Generator_RowDeletedName="DS_productosSobrantesOrdenEntregaRowDeleted" msprop:Generator_RowDeletingName="DS_productosSobrantesOrdenEntregaRowDeleting" msprop:Generator_RowEvArgName="DS_productosSobrantesOrdenEntregaRowChangeEvent" msprop:Generator_TablePropName="DS_productosSobrantesOrdenEntrega" msprop:Generator_RowChangedName="DS_productosSobrantesOrdenEntregaRowChanged" msprop:Generator_RowChangingName="DS_productosSobrantesOrdenEntregaRowChanging" msprop:Generator_TableClassName="DS_productosSobrantesOrdenEntregaDataTable" msprop:Generator_RowClassName="DS_productosSobrantesOrdenEntregaRow" msprop:Generator_TableVarName="tableDS_productosSobrantesOrdenEntrega" msprop:Generator_UserTableName="DS_productosSobrantesOrdenEntrega">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codDespacho" msprop:Generator_ColumnPropNameInRow="codDespacho" msprop:Generator_ColumnPropNameInTable="codDespachoColumn" msprop:Generator_ColumnVarNameInTable="columncodDespacho" msprop:Generator_UserColumnName="codDespacho" type="xs:string" minOccurs="0" />
+              <xs:element name="codcliente" msprop:Generator_ColumnPropNameInRow="codcliente" msprop:Generator_ColumnPropNameInTable="codclienteColumn" msprop:Generator_ColumnVarNameInTable="columncodcliente" msprop:Generator_UserColumnName="codcliente" type="xs:string" minOccurs="0" />
+              <xs:element name="Cliente" msprop:Generator_ColumnPropNameInRow="Cliente" msprop:Generator_ColumnPropNameInTable="ClienteColumn" msprop:Generator_ColumnVarNameInTable="columnCliente" msprop:Generator_UserColumnName="Cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="fechacierre" msprop:Generator_ColumnPropNameInRow="fechacierre" msprop:Generator_ColumnPropNameInTable="fechacierreColumn" msprop:Generator_ColumnVarNameInTable="columnfechacierre" msprop:Generator_UserColumnName="fechacierre" type="xs:string" minOccurs="0" />
+              <xs:element name="horacierre" msprop:Generator_ColumnPropNameInRow="horacierre" msprop:Generator_ColumnPropNameInTable="horacierreColumn" msprop:Generator_ColumnVarNameInTable="columnhoracierre" msprop:Generator_UserColumnName="horacierre" type="xs:string" minOccurs="0" />
+              <xs:element name="conductor" msprop:Generator_ColumnPropNameInRow="conductor" msprop:Generator_ColumnPropNameInTable="conductorColumn" msprop:Generator_ColumnVarNameInTable="columnconductor" msprop:Generator_UserColumnName="conductor" type="xs:string" minOccurs="0" />
+              <xs:element name="vehiculo" msprop:Generator_ColumnPropNameInRow="vehiculo" msprop:Generator_ColumnPropNameInTable="vehiculoColumn" msprop:Generator_ColumnVarNameInTable="columnvehiculo" msprop:Generator_UserColumnName="vehiculo" type="xs:string" minOccurs="0" />
+              <xs:element name="producto" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_ColumnVarNameInTable="columnproducto" msprop:Generator_UserColumnName="producto" type="xs:string" minOccurs="0" />
+              <xs:element name="cantEntregadoCamion" msprop:Generator_ColumnPropNameInRow="cantEntregadoCamion" msprop:Generator_ColumnPropNameInTable="cantEntregadoCamionColumn" msprop:Generator_ColumnVarNameInTable="columncantEntregadoCamion" msprop:Generator_UserColumnName="cantEntregadoCamion" type="xs:string" minOccurs="0" />
+              <xs:element name="codOrdenEntregaCli" msprop:Generator_ColumnPropNameInRow="codOrdenEntregaCli" msprop:Generator_ColumnPropNameInTable="codOrdenEntregaCliColumn" msprop:Generator_ColumnVarNameInTable="columncodOrdenEntregaCli" msprop:Generator_UserColumnName="codOrdenEntregaCli" type="xs:string" minOccurs="0" />
+              <xs:element name="cod_rutaentrega" msprop:Generator_ColumnPropNameInRow="cod_rutaentrega" msprop:Generator_ColumnPropNameInTable="cod_rutaentregaColumn" msprop:Generator_ColumnVarNameInTable="columncod_rutaentrega" msprop:Generator_UserColumnName="cod_rutaentrega" type="xs:string" minOccurs="0" />
+              <xs:element name="cantEntregadaCli" msprop:Generator_ColumnPropNameInRow="cantEntregadaCli" msprop:Generator_ColumnPropNameInTable="cantEntregadaCliColumn" msprop:Generator_ColumnVarNameInTable="columncantEntregadaCli" msprop:Generator_UserColumnName="cantEntregadaCli" type="xs:string" minOccurs="0" />
+              <xs:element name="montoDescuento" msprop:Generator_ColumnPropNameInRow="montoDescuento" msprop:Generator_ColumnPropNameInTable="montoDescuentoColumn" msprop:Generator_ColumnVarNameInTable="columnmontoDescuento" msprop:Generator_UserColumnName="montoDescuento" type="xs:string" minOccurs="0" />
+              <xs:element name="cantidadSobrante" msprop:Generator_ColumnPropNameInRow="cantidadSobrante" msprop:Generator_ColumnPropNameInTable="cantidadSobranteColumn" msprop:Generator_ColumnVarNameInTable="columncantidadSobrante" msprop:Generator_UserColumnName="cantidadSobrante" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

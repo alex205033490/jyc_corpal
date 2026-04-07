@@ -118,8 +118,8 @@ namespace jycboliviaASP.net.Presentacion
 
                 //  string estado = dd_estadoCierre.SelectedItem.Text;
                 string estado = "Cerrado";
-                int codigo = int.Parse(gv_despachos.SelectedRow.Cells[1].Text);
-                string vehiculo = gv_despachos.SelectedRow.Cells[5].Text;
+                int codigo = Convert.ToInt32(gv_despachos.DataKeys[gv_despachos.SelectedIndex]["codigo"]);
+                string vehiculo = gv_despachos.DataKeys[gv_despachos.SelectedIndex]["Vehiculo"].ToString();
 
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
                 bool bandera = negocio.update_despachodeproductosCamiones(codigo, estado, codUser);

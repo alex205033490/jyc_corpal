@@ -11,79 +11,97 @@ namespace jycboliviaASP.net.Presentacion
 {
 
 
-    public partial class FCorpal_SolicitudesPedidoaCredito
+    public partial class FCorpal_ConsultaPedidos
     {
 
         /// <summary>
-        /// Control updatePanelListaSolicitudes.
+        /// Control dd_consulta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatePanelListaSolicitudes;
+        protected global::System.Web.UI.WebControls.DropDownList dd_consulta;
 
         /// <summary>
-        /// Control gv_solicitudesProductos.
+        /// Control btn_buscarReporte.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_solicitudesProductos;
+        protected global::System.Web.UI.WebControls.Button btn_buscarReporte;
 
         /// <summary>
-        /// Control gv_listProductos.
+        /// Control tx_fdesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gv_listProductos;
+        protected global::System.Web.UI.WebControls.TextBox tx_fdesde;
 
         /// <summary>
-        /// Control tx_responsable.
+        /// Control tx_fdesde_calendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_responsable;
+        protected global::AjaxControlToolkit.CalendarExtender tx_fdesde_calendarExtender;
 
         /// <summary>
-        /// Control tx_observacion.
+        /// Control hf_codConductor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_observacion;
+        protected global::System.Web.UI.WebControls.HiddenField hf_codConductor;
 
         /// <summary>
-        /// Control btn_registrarAprobacion.
+        /// Control tx_nomConductor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_registrarAprobacion;
+        protected global::System.Web.UI.WebControls.TextBox tx_nomConductor;
 
         /// <summary>
-        /// Control btn_rechazarCredito.
+        /// Control tx_conductor_AutoCompleteExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_rechazarCredito;
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_conductor_AutoCompleteExtender;
 
         /// <summary>
-        /// Control bt_limpiar.
+        /// Control tx_fhasta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bt_limpiar;
+        protected global::System.Web.UI.WebControls.TextBox tx_fhasta;
+
+        /// <summary>
+        /// Control tx_fhasta_calendarEnteder.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender tx_fhasta_calendarEnteder;
+
+        /// <summary>
+        /// Control rw_consultaPedidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Microsoft.Reporting.WebForms.ReportViewer rw_consultaPedidos;
     }
 }

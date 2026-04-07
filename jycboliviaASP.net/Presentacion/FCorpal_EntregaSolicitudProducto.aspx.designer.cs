@@ -15,6 +15,51 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         /// <summary>
+        /// Control tx_busquedaOrdenP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_busquedaOrdenP;
+
+        /// <summary>
+        /// Control autoCompleteExtender_ordenP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoCompleteExtender_ordenP;
+
+        /// <summary>
+        /// Control tx_busquedaVendedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_busquedaVendedor;
+
+        /// <summary>
+        /// Control autoCompleteExtender_vendedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender autoCompleteExtender_vendedor;
+
+        /// <summary>
+        /// Control btn_busquedaSolicitudes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_busquedaSolicitudes;
+
+        /// <summary>
         /// Control updatePanelListaSolicitudes.
         /// </summary>
         /// <remarks>

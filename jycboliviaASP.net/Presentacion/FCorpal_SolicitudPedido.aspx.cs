@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using static jycboliviaASP.net.Negocio.NA_APIclientes;
 using static jycboliviaASP.net.Negocio.NA_APIproductos;
 using System.Security.Cryptography;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -45,6 +46,7 @@ namespace jycboliviaASP.net.Presentacion
                 dRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
                 dRepuesto.Columns.Add("idcategoriap", typeof(string));
                 dRepuesto.Columns.Add("codupon", typeof(string));
+                dRepuesto.Columns.Add("cb_itemFraccionado", typeof(bool));
 
                 gv_adicionados.DataSource = dRepuesto;
                 gv_adicionados.DataBind();
@@ -97,9 +99,9 @@ namespace jycboliviaASP.net.Presentacion
                     showalert("Error al cargar los datos Metodo de Pago");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                showalert("Error inesperado en el metodo cargarDatosModPago. " + ex.Message );
+                showalert("Error inesperado en el metodo cargarDatosModPago. " + ex.Message);
             }
         }
 
@@ -120,20 +122,33 @@ namespace jycboliviaASP.net.Presentacion
             {
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
-            return lista;          
+            return lista;
         }
 
 
         [WebMethod]
         [ScriptMethod]
-        public static string[] GetlistaProductos(string prefixText, int count)
+        public static string[] GetlistaProductos(string prefixText, int count, string contextKey)
         {
-            
+            if (string.IsNullOrEmpty(contextKey))
+                return new string[0];
+
             string nombreProducto = prefixText;
-            
+            string cliente = contextKey;
+
+            int codigCliente;
+            NCorpal_Cliente nc = new NCorpal_Cliente();
+            codigCliente = nc.get_CodigoCliente(cliente);
+
+            if (codigCliente == 0)
+                return new string[0];
+
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos(nombreProducto);
-         
+            DataSet tuplas = pp.get_mostrarListProductosCliente(codigCliente, nombreProducto);
+
+            if (tuplas == null || tuplas.Tables.Count == 0 || tuplas.Tables[0].Rows.Count == 0)
+                return new string[0];
+
             string[] lista = new string[tuplas.Tables[0].Rows.Count];
             int fin = tuplas.Tables[0].Rows.Count;
             for (int i = 0; i < fin; i++)
@@ -141,21 +156,7 @@ namespace jycboliviaASP.net.Presentacion
                 lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
             }
             return lista;
-            
-            /*
-            NA_endpoints napi = new NA_endpoints();
-            dynamic tuplas = napi.get_productoAlmacen(nombreProducto, "adm", "123");            
-            JArray rowsArray = (JArray)tuplas["Resultado"];
-            string[] lista = new string[rowsArray.Count];
-            int i = 0;
-            foreach (JObject obj in rowsArray)
-            {
-                lista[i] = obj["Descripcion"].ToString() ;
-                i++;
-            }
-            
-            return lista;
-            */
+
         }
 
         public string convertidorFecha(string fecha)
@@ -175,7 +176,6 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void bt_buscar_Click(object sender, EventArgs e)
         {
-         
             buscarProductos();
         }
 
@@ -200,11 +200,27 @@ namespace jycboliviaASP.net.Presentacion
                 gv_Productos.DataSource = datos;
                 gv_Productos.DataBind();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert("Error al encontrar datos. " + ex.Message);
             }
         }
+
+        /* cargar datos producto autocomplete */
+        public class clssProducto
+        {
+            public string codigo { get; set; }
+            public string producto { get; set; }
+            public string medida { get; set; }
+            public string precio { get; set; }
+            public string StockParcialAlmacen { get; set; }
+            public string stockAlmacen { get; set; }
+            public string codcategoriap { get; set; }
+            public string codupon { get; set; }
+
+        }
+
+
         /*******************************************************************************/
         /*      BOTTON AGREGAR PRODUCTO*/
         protected void bt_adicionar_Click(object sender, EventArgs e)
@@ -226,7 +242,7 @@ namespace jycboliviaASP.net.Presentacion
         private void adicionar_productos()
         {
             decimal cantidad;
-            decimal.TryParse(tx_cantidadProducto.Text, out cantidad);            
+            decimal.TryParse(tx_cantidadProducto.Text, out cantidad);
             bool itemPackFerial = cb_itemPackFerial.Checked;
 
             string cliente = tx_cliente.Text;
@@ -240,9 +256,12 @@ namespace jycboliviaASP.net.Presentacion
                 return;
             }
 
-            if (cantidad > 0){
+            if (cantidad > 0) {
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 CheckBox cb = null;
+
+                bool usarPrecioFraccionado = cb_precioFraccionado.Checked;
+
                 for (int i = 0; i < gv_Productos.Rows.Count; i++)
                 {
                     cb = (CheckBox)gv_Productos.Rows[i].Cells[1].FindControl("CheckBox1");
@@ -254,51 +273,77 @@ namespace jycboliviaASP.net.Presentacion
                         int codProd = Convert.ToInt32(gv_Productos.DataKeys[i].Value);
                         string producto = gv_Productos.Rows[i].Cells[2].Text;
                         string Medida = HttpUtility.HtmlDecode(gv_Productos.Rows[i].Cells[3].Text);
-                        decimal precio;
+
+                        if (usarPrecioFraccionado)
+                        {
+                            DataSet ds = Nsol.obtenerMedida_productoFraccionado(codigCliente, codProd);
+
+                            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                Medida = ds.Tables[0].Rows[0]["medidacontenedorfraccionada"].ToString();
+                            }
+                        }
+
+                        decimal precio, precioFracc;
                         decimal.TryParse(gv_Productos.Rows[i].Cells[4].Text, out precio);
+                        decimal.TryParse(gv_Productos.Rows[i].Cells[5].Text, out precioFracc);
+
+                        // Seleccionar Precio
+                        decimal precioFinal = usarPrecioFraccionado ? precioFracc : precio;
                         //string tipo = dd_tipoSolicitud.SelectedItem.Text;
                         float StockProducto;
-                        float.TryParse(gv_Productos.Rows[i].Cells[5].Text, out StockProducto);
+                        float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockProducto);
                         float StockPackFerial;
-                        float.TryParse(gv_Productos.Rows[i].Cells[6].Text, out StockPackFerial);
+                        float.TryParse(gv_Productos.Rows[i].Cells[7].Text, out StockPackFerial);
                         int idcategiap;
-                        int.TryParse(gv_Productos.Rows[i].Cells[7].Text, out idcategiap);
-                        string codupon = gv_Productos.Rows[i].Cells[8].Text;
+                        int.TryParse(gv_Productos.Rows[i].Cells[8].Text, out idcategiap);
+                        string codupon = gv_Productos.Rows[i].Cells[9].Text;
 
-                        decimal subtotal = precio * cantidad;
+                        decimal subtotal = precioFinal * cantidad;
                         decimal porDescuento = 0;
 
                         subtotal = Math.Round(subtotal, 2, MidpointRounding.AwayFromZero);
-                        
-                            DataRow tupla = datoRepuesto.NewRow();
-                            tupla["Codigo"] = codigo;
-                            tupla["codupon"] = codupon;
-                            tupla["producto"] = producto;
-                            tupla["Medida"] = Medida;
-                            //tupla["Tipo"] = tipo;
-                            tupla["Precio"] = precio;
-                            tupla["Descuento"] = porDescuento;
-                            tupla["Cantidad"] = cantidad;
-                            tupla["PrecioTotal"] = subtotal;
-                            tupla["idcategoriap"] = idcategiap;
 
-                            if (itemPackFerial == true)
-                            {
-                                tupla["ItemPackFerial"] = itemPackFerial;
-                                tupla["Medida"] = "UNIDAD";
-                                //tupla["Tipo"] = "ITEM PACK FERIAL";
-                            }
-                            else
-                                tupla["ItemPackFerial"] = false;
+                        DataRow tupla = datoRepuesto.NewRow();
+                        tupla["Codigo"] = codigo;
+                        tupla["codupon"] = codupon;
+                        tupla["producto"] = producto;
+                        tupla["Medida"] = Medida;
+                        //tupla["Tipo"] = tipo;
+                        tupla["Precio"] = precioFinal;
+                        tupla["Descuento"] = porDescuento;
+                        tupla["Cantidad"] = cantidad;
+                        tupla["PrecioTotal"] = subtotal;
+                        tupla["idcategoriap"] = idcategiap;
+                        tupla["cb_itemFraccionado"] = usarPrecioFraccionado;
 
-                            datoRepuesto.Rows.Add(tupla);
+                        if (itemPackFerial == true)
+                        {
+                            tupla["ItemPackFerial"] = itemPackFerial;
+                            tupla["Medida"] = "UNIDAD";
+                            //tupla["Tipo"] = "ITEM PACK FERIAL";
+                        }
+                        else
+                            tupla["ItemPackFerial"] = false;
+
+                        datoRepuesto.Rows.Add(tupla);
+
+                        //recalcularTotal();
+                        /*
+                        decimal totalVisual = 0;
+                        decimal.TryParse(tx_total.Text, out totalVisual);
+                        totalVisual += subtotal; engranaje
+                        tx_total.Text = totalVisual.ToString("0.00");
+                        */
                     }
                 }
                 int id_tipoCliente = verificarTipoCliente(codigCliente);
                 if (id_tipoCliente == 1 || id_tipoCliente == 3)
                 {
+                    // falta recalcular los q no son fraccionados
                     recalcularDescuentos(datoRepuesto);
                 }
+                recalcularTotal();
 
                 gv_adicionados.DataSource = datoRepuesto;
                 gv_adicionados.DataBind();
@@ -314,16 +359,16 @@ namespace jycboliviaASP.net.Presentacion
 
             decimal cantidadIngresada = decimal.Parse(tx_cantidadProducto.Text.Trim());
 
-            if(cantidadIngresada <= 0)
+            if (cantidadIngresada <= 0)
             {
                 showalert("La cantidad debe ser mayor que cero.");
                 return false;
             }
 
-            foreach(GridViewRow row in gv_Productos.Rows)
+            foreach (GridViewRow row in gv_Productos.Rows)
             {
                 CheckBox chk = row.FindControl("CheckBox1") as CheckBox;
-                if(chk != null && chk.Checked)
+                if (chk != null && chk.Checked)
                 {
                     decimal stockParcial = 0;
 
@@ -388,7 +433,7 @@ namespace jycboliviaASP.net.Presentacion
             try
             {
                 int codMetPago = dd_metodoPago.SelectedIndex;
-            
+
                 DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
                 if (datoRepuesto.Rows.Count > 0)
                 {
@@ -429,24 +474,58 @@ namespace jycboliviaASP.net.Presentacion
                             for (int i = 0; i < datoRepuesto.Rows.Count; i++)
                             {
                                 int codProducto = Convert.ToInt32(datoRepuesto.Rows[i]["codigo"].ToString());
-                                decimal cantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
-                                decimal preciocompra = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
-                                decimal totalProd = Convert.ToDecimal(datoRepuesto.Rows[i]["PrecioTotal"].ToString());
+
+                                decimal VALORcantidad = Convert.ToDecimal(datoRepuesto.Rows[i]["cantidad"].ToString());
+                                decimal VALORprecio = Convert.ToDecimal(datoRepuesto.Rows[i]["Precio"].ToString());
+                                decimal VALORtotal = Convert.ToDecimal(datoRepuesto.Rows[i]["PrecioTotal"].ToString());
+
+                                string VALORmedida = datoRepuesto.Rows[i]["Medida"].ToString();
+                                string Tipo = "";
+
+                                bool esFraccionado = Convert.ToBoolean(datoRepuesto.Rows[i]["cb_itemFraccionado"]);
+
+                                decimal? cantidad = null;
+                                decimal? precio = null;
+                                decimal? total = null;
+                                string medida = null;
+
+                                decimal? cantFracc = null;
+                                decimal? precioFracc = null;
+                                string medidaFracc = null;
+
+                                if (esFraccionado)
+                                {
+                                    cantFracc = VALORcantidad;
+                                    precioFracc = VALORprecio;
+                                    medidaFracc = VALORmedida;
+
+                                    montoTotal = VALORcantidad * VALORprecio;
+                                } else
+                                {
+
+                                    cantidad = VALORcantidad;
+                                    precio = VALORprecio;
+                                    medida = VALORmedida;
+                                    total = VALORtotal;
+
+                                    montoTotal = VALORtotal;
+                                }
+
+                                //preciototalsumando continuamente
 
                                 string producto = datoRepuesto.Rows[i]["producto"].ToString();
-                                string Medida = datoRepuesto.Rows[i]["Medida"].ToString();
-                                string Tipo = "";
-                                decimal total = preciocompra * cantidad;
+                                //decimal total = preciocompra * cantidad;
 
-                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + Medida + ", Tipo=" + Tipo + "<br>";
-                            
-                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, preciocompra, totalProd, Tipo, Medida);
+                                repuestosSolicitados = repuestosSolicitados + producto + " cant.=" + cantidad.ToString() + ", Medida=" + medida + ", Tipo=" + Tipo + "<br>";
 
-                                montoTotal += totalProd;
+                                nss.insertarDetalleSolicitudProducto(ultimoinsertado, codProducto, cantidad, precio, montoTotal, Tipo,
+                                                                    medida, cantFracc, precioFracc, medidaFracc);
+
+                                //montoTotal += totalProd;
                             }
 
                             nss.actualizarmontoTotal(ultimoinsertado);
-               
+
                             //limpiarDatos();
                             buscarProductos();
                             Session["codigoSolicitudProducto"] = ultimoinsertado;
@@ -463,7 +542,7 @@ namespace jycboliviaASP.net.Presentacion
                 else
                     showalert("Error: No tiene Solicitud Pedido");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert("Ocurrio un error inesperado al guardar la solicitud. " + ex.Message);
             }
@@ -482,7 +561,7 @@ namespace jycboliviaASP.net.Presentacion
             int index = e.RowIndex;
 
             DataTable datoRepuesto = Session["listaSolicitudProducto"] as DataTable;
-            
+
             datoRepuesto.Rows[index].Delete();
             datoRepuesto.AcceptChanges();
 
@@ -495,12 +574,30 @@ namespace jycboliviaASP.net.Presentacion
             {
                 recalcularDescuentos(datoRepuesto);
             }
-            
+
             Session["listaSolicitudProducto"] = datoRepuesto;
-            
+
             gv_adicionados.EditIndex = -1;
             gv_adicionados.DataSource = datoRepuesto;
-            gv_adicionados.DataBind();            
+            gv_adicionados.DataBind();
+
+            recalcularTotal();
+        }
+
+        private void recalcularTotal()
+        {
+            DataTable dt = Session["listaSolicitudProducto"] as DataTable;
+
+            decimal total = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                decimal valor2 = Convert.ToDecimal(row["PrecioTotal"]);
+
+                total += valor2; 
+            }
+
+            tx_total.Text = total.ToString("0.00");
         }
 
         protected void gv_adicionados_RowEditing(object sender, GridViewEditEventArgs e)
@@ -573,6 +670,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_solicitante.Text = "";
             tx_fechaEntrega.Text = "";
             tx_horaEntrega.Text = "";
+            hf_tipoCliente.Value = "";
 
             DataTable datoRepuesto = new DataTable();
             datoRepuesto.Columns.Add("Codigo", typeof(string));
@@ -608,7 +706,6 @@ namespace jycboliviaASP.net.Presentacion
             { 
                 dato = dato + obj["Descripcion"].ToString()+";";
             }
-
                 tx_cantidadProducto.Text = rowsArray.Count.ToString();
         }
 
@@ -637,6 +734,8 @@ namespace jycboliviaASP.net.Presentacion
             tx_cantidadProducto.Text = string.Empty;
             gv_Productos.DataSource = null;
             gv_Productos.DataBind();
+
+            cb_precioFraccionado.Checked = false;
         }
 
         private int verificarTipoCliente(int codCli)
@@ -656,6 +755,11 @@ namespace jycboliviaASP.net.Presentacion
 
             foreach(DataRow fila in datoRepuesto.Rows)
             {
+                bool esFraccionado = fila["cb_itemFraccionado"] != DBNull.Value
+                                        && Convert.ToBoolean(fila["cb_itemFraccionado"]);
+                if (esFraccionado)
+                    continue;
+
                 int categoria = Convert.ToInt32(fila["idcategoriap"]);
                 decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
 
@@ -676,6 +780,22 @@ namespace jycboliviaASP.net.Presentacion
 
             foreach(DataRow fila in datoRepuesto.Rows)
             {
+                bool esFraccionado = fila["cb_itemFraccionado"] != DBNull.Value
+                                    && Convert.ToBoolean(fila["cb_itemFraccionado"]);
+                if (esFraccionado)
+                {
+                    fila["Descuento"] = 0;
+                    decimal precio1 = Convert.ToDecimal(fila["Precio"]);
+                    decimal cantidadFila1 = Convert.ToDecimal(fila["Cantidad"]);
+
+                    decimal subtotal1 = precio1 * cantidadFila1;
+                    subtotal1 = Math.Round(subtotal1, 2, MidpointRounding.AwayFromZero);
+
+                    fila["PrecioTotal"] = subtotal1;
+                    continue;
+                }
+
+                
                 int categoria = Convert.ToInt32(fila["idcategoriap"]);
                 decimal precio = Convert.ToDecimal(fila["Precio"]);
                 decimal cantidadFila = Convert.ToDecimal(fila["Cantidad"]);
@@ -696,6 +816,36 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        public class clsscliente
+        {
+            public string direccion { get; set; }
+            public string telefono { get; set; }
+            public string propietario { get; set; }
+            public string nit { get; set; }
+            public string razonsocial { get; set; }
+            public int tipoCliente { get; set; }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static clsscliente obtenerCliente(string nombreCliente)
+        {
+            NCorpal_Cliente ncli = new NCorpal_Cliente();
+            DataSet ds = ncli.get_ClienteNombreEspecifico(nombreCliente);
+
+            clsscliente c = new clsscliente();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+
+                //c.direccion = row["tiendadir"].ToString();
+                //c.telefono = row["tiendatelefono"].ToString();
+                c.propietario = row["propietarioname"].ToString();
+                c.nit = row["propietarionit"].ToString();
+                c.razonsocial = row["facturar_a"].ToString();
+                c.tipoCliente = Convert.ToInt32(row["id_tipocliente"].ToString());
+            }
+            return c;
+        }
 
 
         private void showalert(string mensaje)
@@ -704,6 +854,16 @@ namespace jycboliviaASP.net.Presentacion
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 
-
+        protected void dd_metodoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dd_metodoPago.SelectedIndex == 2)
+            {
+                tx_diasCredito.Visible = true;
+            }
+            else
+            {
+                tx_diasCredito.Visible = false;
+            }
+        }
     }
 }
