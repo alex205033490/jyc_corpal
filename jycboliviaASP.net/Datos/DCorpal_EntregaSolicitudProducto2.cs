@@ -1086,7 +1086,272 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod,
+                                         float cantidad, int codCli, bool contFracc)
+        {
+            try
+            {
+                string consulta = @"INSERT INTO tbcorpal_detalleproddespacho
+                            (coddespacho, codpedido, codprod, 
+                             cantentregada, codcliente, contenedorfraccionado) 
+                            VALUES 
+                            (@coddespacho, @codpedido, @codprod, 
+                             @cantidad, @codcliente, @contFracc);";
 
+                using (MySqlCommand comando = new MySqlCommand(consulta))
+                {
+                    comando.Parameters.AddWithValue("@coddespacho", coddespacho);
+                    comando.Parameters.AddWithValue("@codpedido", codpedido);
+                    comando.Parameters.AddWithValue("@codprod", codprod);
+                    comando.Parameters.AddWithValue("@cantidad", cantidad);
+                    comando.Parameters.AddWithValue("@codcliente", codCli);
+                    comando.Parameters.AddWithValue("@contFracc", contFracc ? 1 : 0);
+
+                    return conexion.ejecutarMySql2(comando);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar detalle de despacho: " + ex.Message);
+            }
+        }
+
+        internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantEntregado, string estadoProducto, float restarStock,
+                                                    int coduser, int codVehiculo, bool estadoFracc)
+        {
+            try
+            {
+                string consulta = @"update tbcorpal_detalle_solicitudproducto dsp
+                         set dsp.cantentregada = @cantEntregada, 
+                         dsp.fechaentrega_car = current_date(), 
+                         dsp.fechaasignacion_car = current_date(), 
+                         dsp.horaentrega_car = current_time(), 
+                         dsp.horaasignacion_car = current_time(), 
+                         dsp.coduserentrega_car = @codUserEntrega, 
+                         dsp.coduserasignacion_car = @codUserAsignacion, 
+                         dsp.codvehiculo = @codCar, 
+                         dsp.estadoprodsolicitud = @estadoProdSol 
+                         where dsp.codsolicitud =  @codSol 
+                         and dsp.codproducto = @codProd 
+                         and (
+                            (@conFraccionado = 1 and dsp.contenedorfraccionado = 1) 
+                         or (@conFraccionado = 0 and dsp.contenedorfraccionado is null)
+)";
+
+                using (MySqlCommand CMD = new MySqlCommand(consulta))
+                {
+                    CMD.Parameters.AddWithValue("@cantEntregada", cantEntregado);
+                    CMD.Parameters.AddWithValue("@codUserEntrega", coduser);
+                    CMD.Parameters.AddWithValue("@codUserAsignacion", coduser);
+                    CMD.Parameters.AddWithValue("@codCar", codVehiculo);
+                    CMD.Parameters.AddWithValue("@estadoProdSol", estadoProducto);
+                    CMD.Parameters.AddWithValue("@codSol", codigoSolicitud);
+                    CMD.Parameters.AddWithValue("@codProd", codigoProducto);
+                    CMD.Parameters.AddWithValue("@conFraccionado", estadoFracc ? 1 : 0);
+
+                    bool result = conexion.ejecutarMySql2(CMD);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar los datos. " + ex.Message);
+            }
+        }
+
+        internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta, string observacion)
+        {
+            try
+            {
+                string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep 
+                            SET sep.resp_aprobarcredito = @codResp, 
+                                sep.fecha_aprobarcredito = current_date(), 
+                                sep.hora_aprobarcredito = current_time(),
+                                sep.observacion_aprobarcredito = @observacion,
+                                sep.estado_aprobarcredito = 0 
+                            WHERE sep.estado = 1 
+                            AND sep.codigo = @codSol 
+                            AND sep.nroboleta = @nroBoleta;";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@codResp", codResp);
+                    cmd.Parameters.AddWithValue("@codSol", codSol);
+                    cmd.Parameters.AddWithValue("@nroBoleta", nroBoleta);
+                    cmd.Parameters.AddWithValue("@observacion", observacion);
+
+                    bool result = conexion.ejecutarMySql2(cmd);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Hubo un error en la consulta de aprobación de credito." + ex.Message);
+            }
+        }
+
+        internal DataSet get_filtroBusquedaCodigoOrdenSolicitud(string codigo)
+        {
+            try
+            {
+                string consulta = @"select 
+                            sep.`codigo`
+                            from tbcorpal_solicitudentregaproducto sep
+                            left join tbcorpal_detalle_solicitudproducto dsp on sep.`codigo` = dsp.`codsolicitud`
+                            where 
+                            sep.`estadosolicitud` = 'abierto'
+                            and sep.estado = true
+                            and sep.`fechaGRA` >= curdate() - interval 5 day
+                            and (dsp.`estadoprodsolicitud` <> 'total' or dsp.`estadoprodsolicitud` is null)
+                            and (sep.`cod_modcobranza` !=2 
+                            or (sep.`cod_modcobranza` = 2 and sep.`estado_aprobarcredito` = 1) or sep.`cod_modcobranza` is null)
+                            and sep.`codigo` like @codOrden 
+                            group by
+                            sep.codigo";
+
+                var parametros = new List<MySqlParameter>
+        {
+            new MySqlParameter("@codOrden", "%"+codigo+"%")
+        };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_filtroBusquedaPersonalSolicitante(string solicitante)
+        {
+            try
+            {
+                string consulta = @"select 
+                            re.`nombre`
+                            from tbcorpal_solicitudentregaproducto sep
+                            left join tbcorpal_detalle_solicitudproducto dsp on sep.`codigo` = dsp.`codsolicitud`
+                            left join tb_responsable re on sep.`codpersolicitante` = re.`codigo`
+                            where 
+                            sep.`estadosolicitud` = 'abierto'
+                            and sep.estado = true
+                            and sep.`fechaGRA` >= curdate() - interval 5 day
+                            and (dsp.`estadoprodsolicitud` <> 'total' or dsp.`estadoprodsolicitud` is null)
+                            and (sep.`cod_modcobranza` !=2 
+                            or (sep.`cod_modcobranza` = 2 and sep.`estado_aprobarcredito` = 1) or sep.`cod_modcobranza` is null)
+                            and re.nombre like @solicitante
+                            group by
+                            sep.codpersolicitante";
+
+                var parametros = new List<MySqlParameter>
+        {
+            new MySqlParameter("@solicitante", "%"+solicitante+"%")
+        };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_mostrarSolicitudesEntregaProducto_filtroBusqueda(string vendedor, string codigo)
+        {
+            try
+            {
+                NA_VariablesGlobales negocio = new NA_VariablesGlobales();
+                string consultaStock = negocio.get_consultaStockProductosActual();
+
+                string consulta = $@"SELECT 
+                        sep.codigo, 
+                        sep.nroboleta, 
+                        sep.personalsolicitud, 
+                        dsp.codproducto, 
+                        p.producto,
+                        dsp.contenedorfraccionado,
+                        pp.StockAlmacen, 
+                        cc.codigo as 'codCliente', 
+                        cc.tiendaname, 
+                        date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', 
+                        sep.horaentrega, 
+                        sep.estadosolicitud, 
+                        dsp.tiposolicitud, 
+                        dsp.cant as 'cantSolicitada', 
+                        ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
+                        CASE dsp.tiposolicitud 
+                            WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 
+                            ELSE ifnull(pp.StockAlmacen, 0) 
+                        END AS 'StockAlmacen' 
+                        from tbcorpal_solicitudentregaproducto sep 
+                        left join tbcorpal_detalle_solicitudproducto dsp 
+                            ON sep.codigo = dsp.codsolicitud 
+                        left join tbcorpal_producto p 
+                            ON dsp.codproducto = p.codigo 
+                        left join ({consultaStock}) as pp 
+                            on dsp.codproducto = pp.codigo 
+                        left join tbcorpal_cliente cc 
+                            ON sep.codcliente = cc.codigo 
+
+                        WHERE sep.estadosolicitud = 'abierto' 
+                        and sep.estado = true 
+                        and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY 
+                        and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) 
+                        and (sep.cod_modcobranza !=2 
+                        OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) 
+                        OR sep.cod_modcobranza is null) ";
+
+                var parametros = new List<MySqlParameter>();
+
+                if (!string.IsNullOrEmpty(vendedor))
+                {
+                    consulta += " AND sep.personalsolicitud = @personalSolicitud";
+                    parametros.Add(new MySqlParameter("@personalSolicitud", vendedor));
+                }
+
+                if (!string.IsNullOrEmpty(codigo))
+                {
+                    consulta += " AND sep.codigo = @codigoSol";
+                    parametros.Add(new MySqlParameter("@codigoSol", codigo));
+                }
+
+                consulta += " ORDER BY sep.fechaGRA desc, sep.codigo DESC;";
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos de la solicitud. " + ex.Message);
+            }
+        }
+
+        internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta, string obs)
+        {
+            try
+            {
+                string consulta = @"UPDATE tbcorpal_solicitudentregaproducto sep 
+                        SET sep.resp_aprobarcredito = @codResp, 
+                        sep.fecha_aprobarcredito = current_date(), 
+                        sep.hora_aprobarcredito = current_time(),
+                        sep.observacion_aprobarcredito = @obs,
+                        sep.estado_aprobarcredito = 1 
+                        WHERE sep.estado = 1 and sep.codigo = @codSol and sep.nroboleta = @nroBoleta;";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@obs", obs);
+                    cmd.Parameters.AddWithValue("@codResp", codResp);
+                    cmd.Parameters.AddWithValue("@codSol", codSol);
+                    cmd.Parameters.AddWithValue("@nroBoleta", nroBoleta);
+
+                    bool result = conexion.ejecutarMySql2(cmd);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Hubo un error en la consulta de aprobación de credito." + ex.Message);
+            }
+        }
 
     }
 }

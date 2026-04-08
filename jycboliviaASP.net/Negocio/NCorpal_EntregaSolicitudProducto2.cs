@@ -21,12 +21,12 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.get_VWRegistrosEntregaSolicitudProductoXCamion(estadoSolicitud, codVehiculo);
         }
-
-        /*internal DataSet get_detSolicitudProducto(int codSolicitud, int codProducto)
+        /*
+        internal DataSet get_detSolicitudProducto(int codSolicitud, int codProducto)
         {
             return datos.get_detSolicitudProductos(codSolicitud, codProducto);
-        }*/
-
+        }
+        */
         internal DataSet get_showCarDD()
         {
             return datos.get_listVehiculosDRegistro();
@@ -110,6 +110,8 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.POST_INSERTdespachoRetornoID(detalle, codvehiculo, codrespinicio, codconductor, conductor);
         }
+
+        
         internal bool POST_INSERTdetalleDespacho(int coddespacho, int codpedido, int codprod, float cantidad, 
                                                     int codcli, bool contFracc)
         {
@@ -123,7 +125,7 @@ namespace jycboliviaASP.net.Negocio
                 throw;
             }
         }
-
+        
         /* POST DETALLE SOLICITUD PEDIDO */
         internal bool UPDATE_camposDetalleSolicitudPedido(int codigoSolicitud, int codigoProducto, float cantidadEntregado, string estadoProducto, float restarStock,
                                                             int coduser, int codVehiculo, bool estadoFraccionado)
@@ -138,7 +140,7 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error inesperado: " + ex.Message);
             }
         }
-
+        
         /* SOLICITUDES PEDIDOS A CREDITO */
         internal DataSet get_listaPedidosACredito()
         {
@@ -149,12 +151,12 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.get_listDetallePedidoaCredito(codigo);
         }
-
+        
         internal bool POST_aprobacionSolCredito(int codResp, int codSol, string nroBoleta, string obs)
         {
             return datos.POST_aprobacionSolCredito(codResp, codSol, nroBoleta, obs);
         }
-
+        
         internal int ObtenerCodVendedor_EntregaSolProductos(int cod)
         {
             return datos.ObtenerCodVendedor_EntregaSolProductos(cod);
@@ -164,6 +166,7 @@ namespace jycboliviaASP.net.Negocio
         {
             return datos.Obtener_codMetodoPagoSolicitud(cod);
         }
+        
         internal bool POST_rechazarSolCredito(int codResp, int codSol, string nroBoleta, string observacion)
         {
             try
@@ -175,6 +178,7 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al rechazar la solicitud de credito. " + ex.Message);
             }
         }
+        
         internal bool POST_RegistroAsignacionChoferAVehiculo(int codCar, int codChofer, int codUserGra, string userGra)
         {
             try
@@ -250,6 +254,7 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al obtener datos de la solicitud. " + ex.Message);
             }
         }
+        
         internal DataSet get_filtroBusquedaCodigoOrdenSolicitud(string codigo)
         {
             try
@@ -261,8 +266,7 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Hubo un error al obtener datos. " + ex.Message);
             }
         }
-
-
+        
         internal DataSet get_filtroBusquedaPersonalSolicitante(string solicitante)
         {
             try
@@ -274,7 +278,6 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Hubo un error al obtener datos. " + ex.Message);
             }
         }
-
         public DataSet get_mostrarSolicitudesEntregaProducto_filtroBusqueda(string vendedor, string codigo)
         {
             try
