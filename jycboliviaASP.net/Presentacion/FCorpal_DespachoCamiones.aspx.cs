@@ -126,6 +126,7 @@ namespace jycboliviaASP.net.Presentacion
                 if (bandera) {
 
                     Registro_RutaPuntosDEntrega_Despacho(codigo, vehiculo);
+                    RegistrarAlmacenMovil(codigo);
                     Session["codigoDespacho"] = codigo;
                     Session["ReporteGeneral"] = "Reporte_DespachoProductoCamionEntrega";
                     Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
@@ -135,6 +136,68 @@ namespace jycboliviaASP.net.Presentacion
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Dato') </script>");
         }
+
+
+        private void RegistrarAlmacenMovil(int codDespacho)
+        {
+            try
+            {
+                NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+                // 1. Obtener datos de Cabecera (Consulta 2: Ruta, Chofer, Vehiculo)
+                DataSet dsCabecera = negocio.GET_CabeceraRutaParaAlmacen(codDespacho);
+
+                if (dsCabecera == null || dsCabecera.Tables[0].Rows.Count == 0)
+                {
+                    showalert("Aviso: No se encontraron datos de ruta para cargar el almacén móvil.");
+                    return;
+                }
+
+                DataRow rowCabecera = dsCabecera.Tables[0].Rows[0];
+                int codRuta = Convert.ToInt32(rowCabecera["codruta"]);
+                int codChofer = Convert.ToInt32(rowCabecera["codchofer"]);
+                int codVehiculo = Convert.ToInt32(rowCabecera["codvehiculo"]);
+
+                // 2. Obtener datos de Detalle (Consulta 1: Productos y Fracciones agrupados)
+                DataSet dsProductos = negocio.GET_ProductosParaAlmacenMovil(codDespacho);
+
+                if (dsProductos != null && dsProductos.Tables[0].Rows.Count > 0)
+                {
+                    // 3. Recorrer los productos e insertarlos en tbcorpal_almacenmovil
+                    foreach (DataRow rowProd in dsProductos.Tables[0].Rows)
+                    {
+                        int codProducto = Convert.ToInt32(rowProd["codproducto"]);
+                        string producto = rowProd["producto"].ToString();
+                        decimal cantidadTotal = Convert.ToDecimal(rowProd["cantidad_total"]);
+                        string medida = rowProd["medida"].ToString();
+
+                        // Manejo de nulos por si algún producto no tiene fracciones
+                        decimal cantFraccionada = rowProd["cantidad_fraccionada_total"] != DBNull.Value ?
+                                                  Convert.ToDecimal(rowProd["cantidad_fraccionada_total"]) : 0;
+                        string medidaFraccionada = rowProd["medida_unidadcontenedorfraccionada"].ToString();
+
+                        int traspaso = 0; // Según tu lógica de negocio
+
+                        // 4. Guardar en BD
+                        bool insertado = negocio.POST_RegistroAlmacenMovil(
+                            codDespacho, codRuta, codChofer, codVehiculo,
+                            codProducto, producto, cantidadTotal, medida,
+                            cantFraccionada, medidaFraccionada, traspaso
+                        );
+
+                        if (!insertado)
+                        {
+                            showalert("Ocurrió un error al registrar el producto: " + producto + " en el almacén móvil.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                showalert("Error al registrar almacén móvil: " + ex.Message);
+            }
+        }
+
 
         /*  Registrar RUTA Y PUNTOS ENTREGA  */
         private void Registro_RutaPuntosDEntrega_Despacho(int codDespacho, string vehiculo)

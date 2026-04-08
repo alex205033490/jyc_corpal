@@ -53,10 +53,14 @@
           <DataField>placa</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CanEntrFracc">
+          <DataField>CanEntrFracc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS_ProductosAlmacen</rd:DataSetName>
-        <rd:SchemaPath>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Users\FELIPE\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
         <rd:TableName>DS_EntregaDespachoProdVehiculo</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -106,7 +110,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>16.8773cm</Width>
+                  <Width>18.55185cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -219,10 +223,13 @@
                                     <Width>2.55292cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>10.96729cm</Width>
+                                    <Width>9.49268cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>2.44708cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -312,6 +319,38 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>Textbox26</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>LightGrey</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox17">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Entregar Fracc</Value>
+                                                    <Style>
+                                                      <FontWeight>Bold</FontWeight>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox17</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Style>Solid</Style>
@@ -417,6 +456,35 @@
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="CanEntrFracc">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!CanEntrFracc.Value</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>CanEntrFracc</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
@@ -488,12 +556,44 @@
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox19">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Sum(Fields!CanEntrFracc.Value)</Value>
+                                                    <Style />
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox19</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>LightGrey</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                          <rd:Selected>true</rd:Selected>
+                                        </CellContents>
+                                      </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
                                 <TablixMembers>
+                                  <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
@@ -519,7 +619,7 @@
                               <Top>2.8537cm</Top>
                               <Left>0.32917cm</Left>
                               <Height>1.8cm</Height>
-                              <Width>15.96729cm</Width>
+                              <Width>16.99268cm</Width>
                               <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
@@ -876,7 +976,7 @@
             <Top>1.85745cm</Top>
             <Left>0.28627cm</Left>
             <Height>7.46442cm</Height>
-            <Width>16.8773cm</Width>
+            <Width>18.55185cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -888,7 +988,7 @@
         <Height>4.08333in</Height>
         <Style />
       </Body>
-      <Width>7.01701in</Width>
+      <Width>7.64575in</Width>
       <Page>
         <PageHeight>27.94cm</PageHeight>
         <PageWidth>21.59cm</PageWidth>
