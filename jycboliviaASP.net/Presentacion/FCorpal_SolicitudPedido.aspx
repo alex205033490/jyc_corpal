@@ -255,9 +255,7 @@
             </div>
         </div>
     </div>
-
     <!-------------------------------------------------------- CARD 2 ------------------------------------------------------------------>
-
     <div class="card col-lg-12">
         <div class="card-header bg-success text-white">
             Adición de Producto
@@ -348,7 +346,6 @@
                         </asp:UpdatePanel>
                     </div>
 
-
                     <div class="container_column2 col-lg-7 col-md-7 col-sm-10 col-12">
                         <div class="container_gvListProductos table-responsive">
 
@@ -423,8 +420,6 @@
                                 <asp:AsyncPostBackTrigger ControlID="gv_adicionados" EventName="RowDeleting"/>
                             </Triggers>
                         </asp:UpdatePanel>
-
-
                     </div>
                 </div>
             </div>
@@ -462,8 +457,6 @@
                 if (lbl) lbl.innerText = "No se permite productos fraccionados";
             }
         }
-
-
 
 
         function setClienteContextKey() {
