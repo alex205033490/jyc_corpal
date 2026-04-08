@@ -26,35 +26,36 @@ namespace jycboliviaASP.net.Datos
                 string consultaStock = negocio.get_consultaStockProductosActual();
 
                 string consulta = $@"SELECT 
-                                sep.codigo, 
-                                sep.nroboleta, 
-                                sep.personalsolicitud, 
-                                dsp.codproducto, 
-                                p.producto, 
-                                pp.StockAlmacen, 
-                                cc.codigo as 'codCliente', 
-                                cc.tiendaname, 
-                                date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', 
-                                sep.horaentrega, 
-                                sep.estadosolicitud, 
-                                dsp.tiposolicitud, 
-                                dsp.cant as 'cantSolicitada', 
-                                ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
-                                CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 
-                                ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' 
-                                from tbcorpal_solicitudentregaproducto sep 
-                                left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud 
-                                left join tbcorpal_producto p ON dsp.codproducto = p.codigo 
-                                left join ({consultaStock}) as pp on dsp.codproducto = pp.codigo 
-                                left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo 
-
-                                WHERE sep.estadosolicitud like @estadoSol  
-                                and sep.estado = true 
-                                and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY 
-                                and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) 
-                                and (sep.cod_modcobranza !=2 
-                                OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) 
-                                order by sep.fechaGRA desc, sep.codigo desc;";
+                sep.codigo, 
+                sep.nroboleta, 
+                sep.personalsolicitud, 
+                dsp.codproducto, 
+                p.producto,
+                dsp.contenedorfraccionado,
+                pp.StockAlmacen, 
+                cc.codigo as 'codCliente', 
+                cc.tiendaname, 
+                date_format(sep.fechaentrega, '%d/%m/%Y') as 'fechaentrega', 
+                sep.horaentrega, 
+                sep.estadosolicitud, 
+                dsp.tiposolicitud, 
+                COALESCE(dsp.cant, dsp.cant_unidadcontenedorfraccionada) as 'cantSolicitada',
+                ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
+                CASE dsp.tiposolicitud WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 
+                ELSE ifnull(pp.StockAlmacen, 0) END AS 'StockAlmacen' 
+                from tbcorpal_solicitudentregaproducto sep 
+                left join tbcorpal_detalle_solicitudproducto dsp ON sep.codigo = dsp.codsolicitud 
+                left join tbcorpal_producto p ON dsp.codproducto = p.codigo 
+                left join ({consultaStock}) as pp on dsp.codproducto = pp.codigo 
+                left join tbcorpal_cliente cc ON sep.codcliente = cc.codigo
+ 
+                WHERE sep.estadosolicitud like @estadoSol  
+                and sep.estado = true 
+                and sep.fechaGRA >= CURDATE() - INTERVAL 5 DAY 
+                and (dsp.estadoprodsolicitud <> 'total' or dsp.estadoprodsolicitud is null) 
+                and (sep.cod_modcobranza !=2 
+                OR (sep.cod_modcobranza = 2 AND sep.estado_aprobarcredito = 1) OR sep.cod_modcobranza is null) 
+                order by sep.fechaGRA desc, sep.codigo desc;";
                 var parametros = new List<MySqlParameter>
             {
                 new MySqlParameter("@estadoSol", "%"+estadoSolicitud+"%")
