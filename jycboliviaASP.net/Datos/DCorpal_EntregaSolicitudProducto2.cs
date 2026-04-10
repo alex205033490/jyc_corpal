@@ -1076,7 +1076,6 @@ namespace jycboliviaASP.net.Datos
                     cmd.Parameters.AddWithValue("@medidaFraccionada", medidaFraccionada);
                     cmd.Parameters.AddWithValue("@traspaso", traspaso);
 
-                    // Usamos tu método existente que ejecuta MySqlCommand y retorna bool
                     return conexion.ejecutarMySql2(cmd);
                 }
             }

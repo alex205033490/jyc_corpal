@@ -307,9 +307,6 @@ namespace jycboliviaASP.net.Negocio
                                               int codProducto, string producto, decimal cantidad, string medida,
                                               decimal cantFraccionada, string medidaFraccionada, int traspaso)
         {
-            // Aquí podrías agregar lógica de negocio adicional antes de guardar si lo necesitaras.
-            // Por ejemplo, validar que la cantidad no sea 0.
-
             return datos.POST_RegistroAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo,
                                                    codProducto, producto, cantidad, medida,
                                                    cantFraccionada, medidaFraccionada, traspaso);

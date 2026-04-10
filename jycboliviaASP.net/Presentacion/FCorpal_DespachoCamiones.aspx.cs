@@ -144,7 +144,7 @@ namespace jycboliviaASP.net.Presentacion
             {
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
 
-                // 1. Obtener datos de Cabecera (Consulta 2: Ruta, Chofer, Vehiculo)
+
                 DataSet dsCabecera = negocio.GET_CabeceraRutaParaAlmacen(codDespacho);
 
                 if (dsCabecera == null || dsCabecera.Tables[0].Rows.Count == 0)
@@ -158,37 +158,52 @@ namespace jycboliviaASP.net.Presentacion
                 int codChofer = Convert.ToInt32(rowCabecera["codchofer"]);
                 int codVehiculo = Convert.ToInt32(rowCabecera["codvehiculo"]);
 
-                // 2. Obtener datos de Detalle (Consulta 1: Productos y Fracciones agrupados)
                 DataSet dsProductos = negocio.GET_ProductosParaAlmacenMovil(codDespacho);
 
                 if (dsProductos != null && dsProductos.Tables[0].Rows.Count > 0)
                 {
-                    // 3. Recorrer los productos e insertarlos en tbcorpal_almacenmovil
+
                     foreach (DataRow rowProd in dsProductos.Tables[0].Rows)
                     {
                         int codProducto = Convert.ToInt32(rowProd["codproducto"]);
                         string producto = rowProd["producto"].ToString();
-                        decimal cantidadTotal = Convert.ToDecimal(rowProd["cantidad_total"]);
+                        //decimal cantidadTotal = Convert.ToDecimal(rowProd["cantidad_total"]);
+                        decimal cantidadTotal = rowProd["cantidad_total"] != DBNull.Value
+                            ? Convert.ToDecimal(rowProd["cantidad_total"]) : 0;
+
                         string medida = rowProd["medida"].ToString();
 
                         // Manejo de nulos por si algún producto no tiene fracciones
-                        decimal cantFraccionada = rowProd["cantidad_fraccionada_total"] != DBNull.Value ?
-                                                  Convert.ToDecimal(rowProd["cantidad_fraccionada_total"]) : 0;
+                        decimal cantFraccionada = rowProd["cantidad_fraccionada_total"] != DBNull.Value 
+                                                ? Convert.ToDecimal(rowProd["cantidad_fraccionada_total"]) : 0;
                         string medidaFraccionada = rowProd["medida_unidadcontenedorfraccionada"].ToString();
 
-                        int traspaso = 0; // Según tu lógica de negocio
+                        int traspaso = 0; 
 
-                        // 4. Guardar en BD
-                        bool insertado = negocio.POST_RegistroAlmacenMovil(
-                            codDespacho, codRuta, codChofer, codVehiculo,
-                            codProducto, producto, cantidadTotal, medida,
-                            cantFraccionada, medidaFraccionada, traspaso
-                        );
-
-                        if (!insertado)
+                        ///////////////     P2
+                        
+                        if (cantidadTotal > 0)
                         {
-                            showalert("Ocurrió un error al registrar el producto: " + producto + " en el almacén móvil.");
+                            negocio.POST_RegistroAlmacenMovil(
+                                codDespacho, codRuta, codChofer, codVehiculo,
+                                codProducto, producto,
+                                cantidadTotal, medida,
+                                0, "", traspaso
+                            );
                         }
+
+                        
+                        if (cantFraccionada > 0)
+                        {
+                            negocio.POST_RegistroAlmacenMovil(
+                                codDespacho, codRuta, codChofer, codVehiculo,
+                                codProducto, producto,
+                                0, "",
+                                cantFraccionada, medidaFraccionada, traspaso
+                            );
+                        }
+
+
                     }
                 }
             }
