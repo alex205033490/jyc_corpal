@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Style_adicionarRepuesto.css" rel="stylesheet" type="text/css" />
+    <link href="/Images/naxsnax.png" rel="icon">
     <style type="text/css">
         .CompletionList {
             padding: 5px 0;
