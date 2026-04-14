@@ -736,6 +736,27 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);    
         }
 
+        public decimal obtenerPrecioBaseProducto(int idProducto)
+        {
+            decimal precioBase = 0;
+            try
+            {
+                string consulta = "SELECT precio FROM tbcorpal_producto WHERE codigo = " + idProducto;
+                System.Data.DataSet ds = conexion.consultaMySql(consulta);
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    // Convertimos de forma segura
+                    decimal.TryParse(ds.Tables[0].Rows[0]["precio"].ToString(), out precioBase);
+                }
+            }
+            catch (Exception)
+            {
+                precioBase = 0;
+            }
+            return precioBase;
+        }
+
 
     }
 }

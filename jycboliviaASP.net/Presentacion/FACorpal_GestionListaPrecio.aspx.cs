@@ -788,11 +788,152 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        protected void btnAbrirModificarPrecio_Click(object sender, EventArgs e)
+        {
+            // 1. Ocultamos otros paneles para mantener la pantalla limpia
+            panelFormularioLista.Visible = false;
+            panelAgregarProducto.Visible = false;
+
+            // Opcional: Ocultamos la sección de productos si había una lista abierta
+            panelProductos.Visible = false;
+            gvListasPrecio.SelectedIndex = -1; // Quitamos la selección azul de la tabla
+
+            // 2. Limpiamos todas las cajitas de nuestro panel
+            txtBuscarProductoModificar.Text = "";
+            txtPrecioActual.Text = "0.00";
+            txtNuevoPrecioBase.Text = "";
+            hdfIdProductoModificar.Value = "";
+
+            // 3. ¡Mostramos el panel celeste!
+            panelModificarPrecio.Visible = true;
+
+            // 4. CARGAMOS LOS PRODUCTOS EN EL BUSCADOR
+            // Llamamos a un método para que llene el datalist con las sugerencias
+           // CargarComboProductosModificar();
+
+            // Hacemos focus en el buscador para que el usuario escriba de inmediato
+            txtBuscarProductoModificar.Focus();
+        }
+
+        // ==========================================================
+        // EVENTO: AL SELECCIONAR UN PRODUCTO EN EL BUSCADOR GLOBAL
+        // ==========================================================
+        // ==========================================================
+        // EVENTO: AL SELECCIONAR UN PRODUCTO EN EL BUSCADOR GLOBAL
+        // ==========================================================
+        protected void txtBuscarProductoModificar_TextChanged(object sender, EventArgs e)
+        {
+            string textoSeleccionado = txtBuscarProductoModificar.Text;
+
+            if (!string.IsNullOrEmpty(textoSeleccionado) && textoSeleccionado.Contains("-"))
+            {
+                try
+                {
+                    // 1. Extraemos solo el ID
+                    string[] partes = textoSeleccionado.Split('-');
+                    int idProducto = Convert.ToInt32(partes[0].Trim());
+
+                    // 2. Guardamos el ID de forma oculta para usarlo al hacer el UPDATE
+                    hdfIdProductoModificar.Value = idProducto.ToString();
+
+                    // 3. Consultamos la base de datos
+                    NCorpal_Cliente Nproy = new NCorpal_Cliente();
+                    decimal precioActual = Nproy.obtenerPrecioBaseProducto(idProducto);
+
+                    // 4. Mostramos el precio formateado a 2 decimales en la caja bloqueada
+                    // Usamos InvariantCulture para que siempre pinte punto decimal (Ej: 150.50)
+                    txtPrecioActual.Text = precioActual.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                    // 5. Llevamos el cursor directo a la caja de Nuevo Precio Base
+                    txtNuevoPrecioBase.Focus();
+                }
+                catch (Exception)
+                {
+                    // Limpiamos en caso de error
+                    txtPrecioActual.Text = "0.00";
+                    hdfIdProductoModificar.Value = "";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Error al procesar el producto seleccionado.');", true);
+                }
+            }
+        }
 
 
+        // ==========================================================
+        // EVENTO: GUARDAR EL NUEVO PRECIO BASE GLOBAL
+        // ==========================================================
+        protected void btnGuardarPrecioBase_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. Validamos que haya seleccionado un producto (el ID oculto no debe estar vacío)
+                if (string.IsNullOrEmpty(hdfIdProductoModificar.Value))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('Por favor, busque y seleccione un producto primero.');", true);
+                    return;
+                }
+
+                // 2. Validamos que el nuevo precio no esté vacío
+                if (string.IsNullOrWhiteSpace(txtNuevoPrecioBase.Text))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('Debe ingresar un nuevo precio base.');", true);
+                    return;
+                }
+
+                int idProducto = Convert.ToInt32(hdfIdProductoModificar.Value);
+                decimal nuevoPrecioBase = 0;
+
+                // 3. Convertimos el precio de forma segura (soportando comas o puntos)
+                bool esValido = decimal.TryParse(txtNuevoPrecioBase.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out nuevoPrecioBase);
+
+                if (!esValido || nuevoPrecioBase < 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('El precio ingresado no es válido. Ingrese un número positivo.');", true);
+                    return;
+                }
+
+                // =========================================================================
+                // 4. GUARDAR EN LA BASE DE DATOS (ACTUALIZAR tbcorpal_producto)
+                // =========================================================================
+                // Aquí es donde conectarás con tu Capa de Negocio para hacer el UPDATE
+                // NCorpal_Cliente Nproy = new NCorpal_Cliente();
+                // bool exito = Nproy.actualizarPrecioBaseProducto(idProducto, nuevoPrecioBase);
+
+                bool exito = true; // Variable temporal para que puedas compilar y probar la vista
+
+                if (exito)
+                {
+                    // Cerramos el panel celeste
+                    panelModificarPrecio.Visible = false;
+
+                    // Si justo tenías la grilla de una lista abierta, la recargamos 
+                    // para que los precios base de la pantalla se actualicen al instante
+                    if (ViewState["IdListaSeleccionada"] != null)
+                    {
+                        int idLista = Convert.ToInt32(ViewState["IdListaSeleccionada"]);
+                        CargarProductosDeLista(idLista);
+                    }
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "exito", "alert('Precio base actualizado correctamente en el sistema.');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Ocurrió un error al actualizar el precio en la base de datos.');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Error inesperado al procesar los datos.');", true);
+            }
+        }
 
 
-
-
+        // ==========================================================
+        // EVENTO: CERRAR EL PANEL (Botón Cancelar)
+        // ==========================================================
+        protected void btnCancelarModificarPrecio_Click(object sender, EventArgs e)
+        {
+            // Simplemente ocultamos el panel celeste
+            panelModificarPrecio.Visible = false;
+        }
     }
 }

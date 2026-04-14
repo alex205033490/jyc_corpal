@@ -339,6 +339,15 @@ namespace jycboliviaASP.net.Negocio
         {
             return dtienda.updateDatosTiendaSolicitud( codigCliente,  cliente, razonsocial, propietario,  nit,  codpersolicitante);
         }
+
+
+
+        public decimal obtenerPrecioBaseProducto(int idProducto)
+        {
+            return dtienda.obtenerPrecioBaseProducto(idProducto);
+        }
+
+
     }
 }
     
