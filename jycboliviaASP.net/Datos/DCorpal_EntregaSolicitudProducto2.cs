@@ -1002,7 +1002,6 @@ namespace jycboliviaASP.net.Datos
                         dpd.codprod AS codproducto,
                         pro.producto,
                         
-                        -- Columna 1: Suma la cantidad NORMAL (Si el flag es 0 o Null)
                         SUM(CASE 
                             WHEN IFNULL(dpd.contenedorfraccionado, 0) = 0 THEN dpd.cantentregada 
                             ELSE 0 
@@ -1010,7 +1009,6 @@ namespace jycboliviaASP.net.Datos
                         
                         pro.medida,
                         
-                        -- Columna 2: Suma la cantidad FRACCIONADA (Si el flag es 1)
                         SUM(CASE 
                             WHEN dpd.contenedorfraccionado = 1 THEN dpd.cantentregada 
                             ELSE 0 
@@ -1081,8 +1079,7 @@ namespace jycboliviaASP.net.Datos
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al insertar en Almacén Móvil: " + ex.Message);
-                return false;
+                throw new Exception("Error al insertar en Almacén Móvil: " + ex.Message);
             }
         }
 

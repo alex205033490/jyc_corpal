@@ -184,32 +184,40 @@ namespace jycboliviaASP.net.Presentacion
                         
                         if (cantidadTotal > 0)
                         {
-                            negocio.POST_RegistroAlmacenMovil(
+                            bool result = negocio.POST_RegistroAlmacenMovil(
                                 codDespacho, codRuta, codChofer, codVehiculo,
                                 codProducto, producto,
                                 cantidadTotal, medida,
                                 0, "", traspaso
                             );
+                            if (!result)
+                            {
+                                showalert($"Error al insertar el producto : {producto}");
+                            }
                         }
 
                         
                         if (cantFraccionada > 0)
                         {
-                            negocio.POST_RegistroAlmacenMovil(
+                            bool result = negocio.POST_RegistroAlmacenMovil(
                                 codDespacho, codRuta, codChofer, codVehiculo,
                                 codProducto, producto,
                                 0, "",
                                 cantFraccionada, medidaFraccionada, traspaso
                             );
+                            if (!result)
+                            {
+                                showalert($"Error al insertar el producto : {producto}");
+                            }
                         }
-
 
                     }
                 }
             }
             catch (Exception ex)
             {
-                showalert("Error al registrar almacén móvil: " + ex.Message);
+                throw;
+                //showalert("Error al registrar almacén móvil: " + ex.Message);
             }
         }
 

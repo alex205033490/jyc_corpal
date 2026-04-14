@@ -405,6 +405,21 @@ namespace jycboliviaASP.net.Presentacion
 
         private bool validarGuardado()
         {
+            int codTipoCliente = Convert.ToInt32(hf_tipoCliente.Value);
+            
+            if (codTipoCliente != 7)
+            {
+                foreach(GridViewRow row in gv_adicionados.Rows)
+                {
+                    CheckBox cb = (CheckBox)row.FindControl("cb_itemFraccionado");
+                    if(cb != null && cb.Checked)
+                    {
+                        showalert("Este tipo de clientes no puede tener productos fraccionados.");
+                        return false;
+                    }
+                }
+            }
+
             string fechaentrega = tx_fechaEntrega.Text.Trim();
             string horaentrega = tx_horaEntrega.Text.Trim();
 
