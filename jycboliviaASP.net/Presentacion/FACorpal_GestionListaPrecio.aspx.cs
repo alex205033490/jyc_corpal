@@ -17,20 +17,33 @@ namespace jycboliviaASP.net.Presentacion
     {
 
         protected void Page_Load(object sender, EventArgs e)
-
         {
             this.Title = Session["BaseDatos"].ToString();
+
+            // 1. Verificamos si tiene permiso para ENTRAR a la página en general
             if (tienePermisoDeIngreso(151) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
             }
+
             if (!IsPostBack)
             {
                 buscarListaProducto("");
                 panelAgregarProducto.Visible = false;
-            }
+                panelModificarPrecio.Visible = false;
 
+ 
+                // Reemplaza el "152" por tu ID de permiso real
+                // ==========================================================
+                // 2. PERMISO EXCLUSIVO PARA EL BOTÓN MODIFICAR PRECIO
+                // ==========================================================
+                if (tienePermisoDeIngreso(152) == false)
+                {
+                    // Simplemente lo inhabilitamos (se verá gris y no hará nada)
+                    btnAbrirModificarPrecio.Enabled = false;
+                }
+            }
         }
 
         private bool tienePermisoDeIngreso(int permiso)
@@ -87,6 +100,7 @@ namespace jycboliviaASP.net.Presentacion
             panelFormularioLista.Visible = true;
 
             // 3. Ocultamos las grillas para que la pantalla quede limpia
+            btnAbrirModificarPrecio.Visible = false;
             txtBuscarLista.Visible = false;
             btnBuscarLista.Visible = false;
             btnNuevaLista.Visible = false;
@@ -142,6 +156,7 @@ namespace jycboliviaASP.net.Presentacion
                 panelFormularioLista.Visible = false;
 
                 // 2. Volvemos a hacer visibles los controles de búsqueda y la grilla
+                btnAbrirModificarPrecio.Visible = true;
                 txtBuscarLista.Visible = true;
                 btnBuscarLista.Visible = true;
                 btnNuevaLista.Visible = true;
@@ -168,6 +183,7 @@ namespace jycboliviaASP.net.Presentacion
             panelFormularioLista.Visible = false;
 
             // 3. Volvemos a mostrar la grilla y los controles de búsqueda
+            btnAbrirModificarPrecio.Visible = true;
             txtBuscarLista.Visible = true;
             btnBuscarLista.Visible = true;
             btnNuevaLista.Visible = true;
@@ -790,29 +806,53 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void btnAbrirModificarPrecio_Click(object sender, EventArgs e)
         {
-            // 1. Ocultamos otros paneles para mantener la pantalla limpia
+            // 1. Ocultamos absolutamente todo lo demás
             panelFormularioLista.Visible = false;
             panelAgregarProducto.Visible = false;
-
-            // Opcional: Ocultamos la sección de productos si había una lista abierta
             panelProductos.Visible = false;
-            gvListasPrecio.SelectedIndex = -1; // Quitamos la selección azul de la tabla
 
-            // 2. Limpiamos todas las cajitas de nuestro panel
+            gvListasPrecio.Visible = false; // Ocultamos la grilla principal
+            txtBuscarLista.Visible = false; // Ocultamos el buscador de listas
+            btnBuscarLista.Visible = false; // Ocultamos botón buscar
+            btnNuevaLista.Visible = false;  // Ocultamos botón nueva lista
+            btnAbrirModificarPrecio.Visible = false; // Ocultamos este mismo botón
+
+            gvListasPrecio.SelectedIndex = -1;
+
+            // 2. Limpiamos las cajitas
             txtBuscarProductoModificar.Text = "";
             txtPrecioActual.Text = "0.00";
             txtNuevoPrecioBase.Text = "";
             hdfIdProductoModificar.Value = "";
 
-            // 3. ¡Mostramos el panel celeste!
+            // 3. ¡Mostramos SOLO el panel celeste!
             panelModificarPrecio.Visible = true;
 
-            // 4. CARGAMOS LOS PRODUCTOS EN EL BUSCADOR
-            // Llamamos a un método para que llene el datalist con las sugerencias
-           // CargarComboProductosModificar();
-
-            // Hacemos focus en el buscador para que el usuario escriba de inmediato
+            CargarComboProductosModificar();
             txtBuscarProductoModificar.Focus();
+        }
+
+
+        private void CargarComboProductosModificar()
+        {
+            try
+            {
+                NCorpal_Cliente Nproy = new NCorpal_Cliente();
+
+                // 1. CORRECCIÓN: Usamos exactamente el mismo método del otro panel
+                DataSet dsProductos = Nproy.listarProductosActivos();
+
+                if (dsProductos != null && dsProductos.Tables.Count > 0)
+                {
+                    // 2. CORRECCIÓN: Le agregamos el .Tables[0] para que lea los datos correctamente
+                    rptProductosModificar.DataSource = dsProductos.Tables[0];
+                    rptProductosModificar.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Error al cargar productos en el buscador.');", true);
+            }
         }
 
         // ==========================================================
@@ -865,14 +905,12 @@ namespace jycboliviaASP.net.Presentacion
         {
             try
             {
-                // 1. Validamos que haya seleccionado un producto (el ID oculto no debe estar vacío)
                 if (string.IsNullOrEmpty(hdfIdProductoModificar.Value))
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('Por favor, busque y seleccione un producto primero.');", true);
                     return;
                 }
 
-                // 2. Validamos que el nuevo precio no esté vacío
                 if (string.IsNullOrWhiteSpace(txtNuevoPrecioBase.Text))
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('Debe ingresar un nuevo precio base.');", true);
@@ -882,45 +920,53 @@ namespace jycboliviaASP.net.Presentacion
                 int idProducto = Convert.ToInt32(hdfIdProductoModificar.Value);
                 decimal nuevoPrecioBase = 0;
 
-                // 3. Convertimos el precio de forma segura (soportando comas o puntos)
-                bool esValido = decimal.TryParse(txtNuevoPrecioBase.Text.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out nuevoPrecioBase);
+                string precioNormalizado = txtNuevoPrecioBase.Text.Replace(",", ".");
+
+                bool esValido = decimal.TryParse(precioNormalizado, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out nuevoPrecioBase);
 
                 if (!esValido || nuevoPrecioBase < 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('El precio ingresado no es válido. Ingrese un número positivo.');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alerta", "alert('El precio ingresado no es válido. Ingrese un número positivo usando punto o coma.');", true);
                     return;
                 }
 
-                // =========================================================================
-                // 4. GUARDAR EN LA BASE DE DATOS (ACTUALIZAR tbcorpal_producto)
-                // =========================================================================
-                // Aquí es donde conectarás con tu Capa de Negocio para hacer el UPDATE
-                // NCorpal_Cliente Nproy = new NCorpal_Cliente();
-                // bool exito = Nproy.actualizarPrecioBaseProducto(idProducto, nuevoPrecioBase);
+                NCorpal_Cliente Nproy = new NCorpal_Cliente();
 
-                bool exito = true; // Variable temporal para que puedas compilar y probar la vista
+                // PASO 1: Actualizamos el precio base en la tabla global
+                bool exito = Nproy.actualizarPrecioBaseProducto(idProducto, nuevoPrecioBase);
 
                 if (exito)
                 {
-                    // Cerramos el panel celeste
-                    panelModificarPrecio.Visible = false;
+                    // PASO 2: Disparamos la actualización en cascada
+                    Nproy.actualizarPreciosDetalleEnCascada(idProducto);
 
-                    // Si justo tenías la grilla de una lista abierta, la recargamos 
-                    // para que los precios base de la pantalla se actualicen al instante
+                    panelModificarPrecio.Visible = false;
+                    // VOLVEMOS A MOSTRAR LA PANTALLA PRINCIPAL
+                    txtBuscarLista.Visible = true;
+                    btnBuscarLista.Visible = true;
+                    btnNuevaLista.Visible = true;
+                    btnAbrirModificarPrecio.Visible = true;
+                    gvListasPrecio.Visible = true;
+
+                    txtBuscarProductoModificar.Text = "";
+                    txtPrecioActual.Text = "0.00";
+                    txtNuevoPrecioBase.Text = "";
+                    hdfIdProductoModificar.Value = "";
+
                     if (ViewState["IdListaSeleccionada"] != null)
                     {
                         int idLista = Convert.ToInt32(ViewState["IdListaSeleccionada"]);
                         CargarProductosDeLista(idLista);
                     }
 
-                    ScriptManager.RegisterStartupScript(this, GetType(), "exito", "alert('Precio base actualizado correctamente en el sistema.');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "exito", "alert('Precio base actualizado. Las listas han sido recalculadas exitosamente.');", true);
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Ocurrió un error al actualizar el precio en la base de datos.');", true);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "error", "alert('Error inesperado al procesar los datos.');", true);
             }
@@ -932,8 +978,15 @@ namespace jycboliviaASP.net.Presentacion
         // ==========================================================
         protected void btnCancelarModificarPrecio_Click(object sender, EventArgs e)
         {
-            // Simplemente ocultamos el panel celeste
+            // 1. Ocultamos el panel celeste
             panelModificarPrecio.Visible = false;
+
+            // 2. Volvemos a encender los controles principales
+            txtBuscarLista.Visible = true;
+            btnBuscarLista.Visible = true;
+            btnNuevaLista.Visible = true;
+            btnAbrirModificarPrecio.Visible = true;
+            gvListasPrecio.Visible = true;
         }
     }
 }

@@ -56,7 +56,7 @@
         <%-- NUEVO PANEL: MODIFICAR PRECIO BASE GLOBAL                         --%>
         <%-- ================================================================= --%>
         <asp:Panel ID="panelModificarPrecio" runat="server" Visible="false" CssClass="card" style="margin-bottom: 20px; border: 1px solid #31708f; padding: 15px; background-color: #d9edf7;">
-            <h5 style="color: #31708f; font-weight: bold;">Modificar Precio Base Global del Producto</h5>
+            <h5 style="color: #31708f; font-weight: bold;">Modificar Precio Base del Producto</h5>
             
             <div class="row">
                 <asp:HiddenField ID="hdfIdProductoModificar" runat="server" />

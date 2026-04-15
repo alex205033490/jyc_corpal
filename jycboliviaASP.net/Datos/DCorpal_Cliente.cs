@@ -758,5 +758,47 @@ namespace jycboliviaASP.net.Datos
         }
 
 
+        public bool actualizarPrecioBaseProducto(int idProducto, decimal nuevoPrecio)
+        {
+            try
+            {
+                // Formateamos el precio para que MySQL siempre reciba un punto (Ej: 490.99)
+                string precioSQL = nuevoPrecio.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                // Hacemos el UPDATE en la tabla maestra
+                string consulta = "UPDATE tbcorpal_producto SET " +
+                                  "precio = " + precioSQL + " " +
+                                  "WHERE codigo = " + idProducto;
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool actualizarPreciosDetalleEnCascada(int idProducto)
+        {
+            try
+            {
+                // Tu consulta SQL literal (cambiando el '4' por la variable idProducto)
+                string consulta = "UPDATE tbcorpal_detallelistaprecio d " +
+                                  "INNER JOIN tbcorpal_producto p ON p.codigo = d.id_producto " +
+                                  "SET d.precio = p.precio * (1 + IFNULL(d.porcentaje_aumento, 0) / 100 - IFNULL(d.porcentaje_descuento, 0) / 100) " +
+                                  "WHERE p.codigo = " + idProducto + " " +
+                                  "AND d.estado = 1";
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
     }
 }
