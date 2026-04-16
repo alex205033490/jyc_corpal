@@ -339,6 +339,27 @@ namespace jycboliviaASP.net.Negocio
         {
             return dtienda.updateDatosTiendaSolicitud( codigCliente,  cliente, razonsocial, propietario,  nit,  codpersolicitante);
         }
+
+
+
+        public decimal obtenerPrecioBaseProducto(int idProducto)
+        {
+            return dtienda.obtenerPrecioBaseProducto(idProducto);
+        }
+
+        public bool actualizarPrecioBaseProducto(int idProducto, decimal nuevoPrecio)
+        {
+            // Reemplaza "dtienda" por el nombre de tu instancia de datos si es distinto
+            return dtienda.actualizarPrecioBaseProducto(idProducto, nuevoPrecio);
+        }
+
+        public bool actualizarPreciosDetalleEnCascada(int idProducto)
+        {
+            return dtienda.actualizarPreciosDetalleEnCascada(idProducto);
+        }
+
+
+
     }
 }
     

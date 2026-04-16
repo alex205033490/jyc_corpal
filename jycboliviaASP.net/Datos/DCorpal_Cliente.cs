@@ -736,6 +736,69 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);    
         }
 
+        public decimal obtenerPrecioBaseProducto(int idProducto)
+        {
+            decimal precioBase = 0;
+            try
+            {
+                string consulta = "SELECT precio FROM tbcorpal_producto WHERE codigo = " + idProducto;
+                System.Data.DataSet ds = conexion.consultaMySql(consulta);
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    // Convertimos de forma segura
+                    decimal.TryParse(ds.Tables[0].Rows[0]["precio"].ToString(), out precioBase);
+                }
+            }
+            catch (Exception)
+            {
+                precioBase = 0;
+            }
+            return precioBase;
+        }
+
+
+        public bool actualizarPrecioBaseProducto(int idProducto, decimal nuevoPrecio)
+        {
+            try
+            {
+                // Formateamos el precio para que MySQL siempre reciba un punto (Ej: 490.99)
+                string precioSQL = nuevoPrecio.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+                // Hacemos el UPDATE en la tabla maestra
+                string consulta = "UPDATE tbcorpal_producto SET " +
+                                  "precio = " + precioSQL + " " +
+                                  "WHERE codigo = " + idProducto;
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool actualizarPreciosDetalleEnCascada(int idProducto)
+        {
+            try
+            {
+                // Tu consulta SQL literal (cambiando el '4' por la variable idProducto)
+                string consulta = "UPDATE tbcorpal_detallelistaprecio d " +
+                                  "INNER JOIN tbcorpal_producto p ON p.codigo = d.id_producto " +
+                                  "SET d.precio = p.precio * (1 + IFNULL(d.porcentaje_aumento, 0) / 100 - IFNULL(d.porcentaje_descuento, 0) / 100) " +
+                                  "WHERE p.codigo = " + idProducto + " " +
+                                  "AND d.estado = 1";
+
+                conexion.consultaMySql(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
     }
 }

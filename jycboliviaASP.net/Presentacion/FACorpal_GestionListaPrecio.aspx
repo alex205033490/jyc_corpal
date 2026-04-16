@@ -49,9 +49,61 @@
                 </div>
             </div>
         </asp:Panel>
+        
 
 
+        <%-- ================================================================= --%>
+        <%-- NUEVO PANEL: MODIFICAR PRECIO BASE GLOBAL                         --%>
+        <%-- ================================================================= --%>
+        <asp:Panel ID="panelModificarPrecio" runat="server" Visible="false" CssClass="card" style="margin-bottom: 20px; border: 1px solid #31708f; padding: 15px; background-color: #d9edf7;">
+            <h5 style="color: #31708f; font-weight: bold;">Modificar Precio Base del Producto</h5>
+            
+            <div class="row">
+                <asp:HiddenField ID="hdfIdProductoModificar" runat="server" />
+                
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Buscar Producto (*)</label>
+                        <asp:TextBox ID="txtBuscarProductoModificar" runat="server" CssClass="form-control" 
+                            list="listaProductosGlobal" AutoPostBack="true" 
+                            OnTextChanged="txtBuscarProductoModificar_TextChanged" 
+                            placeholder="Escriba para buscar...">
+                        </asp:TextBox>
+                        
+                        <datalist id="listaProductosGlobal">
+                            <asp:Repeater ID="rptProductosModificar" runat="server">
+                                <ItemTemplate>
+                                    <option value='<%# Eval("codigo") + " - " + Eval("producto") %>'></option>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </datalist>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Precio Base Actual</label>
+                        <asp:TextBox ID="txtPrecioActual" runat="server" CssClass="form-control" ReadOnly="true" BackColor="#e9ecef"></asp:TextBox>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Nuevo Precio Base (*)</label>
+                        <asp:TextBox ID="txtNuevoPrecioBase" runat="server" CssClass="form-control" TextMode="Number" step="0.01"></asp:TextBox>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 text-right">
+                    <div class="form-group" style="margin-top: 25px;">
+                        <asp:Button ID="btnGuardarPrecioBase" runat="server" Text="Actualizar Precio" CssClass="btn btn-primary" OnClick="btnGuardarPrecioBase_Click" />
+                        <asp:Button ID="btnCancelarModificarPrecio" runat="server" Text="Cancelar" CssClass="btn btn-default" OnClick="btnCancelarModificarPrecio_Click" />
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
 
+        
         <div class="row mb-3" style="margin-bottom: 15px;">
             <div class="col-md-8">
                 <div class="input-group">
@@ -61,7 +113,13 @@
                     </span>
                 </div>
             </div>
+            
+            <%-- Juntamos AMBOS botones en el mismo col-md-4 para que no se bajen a otra línea --%>
             <div class="col-md-4 text-right">
+                <%-- BOTÓN 1: Modificar Precio --%>
+                <asp:Button ID="btnAbrirModificarPrecio" runat="server" Text="Modificar Precio" CssClass="btn btn-info" OnClick="btnAbrirModificarPrecio_Click" style="margin-right: 5px;" />
+                
+                <%-- BOTÓN 2: Nueva Lista --%>
                 <asp:Button ID="btnNuevaLista" runat="server" Text="+ Nueva Lista" CssClass="btn btn-success" OnClick="btnNuevaLista_Click" />
             </div>
         </div>
