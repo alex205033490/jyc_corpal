@@ -457,5 +457,7 @@ namespace jycboliviaASP.net.Presentacion
             string medida = tuplas.Tables[0].Rows[0][2].ToString();
             tx_medida.Text = medida;
         }
+
+        //private void obtenerMedidaFraccionada_
     }
 }

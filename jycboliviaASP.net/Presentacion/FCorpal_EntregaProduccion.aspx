@@ -55,7 +55,18 @@
         width: 300px;
         height: auto;
     }
-    
+    .gv_EntregasdeProduccion th{
+        border: 2px solid #ffffff;
+        padding: 0.35rem;
+        background-color: black;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        font-size: 0.7rem;
+    }
+    .gv_EntregasdeProduccion td{
+        font-size: 0.6rem;
+    }
         </style>
 </asp:Content>
 
@@ -178,6 +189,7 @@
         <td>
             <asp:TextBox ID="tx_unidadsuelta" class="form-control" runat="server"></asp:TextBox>
             </td>
+        
         <td>
             <asp:Label ID="Label43" runat="server" Text="Kgr para mix :"></asp:Label>
             </td>
@@ -185,6 +197,23 @@
             <asp:TextBox ID="tx_kgrparamix" class="form-control" runat="server"></asp:TextBox>
             </td>        
         </tr>
+
+           <tr>
+               <td>
+                    <asp:Label ID="lb_unidadFraccionada" runat="server" Text="Unidad Fraccionada: "></asp:Label>
+                </td>
+                    <td>
+                        <asp:TextBox ID="tx_unidadFraccionada" class="form-control" runat="server"></asp:TextBox>
+                    </td>
+               <td>
+                   <asp:Label ID="lb_medidafraccionada" runat="server" Text="Medida Fraccionada:"></asp:Label>
+               </td>
+               <td>
+                   <asp:TextBox ID="tx_medidaFraccionada" runat="server" class="form-control"></asp:TextBox>
+               </td>
+
+           </tr>
+
         <tr>
         <td>
             <asp:Label ID="Label44" runat="server" Text="kgr Desperdicio Con Aceite:"></asp:Label>
@@ -254,13 +283,36 @@
     <div class="col-md-12 col-md-offset-1">  
             <div class="DatosProyecto">                
                 <asp:GridView ID="gv_EntregasdeProduccion" 
-                     runat="server" BackColor="White" 
+                     runat="server" BackColor="White" CssClass="gv_EntregasdeProduccion"
                     BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" 
-                    Font-Size="Small" ForeColor="Black" GridLines="Vertical" 
+                    Font-Size="Small" ForeColor="black" GridLines="Vertical" AutoGenerateColumns="false" 
                     onselectedindexchanged="gv_reciboIngresoEgreso_SelectedIndexChanged">
-                    <AlternatingRowStyle BackColor="#CCCCCC" />
+                    <AlternatingRowStyle BackColor="#CCCCCC"/>
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" />
+                        <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" />
+                        <asp:BoundField DataField="turno" HeaderText="Turno" HtmlEncode="false" />
+                        <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
+                        <asp:BoundField DataField="hora" HeaderText="Hora" HtmlEncode="false" />
+                        <asp:BoundField DataField="resp_entrega" HeaderText="Responsable Entrega" HtmlEncode="false" />
+                        <asp:BoundField DataField="cantcajas" HeaderText="Cantidad Cajas" HtmlEncode="false" />
+                        <asp:BoundField DataField="unidadsuelta" HeaderText="Unidad Suelta" HtmlEncode="false" />
+                        <asp:BoundField DataField="kgrdesperdicio" HeaderText="Kg Desperdicio" HtmlEncode="false" />
+                        <asp:BoundField DataField="kgrparamix" HeaderText="Kg para Mix" HtmlEncode="false" />
+                        <asp:BoundField DataField="codorden" HeaderText="ID Orden" HtmlEncode="false" />
+                        <asp:BoundField DataField="codrespentrega" HeaderText="ID Responsable Entrega" HtmlEncode="false" />
+                        <asp:BoundField DataField="detalleentrega" HeaderText="Detalle Entrega" HtmlEncode="false" />
+                        <asp:BoundField DataField="nroorden" HeaderText="Nro Orden" HtmlEncode="false" />
+                        <asp:BoundField DataField="productoNax" HeaderText="Item" HtmlEncode="false" />
+                        <asp:BoundField DataField="codProductonax" HeaderText="ID Item" HtmlEncode="false" />
+                        <asp:BoundField DataField="codresprecepcion" HeaderText="ID Responsable Recepción" HtmlEncode="false" />
+                        <asp:BoundField DataField="resp_recepcion" HeaderText="Responsable Recepcion" HtmlEncode="false" />
+                        <asp:BoundField DataField="kgrdesperdicio_conaceite" HeaderText="Desperdicio con Aceite (KG)" HtmlEncode="false" />
+                        <asp:BoundField DataField="kgrdesperdicio_conaceite" HeaderText="Desperdicio sin Aceite (KG)" HtmlEncode="false" />
+                        <asp:BoundField DataField="kgrdesperdiciobobina" HeaderText="Desperdicio Bobina" HtmlEncode="false" />
+                        <asp:BoundField DataField="pack_ferial" HeaderText="Pack Ferial" HtmlEncode="false" />
+
+
                     </Columns>
                     <FooterStyle BackColor="#CCCCCC" />
                     <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

@@ -8,6 +8,7 @@ using jycboliviaASP.net.Presentacion;
 using Microsoft.Reporting.Map.WebForms;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -18,9 +19,56 @@ namespace jycboliviaASP.net.Datos
 
 
 
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, 
+                                float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, 
+                                string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, 
+                                string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, 
+                                float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
         {
-            string consulta = "insert into tbcorpal_entregasordenproduccion( "+
+            try
+            {
+                string consulta = @"insert into tbcorpal_entregasordenproduccion( fechagra, horagra, turno, resp_entrega, 
+                                    cantcajas, unidadsuelta, kgrdesperdicio, kgrparamix, codorden, codrespentrega, detalleentrega, nroorden, 
+                                    productoNax, codProductonax, estado, codresprecepcion, resp_recepcion, cod_respgra, kgrdesperdicio_conaceite, kgrdesperdicio_sinaceite , pack_ferial, 
+                                    medidaentregada, medidapackferial, kgrdesperdiciobobina) values ( 
+                                    current_date(), current_time(), @turno, @respEntrega, 
+                                    @cantCajas, @unidadSuelta, @kgDesperdicio, @kgParaMix, null, @codUser, @detalleEntrega, @nroOrden, 
+                                    @productoNax, @codProductoNax, 1, @codRespRecepcion, @respRecepcion, @codRespGra, @kgDesperdicio_conAceite, @kgDesperdicio_sinAceite, @packFerial, 
+                                    @medidaEntregada, @medidaPackFerial, @kgDesperdicioBobina)";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@turno", turno);
+                    cmd.Parameters.AddWithValue("@respEntrega", respEntrega);
+                    cmd.Parameters.AddWithValue("@cantCajas", cantcajas);
+                    cmd.Parameters.AddWithValue("@unidadSuelta", unidadsuelta);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio", kgrdesperdicio);
+                    cmd.Parameters.AddWithValue("@kgParaMix", kgrparamix);
+                    cmd.Parameters.AddWithValue("@codUser", codusuario);
+                    cmd.Parameters.AddWithValue("@detalleEntrega", detalleentrega);
+                    cmd.Parameters.AddWithValue("@nroOrden", nroorden);
+                    cmd.Parameters.AddWithValue("@productoNax", productoNax);
+                    cmd.Parameters.AddWithValue("@codProductoNax", codProdNax);
+                    cmd.Parameters.AddWithValue("@codRespRecepcion", codresprecepcion);
+                    cmd.Parameters.AddWithValue("@respRecepcion", resp_recepcion);
+                    cmd.Parameters.AddWithValue("@codRespGra", cod_respgra);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio_conAceite", kgrdesperdicio_conaceite);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio_sinAceite", kgrdesperdicio_sinaceite);
+                    cmd.Parameters.AddWithValue("@packFerial", pack_ferial);
+                    cmd.Parameters.AddWithValue("@medidaEntregada", medidaentregada);
+                    cmd.Parameters.AddWithValue("@medidaPackFerial", medidapackferial);
+                    cmd.Parameters.AddWithValue("@kgDesperdicioBobina", kgrdesperdiciobobina);
+
+                    return Conx.ejecutarMySql2(cmd);
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al registrar entrega de producción. " + ex.Message);
+            }
+
+            string consulta2 = "insert into tbcorpal_entregasordenproduccion( "+
                                " fechagra,horagra,turno,resp_entrega, "+
                                " cantcajas,unidadsuelta,kgrdesperdicio,kgrparamix, "+
                                " codorden,codrespentrega,detalleentrega,nroorden, "+
@@ -32,7 +80,9 @@ namespace jycboliviaASP.net.Datos
                                " null, " + codusuario + ", '" + detalleentrega + "', '" + nroorden + "', " +
                                " '" + productoNax + "', " + codProdNax + ", 1, " + codresprecepcion + ",'" + resp_recepcion + "'," + cod_respgra + ", '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "','"+ pack_ferial.ToString().Replace(',', '.') + "'," +
                                "'"+medidaentregada+"', '"+medidapackferial+"', '"+ kgrdesperdiciobobina.ToString().Replace(',', '.') + "')";
-            return Conx.ejecutarMySql(consulta);
+            
+            
+            return Conx.ejecutarMySql(consulta2);
         }
 
         internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)

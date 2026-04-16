@@ -202,6 +202,7 @@
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
 
@@ -247,6 +248,7 @@
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -302,7 +304,6 @@
                                             <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
 
                                             <asp:Button ID="bt_verificar" CssClass="btn btn-info mb-2" runat="server" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
-
                                         </div>
 
 
@@ -343,6 +344,7 @@
                                 <asp:AsyncPostBackTrigger ControlID="bt_buscar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
                                 <asp:AsyncPostBackTrigger ControlID="dd_metodoPago" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -400,7 +402,7 @@
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click" />
                                     <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click" />
-                                    
+                                    <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="click" />
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
@@ -419,6 +421,7 @@
                                 <asp:AsyncPostBackTrigger ControlID="bt_adicionar" EventName="click"/>
                                 <asp:AsyncPostBackTrigger ControlID="bt_guardar" EventName="click"/>
                                 <asp:AsyncPostBackTrigger ControlID="gv_adicionados" EventName="RowDeleting"/>
+                                <asp:AsyncPostBackTrigger ControlID="bt_limpiar" EventName="click" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -432,14 +435,25 @@
         
         function ClienteSeleccionado(source, eventArgs) {
             var nomCliente = eventArgs.get_text();
+
             PageMethods.obtenerCliente(nomCliente, function (resultado) {
                 document.getElementById("<%=tx_propietario.ClientID%>").value = resultado.propietario;
                 document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
                 document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
 
-                document.getElementById("<%= hf_tipoCliente.ClientID %>").value = resultado.tipoCliente;
+                var hfTipo = document.getElementById("<%= hf_tipoCliente.ClientID %>");
+                var txCliente = document.getElementById("<%= tx_cliente.ClientID %>");
+
+                hfTipo.value = resultado.tipoCliente;
 
                 aplicarReglaFraccionado(resultado.tipoCliente);
+
+                if (hfTipo.value !== "") {
+                    txCliente.readOnly = true;
+                }
+
+                //txCliente.style.backgroundColor = "#e9ecef";
+                //txCliente.style.cursor = "not-allowed";
             });
         }
 

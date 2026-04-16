@@ -785,6 +785,28 @@ namespace jycboliviaASP.net.Datos
 
         }
 
+        internal DataSet obtenerMedidaFraccionada_producto(int codItem)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    p.`producto`,
+                                    p.`medidaunidadcontenido`
+                                    from tbcorpal_producto p 
+                                    where p.`codigo` = @codItem 
+                                    and p.`estado` = 1";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codItem", codItem)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("ocurrio un error al obtener los datos del producto. " + ex.Message);
+            }
+        }
+
 
 
     }
