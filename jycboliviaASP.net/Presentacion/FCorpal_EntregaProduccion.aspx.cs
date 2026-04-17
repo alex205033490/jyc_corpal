@@ -34,6 +34,7 @@ namespace jycboliviaASP.net.Presentacion
                 llenarProductosNax();
                 ponerMedidadelProducto();
                 buscarDatos("","");
+                obtenerMedidaFraccionada_producto();
             }
             permisodemodificaryeliminar();
         }
@@ -47,8 +48,8 @@ namespace jycboliviaASP.net.Presentacion
             dd_productosNax.DataValueField = "codigo";
             dd_productosNax.DataTextField = "producto";            
             dd_productosNax.AppendDataBoundItems = true;
-            dd_productosNax.SelectedIndex = 1;
             dd_productosNax.DataBind();
+            dd_productosNax.SelectedIndex = 1;
         }
 
         private void permisodemodificaryeliminar()
@@ -149,6 +150,10 @@ namespace jycboliviaASP.net.Presentacion
             float.TryParse(tx_cantcajas.Text.Replace('.',','), out cantcajas );
             float unidadsuelta = 0;
             float.TryParse(tx_unidadsuelta.Text.Replace('.',','), out unidadsuelta);
+
+            decimal cantfracc;
+            decimal.TryParse(tx_cantidadFraccionada.Text.Replace('.', ','), out cantfracc);
+            string medidafraccionada = tx_medidaFraccionada.Text;
             
             float kgrparamix = 0;
             float.TryParse(tx_kgrparamix.Text.Replace('.',','), out kgrparamix);
@@ -188,7 +193,12 @@ namespace jycboliviaASP.net.Presentacion
                 int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
                 NCorpal_Produccion npro = new NCorpal_Produccion();
-                bool bandera = npro.insertarEntregaProduccion(nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser, kgrdesperdicio_conaceite, kgrdesperdicio_Sinaceite, packFerial, medidaentregada, medidapackferial, kgrdesperdiciobobina);
+                bool bandera = npro.insertarEntregaProduccion(
+                                nroorden, turno, codrespEntrega, respEntrega, cantcajas, 
+                                unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, 
+                                productoNAX, codRespRecepcionProduccion, respRecepcion, codUser, kgrdesperdicio_conaceite, 
+                                kgrdesperdicio_Sinaceite, packFerial, medidaentregada, medidapackferial, kgrdesperdiciobobina,
+                                cantfracc, medidafraccionada);
 
                 if (bandera)
                 {
@@ -206,10 +216,6 @@ namespace jycboliviaASP.net.Presentacion
             }else
                 Response.Write("<script type='text/javascript'> alert('ERROR: Rellenar campos de desperdicio') </script>");
 
-
-
-
-
         }
 
         private void buscarDatos(string turno, string respEntrega)
@@ -224,14 +230,16 @@ namespace jycboliviaASP.net.Presentacion
         private void limpiarDatos()
         {
             dd_turno.SelectedIndex = -1;
-            tx_responsableEntrega.Text = "";
+            tx_recepcionProduccion.Text = "";
             tx_cantcajas.Text = "";
+            tx_cantidadFraccionada.Text = "";
             tx_unidadsuelta.Text = "";            
             tx_kgrparamix.Text = "";
             tx_nroOrden.Text = "";
             tx_detalle.Text = "";
             //tx_productoNax.Text = "";
             tx_medida.Text = "";
+            tx_KgrDesperdicioBOBINA.Text = "";
 
             tx_kgrdesperdicio_conaceite.Text = "";
             tx_kgrdesperdicio_SinAceite.Text = "";
@@ -262,6 +270,11 @@ namespace jycboliviaASP.net.Presentacion
                // float.TryParse(tx_kgrdesperdicio.Text.Replace('.', ','), out kgrdesperdicio);
                 float kgrparamix = 0;
                 float.TryParse(tx_kgrparamix.Text.Replace('.', ','), out kgrparamix);
+
+                decimal cantfraccionada;
+                decimal.TryParse(tx_cantidadFraccionada.Text.Replace('.', ','), out cantfraccionada);
+                string medidafraccionada = tx_medidaFraccionada.Text;
+
                 string nroorden = tx_nroOrden.Text;
                 string detalleentrega = tx_detalle.Text;
 
@@ -295,7 +308,10 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (kgrdesperdicio_conaceite > 0 && kgrdesperdicio_Sinaceite > 0) {
                     NCorpal_Produccion npro = new NCorpal_Produccion();
-                    bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, cantcajas, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, productoNAX, codRespRecepcionProduccion, respRecepcion, codUser,kgrdesperdicio_Sinaceite,kgrdesperdicio_conaceite,packFerial,  medidaentregada,  medidapackferial, kgrdesperdiciobobina);
+                    bool bandera = npro.modificarEntregaProduccion(codigo, nroorden, turno, codrespEntrega, respEntrega, 
+                        cantcajas, cantfraccionada, medidafraccionada, unidadsuelta, 0, kgrparamix, detalleentrega, codigoProdNax, 
+                        productoNAX, codRespRecepcionProduccion, respRecepcion, codUser,kgrdesperdicio_Sinaceite,
+                        kgrdesperdicio_conaceite,packFerial,  medidaentregada,  medidapackferial, kgrdesperdiciobobina);
                     if (bandera)
                     {
                         limpiarDatos();
@@ -351,33 +367,39 @@ namespace jycboliviaASP.net.Presentacion
         {
             dd_turno.SelectedValue = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[2].Text);
             tx_responsableEntrega.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[5].Text);            
-            tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);           
-            tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text);           
+            tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);
+
+            decimal cantFraccionada;
+            decimal.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[7].Text.Replace('.', ','), out cantFraccionada);
+            tx_cantidadFraccionada.Text = cantFraccionada.ToString();
+            tx_medidaFraccionada.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);
+
+            tx_unidadsuelta.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);           
             //tx_kgrdesperdicio.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[8].Text);           
-            tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[9].Text);            
-            tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[12].Text);
-            tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[13].Text);
+            tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[11].Text);            
+            tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
+            tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[15].Text);
             int codigo;
-            int.TryParse(HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[15].Text), out codigo);
+            int.TryParse(HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[17].Text), out codigo);
             if(codigo >= 0){
                 dd_productosNax.SelectedValue = codigo.ToString();
             }            
             //tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
-            tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[17].Text);
+            tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text);
             float kgrdesperdicio_conaceite;
-            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[18].Text.Replace('.', ','), out kgrdesperdicio_conaceite);
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[20].Text.Replace('.', ','), out kgrdesperdicio_conaceite);
             tx_kgrdesperdicio_conaceite.Text = kgrdesperdicio_conaceite.ToString();
 
             float kgrdesperdicio_sinaceite;
-            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text.Replace('.', ','), out kgrdesperdicio_sinaceite);
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[21].Text.Replace('.', ','), out kgrdesperdicio_sinaceite);
             tx_kgrdesperdicio_SinAceite.Text = kgrdesperdicio_sinaceite.ToString();
 
             float packFerial;
-            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[20].Text.Replace('.', ','), out packFerial);
+            float.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[23].Text.Replace('.', ','), out packFerial);
             tx_packFerial.Text = packFerial.ToString();
 
             decimal kgrdesperdiciobobina;
-            decimal.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[21].Text.Replace('.', ','), out kgrdesperdiciobobina);
+            decimal.TryParse(gv_EntregasdeProduccion.SelectedRow.Cells[22].Text.Replace('.', ','), out kgrdesperdiciobobina);
             tx_KgrDesperdicioBOBINA.Text = kgrdesperdiciobobina.ToString();
 
         }
@@ -447,6 +469,7 @@ namespace jycboliviaASP.net.Presentacion
         protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
         {
             ponerMedidadelProducto();
+            obtenerMedidaFraccionada_producto();
         }
 
         private void ponerMedidadelProducto()
@@ -458,6 +481,21 @@ namespace jycboliviaASP.net.Presentacion
             tx_medida.Text = medida;
         }
 
-        //private void obtenerMedidaFraccionada_
+        private void obtenerMedidaFraccionada_producto ()
+        {
+            try
+            {
+                int codProd = Convert.ToInt32(dd_productosNax.SelectedValue);
+                NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+                DataSet ds = pp.obtenerMedidaFraccionada_producto(codProd);
+
+                string medidaFracc = ds.Tables[0].Rows[0]["medidaunidadcontenido"].ToString();
+                tx_medidaFraccionada.Text = medidaFracc;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al obtener la medida. " + ex.Message);
+            }
+        }
     }
 }

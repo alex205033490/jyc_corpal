@@ -203,7 +203,7 @@
                     <asp:Label ID="lb_unidadFraccionada" runat="server" Text="Unidad Fraccionada: "></asp:Label>
                 </td>
                     <td>
-                        <asp:TextBox ID="tx_unidadFraccionada" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="tx_cantidadFraccionada" class="form-control" runat="server"></asp:TextBox>
                     </td>
                <td>
                    <asp:Label ID="lb_medidafraccionada" runat="server" Text="Medida Fraccionada:"></asp:Label>
@@ -295,20 +295,26 @@
                         <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
                         <asp:BoundField DataField="hora" HeaderText="Hora" HtmlEncode="false" />
                         <asp:BoundField DataField="resp_entrega" HeaderText="Responsable Entrega" HtmlEncode="false" />
+                        
                         <asp:BoundField DataField="cantcajas" HeaderText="Cantidad Cajas" HtmlEncode="false" />
+                        <asp:BoundField DataField="cantfraccionada" HeaderText="Cant Fraccionada" HtmlEncode="false" />
+                        <asp:BoundField DataField="medidafraccionada" HeaderText="Medida Fraccionada" HtmlEncode="false" />
                         <asp:BoundField DataField="unidadsuelta" HeaderText="Unidad Suelta" HtmlEncode="false" />
                         <asp:BoundField DataField="kgrdesperdicio" HeaderText="Kg Desperdicio" HtmlEncode="false" />
+                        
                         <asp:BoundField DataField="kgrparamix" HeaderText="Kg para Mix" HtmlEncode="false" />
                         <asp:BoundField DataField="codorden" HeaderText="ID Orden" HtmlEncode="false" />
                         <asp:BoundField DataField="codrespentrega" HeaderText="ID Responsable Entrega" HtmlEncode="false" />
                         <asp:BoundField DataField="detalleentrega" HeaderText="Detalle Entrega" HtmlEncode="false" />
                         <asp:BoundField DataField="nroorden" HeaderText="Nro Orden" HtmlEncode="false" />
+                        
                         <asp:BoundField DataField="productoNax" HeaderText="Item" HtmlEncode="false" />
                         <asp:BoundField DataField="codProductonax" HeaderText="ID Item" HtmlEncode="false" />
                         <asp:BoundField DataField="codresprecepcion" HeaderText="ID Responsable Recepción" HtmlEncode="false" />
                         <asp:BoundField DataField="resp_recepcion" HeaderText="Responsable Recepcion" HtmlEncode="false" />
                         <asp:BoundField DataField="kgrdesperdicio_conaceite" HeaderText="Desperdicio con Aceite (KG)" HtmlEncode="false" />
-                        <asp:BoundField DataField="kgrdesperdicio_conaceite" HeaderText="Desperdicio sin Aceite (KG)" HtmlEncode="false" />
+                        
+                        <asp:BoundField DataField="kgrdesperdicio_sinaceite" HeaderText="Desperdicio sin Aceite (KG)" HtmlEncode="false" />
                         <asp:BoundField DataField="kgrdesperdiciobobina" HeaderText="Desperdicio Bobina" HtmlEncode="false" />
                         <asp:BoundField DataField="pack_ferial" HeaderText="Pack Ferial" HtmlEncode="false" />
 

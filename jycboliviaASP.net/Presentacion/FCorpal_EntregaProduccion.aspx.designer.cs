@@ -249,13 +249,13 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label lb_unidadFraccionada;
 
         /// <summary>
-        /// Control tx_unidadFraccionada.
+        /// Control tx_cantidadFraccionada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tx_unidadFraccionada;
+        protected global::System.Web.UI.WebControls.TextBox tx_cantidadFraccionada;
 
         /// <summary>
         /// Control lb_medidafraccionada.
