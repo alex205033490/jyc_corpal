@@ -12,14 +12,37 @@ namespace jycboliviaASP.net.Negocio
     public class NCorpal_Produccion    
     {
         DCorpal_Produccion dproduccion = new DCorpal_Produccion();
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, 
+                    float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, 
+                    int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, 
+                    float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, 
+                    string medidapackferial, decimal kgrdesperdiciobobina, decimal cantfracc, string medidafracc)
         {
-            return dproduccion.insertarEntregaProduccion( nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax,  codresprecepcion,  resp_recepcion,  cod_respgra,  kgrdesperdicio_conaceite,  kgrdesperdicio_sinaceite, pack_ferial, medidaentregada, medidapackferial, kgrdesperdiciobobina);
+            try
+            {
+                return dproduccion.insertarEntregaProduccion( nroorden, turno, codusuario, respEntrega, cantcajas,  
+                        unidadsuelta, kgrdesperdicio, kgrparamix, detalleentrega, codProdNax,  
+                        productoNax, codresprecepcion, resp_recepcion, cod_respgra, kgrdesperdicio_conaceite,  
+                        kgrdesperdicio_sinaceite, pack_ferial, medidaentregada, medidapackferial, kgrdesperdiciobobina, 
+                        cantfracc, medidafracc);
+            } catch(Exception ex)
+            {
+                throw new Exception("Error al registrar la entrega de producccion. " + ex.Message);
+            }
+
         }
 
-        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
+        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, 
+                            float cantcajas, decimal cantfraccionada, string medidafraccionada, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, 
+                            int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, 
+                            float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, 
+                            decimal kgrdesperdiciobobina)
         {
-            return dproduccion.modificarEntregaProduccion( codigo,  nroorden,  turno,  codusuario,  respEntrega,  cantcajas,  unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  codProdNax,  productoNax ,  codresprecepcion,  resp_recepcion,  cod_respgra,  kgrdesperdicio_sinaceite,  kgrdesperdicio_conaceite,  pack_ferial,  medidaentregada,  medidapackferial, kgrdesperdiciobobina);
+            return dproduccion.modificarEntregaProduccion( codigo,  nroorden,  turno,  codusuario,  respEntrega,  
+                cantcajas, cantfraccionada, medidafraccionada, unidadsuelta,  kgrdesperdicio,  kgrparamix,  detalleentrega,  
+                codProdNax,  productoNax ,  codresprecepcion,  resp_recepcion,  cod_respgra,  
+                kgrdesperdicio_sinaceite,  kgrdesperdicio_conaceite,  pack_ferial,  medidaentregada,  
+                medidapackferial, kgrdesperdiciobobina);
         }
 
         internal bool eliminarEntregaProduccion(int codigo)

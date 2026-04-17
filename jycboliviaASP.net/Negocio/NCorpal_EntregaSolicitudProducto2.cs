@@ -307,9 +307,16 @@ namespace jycboliviaASP.net.Negocio
                                               int codProducto, string producto, decimal cantidad, string medida,
                                               decimal cantFraccionada, string medidaFraccionada, int traspaso)
         {
-            return datos.POST_RegistroAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo,
-                                                   codProducto, producto, cantidad, medida,
-                                                   cantFraccionada, medidaFraccionada, traspaso);
+            try
+            {
+                return datos.POST_RegistroAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo,
+                                                       codProducto, producto, cantidad, medida,
+                                                       cantFraccionada, medidaFraccionada, traspaso);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al registrar el almacen. " + ex.Message);
+            }
         }
 
 

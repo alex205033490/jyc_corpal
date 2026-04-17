@@ -281,5 +281,17 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        internal DataSet obtenerMedidaFraccionada_producto(int codItem)
+        {
+            try
+            {
+                return dsp.obtenerMedidaFraccionada_producto(codItem);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
     }
 }

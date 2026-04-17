@@ -8,6 +8,7 @@ using jycboliviaASP.net.Presentacion;
 using Microsoft.Reporting.Map.WebForms;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -18,9 +19,59 @@ namespace jycboliviaASP.net.Datos
 
 
 
-        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
+        internal bool insertarEntregaProduccion(string nroorden, string turno, int codusuario, string respEntrega, 
+                                float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, 
+                                string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, 
+                                string resp_recepcion, int cod_respgra, float kgrdesperdicio_conaceite, float kgrdesperdicio_sinaceite, 
+                                float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina, 
+                                decimal cantfracc, string medidafracc)
         {
-            string consulta = "insert into tbcorpal_entregasordenproduccion( "+
+            try
+            {
+                string consulta = @"insert into tbcorpal_entregasordenproduccion( fechagra, horagra, turno, resp_entrega, 
+                                    cantcajas, unidadsuelta, kgrdesperdicio, kgrparamix, codorden, codrespentrega, detalleentrega, nroorden, 
+                                    productoNax, codProductonax, estado, codresprecepcion, resp_recepcion, cod_respgra, kgrdesperdicio_conaceite, kgrdesperdicio_sinaceite , pack_ferial, 
+                                    medidaentregada, medidapackferial, kgrdesperdiciobobina, cantfraccionada, medidafraccionada) values ( 
+                                    current_date(), current_time(), @turno, @respEntrega, 
+                                    @cantCajas, @unidadSuelta, @kgDesperdicio, @kgParaMix, null, @codUser, @detalleEntrega, @nroOrden, 
+                                    @productoNax, @codProductoNax, 1, @codRespRecepcion, @respRecepcion, @codRespGra, @kgDesperdicio_conAceite, @kgDesperdicio_sinAceite, @packFerial, 
+                                    @medidaEntregada, @medidaPackFerial, @kgDesperdicioBobina, @cantfracc, @medidafracc)";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@turno", turno);
+                    cmd.Parameters.AddWithValue("@respEntrega", respEntrega);
+                    cmd.Parameters.AddWithValue("@cantCajas", cantcajas);
+                    cmd.Parameters.AddWithValue("@unidadSuelta", unidadsuelta);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio", kgrdesperdicio);
+                    cmd.Parameters.AddWithValue("@kgParaMix", kgrparamix);
+                    cmd.Parameters.AddWithValue("@codUser", codusuario);
+                    cmd.Parameters.AddWithValue("@detalleEntrega", detalleentrega);
+                    cmd.Parameters.AddWithValue("@nroOrden", nroorden);
+                    cmd.Parameters.AddWithValue("@productoNax", productoNax);
+                    cmd.Parameters.AddWithValue("@codProductoNax", codProdNax);
+                    cmd.Parameters.AddWithValue("@codRespRecepcion", codresprecepcion);
+                    cmd.Parameters.AddWithValue("@respRecepcion", resp_recepcion);
+                    cmd.Parameters.AddWithValue("@codRespGra", cod_respgra);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio_conAceite", kgrdesperdicio_conaceite);
+                    cmd.Parameters.AddWithValue("@kgDesperdicio_sinAceite", kgrdesperdicio_sinaceite);
+                    cmd.Parameters.AddWithValue("@packFerial", pack_ferial);
+                    cmd.Parameters.AddWithValue("@medidaEntregada", medidaentregada);
+                    cmd.Parameters.AddWithValue("@medidaPackFerial", medidapackferial);
+                    cmd.Parameters.AddWithValue("@kgDesperdicioBobina", kgrdesperdiciobobina);
+                    cmd.Parameters.AddWithValue("@cantfracc", cantfracc <= 0 ? 0 : cantfracc);
+                    cmd.Parameters.AddWithValue("@medidafracc", medidafracc);
+
+                    return Conx.ejecutarMySql2(cmd);
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al registrar entrega de producción. " + ex.Message);
+            }
+            /*
+            string consulta2 = "insert into tbcorpal_entregasordenproduccion( "+
                                " fechagra,horagra,turno,resp_entrega, "+
                                " cantcajas,unidadsuelta,kgrdesperdicio,kgrparamix, "+
                                " codorden,codrespentrega,detalleentrega,nroorden, "+
@@ -32,39 +83,85 @@ namespace jycboliviaASP.net.Datos
                                " null, " + codusuario + ", '" + detalleentrega + "', '" + nroorden + "', " +
                                " '" + productoNax + "', " + codProdNax + ", 1, " + codresprecepcion + ",'" + resp_recepcion + "'," + cod_respgra + ", '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "','"+ pack_ferial.ToString().Replace(',', '.') + "'," +
                                "'"+medidaentregada+"', '"+medidapackferial+"', '"+ kgrdesperdiciobobina.ToString().Replace(',', '.') + "')";
-            return Conx.ejecutarMySql(consulta);
+            
+            
+            return Conx.ejecutarMySql(consulta2);
+            */
         }
 
-        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, float cantcajas, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, decimal kgrdesperdiciobobina)
+        internal bool modificarEntregaProduccion(int codigo, string nroorden, string turno, int codusuario, string respEntrega, 
+                        float cantcajas, decimal cantfraccionada, string medidafraccionada, float unidadsuelta, float kgrdesperdicio, float kgrparamix, string detalleentrega, 
+                        int codProdNax, string productoNax, int codresprecepcion, string resp_recepcion, int cod_respgra, 
+                        float kgrdesperdicio_sinaceite, float kgrdesperdicio_conaceite, float pack_ferial, string medidaentregada, string medidapackferial, 
+                        decimal kgrdesperdiciobobina)
         {
-            string consulta = "update tbcorpal_entregasordenproduccion set "+ 
-                               " tbcorpal_entregasordenproduccion.turno = '"+turno+"', "+
-                               " tbcorpal_entregasordenproduccion.resp_entrega = '" + respEntrega + "', " +
-                               " tbcorpal_entregasordenproduccion.cantcajas = '"+cantcajas.ToString().Replace(',','.')+"', "+
-                               " tbcorpal_entregasordenproduccion.unidadsuelta = '" + unidadsuelta.ToString().Replace(',', '.') + "', " +
-                               " tbcorpal_entregasordenproduccion.kgrdesperdicio = '"+kgrdesperdicio.ToString().Replace(',','.')+"', " +
-                               " tbcorpal_entregasordenproduccion.kgrparamix = '"+kgrparamix.ToString().Replace(',','.')+"', " +
-                               " tbcorpal_entregasordenproduccion.codrespentrega = '" + codusuario + "', " +
-                               " tbcorpal_entregasordenproduccion.detalleentrega = '"+detalleentrega+"', "+
-                               " tbcorpal_entregasordenproduccion.nroorden = '"+nroorden+"', "+
-                               " tbcorpal_entregasordenproduccion.productoNax = '"+productoNax+"', "+
-                               " tbcorpal_entregasordenproduccion.codProductonax = " + codProdNax + " , "+
-                               " tbcorpal_entregasordenproduccion.codresprecepcion = " + codresprecepcion + " , " +
-                               " tbcorpal_entregasordenproduccion.resp_recepcion = '" + resp_recepcion + "' , " +
-                               " tbcorpal_entregasordenproduccion.cod_respgra = " + cod_respgra +", "+
-                               " tbcorpal_entregasordenproduccion.kgrdesperdicio_sinaceite = '"+ kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "', " +
-                               " tbcorpal_entregasordenproduccion.kgrdesperdicio_conaceite = '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', " +
-                               " tbcorpal_entregasordenproduccion.pack_ferial = '" + pack_ferial.ToString().Replace(',', '.') + "', " +
-                               " tbcorpal_entregasordenproduccion.medidaentregada = '"+ medidaentregada + "', " +
-                               " tbcorpal_entregasordenproduccion.medidapackferial = '"+ medidapackferial + "', " +
-                               " tbcorpal_entregasordenproduccion.kgrdesperdiciobobina = '"+ kgrdesperdiciobobina.ToString().Replace(',', '.') + "' "+
-                               " where " +
-                               " tbcorpal_entregasordenproduccion.codigo ="+ codigo;
-            return Conx.ejecutarMySql(consulta);
+            try
+            {
+                string consulta = "update tbcorpal_entregasordenproduccion set " +
+                                   " tbcorpal_entregasordenproduccion.turno = '" + turno + "', " +
+                                   " tbcorpal_entregasordenproduccion.resp_entrega = '" + respEntrega + "', " +
+                                   " tbcorpal_entregasordenproduccion.cantcajas = '" + cantcajas.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.unidadsuelta = '" + unidadsuelta.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.kgrdesperdicio = '" + kgrdesperdicio.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.kgrparamix = '" + kgrparamix.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.codrespentrega = '" + codusuario + "', " +
+                                   " tbcorpal_entregasordenproduccion.detalleentrega = '" + detalleentrega + "', " +
+                                   " tbcorpal_entregasordenproduccion.nroorden = '" + nroorden + "', " +
+                                   " tbcorpal_entregasordenproduccion.productoNax = '" + productoNax + "', " +
+                                   " tbcorpal_entregasordenproduccion.codProductonax = " + codProdNax + " , " +
+                                   " tbcorpal_entregasordenproduccion.codresprecepcion = " + codresprecepcion + " , " +
+                                   " tbcorpal_entregasordenproduccion.resp_recepcion = '" + resp_recepcion + "' , " +
+                                   " tbcorpal_entregasordenproduccion.cod_respgra = " + cod_respgra + ", " +
+                                   " tbcorpal_entregasordenproduccion.kgrdesperdicio_sinaceite = '" + kgrdesperdicio_sinaceite.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.kgrdesperdicio_conaceite = '" + kgrdesperdicio_conaceite.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.pack_ferial = '" + pack_ferial.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.medidaentregada = '" + medidaentregada + "', " +
+                                   " tbcorpal_entregasordenproduccion.medidapackferial = '" + medidapackferial + "', " +
+
+                                   " tbcorpal_entregasordenproduccion.cantfraccionada = '" + cantfraccionada.ToString().Replace(',', '.') + "', " +
+                                   " tbcorpal_entregasordenproduccion.medidafraccionada = '" + medidafraccionada + "', " +
+                                   " tbcorpal_entregasordenproduccion.kgrdesperdiciobobina = '" + kgrdesperdiciobobina.ToString().Replace(',', '.') + "' " +
+                                   " where " +
+                                   " tbcorpal_entregasordenproduccion.codigo =" + codigo;
+                return Conx.ejecutarMySql(consulta);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al actualizar los datos. " + ex.Message);
+            }
         }
 
         internal DataSet mostrarEmpregasProduccion(string turno, string respEntrega)
         {
+            try
+            {
+                string consulta = @"select 
+                                aa.codigo, aa.turno, 
+                                date_format( aa.fechagra, '%d/%m/%Y') as 'fecha' ,
+                                aa.horagra as 'hora',
+                                aa.resp_entrega, aa.cantcajas, aa.unidadsuelta, aa.kgrdesperdicio, aa.kgrparamix,
+                                aa.codorden, aa.codrespentrega, aa.detalleentrega, aa.nroorden,
+                                aa.productoNax, aa.codProductonax, aa.codresprecepcion, aa.resp_recepcion, 
+                                aa.kgrdesperdicio_conaceite, aa.kgrdesperdicio_sinaceite, aa.pack_ferial, aa.kgrdesperdiciobobina,
+                                aa.cantfraccionada, aa.medidafraccionada 
+                                from 
+                                tbcorpal_entregasordenproduccion aa 
+                                where 
+                                aa.estado = 1 and 
+                                aa.turno like @turno and aa.resp_entrega like @respEntrega 
+                                order by aa.codigo desc";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@turno", "%" +turno+ "%"),
+                    new MySqlParameter("@respEntrega", "%" +respEntrega+ "%")
+                };
+                return Conx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos Entrega Producción. " + ex.Message);
+            }
+            /*
             string consulta = "select "+
                                " aa.codigo, aa.turno, "+ 
                                " date_format( aa.fechagra, '%d/%m/%Y') as 'fecha' , "+
@@ -79,7 +176,7 @@ namespace jycboliviaASP.net.Datos
                                " aa.estado = 1 and "+
                                " aa.turno like '%"+turno+"%' and aa.resp_entrega like '%"+respEntrega+"%' "+
                                " order by aa.codigo desc ";
-            return Conx.consultaMySql(consulta);
+            return Conx.consultaMySql(consulta);*/
         }
 
         internal bool eliminarEntregaProduccion(int codigo)
@@ -231,7 +328,9 @@ namespace jycboliviaASP.net.Datos
                                " ee.medidaentregada,"+
                                " ee.kgrdesperdicio_conaceite,"+                               
                                " ee.kgrdesperdicio_sinaceite,"+
-                               " ee.pack_ferial "+
+                               " ee.pack_ferial," +
+                               " ee.cantfraccionada," +
+                               " ee.medidafraccionada"+
                                " from tbcorpal_entregasordenproduccion ee " +
                                " where " +
                                " ee.estado = 1 and " +

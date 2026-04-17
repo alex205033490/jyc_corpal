@@ -240,6 +240,42 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.TextBox tx_kgrparamix;
 
         /// <summary>
+        /// Control lb_unidadFraccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_unidadFraccionada;
+
+        /// <summary>
+        /// Control tx_cantidadFraccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_cantidadFraccionada;
+
+        /// <summary>
+        /// Control lb_medidafraccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_medidafraccionada;
+
+        /// <summary>
+        /// Control tx_medidaFraccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_medidaFraccionada;
+
+        /// <summary>
         /// Control Label44.
         /// </summary>
         /// <remarks>

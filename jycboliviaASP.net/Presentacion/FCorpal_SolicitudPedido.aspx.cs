@@ -56,6 +56,14 @@ namespace jycboliviaASP.net.Presentacion
 
                 cargarDatosModPago();
             }
+
+            if (!string.IsNullOrEmpty(hf_tipoCliente.Value))
+            {
+                tx_cliente.ReadOnly = true;
+                //tx_cliente.BackColor = System.Drawing.ColorTranslator.FromHtml("e9ecef");
+                tx_cliente.Attributes["style"] += "cursor:not-allowed;";
+            }
+
             NA_Responsables Nresp = new NA_Responsables();
             string usuarioAux = Session["NameUser"].ToString();
             string passwordAux = Session["passworuser"].ToString();
@@ -405,6 +413,21 @@ namespace jycboliviaASP.net.Presentacion
 
         private bool validarGuardado()
         {
+            int codTipoCliente = Convert.ToInt32(hf_tipoCliente.Value);
+            
+            if (codTipoCliente != 7)
+            {
+                foreach(GridViewRow row in gv_adicionados.Rows)
+                {
+                    CheckBox cb = (CheckBox)row.FindControl("cb_itemFraccionado");
+                    if(cb != null && cb.Checked)
+                    {
+                        showalert("Este tipo de clientes no puede tener productos fraccionados.");
+                        return false;
+                    }
+                }
+            }
+
             string fechaentrega = tx_fechaEntrega.Text.Trim();
             string horaentrega = tx_horaEntrega.Text.Trim();
 
@@ -671,16 +694,22 @@ namespace jycboliviaASP.net.Presentacion
             tx_fechaEntrega.Text = "";
             tx_horaEntrega.Text = "";
             hf_tipoCliente.Value = "";
+            tx_cliente.Text = "";
+            tx_cliente.ReadOnly = false;
+            tx_total.Text = "";
 
             DataTable datoRepuesto = new DataTable();
             datoRepuesto.Columns.Add("Codigo", typeof(string));
             datoRepuesto.Columns.Add("Producto", typeof(string));
             datoRepuesto.Columns.Add("Medida", typeof(string));
-            datoRepuesto.Columns.Add("Tipo", typeof(string));
             datoRepuesto.Columns.Add("Precio", typeof(string));
+            datoRepuesto.Columns.Add("Descuento", typeof(string));
             datoRepuesto.Columns.Add("Cantidad", typeof(string));
             datoRepuesto.Columns.Add("PrecioTotal", typeof(string));
             datoRepuesto.Columns.Add("ItemPackFerial", typeof(Boolean));
+            datoRepuesto.Columns.Add("idcategoriap", typeof(string));
+            datoRepuesto.Columns.Add("codupon", typeof(string));
+            datoRepuesto.Columns.Add("cb_itemFraccionado", typeof(bool));
 
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();

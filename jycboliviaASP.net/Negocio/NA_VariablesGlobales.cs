@@ -299,7 +299,8 @@ namespace jycboliviaASP.net.Negocio
                 " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'StockAlmacen',   " +
                 " (ifnull(t1.ingreso,0) - ifnull(t3.salida,0)) as 'StockParcialAlmacen', " +
                 " (ifnull(t1.ingresopackferial,0) - ifnull(t2.salidaPackFerial,0)) as 'StockPackFerial'  " +
-                " ,pp.codupon, pp.codumupon, pp.codigosimec " +
+                " ,pp.codupon, pp.codumupon, pp.codigosimec, " +
+                " t1.ingresocantfracc " +
                 " FROM tbcorpal_producto pp   " +
 
                 /* T1 */
@@ -307,7 +308,8 @@ namespace jycboliviaASP.net.Negocio
                 " (   " +
                 " select   " +
                 " oo.codProductonax, sum(oo.cantcajas) as 'ingreso',   " +
-                " sum(oo.pack_ferial) as 'ingresopackferial'   " +
+                " sum(oo.pack_ferial) as 'ingresopackferial'," +
+                " sum(oo.`cantfraccionada`) as 'ingresocantfracc'  " +
                 " from tbcorpal_entregasordenproduccion oo   " +
                 " where   " +
                 " oo.estado = 1 and   " +
