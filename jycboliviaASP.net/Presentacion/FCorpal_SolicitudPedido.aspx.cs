@@ -709,6 +709,9 @@ namespace jycboliviaASP.net.Presentacion
 
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();
+
+            gv_Productos.DataSource = null;
+            gv_Productos.DataBind();
             Session["listaSolicitudProducto"] = datoRepuesto;
 
             NA_Responsables Nresp = new NA_Responsables();
