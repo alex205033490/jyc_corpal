@@ -24,12 +24,46 @@ namespace jycboliviaASP.net.Datos
                 NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
                 string consultaStockActual = vlocal.get_consultaStockProductosActual();
 
-                string consulta = $@"select 
+
+                string consulta = $@"SELECT 
+                                dlp.`codigo`,
+                                dlp.codupon,
+                                dlp.`producto`,
+                                dlp.medida,
+                                dlp.precio,
+                                dlp.preciounidadcontenedorfraccionada AS 'precioFracc',
+                                dlp.codcategoriap,
+                                t1.StockAlmacen,
+                                t1.StockParcialAlmacen
+                            FROM tbcorpal_cliente cl
+                            INNER JOIN tbcorpal_listaprecio lp 
+                                ON cl.`id_listaprecio` = lp.`codigo`
+                            INNER JOIN (
+                                SELECT dlp.id_producto, dlp.precio, dlp.preciounidadcontenedorfraccionada, dlp.id_listaprecio, 
+                                dlp.estado, p.codigo, p.`codupon`, p.`producto`, p.`medida`, p.`codcategoriap`
+                                FROM tbcorpal_producto p 
+                                inner join  tbcorpal_detallelistaprecio dlp on p.`codigo` = dlp.`id_producto`
+                                inner join tbcorpal_cliente cl on dlp.`id_listaprecio` = cl.`id_listaprecio`
+                                WHERE dlp.estado = 1 
+                                and p.`estado` = 1 
+                                and cl.`estado` = 1 
+                                and cl.`codigo` = @codcliente 
+                                AND p.`producto` LIKE @producto
+                            ) dlp 
+                                ON dlp.id_listaprecio = lp.`codigo`
+                            left join ({consultaStockActual}) as t1 on t1.codigo = dlp.codigo 
+                            WHERE 
+                                  cl.estado = 1 
+                                  and cl.`codigo` = @codcliente
+                                AND dlp.`producto` LIKE @producto
+                                and cl.id_listaprecio = dlp.id_listaprecio";
+
+                string consulta2 = $@"select 
                                     pp.`codigo`,
                                     pp.codupon,
                                     pp.`producto`,
                                     pp.medida,
-                                    dlp.`precio`,
+                                    dlp.precio,
                                     dlp.preciounidadcontenedorfraccionada as 'precioFracc',
                                     pp.codcategoriap,
                                     t1.StockAlmacen,
@@ -71,7 +105,9 @@ namespace jycboliviaASP.net.Datos
             };
             return conexion.consultaMySqlParametros(consulta, parametros);
         }
-        internal DataSet get_mostrarListProductosCliente(int codCli, string producto)
+        
+
+        internal DataSet get_mostrarListProductosCliente(string producto)
         {
             NA_VariablesGlobales vlocal = new NA_VariablesGlobales();
             string consultaStockActual = vlocal.get_consultaStockProductosActual();
@@ -82,12 +118,11 @@ namespace jycboliviaASP.net.Datos
                                 inner join tbcorpal_detallelistaprecio dlp on lp.codigo = dlp.id_listaprecio
                                 left join tbcorpal_producto pp on dlp.id_producto = pp.codigo
                                 where pp.estado = 1 
-                                and cl.codigo = @codcli
-                                and pp.producto like @producto";
+                                and pp.producto like @producto 
+                                group by pp.codigo";
             var parametros = new List<MySqlParameter>
             {
                 new MySqlParameter("@producto", "%" +producto+ "%"),
-                new MySqlParameter("@codcli", codCli)
             };
             return conexion.consultaMySqlParametros(consulta, parametros);
         }

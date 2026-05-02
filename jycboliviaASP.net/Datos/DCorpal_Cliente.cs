@@ -662,12 +662,12 @@ namespace jycboliviaASP.net.Datos
                             " propietarionit,  propietariocorreo, facturar_a, " +
                             " facturar_nit,  facturar_correo, observacion " +
                             " from tbcorpal_cliente tt " +
-                           "  where tt.tiendaname like '%" + tiendanombre + "%'";
+                           "  where tt.tiendaname like '%" + tiendanombre + "%' AND tt.estado = 1";
             DataSet lista = conexion.consultaMySql(consulta);
             return lista;
         }
 
-        internal DataSet get_ClienteNombreEspecifico(string tiendanombre)
+        internal DataSet get_ClienteNombreEspecifico(int codigo)
         {
             try
             {
@@ -677,10 +677,10 @@ namespace jycboliviaASP.net.Datos
                         propietariocelular, propietarionit, propietariocorreo,
                         facturar_a, facturar_nit, facturar_correo, observacion, id_tipocliente  
                         from tbcorpal_cliente tt 
-                        where tt.tiendaname = @tiendaname";
+                        where tt.codigo = @codigo";
                 var parametros = new List<MySqlParameter>
                 {
-                    new MySqlParameter("@tiendaname", tiendanombre)
+                    new MySqlParameter("@codigo", codigo)
                 };
                 return conexion.consultaMySqlParametros(consulta, parametros);
             }

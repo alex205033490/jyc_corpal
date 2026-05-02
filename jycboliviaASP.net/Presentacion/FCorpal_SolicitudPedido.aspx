@@ -287,6 +287,7 @@
 
                                         <div class="group_verificar mb-2" style="box-shadow: 1px 0px 2px 0px #7f7d7d; padding: 3px; border: 1px solid #00000026;">
                                             <asp:HiddenField ID="hf_tipoCliente" runat="server"/>
+                                            <asp:HiddenField ID="hf_codCliente" runat="server"/>
 
                                             <asp:Label runat="server" class="form-label" for="tx_cliente">Tienda:</asp:Label>
                                             <asp:TextBox ID="tx_cliente" runat="server" class="form-control mb-1" Style="font-size: smaller;"></asp:TextBox>
@@ -294,7 +295,7 @@
                                                 TargetControlID="tx_cliente"
                                                 CompletionSetCount="12"
                                                 MinimumPrefixLength="1" ServiceMethod="GetlistaClientes222"
-                                                UseContextKey="True"
+                                                UseContextKey="False"
                                                 CompletionListCssClass="CompletionList"
                                                 CompletionListItemCssClass="CompletionlistItem"
                                                 CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10"
@@ -432,17 +433,26 @@
 
     <script src="../js/mainCorpal.js"></script>
     <script type="text/javascript"> 
+
         
         function ClienteSeleccionado(source, eventArgs) {
-            var nomCliente = eventArgs.get_text();
+            //var nomCliente = eventArgs.get_text();
+            var nom = eventArgs.get_text();
+            var codigo = eventArgs.get_value();
 
-            PageMethods.obtenerCliente(nomCliente, function (resultado) {
+            document.getElementById("<%= tx_cliente.ClientID %>").value = nom;
+            document.getElementById("<%= hf_codCliente.ClientID %>").value = codigo;
+
+
+            PageMethods.obtenerCliente(codigo, function (resultado) {
                 document.getElementById("<%=tx_propietario.ClientID%>").value = resultado.propietario;
                 document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
                 document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
+                document.getElementById("<%=hf_codCliente.ClientID%>").value = codigo;
 
                 var hfTipo = document.getElementById("<%= hf_tipoCliente.ClientID %>");
                 var txCliente = document.getElementById("<%= tx_cliente.ClientID %>");
+               
 
                 hfTipo.value = resultado.tipoCliente;
 
@@ -489,15 +499,15 @@
                         autoComplete.set_contextKey(cliente);
                     }
         }
-
         function ProductoSeleccionado(source, eventArgs) {
             var producto = eventArgs.get_text();
 
             document.getElementById("<%= tx_producto.ClientID %>").value = producto;
+    
             
-            __doPostBack('<%= bt_buscar.UniqueID %>', '');
         }
-
+        
+        
         Sys.Application.add_load(function () {
             var tipoCliente = document.getElementById("<%= hf_tipoCliente.ClientID %>").value;
 
