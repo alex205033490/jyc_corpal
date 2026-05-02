@@ -504,7 +504,7 @@
 
             document.getElementById("<%= tx_producto.ClientID %>").value = producto;
     
-            
+            __doPostBack('<%= bt_buscar.UniqueID %>', '');
         }
         
         
