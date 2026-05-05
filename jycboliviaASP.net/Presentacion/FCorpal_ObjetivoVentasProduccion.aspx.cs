@@ -28,7 +28,7 @@ namespace jycboliviaASP.net.Presentacion
                 llenarProductosNax();
 
                 // 2. Cargar el GridView Masivo (Panel por defecto)
-                cargarGridMasivo();
+                cargarGridMasivo("");
 
                 // 3. Cargar la tabla principal (Siempre visible abajo)
                 buscarDatos("", "");
@@ -53,25 +53,31 @@ namespace jycboliviaASP.net.Presentacion
             pn_Edicion.Visible = true;
         }
 
-        // Nuevo Botón para salir de la edición sin guardar
         protected void bt_cancelarEdicion_Click(object sender, EventArgs e)
         {
-            limpiarDatos();
-            // Deseleccionar la fila de la grilla principal
+            limpiarDatosEdicion();
             gv_objetivoProduccion.SelectedIndex = -1;
             MostrarPanelCargaMasiva();
         }
 
         // ========================================================================================
-        // CARGA MASIVA DE DATOS
+        // CARGA MASIVA DE DATOS Y SU BÚSQUEDA
         // ========================================================================================
-        private void cargarGridMasivo()
+        private void cargarGridMasivo(string filtro)
         {
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos_quesoloestenvigente2("");
+            // Le pasamos el filtro al método de negocio
+            DataSet tuplas = pp.get_mostrarProductos_quesoloestenvigente2(filtro);
 
             gv_cargaMasiva.DataSource = tuplas;
             gv_cargaMasiva.DataBind();
+        }
+
+        // NUEVO: Buscador de la tabla de arriba (Masiva)
+        protected void bt_buscarMasivo_Click(object sender, EventArgs e)
+        {
+            string filtro = tx_busquedaMasiva.Text.Trim();
+            cargarGridMasivo(filtro);
         }
 
         protected void bt_insertarMasivo_Click(object sender, EventArgs e)
@@ -104,8 +110,13 @@ namespace jycboliviaASP.net.Presentacion
                         }
 
                         int codprod = Convert.ToInt32(gv_cargaMasiva.DataKeys[row.RowIndex].Value);
-                        string producto = HttpUtility.HtmlDecode(row.Cells[2].Text);
-                        string medida = HttpUtility.HtmlDecode(row.Cells[5].Text);
+
+                        // Consultamos a la BD para obtener el nombre "limpio" y la medida, 
+                        // exactamente igual que en tu lógica original.
+                        NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+                        DataSet tuplasProd = pp.get_producto(codprod);
+                        string producto = tuplasProd.Tables[0].Rows[0][1].ToString();
+                        string medida = tuplasProd.Tables[0].Rows[0][2].ToString();
 
                         string fechalimite = convertirFecha(txtFecha.Text);
                         float cantidadprod;
@@ -137,7 +148,10 @@ namespace jycboliviaASP.net.Presentacion
                 string baseDatos = Session["BaseDatos"].ToString();
                 nenvio.Enviar_Correo_objetivosVentas(asunto, CuerpoCorreo);
 
-                buscarDatos("", "");
+                // Refresca la tabla de abajo con los filtros actuales
+                string fechaBusqueda = convertirFecha(tx_busquedaFecha.Text);
+                buscarDatos(fechaBusqueda, tx_busquedaProducto.Text.Trim());
+
                 Response.Write($"<script type='text/javascript'> alert('Guardado Masivo OK: {insertados} registros ingresados.') </script>");
             }
             else
@@ -147,60 +161,23 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         // ========================================================================================
-        // MÉTODOS GENERALES (FECHA, PERMISOS, LLENAR DROPDOWN)
+        // TABLA INFERIOR (REGISTROS ACTUALES Y SU BÚSQUEDA)
         // ========================================================================================
-        private void llenarProductosNax()
+
+        // NUEVO: Botón buscar de la tabla inferior
+        protected void bt_buscarObjetivos_Click(object sender, EventArgs e)
         {
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos_quesoloestenvigente2("");
-
-            dd_productosNax.DataSource = tuplas;
-            dd_productosNax.DataValueField = "codigo";
-            dd_productosNax.DataTextField = "producto";
-            dd_productosNax.AppendDataBoundItems = true;
-            dd_productosNax.SelectedIndex = 1;
-            dd_productosNax.DataBind();
-
-            string medida = tuplas.Tables[0].Rows[0][2].ToString();
-            tx_medida.Text = medida;
-        }
-
-        private bool tienePermisoDeIngreso(int permiso)
-        {
-            NA_Responsables Nresp = new NA_Responsables();
-            string usuarioAux = Session["NameUser"].ToString();
-            string passwordAux = Session["passworuser"].ToString();
-            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
-
-            NA_DetallePermiso npermiso = new NA_DetallePermiso();
-            return npermiso.tienePermisoResponsable(permiso, codUser);
-        }
-
-        public string convertirFecha(string fecha)
-        {
-            if (fecha == "" || fecha == "&nbsp;")
-            {
-                return fecha = "null";
-            }
-            else
-            {
-                DateTime fecha_ = Convert.ToDateTime(fecha);
-                int dia = fecha_.Day;
-                int mes = fecha_.Month;
-                int anio = fecha_.Year;
-                string _fecha = "'" + anio + "/" + mes + "/" + dia + "'";
-                return _fecha;
-            }
-        }
-
-        // ========================================================================================
-        // TABLA INFERIOR (BÚSQUEDA Y SELECCIÓN PARA EDICIÓN)
-        // ========================================================================================
-        protected void bt_buscar_Click(object sender, EventArgs e)
-        {
-            string fechalimite = convertirFecha(tx_fechalimite.Text);
-            string producto = dd_productosNax.SelectedItem.Text;
+            string fechalimite = convertirFecha(tx_busquedaFecha.Text);
+            string producto = tx_busquedaProducto.Text.Trim();
             buscarDatos(fechalimite, producto);
+        }
+
+        // NUEVO: Limpiar búsqueda inferior
+        protected void bt_limpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            tx_busquedaFecha.Text = "";
+            tx_busquedaProducto.Text = "";
+            buscarDatos("", "");
         }
 
         private void buscarDatos(string fechalimite, string producto)
@@ -214,7 +191,6 @@ namespace jycboliviaASP.net.Presentacion
         protected void gv_reciboIngresoEgreso_SelectedIndexChanged(object sender, EventArgs e)
         {
             selecciondeDatosparaModificar();
-            // Mostrar panel de edición tras seleccionar de la tabla
             MostrarPanelEdicion();
         }
 
@@ -233,36 +209,19 @@ namespace jycboliviaASP.net.Presentacion
             tx_detalle.Text = HttpUtility.HtmlDecode(gv_objetivoProduccion.SelectedRow.Cells[9].Text);
         }
 
-        protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cargarDatosSeleccionado();
-        }
-
-        private void cargarDatosSeleccionado()
-        {
-            int codigoProducto;
-            int.TryParse(dd_productosNax.SelectedValue, out codigoProducto);
-
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_producto(codigoProducto);
-            string medida = tuplas.Tables[0].Rows[0][2].ToString();
-            tx_medida.Text = medida;
-        }
-
         // ========================================================================================
-        // MODIFICACIÓN, ELIMINACIÓN Y LIMPIEZA
+        // MODIFICACIÓN, ELIMINACIÓN Y LIMPIEZA EN EDICIÓN
         // ========================================================================================
         protected void bt_limpiar_Click(object sender, EventArgs e)
         {
-            limpiarDatos();
+            limpiarDatosEdicion();
         }
 
-        private void limpiarDatos()
+        private void limpiarDatosEdicion()
         {
             tx_cantcajas.Text = "0";
             tx_detalle.Text = "";
-            tx_fechalimite.Text = "0";
-            // No reseteamos la medida ni el producto aquí ya que bloqueamos el combo en HTML
+            tx_fechalimite.Text = "";
         }
 
         protected void bt_modificar_Click(object sender, EventArgs e)
@@ -314,10 +273,13 @@ namespace jycboliviaASP.net.Presentacion
                     string baseDatos = Session["BaseDatos"].ToString();
                     bool correoOK = nenvio.Enviar_Correo_objetivosVentas(asunto, Cuerpo);
 
-                    buscarDatos("", "");
-                    limpiarDatos();
-                    gv_objetivoProduccion.SelectedIndex = -1; // Deseleccionamos
-                    MostrarPanelCargaMasiva(); // Volvemos a la vista original
+                    // Refrescar usando los filtros actuales
+                    string fechaBusqueda = convertirFecha(tx_busquedaFecha.Text);
+                    buscarDatos(fechaBusqueda, tx_busquedaProducto.Text.Trim());
+
+                    limpiarDatosEdicion();
+                    gv_objetivoProduccion.SelectedIndex = -1;
+                    MostrarPanelCargaMasiva();
 
                     Response.Write("<script type='text/javascript'> alert('Modificación exitosa') </script>");
                 }
@@ -338,8 +300,6 @@ namespace jycboliviaASP.net.Presentacion
                 int codigo;
                 int.TryParse(gv_objetivoProduccion.SelectedRow.Cells[1].Text, out codigo);
 
-                string fechalimite = convertirFecha(tx_fechalimite.Text);
-
                 NA_Responsables Nresp = new NA_Responsables();
                 string usuarioAux = Session["NameUser"].ToString();
                 string passwordAux = Session["passworuser"].ToString();
@@ -349,15 +309,76 @@ namespace jycboliviaASP.net.Presentacion
                 bool bandera = cp.delete_objetivoProduccion(codigo, codUser);
                 if (bandera)
                 {
-                    buscarDatos("", "");
-                    limpiarDatos();
-                    gv_objetivoProduccion.SelectedIndex = -1; // Deseleccionamos
-                    MostrarPanelCargaMasiva(); // Volvemos a la vista original
+                    // Refrescar usando los filtros actuales
+                    string fechaBusqueda = convertirFecha(tx_busquedaFecha.Text);
+                    buscarDatos(fechaBusqueda, tx_busquedaProducto.Text.Trim());
+
+                    limpiarDatosEdicion();
+                    gv_objetivoProduccion.SelectedIndex = -1;
+                    MostrarPanelCargaMasiva();
 
                     Response.Write("<script type='text/javascript'> alert('Registro eliminado') </script>");
                 }
                 else
                     Response.Write("<script type='text/javascript'> alert('ERROR: No se pudo eliminar el registro') </script>");
+            }
+        }
+
+        // ========================================================================================
+        // UTILIDADES Y PERMISOS
+        // ========================================================================================
+        private void llenarProductosNax()
+        {
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_mostrarProductos_quesoloestenvigente2("");
+
+            dd_productosNax.DataSource = tuplas;
+            dd_productosNax.DataValueField = "codigo";
+            dd_productosNax.DataTextField = "producto";
+            dd_productosNax.AppendDataBoundItems = true;
+            dd_productosNax.SelectedIndex = 1;
+            dd_productosNax.DataBind();
+
+            string medida = tuplas.Tables[0].Rows[0][2].ToString();
+            tx_medida.Text = medida;
+        }
+
+        protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int codigoProducto;
+            int.TryParse(dd_productosNax.SelectedValue, out codigoProducto);
+
+            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
+            DataSet tuplas = pp.get_producto(codigoProducto);
+            string medida = tuplas.Tables[0].Rows[0][2].ToString();
+            tx_medida.Text = medida;
+        }
+
+        private bool tienePermisoDeIngreso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
+
+            NA_DetallePermiso npermiso = new NA_DetallePermiso();
+            return npermiso.tienePermisoResponsable(permiso, codUser);
+        }
+
+        public string convertirFecha(string fecha)
+        {
+            if (fecha == "" || fecha == "&nbsp;")
+            {
+                return fecha = "null";
+            }
+            else
+            {
+                DateTime fecha_ = Convert.ToDateTime(fecha);
+                int dia = fecha_.Day;
+                int mes = fecha_.Month;
+                int anio = fecha_.Year;
+                string _fecha = "'" + anio + "/" + mes + "/" + dia + "'";
+                return _fecha;
             }
         }
 
@@ -371,22 +392,11 @@ namespace jycboliviaASP.net.Presentacion
 
         private void descargarExcel()
         {
-            string fechalimite = convertirFecha(tx_fechalimite.Text);
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-
-            int codigoProducto;
-            int.TryParse(dd_productosNax.SelectedValue, out codigoProducto);
-
-            DataSet tuplas = pp.get_producto(codigoProducto);
-            string producto = tuplas.Tables[0].Rows[0][1].ToString();
+            // Ahora la descarga de excel respeta los filtros de la tabla inferior
+            string fechalimite = convertirFecha(tx_busquedaFecha.Text);
+            string producto = tx_busquedaProducto.Text.Trim();
 
             NCorpal_Produccion np = new NCorpal_Produccion();
-            if (!(gv_objetivoProduccion.SelectedIndex >= 0))
-            {
-                fechalimite = "";
-                producto = "";
-            }
-
             DataSet datos = np.get_objetivosDeProduccion(fechalimite, producto);
 
             HttpResponse response = HttpContext.Current.Response;
@@ -408,6 +418,18 @@ namespace jycboliviaASP.net.Presentacion
                     response.End();
                 }
             }
+        }
+
+        protected void bt_limpiarMasivo_Click(object sender, EventArgs e)
+        {
+            // 1. Limpiamos la caja de texto del buscador
+            tx_busquedaMasiva.Text = "";
+
+            // 2. Volvemos a enlazar la grilla sin filtros. 
+            // Al hacer DataBind() nuevamente, ASP.NET destruye la tabla actual y la dibuja desde cero,
+            // lo que automáticamente desmarca todos los CheckBox y resetea las cantidades a "0" y las fechas.
+            cargarGridMasivo("");
+
         }
     }
 }

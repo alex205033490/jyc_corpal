@@ -286,63 +286,37 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_objetivosDeProduccion(string fechalimite, string producto)
         {
-            /*
-               string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, "+
-                                      " ifnull(t1.ingreso,0) as 'Ingreso1', "+
-                                      " ifnull(t2.salida,0) as 'Salida1', "+
-                                      " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'StockAlmacen' "+ 
-                                      " FROM tbcorpal_producto pp "+
-                                      " LEFT JOIN "+
-                                      " ( "+
-                                      " select "+
-                                      " oo.codProductonax, sum(oo.cantcajas) as 'ingreso' "+   
-                                      " from tbcorpal_entregasordenproduccion oo "+
-                                      " where "+
-                                      " oo.estado = 1 and "+
-                                      " oo.fechagra between "+NA_VariablesGlobales.fechaInicialProduccion+" and current_date() "+
-                                      " group by oo.codProductonax "+
-                                      " ) as t1  ON pp.codigo = t1.codProductonax "+
-                                      " LEFT JOIN "+
-                                      " ( "+
-                                      " select dss.codproducto, sum(dss.cantentregada) as 'salida' "+
-                                      " from tbcorpal_solicitudentregaproducto ss, "+
-                                      " tbcorpal_detalle_solicitudproducto dss "+
-                                      " where "+
-                                      " ss.codigo = dss.codsolicitud and "+
-                                      " ss.estado = 1 and "+
-                                      " ss.estadosolicitud = 'Cerrado' and "+
-                                      " ss.fechacierre between "+NA_VariablesGlobales.fechaInicialProduccion+" and current_date() "+
-                                      " group by dss.codproducto "+
-                                      " ) as t2 ON pp.codigo = t2.codproducto "+
-                                      " WHERE "+
-                                      " pp.estado = 1 ";
-                                       */
             NA_VariablesGlobales variableN = new NA_VariablesGlobales();
             string consultaStock = variableN.get_consultaStockProductosActual();
 
-               string consulta = "Select "+ 
-                               " op.codigo, "+
-                               " date_format(op.fechalimite, '%d/%m/%Y') as 'fechaLimite', "+
-                               " op.codprod, "+
-                               " op.producto, "+
-                               " op.cantidadprod, "+
-                               " pp.StockAlmacen as 'stock_Almacen', " +
-                               " if( "+
-                               " (ifnull(pp.StockAlmacen,0) - ifnull(op.cantidadprod,0)) <= 0, " +
-                               " ((ifnull(pp.StockAlmacen,0) - ifnull(op.cantidadprod,0)) * -1), 0 " +
-                               " ) as 'cant_CompletarObjetivo', " +
-                               " op.medida, "+
-                               " op.detalle "+
-                               " from tbcorpal_objetivosproduccion op, ("+consultaStock+") as pp "+
-                               " where "+
-                               " op.estado = 1 and "+
-                               " op.codprod = pp.codigo and "+
-                               " op.producto like '%"+producto+"%' "+
-                               " order by op.codigo desc";
+            // 1. Armamos la consulta BASE sin el ORDER BY todavía
+            string consulta = "Select " +
+                            " op.codigo, " +
+                            " date_format(op.fechalimite, '%d/%m/%Y') as 'fechaLimite', " +
+                            " op.codprod, " +
+                            " op.producto, " +
+                            " op.cantidadprod, " +
+                            " pp.StockAlmacen as 'stock_Almacen', " +
+                            " if( " +
+                            " (ifnull(pp.StockAlmacen,0) - ifnull(op.cantidadprod,0)) <= 0, " +
+                            " ((ifnull(pp.StockAlmacen,0) - ifnull(op.cantidadprod,0)) * -1), 0 " +
+                            " ) as 'cant_CompletarObjetivo', " +
+                            " op.medida, " +
+                            " op.detalle " +
+                            " from tbcorpal_objetivosproduccion op, (" + consultaStock + ") as pp " +
+                            " where " +
+                            " op.estado = 1 and " +
+                            " op.codprod = pp.codigo and " +
+                            " op.producto like '%" + producto + "%' ";
 
-            if(string.IsNullOrEmpty(fechalimite) == false){
-                consulta = consulta + " and op.fechalimite <= " + fechalimite;              
-            }            
+            // 2. Agregamos el filtro de fecha SOLO si no es "null" ni está vacío
+            if (string.IsNullOrEmpty(fechalimite) == false && fechalimite != "null")
+            {
+                consulta = consulta + " and op.fechalimite <= " + fechalimite + " ";
+            }
+
+            // 3. FINALMENTE, agregamos el ordenamiento al final de toda la cadena SQL
+            consulta = consulta + " order by op.codigo desc";
 
             return Conx.consultaMySql(consulta);
         }

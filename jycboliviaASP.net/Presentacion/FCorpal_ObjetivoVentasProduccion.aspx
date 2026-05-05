@@ -46,15 +46,29 @@
 
     <div class="card" >
       <div class="card-header bg-warning text-black font-weight-bold">
-        Gestión de Objetivos de Ventas Producción
+        Objetivo Ventas Producción:
       </div>
       
       <div class="card-body">
 
+        <!-- ======================================================== -->
+        <!-- PANEL 1: CARGA MASIVA (Visible por defecto)              -->
+        <!-- ======================================================== -->
         <asp:Panel ID="pn_CargaMasiva" runat="server" Visible="true">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="text-primary m-0">Carga Masiva de Productos</h5>
-                <asp:Button ID="bt_insertarMasivo" class="btn btn-primary" runat="server" Text="Guardar Seleccionados" onclick="bt_insertarMasivo_Click" />
+            
+            <div class="row mb-2 align-items-center">
+                <div class="col-md-4">
+                    <h5 class="text-primary m-0">Carga Masiva de Productos</h5>
+                </div>
+                <div class="col-md-5 d-flex">
+                    <asp:TextBox ID="tx_busquedaMasiva" runat="server" CssClass="form-control form-control-sm mr-2" placeholder="Buscar producto..."></asp:TextBox>
+                    <asp:Button ID="bt_buscarMasivo" class="btn btn-secondary btn-sm" runat="server" Text="Buscar" OnClick="bt_buscarMasivo_Click" />
+                    <!-- NUEVO BOTÓN LIMPIAR -->
+                    <asp:Button ID="bt_limpiarMasivo" class="btn btn-light btn-sm ml-1 border" runat="server" Text="Limpiar" OnClick="bt_limpiarMasivo_Click" />
+                </div>
+                <div class="col-md-3 text-right">
+                    <asp:Button ID="bt_insertarMasivo" class="btn btn-primary btn-sm" runat="server" Text="Guardar" onclick="bt_insertarMasivo_Click" />
+                </div>
             </div>
             
             <div style="height: 380px; overflow-y: auto; border: 1px solid #ccc; border-radius: 5px;" class="mb-4">
@@ -97,6 +111,9 @@
             </div>
         </asp:Panel>
 
+        <!-- ======================================================== -->
+        <!-- PANEL 2: EDICIÓN INDIVIDUAL (Oculto por defecto)         -->
+        <!-- ======================================================== -->
         <asp:Panel ID="pn_Edicion" runat="server" Visible="false" CssClass="bg-light p-3 border rounded mb-4">
             <h5 class="text-secondary mb-3 border-bottom pb-2">Modificar o Eliminar Registro</h5>
             <div class="row">
@@ -108,7 +125,7 @@
                                 <asp:TextBox ID="tx_fechalimite" class="form-control" runat="server" Width="150px" ></asp:TextBox>
                                 <asp:CalendarExtender ID="tx_fechalimite_CalendarExtender" runat="server" TargetControlID="tx_fechalimite"></asp:CalendarExtender>
                             </td>
-                            <td><asp:Button ID="bt_buscar" class="btn btn-success ml-2" runat="server" onclick="bt_buscar_Click" Text="Buscar" /></td>
+                            <!-- SE QUITÓ EL BOTÓN BUSCAR DE AQUÍ -->
                         </tr>  
                         <tr>
                             <td class="pt-2"><asp:Label ID="Label40" runat="server" Text="Producto Nax :" CssClass="font-weight-bold mr-2"></asp:Label></td>
@@ -144,12 +161,30 @@
             <div class="mt-4 border-top pt-3">
                 <asp:Button ID="bt_modificar" class="btn btn-warning" runat="server" Text="Guardar Cambios" onclick="bt_modificar_Click" />
                 <asp:Button ID="bt_eliminar" class="btn btn-danger ml-2" runat="server" Text="Eliminar Registro" onclick="bt_eliminar_Click" />
-                <asp:Button ID="bt_limpiar" class="btn btn-light ml-2 border" runat="server" Text="Limpiar" onclick="bt_limpiar_Click" />
                 <asp:Button ID="bt_cancelarEdicion" class="btn btn-secondary float-right" runat="server" Text="Cancelar / Volver" onclick="bt_cancelarEdicion_Click" />
             </div>
         </asp:Panel>
 
-        <h5 class="mt-4 border-bottom pb-2">Registros de Objetivos Actuales</h5>
+        <!-- ======================================================== -->
+        <!-- SECCIÓN 3: TABLA DE REGISTROS GUARDADOS                  -->
+        <!-- ======================================================== -->
+        <h5 class="mt-4 border-bottom pb-2">Registros de Objetivos</h5>
+        
+        <!-- NUEVO: Buscador exclusivo para la tabla inferior -->
+        <div class="row mb-3 bg-light p-2 border rounded mx-0">
+            <div class="col-md-3">
+                <asp:TextBox ID="tx_busquedaFecha" runat="server" CssClass="form-control form-control-sm" placeholder="Filtro Fecha Límite"></asp:TextBox>
+                <asp:CalendarExtender ID="ce_busquedaFecha" runat="server" TargetControlID="tx_busquedaFecha"></asp:CalendarExtender>
+            </div>
+            <div class="col-md-5">
+                <asp:TextBox ID="tx_busquedaProducto" runat="server" CssClass="form-control form-control-sm" placeholder="Filtro Nombre Producto"></asp:TextBox>
+            </div>
+            <div class="col-md-4">
+                <asp:Button ID="bt_buscarObjetivos" class="btn btn-success btn-sm" runat="server" Text="Buscar en Historial" onclick="bt_buscarObjetivos_Click" />
+                <asp:Button ID="bt_limpiarBusqueda" class="btn btn-outline-secondary btn-sm ml-1" runat="server" Text="Limpiar" onclick="bt_limpiarBusqueda_Click" />
+            </div>
+        </div>
+
         <div class="DatosProyecto mb-3" style="overflow-x: auto;">
              <asp:GridView ID="gv_objetivoProduccion" 
                   runat="server" BackColor="White" 
