@@ -32,7 +32,6 @@ namespace jycboliviaASP.net.Presentacion
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
             }
-
             if (!IsPostBack)
             {
                 DataTable dRepuesto = new DataTable();
@@ -128,7 +127,10 @@ namespace jycboliviaASP.net.Presentacion
             int fin = tuplas.Tables[0].Rows.Count;
             for (int i = 0; i < fin; i++)
             {
-                lista[i] = tuplas.Tables[0].Rows[i][1].ToString();
+                var codigo = tuplas.Tables[0].Rows[i][0].ToString();
+                var nombre = tuplas.Tables[0].Rows[i][1].ToString();
+                //lista[i] = $"{nombre}|{codigo}";
+                lista[i] = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(nombre, codigo);
             }
             return lista;
         }
@@ -143,16 +145,11 @@ namespace jycboliviaASP.net.Presentacion
 
             string nombreProducto = prefixText;
             string cliente = contextKey;
-
-            int codigCliente;
+            
             NCorpal_Cliente nc = new NCorpal_Cliente();
-            codigCliente = nc.get_CodigoCliente(cliente);
-
-            if (codigCliente == 0)
-                return new string[0];
 
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarListProductosCliente(codigCliente, nombreProducto);
+            DataSet tuplas = pp.get_mostrarListProductosCliente(nombreProducto);
 
             if (tuplas == null || tuplas.Tables.Count == 0 || tuplas.Tables[0].Rows.Count == 0)
                 return new string[0];
@@ -193,9 +190,8 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string producto = tx_producto.Text.Trim();
                 string cliente = tx_cliente.Text;
-                int codigCliente;
+                int codigCliente = Convert.ToInt32(hf_codCliente.Value);
                 NCorpal_Cliente nc = new NCorpal_Cliente();
-                codigCliente = nc.get_CodigoCliente(cliente);
 
                 if (codigCliente <= 0)
                 {
@@ -254,9 +250,9 @@ namespace jycboliviaASP.net.Presentacion
             bool itemPackFerial = cb_itemPackFerial.Checked;
 
             string cliente = tx_cliente.Text;
-            int codigCliente;
+            int codigCliente = Convert.ToInt32(hf_codCliente.Value);
             NCorpal_Cliente nc = new NCorpal_Cliente();
-            codigCliente = nc.get_CodigoCliente(cliente);
+            
 
             if (codigCliente <= 0)
             {
@@ -474,10 +470,9 @@ namespace jycboliviaASP.net.Presentacion
 
                     string repuestosSolicitados = "";
                     string cliente = tx_cliente.Text;
-                    int codigCliente;
+                    int codigCliente = Convert.ToInt32(hf_codCliente.Value);
                     NCorpal_Cliente nc = new NCorpal_Cliente();
-                    codigCliente = nc.get_CodigoCliente(cliente);
-
+                    
                     bool banderaActualizar = cb_actualizarCliente.Checked;
                     if (codigCliente != 0 && banderaActualizar == true)
                     {
@@ -589,9 +584,9 @@ namespace jycboliviaASP.net.Presentacion
             datoRepuesto.AcceptChanges();
 
             string cliente = tx_cliente.Text;
-            int codigCliente;
+            int codigCliente = Convert.ToInt32(hf_codCliente.Value);
             NCorpal_Cliente nc = new NCorpal_Cliente();
-            codigCliente = nc.get_CodigoCliente(cliente);
+            
             int id_tipoCliente = verificarTipoCliente(codigCliente);
             if (id_tipoCliente == 1 || id_tipoCliente == 3)
             {
@@ -694,6 +689,7 @@ namespace jycboliviaASP.net.Presentacion
             tx_fechaEntrega.Text = "";
             tx_horaEntrega.Text = "";
             hf_tipoCliente.Value = "";
+            hf_codCliente.Value = "";
             tx_cliente.Text = "";
             tx_cliente.ReadOnly = false;
             tx_total.Text = "";
@@ -713,6 +709,9 @@ namespace jycboliviaASP.net.Presentacion
 
             gv_adicionados.DataSource = datoRepuesto;
             gv_adicionados.DataBind();
+
+            gv_Productos.DataSource = null;
+            gv_Productos.DataBind();
             Session["listaSolicitudProducto"] = datoRepuesto;
 
             NA_Responsables Nresp = new NA_Responsables();
@@ -746,9 +745,9 @@ namespace jycboliviaASP.net.Presentacion
 
         private void verificarTienda()
         {
-            string tienda = tx_cliente.Text;
+            int codCliente = Convert.ToInt32(hf_codCliente.Value);
             NCorpal_Cliente ncli = new NCorpal_Cliente();
-            DataSet tuplaCliente = ncli.get_ClienteNombreEspecifico(tienda);
+            DataSet tuplaCliente = ncli.get_ClienteNombreEspecifico(codCliente);
             if (tuplaCliente.Tables[0].Rows.Count>0) {
                 tx_propietario.Text = tuplaCliente.Tables[0].Rows[0][6].ToString(); 
                 tx_razonSocial.Text = tuplaCliente.Tables[0].Rows[0][12].ToString();
@@ -856,10 +855,10 @@ namespace jycboliviaASP.net.Presentacion
         }
 
         [System.Web.Services.WebMethod]
-        public static clsscliente obtenerCliente(string nombreCliente)
+        public static clsscliente obtenerCliente(int codigo)
         {
             NCorpal_Cliente ncli = new NCorpal_Cliente();
-            DataSet ds = ncli.get_ClienteNombreEspecifico(nombreCliente);
+            DataSet ds = ncli.get_ClienteNombreEspecifico(codigo);
 
             clsscliente c = new clsscliente();
             if (ds.Tables[0].Rows.Count > 0)

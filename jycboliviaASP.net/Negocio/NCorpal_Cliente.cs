@@ -294,9 +294,9 @@ namespace jycboliviaASP.net.Negocio
             return dtienda.get_ClienteNombre(tiendanombre);
         }
 
-        internal DataSet get_ClienteNombreEspecifico(string tiendanombre)
+        internal DataSet get_ClienteNombreEspecifico(int codigo)
         {
-            return dtienda.get_ClienteNombreEspecifico(tiendanombre);
+            return dtienda.get_ClienteNombreEspecifico(codigo);
         }
 
         internal DataSet get_ClienteCodigo(int codigo)
@@ -304,10 +304,10 @@ namespace jycboliviaASP.net.Negocio
             return dtienda.get_ClienteCodCliente(codigo);
         }
 
-        internal int get_CodigoCliente(string cliente)
+        internal int get_CodigoCliente(int cod)
         {
             int codigo = 0;
-            DataSet tabla = dtienda.get_ClienteNombreEspecifico(cliente);
+            DataSet tabla = dtienda.get_ClienteNombreEspecifico(cod);
             if (tabla.Tables[0].Rows.Count > 0)
             {
                 int.TryParse(tabla.Tables[0].Rows[0][0].ToString(), out codigo);

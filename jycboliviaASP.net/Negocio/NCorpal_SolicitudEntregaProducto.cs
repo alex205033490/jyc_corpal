@@ -39,11 +39,11 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al obtener los datos. " + ex.Message);
             }
         }
-        internal DataSet get_mostrarListProductosCliente(int codCli, string producto)
+        internal DataSet get_mostrarListProductosCliente(string producto)
         {
             try
             {
-                return dsp.get_mostrarListProductosCliente(codCli, producto);
+                return dsp.get_mostrarListProductosCliente(producto);
             }
             catch(Exception ex)
             {

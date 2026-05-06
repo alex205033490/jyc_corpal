@@ -186,6 +186,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.HiddenField hf_tipoCliente;
 
         /// <summary>
+        /// Control hf_codCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_codCliente;
+
+        /// <summary>
         /// Control tx_cliente.
         /// </summary>
         /// <remarks>
