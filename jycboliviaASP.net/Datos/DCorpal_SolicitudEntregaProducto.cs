@@ -58,7 +58,7 @@ namespace jycboliviaASP.net.Datos
                                 AND dlp.`producto` LIKE @producto
                                 and cl.id_listaprecio = dlp.id_listaprecio";
 
-                string consulta2 = $@"select 
+                /*string consulta2 = $@"select 
                                     pp.`codigo`,
                                     pp.codupon,
                                     pp.`producto`,
@@ -78,7 +78,7 @@ namespace jycboliviaASP.net.Datos
                                     where pp.`estado` = 1 and lp.`estado` = 1 and dlp.`estado` = 1 
                                     and cl.`codigo` = @codcliente
                                     and pp.`producto` like @producto ";
-
+                */
                 var parametros = new List<MySqlParameter>
                 {
                     new MySqlParameter("@codcliente", codCliente),
