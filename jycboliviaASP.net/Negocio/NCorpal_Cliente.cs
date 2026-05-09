@@ -339,6 +339,19 @@ namespace jycboliviaASP.net.Negocio
         {
             return dtienda.updateDatosTiendaSolicitud( codigCliente,  cliente, razonsocial, propietario,  nit,  codpersolicitante);
         }
+
+        internal bool update_CoordenadasCliente(int codCli, string lat, string lng)
+        {
+            try
+            {
+                return dtienda.updateCoordenadasCliente(codCli, lat, lng);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al actualizar la coordenada del cliente. " +ex.Message);
+            }
+        }
+
     }
 }
     

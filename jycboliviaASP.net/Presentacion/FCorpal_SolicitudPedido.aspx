@@ -103,6 +103,11 @@
             background-color: antiquewhite;
             font-size: 0.7rem;
         }
+
+        .form_map{
+            border: 2px solid black;
+            box-shadow: 2px 1px 7px 0px #484848;
+        }
     </style>
     <script type="text/javascript">
 
@@ -268,7 +273,6 @@
 
                 <div class="container_columns row col-lg-12">
 
-
                     <div class="container_column1 row col-lg-5">
                         <asp:UpdatePanel ID="updatePanel_datosFactura" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
@@ -305,6 +309,11 @@
                                             <asp:CheckBox ID="cb_actualizarCliente" for="bt_verificar" Text="Actualizar Tienda" runat="server" />
 
                                             <asp:Button ID="bt_verificar" CssClass="btn btn-info mb-2" runat="server" Text="Verificar" Font-Size="Smaller" OnClick="bt_verificar_Click" />
+                                        
+                                            <asp:Button id="btn_verUbicacionCli" runat="server" CssClass="btn btn-secondary" Text="Ver Ubicación" Font-Size="Smaller" 
+                                                 OnClientClick="mostrarPunto(); return false;"/>
+                                        
+                                            <asp:Button ID="btn_modificarUbicacionCli" runat="server" CssClass="btn btn-primary" Text="Modificar Ubicación" Font-Size="Smaller" OnClick="btn_modificarUbicacionCli_Click" />
                                         </div>
 
 
@@ -427,6 +436,19 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
+                <asp:HiddenField runat="server" id ="hf_latCliente"/>
+                <asp:HiddenField runat="server" id ="hf_lngCliente"/>
+
+                <div class="container_map col-12">
+                    <div class="form_map col-8">
+
+                        <div id="divmappp" style="width: 100%; height: 420px; border: 1px solid #ccc"></div>
+
+                    </div>
+                    <asp:Button ID="btn_limpiarMap" runat="server" CssClass="btn btn-danger mt-2" OnClientClick="limpiarMap(); return false;" Text="Limpiar Puntos"/>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -449,6 +471,9 @@
                 document.getElementById("<%=tx_nit.ClientID%>").value = resultado.nit;
                 document.getElementById("<%=tx_razonSocial.ClientID%>").value = resultado.razonsocial;
                 document.getElementById("<%=hf_codCliente.ClientID%>").value = codigo;
+
+                document.getElementById("<%= hf_latCliente.ClientID %>").value = resultado.lat;
+                document.getElementById("<%= hf_lngCliente.ClientID %>").value = resultado.lng;
 
                 var hfTipo = document.getElementById("<%= hf_tipoCliente.ClientID %>");
                 var txCliente = document.getElementById("<%= tx_cliente.ClientID %>");
@@ -516,6 +541,95 @@
             }
         })
     </script>
+
+
+        <!-- SCRIPT MAPS -->
+        <script type="text/javascript">
+
+            let map;
+            let markerunico = null;
+
+            function initMap() {
+
+                const centro = {
+                    lat: -17.752107,
+                    lng: -63.132962
+                }
+
+                //Crear mapa
+                map = new google.maps.Map(document.getElementById("divmappp"), {
+                    zoom: 13,
+                    center: centro
+                });
+
+                map.addListener("click", function (event) {
+                    const lat = event.latLng.lat();
+                    const lng = event.latLng.lng();
+
+                    dibujarPunto(lat, lng);
+
+                    document.getElementById('<%= hf_latCliente.ClientID %>').value = lat;
+                    document.getElementById('<%= hf_lngCliente.ClientID %>').value = lng;
+
+                    console.log(lat, lng);
+                });
+            }
+
+            function dibujarPunto(lat, lng) {
+                if (markerunico) {
+                    markerunico.setMap(null);
+                }
+
+                markerunico = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(lat),
+                        lng: parseFloat(lng)
+                    },
+                    map : map
+                });
+
+                map.setCenter({
+                    lat: parseFloat(lat),
+                    lng: parseFloat(lng)
+                });
+
+                map.setZoom(16);
+
+                console.log("Lat:", lat);
+                console.log("Lng:", lng);
+            }
+
+            function mostrarPunto() {
+                let lat = document.getElementById('<%= hf_latCliente.ClientID %>').value
+                let lng = document.getElementById('<%= hf_lngCliente.ClientID %>').value
+
+                if (!lat || !lng) {
+                    alert("no hay coordenadas");
+                    return;
+                }
+                dibujarPunto(lat, lng);
+            }
+            
+            function limpiarMap() {
+                if (markerunico) {
+                    markerunico.setMap(null);
+                    markerunico = null;
+                }
+
+                map.setCenter({
+                    lat: -17.752107,
+                    lng: -63.132962
+                });
+
+                map.setZoom(13);
+
+                console.log("mapa limpiado");
+            }
+            
+
+        </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBadNUlLiF0DBBKZse7AFtt-v2p4Oz1Vp0&callback=initMap" async defer></script>
 
 </asp:Content>
 

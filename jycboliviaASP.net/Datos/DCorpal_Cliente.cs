@@ -675,7 +675,8 @@ namespace jycboliviaASP.net.Datos
                         tiendatelefono, tiendadepartamento, tiendazona, 
                         propietarioname, propietarioci, propietariodir,
                         propietariocelular, propietarionit, propietariocorreo,
-                        facturar_a, facturar_nit, facturar_correo, observacion, id_tipocliente  
+                        facturar_a, facturar_nit, facturar_correo, observacion, id_tipocliente, 
+                        direccion_lat, direccion_lng 
                         from tbcorpal_cliente tt 
                         where tt.codigo = @codigo";
                 var parametros = new List<MySqlParameter>
@@ -736,6 +737,29 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);    
         }
 
+        internal bool updateCoordenadasCliente(int codCli, string lat, string lng)
+        {
+            try
+            {
+                string consulta = @"update tbcorpal_cliente c 
+                                set c.direccion_lat = @lat, 
+                                c.direccion_lng = @lng 
+                                where c.estado = 1 
+                                and c.codigo = @codCli";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@lat", lat);
+                    cmd.Parameters.AddWithValue("@lng", lng);
+                    cmd.Parameters.AddWithValue("@codCli", codCli);
+
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la ubicacion. " + ex.Message);
+            }
+        }
 
     }
 }
