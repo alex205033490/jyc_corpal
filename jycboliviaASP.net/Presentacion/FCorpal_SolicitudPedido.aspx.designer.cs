@@ -402,6 +402,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.HiddenField hf_lngCliente;
 
         /// <summary>
+        /// Control btn_iniciarMap.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_iniciarMap;
+
+        /// <summary>
         /// Control btn_limpiarMap.
         /// </summary>
         /// <remarks>

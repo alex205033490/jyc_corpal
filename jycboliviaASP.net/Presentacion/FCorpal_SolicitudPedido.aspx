@@ -445,6 +445,7 @@
                         <div id="divmappp" style="width: 100%; height: 420px; border: 1px solid #ccc"></div>
 
                     </div>
+                    <asp:Button ID="btn_iniciarMap" runat="server" CssClass="btn btn-success mt-2" OnClientClick="cargarMapa(); return false;" Text="Cargar Mapa"/>
                     <asp:Button ID="btn_limpiarMap" runat="server" CssClass="btn btn-danger mt-2" OnClientClick="limpiarMap(); return false;" Text="Limpiar Puntos"/>
                 </div>
 
@@ -548,6 +549,22 @@
 
             let map;
             let markerunico = null;
+            let mapaCargado = false;
+
+            function cargarMapa() {
+                if (mapaCargado) {
+                    return;
+                }
+
+                mapaCargado = true;
+                const script = document.createElement("script");
+                script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBadNUlLiF0DBBKZse7AFtt-v2p4Oz1Vp0&callback=initMap";
+
+                script.async = true;
+                script.async = true;
+
+                document.head.appendChild(script);
+            }
 
             function initMap() {
 
@@ -580,7 +597,7 @@
                     markerunico.setMap(null);
                 }
 
-                markerunico = new google.maps.Marker({
+                markerunico = new google.maps.Marker({ 
                     position: {
                         lat: parseFloat(lat),
                         lng: parseFloat(lng)
@@ -628,8 +645,6 @@
             
 
         </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBadNUlLiF0DBBKZse7AFtt-v2p4Oz1Vp0&callback=initMap" async defer></script>
 
 </asp:Content>
 
