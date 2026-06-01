@@ -1273,7 +1273,7 @@ namespace jycboliviaASP.net.Datos
                         sep.horaentrega, 
                         sep.estadosolicitud, 
                         dsp.tiposolicitud, 
-                        dsp.cant as 'cantSolicitada', 
+                        COALESCE(dsp.cant, dsp.cant_unidadcontenedorfraccionada) as 'cantSolicitada', 
                         ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
                         CASE dsp.tiposolicitud 
                             WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 

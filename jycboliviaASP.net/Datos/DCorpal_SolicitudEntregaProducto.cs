@@ -547,8 +547,12 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_StockProducctos(string fechaHasta)
         {         
-           NA_VariablesGlobales nv = new NA_VariablesGlobales();
+            NA_VariablesGlobales nv = new NA_VariablesGlobales();
+            //return nv.get_consultaStockProductosActual_fecha(fechaHasta);
+            
+            //DataSet ds = nv.
             string consulta = nv.get_consultaStockProductosActual_fecha(fechaHasta);
+            //throw new Exception(consulta);
             return conexion.consultaMySql(consulta);
         }
 
@@ -593,33 +597,59 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        internal DataSet get_detalleEntregaSolicitudProductos(DateTime fechadesde, DateTime fechahasta)
         {
-            string consulta = "select " +
-                               " ss.codigo, ss.nroboleta, " +
-                               " date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', " +
-                               " ss.horaentrega, " +
-                               " ss.personalsolicitud, " +
-                               " pp.producto, " +
-                               " dss.cant as 'cant_solicitada', " +
-                               " ifnull(dss.cantentregada,0) as 'cant_entregada', " +
-                               " ss.estadosolicitud, " +
-                               " date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', " +
-                               " ss.horacierre, " +
-                               " ss.personalentregoproducto, " +
-                               " ss.detallecierre  " +
-                               " ,pp.codupon "+
-                               " from tbcorpal_solicitudentregaproducto ss, " +
-                               " tbcorpal_detalle_solicitudproducto dss, " +
-                               " tbcorpal_producto pp " +
-                               " where " +
-                               " ss.codigo = dss.codsolicitud and " +
-                               " dss.codproducto = pp.codigo and " +
-                               " ss.estado = 1 and " +
-                               " pp.estado = 1 and "+
-                               " ss.fechaentrega between " + fechadesde + " and " + fechahasta;
-                               
-            return conexion.consultaMySql(consulta);
+            try
+            {
+                string consulta = @"select 
+                                     ss.codigo, ss.nroboleta, 
+                                     date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', 
+                                     ss.horaentrega, 
+                                     ss.personalsolicitud, 
+                                     pp.producto,
+                                     dss.`contenedorfraccionado`,
+                                     CASE
+                                        WHEN IFNULL(dss.contenedorfraccionado,0) = 1
+                                            THEN IFNULL(dss.cant_unidadcontenedorfraccionada,0)
+                                        ELSE
+                                            IFNULL(dss.cant,0)
+                                        END AS cant_solicitada, 
+                                     ifnull(dss.cantentregada,0) as 'cant_entregada', 
+                                     ss.estadosolicitud, 
+                                     date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', 
+                                     ss.horacierre, 
+                                     ss.personalentregoproducto, 
+                                     ss.detallecierre,  
+                                     pp.codupon
+                                     from tbcorpal_solicitudentregaproducto ss 
+                                     left join tbcorpal_detalle_solicitudproducto dss ON ss.`codigo` = dss.`codsolicitud` 
+                                     left join tbcorpal_producto pp ON dss.`codproducto` = pp.`codigo`
+                                     where 
+                                     ss.estado = 1 and 
+                                     pp.estado = 1 and 
+                                     ss.fechaentrega BETWEEN @fechaIni AND @fechaFin
+                                     order by 
+                                     ss.fechaentrega asc, 
+                                     ss.codigo asc;" ;
+                var parametros = new List<MySqlParameter>
+                    {
+                        new MySqlParameter("@fechaIni", MySqlDbType.Date)
+                        {
+                            Value = fechadesde.Date
+                        },
+
+                        new MySqlParameter("@fechaFin", MySqlDbType.Date)
+                        {
+                            Value = fechahasta.Date
+                        }
+                    };
+
+                            return conexion.consultaMySqlParametros( consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
         }
 
         internal DataSet get_allPedidosParaVaciarUpon(string cliente)

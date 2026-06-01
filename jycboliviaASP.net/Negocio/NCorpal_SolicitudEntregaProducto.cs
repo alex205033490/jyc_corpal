@@ -186,8 +186,7 @@ namespace jycboliviaASP.net.Negocio
 
         internal DataSet get_StockProducctos(string fechaHasta)
         {
-            DataSet dato = dsp.get_StockProducctos(fechaHasta);
-            return dato;
+            return dsp.get_StockProducctos(fechaHasta);
         }
 
         internal float get_Stock(int codProducto, string tipoSolicitud)
@@ -208,7 +207,7 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
         }
 
-        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        internal DataSet get_detalleEntregaSolicitudProductos(DateTime fechadesde, DateTime fechahasta)
         {
             return dsp.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
         }

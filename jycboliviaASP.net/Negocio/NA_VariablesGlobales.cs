@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using jycboliviaASP.net.Datos;
+using MySql.Data.MySqlClient;
 
 namespace jycboliviaASP.net.Negocio
 {
     public class NA_VariablesGlobales
     {
+        private conexionMySql cnx = new conexionMySql();
+
         public static int meseslimitesdeAtrazadosPermitidosMantenimiento = 2;
         //"db_seguimientoscz_jyc", "db_seguimientocbba_jyc", "db_seguimientolpz_jyc", "db_seguimientosucre_jyc", "db_seguimientotarija_jyc", "db_seguimientooruro_jyc", "db_seguimientopotosi_jyc", "db_seguimientobeni_jyc", "db_seguimientopando_jyc", "db_seguimientoyacuiba_jyc", "db_seguimientovillamontes_jyc", "db_seguimientoparaguay_nuevo" 
         //public static List<string> listBaseDatos = new List<string> { "db_seguimientoprueba_jyc"};
@@ -376,80 +379,138 @@ namespace jycboliviaASP.net.Negocio
 
         internal string get_consultaStockProductosActual_fecha(string fechaHasta)
         {
-            string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1',   " +
-                    " (ifnull(t1.ingreso,0) - ifnull(t2.salida,0)) as 'StockAlmacen',   " +
-                    "(ifnull(t1.ingreso, 0) - ifnull(t3.salida, 0)) as 'StockParcialAlmacen', " +
-                    " (ifnull(t1.ingresopackferial,0) - ifnull(t2.salidaPackFerial,0)) as 'StockPackFerial'  " +
-                    " ,pp.codupon, pp.codumupon, pp.codigosimec " +
-                    " FROM tbcorpal_producto pp   " +
-                    " LEFT JOIN    " +
-                    " (   " +
-                    " select   " +
-                    " oo.codProductonax, sum(oo.cantcajas) as 'ingreso',   " +
-                    " sum(oo.pack_ferial) as 'ingresopackferial'   " +
-                    " from tbcorpal_entregasordenproduccion oo   " +
-                    " where   " +
-                    " oo.estado = 1 and   " +
-                    " TIMESTAMP(oo.fechagra, oo.horagra)  between " +
-                    " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
-                    " TIMESTAMP(DATE_SUB("+ fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " +
-                    //NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
-                    " group by oo.codProductonax   " +
-                    " ) as t1  ON pp.codigo = t1.codProductonax   " +
-                    " LEFT JOIN   " +
-                    " (   " +
-                    " select dss.codproducto,  " +
-                    " sum(dss.cantentregada) as 'salida',  " +
-                    " sum(  " +
-                    " case    " +
-                    " when dss.tiposolicitud <> 'ITEM PACK FERIAL' then dss.cantentregada  " +
-                    " else 0  " +
-                    " end)   " +
-                    " as 'salidaCajas' ,  " +
-                    " sum(  " +
-                    " case dss.tiposolicitud   " +
-                    " when 'ITEM PACK FERIAL' then dss.cantentregada  " +
-                    " else 0  " +
-                    " end)   " +
-                    " as 'salidaPackFerial'                                          " +
-                    " from tbcorpal_solicitudentregaproducto ss,   " +
-                    " tbcorpal_detalle_solicitudproducto dss   " +
-                    " where   " +
-                    " ss.codigo = dss.codsolicitud and   " +
-                    " ss.estado = 1 and   " +
-                    /*    " ss.estadosolicitud = 'Cerrado' and  " +
-                        " TIMESTAMP(ss.fechaentrega, ss.horaentrega)  between " +
-                        " TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + ", '07:00:00') and " +
-                        " TIMESTAMP(DATE_SUB(" + fechaHasta + ", INTERVAL - 1 DAY), '06:00:00') " + */
-                    " ss.fechaentrega between "+ NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta+
-                    " group by dss.codproducto   " +
-                    " ) as t2 ON pp.codigo = t2.codproducto   " +
+            try {
 
-                    /* T3 stock parcial */
-                    " LEFT JOIN " +
-                    " (  " +
-                    " select dss.codproducto, " +
-                    " sum(dss.cantentregada) as 'salida', " +
-                    " sum(  " +
-                    " case  " +
-                    " when dss.tiposolicitud<> 'ITEM PACK FERIAL' then dss.cant  " +
-                    " else 0  " +
-                    " end)  " +
-                    " as 'salidaCajas'  " +
-                    " from tbcorpal_solicitudentregaproducto ss, " +
-                    " tbcorpal_detalle_solicitudproducto dss " +
-                    " where " +
-                    " ss.codigo = dss.codsolicitud and " +
-                    " ss.estado = 1 " +
-                    " and ss.fechaGra between "+ NA_VariablesGlobales.fechaInicialProduccion + " and " + fechaHasta +
-                    " group by dss.codproducto " +
-                    " ) as t3 ON pp.codigo = t3.codproducto " +
 
-                    " WHERE   " +
-                    " pp.estado = 1 ";
+                string consultaStock = @"
+                            SELECT 
+                                pp.codigo,
+                                pp.producto,
+                                pp.medida,
+                                IFNULL(t1.ingreso,0) AS Ingreso1,
+                                IFNULL(t1.ingresoFraccionada, 0) AS IngresoFraccionado,
+                                IFNULL(t2.salida,0) AS Salida1,
+                                IFNULL(T2.salidaCantFraccionada, 0) AS SalidaFraccionada,
+                                (IFNULL(t1.ingreso,0) - IFNULL(t2.salida,0)) AS StockAlmacen,
+                                (IFNULL(t1.ingreso,0) - IFNULL(t3.salida,0)) AS StockParcialAlmacen,
+                                (IFNULL(t1.ingresopackferial,0) - IFNULL(t2.salidaPackFerial,0)) AS StockPackFerial,
+                                pp.codupon,
+                                pp.codumupon,
+                                pp.codigosimec,
+                                
+                                (IFNULL(t1.ingresoFraccionada, 0) - IFNULL(t2.salidaCantFraccionada, 0)) AS StockFraccAlmacen
 
-            return consultaStock;
+                            FROM tbcorpal_producto pp
+
+
+                           
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    oo.codProductonax,
+                                    SUM(oo.cantcajas) AS ingreso,
+                                    SUM(oo.pack_ferial) AS ingresopackferial,
+                                    SUM(oo.cantfraccionada) AS ingresoFraccionada
+
+                                FROM tbcorpal_entregasordenproduccion oo
+
+                                WHERE
+                                    oo.estado = 1
+                                    AND TIMESTAMP(oo.fechagra, oo.horagra)
+                                    BETWEEN TIMESTAMP(" + NA_VariablesGlobales.fechaInicialProduccion + @", '07:00:00')
+                                    AND TIMESTAMP(DATE_SUB(" + fechaHasta + @", INTERVAL -1 DAY), '06:00:00')
+                                GROUP BY oo.codProductonax
+                            ) AS t1 ON pp.codigo = t1.codProductonax
+
+
+                            
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    dss.codproducto,
+                                    SUM(
+                                        CASE
+                                            WHEN IFNULL(dss.contenedorfraccionado, 0) = 0 
+                                            THEN dss.cantentregada 
+                                            ELSE 0
+                                        END
+                                    ) AS salida,
+                                    SUM(
+                                        CASE
+                                            WHEN dss.contenedorfraccionado = 1 
+                                            THEN dss.cantentregada 
+                                            ELSE 0 
+                                        END
+                                    ) AS salidaCantFraccionada,
+                                    SUM(
+                                        CASE
+                                            WHEN dss.tiposolicitud <> 'ITEM PACK FERIAL'
+                                            THEN dss.cantentregada
+                                            ELSE 0
+                                        END
+                                    ) AS salidaCajas,
+                                    SUM(
+                                        CASE
+                                            WHEN dss.tiposolicitud = 'ITEM PACK FERIAL'
+                                            THEN dss.cantentregada
+                                            ELSE 0
+                                        END
+                                    ) AS salidaPackFerial
+
+                                FROM tbcorpal_solicitudentregaproducto ss
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dss
+                                    ON ss.codigo = dss.codsolicitud
+
+                                WHERE
+                                    ss.estado = 1
+                                    AND ss.fechaentrega BETWEEN " + NA_VariablesGlobales.fechaInicialProduccion + @"
+                                    AND " + fechaHasta + @"
+
+                                GROUP BY dss.codproducto
+
+                            ) AS t2 ON pp.codigo = t2.codproducto
+
+
+                            
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    dss.codproducto,
+                                    SUM(dss.cantentregada) AS salida,
+
+                                    SUM(
+                                        CASE
+                                            WHEN dss.tiposolicitud <> 'ITEM PACK FERIAL'
+                                            THEN dss.cant
+                                            ELSE 0
+                                        END
+                                    ) AS salidaCajas
+
+                                FROM tbcorpal_solicitudentregaproducto ss
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dss
+                                    ON ss.codigo = dss.codsolicitud
+
+                                WHERE
+                                    ss.estado = 1
+                                    AND ss.fechaGra BETWEEN " + NA_VariablesGlobales.fechaInicialProduccion + @"
+                                    AND " + fechaHasta + @"
+
+                                GROUP BY dss.codproducto
+
+                            ) AS t3 ON pp.codigo = t3.codproducto
+
+                            WHERE
+                                pp.estado = 1;";
+
+                return consultaStock;
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al consultar Stock actual. " + ex.Message);
+            }
         }
+
         internal string get_consultaStockProductosActual(int codigoProducto)
         {
             string consultaStock = "SELECT pp.codigo, pp.producto, pp.medida, ifnull(t1.ingreso,0) as 'Ingreso1', ifnull(t2.salida,0) as 'Salida1',   " +
