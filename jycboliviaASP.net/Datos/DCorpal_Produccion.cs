@@ -9,6 +9,7 @@ using Microsoft.Reporting.Map.WebForms;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using System.Drawing;
 
 namespace jycboliviaASP.net.Datos
 {
@@ -231,9 +232,76 @@ namespace jycboliviaASP.net.Datos
             
         }
 
-        internal DataSet get_entregasProduccion(string fechadesde, string fechahasta, string Responsable, string producto)
+        internal DataSet get_entregasProduccion(DateTime fechadesde, DateTime fechahasta, string Responsable, string producto)
         {
-            string consulta = "select "+
+            try
+            {
+                string consulta = @"select 
+                                     ee.codigo, 
+                                     ee.turno, 
+                                     ee.resp_entrega, 
+                                     ee.resp_recepcion, 
+                                     ee.codigo as 'nroorden', 
+                                     ee.productoNax, 
+                                     format(ee.cantcajas,2) as 'cantcajas',
+                                     format(ee.cantfraccionada, 2) as 'cantfraccionada', 
+                                     format(ee.unidadsuelta,2) as 'unidadsuelta', 
+                                     format(ee.kgrdesperdicio,2) as 'kgrdesperdicio', 
+                                     format(ee.kgrparamix, 2) as 'kgrparamix', 
+                                     format(( 
+                                     (ifnull(ee.cantcajas,0)* ifnull(cc.pesoporcajakgr,0)) + 
+                                     (ifnull(ee.unidadsuelta,0)*ifnull(cc.pesounidadgr,0)) 
+                                     ),2) as 'PesoTotal', 
+                                     'Objetivo' as 'ObjetivoProduccion', 
+                                     'Cantidad' as 'CantdeAcuerdoaPlanProduccionUnidades', 
+                                     date_format(ee.fechagra, '%d/%m/%Y') as 'fecha', 
+                                     ee.horagra as 'hora', 
+                                     ee.detalleentrega, 
+                                     CASE DAYOFWEEK(ee.fechagra) 
+                                     WHEN 1 THEN 'Domingo' 
+                                     WHEN 2 THEN 'Lunes' 
+                                     WHEN 3 THEN 'Martes' 
+                                     WHEN 4 THEN 'Miércoles' 
+                                     WHEN 5 THEN 'Jueves' 
+                                     WHEN 6 THEN 'Viernes' 
+                                     WHEN 7 THEN 'Sábado' 
+                                     END AS 'Dia', 
+                                     CASE 
+                                     WHEN HOUR(ee.horagra) BETWEEN 0 AND 6 THEN date_format(date_add(ee.fechagra, INTERVAL -1 DAY),'%d/%m/%Y') 
+                                     ELSE date_format(ee.fechagra,'%d/%m/%Y') 
+                                     END AS 'FechaSistema', 
+                                     CASE 
+                                     WHEN HOUR(ee.horagra) BETWEEN 7 AND 15 THEN 'Mañana' 
+                                     WHEN HOUR(ee.horagra) BETWEEN 16 AND 23 THEN 'Tarde' 
+                                     WHEN HOUR(ee.horagra) BETWEEN 0 AND 6 THEN 'Noche' 
+                                     ELSE 'Noche' 
+                                     END AS 'TurnoSistema',
+                                     cc.codupon 
+                                     from tbcorpal_entregasordenproduccion ee 
+                                     left join tbcorpal_producto cc on (ee.codProductonax = cc.codigo) 
+                                     where 
+                                     cc.estado = 1 and 
+                                     ee.estado = 1 and 
+                                     ee.resp_entrega like @responsable and 
+                                     ee.productoNax like @producto and 
+                                     ee.fechagra between @fechaInicio and @fechaFin
+                                     order by 
+                                     TIMESTAMP (ee.fechagra,ee.horagra) desc;";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaInicio", fechadesde),
+                    new MySqlParameter("@fechaFin", fechahasta),
+                    new MySqlParameter("@responsable", "%"+Responsable+"%"),
+                    new MySqlParameter("@producto", "%"+producto+"%")
+                };
+                return Conx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
+
+            /*string consulta = "select "+
                                " ee.codigo, "+
                                " ee.turno, "+
                                " ee.resp_entrega, "+
@@ -282,7 +350,7 @@ namespace jycboliviaASP.net.Datos
                                " ee.productoNax like '%"+producto+"%' and "+
                                " ee.fechagra between "+fechadesde+" and "+fechahasta +
                                " order by TIMESTAMP (ee.fechagra,ee.horagra) desc";
-            return Conx.consultaMySql(consulta);
+            return Conx.consultaMySql(consulta);*/
         }
 
         internal DataSet get_ultimoInsertadoEntregaProduccion(string respEntrega)
@@ -725,9 +793,117 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
-        internal DataSet get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
+        internal DataSet get_datosEntregaProduccionFechaTurno(
+                            DateTime fechadesde, DateTime fechahasta, string producto)
         {
-            string consulta = "select pp.codigo, pp.producto, " +
+            try
+            {
+                string consulta = @"SELECT 
+                                    pp.codigo,
+                                    pp.producto,
+                                    DATE_FORMAT(t1.FechaSistema,'%d/%m/%Y') AS FechaTurno,
+                                    pp.medida,
+                                    SUM(IFNULL(t1.TurnoDia,0)) AS TurnoDia1,
+                                    SUM(IFNULL(t1.TurnoTarde,0)) AS TurnoTarde1,
+                                    SUM(IFNULL(t1.TurnoNoche,0)) AS TurnoNoche1,
+                                    SUM(t1.CantCajas1) AS CantCajas1,
+                                    SUM(t1.CantFracciones) AS CantFraccionada,
+                                    SUM(t1.CantSuelta) AS CantSuelta,
+                                    FORMAT(SUM(t1.PackFerial),2) AS PackFerial1,
+                                    FORMAT(
+                                        (
+                                            (SUM(t1.CantCajas1) * pp.pesoporcajakgr)
+                                            + (SUM(t1.CantSuelta) * (pp.pesounidadgr/1000))
+                                            + (SUM(t1.PackFerial) * (pp.pesounidadgr/1000))
+                                            + t1.kgrdesperdicio_conaceite
+                                            + t1.kgrdesperdicio_sinaceite
+                                        ),
+                                        2
+                                    ) AS Total_Kgr,
+                                    SUM(t1.kgrdesperdicio_conaceite) AS kgrdesperdicioconaceite,
+                                    SUM(t1.kgrdesperdicio_sinaceite) AS kgrdesperdiciosinaceite
+                                FROM tbcorpal_producto pp
+                                LEFT JOIN
+                                (
+                                    SELECT
+                                        eo.codProductonax,
+                                        eo.productoNax,
+                                        CASE
+                                            WHEN HOUR(eo.horagra) BETWEEN 0 AND 6
+                                                THEN DATE_ADD(eo.fechagra, INTERVAL -1 DAY)
+                                            ELSE eo.fechagra
+                                        END AS FechaSistema,
+
+                                        SUM(
+                                            CASE
+                                                WHEN HOUR(eo.horagra) BETWEEN 7 AND 15
+                                                    THEN IFNULL(eo.cantcajas,0)
+                                                ELSE 0
+                                            END
+                                        ) AS TurnoDia,
+
+                                        SUM(
+                                            CASE
+                                                WHEN HOUR(eo.horagra) BETWEEN 16 AND 23
+                                                    THEN IFNULL(eo.cantcajas,0)
+                                                ELSE 0
+                                            END
+                                        ) AS TurnoTarde,
+
+                                        SUM(
+                                            CASE
+                                                WHEN HOUR(eo.horagra) BETWEEN 0 AND 6
+                                                    THEN IFNULL(eo.cantcajas,0)
+                                                ELSE 0
+                                            END
+                                        ) AS TurnoNoche,
+
+                                        SUM(IFNULL(eo.cantcajas,0)) AS CantCajas1,
+                                        SUM(IFNULL(eo.`cantfraccionada`,0)) AS CantFracciones,
+                                        SUM(IFNULL(eo.unidadsuelta,0)) AS CantSuelta,
+                                        SUM(IFNULL(eo.pack_ferial,0)) AS PackFerial,
+                                        SUM(IFNULL(eo.kgrdesperdicio_conaceite,0)) AS kgrdesperdicio_conaceite,
+                                        SUM(IFNULL(eo.kgrdesperdicio_sinaceite,0)) AS kgrdesperdicio_sinaceite
+
+                                    FROM tbcorpal_entregasordenproduccion eo
+                                    WHERE eo.estado = 1
+                                      AND TIMESTAMP(eo.fechagra, eo.horagra) BETWEEN
+                                            TIMESTAMP(@fechaInicio, '07:00:00')
+                                        AND TIMESTAMP(DATE_ADD(@fechaFin, INTERVAL 1 DAY),'06:00:00')
+
+                                    GROUP BY
+                                        FechaSistema,
+                                        eo.codProductonax,
+                                        eo.productoNax
+
+                                ) t1 ON pp.codigo = t1.codProductonax
+
+                                WHERE pp.estado = 1
+                                  AND t1.FechaSistema IS NOT NULL
+                                  AND pp.producto LIKE @producto
+
+                                GROUP BY
+                                    t1.FechaSistema,
+                                    pp.codigo
+
+                                ORDER BY
+                                    t1.FechaSistema,
+                                    pp.codigo ASC;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaInicio", fechadesde),
+                    new MySqlParameter("@fechaFin", fechahasta),
+                    new MySqlParameter("@producto","%"+producto+"%" ),
+                };
+                return Conx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
+
+            /*string consulta = "select pp.codigo, pp.producto, " +
                 "date_format(t1.FechaSistema,'%d/%m/%Y') as 'FechaTurno', " +
                 "pp.medida,  " +
                " sum(ifnull(t1.TurnoDia, 0)) as 'TurnoDia1', "+
@@ -785,7 +961,7 @@ namespace jycboliviaASP.net.Datos
                " and pp.producto like '%" +producto+"%' " +
                " group by  t1.FechaSistema, pp.codigo " +
                " order by t1.FechaSistema, pp.codigo asc";
-            return Conx.consultaMySql(consulta);
+            return Conx.consultaMySql(consulta);*/
         }
 
         internal DataSet get_codigoOrdenProduccionUltimoInsertado(int codProducto, int codUser)

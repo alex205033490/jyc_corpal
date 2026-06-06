@@ -55,7 +55,7 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.mostrarEmpregasProduccion( turno,  respEntrega);
         }
 
-        internal DataSet get_entregasProduccion(string fechadesde, string fechahasta, string Responsable, string producto)
+        internal DataSet get_entregasProduccion(DateTime fechadesde, DateTime fechahasta, string Responsable, string producto)
         {
            return dproduccion.get_entregasProduccion( fechadesde,  fechahasta, Responsable,  producto);
         }
@@ -191,7 +191,8 @@ namespace jycboliviaASP.net.Negocio
 
         }
 
-        internal DataSet get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
+        internal DataSet get_datosEntregaProduccionFechaTurno(
+                            DateTime fechadesde, DateTime fechahasta, string producto)
         {
             return dproduccion.get_datosEntregaProduccionFechaTurno( fechadesde,  fechahasta,  producto);
         }
