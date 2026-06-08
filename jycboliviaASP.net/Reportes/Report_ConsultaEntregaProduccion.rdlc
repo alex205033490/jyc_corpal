@@ -175,7 +175,7 @@
             <Top>1.57903cm</Top>
             <Left>0.75883cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.32021cm</Width>
+            <Width>2.43121cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -203,9 +203,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>12.42695cm</Left>
+            <Left>12.3063cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.32021cm</Width>
+            <Width>2.26717cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -233,9 +233,9 @@
             </Paragraphs>
             <rd:DefaultName>p_fechadesde</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>4.25542cm</Left>
+            <Left>3.2606cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.29917cm</Width>
+            <Width>3.55834cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -263,9 +263,9 @@
             </Paragraphs>
             <rd:DefaultName>p_fechahasta</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>15.92355cm</Left>
+            <Left>14.64403cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.80188cm</Width>
+            <Width>3.32021cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>

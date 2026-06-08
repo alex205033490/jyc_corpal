@@ -283,7 +283,7 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columncodSolicitud;
             
-            private global::System.Data.DataColumn columncodVenta;
+            private global::System.Data.DataColumn columncodOrdenEntrega;
             
             private global::System.Data.DataColumn columnvehiculo;
             
@@ -295,15 +295,17 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnproducto;
             
-            private global::System.Data.DataColumn columncantidadRecibida;
+            private global::System.Data.DataColumn columnfraccionado;
             
-            private global::System.Data.DataColumn columncantidadEntregada;
+            private global::System.Data.DataColumn columncantentregada;
             
-            private global::System.Data.DataColumn columnestadoventa;
+            private global::System.Data.DataColumn columncantidadEntregadaCliente;
             
             private global::System.Data.DataColumn columncantidadSobrante;
             
-            private global::System.Data.DataColumn columnfechaEntregaProductosCliente;
+            private global::System.Data.DataColumn columnfechaentrega;
+            
+            private global::System.Data.DataColumn columncodprod;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -356,9 +358,9 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn codVentaColumn {
+            public global::System.Data.DataColumn codOrdenEntregaColumn {
                 get {
-                    return this.columncodVenta;
+                    return this.columncodOrdenEntrega;
                 }
             }
             
@@ -404,25 +406,25 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn cantidadRecibidaColumn {
+            public global::System.Data.DataColumn fraccionadoColumn {
                 get {
-                    return this.columncantidadRecibida;
+                    return this.columnfraccionado;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn cantidadEntregadaColumn {
+            public global::System.Data.DataColumn cantentregadaColumn {
                 get {
-                    return this.columncantidadEntregada;
+                    return this.columncantentregada;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn estadoventaColumn {
+            public global::System.Data.DataColumn cantidadEntregadaClienteColumn {
                 get {
-                    return this.columnestadoventa;
+                    return this.columncantidadEntregadaCliente;
                 }
             }
             
@@ -436,9 +438,17 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn fechaEntregaProductosClienteColumn {
+            public global::System.Data.DataColumn fechaentregaColumn {
                 get {
-                    return this.columnfechaEntregaProductosCliente;
+                    return this.columnfechaentrega;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codprodColumn {
+                get {
+                    return this.columncodprod;
                 }
             }
             
@@ -479,22 +489,23 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_EntregaProductosDespachoVentaRow AddDS_EntregaProductosDespachoVentaRow(string codDespacho, string codSolicitud, string codVenta, string vehiculo, string conductor, string cliente, string vendedor, string producto, string cantidadRecibida, string cantidadEntregada, string estadoventa, string cantidadSobrante, string fechaEntregaProductosCliente) {
+            public DS_EntregaProductosDespachoVentaRow AddDS_EntregaProductosDespachoVentaRow(string codDespacho, string codSolicitud, string codOrdenEntrega, string vehiculo, string conductor, string cliente, string vendedor, string producto, string fraccionado, string cantentregada, string cantidadEntregadaCliente, string cantidadSobrante, string fechaentrega, string codprod) {
                 DS_EntregaProductosDespachoVentaRow rowDS_EntregaProductosDespachoVentaRow = ((DS_EntregaProductosDespachoVentaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codDespacho,
                         codSolicitud,
-                        codVenta,
+                        codOrdenEntrega,
                         vehiculo,
                         conductor,
                         cliente,
                         vendedor,
                         producto,
-                        cantidadRecibida,
-                        cantidadEntregada,
-                        estadoventa,
+                        fraccionado,
+                        cantentregada,
+                        cantidadEntregadaCliente,
                         cantidadSobrante,
-                        fechaEntregaProductosCliente};
+                        fechaentrega,
+                        codprod};
                 rowDS_EntregaProductosDespachoVentaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_EntregaProductosDespachoVentaRow);
                 return rowDS_EntregaProductosDespachoVentaRow;
@@ -519,17 +530,18 @@ namespace jycboliviaASP.net {
             internal void InitVars() {
                 this.columncodDespacho = base.Columns["codDespacho"];
                 this.columncodSolicitud = base.Columns["codSolicitud"];
-                this.columncodVenta = base.Columns["codVenta"];
+                this.columncodOrdenEntrega = base.Columns["codOrdenEntrega"];
                 this.columnvehiculo = base.Columns["vehiculo"];
                 this.columnconductor = base.Columns["conductor"];
                 this.columncliente = base.Columns["cliente"];
                 this.columnvendedor = base.Columns["vendedor"];
                 this.columnproducto = base.Columns["producto"];
-                this.columncantidadRecibida = base.Columns["cantidadRecibida"];
-                this.columncantidadEntregada = base.Columns["cantidadEntregada"];
-                this.columnestadoventa = base.Columns["estadoventa"];
+                this.columnfraccionado = base.Columns["fraccionado"];
+                this.columncantentregada = base.Columns["cantentregada"];
+                this.columncantidadEntregadaCliente = base.Columns["cantidadEntregadaCliente"];
                 this.columncantidadSobrante = base.Columns["cantidadSobrante"];
-                this.columnfechaEntregaProductosCliente = base.Columns["fechaEntregaProductosCliente"];
+                this.columnfechaentrega = base.Columns["fechaentrega"];
+                this.columncodprod = base.Columns["codprod"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -539,8 +551,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columncodDespacho);
                 this.columncodSolicitud = new global::System.Data.DataColumn("codSolicitud", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncodSolicitud);
-                this.columncodVenta = new global::System.Data.DataColumn("codVenta", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncodVenta);
+                this.columncodOrdenEntrega = new global::System.Data.DataColumn("codOrdenEntrega", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodOrdenEntrega);
                 this.columnvehiculo = new global::System.Data.DataColumn("vehiculo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnvehiculo);
                 this.columnconductor = new global::System.Data.DataColumn("conductor", typeof(string), null, global::System.Data.MappingType.Element);
@@ -551,16 +563,18 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnvendedor);
                 this.columnproducto = new global::System.Data.DataColumn("producto", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproducto);
-                this.columncantidadRecibida = new global::System.Data.DataColumn("cantidadRecibida", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncantidadRecibida);
-                this.columncantidadEntregada = new global::System.Data.DataColumn("cantidadEntregada", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncantidadEntregada);
-                this.columnestadoventa = new global::System.Data.DataColumn("estadoventa", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnestadoventa);
+                this.columnfraccionado = new global::System.Data.DataColumn("fraccionado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfraccionado);
+                this.columncantentregada = new global::System.Data.DataColumn("cantentregada", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncantentregada);
+                this.columncantidadEntregadaCliente = new global::System.Data.DataColumn("cantidadEntregadaCliente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncantidadEntregadaCliente);
                 this.columncantidadSobrante = new global::System.Data.DataColumn("cantidadSobrante", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncantidadSobrante);
-                this.columnfechaEntregaProductosCliente = new global::System.Data.DataColumn("fechaEntregaProductosCliente", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfechaEntregaProductosCliente);
+                this.columnfechaentrega = new global::System.Data.DataColumn("fechaentrega", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfechaentrega);
+                this.columncodprod = new global::System.Data.DataColumn("codprod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodprod);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -737,18 +751,18 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string codVenta {
+            public string codOrdenEntrega {
                 get {
                     try {
-                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.codVentaColumn]));
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.codOrdenEntregaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codVenta\' de la tabla \'DS_EntregaProductosDespachoVenta\' " +
-                                "es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codOrdenEntrega\' de la tabla \'DS_EntregaProductosDespacho" +
+                                "Venta\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDS_EntregaProductosDespachoVenta.codVentaColumn] = value;
+                    this[this.tableDS_EntregaProductosDespachoVenta.codOrdenEntregaColumn] = value;
                 }
             }
             
@@ -839,52 +853,52 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string cantidadRecibida {
+            public string fraccionado {
                 get {
                     try {
-                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.cantidadRecibidaColumn]));
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.fraccionadoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantidadRecibida\' de la tabla \'DS_EntregaProductosDespach" +
-                                "oVenta\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDS_EntregaProductosDespachoVenta.cantidadRecibidaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string cantidadEntregada {
-                get {
-                    try {
-                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantidadEntregada\' de la tabla \'DS_EntregaProductosDespac" +
-                                "hoVenta\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string estadoventa {
-                get {
-                    try {
-                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.estadoventaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'estadoventa\' de la tabla \'DS_EntregaProductosDespachoVent" +
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fraccionado\' de la tabla \'DS_EntregaProductosDespachoVent" +
                                 "a\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDS_EntregaProductosDespachoVenta.estadoventaColumn] = value;
+                    this[this.tableDS_EntregaProductosDespachoVenta.fraccionadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cantentregada {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.cantentregadaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantentregada\' de la tabla \'DS_EntregaProductosDespachoVe" +
+                                "nta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_EntregaProductosDespachoVenta.cantentregadaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cantidadEntregadaCliente {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaClienteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cantidadEntregadaCliente\' de la tabla \'DS_EntregaProducto" +
+                                "sDespachoVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaClienteColumn] = value;
                 }
             }
             
@@ -907,18 +921,35 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string fechaEntregaProductosCliente {
+            public string fechaentrega {
                 get {
                     try {
-                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.fechaEntregaProductosClienteColumn]));
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.fechaentregaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechaEntregaProductosCliente\' de la tabla \'DS_EntregaProd" +
-                                "uctosDespachoVenta\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechaentrega\' de la tabla \'DS_EntregaProductosDespachoVen" +
+                                "ta\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDS_EntregaProductosDespachoVenta.fechaEntregaProductosClienteColumn] = value;
+                    this[this.tableDS_EntregaProductosDespachoVenta.fechaentregaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codprod {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_EntregaProductosDespachoVenta.codprodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codprod\' de la tabla \'DS_EntregaProductosDespachoVenta\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_EntregaProductosDespachoVenta.codprodColumn] = value;
                 }
             }
             
@@ -948,14 +979,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IscodVentaNull() {
-                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.codVentaColumn);
+            public bool IscodOrdenEntregaNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.codOrdenEntregaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetcodVentaNull() {
-                this[this.tableDS_EntregaProductosDespachoVenta.codVentaColumn] = global::System.Convert.DBNull;
+            public void SetcodOrdenEntregaNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.codOrdenEntregaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1020,38 +1051,38 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IscantidadRecibidaNull() {
-                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.cantidadRecibidaColumn);
+            public bool IsfraccionadoNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.fraccionadoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetcantidadRecibidaNull() {
-                this[this.tableDS_EntregaProductosDespachoVenta.cantidadRecibidaColumn] = global::System.Convert.DBNull;
+            public void SetfraccionadoNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.fraccionadoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IscantidadEntregadaNull() {
-                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaColumn);
+            public bool IscantentregadaNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.cantentregadaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetcantidadEntregadaNull() {
-                this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaColumn] = global::System.Convert.DBNull;
+            public void SetcantentregadaNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.cantentregadaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsestadoventaNull() {
-                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.estadoventaColumn);
+            public bool IscantidadEntregadaClienteNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaClienteColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetestadoventaNull() {
-                this[this.tableDS_EntregaProductosDespachoVenta.estadoventaColumn] = global::System.Convert.DBNull;
+            public void SetcantidadEntregadaClienteNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.cantidadEntregadaClienteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1068,14 +1099,26 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsfechaEntregaProductosClienteNull() {
-                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.fechaEntregaProductosClienteColumn);
+            public bool IsfechaentregaNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.fechaentregaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetfechaEntregaProductosClienteNull() {
-                this[this.tableDS_EntregaProductosDespachoVenta.fechaEntregaProductosClienteColumn] = global::System.Convert.DBNull;
+            public void SetfechaentregaNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.fechaentregaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodprodNull() {
+                return this.IsNull(this.tableDS_EntregaProductosDespachoVenta.codprodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodprodNull() {
+                this[this.tableDS_EntregaProductosDespachoVenta.codprodColumn] = global::System.Convert.DBNull;
             }
         }
         
