@@ -67,6 +67,8 @@
                     <asp:ListItem>Seleccione un opción</asp:ListItem>
                     <asp:ListItem>Productos sobrantes de despachos</asp:ListItem>
                     <asp:ListItem>Reporte Tiempo de Tardanza Entrega de Productos (Despacho-Orden de Entrega)</asp:ListItem>
+                    <asp:ListItem>Reporte Cantidad Total De Productos Solicitados Por Vendedor</asp:ListItem>
+
                 </asp:DropDownList>
 
                 <asp:Button ID="btn_buscarReporte" runat="server" CssClass="btn btn-success" Text="Buscar" Style="font-size: small;" OnClick="btn_buscarReporte_Click" />

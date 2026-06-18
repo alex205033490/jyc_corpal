@@ -26,6 +26,8 @@ namespace jycboliviaASP.net {
         
         private DS_EntregaProductosDespachoVentaDataTable tableDS_EntregaProductosDespachoVenta;
         
+        private DS_ProductosSalientes_cantTotalXVendedorDataTable tableDS_ProductosSalientes_cantTotalXVendedor;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -57,6 +59,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_EntregaProductosDespachoVenta"] != null)) {
                     base.Tables.Add(new DS_EntregaProductosDespachoVentaDataTable(ds.Tables["DS_EntregaProductosDespachoVenta"]));
                 }
+                if ((ds.Tables["DS_ProductosSalientes_cantTotalXVendedor"] != null)) {
+                    base.Tables.Add(new DS_ProductosSalientes_cantTotalXVendedorDataTable(ds.Tables["DS_ProductosSalientes_cantTotalXVendedor"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -82,6 +87,16 @@ namespace jycboliviaASP.net {
         public DS_EntregaProductosDespachoVentaDataTable DS_EntregaProductosDespachoVenta {
             get {
                 return this.tableDS_EntregaProductosDespachoVenta;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DS_ProductosSalientes_cantTotalXVendedorDataTable DS_ProductosSalientes_cantTotalXVendedor {
+            get {
+                return this.tableDS_ProductosSalientes_cantTotalXVendedor;
             }
         }
         
@@ -155,6 +170,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_EntregaProductosDespachoVenta"] != null)) {
                     base.Tables.Add(new DS_EntregaProductosDespachoVentaDataTable(ds.Tables["DS_EntregaProductosDespachoVenta"]));
                 }
+                if ((ds.Tables["DS_ProductosSalientes_cantTotalXVendedor"] != null)) {
+                    base.Tables.Add(new DS_ProductosSalientes_cantTotalXVendedorDataTable(ds.Tables["DS_ProductosSalientes_cantTotalXVendedor"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -194,6 +212,12 @@ namespace jycboliviaASP.net {
                     this.tableDS_EntregaProductosDespachoVenta.InitVars();
                 }
             }
+            this.tableDS_ProductosSalientes_cantTotalXVendedor = ((DS_ProductosSalientes_cantTotalXVendedorDataTable)(base.Tables["DS_ProductosSalientes_cantTotalXVendedor"]));
+            if ((initTable == true)) {
+                if ((this.tableDS_ProductosSalientes_cantTotalXVendedor != null)) {
+                    this.tableDS_ProductosSalientes_cantTotalXVendedor.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -206,11 +230,19 @@ namespace jycboliviaASP.net {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableDS_EntregaProductosDespachoVenta = new DS_EntregaProductosDespachoVentaDataTable();
             base.Tables.Add(this.tableDS_EntregaProductosDespachoVenta);
+            this.tableDS_ProductosSalientes_cantTotalXVendedor = new DS_ProductosSalientes_cantTotalXVendedorDataTable();
+            base.Tables.Add(this.tableDS_ProductosSalientes_cantTotalXVendedor);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeDS_EntregaProductosDespachoVenta() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDS_ProductosSalientes_cantTotalXVendedor() {
             return false;
         }
         
@@ -271,6 +303,9 @@ namespace jycboliviaASP.net {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void DS_EntregaProductosDespachoVentaRowChangeEventHandler(object sender, DS_EntregaProductosDespachoVentaRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DS_ProductosSalientes_cantTotalXVendedorRowChangeEventHandler(object sender, DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -661,6 +696,323 @@ namespace jycboliviaASP.net {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DS_EntregaProductosDespachoVentaDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DS_ProductosSalientes_cantTotalXVendedorDataTable : global::System.Data.TypedTableBase<DS_ProductosSalientes_cantTotalXVendedorRow> {
+            
+            private global::System.Data.DataColumn columncodigo;
+            
+            private global::System.Data.DataColumn columnproducto;
+            
+            private global::System.Data.DataColumn columncod_vendedor;
+            
+            private global::System.Data.DataColumn columnvendedor;
+            
+            private global::System.Data.DataColumn columncant;
+            
+            private global::System.Data.DataColumn columncant_fracc;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorDataTable() {
+                this.TableName = "DS_ProductosSalientes_cantTotalXVendedor";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_ProductosSalientes_cantTotalXVendedorDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DS_ProductosSalientes_cantTotalXVendedorDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codigoColumn {
+                get {
+                    return this.columncodigo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn productoColumn {
+                get {
+                    return this.columnproducto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cod_vendedorColumn {
+                get {
+                    return this.columncod_vendedor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn vendedorColumn {
+                get {
+                    return this.columnvendedor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cantColumn {
+                get {
+                    return this.columncant;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cant_fraccColumn {
+                get {
+                    return this.columncant_fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorRow this[int index] {
+                get {
+                    return ((DS_ProductosSalientes_cantTotalXVendedorRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_ProductosSalientes_cantTotalXVendedorRowChangeEventHandler DS_ProductosSalientes_cantTotalXVendedorRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_ProductosSalientes_cantTotalXVendedorRowChangeEventHandler DS_ProductosSalientes_cantTotalXVendedorRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_ProductosSalientes_cantTotalXVendedorRowChangeEventHandler DS_ProductosSalientes_cantTotalXVendedorRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_ProductosSalientes_cantTotalXVendedorRowChangeEventHandler DS_ProductosSalientes_cantTotalXVendedorRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDS_ProductosSalientes_cantTotalXVendedorRow(DS_ProductosSalientes_cantTotalXVendedorRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorRow AddDS_ProductosSalientes_cantTotalXVendedorRow(string codigo, string producto, string cod_vendedor, string vendedor, string cant, string cant_fracc) {
+                DS_ProductosSalientes_cantTotalXVendedorRow rowDS_ProductosSalientes_cantTotalXVendedorRow = ((DS_ProductosSalientes_cantTotalXVendedorRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        codigo,
+                        producto,
+                        cod_vendedor,
+                        vendedor,
+                        cant,
+                        cant_fracc};
+                rowDS_ProductosSalientes_cantTotalXVendedorRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDS_ProductosSalientes_cantTotalXVendedorRow);
+                return rowDS_ProductosSalientes_cantTotalXVendedorRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DS_ProductosSalientes_cantTotalXVendedorDataTable cln = ((DS_ProductosSalientes_cantTotalXVendedorDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DS_ProductosSalientes_cantTotalXVendedorDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncodigo = base.Columns["codigo"];
+                this.columnproducto = base.Columns["producto"];
+                this.columncod_vendedor = base.Columns["cod_vendedor"];
+                this.columnvendedor = base.Columns["vendedor"];
+                this.columncant = base.Columns["cant"];
+                this.columncant_fracc = base.Columns["cant_fracc"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncodigo = new global::System.Data.DataColumn("codigo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodigo);
+                this.columnproducto = new global::System.Data.DataColumn("producto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproducto);
+                this.columncod_vendedor = new global::System.Data.DataColumn("cod_vendedor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncod_vendedor);
+                this.columnvendedor = new global::System.Data.DataColumn("vendedor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnvendedor);
+                this.columncant = new global::System.Data.DataColumn("cant", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncant);
+                this.columncant_fracc = new global::System.Data.DataColumn("cant_fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncant_fracc);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorRow NewDS_ProductosSalientes_cantTotalXVendedorRow() {
+                return ((DS_ProductosSalientes_cantTotalXVendedorRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DS_ProductosSalientes_cantTotalXVendedorRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DS_ProductosSalientes_cantTotalXVendedorRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DS_ProductosSalientes_cantTotalXVendedorRowChanged != null)) {
+                    this.DS_ProductosSalientes_cantTotalXVendedorRowChanged(this, new DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent(((DS_ProductosSalientes_cantTotalXVendedorRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DS_ProductosSalientes_cantTotalXVendedorRowChanging != null)) {
+                    this.DS_ProductosSalientes_cantTotalXVendedorRowChanging(this, new DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent(((DS_ProductosSalientes_cantTotalXVendedorRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DS_ProductosSalientes_cantTotalXVendedorRowDeleted != null)) {
+                    this.DS_ProductosSalientes_cantTotalXVendedorRowDeleted(this, new DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent(((DS_ProductosSalientes_cantTotalXVendedorRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DS_ProductosSalientes_cantTotalXVendedorRowDeleting != null)) {
+                    this.DS_ProductosSalientes_cantTotalXVendedorRowDeleting(this, new DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent(((DS_ProductosSalientes_cantTotalXVendedorRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDS_ProductosSalientes_cantTotalXVendedorRow(DS_ProductosSalientes_cantTotalXVendedorRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DS_ReporteProductos ds = new DS_ReporteProductos();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DS_ProductosSalientes_cantTotalXVendedorDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1123,6 +1475,195 @@ namespace jycboliviaASP.net {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DS_ProductosSalientes_cantTotalXVendedorRow : global::System.Data.DataRow {
+            
+            private DS_ProductosSalientes_cantTotalXVendedorDataTable tableDS_ProductosSalientes_cantTotalXVendedor;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_ProductosSalientes_cantTotalXVendedorRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDS_ProductosSalientes_cantTotalXVendedor = ((DS_ProductosSalientes_cantTotalXVendedorDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codigo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.codigoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codigo\' de la tabla \'DS_ProductosSalientes_cantTotalXVend" +
+                                "edor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.codigoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string producto {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.productoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'producto\' de la tabla \'DS_ProductosSalientes_cantTotalXVe" +
+                                "ndedor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.productoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cod_vendedor {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cod_vendedorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cod_vendedor\' de la tabla \'DS_ProductosSalientes_cantTota" +
+                                "lXVendedor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cod_vendedorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string vendedor {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.vendedorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'vendedor\' de la tabla \'DS_ProductosSalientes_cantTotalXVe" +
+                                "ndedor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.vendedorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cant {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cantColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cant\' de la tabla \'DS_ProductosSalientes_cantTotalXVended" +
+                                "or\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cantColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cant_fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cant_fraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cant_fracc\' de la tabla \'DS_ProductosSalientes_cantTotalX" +
+                                "Vendedor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cant_fraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodigoNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.codigoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodigoNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.codigoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsproductoNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.productoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetproductoNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.productoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscod_vendedorNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.cod_vendedorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcod_vendedorNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cod_vendedorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsvendedorNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.vendedorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetvendedorNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.vendedorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscantNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.cantColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcantNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cantColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscant_fraccNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.cant_fraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcant_fraccNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cant_fraccColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -1142,6 +1683,40 @@ namespace jycboliviaASP.net {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_EntregaProductosDespachoVentaRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent : global::System.EventArgs {
+            
+            private DS_ProductosSalientes_cantTotalXVendedorRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorRowChangeEvent(DS_ProductosSalientes_cantTotalXVendedorRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_ProductosSalientes_cantTotalXVendedorRow Row {
                 get {
                     return this.eventRow;
                 }

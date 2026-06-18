@@ -105,11 +105,11 @@ namespace jycboliviaASP.net.Negocio
         }
 
         /*ORDEN ENTREGA*/
-        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, int codChofer)
+        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, string chofer)
         {
             try
             {
-                return dv.get_mostrarProductosSobrantes_OrdenEntrega(fechaIni, fechaFin, codChofer);
+                return dv.get_mostrarProductosSobrantes_OrdenEntrega(fechaIni, fechaFin, chofer);
             }
             catch(Exception ex)
             {
@@ -128,6 +128,19 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error en la consulta. " + ex.Message);
             }
         }
+
+        internal DataSet GET_obtenerCantidadProductosSaliente_vendedor(DateTime fechaini, DateTime fechafin)
+        {
+            try
+            {
+                return dv.GET_obtenerCantidadProductosSaliente_vendedor(fechaini, fechafin);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex.Message);
+            }
+        }
+
 
     }
 }

@@ -85,15 +85,19 @@ namespace jycboliviaASP.net.Presentacion
                     return;
                 }
 
-               
+
                 if (dd_consulta.SelectedIndex == 1)
                 {
                     get_productosSobrantes_OrdenEntrega();
                 }
-                if(dd_consulta.SelectedIndex == 2) 
+                else if (dd_consulta.SelectedIndex == 2)
                 {
-                    
-                    
+
+                }
+                else if (dd_consulta.SelectedIndex == 3)
+                {
+                    // OBTENER PRODUCTOS SALIENTES VENDEDOR
+                    obtenerCantTotalProductosSalientesxVendedor();
                 }
                 else
                 {
@@ -119,11 +123,13 @@ namespace jycboliviaASP.net.Presentacion
                 int codChofer = 0;
                 int.TryParse(hf_codConductor.Value, out codChofer);
 
+                string nombreResponsable = tx_nomConductor.Text.Trim();
+
                 LocalReport localreport = rw_consultaPedidos.LocalReport;
-                //localreport.ReportPath = "Reportes/Report_ConsultaProductosSobrantes_ordenEntrega.rdlc";
+                localreport.ReportPath = "Reportes/Report_ConsultaProductosSobrantes_ordenEntrega.rdlc";
 
                 NCorpal_Venta nventa = new NCorpal_Venta();
-                DataSet consulta = nventa.get_mostrarProductosSobrantes_OrdenEntrega(fecha1, fecha2, codChofer);
+                DataSet consulta = nventa.get_mostrarProductosSobrantes_OrdenEntrega(fecha1, fecha2, nombreResponsable);
                 DataTable DSconsulta = consulta.Tables[0];
 
                 if (DSconsulta.Rows.Count == 0)
@@ -153,6 +159,65 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Error en el metodo para obtener datos. " + ex.Message);
             }
         }
+
+        private void obtenerCantTotalProductosSalientesxVendedor()
+        {
+            try
+            {
+                DateTime fechaini = DateTime.ParseExact(tx_fdesde.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime fechafin = DateTime.ParseExact(tx_fhasta.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                rw_consultaPedidos.Visible = true;
+
+                LocalReport localreport = rw_consultaPedidos.LocalReport;
+                localreport.ReportPath = "Reportes/Report_ConsultaProductosSalientesSEP_xVendedor.rdlc";
+
+                NCorpal_Venta nventa = new NCorpal_Venta();
+                DataSet consulta = nventa.GET_obtenerCantidadProductosSaliente_vendedor(fechaini, fechafin);
+                if (consulta == null)
+                {
+                    showalert("DataSet es NULL");
+                    return;
+                }
+
+                if (consulta.Tables.Count == 0)
+                {
+                    showalert("No existe tablas en el DataSet");
+                    return;
+                }
+
+
+                DataTable dsconsulta = consulta.Tables[0];
+
+                if(dsconsulta.Rows.Count == 0)
+                {
+                    showalert("no hay datos para mostrar.");
+                    return;
+                }
+
+                ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_fdesde.Text.Trim());
+                ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_fhasta.Text.Trim());
+
+                rw_consultaPedidos.LocalReport.DataSources.Clear();
+
+                ReportDataSource DS_salidaProductosVendedor = new ReportDataSource("DS_ProductosSalientes_cantTotalXVendedor", dsconsulta);
+
+                rw_consultaPedidos.LocalReport.SetParameters(p_fecha1);
+                rw_consultaPedidos.LocalReport.SetParameters(p_fecha2);
+                rw_consultaPedidos.LocalReport.DataSources.Add(DS_salidaProductosVendedor);
+                this.rw_consultaPedidos.LocalReport.Refresh();
+                this.rw_consultaPedidos.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                showalert("No se pudo obtener datos. " +ex.Message);
+            }
+
+        }
+
+
+
 
         private void get_tiempoTardanzaEntregaDDespacho()
         {

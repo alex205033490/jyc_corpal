@@ -2304,6 +2304,7 @@
     <EmbeddedResource Include="Reportes\Report_CalidadRemojadoyLavado.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CalidadMolinos.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProducto_DespachoVenta.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_ConsultaProductosSalientesSEP_xVendedor.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaProductosSobrantes_ordenEntrega.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Marcacion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CorrespondeAlmuerzoFichada.rdlc" />
