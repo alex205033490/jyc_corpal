@@ -1263,7 +1263,7 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_objetivoproduccion_vs_entregaproduccion_consalidaalmacen( string fechahasta)
         {
-            string consulta = "call 1_objetivoproduccion_vs_entregaproduccion_consalidaalmacen("+fechahasta+")";
+            string consulta = "call 1_objetivoproduccion_vs_entregaproduccion_consalidaalmacen(" + fechahasta+")";
             return Conx.consultaMySql(consulta);
         }
 
