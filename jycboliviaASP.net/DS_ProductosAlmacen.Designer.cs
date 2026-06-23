@@ -4243,6 +4243,26 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columnDiffEntregados_ObjetivoEntrega;
             
+            private global::System.Data.DataColumn columnSalida_Almacen_Fracc;
+            
+            private global::System.Data.DataColumn columnStock_Almacen_Fracc;
+            
+            private global::System.Data.DataColumn columnDomingo_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnLunes_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnMartes_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnMiercoles_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnJueves_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnViernes_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnSabado_OrdenEntrega_Fracc;
+            
+            private global::System.Data.DataColumn columnSumEntregaSemanaFracc;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenDataTable() {
@@ -4534,6 +4554,86 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Salida_Almacen_FraccColumn {
+                get {
+                    return this.columnSalida_Almacen_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Stock_Almacen_FraccColumn {
+                get {
+                    return this.columnStock_Almacen_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Domingo_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnDomingo_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Lunes_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnLunes_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Martes_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnMartes_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Miercoles_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnMiercoles_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Jueves_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnJueves_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Viernes_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnViernes_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Sabado_OrdenEntrega_FraccColumn {
+                get {
+                    return this.columnSabado_OrdenEntrega_Fracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SumEntregaSemanaFraccColumn {
+                get {
+                    return this.columnSumEntregaSemanaFracc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4601,7 +4701,17 @@ namespace jycboliviaASP.net {
                         string Diff_Venta, 
                         string SumEntregaSemana, 
                         string SumObjetivoSemana, 
-                        string DiffEntregados_ObjetivoEntrega) {
+                        string DiffEntregados_ObjetivoEntrega, 
+                        string Salida_Almacen_Fracc, 
+                        string Stock_Almacen_Fracc, 
+                        string Domingo_OrdenEntrega_Fracc, 
+                        string Lunes_OrdenEntrega_Fracc, 
+                        string Martes_OrdenEntrega_Fracc, 
+                        string Miercoles_OrdenEntrega_Fracc, 
+                        string Jueves_OrdenEntrega_Fracc, 
+                        string Viernes_OrdenEntrega_Fracc, 
+                        string Sabado_OrdenEntrega_Fracc, 
+                        string SumEntregaSemanaFracc) {
                 DS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow rowDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow = ((DS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -4635,7 +4745,17 @@ namespace jycboliviaASP.net {
                         Diff_Venta,
                         SumEntregaSemana,
                         SumObjetivoSemana,
-                        DiffEntregados_ObjetivoEntrega};
+                        DiffEntregados_ObjetivoEntrega,
+                        Salida_Almacen_Fracc,
+                        Stock_Almacen_Fracc,
+                        Domingo_OrdenEntrega_Fracc,
+                        Lunes_OrdenEntrega_Fracc,
+                        Martes_OrdenEntrega_Fracc,
+                        Miercoles_OrdenEntrega_Fracc,
+                        Jueves_OrdenEntrega_Fracc,
+                        Viernes_OrdenEntrega_Fracc,
+                        Sabado_OrdenEntrega_Fracc,
+                        SumEntregaSemanaFracc};
                 rowDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow);
                 return rowDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacenRow;
@@ -4690,6 +4810,16 @@ namespace jycboliviaASP.net {
                 this.columnSumEntregaSemana = base.Columns["SumEntregaSemana"];
                 this.columnSumObjetivoSemana = base.Columns["SumObjetivoSemana"];
                 this.columnDiffEntregados_ObjetivoEntrega = base.Columns["DiffEntregados_ObjetivoEntrega"];
+                this.columnSalida_Almacen_Fracc = base.Columns["Salida_Almacen_Fracc"];
+                this.columnStock_Almacen_Fracc = base.Columns["Stock_Almacen_Fracc"];
+                this.columnDomingo_OrdenEntrega_Fracc = base.Columns["Domingo_OrdenEntrega_Fracc"];
+                this.columnLunes_OrdenEntrega_Fracc = base.Columns["Lunes_OrdenEntrega_Fracc"];
+                this.columnMartes_OrdenEntrega_Fracc = base.Columns["Martes_OrdenEntrega_Fracc"];
+                this.columnMiercoles_OrdenEntrega_Fracc = base.Columns["Miercoles_OrdenEntrega_Fracc"];
+                this.columnJueves_OrdenEntrega_Fracc = base.Columns["Jueves_OrdenEntrega_Fracc"];
+                this.columnViernes_OrdenEntrega_Fracc = base.Columns["Viernes_OrdenEntrega_Fracc"];
+                this.columnSabado_OrdenEntrega_Fracc = base.Columns["Sabado_OrdenEntrega_Fracc"];
+                this.columnSumEntregaSemanaFracc = base.Columns["SumEntregaSemanaFracc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4759,6 +4889,26 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columnSumObjetivoSemana);
                 this.columnDiffEntregados_ObjetivoEntrega = new global::System.Data.DataColumn("DiffEntregados_ObjetivoEntrega", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDiffEntregados_ObjetivoEntrega);
+                this.columnSalida_Almacen_Fracc = new global::System.Data.DataColumn("Salida_Almacen_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSalida_Almacen_Fracc);
+                this.columnStock_Almacen_Fracc = new global::System.Data.DataColumn("Stock_Almacen_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStock_Almacen_Fracc);
+                this.columnDomingo_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Domingo_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDomingo_OrdenEntrega_Fracc);
+                this.columnLunes_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Lunes_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLunes_OrdenEntrega_Fracc);
+                this.columnMartes_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Martes_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMartes_OrdenEntrega_Fracc);
+                this.columnMiercoles_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Miercoles_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMiercoles_OrdenEntrega_Fracc);
+                this.columnJueves_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Jueves_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJueves_OrdenEntrega_Fracc);
+                this.columnViernes_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Viernes_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnViernes_OrdenEntrega_Fracc);
+                this.columnSabado_OrdenEntrega_Fracc = new global::System.Data.DataColumn("Sabado_OrdenEntrega_Fracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSabado_OrdenEntrega_Fracc);
+                this.columnSumEntregaSemanaFracc = new global::System.Data.DataColumn("SumEntregaSemanaFracc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSumEntregaSemanaFracc);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10750,6 +10900,176 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Salida_Almacen_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Salida_Almacen_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Salida_Almacen_Fracc\' de la tabla \'DS_objetivoproduccion_" +
+                                "vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Salida_Almacen_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Stock_Almacen_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Stock_Almacen_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Stock_Almacen_Fracc\' de la tabla \'DS_objetivoproduccion_v" +
+                                "s_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Stock_Almacen_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Domingo_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Domingo_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Domingo_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoprodu" +
+                                "ccion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Domingo_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Lunes_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Lunes_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Lunes_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoproducc" +
+                                "ion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Lunes_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Martes_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Martes_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Martes_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoproduc" +
+                                "cion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Martes_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Miercoles_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Miercoles_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Miercoles_OrdenEntrega_Fracc\' de la tabla \'DS_objetivopro" +
+                                "duccion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Miercoles_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Jueves_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Jueves_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Jueves_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoproduc" +
+                                "cion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Jueves_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Viernes_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Viernes_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Viernes_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoprodu" +
+                                "ccion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Viernes_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Sabado_OrdenEntrega_Fracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Sabado_OrdenEntrega_FraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Sabado_OrdenEntrega_Fracc\' de la tabla \'DS_objetivoproduc" +
+                                "cion_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Sabado_OrdenEntrega_FraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string SumEntregaSemanaFracc {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.SumEntregaSemanaFraccColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'SumEntregaSemanaFracc\' de la tabla \'DS_objetivoproduccion" +
+                                "_vs_entregaproduccion_consalidaalmacen\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.SumEntregaSemanaFraccColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.codigoColumn);
             }
@@ -11130,6 +11450,126 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetDiffEntregados_ObjetivoEntregaNull() {
                 this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.DiffEntregados_ObjetivoEntregaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSalida_Almacen_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Salida_Almacen_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSalida_Almacen_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Salida_Almacen_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsStock_Almacen_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Stock_Almacen_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetStock_Almacen_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Stock_Almacen_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDomingo_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Domingo_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDomingo_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Domingo_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsLunes_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Lunes_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetLunes_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Lunes_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMartes_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Martes_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMartes_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Martes_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMiercoles_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Miercoles_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMiercoles_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Miercoles_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsJueves_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Jueves_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetJueves_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Jueves_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsViernes_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Viernes_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetViernes_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Viernes_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSabado_OrdenEntrega_FraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Sabado_OrdenEntrega_FraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSabado_OrdenEntrega_FraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.Sabado_OrdenEntrega_FraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSumEntregaSemanaFraccNull() {
+                return this.IsNull(this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.SumEntregaSemanaFraccColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSumEntregaSemanaFraccNull() {
+                this[this.tableDS_objetivoproduccion_vs_entregaproduccion_consalidaalmacen.SumEntregaSemanaFraccColumn] = global::System.Convert.DBNull;
             }
         }
         

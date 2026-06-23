@@ -229,6 +229,105 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
+                string consulta = @"select
+                                      venta1.codprod,
+                                      venta1.descripcion,
+      
+                                      ifnull(venta2.domingo, 0) as domingo,
+                                      ifnull(venta2.domingoFracc, 0) as domingo_fracc,
+                                      ifnull(venta2.lunes, 0) as lunes,
+                                      ifnull(venta2.lunesFracc, 0) as lunes_fracc,
+                                      ifnull(venta2.martes, 0) as martes,
+                                      ifnull(venta2.martesFracc, 0) as martes_fracc,
+                                      ifnull(venta2.miercoles, 0) as miercoles,
+                                      ifnull(venta2.miercolesFracc, 0) as miercoles_fracc,
+                                      ifnull(venta2.jueves, 0) as jueves,
+                                      ifnull(venta2.juevesFracc, 0) as jueves_fracc,
+                                      ifnull(venta2.viernes, 0) as viernes,
+                                      ifnull(venta2.viernesFracc, 0) as viernes_fracc,
+                                      ifnull(venta2.sabado, 0) as sabado,
+                                      ifnull(venta2.sabadoFracc, 0) as sabado_fracc,
+      
+                                      venta1.cantidad_total_vendida,
+                                      venta1.cantidad_totalfracc_vendida
+
+                                from (
+                                     select 
+                                            doe.`codprod`,
+                                            doe.`descripcion`,
+                                            SUM(doe.`cantidad`) as cantidad_total_vendida,
+                                            SUM(doe.`cant_unidadcontenedorfraccionada`) as cantidad_totalfracc_vendida
+     
+                                     from tbcorpal_ordenentregacliente oe
+                                     left join tbcorpal_detalleproductoordenentregacliente doe
+                                          on oe.`codigo` = doe.`codventa`
+                                     where 
+                                           oe.`fechagra` >= @fechaini and oe.`fechagra` <= @fechafin  
+                                           and oe.`estado` = 1 
+                                     group by 
+                                           doe.`codprod`
+
+                                ) venta1 
+
+                                left join (
+
+                                     SELECT 
+                                     doe.codprod,
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 1 THEN doe.cantidad ELSE 0 END) AS 'domingo',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 1 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'domingoFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 2 THEN doe.cantidad ELSE 0 END) AS 'lunes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 2 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'lunesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 3 THEN doe.cantidad ELSE 0 END) AS 'martes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 3 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'martesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 4 THEN doe.cantidad ELSE 0 END) AS 'miercoles',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 4 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'miercolesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 5 THEN doe.cantidad ELSE 0 END) AS 'jueves',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 5 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'juevesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 6 THEN doe.cantidad ELSE 0 END) AS 'viernes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 6 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'viernesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 7 THEN doe.cantidad ELSE 0 END) AS 'sabado', 
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 7 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'sabadoFracc'
+     
+                                     FROM tbcorpal_ordenentregacliente oe
+                                     INNER JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                          on oe.`codigo` = doe.`codventa`
+                                     where 
+                                           oe.`estado` = 1
+                                           and week(oe.`fechagra`, 1) = week(current_date(), 1)
+                                           and year(oe.`fechagra`) = year(current_date())
+                                     group by
+                                           doe.`codprod`
+             
+                                ) venta2
+                                        ON venta1.codprod = venta2.codprod
+
+                                LEFT JOIN (
+                                     select  
+                                             op.codprod,
+                                             max(op.`fechalimite`) as 'fechaMax' 
+                                      from tbcorpal_objetivosproduccion op 
+                                      where op.`estado` = 1 
+                                            and op.`fechalimite` <= @fechafin 
+                                      group by 
+                                            op.`codprod` 
+
+                                ) objmax ON objmax.codprod = venta1.codprod
+
+                                LEFT JOIN tbcorpal_objetivosproduccion objventa2 
+                                          on objventa2.codprod = objmax.codprod 
+                                          and objventa2.fechalimite = objmax.fechamax 
+                                          and objventa2.estado = 1 
+                                GROUP BY objventa2.codprod
+                                ";
+
+                /*
                 string consulta = @"
                 select 
                 venta1.codprod,
@@ -292,6 +391,7 @@ namespace jycboliviaASP.net.Datos
                      on objventa2.codprod = objmax.codprod 
                      and objventa2.fechalimite = objmax.fechamax 
                      and objventa2.estado = 1 GROUP BY objventa2.codprod";
+                */
 
                 var parametros = new List<MySqlParameter>
             {
