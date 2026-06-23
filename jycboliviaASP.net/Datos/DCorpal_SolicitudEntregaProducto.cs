@@ -98,7 +98,9 @@ namespace jycboliviaASP.net.Datos
             string consulta = @"select pp.codigo, pp.producto, pp.medida  from  
                                 tbcorpal_producto pp 
                                 where pp.estado = 1 
-                                and pp.producto like @producto";
+                                and pp.producto like @producto 
+                                order by pp.producto asc  
+                                        ";
             var parametros = new List<MySqlParameter>
             {
                 new MySqlParameter("@producto", "%" +producto+ "%")
@@ -828,29 +830,35 @@ namespace jycboliviaASP.net.Datos
                                      ss.personalsolicitud, 
                                      pp.producto,
                                      dss.`contenedorfraccionado`,
+
                                      CASE
                                         WHEN IFNULL(dss.contenedorfraccionado,0) = 1
                                             THEN IFNULL(dss.cant_unidadcontenedorfraccionada,0)
                                         ELSE
                                             IFNULL(dss.cant,0)
-                                        END AS cant_solicitada, 
+                                        END AS cant_solicitada,
+
                                      ifnull(dss.cantentregada,0) as 'cant_entregada', 
                                      ss.estadosolicitud, 
                                      date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', 
                                      ss.horacierre, 
                                      ss.personalentregoproducto, 
-                                     ss.detallecierre,  
+                                     ss.detallecierre,
+                                     v.placa,
+                                     cli.tiendaname,
                                      pp.codupon
                                      from tbcorpal_solicitudentregaproducto ss 
                                      left join tbcorpal_detalle_solicitudproducto dss ON ss.`codigo` = dss.`codsolicitud` 
                                      left join tbcorpal_producto pp ON dss.`codproducto` = pp.`codigo`
+                                     left join tbcorpal_vehiculos v ON dss.`codvehiculo` = v.`codigo`
+                                     left join tbcorpal_cliente cli ON ss.`codcliente` = cli.`codigo`
                                      where 
                                      ss.estado = 1 and 
                                      pp.estado = 1 and 
                                      ss.fechaentrega BETWEEN @fechaIni AND @fechaFin
                                      order by 
                                      ss.fechaentrega asc, 
-                                     ss.codigo asc;" ;
+                                     ss.codigo asc;";
                 var parametros = new List<MySqlParameter>
                     {
                         new MySqlParameter("@fechaIni", MySqlDbType.Date)
