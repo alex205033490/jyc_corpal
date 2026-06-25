@@ -149,17 +149,17 @@ namespace jycboliviaASP.net.Negocio
             return dsp.get_productosSolicitudProducto( codigoSolicitudProducto);
         }
 
-        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta, string personalsolicitud)
+        internal DataSet get_alldetalleProductoSolicitudEntregado(DateTime fechadesde, DateTime fechahasta, string personalsolicitud)
         {
             return dsp.get_alldetalleProductoSolicitudEntregado( fechadesde,  fechahasta,  personalsolicitud);
         }
 
-        internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(string fechadesde, string fechahasta)
+        internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(DateTime fechadesde, DateTime fechahasta)
         {
             return dsp.get_alldetalleProductoSolicitud_VS_Entregado( fechadesde,  fechahasta);
         }
 
-        internal DataSet get_alldetalleProductoSolicitadosyEntregadosporpersona(string fechadesde, string fechahasta, string Responsable)
+        internal DataSet get_alldetalleProductoSolicitadosyEntregadosporpersona(DateTime fechadesde, DateTime fechahasta, string Responsable)
         {
             return dsp.get_alldetalleProductoSolicitadosyEntregadosporpersona(fechadesde, fechahasta, Responsable);
         }
@@ -186,8 +186,7 @@ namespace jycboliviaASP.net.Negocio
 
         internal DataSet get_StockProducctos(string fechaHasta)
         {
-            DataSet dato = dsp.get_StockProducctos(fechaHasta);
-            return dato;
+            return dsp.get_StockProducctos(fechaHasta);
         }
 
         internal float get_Stock(int codProducto, string tipoSolicitud)
@@ -208,7 +207,7 @@ namespace jycboliviaASP.net.Negocio
                 return 0;
         }
 
-        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        internal DataSet get_detalleEntregaSolicitudProductos(DateTime fechadesde, DateTime fechahasta)
         {
             return dsp.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
         }

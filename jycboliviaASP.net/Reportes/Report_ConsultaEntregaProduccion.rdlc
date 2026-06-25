@@ -9,11 +9,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>3883a792-c4c2-448a-a15d-0454b3b68372</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="DS_ProductosAlmacen">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>bc65e965-6342-4720-928a-b92d79ca274c</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DS_ConsultaEntregaProduccion">
       <Query>
-        <DataSourceName>DS_ReciboIngresoEgreso</DataSourceName>
+        <DataSourceName>DS_ProductosAlmacen</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -97,10 +104,14 @@
           <DataField>codupon</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="cantfraccionada">
+          <DataField>cantfraccionada</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS_ProductosAlmacen</rd:DataSetName>
-        <rd:SchemaPath>F:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\DS_ProductosAlmacen.xsd</rd:SchemaPath>
         <rd:TableName>ds_entregaProduccion</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -164,7 +175,7 @@
             <Top>1.57903cm</Top>
             <Left>0.75883cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.32021cm</Width>
+            <Width>2.43121cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -192,9 +203,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>12.42695cm</Left>
+            <Left>12.3063cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.32021cm</Width>
+            <Width>2.26717cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -222,9 +233,9 @@
             </Paragraphs>
             <rd:DefaultName>p_fechadesde</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>4.25542cm</Left>
+            <Left>3.2606cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.29917cm</Width>
+            <Width>3.55834cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -252,9 +263,9 @@
             </Paragraphs>
             <rd:DefaultName>p_fechahasta</rd:DefaultName>
             <Top>1.57903cm</Top>
-            <Left>15.92355cm</Left>
+            <Left>14.64403cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.80188cm</Width>
+            <Width>3.32021cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -270,16 +281,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.49999cm</Width>
+                  <Width>2.07666cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.49999cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.246cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.49999cm</Width>
@@ -288,43 +293,52 @@
                   <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
+                  <Width>2.22482cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.26717cm</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>6.39188cm</Width>
+                  <Width>4.38105cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.84459cm</Width>
+                  <Width>4.86009cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.49999cm</Width>
+                  <Width>2.01316cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.4525cm</Width>
+                  <Width>2.77517cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>9.32624cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.49999cm</Width>
+                  <Width>6.36291cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.49999cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.49999cm</Width>
+                  <Width>2.35183cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.30949cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.49999cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.49999cm</Width>
+                  <Width>2.05549cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>6.49521cm</Width>
+                  <Width>2.28832cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.80187cm</Width>
+                  <Width>4.90771cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.42087cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.02915cm</Width>
@@ -332,7 +346,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>1.6cm</Height>
+                  <Height>1.219cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -693,7 +707,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>codupon</Value>
+                                  <Value>Codigo UPON</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -776,7 +790,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Cant cajas</Value>
+                                  <Value>Cant Cajas</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -788,6 +802,41 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox23</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cant Fraccionada</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -846,7 +895,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>kgr desperdicio</Value>
+                                  <Value>kg Desperdicio</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1431,6 +1480,35 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="cantfraccionada">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!cantfraccionada.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>cantfraccionada</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="unidadsuelta">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1658,6 +1736,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1673,8 +1752,8 @@
             <DataSetName>DS_ConsultaEntregaProduccion</DataSetName>
             <Top>2.76966cm</Top>
             <Left>0.75883cm</Left>
-            <Height>2.2cm</Height>
-            <Width>73.84135cm</Width>
+            <Height>1.819cm</Height>
+            <Width>63.06986cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>

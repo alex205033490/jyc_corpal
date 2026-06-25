@@ -229,6 +229,105 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
+                string consulta = @"select
+                                      venta1.codprod,
+                                      venta1.descripcion,
+      
+                                      ifnull(venta2.domingo, 0) as domingo,
+                                      ifnull(venta2.domingoFracc, 0) as domingo_fracc,
+                                      ifnull(venta2.lunes, 0) as lunes,
+                                      ifnull(venta2.lunesFracc, 0) as lunes_fracc,
+                                      ifnull(venta2.martes, 0) as martes,
+                                      ifnull(venta2.martesFracc, 0) as martes_fracc,
+                                      ifnull(venta2.miercoles, 0) as miercoles,
+                                      ifnull(venta2.miercolesFracc, 0) as miercoles_fracc,
+                                      ifnull(venta2.jueves, 0) as jueves,
+                                      ifnull(venta2.juevesFracc, 0) as jueves_fracc,
+                                      ifnull(venta2.viernes, 0) as viernes,
+                                      ifnull(venta2.viernesFracc, 0) as viernes_fracc,
+                                      ifnull(venta2.sabado, 0) as sabado,
+                                      ifnull(venta2.sabadoFracc, 0) as sabado_fracc,
+      
+                                      venta1.cantidad_total_vendida,
+                                      venta1.cantidad_totalfracc_vendida
+
+                                from (
+                                     select 
+                                            doe.`codprod`,
+                                            doe.`descripcion`,
+                                            SUM(doe.`cantidad`) as cantidad_total_vendida,
+                                            SUM(doe.`cant_unidadcontenedorfraccionada`) as cantidad_totalfracc_vendida
+     
+                                     from tbcorpal_ordenentregacliente oe
+                                     left join tbcorpal_detalleproductoordenentregacliente doe
+                                          on oe.`codigo` = doe.`codventa`
+                                     where 
+                                           oe.`fechagra` >= @fechaini and oe.`fechagra` <= @fechafin  
+                                           and oe.`estado` = 1 
+                                     group by 
+                                           doe.`codprod`
+
+                                ) venta1 
+
+                                left join (
+
+                                     SELECT 
+                                     doe.codprod,
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 1 THEN doe.cantidad ELSE 0 END) AS 'domingo',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 1 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'domingoFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 2 THEN doe.cantidad ELSE 0 END) AS 'lunes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 2 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'lunesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 3 THEN doe.cantidad ELSE 0 END) AS 'martes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 3 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'martesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 4 THEN doe.cantidad ELSE 0 END) AS 'miercoles',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 4 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'miercolesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 5 THEN doe.cantidad ELSE 0 END) AS 'jueves',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 5 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'juevesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 6 THEN doe.cantidad ELSE 0 END) AS 'viernes',
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 6 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'viernesFracc',
+     
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 7 THEN doe.cantidad ELSE 0 END) AS 'sabado', 
+                                     SUM(CASE WHEN DAYOFWEEK(oe.fechagra) = 7 THEN doe.cant_unidadcontenedorfraccionada ELSE 0 END) AS 'sabadoFracc'
+     
+                                     FROM tbcorpal_ordenentregacliente oe
+                                     INNER JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                          on oe.`codigo` = doe.`codventa`
+                                     where 
+                                           oe.`estado` = 1
+                                           and week(oe.`fechagra`, 1) = week(current_date(), 1)
+                                           and year(oe.`fechagra`) = year(current_date())
+                                     group by
+                                           doe.`codprod`
+             
+                                ) venta2
+                                        ON venta1.codprod = venta2.codprod
+
+                                LEFT JOIN (
+                                     select  
+                                             op.codprod,
+                                             max(op.`fechalimite`) as 'fechaMax' 
+                                      from tbcorpal_objetivosproduccion op 
+                                      where op.`estado` = 1 
+                                            and op.`fechalimite` <= @fechafin 
+                                      group by 
+                                            op.`codprod` 
+
+                                ) objmax ON objmax.codprod = venta1.codprod
+
+                                LEFT JOIN tbcorpal_objetivosproduccion objventa2 
+                                          on objventa2.codprod = objmax.codprod 
+                                          and objventa2.fechalimite = objmax.fechamax 
+                                          and objventa2.estado = 1 
+                                GROUP BY objventa2.codprod
+                                ";
+
+                /*
                 string consulta = @"
                 select 
                 venta1.codprod,
@@ -292,6 +391,7 @@ namespace jycboliviaASP.net.Datos
                      on objventa2.codprod = objmax.codprod 
                      and objventa2.fechalimite = objmax.fechamax 
                      and objventa2.estado = 1 GROUP BY objventa2.codprod";
+                */
 
                 var parametros = new List<MySqlParameter>
             {
@@ -374,58 +474,78 @@ namespace jycboliviaASP.net.Datos
 
         /****************************************************************************/
         /*********************************  ORDEN ENTREGA  *******************************************/
-        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, int codChofer)
+        internal DataSet get_mostrarProductosSobrantes_OrdenEntrega(DateTime fechaIni, DateTime fechaFin, string chofer)
         {
             try
             {
                 string consulta = @"select 
-                                        dv.`codigo` as 'codDespacho',
-                                        ddv.`codcliente`,
-                                        cl.tiendaname as 'Cliente',
-                                        dv.`fechacierre`,
-                                        dv.`horacierre`,
-                                        dv.`conductor`,
-                                        concat(v.`placa`, ' - ', v.`marca`) as 'vehiculo',
-                                        p.`producto`,
-                                        ddv.`cantentregada` as 'cantEntregadoCamion' ,
-                                        tb_orden.codOrden as 'codOrdenEntregaCli',
-                                        tb_orden.cod_rutaentrega,
-                                        tb_orden.cantEntregadaCli,
-                                        tb_orden.montoDescuento,
-                                        (ddv.`cantentregada` - tb_orden.cantEntregadaCli) as 'cantidadSobrante'
+                                    dv.`codigo` as 'codDespacho',
+                                    ddv.`codpedido` as 'codSolicitud',
+                                    t1.codOrdenEntrega,
 
-                                        from tbcorpal_despachovehiculo dv
-                                        inner join tbcorpal_detalleproddespacho ddv
-                                             on dv.`codigo` = ddv.`coddespacho`
-                                        left join tbcorpal_vehiculos v 
-                                             on dv.`codvehiculo` = v.`codigo`
-                                        inner join tbcorpal_producto p
-                                             on ddv.`codprod` = p.`codigo`
-                                        inner join tbcorpal_cliente cl
-                                             on ddv.`codcliente` = cl.`codigo`     
-                                        left join 
-                                             (select
-                                             oe.`codigo` as 'codOrden',
-                                             oe.`codigoCliente`,
-                                             oe.`cod_rutaentrega`,
-                                             oe.`cod_despachovehiculo`,
-                                             doe.`codprod`,
-                                             doe.`cantidad` as 'cantEntregadaCli',
-                                             doe.`montoDescuento`
-                                             from tbcorpal_ordenentregacliente oe
-                                             inner join tbcorpal_detalleproductoordenentregacliente doe
-                                                   on oe.codigo = doe.codventa) as tb_orden on dv.codigo = tb_orden.cod_despachovehiculo
-                                                   and ddv.codcliente = tb_orden.codigoCliente
-      
-                                        where 
-                                        dv.`estadodespacho` = 'Cerrado'
-                                        and dv.fechacierre between @fechaIni and @fechaFin 
-                                        and (@codChofer = 0 OR dv.codconductor = @codChofer);";
+                                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
+                                    dv.`conductor` as 'conductor',
+
+                                    t1.cliente,
+                                    t1.vendedor,
+
+                                    ddv.`codprod`,
+                                    p.`producto` as 'producto',
+                                    ddv.`contenedorfraccionado` as fraccionado,
+
+                                    ddv.`cantentregada`,
+                                    t1.cantidadEntregadaCliente,
+                                    dv.fechacierre,
+
+                                    CASE
+                                        WHEN t1.cantidadEntregadaCliente is null or t1.cantidadEntregadaCliente = 0
+                                             then ddv.`cantentregada`
+                                        ELSE ddv.`cantentregada` - t1.cantidadEntregadaCliente
+                                        END as cantidadSobrante,
+                                    t1.fechaentrega 
+
+                                    from  
+                                    tbcorpal_despachovehiculo dv 
+                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
+
+                                    left join 
+                                    (
+
+                                    select 
+                                    oec.codigo as codOrdenEntrega,
+                                    oec.cliente,
+                                    oec.responsable as 'vendedor',
+                                    doec.`codprod`,
+                                    oec.`cod_despachovehiculo`,
+                                    oec.fechaentrega,
+                                    CASE
+                                        when doec.contenedorfraccionado = 1
+                                           then doec.cant_unidadcontenedorfraccionada
+                                        else doec.cantidad
+                                        end as cantidadEntregadaCliente
+    
+                                    from 
+                                    tbcorpal_ordenentregacliente oec 
+                                    left join tbcorpal_detalleproductoordenentregacliente doec ON oec.`codigo` = doec.`codventa`
+                                    where
+                                    oec.`estado` = 1
+
+                                    ) t1 ON dv.`codigo` = t1.cod_despachovehiculo and ddv.codprod = t1.codprod
+
+                                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo` 
+
+                                    inner join tbcorpal_producto p ON ddv.`codprod` = p.`codigo` 
+
+                                    where 
+                                    dv.`estado` = 1 
+                                    and dv.`estadodespacho` = 'Cerrado' 
+                                    and dv.`fechagra` between @fechaIni and @fechaFin 
+                                    and dv.conductor like @nombreChofer ;";
                 var parametros = new List<MySqlParameter>
                 {
                     new MySqlParameter("@fechaIni", fechaIni),
                     new MySqlParameter("@fechaFin", fechaFin),
-                    new MySqlParameter("@codChofer", codChofer)
+                    new MySqlParameter("@nombreChofer", "%"+ chofer +"%")
 
                 };
                 return cnx.consultaMySqlParametros(consulta, parametros);
@@ -505,6 +625,61 @@ namespace jycboliviaASP.net.Datos
             catch(Exception ex)
             {
                 throw new Exception("error inesperado al cargar los datos. " + ex.Message);
+            }
+        }
+
+        internal DataSet GET_obtenerCantidadProductosSaliente_vendedor(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    p.`codigo`,
+                                    p.`producto`,
+                                    sol1.cod_vendedor,
+                                    sol1.vendedor,
+                                    sol1.cant,
+                                    sol1.cant_fracc
+
+                                    from tbcorpal_producto p     
+
+                                    inner join (
+     
+                                         select 
+                                                dse.`codproducto`,
+                                                SUM(dse.`cant_unidadcontenedorfraccionada`) as cant_fracc,
+                                                SUM(dse.`cant`) as cant,
+                                                sep.`codpersolicitante` as cod_vendedor,
+                                                sep.`personalsolicitud` as vendedor
+     
+                                         from 
+                                         tbcorpal_solicitudentregaproducto sep
+                                         left join tbcorpal_detalle_solicitudproducto dse
+                                              ON sep.`codigo` = dse.`codsolicitud`
+                                         where
+                                              sep.`estado` = 1 and
+                                              sep.`estadosolicitud` = 'Cerrado' and
+                                              sep.`fechacierre` between @fecha1 and @fecha2
+                                         GROUP BY
+                                               dse.`codproducto`,
+                                               sep.`codpersolicitante`
+           
+                                    ) AS sol1
+                                         ON p.`codigo` = sol1.codproducto
+                                    where 
+                                          p.`estado` = 1
+                                    order by 
+                                        p.producto asc
+                                    ";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fecha1", fechaDesde),
+                    new MySqlParameter("@fecha2", fechaHasta)
+                };
+                return cnx.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
             }
         }
 

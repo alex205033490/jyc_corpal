@@ -131,7 +131,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="CR_datos">
-                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="800px" 
+                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="100%" 
                         Height="645px" Font-Names="Verdana" Font-Size="8pt" 
                         InteractiveDeviceInfos="(Collection)" WaitMessageFont-Names="Verdana" 
                         WaitMessageFont-Size="14pt">

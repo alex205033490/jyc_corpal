@@ -342,6 +342,7 @@ namespace jycboliviaASP.net.Negocio
 
 
 
+
         public decimal obtenerPrecioBaseProducto(int idProducto)
         {
             return dtienda.obtenerPrecioBaseProducto(idProducto);
@@ -358,6 +359,20 @@ namespace jycboliviaASP.net.Negocio
             return dtienda.actualizarPreciosDetalleEnCascada(idProducto);
         }
 
+
+
+
+        internal bool update_CoordenadasCliente(int codCli, string lat, string lng)
+        {
+            try
+            {
+                return dtienda.updateCoordenadasCliente(codCli, lat, lng);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al actualizar la coordenada del cliente. " +ex.Message);
+            }
+        }
 
 
     }

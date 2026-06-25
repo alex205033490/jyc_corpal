@@ -408,9 +408,59 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_alldetalleProductoSolicitudEntregado(string fechadesde, string fechahasta, string personalsolicitud)
+        internal DataSet get_alldetalleProductoSolicitudEntregado(DateTime fechadesde, DateTime fechahasta, string personalsolicitud)
         {
-            string consulta = " select "+
+            try
+            {
+                string consulta = @"SELECT
+                                    se.codigo,
+                                    se.nroboleta,
+                                    DATE_FORMAT(se.fechaGRA, '%d/%m/%Y') AS fecha_Gra,
+                                    se.horaGRA,
+                                    DATE_FORMAT(se.fechaentrega, '%d/%m/%Y') AS fecha_entrega,
+                                    se.horaentrega,
+                                    se.personalsolicitud,
+                                    pp.producto,
+                                    (CASE
+                                        WHEN dse.`contenedorfraccionado` = 1
+                                        THEN dse.`medida_unidadcontenedorfraccionada`
+                                        ELSE dse.`medida`
+                                    END) AS 'medida',
+                                    (CASE
+                                         WHEN dse.`contenedorfraccionado` = 1 
+                                         THEN dse.`cant_unidadcontenedorfraccionada` 
+                                         ELSE dse.`cant`
+                                    END) AS 'cantidad',
+                                    dse.`contenedorfraccionado`,
+                                    dse.tiposolicitud,
+                                    se.personalentregoproducto,
+                                    DATE_FORMAT(se.fechacierre, '%d/%m/%Y') AS fecha_Cierre,
+                                    se.horacierre,
+                                    se.estadosolicitud,
+                                    dse.cantentregada
+                                FROM tbcorpal_solicitudentregaproducto se
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dse
+                                    ON se.codigo = dse.`codsolicitud`
+                                INNER JOIN tbcorpal_producto pp
+                                    ON dse.`codproducto` = pp.codigo
+                                WHERE se.estado = 1
+                                  AND se.personalsolicitud LIKE @personalSolicitud
+                                  AND se.fechaGRA BETWEEN @fechaInicio AND @fechaFin;";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@personalSolicitud", "%"+personalsolicitud+"%"),
+                    new MySqlParameter("@fechaInicio", fechadesde),
+                    new MySqlParameter("@fechaFin", fechahasta)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex.Message);
+            }
+
+            /*string consulta = " select "+
                                 " se.codigo, "+
                                 " se.nroboleta, "+
                                 " date_format(se.fechaGRA,'%d/%m/%Y') as 'fecha_Gra', "+
@@ -434,12 +484,106 @@ namespace jycboliviaASP.net.Datos
                                 " se.estado = 1 and "+
                                 " se.personalsolicitud like '%" + personalsolicitud + "%' and " +
                                 " se.fechaGRA BETWEEN "+fechadesde+" and "+fechahasta;
-            return conexion.consultaMySql(consulta);
+            return conexion.consultaMySql(consulta);*/
         }
 
-        internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(string fechadesde, string fechahasta)
+        internal DataSet get_alldetalleProductoSolicitud_VS_Entregado(DateTime fechadesde, DateTime fechahasta)
         {
-            string consulta = "select "+ 
+            try
+            {
+                string consulta = @"SELECT
+                                    pp.codigo,
+                                    pp.producto,
+                                    t1.estadoFraccionado,
+                                    t1.medidaFracc,
+                                    t1.medida,
+                                    FORMAT(IFNULL(t1.cantsolicitadoFracc, 0), 2) AS CantidadSolicitadoFracc,
+                                    FORMAT(IFNULL(t1.cantidadsolicitado, 0), 2) AS CantidadSolicitado,
+
+                                    FORMAT(IFNULL(t1.cantidadEntregada, 0), 2) AS Cantidad_Entregado,
+                                    FORMAT(IFNULL(t1.cantidadEntregadaFracc, 0), 2) AS CantidadFracc_Entregado,
+    
+                                    FORMAT(IFNULL(t1.precio, 0), 2) AS PrecioUnidad,
+                                    FORMAT(IFNULL(t1.precioFracc, 0), 2) AS PrecioUnidadFracc,
+    
+                                    FORMAT(IFNULL((t1.cantidadsolicitado * t1.precio), 0), 2) AS MontoSolicitado,
+                                    FORMAT(IFNULL((t1.cantsolicitadoFracc * t1.precioFracc), 0), 2) AS MontoSolicitadoFracc,
+    
+                                    FORMAT(IFNULL((t1.cantidadEntregada * t1.precio), 0), 2) AS MontoEntregado,
+                                    FORMAT(IFNULL((t1.cantidadEntregadaFracc * t1.precioFracc), 0), 2) AS MontoEntregadoFracc,
+    
+                                    FORMAT(
+                                        (
+                                            IFNULL((t1.cantidadsolicitado * t1.precio), 0)
+                                            -
+                                            IFNULL((t1.cantidadEntregada * t1.precio), 0)
+                                        ),
+                                        2
+                                    ) AS Perdida,
+    
+                                    FORMAT(
+                                           (
+                                           IFNULL((t1.cantsolicitadoFracc * t1.precioFracc), 0)
+                                           -
+                                           IFNULL((t1.cantidadEntregadaFracc * t1.precioFracc), 0)
+                                           ),
+                                           2
+                                    ) AS PerdidaFracc
+    
+                                FROM tbcorpal_producto pp
+
+                                LEFT JOIN (
+                                    SELECT
+                                        dse.codproducto,
+        
+                                        dse.`medida_unidadcontenedorfraccionada` as medidaFracc,
+                                        dse.`medida`,
+        
+                                        SUM(dse.`cant_unidadcontenedorfraccionada`) AS cantsolicitadoFracc,
+                                        SUM(dse.cant) AS cantidadsolicitado,
+        
+                                        dse.precio AS precio,
+                                        dse.`precio_unidadcontenedorfraccionado` AS precioFracc,
+        
+                                        dse.`contenedorfraccionado` AS estadoFraccionado,
+        
+                                        SUM(CASE
+                                                WHEN dse.`contenedorfraccionado` <> 1 
+                                                     OR dse.`contenedorfraccionado` IS NULL
+                                                THEN dse.`cantentregada`
+                                           END) AS cantidadEntregada,  
+        
+                                        SUM(CASE
+                                                WHEN dse.`contenedorfraccionado` = 1
+                                                THEN dse.`cantentregada` 
+                                           END) AS cantidadEntregadaFracc
+           
+                                    FROM tbcorpal_solicitudentregaproducto se 
+                                         left join tbcorpal_detalle_solicitudproducto dse ON se.`codigo` = dse.`codsolicitud`
+                                         left join tbcorpal_producto p ON dse.`codproducto` = p.`codigo`
+                                    WHERE
+                                        se.estado = 1
+                                        AND se.estadosolicitud = 'Cerrado'
+                                        AND se.fechaentrega BETWEEN @fechaIni AND @fechaFin
+                                    GROUP BY dse.codproducto
+                                ) AS t1
+
+                                    ON pp.codigo = t1.codproducto
+                                WHERE pp.estado = 1;";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechaIni", fechadesde),
+                    new MySqlParameter("@fechaFin", fechahasta)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            }catch(Exception ex)
+            {
+                throw new Exception("Error al obtener los datos. " + ex.Message);
+            }
+
+
+            /*string consulta = "select "+ 
                                " pp.codigo, "+
                                " pp.producto, "+
                                " pp.medida, "+
@@ -469,7 +613,7 @@ namespace jycboliviaASP.net.Datos
                                " )AS t1 "+
                                " ON  (pp.codigo = t1.codproducto) "+
                                " where pp.estado = 1;";
-            return conexion.consultaMySql(consulta);
+            return conexion.consultaMySql(consulta);*/
         }
 
         internal DataSet get_CodigoProductos(string producto)
@@ -480,47 +624,123 @@ namespace jycboliviaASP.net.Datos
             return lista;
         }
 
-        internal DataSet get_alldetalleProductoSolicitadosyEntregadosporpersona(string fechadesde, string fechahasta, string Responsable)
+        internal DataSet get_alldetalleProductoSolicitadosyEntregadosporpersona(DateTime fechadesde, DateTime fechahasta, string Responsable)
         {
-            string consulta = "SELECT SF.personalsolicitud, SF.producto, SF.total_cantSolicitada, SF.total_cantentregada "+
-                               " FROM "+
-                               " ( "+
-                               " SELECT personalsolicitud, producto, SUM(total_cant) AS 'total_cantSolicitada', SUM(total_cantentregada) AS 'total_cantentregada' "+
-                               " FROM ( "+
-                               " SELECT s.personalsolicitud, p.producto, COALESCE(SUM(d.cant), 0) AS total_cant, COALESCE(SUM(d.cantentregada), 0) AS total_cantentregada "+
-                               " FROM tbcorpal_solicitudentregaproducto s "+
-                               " RIGHT JOIN tbcorpal_detalle_solicitudproducto d ON s.codigo = d.codsolicitud "+
-                               " RIGHT JOIN tbcorpal_producto p ON p.codigo = d.codproducto "+
-                               " WHERE s.estado = 1 and p.estado = 1 and s.fechaGRA BETWEEN "+fechadesde+" AND "+fechahasta+
-                               " GROUP BY s.personalsolicitud, p.producto "+
-                               " UNION "+
-                               " SELECT s.personalsolicitud, p.producto, 0 AS total_cant, 0 AS total_cantentregada "+
-                               " FROM tbcorpal_producto p "+
-                               " CROSS JOIN ( "+
-                               " SELECT personalsolicitud "+
-                               " FROM tbcorpal_solicitudentregaproducto "+
-                               " GROUP BY personalsolicitud "+
-                               " ) as s "+
-                               " LEFT JOIN tbcorpal_detalle_solicitudproducto d ON p.codigo = d.codproducto "+
-                               " LEFT JOIN tbcorpal_solicitudentregaproducto se ON se.codigo = d.codsolicitud AND se.personalsolicitud = s.personalsolicitud "+
-                               " WHERE p.estado = 1 and se.codigo IS NULL "+
-                               " ) AS result "+
-                               " GROUP BY personalsolicitud, producto "+
-                               " UNION "+
-                               " SELECT res1.nombre AS personalsolicitud, pro1.producto, 0 AS 'total_cantSolicitada', 0 AS 'total_cantentregada' "+
-                               " FROM tb_responsable res1 "+
-                               " CROSS JOIN tbcorpal_producto pro1 "+
-                               " WHERE pro1.estado = 1 and res1.codigo NOT IN ( " +
-                               " SELECT sol1.codpersolicitante "+
-                               " FROM tbcorpal_solicitudentregaproducto sol1 "+
-                               " WHERE sol1.estado = 1 and sol1.fechaGRA BETWEEN " + fechadesde + " AND " + fechahasta + 
-                               " ) "+
-                               " ORDER BY personalsolicitud, producto "+
-                               " ) AS SF "+
-                               " WHERE "+
-                               " SF.personalsolicitud LIKE '%"+Responsable+"%'";
-            DataSet lista = conexion.consultaMySql(consulta);
-            return lista;
+            try
+            {
+                string consulta = @"SELECT SF.personalsolicitud,
+                                               SF.producto,
+                                               SF.total_cantSolicitada,
+                                               SF.total_cantSolicitadaFracc,
+                                               SF.total_cantentregada,
+                                               SF.total_cantentregadaFracc
+                                        FROM
+                                        (
+                                            SELECT personalsolicitud,
+                                                   producto,
+                                                   SUM(total_cant) AS total_cantSolicitada,
+                                                   SUM(total_cantsolicitadaFracc) AS total_cantSolicitadaFracc,
+                                                   SUM(total_cantentregada) AS total_cantentregada,
+                                                   SUM(total_cantentregadaFracc) AS total_cantentregadaFracc
+           
+                                            FROM
+                                            (
+                                                SELECT s.personalsolicitud,
+                                                       p.producto,
+                                                       COALESCE(SUM(d.cant), 0) AS total_cant,
+                                                       COALESCE(SUM(d.`cant_unidadcontenedorfraccionada`), 0) AS total_cantsolicitadaFracc,
+               
+                                                       COALESCE(
+                                                       SUM(
+                                                           CASE
+                                                               WHEN d.contenedorfraccionado <> 1
+                                                                OR d.contenedorfraccionado IS NULL
+                                                                THEN d.cantentregada
+                                                                ELSE 0
+                                                                END
+                                                                ), 0
+                                                                ) AS total_cantentregada,   
+                                    
+                                                       COALESCE(
+                                                       SUM(
+                                                           CASE
+                                                               WHEN d.contenedorfraccionado = 1
+                                                               THEN d.cantentregada
+                                                               ELSE 0
+                                                               END
+                                                               ), 0
+                                                               ) AS total_cantentregadaFracc
+               
+                                                FROM tbcorpal_solicitudentregaproducto s
+                                                RIGHT JOIN tbcorpal_detalle_solicitudproducto d
+                                                    ON s.codigo = d.codsolicitud
+                                                RIGHT JOIN tbcorpal_producto p
+                                                    ON p.codigo = d.codproducto
+                                                WHERE s.estado = 1
+                                                  AND p.estado = 1
+                                                  AND s.fechaGRA BETWEEN @fechadesde and @fechahasta 
+                                                GROUP BY s.personalsolicitud, p.producto
+
+                                                UNION
+
+                                                SELECT s.personalsolicitud,
+                                                       p.producto,
+                                                       0 AS total_cant,
+                                                       0 AS total_cantFracc,
+                                                       0 AS total_cantentregada,
+                                                       0 AS total_cantentregadaFracc
+                                                FROM tbcorpal_producto p
+                                                CROSS JOIN
+                                                (
+                                                    SELECT personalsolicitud
+                                                    FROM tbcorpal_solicitudentregaproducto
+                                                    GROUP BY personalsolicitud
+                                                ) s
+                                                LEFT JOIN tbcorpal_detalle_solicitudproducto d
+                                                    ON p.codigo = d.codproducto
+                                                LEFT JOIN tbcorpal_solicitudentregaproducto se
+                                                    ON se.codigo = d.codsolicitud
+                                                   AND se.personalsolicitud = s.personalsolicitud
+                                                WHERE p.estado = 1
+                                                  AND se.codigo IS NULL
+                                            ) result
+                                            GROUP BY personalsolicitud, producto
+
+                                            UNION
+
+                                            SELECT res1.nombre AS personalsolicitud,
+                                                   pro1.producto,
+                                                   0 AS total_cantSolicitada,
+                                                   0 AS total_cantSolicitadaFracc,
+                                                   0 AS total_cantentregada,
+                                                   0 AS total_cantentregadaFracc
+                                            FROM tb_responsable res1
+                                            CROSS JOIN tbcorpal_producto pro1
+                                            WHERE pro1.estado = 1
+                                              AND res1.codigo NOT IN
+                                              (
+                                                  SELECT sol1.codpersolicitante
+                                                  FROM tbcorpal_solicitudentregaproducto sol1
+                                                  WHERE sol1.estado = 1
+                                                    AND sol1.fechaGRA BETWEEN @fechadesde AND @fechahasta 
+                                              )
+                                        ) SF
+                                        WHERE SF.personalsolicitud LIKE @personal
+                                        ORDER BY SF.personalsolicitud, SF.producto;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@fechadesde", fechadesde),
+                    new MySqlParameter("@fechahasta", fechahasta),
+                    new MySqlParameter("@personal", "%"+Responsable+"%")
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
         }
 
         internal bool sumarStockenProducto(int codigoProdNax, float cantcajas)
@@ -547,8 +767,12 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_StockProducctos(string fechaHasta)
         {         
-           NA_VariablesGlobales nv = new NA_VariablesGlobales();
+            NA_VariablesGlobales nv = new NA_VariablesGlobales();
+            //return nv.get_consultaStockProductosActual_fecha(fechaHasta);
+            
+            //DataSet ds = nv.
             string consulta = nv.get_consultaStockProductosActual_fecha(fechaHasta);
+            //throw new Exception(consulta);
             return conexion.consultaMySql(consulta);
         }
 
@@ -593,33 +817,59 @@ namespace jycboliviaASP.net.Datos
             return conexion.consultaMySql(consulta);
         }
 
-        internal DataSet get_detalleEntregaSolicitudProductos(string fechadesde, string fechahasta)
+        internal DataSet get_detalleEntregaSolicitudProductos(DateTime fechadesde, DateTime fechahasta)
         {
-            string consulta = "select " +
-                               " ss.codigo, ss.nroboleta, " +
-                               " date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', " +
-                               " ss.horaentrega, " +
-                               " ss.personalsolicitud, " +
-                               " pp.producto, " +
-                               " dss.cant as 'cant_solicitada', " +
-                               " ifnull(dss.cantentregada,0) as 'cant_entregada', " +
-                               " ss.estadosolicitud, " +
-                               " date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', " +
-                               " ss.horacierre, " +
-                               " ss.personalentregoproducto, " +
-                               " ss.detallecierre  " +
-                               " ,pp.codupon "+
-                               " from tbcorpal_solicitudentregaproducto ss, " +
-                               " tbcorpal_detalle_solicitudproducto dss, " +
-                               " tbcorpal_producto pp " +
-                               " where " +
-                               " ss.codigo = dss.codsolicitud and " +
-                               " dss.codproducto = pp.codigo and " +
-                               " ss.estado = 1 and " +
-                               " pp.estado = 1 and "+
-                               " ss.fechaentrega between " + fechadesde + " and " + fechahasta;
-                               
-            return conexion.consultaMySql(consulta);
+            try
+            {
+                string consulta = @"select 
+                                     ss.codigo, ss.nroboleta, 
+                                     date_format(ss.fechaentrega,'%d/%m/%Y') as 'fecha_entrega', 
+                                     ss.horaentrega, 
+                                     ss.personalsolicitud, 
+                                     pp.producto,
+                                     dss.`contenedorfraccionado`,
+                                     CASE
+                                        WHEN IFNULL(dss.contenedorfraccionado,0) = 1
+                                            THEN IFNULL(dss.cant_unidadcontenedorfraccionada,0)
+                                        ELSE
+                                            IFNULL(dss.cant,0)
+                                        END AS cant_solicitada, 
+                                     ifnull(dss.cantentregada,0) as 'cant_entregada', 
+                                     ss.estadosolicitud, 
+                                     date_format(ss.fechacierre,'%d/%m/%Y') as 'fecha_cierre', 
+                                     ss.horacierre, 
+                                     ss.personalentregoproducto, 
+                                     ss.detallecierre,  
+                                     pp.codupon
+                                     from tbcorpal_solicitudentregaproducto ss 
+                                     left join tbcorpal_detalle_solicitudproducto dss ON ss.`codigo` = dss.`codsolicitud` 
+                                     left join tbcorpal_producto pp ON dss.`codproducto` = pp.`codigo`
+                                     where 
+                                     ss.estado = 1 and 
+                                     pp.estado = 1 and 
+                                     ss.fechaentrega BETWEEN @fechaIni AND @fechaFin
+                                     order by 
+                                     ss.fechaentrega asc, 
+                                     ss.codigo asc;" ;
+                var parametros = new List<MySqlParameter>
+                    {
+                        new MySqlParameter("@fechaIni", MySqlDbType.Date)
+                        {
+                            Value = fechadesde.Date
+                        },
+
+                        new MySqlParameter("@fechaFin", MySqlDbType.Date)
+                        {
+                            Value = fechahasta.Date
+                        }
+                    };
+
+                            return conexion.consultaMySqlParametros( consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
         }
 
         internal DataSet get_allPedidosParaVaciarUpon(string cliente)

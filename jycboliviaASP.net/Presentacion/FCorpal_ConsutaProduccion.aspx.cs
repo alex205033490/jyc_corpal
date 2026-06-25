@@ -96,8 +96,11 @@ namespace jycboliviaASP.net.Presentacion
                 return "null";
         }
 
-        private void get_datosEntregaProduccion(string fechadesde, string fechahasta, string Responsable, string producto)
+        private void get_datosEntregaProduccion( string Responsable, string producto)
         {
+            DateTime fechadesde = DateTime.Parse(tx_desdeFecha.Text);
+            DateTime fechahasta = DateTime.Parse(tx_hastaFecha.Text);
+
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_ConsultaEntregaProduccion.rdlc";
 
@@ -115,6 +118,7 @@ namespace jycboliviaASP.net.Presentacion
             this.ReportViewer1.LocalReport.Refresh();
             this.ReportViewer1.DataBind();
         }
+
         private void consultadedatos()
         {
             ReportViewer1.LocalReport.DataSources.Clear();
@@ -131,11 +135,11 @@ namespace jycboliviaASP.net.Presentacion
             {
                 if (dd_consulta.SelectedIndex == 0)
                 {                
-                    get_datosEntregaProduccion(fechadesde, fechahasta, Responsable, producto);
+                    get_datosEntregaProduccion(Responsable, producto);
                 }else
                   if (dd_consulta.SelectedIndex == 1)
                    {
-                     get_datosEntregaProduccionFechaTurno(fechadesde, fechahasta, producto);
+                     get_datosEntregaProduccionFechaTurno(producto);
                    }else
                     if (dd_consulta.SelectedIndex == 2)
                         {
@@ -171,8 +175,11 @@ namespace jycboliviaASP.net.Presentacion
             this.ReportViewer1.DataBind();
         }
 
-        private void get_datosEntregaProduccionFechaTurno(string fechadesde, string fechahasta, string producto)
+        private void get_datosEntregaProduccionFechaTurno(string producto)
         {
+            DateTime fechadesde = DateTime.Parse(tx_desdeFecha.Text);
+            DateTime fechahasta = DateTime.Parse(tx_hastaFecha.Text);
+
             LocalReport localreport = ReportViewer1.LocalReport;
             localreport.ReportPath = "Reportes/Report_ConsultaEntregaProduccionFechaTurno.rdlc";
 

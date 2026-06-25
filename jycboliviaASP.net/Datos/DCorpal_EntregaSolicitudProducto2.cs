@@ -886,46 +886,68 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
-                string consulta = @"select 
+                string consulta2 = @"select 
                                     dv.`codigo` as 'codDespacho',
                                     ddv.`codpedido` as 'codSolicitud',
-                                    v2.`codigo` as codVenta,
+                                    t1.codOrdenEntrega,
+
                                     concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
                                     dv.`conductor` as 'conductor',
 
-                                    v2.`cliente` as 'cliente',
-                                    v2.`responsable` as 'vendedor',
+                                    t1.cliente,
+                                    t1.vendedor,
 
+                                    ddv.`codprod`,
                                     p.`producto` as 'producto',
-                                    ddv.`cantentregada` as 'cantidadRecibida',
-                                    dvp.`cantidad` as 'cantidadEntregada', 
-                                    CASE
-                                        when dvp.cantidad is null or dvp.cantidad = 0 
-                                            then ddv.cantentregada 
-                                        ELSE ddv.cantentregada - dvp.cantidad 
-                                    END as cantidadSobrante, 
-                                    DATE(v.fechaEmision) as 'fechaEntregaProductosCliente',
+                                    ddv.`contenedorfraccionado` as fraccionado,
 
-                                    v.`estadoventa` as 'estadoventa' 
+                                    ddv.`cantentregada`,
+                                    t1.cantidadEntregadaCliente,
+
+                                    CASE
+                                        WHEN t1.cantidadEntregadaCliente is null or t1.cantidadEntregadaCliente = 0
+                                             then ddv.`cantentregada`
+                                        ELSE ddv.`cantentregada` - t1.cantidadEntregadaCliente
+                                        END as cantidadSobrante,
+                                    t1.fechaentrega 
 
                                     from  
                                     tbcorpal_despachovehiculo dv 
+                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
+
+                                    left join 
+                                    (
+
+                                    select 
+                                    oec.codigo as codOrdenEntrega,
+                                    oec.cliente,
+                                    oec.responsable as 'vendedor',
+                                    doec.`codprod`,
+                                    oec.`cod_despachovehiculo`,
+                                    oec.fechaentrega,
+                                    CASE
+                                        when doec.contenedorfraccionado = 1
+                                           then doec.cant_unidadcontenedorfraccionada
+                                        else doec.cantidad
+                                        end as cantidadEntregadaCliente
+    
+                                    from 
+                                    tbcorpal_ordenentregacliente oec 
+                                    left join tbcorpal_detalleproductoordenentregacliente doec ON oec.`codigo` = doec.`codventa`
+                                    where
+                                    oec.`estado` = 1
+
+                                    ) t1 ON dv.`codigo` = t1.cod_despachovehiculo and ddv.codprod = t1.codprod
+
                                     inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo` 
 
-                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
                                     inner join tbcorpal_producto p ON ddv.`codprod` = p.`codigo` 
 
-                                    left join tbcorpal_venta v2 on ddv.`codpedido` = v2.`codsolicitudentregaproducto` 
-
-                                    left join tbcorpal_venta v 
-                                         ON ddv.`codpedido` = v.`codsolicitudentregaproducto` 
-                                         and v.`estado` = 1 
-                                         and v.`estadoventa` = 'Cerrado' 
-                                    left join tbcorpal_detalleventasproducto dvp ON v.`codigo` = dvp.`codventa` 
-
                                     where 
-                                    dv.`estado` = 1 and dv.`estadodespacho` = 'Cerrado' 
-                                    and dv.`fechagra` between @fechaIni and @fechaFin ";
+                                    dv.`estado` = 1 
+                                    and dv.`estadodespacho` = 'Cerrado' 
+                                    and dv.`fechagra` between @fechaIni and @fechaFin  ";
+
 
                 var parametros = new List<MySqlParameter>
                 {
@@ -935,20 +957,20 @@ namespace jycboliviaASP.net.Datos
                 
                 if (!string.IsNullOrEmpty(cliente))
                 {
-                    consulta += " and v2.cliente = @cliente ";
+                    consulta2 += " and t1.cliente = @cliente ";
                     parametros.Add(new MySqlParameter("@cliente", cliente));
                 }
 
                 if (!string.IsNullOrEmpty(vendedor))
                 {
-                    consulta += " and v2.responsable = @vendedor ";
+                    consulta2 += " and t1.vendedor = @vendedor ";
                     parametros.Add(new MySqlParameter("@vendedor", vendedor));
                 }
                 
-                consulta += "order by dv.codigo asc ";
+                consulta2 += "order by dv.codigo asc ";
 
                 
-                return conexion.consultaMySqlParametros(consulta, parametros);
+                return conexion.consultaMySqlParametros(consulta2, parametros);
 
             } catch(Exception ex)
             {
@@ -1273,7 +1295,7 @@ namespace jycboliviaASP.net.Datos
                         sep.horaentrega, 
                         sep.estadosolicitud, 
                         dsp.tiposolicitud, 
-                        dsp.cant as 'cantSolicitada', 
+                        COALESCE(dsp.cant, dsp.cant_unidadcontenedorfraccionada) as 'cantSolicitada', 
                         ifnull(dsp.cantentregada, 0) as 'cantEntregada', 
                         CASE dsp.tiposolicitud 
                             WHEN 'ITEM PACK FERIAL' THEN ifnull(pp.StockPackFerial, 0) 

@@ -852,6 +852,8 @@ namespace jycboliviaASP.net.Presentacion
             public string nit { get; set; }
             public string razonsocial { get; set; }
             public int tipoCliente { get; set; }
+            public string lat { get; set; }
+            public string lng { get; set; }
         }
 
         [System.Web.Services.WebMethod]
@@ -871,6 +873,8 @@ namespace jycboliviaASP.net.Presentacion
                 c.nit = row["propietarionit"].ToString();
                 c.razonsocial = row["facturar_a"].ToString();
                 c.tipoCliente = Convert.ToInt32(row["id_tipocliente"].ToString());
+                c.lat = row["direccion_lat"].ToString();
+                c.lng = row["direccion_lng"].ToString();
             }
             return c;
         }
@@ -893,5 +897,35 @@ namespace jycboliviaASP.net.Presentacion
                 tx_diasCredito.Visible = false;
             }
         }
+
+        protected void btn_modificarUbicacionCli_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string lat = hf_latCliente.Value.ToString();
+                string lng = hf_lngCliente.Value.ToString();
+                int codClie = Convert.ToInt32(hf_codCliente.Value.ToString());
+
+                NCorpal_Cliente ncli = new NCorpal_Cliente();
+                bool result = ncli.update_CoordenadasCliente(codClie, lat, lng);
+
+                if (result)
+                {
+                    showalert("Coordenadas actualizadas exitosamente.");
+                }
+                else
+                {
+                    showalert("datos incompletos no se pudo actualizar");
+                }
+
+            } catch(Exception ex)
+            {
+                showalert("Ocurrio un problema al actualizar las coordenadas. " +ex.Message);
+            }
+
+        }
+
+
+
     }
 }
