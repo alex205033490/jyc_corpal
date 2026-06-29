@@ -95,7 +95,8 @@ namespace jycboliviaASP.net.Datos
         internal DataSet get_mostrarProductos(string producto)
         {            
 
-            string consulta = @"select pp.codigo, pp.producto, pp.medida  from  
+            string consulta = @"select pp.codigo, pp.producto, pp.medida 
+                                from  
                                 tbcorpal_producto pp 
                                 where pp.estado = 1 
                                 and pp.producto like @producto 

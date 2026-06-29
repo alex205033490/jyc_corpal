@@ -148,12 +148,37 @@
                 <asp:Label ID="Label40" runat="server"  Text="Producto Nax :"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList ID="dd_productosNax" class="btn btn-secondary dropdown-toggle" runat="server" 
-                    Width="400px" onselectedindexchanged="dd_productosNax_SelectedIndexChanged" AutoPostBack="True">
-                </asp:DropDownList>
+                <div style="display: flex; align-items:center; gap: 10px;">
+                    <asp:HiddenField runat="server" id="hf_codProducto"/>
+
+                    <asp:TextBox ID="tx_codProductoNax" runat="server" CssClass="form-control" placeholder="Codigo Upon" Width="150px"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="tx_codProductoNax_AutoCompleteExtender" runat="server"
+                            TargetControlID="tx_codProductoNax"
+                            CompletionSetCount="12"
+                            MinimumPrefixLength="1" ServiceMethod="GETlistaCodigoProductosAutocomplete"
+                            UseContextKey="True"
+                            CompletionListCssClass="CompletionList"
+                            CompletionListItemCssClass="CompletionlistItem"
+                            OnClientItemSelected="codigoNaxSeleccionado"
+                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" >
+                        </asp:AutoCompleteExtender>
+
+
+
+                    <asp:TextBox ID="tx_nomProductoNax" runat="server" CssClass="form-control" placeholder="Producto" Width="300px"></asp:TextBox>
+                        <asp:AutoCompleteExtender ID="tx_producto_AutoCompleteExtender" runat="server"
+                            TargetControlID="tx_nomProductoNax"
+                            CompletionSetCount="12"
+                            MinimumPrefixLength="1" ServiceMethod="GETlistaProductosAutocomplete"
+                            UseContextKey="True"
+                            CompletionListCssClass="CompletionList"
+                            CompletionListItemCssClass="CompletionlistItem"
+                            OnClientItemSelected="productoNaxSeleccionado"
+                            CompletionListHighlightedItemCssClass="CompletionListMighlightedItem" CompletionInterval="10" >
+                        </asp:AutoCompleteExtender>
+                </div>
             </td>
-            <td></td>
-            <td></td>
+
         </tr>
     </table>
        <table>
@@ -340,5 +365,27 @@
   </ul>
 </div>
 
+    <script>
+        function productoNaxSeleccionado(sender, args) {
+            var datos = args.get_value().split('|');
+
+            document.getElementById("<%= tx_codProductoNax.ClientID %>").value = datos[0];
+            document.getElementById("<%= tx_medida.ClientID %>").value = datos[1];
+            document.getElementById("<%= tx_medidaFraccionada.ClientID %>").value = datos[2];
+
+        }
+
+        function codigoNaxSeleccionado(sender, args) {
+            var datos = args.get_value().split('|');
+
+            document.getElementById("<%= tx_nomProductoNax.ClientID %>").value = datos[0];
+            document.getElementById("<%= tx_medida.ClientID %>").value = datos[1];
+            document.getElementById("<%= tx_medidaFraccionada.ClientID %>").value = datos[2];
+
+        }
+
+    </script>
 
 </asp:Content>
+
+
