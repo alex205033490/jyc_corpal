@@ -1888,6 +1888,37 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
+        internal DataSet get_buscarCodProductoNAXautocomplete(string cod, string producto)
+        {
+            try
+            {
+                string consulta = @"select 
+                                    p.`producto`,
+                                    p.`codupon`,
+                                    p.medida,
+                                    p.medidaunidadcontenido 
+
+                                    from tbcorpal_producto p 
+                                    where 
+                                    p.`estado` = 1 
+                                    and p.`producto` like @producto 
+                                    and p.`codupon` like @codigo ";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@producto", "%"+producto+"%"),
+                    new MySqlParameter("@codigo", "%"+cod+"%")
+                };
+                return Conx.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al obtener los datos. " + ex.Message);
+            }
+        }
+
+
 
     }
 }

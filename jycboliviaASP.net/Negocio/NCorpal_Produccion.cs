@@ -583,6 +583,21 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.get_SolicitadoEntregado(fechadesde, fechahasta, responsable, producto);
         }
 
+        internal DataSet get_buscarCodProductoNAXautocomplete(string cod, string producto)
+        {
+            return dproduccion.get_buscarCodProductoNAXautocomplete(cod, producto);
+        }
+
+        internal string get_codigoUPONproducto(string producto)
+        {
+            DataSet datos = dproduccion.get_buscarCodProductoNAXautocomplete("", producto);
+            if (datos.Tables[0].Rows.Count > 0)
+            {
+                return datos.Tables[0].Rows[0][1].ToString();
+            }
+            return null;
+        }
+
 
     }
 }

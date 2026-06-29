@@ -381,24 +381,26 @@ namespace jycboliviaASP.net.Negocio
         {
             try {
 
-
+                // STOCK PARCIAL = cantidad que ingreso a almacen - cantidad que solicitaron los vendedores estado abierto
+                // STOCL ALMACEN = cantidad que ingreso a almacen - cantidad que se entrego a camiones (estado = Cerrado)
                 string consultaStock = @"
                             SELECT 
-                                pp.codigo,
-                                pp.producto,
-                                pp.medida,
-                                IFNULL(t1.ingreso,0) AS Ingreso1,
-                                IFNULL(t1.ingresoFraccionada, 0) AS IngresoFraccionado,
-                                IFNULL(t2.salida,0) AS Salida1,
-                                IFNULL(T2.salidaCantFraccionada, 0) AS SalidaFraccionada,
-                                (IFNULL(t1.ingreso,0) - IFNULL(t2.salida,0)) AS StockAlmacen,
-                                (IFNULL(t1.ingreso,0) - IFNULL(t3.salida,0)) AS StockParcialAlmacen,
-                                (IFNULL(t1.ingresopackferial,0) - IFNULL(t2.salidaPackFerial,0)) AS StockPackFerial,
-                                pp.codupon,
-                                pp.codumupon,
-                                pp.codigosimec,
+                                pp.codigo, 
+                                pp.producto, 
+                                pp.medida, 
+                                IFNULL(t1.ingreso,0) AS Ingreso1, 
+                                IFNULL(t1.ingresoFraccionada, 0) AS IngresoFraccionado, 
+                                IFNULL(t2.salida,0) AS Salida1, 
+                                IFNULL(T2.salidaCantFraccionada, 0) AS SalidaFraccionada, 
+                                (IFNULL(t1.ingreso,0) - IFNULL(t2.salida,0)) AS StockAlmacen, 
+                                (IFNULL(t1.ingreso,0) - IFNULL(t3.cantsolicitada,0)) AS StockParcialAlmacen,
+                                (IFNULL(t1.ingresoFraccionada, 0) - IFNULL(t3.cantsolicitadafracc, 0)) AS StockParcialAlmacenFracc,
+                                (IFNULL(t1.ingresopackferial,0) - IFNULL(t2.salidaPackFerial,0)) AS StockPackFerial, 
+                                pp.codupon, 
+                                pp.codumupon, 
+                                pp.codigosimec, 
                                 
-                                (IFNULL(t1.ingresoFraccionada, 0) - IFNULL(t2.salidaCantFraccionada, 0)) AS StockFraccAlmacen
+                                (IFNULL(t1.ingresoFraccionada, 0) - IFNULL(t2.salidaCantFraccionada, 0)) AS StockFraccAlmacen 
 
                             FROM tbcorpal_producto pp
 
@@ -463,6 +465,7 @@ namespace jycboliviaASP.net.Negocio
 
                                 WHERE
                                     ss.estado = 1
+                                    AND ss.estadosolicitud = 'Cerrado' 
                                     AND ss.fechaentrega BETWEEN " + NA_VariablesGlobales.fechaInicialProduccion + @"
                                     AND " + fechaHasta + @"
 
@@ -476,7 +479,21 @@ namespace jycboliviaASP.net.Negocio
                             (
                                 SELECT
                                     dss.codproducto,
-                                    SUM(dss.cantentregada) AS salida,
+
+                                    SUM(
+                                        CASE
+                                            WHEN IFNULL(dss.contenedorfraccionado, 0) = 0 
+                                            THEN dss.cant 
+                                            ELSE 0
+                                        END
+                                    ) AS cantsolicitada,
+                                    SUM(
+                                        CASE
+                                            WHEN dss.contenedorfraccionado = 1 
+                                            THEN dss.cant_unidadcontenedorfraccionada  
+                                            ELSE 0 
+                                        END
+                                    ) AS cantsolicitadafracc,
 
                                     SUM(
                                         CASE

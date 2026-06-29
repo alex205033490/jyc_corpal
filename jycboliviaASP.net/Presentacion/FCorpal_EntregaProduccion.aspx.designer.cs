@@ -123,13 +123,49 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Label Label40;
 
         /// <summary>
-        /// Control dd_productosNax.
+        /// Control hf_codProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dd_productosNax;
+        protected global::System.Web.UI.WebControls.HiddenField hf_codProducto;
+
+        /// <summary>
+        /// Control tx_codProductoNax.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_codProductoNax;
+
+        /// <summary>
+        /// Control tx_codProductoNax_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_codProductoNax_AutoCompleteExtender;
+
+        /// <summary>
+        /// Control tx_nomProductoNax.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tx_nomProductoNax;
+
+        /// <summary>
+        /// Control tx_producto_AutoCompleteExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AutoCompleteExtender tx_producto_AutoCompleteExtender;
 
         /// <summary>
         /// Control Label31.
