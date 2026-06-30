@@ -132,6 +132,15 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.HiddenField hf_codProducto;
 
         /// <summary>
+        /// Control hf_unidadcontenidoProd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_unidadcontenidoProd;
+
+        /// <summary>
         /// Control tx_codProductoNax.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,24 @@ namespace jycboliviaASP.net.Presentacion
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tx_cantcajas;
+
+        /// <summary>
+        /// Control lb_nomcant.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_nomcant;
+
+        /// <summary>
+        /// Control lb_canttotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lb_canttotal;
 
         /// <summary>
         /// Control Label32.

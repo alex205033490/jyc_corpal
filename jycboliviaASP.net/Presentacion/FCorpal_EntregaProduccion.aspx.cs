@@ -12,6 +12,7 @@ using System.Web.Script.Services;
 using System.IO;
 using System.Windows.Documents;
 using AjaxControlToolkit;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -238,6 +239,8 @@ namespace jycboliviaASP.net.Presentacion
             tx_kgrdesperdicio_conaceite.Text = "";
             tx_kgrdesperdicio_SinAceite.Text = "";
             tx_packFerial.Text = "";
+            lb_canttotal.Text = string.Empty;
+            hf_unidadcontenidoProd.Value = string.Empty;
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -384,8 +387,13 @@ namespace jycboliviaASP.net.Presentacion
             if(codigo >= 0){
                 hf_codProducto.Value = codigo.ToString();
             }
-            
-            string codUpon = 
+
+            decimal unidadContenidoProd = nprod.get_obtenerUnidadContenidoProducto(tx_nomProductoNax.Text);
+            hf_unidadcontenidoProd.Value = unidadContenidoProd.ToString(CultureInfo.InvariantCulture);
+
+            decimal cantCajas = decimal.Parse(tx_cantcajas.Text, CultureInfo.InvariantCulture);
+            decimal unidadContenido = decimal.Parse(hf_unidadcontenidoProd.Value, CultureInfo.InvariantCulture);
+            lb_canttotal.Text = (cantCajas * unidadContenido).ToString(CultureInfo.InvariantCulture);
 
             //tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
             tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text);
@@ -493,8 +501,9 @@ namespace jycboliviaASP.net.Presentacion
                 string codigo = tuplas.Tables[0].Rows[i]["codupon"].ToString();
                 string medida = tuplas.Tables[0].Rows[i]["medida"].ToString();
                 string medidaunidadcontenido = tuplas.Tables[0].Rows[i]["medidaunidadcontenido"].ToString();
+                string unidadcontenido = tuplas.Tables[0].Rows[i]["unidadcontenido"].ToString();
 
-                string valor = codigo + "|" + medida + "|" + medidaunidadcontenido;
+                string valor = codigo + "|" + medida + "|" + medidaunidadcontenido +"|"+ unidadcontenido;
 
                 lista[i] = AutoCompleteExtender.CreateAutoCompleteItem(prod, valor);
             }
@@ -518,8 +527,9 @@ namespace jycboliviaASP.net.Presentacion
                 string codigo = tuplas.Tables[0].Rows[i]["codupon"].ToString();
                 string medida = tuplas.Tables[0].Rows[i]["medida"].ToString();
                 string medidaunidadcontenido = tuplas.Tables[0].Rows[i]["medidaunidadcontenido"].ToString();
+                string unidadcontenido = tuplas.Tables[0].Rows[i]["unidadcontenido"].ToString();
 
-                string valor = prod + "|" + medida + "|" + medidaunidadcontenido;
+                string valor = prod + "|" + medida + "|" + medidaunidadcontenido+"|"+unidadcontenido;
 
                 lista[i] = AutoCompleteExtender.CreateAutoCompleteItem(codigo, valor);
             }
