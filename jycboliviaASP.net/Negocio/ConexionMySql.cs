@@ -355,8 +355,12 @@ namespace jycboliviaASP.net.Negocio
             {
                 comando.Connection = MySqlConexion;
                 MySqlConexion.Open();
-                var result = comando.ExecuteScalar();
-                return result;
+                return comando.ExecuteScalar();
+               
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al ejecutar ExecuteScalar: " + ex.Message, ex);
             }
             finally
             {

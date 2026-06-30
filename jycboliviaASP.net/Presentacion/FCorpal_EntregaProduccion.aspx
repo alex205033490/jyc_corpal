@@ -67,6 +67,12 @@
     .gv_EntregasdeProduccion td{
         font-size: 0.6rem;
     }
+    .contenedor_cantidad{
+        padding: 2.5px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 2px 0px #000000;
+    }
+
         </style>
 </asp:Content>
 
@@ -150,6 +156,7 @@
             <td>
                 <div style="display: flex; align-items:center; gap: 10px;">
                     <asp:HiddenField runat="server" id="hf_codProducto"/>
+                    <asp:HiddenField runat="server" ID="hf_unidadcontenidoProd" />
 
                     <asp:TextBox ID="tx_codProductoNax" runat="server" CssClass="form-control" placeholder="Codigo Upon" Width="150px"></asp:TextBox>
                         <asp:AutoCompleteExtender ID="tx_codProductoNax_AutoCompleteExtender" runat="server"
@@ -187,8 +194,12 @@
                 <asp:Label ID="Label31" runat="server" Text="Cantidad:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="tx_cantcajas" class="form-control" runat="server" 
-                    Width="150px"></asp:TextBox>
+                <div class="contenedor_cantidad">
+                    <asp:TextBox ID="tx_cantcajas" class="form-control" runat="server" 
+                        Width="120px" autocomplete="off"></asp:TextBox> 
+                    <asp:Label runat="server" ID ="lb_nomcant" Text="Contenido: " style="font-size: small; color: blue;"></asp:Label>
+                    <asp:Label runat="server" ID="lb_canttotal">0</asp:Label>
+                </div>
             </td>
             <td>
                 <asp:Label ID="Label32" runat="server" Text="Medida:"></asp:Label>
@@ -372,7 +383,7 @@
             document.getElementById("<%= tx_codProductoNax.ClientID %>").value = datos[0];
             document.getElementById("<%= tx_medida.ClientID %>").value = datos[1];
             document.getElementById("<%= tx_medidaFraccionada.ClientID %>").value = datos[2];
-
+            document.getElementById("<%= hf_unidadcontenidoProd.ClientID %>").value = datos[3];
         }
 
         function codigoNaxSeleccionado(sender, args) {
@@ -381,9 +392,26 @@
             document.getElementById("<%= tx_nomProductoNax.ClientID %>").value = datos[0];
             document.getElementById("<%= tx_medida.ClientID %>").value = datos[1];
             document.getElementById("<%= tx_medidaFraccionada.ClientID %>").value = datos[2];
-
+            document.getElementById("<%= hf_unidadcontenidoProd.ClientID %>").value = datos[3];
         }
 
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const txtCantidad = document.getElementById("<%= tx_cantcajas.ClientID %>");
+            const hfUnidad = document.getElementById("<%= hf_unidadcontenidoProd.ClientID %>");
+            const lblTotal = document.getElementById("<%= lb_canttotal.ClientID %>");
+
+            txtCantidad.addEventListener("input", function () {
+                let cantidad = parseFloat(txtCantidad.value) || 0;
+                let unidad = parseFloat(hfUnidad.value) || 0;
+
+                let total = cantidad * unidad;
+
+                lblTotal.innerHTML = total;
+
+            });
+
+        });
     </script>
 
 </asp:Content>
