@@ -67,7 +67,7 @@
                     <asp:ListItem>Seleccione un opción</asp:ListItem>
                     <asp:ListItem>Productos sobrantes de despachos</asp:ListItem>
                     <asp:ListItem>Reporte Tiempo de Tardanza Entrega de Productos (Despacho-Orden de Entrega)</asp:ListItem>
-                    <asp:ListItem>Reporte Cantidad Total De Productos Solicitados Por Vendedor</asp:ListItem>
+                    <asp:ListItem>Reporte Cantidad Total de Productos Vendidos Por Vendedor</asp:ListItem>
 
                 </asp:DropDownList>
 

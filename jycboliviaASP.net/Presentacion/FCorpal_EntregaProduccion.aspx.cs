@@ -11,6 +11,8 @@ using System.Web.Services;
 using System.Web.Script.Services;
 using System.IO;
 using System.Windows.Documents;
+using AjaxControlToolkit;
+using System.Globalization;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -31,26 +33,15 @@ namespace jycboliviaASP.net.Presentacion
                 string passwordAux = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 tx_responsableEntrega.Text = Nresp.get_responsable(codUser).Tables[0].Rows[0][1].ToString();
-                llenarProductosNax();
-                ponerMedidadelProducto();
+                //llenarProductosNax();
+                //ponerMedidadelProducto();
                 buscarDatos("","");
-                obtenerMedidaFraccionada_producto();
+                //obtenerMedidaFraccionada_producto();
             }
             permisodemodificaryeliminar();
         }
 
-        private void llenarProductosNax()
-        {
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos("");
-
-            dd_productosNax.DataSource = tuplas;
-            dd_productosNax.DataValueField = "codigo";
-            dd_productosNax.DataTextField = "producto";            
-            dd_productosNax.AppendDataBoundItems = true;
-            dd_productosNax.DataBind();
-            dd_productosNax.SelectedIndex = 1;
-        }
+        
 
         private void permisodemodificaryeliminar()
         {
@@ -189,7 +180,7 @@ namespace jycboliviaASP.net.Presentacion
 
             if (kgrdesperdicio_conaceite > 0 && kgrdesperdicio_Sinaceite > 0) {
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                string productoNAX = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
+                string productoNAX = tx_nomProductoNax.Text.Trim();
                 int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
                 NCorpal_Produccion npro = new NCorpal_Produccion();
@@ -240,10 +231,16 @@ namespace jycboliviaASP.net.Presentacion
             //tx_productoNax.Text = "";
             tx_medida.Text = "";
             tx_KgrDesperdicioBOBINA.Text = "";
+            tx_cantidadFraccionada.Text = "";
+            tx_medidaFraccionada.Text = "";
+            tx_codProductoNax.Text = "";
+            tx_nomProductoNax.Text = "";
 
             tx_kgrdesperdicio_conaceite.Text = "";
             tx_kgrdesperdicio_SinAceite.Text = "";
             tx_packFerial.Text = "";
+            lb_canttotal.Text = string.Empty;
+            hf_unidadcontenidoProd.Value = string.Empty;
         }
 
         protected void bt_limpiar_Click(object sender, EventArgs e)
@@ -285,7 +282,7 @@ namespace jycboliviaASP.net.Presentacion
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
                 //---------------------------------------
                 NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                string productoNAX = HttpUtility.HtmlDecode(dd_productosNax.SelectedItem.Text);
+                string productoNAX = tx_nomProductoNax.Text.Trim();
                 int codigoProdNax = pp.get_CodigoProductos(productoNAX);
 
                 string respEntrega = tx_responsableEntrega.Text;
@@ -365,6 +362,9 @@ namespace jycboliviaASP.net.Presentacion
 
         private void SeleccionDatosProduccion()
         {
+            NCorpal_Produccion nprod = new NCorpal_Produccion();
+            
+
             dd_turno.SelectedValue = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[2].Text);
             tx_responsableEntrega.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[5].Text);            
             tx_cantcajas.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[6].Text);
@@ -379,11 +379,22 @@ namespace jycboliviaASP.net.Presentacion
             tx_kgrparamix.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[11].Text);            
             tx_detalle.Text =  HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
             tx_nroOrden.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[15].Text);
+            tx_nomProductoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[16].Text);
+            string codUPON = nprod.get_codigoUPONproducto(tx_nomProductoNax.Text);
+            tx_codProductoNax.Text = codUPON;
             int codigo;
             int.TryParse(HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[17].Text), out codigo);
             if(codigo >= 0){
-                dd_productosNax.SelectedValue = codigo.ToString();
-            }            
+                hf_codProducto.Value = codigo.ToString();
+            }
+
+            decimal unidadContenidoProd = nprod.get_obtenerUnidadContenidoProducto(tx_nomProductoNax.Text);
+            hf_unidadcontenidoProd.Value = unidadContenidoProd.ToString(CultureInfo.InvariantCulture);
+
+            decimal cantCajas = decimal.Parse(tx_cantcajas.Text, CultureInfo.InvariantCulture);
+            decimal unidadContenido = decimal.Parse(hf_unidadcontenidoProd.Value, CultureInfo.InvariantCulture);
+            lb_canttotal.Text = (cantCajas * unidadContenido).ToString(CultureInfo.InvariantCulture);
+
             //tx_productoNax.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[14].Text);
             tx_recepcionProduccion.Text = HttpUtility.HtmlDecode(gv_EntregasdeProduccion.SelectedRow.Cells[19].Text);
             float kgrdesperdicio_conaceite;
@@ -468,34 +479,64 @@ namespace jycboliviaASP.net.Presentacion
 
         protected void dd_productosNax_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ponerMedidadelProducto();
-            obtenerMedidaFraccionada_producto();
+            //ponerMedidadelProducto();
+            //obtenerMedidaFraccionada_producto();
         }
 
-        private void ponerMedidadelProducto()
+
+        [WebMethod]
+        [ScriptMethod]
+        public static string[] GETlistaProductosAutocomplete(string prefixText, int count)
         {
-            string producto = dd_productosNax.SelectedItem.Text;
-            NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos(producto);
-            string medida = tuplas.Tables[0].Rows[0][2].ToString();
-            tx_medida.Text = medida;
+            string producto = prefixText;
+
+            NCorpal_Produccion nprod = new NCorpal_Produccion();
+            DataSet tuplas = nprod.get_buscarCodProductoNAXautocomplete("", producto);
+
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+
+            for (int i = 0; i < tuplas.Tables[0].Rows.Count; i++)
+            {
+                string prod= tuplas.Tables[0].Rows[i]["producto"].ToString();
+                string codigo = tuplas.Tables[0].Rows[i]["codupon"].ToString();
+                string medida = tuplas.Tables[0].Rows[i]["medida"].ToString();
+                string medidaunidadcontenido = tuplas.Tables[0].Rows[i]["medidaunidadcontenido"].ToString();
+                string unidadcontenido = tuplas.Tables[0].Rows[i]["unidadcontenido"].ToString();
+
+                string valor = codigo + "|" + medida + "|" + medidaunidadcontenido +"|"+ unidadcontenido;
+
+                lista[i] = AutoCompleteExtender.CreateAutoCompleteItem(prod, valor);
+            }
+            return lista;
         }
 
-        private void obtenerMedidaFraccionada_producto ()
+        [WebMethod]
+        [ScriptMethod]
+        public static string[] GETlistaCodigoProductosAutocomplete(string prefixText, int count)
         {
-            try
-            {
-                int codProd = Convert.ToInt32(dd_productosNax.SelectedValue);
-                NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-                DataSet ds = pp.obtenerMedidaFraccionada_producto(codProd);
+            string codproducto = prefixText;
 
-                string medidaFracc = ds.Tables[0].Rows[0]["medidaunidadcontenido"].ToString();
-                tx_medidaFraccionada.Text = medidaFracc;
-            }
-            catch(Exception ex)
+            NCorpal_Produccion nprod = new NCorpal_Produccion();
+            DataSet tuplas = nprod.get_buscarCodProductoNAXautocomplete(codproducto, "");
+
+            string[] lista = new string[tuplas.Tables[0].Rows.Count];
+
+            for(int i = 0; i < tuplas.Tables[0].Rows.Count; i++)
             {
-                throw new Exception("error al obtener la medida. " + ex.Message);
+                string prod = tuplas.Tables[0].Rows[i]["producto"].ToString();
+                string codigo = tuplas.Tables[0].Rows[i]["codupon"].ToString();
+                string medida = tuplas.Tables[0].Rows[i]["medida"].ToString();
+                string medidaunidadcontenido = tuplas.Tables[0].Rows[i]["medidaunidadcontenido"].ToString();
+                string unidadcontenido = tuplas.Tables[0].Rows[i]["unidadcontenido"].ToString();
+
+                string valor = prod + "|" + medida + "|" + medidaunidadcontenido+"|"+unidadcontenido;
+
+                lista[i] = AutoCompleteExtender.CreateAutoCompleteItem(codigo, valor);
             }
+            return lista;
         }
+
+
+
     }
 }
