@@ -26,6 +26,8 @@ namespace jycboliviaASP.net {
         
         private DS_productosSobrantesOrdenEntregaDataTable tableDS_productosSobrantesOrdenEntrega;
         
+        private DS_tiempoTardanzaEntregaProdDataTable tableDS_tiempoTardanzaEntregaProd;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -57,6 +59,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_productosSobrantesOrdenEntrega"] != null)) {
                     base.Tables.Add(new DS_productosSobrantesOrdenEntregaDataTable(ds.Tables["DS_productosSobrantesOrdenEntrega"]));
                 }
+                if ((ds.Tables["DS_tiempoTardanzaEntregaProd"] != null)) {
+                    base.Tables.Add(new DS_tiempoTardanzaEntregaProdDataTable(ds.Tables["DS_tiempoTardanzaEntregaProd"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -82,6 +87,16 @@ namespace jycboliviaASP.net {
         public DS_productosSobrantesOrdenEntregaDataTable DS_productosSobrantesOrdenEntrega {
             get {
                 return this.tableDS_productosSobrantesOrdenEntrega;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DS_tiempoTardanzaEntregaProdDataTable DS_tiempoTardanzaEntregaProd {
+            get {
+                return this.tableDS_tiempoTardanzaEntregaProd;
             }
         }
         
@@ -155,6 +170,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_productosSobrantesOrdenEntrega"] != null)) {
                     base.Tables.Add(new DS_productosSobrantesOrdenEntregaDataTable(ds.Tables["DS_productosSobrantesOrdenEntrega"]));
                 }
+                if ((ds.Tables["DS_tiempoTardanzaEntregaProd"] != null)) {
+                    base.Tables.Add(new DS_tiempoTardanzaEntregaProdDataTable(ds.Tables["DS_tiempoTardanzaEntregaProd"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -194,6 +212,12 @@ namespace jycboliviaASP.net {
                     this.tableDS_productosSobrantesOrdenEntrega.InitVars();
                 }
             }
+            this.tableDS_tiempoTardanzaEntregaProd = ((DS_tiempoTardanzaEntregaProdDataTable)(base.Tables["DS_tiempoTardanzaEntregaProd"]));
+            if ((initTable == true)) {
+                if ((this.tableDS_tiempoTardanzaEntregaProd != null)) {
+                    this.tableDS_tiempoTardanzaEntregaProd.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -206,11 +230,19 @@ namespace jycboliviaASP.net {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableDS_productosSobrantesOrdenEntrega = new DS_productosSobrantesOrdenEntregaDataTable();
             base.Tables.Add(this.tableDS_productosSobrantesOrdenEntrega);
+            this.tableDS_tiempoTardanzaEntregaProd = new DS_tiempoTardanzaEntregaProdDataTable();
+            base.Tables.Add(this.tableDS_tiempoTardanzaEntregaProd);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeDS_productosSobrantesOrdenEntrega() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDS_tiempoTardanzaEntregaProd() {
             return false;
         }
         
@@ -271,6 +303,9 @@ namespace jycboliviaASP.net {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void DS_productosSobrantesOrdenEntregaRowChangeEventHandler(object sender, DS_productosSobrantesOrdenEntregaRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DS_tiempoTardanzaEntregaProdRowChangeEventHandler(object sender, DS_tiempoTardanzaEntregaProdRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -675,6 +710,421 @@ namespace jycboliviaASP.net {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DS_productosSobrantesOrdenEntregaDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DS_tiempoTardanzaEntregaProdDataTable : global::System.Data.TypedTableBase<DS_tiempoTardanzaEntregaProdRow> {
+            
+            private global::System.Data.DataColumn columncodDespacho;
+            
+            private global::System.Data.DataColumn columnconductor;
+            
+            private global::System.Data.DataColumn columnvehiculo;
+            
+            private global::System.Data.DataColumn columncliente;
+            
+            private global::System.Data.DataColumn columnfechaDespacho2;
+            
+            private global::System.Data.DataColumn columncodOrdenEntrega;
+            
+            private global::System.Data.DataColumn columnfechaOrdenEntrega2;
+            
+            private global::System.Data.DataColumn columndiferencia_horas;
+            
+            private global::System.Data.DataColumn columndiferencia_ddhhmm;
+            
+            private global::System.Data.DataColumn columnestadoEntrega;
+            
+            private global::System.Data.DataColumn columndias;
+            
+            private global::System.Data.DataColumn columnhoras;
+            
+            private global::System.Data.DataColumn columnminutos;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdDataTable() {
+                this.TableName = "DS_tiempoTardanzaEntregaProd";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_tiempoTardanzaEntregaProdDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DS_tiempoTardanzaEntregaProdDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codDespachoColumn {
+                get {
+                    return this.columncodDespacho;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn conductorColumn {
+                get {
+                    return this.columnconductor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn vehiculoColumn {
+                get {
+                    return this.columnvehiculo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn clienteColumn {
+                get {
+                    return this.columncliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fechaDespacho2Column {
+                get {
+                    return this.columnfechaDespacho2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codOrdenEntregaColumn {
+                get {
+                    return this.columncodOrdenEntrega;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fechaOrdenEntrega2Column {
+                get {
+                    return this.columnfechaOrdenEntrega2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn diferencia_horasColumn {
+                get {
+                    return this.columndiferencia_horas;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn diferencia_ddhhmmColumn {
+                get {
+                    return this.columndiferencia_ddhhmm;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn estadoEntregaColumn {
+                get {
+                    return this.columnestadoEntrega;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn diasColumn {
+                get {
+                    return this.columndias;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn horasColumn {
+                get {
+                    return this.columnhoras;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn minutosColumn {
+                get {
+                    return this.columnminutos;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdRow this[int index] {
+                get {
+                    return ((DS_tiempoTardanzaEntregaProdRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_tiempoTardanzaEntregaProdRowChangeEventHandler DS_tiempoTardanzaEntregaProdRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_tiempoTardanzaEntregaProdRowChangeEventHandler DS_tiempoTardanzaEntregaProdRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_tiempoTardanzaEntregaProdRowChangeEventHandler DS_tiempoTardanzaEntregaProdRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_tiempoTardanzaEntregaProdRowChangeEventHandler DS_tiempoTardanzaEntregaProdRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDS_tiempoTardanzaEntregaProdRow(DS_tiempoTardanzaEntregaProdRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdRow AddDS_tiempoTardanzaEntregaProdRow(string codDespacho, string conductor, string vehiculo, string cliente, string fechaDespacho2, string codOrdenEntrega, string fechaOrdenEntrega2, string diferencia_horas, string diferencia_ddhhmm, string estadoEntrega, string dias, string horas, string minutos) {
+                DS_tiempoTardanzaEntregaProdRow rowDS_tiempoTardanzaEntregaProdRow = ((DS_tiempoTardanzaEntregaProdRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        codDespacho,
+                        conductor,
+                        vehiculo,
+                        cliente,
+                        fechaDespacho2,
+                        codOrdenEntrega,
+                        fechaOrdenEntrega2,
+                        diferencia_horas,
+                        diferencia_ddhhmm,
+                        estadoEntrega,
+                        dias,
+                        horas,
+                        minutos};
+                rowDS_tiempoTardanzaEntregaProdRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDS_tiempoTardanzaEntregaProdRow);
+                return rowDS_tiempoTardanzaEntregaProdRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DS_tiempoTardanzaEntregaProdDataTable cln = ((DS_tiempoTardanzaEntregaProdDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DS_tiempoTardanzaEntregaProdDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncodDespacho = base.Columns["codDespacho"];
+                this.columnconductor = base.Columns["conductor"];
+                this.columnvehiculo = base.Columns["vehiculo"];
+                this.columncliente = base.Columns["cliente"];
+                this.columnfechaDespacho2 = base.Columns["fechaDespacho2"];
+                this.columncodOrdenEntrega = base.Columns["codOrdenEntrega"];
+                this.columnfechaOrdenEntrega2 = base.Columns["fechaOrdenEntrega2"];
+                this.columndiferencia_horas = base.Columns["diferencia_horas"];
+                this.columndiferencia_ddhhmm = base.Columns["diferencia_ddhhmm"];
+                this.columnestadoEntrega = base.Columns["estadoEntrega"];
+                this.columndias = base.Columns["dias"];
+                this.columnhoras = base.Columns["horas"];
+                this.columnminutos = base.Columns["minutos"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncodDespacho = new global::System.Data.DataColumn("codDespacho", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodDespacho);
+                this.columnconductor = new global::System.Data.DataColumn("conductor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnconductor);
+                this.columnvehiculo = new global::System.Data.DataColumn("vehiculo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnvehiculo);
+                this.columncliente = new global::System.Data.DataColumn("cliente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncliente);
+                this.columnfechaDespacho2 = new global::System.Data.DataColumn("fechaDespacho2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfechaDespacho2);
+                this.columncodOrdenEntrega = new global::System.Data.DataColumn("codOrdenEntrega", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodOrdenEntrega);
+                this.columnfechaOrdenEntrega2 = new global::System.Data.DataColumn("fechaOrdenEntrega2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfechaOrdenEntrega2);
+                this.columndiferencia_horas = new global::System.Data.DataColumn("diferencia_horas", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndiferencia_horas);
+                this.columndiferencia_ddhhmm = new global::System.Data.DataColumn("diferencia_ddhhmm", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndiferencia_ddhhmm);
+                this.columnestadoEntrega = new global::System.Data.DataColumn("estadoEntrega", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnestadoEntrega);
+                this.columndias = new global::System.Data.DataColumn("dias", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndias);
+                this.columnhoras = new global::System.Data.DataColumn("horas", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoras);
+                this.columnminutos = new global::System.Data.DataColumn("minutos", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnminutos);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdRow NewDS_tiempoTardanzaEntregaProdRow() {
+                return ((DS_tiempoTardanzaEntregaProdRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DS_tiempoTardanzaEntregaProdRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DS_tiempoTardanzaEntregaProdRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DS_tiempoTardanzaEntregaProdRowChanged != null)) {
+                    this.DS_tiempoTardanzaEntregaProdRowChanged(this, new DS_tiempoTardanzaEntregaProdRowChangeEvent(((DS_tiempoTardanzaEntregaProdRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DS_tiempoTardanzaEntregaProdRowChanging != null)) {
+                    this.DS_tiempoTardanzaEntregaProdRowChanging(this, new DS_tiempoTardanzaEntregaProdRowChangeEvent(((DS_tiempoTardanzaEntregaProdRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DS_tiempoTardanzaEntregaProdRowDeleted != null)) {
+                    this.DS_tiempoTardanzaEntregaProdRowDeleted(this, new DS_tiempoTardanzaEntregaProdRowChangeEvent(((DS_tiempoTardanzaEntregaProdRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DS_tiempoTardanzaEntregaProdRowDeleting != null)) {
+                    this.DS_tiempoTardanzaEntregaProdRowDeleting(this, new DS_tiempoTardanzaEntregaProdRowChangeEvent(((DS_tiempoTardanzaEntregaProdRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDS_tiempoTardanzaEntregaProdRow(DS_tiempoTardanzaEntregaProdRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DS_OrdenDEntrega ds = new DS_OrdenDEntrega();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DS_tiempoTardanzaEntregaProdDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1166,6 +1616,398 @@ namespace jycboliviaASP.net {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DS_tiempoTardanzaEntregaProdRow : global::System.Data.DataRow {
+            
+            private DS_tiempoTardanzaEntregaProdDataTable tableDS_tiempoTardanzaEntregaProd;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_tiempoTardanzaEntregaProdRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDS_tiempoTardanzaEntregaProd = ((DS_tiempoTardanzaEntregaProdDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codDespacho {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.codDespachoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codDespacho\' de la tabla \'DS_tiempoTardanzaEntregaProd\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.codDespachoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string conductor {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.conductorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'conductor\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.conductorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string vehiculo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.vehiculoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'vehiculo\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.vehiculoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cliente {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.clienteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cliente\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.clienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fechaDespacho2 {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.fechaDespacho2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechaDespacho2\' de la tabla \'DS_tiempoTardanzaEntregaProd" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.fechaDespacho2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codOrdenEntrega {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.codOrdenEntregaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codOrdenEntrega\' de la tabla \'DS_tiempoTardanzaEntregaPro" +
+                                "d\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.codOrdenEntregaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fechaOrdenEntrega2 {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.fechaOrdenEntrega2Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechaOrdenEntrega2\' de la tabla \'DS_tiempoTardanzaEntrega" +
+                                "Prod\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.fechaOrdenEntrega2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string diferencia_horas {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_horasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'diferencia_horas\' de la tabla \'DS_tiempoTardanzaEntregaPr" +
+                                "od\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_horasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string diferencia_ddhhmm {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_ddhhmmColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'diferencia_ddhhmm\' de la tabla \'DS_tiempoTardanzaEntregaP" +
+                                "rod\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_ddhhmmColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string estadoEntrega {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.estadoEntregaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'estadoEntrega\' de la tabla \'DS_tiempoTardanzaEntregaProd\'" +
+                                " es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.estadoEntregaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string dias {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.diasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'dias\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.diasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string horas {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.horasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'horas\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.horasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string minutos {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_tiempoTardanzaEntregaProd.minutosColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'minutos\' de la tabla \'DS_tiempoTardanzaEntregaProd\' es DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_tiempoTardanzaEntregaProd.minutosColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodDespachoNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.codDespachoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodDespachoNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.codDespachoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsconductorNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.conductorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetconductorNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.conductorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsvehiculoNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.vehiculoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetvehiculoNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.vehiculoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsclienteNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.clienteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetclienteNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.clienteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsfechaDespacho2Null() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.fechaDespacho2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetfechaDespacho2Null() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.fechaDespacho2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodOrdenEntregaNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.codOrdenEntregaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodOrdenEntregaNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.codOrdenEntregaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsfechaOrdenEntrega2Null() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.fechaOrdenEntrega2Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetfechaOrdenEntrega2Null() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.fechaOrdenEntrega2Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isdiferencia_horasNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.diferencia_horasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setdiferencia_horasNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_horasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isdiferencia_ddhhmmNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.diferencia_ddhhmmColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setdiferencia_ddhhmmNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.diferencia_ddhhmmColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsestadoEntregaNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.estadoEntregaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetestadoEntregaNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.estadoEntregaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdiasNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.diasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdiasNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.diasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IshorasNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.horasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SethorasNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.horasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsminutosNull() {
+                return this.IsNull(this.tableDS_tiempoTardanzaEntregaProd.minutosColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetminutosNull() {
+                this[this.tableDS_tiempoTardanzaEntregaProd.minutosColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -1185,6 +2027,40 @@ namespace jycboliviaASP.net {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_productosSobrantesOrdenEntregaRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DS_tiempoTardanzaEntregaProdRowChangeEvent : global::System.EventArgs {
+            
+            private DS_tiempoTardanzaEntregaProdRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdRowChangeEvent(DS_tiempoTardanzaEntregaProdRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_tiempoTardanzaEntregaProdRow Row {
                 get {
                     return this.eventRow;
                 }

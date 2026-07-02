@@ -92,7 +92,7 @@ namespace jycboliviaASP.net.Presentacion
                 }
                 else if (dd_consulta.SelectedIndex == 2)
                 {
-
+                    get_tiempoTardanzaEntregaDDespacho_OrdenEntregaCli();
                 }
                 else if (dd_consulta.SelectedIndex == 3)
                 {
@@ -217,18 +217,57 @@ namespace jycboliviaASP.net.Presentacion
         }
 
 
-
-
-        private void get_tiempoTardanzaEntregaDDespacho()
+        private void get_tiempoTardanzaEntregaDDespacho_OrdenEntregaCli()
         {
             try
             {
                 DateTime fecha1 = DateTime.ParseExact(tx_fdesde.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime fecha2 = DateTime.ParseExact(tx_fhasta.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                string chofer = tx_nomConductor.Text.Trim();
+
+                rw_consultaPedidos.Visible = true;
+
+                LocalReport localreport = rw_consultaPedidos.LocalReport;
+                localreport.ReportPath = "Reportes/Report_consultaTiempoTardanzaEntregaProdaClient.rdlc";
+
+                NCorpal_Venta nventa = new NCorpal_Venta();
+                DataSet consulta = nventa.get_tiempoTardanzaEntregaDDespacho_OrdenEntregaCli(fecha1, fecha2, chofer);
+
+                if (consulta == null)
+                {
+                    showalert("Dataset es null");
+                    return;
+                }
+
+                if(consulta.Tables.Count == 0)
+                {
+                    showalert("No existe tablas en el DataSet");
+                    return;
+                }
+
+                DataTable dsconsulta = consulta.Tables[0];
+                if(dsconsulta.Rows.Count == 0)
+                {
+                    showalert("No hay datos para mostrar.");
+                    return;
+                }
+
+                ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_fdesde.Text.Trim());
+                ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_fhasta.Text.Trim());
+
+                rw_consultaPedidos.LocalReport.DataSources.Clear();
+
+                ReportDataSource DS_tiempoTardanzaEntrega = new ReportDataSource("DS_tiempoTardanzaEntregaProd", dsconsulta);
+
+                rw_consultaPedidos.LocalReport.SetParameters(p_fecha1);
+                rw_consultaPedidos.LocalReport.SetParameters(p_fecha2);
+                rw_consultaPedidos.LocalReport.DataSources.Add(DS_tiempoTardanzaEntrega);
+                this.rw_consultaPedidos.LocalReport.Refresh();
+                this.rw_consultaPedidos.DataBind();
             }
             catch(Exception ex)
             {
-                showalert("Error en el metodo. " + ex.Message);
+                showalert("Error al obtener datos. " + ex.Message);
             }
         }
 

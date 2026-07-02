@@ -683,6 +683,133 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet get_tiempoTardanzaEntregaDDespacho_OrdenEntregaCli(DateTime fechainicio, DateTime fechafin, string chofer)
+        {
+            try
+            {
+                string consulta = @"select dv.`codigo` as codDespacho,
+                                        dv.`conductor`,
+                                        concat(v.`placa`,' - ', v.`marca`) as 'vehiculo',
+ 
+                                        cl.tiendaname as cliente,
+
+                                        timestamp(dv.fechacierre,dv.horacierre) as 'fechaDespacho2',
+
+                                        oe.codigo as 'codOrdenEntrega',
+                                        timestamp(oe.fechagra, oe.horagra) as 'fechaOrdenEntrega2',
+                                        oe.estado as 'estadoEntrega',
+
+                                        -- DIFERENCIA EN HORAS
+                                        TIMESTAMPDIFF(HOUR,
+                                        CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                        CASE
+                                            WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                 THEN NOW()
+                                            ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                        END    
+                                        ) as diferencia_horas,
+
+                                        -- DIFERENCIA COMPLETA FORMATEADA
+                                        CONCAT(
+                                            FLOOR(TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CASE
+                                                    WHEN oe.fechagra IS NULL OR oe.horagra IS NULL 
+                                                         THEN NOW()
+                                                    ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                END
+                                            ) / 1440), ' dias ',
+    
+                                            FLOOR((TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CASE
+                                                    WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                         THEN NOW()
+                                                    ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                    END
+                                            ) % 1440) / 60), ' horas ',
+    
+                                            (TIMESTAMPDIFF(MINUTE,
+                                                CONCAT(dv.`fechacierre`, ' ', dv.`horacierre`),
+                                                CASE
+                                                    WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                         THEN NOW()
+                                                    ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                END
+                                            ) % 60), ' minutos'
+                                        ) as 'diferencia_ddhhmm',
+                                            FLOOR(
+                                                TIMESTAMPDIFF(MINUTE,
+                                                    CONCAT(dv.fechacierre, ' ', dv.horacierre),
+                                                    CASE
+                                                        WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                            THEN NOW()
+                                                        ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                    END
+                                                ) / 1440
+                                            ) AS dias,
+
+                                            FLOOR(
+                                                (
+                                                    TIMESTAMPDIFF(MINUTE,
+                                                        CONCAT(dv.fechacierre, ' ', dv.horacierre),
+                                                        CASE
+                                                            WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                                THEN NOW()
+                                                            ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                        END
+                                                    ) % 1440
+                                                ) / 60
+                                            ) AS horas,
+
+                                            (
+                                                TIMESTAMPDIFF(MINUTE,
+                                                    CONCAT(dv.fechacierre, ' ', dv.horacierre),
+                                                    CASE
+                                                        WHEN oe.fechagra IS NULL OR oe.horagra IS NULL
+                                                            THEN NOW()
+                                                        ELSE CONCAT(oe.fechagra, ' ', oe.horagra)
+                                                    END
+                                                ) % 60
+                                            ) AS minutos
+
+                                        FROM tbcorpal_despachovehiculo dv
+
+                                        LEFT JOIN tbcorpal_detalleproddespacho ddv
+                                            ON dv.`codigo` = ddv.`coddespacho`
+    
+                                        INNER JOIN tbcorpal_vehiculos v 
+                                            ON dv.`codvehiculo` = v.`codigo`
+    
+                                        LEFT JOIN tbcorpal_ordenentregacliente oe
+                                            ON dv.`codigo` = oe.`cod_despachovehiculo`
+                                            AND ddv.`codcliente` = oe.`codigoCliente`
+                                        
+                                        LEFT JOIN tbcorpal_cliente cl
+                                             ON ddv.codcliente = cl.codigo
+
+                                        WHERE dv.`estado` = 1
+                                        AND dv.`estadodespacho` = 'Cerrado'
+                                        ##AND oe.`estado` = 1
+                                        ##AND dv.`codigo` = 74
+                                        and dv.conductor like @chofer
+                                        and dv.fechacierre between @fechainicio and @fechafin ";
+
+                                        var parametros = new List<MySqlParameter>
+                                        {
+                                            new MySqlParameter("@fechainicio", fechainicio),
+                                            new MySqlParameter("@fechafin", fechafin),
+                                            new MySqlParameter("@chofer", "%"+chofer+"%")
+                                        };
+                return cnx.consultaMySqlParametros(consulta, parametros);                 
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message) ;
+            }
+        }
+
+
 
 
     }
