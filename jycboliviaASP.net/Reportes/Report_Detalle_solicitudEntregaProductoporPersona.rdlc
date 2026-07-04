@@ -63,10 +63,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Reporte Solicitud - Entrega de Producctos por Persona</Value>
+                    <Value>Reporte de Solicitudes y Entregas de Productos por Vendedor</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -84,6 +87,7 @@
               <Border>
                 <Style>None</Style>
               </Border>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -108,7 +112,7 @@
             <Top>1.76424cm</Top>
             <Left>0.89112cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.02917cm</Width>
+            <Width>2.5cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -138,7 +142,7 @@
             <Top>1.76424cm</Top>
             <Left>10.12508cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.97625cm</Width>
+            <Width>2.44708cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -166,7 +170,7 @@
             </Paragraphs>
             <rd:DefaultName>p_fechadesde</rd:DefaultName>
             <Top>1.76424cm</Top>
-            <Left>4.02612cm</Left>
+            <Left>3.46168cm</Left>
             <Height>0.6cm</Height>
             <Width>3.82292cm</Width>
             <ZIndex>3</ZIndex>
@@ -196,7 +200,7 @@
             </Paragraphs>
             <rd:DefaultName>p_fechahasta</rd:DefaultName>
             <Top>1.76424cm</Top>
-            <Left>13.10133cm</Left>
+            <Left>12.64272cm</Left>
             <Height>0.6cm</Height>
             <Width>3.87583cm</Width>
             <ZIndex>4</ZIndex>
