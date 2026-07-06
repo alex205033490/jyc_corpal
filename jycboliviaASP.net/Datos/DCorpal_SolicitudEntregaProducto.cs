@@ -631,105 +631,48 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
-                string consulta = @"SELECT SF.personalsolicitud,
-                                               SF.producto,
-                                               SF.total_cantSolicitada,
-                                               SF.total_cantSolicitadaFracc,
-                                               SF.total_cantentregada,
-                                               SF.total_cantentregadaFracc
-                                        FROM
-                                        (
-                                            SELECT personalsolicitud,
-                                                   producto,
-                                                   SUM(total_cant) AS total_cantSolicitada,
-                                                   SUM(total_cantsolicitadaFracc) AS total_cantSolicitadaFracc,
-                                                   SUM(total_cantentregada) AS total_cantentregada,
-                                                   SUM(total_cantentregadaFracc) AS total_cantentregadaFracc
+                string consulta = @"SELECT 
+                                   sp.`codpersolicitante`,
+                                   sp.`personalsolicitud`,
+                                   dsp.`codproducto`,
+                                   p.`producto`,
+                                   sum(
+                                       dsp.`cant`
+                                       ) AS total_cantSolicitada,
+       
+                                   sum(
+                                       dsp.`cant_unidadcontenedorfraccionada`
+                                       ) AS total_cantSolicitadaFracc,
            
-                                            FROM
-                                            (
-                                                SELECT s.personalsolicitud,
-                                                       p.producto,
-                                                       COALESCE(SUM(d.cant), 0) AS total_cant,
-                                                       COALESCE(SUM(d.`cant_unidadcontenedorfraccionada`), 0) AS total_cantsolicitadaFracc,
-               
-                                                       COALESCE(
-                                                       SUM(
-                                                           CASE
-                                                               WHEN d.contenedorfraccionado <> 1
-                                                                OR d.contenedorfraccionado IS NULL
-                                                                THEN d.cantentregada
-                                                                ELSE 0
-                                                                END
-                                                                ), 0
-                                                                ) AS total_cantentregada,   
-                                    
-                                                       COALESCE(
-                                                       SUM(
-                                                           CASE
-                                                               WHEN d.contenedorfraccionado = 1
-                                                               THEN d.cantentregada
-                                                               ELSE 0
-                                                               END
-                                                               ), 0
-                                                               ) AS total_cantentregadaFracc
-               
-                                                FROM tbcorpal_solicitudentregaproducto s
-                                                RIGHT JOIN tbcorpal_detalle_solicitudproducto d
-                                                    ON s.codigo = d.codsolicitud
-                                                RIGHT JOIN tbcorpal_producto p
-                                                    ON p.codigo = d.codproducto
-                                                WHERE s.estado = 1
-                                                  AND p.estado = 1
-                                                  AND s.fechaGRA BETWEEN @fechadesde and @fechahasta 
-                                                GROUP BY s.personalsolicitud, p.producto
+                                   sum(
+                                       CASE
+                                       WHEN dsp.`contenedorfraccionado` = 0
+                                            or dsp.`contenedorfraccionado` is null
+                                       THEN dsp.`cantentregada`
+                                       ELSE 0
+                                       END
+                                   ) AS total_cantentregada,
+       
+                                   sum(
+                                       CASE
+                                       WHEN dsp.`contenedorfraccionado` = 1
+                                       THEN dsp.`cantentregada`
+                                       ELSE 0
+                                       END
+                                   ) AS total_cantentregadaFracc
+       
 
-                                                UNION
-
-                                                SELECT s.personalsolicitud,
-                                                       p.producto,
-                                                       0 AS total_cant,
-                                                       0 AS total_cantFracc,
-                                                       0 AS total_cantentregada,
-                                                       0 AS total_cantentregadaFracc
-                                                FROM tbcorpal_producto p
-                                                CROSS JOIN
-                                                (
-                                                    SELECT personalsolicitud
-                                                    FROM tbcorpal_solicitudentregaproducto
-                                                    GROUP BY personalsolicitud
-                                                ) s
-                                                LEFT JOIN tbcorpal_detalle_solicitudproducto d
-                                                    ON p.codigo = d.codproducto
-                                                LEFT JOIN tbcorpal_solicitudentregaproducto se
-                                                    ON se.codigo = d.codsolicitud
-                                                   AND se.personalsolicitud = s.personalsolicitud
-                                                WHERE p.estado = 1
-                                                  AND se.codigo IS NULL
-                                            ) result
-                                            GROUP BY personalsolicitud, producto
-
-                                            UNION
-
-                                            SELECT res1.nombre AS personalsolicitud,
-                                                   pro1.producto,
-                                                   0 AS total_cantSolicitada,
-                                                   0 AS total_cantSolicitadaFracc,
-                                                   0 AS total_cantentregada,
-                                                   0 AS total_cantentregadaFracc
-                                            FROM tb_responsable res1
-                                            CROSS JOIN tbcorpal_producto pro1
-                                            WHERE pro1.estado = 1
-                                              AND res1.codigo NOT IN
-                                              (
-                                                  SELECT sol1.codpersolicitante
-                                                  FROM tbcorpal_solicitudentregaproducto sol1
-                                                  WHERE sol1.estado = 1
-                                                    AND sol1.fechaGRA BETWEEN @fechadesde AND @fechahasta 
-                                              )
-                                        ) SF
-                                        WHERE SF.personalsolicitud LIKE @personal
-                                        ORDER BY SF.personalsolicitud, SF.producto;";
+                            FROM tbcorpal_solicitudentregaproducto sp
+                            LEFT JOIN tbcorpal_detalle_solicitudproducto dsp
+                                 ON sp.`codigo` = dsp.`codsolicitud`
+                            LEFT JOIN tbcorpal_producto p
+                                 ON dsp.`codproducto` = p.`codigo`
+                            WHERE
+                                 sp.`fechaGRA` BETWEEN @fechadesde and @fechahasta
+                                 and sp.`estado` = 1
+                                 and sp.`personalsolicitud` like @personal
+                            group by
+                                  sp.`personalsolicitud`, dsp.`codproducto`";
 
                 var parametros = new List<MySqlParameter>
                 {

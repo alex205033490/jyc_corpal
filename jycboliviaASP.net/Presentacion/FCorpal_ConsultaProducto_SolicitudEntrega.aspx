@@ -65,7 +65,7 @@
                                 <asp:DropDownList ID="dd_consulta" class="btn btn-secondary dropdown-toggle" runat="server" Width="420px">
                                     <asp:ListItem>Detalle de Datos</asp:ListItem>
                                     <asp:ListItem>Productos Solicitados Vs Entregados</asp:ListItem>
-                                    <asp:ListItem>Productos Entregados y Solicitados por Persona</asp:ListItem>
+                                    <asp:ListItem>Productos Solicitados y Entregados por Personal</asp:ListItem>
                                     <asp:ListItem>Entrega Produccion</asp:ListItem>
                                     <asp:ListItem>Stock Producto</asp:ListItem>
                                     <asp:ListItem>Detalle Entrega Productos</asp:ListItem>
