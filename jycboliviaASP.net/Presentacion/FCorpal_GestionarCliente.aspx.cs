@@ -93,46 +93,7 @@ namespace jycboliviaASP.net.Presentacion
             buscarClientesT(criterio);
         }
 
-        protected void bt_limpiar_Click(object sender, EventArgs e)
-        {
-            // 1. Limpiar todos los campos de texto
-            tx_tiendaname.Text = "";
-            tx_tiendadir.Text = "";
-            tx_tiendatelefono.Text = "";
-            tx_tiendadepartamento.Text = "";
-            tx_tiendazona.Text = "";
-
-            tx_propietarioname.Text = "";
-            tx_propietarioci.Text = "";
-            tx_propietariodir.Text = "";
-            tx_propietariocelular.Text = "";
-            tx_propietarionit.Text = "";
-            tx_propietariocorreo.Text = "";
-
-            tx_facturar_a.Text = "";
-            tx_facturar_nit.Text = "";
-            tx_facturar_correo.Text = "";
-            tx_observacion.Text = "";
-
-            // Opcional: Limpiar el buscador
-            tx_buscar.Text = "";
-
-            // 2. Reiniciar los DropDownLists al primer elemento (si existen datos)
-            if (ddl_tipocliente.Items.Count > 0) ddl_tipocliente.SelectedIndex = 0;
-            if (ddl_listaprecio.Items.Count > 0) ddl_listaprecio.SelectedIndex = 0;
-
-            // 3. RESTABLECER BOTONES (Modo Creación)
-            bt_insertar.Enabled = true;     // Habilitamos Guardar
-            bt_modificar.Enabled = false;   // Deshabilitamos Editar
-            bt_eliminar.Enabled = false;    // Deshabilitamos Eliminar
-
-            // 4. Reiniciar la variable de estado (IMPORTANTE)
-            // Esto evita que si le das a "Insertar" intente actualizar un ID viejo
-            ViewState["IDClienteSeleccionado"] = 0;
-
-            // 5. Limpiar mensajes de error/éxito
-            lbl_mensaje.Text = "";
-        }
+        
 
         protected void bt_insertar_Click(object sender, EventArgs e)
         {
@@ -178,8 +139,8 @@ namespace jycboliviaASP.net.Presentacion
 
                 int idTipoCliente = int.Parse(ddl_tipocliente.SelectedValue);
                 int idListaPrecio = int.Parse(ddl_listaprecio.SelectedValue);
-                string latitud = "";
-                string longitud = "";
+                string latitud = hf_latCli.Value;
+                string longitud = hf_lngCli.Value;
 
                 // Insertar (Asegúrate de que tu Negocio acepte los parámetros en este orden)
                 bool insertado = Nproy.insertar_cliente(
@@ -222,8 +183,11 @@ namespace jycboliviaASP.net.Presentacion
             {
                 string mensajeError = ex.Message.Replace("'", "").Replace("\n", " ");
                 MostrarAlerta("ERROR CRÍTICO: " + mensajeError);
+                
             }
         }
+
+
 
         // --- MÉTODO AUXILIAR PARA ALERTAS COMPATIBLES CON AJAX ---
         private void MostrarAlerta(string mensaje)
@@ -303,8 +267,8 @@ namespace jycboliviaASP.net.Presentacion
 
                     codUser, // codrespgra (Quién modificó)
                    
-                    "",      // latitud
-                    "",      // longitud
+                    hf_latCli.Value,      // latitud
+                    hf_lngCli.Value,      // longitud
 
                     idTipoCliente,
                     idListaPrecio
@@ -419,6 +383,8 @@ namespace jycboliviaASP.net.Presentacion
                     tx_tiendatelefono.Text = row["tiendatelefono"].ToString();
                     tx_tiendadepartamento.Text = row["tiendadepartamento"].ToString();
                     tx_tiendazona.Text = row["tiendazona"].ToString();
+                    hf_latCli.Value = row["direccion_lat"].ToString();
+                    hf_lngCli.Value = row["direccion_lng"].ToString();
 
                     // Propietario
                     tx_propietarioname.Text = row["propietarioname"].ToString();
@@ -456,6 +422,15 @@ namespace jycboliviaASP.net.Presentacion
                     // --- MENSAJE DE ÉXITO ---
                     lbl_mensaje.Text = "Cliente seleccionado correctamente. ID: " + idCliente;
                     lbl_mensaje.ForeColor = System.Drawing.Color.Blue;
+
+
+                    ScriptManager.RegisterStartupScript(
+                            this,
+                            GetType(),
+                            "ActualizarMapa",
+                            "limpiarMap();",
+                            true
+                        );
                 }
             }
             catch (Exception ex)
@@ -465,6 +440,58 @@ namespace jycboliviaASP.net.Presentacion
                 lbl_mensaje.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        protected void bt_limpiar_Click(object sender, EventArgs e)
+        {
+            // 1. Limpiar todos los campos de texto
+            tx_tiendaname.Text = "";
+            tx_tiendadir.Text = "";
+            tx_tiendatelefono.Text = "";
+            tx_tiendadepartamento.Text = "";
+            tx_tiendazona.Text = "";
+
+            tx_propietarioname.Text = "";
+            tx_propietarioci.Text = "";
+            tx_propietariodir.Text = "";
+            tx_propietariocelular.Text = "";
+            tx_propietarionit.Text = "";
+            tx_propietariocorreo.Text = "";
+
+            tx_facturar_a.Text = "";
+            tx_facturar_nit.Text = "";
+            tx_facturar_correo.Text = "";
+            tx_observacion.Text = "";
+            
+            hf_latCli.Value = "";
+            hf_lngCli.Value = "";
+
+            // Opcional: Limpiar el buscador
+            tx_buscar.Text = "";
+
+            // 2. Reiniciar los DropDownLists al primer elemento (si existen datos)
+            if (ddl_tipocliente.Items.Count > 0) ddl_tipocliente.SelectedIndex = 0;
+            if (ddl_listaprecio.Items.Count > 0) ddl_listaprecio.SelectedIndex = 0;
+
+            // 3. RESTABLECER BOTONES (Modo Creación)
+            bt_insertar.Enabled = true;     // Habilitamos Guardar
+            bt_modificar.Enabled = false;   // Deshabilitamos Editar
+            bt_eliminar.Enabled = false;    // Deshabilitamos Eliminar
+
+            // 4. Reiniciar la variable de estado (IMPORTANTE)
+            // Esto evita que si le das a "Insertar" intente actualizar un ID viejo
+            ViewState["IDClienteSeleccionado"] = 0;
+
+            // 5. Limpiar mensajes de error/éxito
+            lbl_mensaje.Text = "";
+        }
+
+        private void showalert(string mensaje)
+        {
+            string script = $"alert(' {mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
+        }
+
+
 
     }
 }

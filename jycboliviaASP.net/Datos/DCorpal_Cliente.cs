@@ -194,10 +194,77 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        public bool insertar_cliente(string tiendaname, string tiendadir, string tiendatelefono,
+                                    string tiendadepartamento, string tiendazona, string propietarioname,
+                                    string propietarioci, string propietariodir, string propietariocelular,
+                                    string propietarionit, string propietariocorreo, string facturar_a,
+                                    string facturar_nit, string facturar_correo, string observacion,
+                                    int codrespgra, string direccion_lat, string direccion_lng,
+                                    int id_tipocliente, int id_listaprecio)
+        {
+            try
+            {
+                string consulta = @"INSERT INTO tbcorpal_cliente
+                                    (
+                                        fechagra, horagra, tiendaname,
+                                        tiendadir, tiendatelefono, tiendadepartamento,
+                                        tiendazona, propietarioname, propietarioci,
+                                        propietariodir, propietariocelular, propietarionit,
+                                        propietariocorreo, facturar_a, facturar_nit,
+                                        facturar_correo, observacion, codrespgra,
+                                        direccion_lat, direccion_lng, id_tipocliente,
+                                        id_listaprecio, estado
+                                    )
+                                    VALUES
+                                    ( CURDATE(), CURTIME(), @tiendaname,
+                                      @tiendadir, @tiendatelefono, @tiendadepartamento,
+                                        @tiendazona, @propietarioname, @propietarioci,
+                                        @propietariodir, @propietariocelular, @propietarionit,
+                                        @propietariocorreo, @facturar_a, @facturar_nit,
+                                        @facturar_correo, @observacion, @codrespgra,
+                                        @direccion_lat, @direccion_lng, @id_tipocliente,
+                                        @id_listaprecio, 1);";
+
+                MySqlCommand cmd = new MySqlCommand(consulta);
+
+                                    cmd.Parameters.AddWithValue("@tiendaname", tiendaname);
+                                    cmd.Parameters.AddWithValue("@tiendadir", tiendadir);
+                                    cmd.Parameters.AddWithValue("@tiendatelefono", tiendatelefono);
+                                    cmd.Parameters.AddWithValue("@tiendadepartamento", tiendadepartamento);
+                                    cmd.Parameters.AddWithValue("@tiendazona", tiendazona);
+
+                                    cmd.Parameters.AddWithValue("@propietarioname", propietarioname);
+                                    cmd.Parameters.AddWithValue("@propietarioci", propietarioci);
+                                    cmd.Parameters.AddWithValue("@propietariodir", propietariodir);
+                                    cmd.Parameters.AddWithValue("@propietariocelular", propietariocelular);
+                                    cmd.Parameters.AddWithValue("@propietarionit", propietarionit);
+                                    cmd.Parameters.AddWithValue("@propietariocorreo", propietariocorreo);
+
+                                    cmd.Parameters.AddWithValue("@facturar_a", facturar_a);
+                                    cmd.Parameters.AddWithValue("@facturar_nit", facturar_nit);
+                                    cmd.Parameters.AddWithValue("@facturar_correo", facturar_correo);
+                                    cmd.Parameters.AddWithValue("@observacion", observacion);
+
+                                    cmd.Parameters.AddWithValue("@codrespgra", codrespgra);
+                                    cmd.Parameters.AddWithValue("@direccion_lat", direccion_lat);
+                                    cmd.Parameters.AddWithValue("@direccion_lng", direccion_lng);
+
+                                    cmd.Parameters.AddWithValue("@id_tipocliente", id_tipocliente);
+                                    cmd.Parameters.AddWithValue("@id_listaprecio", id_listaprecio);
+
+                return conexion.ejecutarMySql2(cmd);
+                                
+            }
+            catch (Exception ex)
+            {
+                // Registrar el error en log
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
 
 
-
-        public bool insertar_cliente(
+        public bool insertar_cliente2(
     // Datos Tienda
     string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
     // Datos Propietario
@@ -296,34 +363,77 @@ namespace jycboliviaASP.net.Datos
             return lista;
         }
 
-        internal DataSet get_cliente(int codigo) {
-            string consulta = "SELECT " +
-    "    tiendaname, " +
-    "    tiendadir, " +
-    "    tiendatelefono, " +
-    "    tiendadepartamento, " +
-    "    tiendazona, " +
-    "    propietarioname, " +
-    "    propietarioci, " +
-    "    propietarionit, " +
-    "    propietariocelular, " +
-    "    propietariodir, " +
-    "    propietariocorreo, " +
-    "    facturar_a, " +
-    "    facturar_nit, " +
-    "    facturar_correo, " +
-    "    id_tipocliente, " +
-    "    id_listaprecio, " +
-    "    observacion " +
-    "FROM tbcorpal_cliente " +
-    "WHERE codigo = " + codigo + " ";
-            DataSet lista = conexion.consultaMySql(consulta);
-            return lista;
+        internal DataSet get_cliente(int codigo) 
+        {
+            try
+            {
+                string consulta = @"select tiendaname, 
+                        tiendadir, 
+                        tiendatelefono, 
+                        tiendadepartamento, 
+                        tiendazona, 
+                        propietarioname, 
+                        propietarioci, 
+                        propietarionit, 
+                        propietariocelular, 
+                        propietariodir, 
+                        propietariocorreo, 
+                        facturar_a, 
+                        facturar_nit, 
+                        facturar_correo, 
+                        id_tipocliente, 
+                        id_listaprecio, 
+                        direccion_lat, 
+                        direccion_lng, 
+                        observacion 
+                    FROM tbcorpal_cliente 
+                    WHERE codigo = @codigo ";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codigo", codigo)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error inesperado. " + ex.Message);
+            }
         }
         
         internal DataSet listarTiendas2(string nombreTiendas)
         {
-            string consulta = "SELECT " +
+            try
+            {
+                string consulta2 = @"SELECT 
+                        c.codigo,
+                        c.tiendaname,
+                        c.tiendadir,
+                        c.tiendatelefono,
+                        c.propietarioname,
+                        c.propietariocelular,
+                        tc.nombre AS NombreTipoCliente,
+                        lp.nombre AS NombreListaPrecio,
+                        c.direccion_lat,
+                        c.direccion_lng
+
+                    FROM tbcorpal_cliente c
+                    INNER JOIN tbcorpal_tipocliente tc ON c.id_tipocliente = tc.codigo
+                    INNER JOIN tbcorpal_listaprecio lp ON c.id_listaprecio = lp.codigo
+                    WHERE c.estado = 1 
+                      AND c.tiendaname LIKE @nombre 
+                    ORDER BY c.codigo DESC";
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@nombre", "%"+nombreTiendas+"%"),
+                };
+                return conexion.consultaMySqlParametros(consulta2, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+
+            /*string consulta = "SELECT " +
                     "    c.codigo, " +
                     "    c.tiendaname, " +
                     "    c.tiendadir, " +
@@ -343,7 +453,7 @@ namespace jycboliviaASP.net.Datos
                     // Opcional: Ordenar para ver los nuevos primero
                     "ORDER BY c.codigo DESC";
             DataSet lista = conexion.consultaMySql(consulta);
-            return lista;
+            return lista;*/
         }
 
         internal DataSet listarListaProducto(string nombreLista)
