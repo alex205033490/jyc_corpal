@@ -108,7 +108,23 @@ namespace jycboliviaASP.net.Datos
             };
             return conexion.consultaMySqlParametros(consulta, parametros);
         }
-        
+
+        internal DataSet get_mostrarProductos_todos(string producto)
+        {
+
+            string consulta = @"select pp.codigo, pp.producto, pp.medida 
+                                from  
+                                tbcorpal_producto pp 
+                                where 
+                                pp.producto like @producto 
+                                order by pp.producto asc  
+                                        ";
+            var parametros = new List<MySqlParameter>
+            {
+                new MySqlParameter("@producto", "%" +producto+ "%")
+            };
+            return conexion.consultaMySqlParametros(consulta, parametros);
+        }
 
         internal DataSet get_mostrarListProductosCliente(string producto)
         {

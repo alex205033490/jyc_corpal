@@ -39,6 +39,19 @@ namespace jycboliviaASP.net.Negocio
                 throw new Exception("Error al obtener los datos. " + ex.Message);
             }
         }
+
+        public DataSet get_mostrarProductos_todos(string producto)
+        {
+            try
+            {
+                return dsp.get_mostrarProductos_todos(producto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los datos. " + ex.Message);
+            }
+        }
+
         internal DataSet get_mostrarListProductosCliente(string producto)
         {
             try

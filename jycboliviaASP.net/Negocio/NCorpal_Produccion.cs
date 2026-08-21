@@ -156,6 +156,11 @@ namespace jycboliviaASP.net.Negocio
             return dproduccion.get_datosOrdenProduccion(Producto);
         }
 
+        internal DataSet get_datosOrdenProduccion_todos(string Producto)
+        {
+            return dproduccion.get_datosOrdenProduccion_Todos(Producto);
+        }
+
         internal DataSet get_datosOrdenProduccion(int codigoOrden)
         {
             return dproduccion.get_datosOrdenProduccion(codigoOrden);

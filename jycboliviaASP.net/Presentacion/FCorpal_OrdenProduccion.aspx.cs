@@ -44,7 +44,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             string producto = dd_productosNax.SelectedItem.Text;
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos(producto);
+            DataSet tuplas = pp.get_mostrarProductos_todos(producto);
             string medida = tuplas.Tables[0].Rows[0][2].ToString();
             tx_medida.Text = medida;
         }
@@ -52,7 +52,7 @@ namespace jycboliviaASP.net.Presentacion
         private void llenarProductosNax()
         {
             NCorpal_SolicitudEntregaProducto pp = new NCorpal_SolicitudEntregaProducto();
-            DataSet tuplas = pp.get_mostrarProductos("");
+            DataSet tuplas = pp.get_mostrarProductos_todos("");
 
             dd_productosNax.DataSource = tuplas;
             dd_productosNax.DataValueField = "codigo";

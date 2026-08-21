@@ -660,6 +660,27 @@ namespace jycboliviaASP.net.Datos
             return Conx.consultaMySql(consulta);
         }
 
+        internal DataSet get_datosOrdenProduccion_Todos(string Producto)
+        {
+            string consulta = "select " +
+                              " oo.codigo, " +
+                              " date_format(oo.fechaproduccion,'%d/%m/%Y') as 'fecha_produccion', " +
+                              " oo.horaproduccion, " +
+                              " oo.productoNax, " +
+                              " oo.cantcajasproduccion, " +
+                              " oo.medida, " +
+                              " oo.detalleproduccion, " +
+                              " oo.responsable, " +
+                              " oo.cantturnodia," +
+                              " oo.cantturnotarde," +
+                              " oo.cantturnonoche " +
+                              " from " +
+                              " tbcorpal_ordenproduccion oo " +
+                              " where " +                              
+                              " oo.productoNax like '%" + Producto + "%' order by oo.codigo desc";
+            return Conx.consultaMySql(consulta);
+        }
+
         internal DataSet get_datosOrdenProduccion(int codigoOrden)
         {
             string consulta = "select " +
