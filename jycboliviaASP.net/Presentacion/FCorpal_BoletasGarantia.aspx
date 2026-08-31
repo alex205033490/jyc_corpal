@@ -8,6 +8,22 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <style type="text/css">
+        .control_gv{
+            background-color: yellow;
+            padding: 0.2rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            width: 100%;
+        }
+        .controlselect_gv{
+            background-color: yellow;
+            padding: 0.2rem;
+            border-radius: 0.3rem;
+        }
+
+    </style>
+
 </asp:Content>
 
 
@@ -32,7 +48,8 @@
 
                     <div class="col-lg-3">
                         <asp:Label runat="server">Monto:</asp:Label>
-                        <asp:TextBox ID="tx_Monto" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="tx_Monto" runat="server" CssClass="form-control" 
+                                oninput="this.value = this.value.replace(/\./g, ',');" ></asp:TextBox>
                     </div>
 
                     <div class="col-lg-3">
@@ -96,7 +113,8 @@
                                         <asp:TextBox
                                             ID="tx_montoEditar"
                                             runat="server"
-                                            CssClass=""
+                                            oninput="this.value = this.value.replace(/\./g, ',');"
+                                            CssClass="control_gv"
                                             Text='<%# Bind("monto") %>'>
                                         </asp:TextBox>
                                     </EditItemTemplate>
@@ -111,7 +129,7 @@
                                         <asp:TextBox
                                             ID="tx_tipoBoletaEditar"
                                             runat="server"
-                                            CssClass=""
+                                            CssClass="control_gv"
                                             Text='<%# Bind("tipoboleta") %>'>
                                         </asp:TextBox>
                                     </EditItemTemplate>
@@ -126,7 +144,7 @@
                                         <asp:TextBox
                                             ID="tx_clienteEditar"
                                             runat="server"
-                                            CssClass=""
+                                            CssClass="control_gv"
                                             Text='<%# Bind("cliente") %>'>
                                         </asp:TextBox>
                                     </EditItemTemplate>
@@ -141,7 +159,7 @@
                                         <asp:DropDownList
                                             ID="dd_estadoEditar"
                                             runat="server"
-                                            CssClass=" form-select"
+                                            CssClass="controlselect_gv"
                                             SelectedValue='<%# Bind("estado") %>'>
 
                                             <asp:ListItem Text="Abierto" Value="Abierto"></asp:ListItem>

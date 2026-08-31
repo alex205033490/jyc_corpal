@@ -28,6 +28,11 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Error al registrar la boleta garantia.");
                 return;
             }
+            else
+            {
+                showalert("Boleta Registrado Correctamente.");
+                limpiarForm();
+            }
 
 
         }
@@ -189,6 +194,12 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        private void limpiarForm() {
+            tx_Monto.Text = string.Empty;
+            tx_tipoBoletaGarantia.Text = string.Empty;
+            tx_cliente.Text = string.Empty;
 
+            getBoletasGarantia();
+        }
     }
 }
