@@ -561,6 +561,7 @@
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_AsignacionRuta_Camion.aspx" />
+    <Content Include="Presentacion\FCorpal_BoletasGarantia.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaPedidos.aspx" />
     <Content Include="Presentacion\FCorpal_ConsultaStockVendedores.aspx" />
     <Content Include="Presentacion\FCorpal_ActivosJYC.aspx" />
@@ -882,6 +883,7 @@
     <Compile Include="DatosSimec\DA_contabilidad.cs" />
     <Compile Include="DatosSimec\DA_inventario.cs" />
     <Compile Include="Datos\DACorpal_InsumoCreado.cs" />
+    <Compile Include="Datos\DCorpal_boletaGarantia.cs" />
     <Compile Include="Datos\DCorpal_Clientes.cs" />
     <Compile Include="Datos\DA_ActivosJyC.cs" />
     <Compile Include="Datos\DA_AgendaProyecto.cs" />
@@ -1089,6 +1091,7 @@
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
     <Compile Include="Negocio\NA_PruebaAPI.cs" />
+    <Compile Include="Negocio\NCorpal_BoletasGarantia.cs" />
     <Compile Include="Negocio\NCorpal_Clientes.cs" />
     <Compile Include="Negocio\NCorpal_Objetivos.cs" />
     <Compile Include="Negocio\NCorpal_EntregaSolicitudProducto2.cs" />
@@ -1223,6 +1226,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_AsignacionRuta_Camion.aspx.designer.cs">
       <DependentUpon>FCorpal_AsignacionRuta_Camion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_BoletasGarantia.aspx.cs">
+      <DependentUpon>FCorpal_BoletasGarantia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_BoletasGarantia.aspx.designer.cs">
+      <DependentUpon>FCorpal_BoletasGarantia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ConsultaPedidos.aspx.cs">
       <DependentUpon>FCorpal_ConsultaPedidos.aspx</DependentUpon>

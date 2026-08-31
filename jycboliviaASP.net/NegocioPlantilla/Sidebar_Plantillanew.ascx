@@ -144,6 +144,7 @@
                 <li><a href="../Presentacion/FCorpal_movimientoCheques.aspx" id="mn_movimientoCheques" runat="server"><i class="bi bi-circle"></i><span>Movimiento Cheques</span></a></li>                                             
                 <li><a href="../Presentacion/FCorpal_saldosCuentasGeneral.aspx" id="mn_saldosCuentasGeneral" runat="server"><i class="bi bi-circle"></i><span>Vista Saldos General</span></a></li>                                             
                 <li><a href="../Presentacion/FCorpal_Facturacion.aspx" id="mn_facturacion" runat="server"><i class="bi bi-circle"></i><span>Recopilacion de Bancarizacion</span></a></li>                                             
+                <li><a href="../Presentacion/FCorpal_BoletasGarantia.aspx" id="mn_boletaEmergencia" runat="server"><i class="bi bi-circle"></i><span>Boletas Garantia</span></a></li>                                             
           </ul>
         </li><!-- End Tables Nav -->
 

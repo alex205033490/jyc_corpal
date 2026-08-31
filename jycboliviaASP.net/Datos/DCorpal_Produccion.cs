@@ -1902,8 +1902,8 @@ namespace jycboliviaASP.net.Datos
                                     from tbcorpal_producto p 
                                     where 
                                     p.`estado` = 1 
-                                    and p.`producto` like @producto 
-                                    and p.`codupon` like @codigo ";
+                                    and (@producto = '' OR p.producto LIKE @producto) 
+                                    and (@codigo = '' OR IFNULL(p.codupon, '') LIKE @codigo)";
 
                 var parametros = new List<MySqlParameter>
                 {
