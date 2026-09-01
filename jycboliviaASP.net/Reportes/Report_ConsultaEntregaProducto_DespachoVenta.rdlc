@@ -76,7 +76,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DS_ReporteProductos</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\atc\Desktop\repojyc_corpal\jyc_corpal\jycboliviaASP.net\DS_ReporteProductos.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Users\Sistema\Documents\GitHub\jyc_corpal\jycboliviaASP.net\DS_ReporteProductos.xsd</rd:SchemaPath>
         <rd:TableName>DS_EntregaProductosDespachoVenta</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

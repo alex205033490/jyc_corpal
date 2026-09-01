@@ -1104,6 +1104,7 @@
                                   <Value>=Fields!CantidadSolicitado.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1139,6 +1140,7 @@
                                   <Value>=Fields!CantidadSolicitadoFracc.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1174,6 +1176,7 @@
                                   <Value>=Fields!Cantidad_Entregado.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1209,6 +1212,7 @@
                                   <Value>=Fields!CantidadFracc_Entregado.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1244,6 +1248,7 @@
                                   <Value>=Fields!PrecioUnidad.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1279,6 +1284,7 @@
                                   <Value>=Fields!PrecioUnidadFracc.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1314,6 +1320,7 @@
                                   <Value>=Fields!MontoSolicitado.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1349,6 +1356,7 @@
                                   <Value>=Fields!MontoSolicitadoFracc.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1384,6 +1392,7 @@
                                   <Value>=Fields!MontoEntregado.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1419,6 +1428,7 @@
                                   <Value>=Fields!MontoEntregadoFracc.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1454,6 +1464,7 @@
                                   <Value>=Fields!Perdida.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1489,6 +1500,7 @@
                                   <Value>=Fields!PerdidaFracc.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>f2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1510,6 +1522,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1551,7 +1564,7 @@
             <Top>3.14537cm</Top>
             <Left>0.18203cm</Left>
             <Height>1.94083cm</Height>
-            <Width>41.45684cm</Width>
+            <Width>41.45681cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>

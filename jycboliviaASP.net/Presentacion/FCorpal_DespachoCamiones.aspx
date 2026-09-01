@@ -47,7 +47,6 @@
         }
         
         .gv_despachos th {
-            
             border: 1px solid white;
         }
         .gv_despachos td{
@@ -62,8 +61,22 @@
             border:1px solid white !important;
             text-align: center;
         }
-    </style>
 
+        /* Estilos para el Modal de Modificación */
+        .modalBackground {
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+        .modalPopup {
+            background-color: #FFFFFF;
+            border: 3px solid #ff8800;
+            border-radius: 8px;
+            padding: 15px;
+            width: 400px;
+            box-shadow: 0px 0px 10px #000;
+        }
+    </style>
 
     <div class="card">
         <div class="card-header bg-warning text-black">Entrega de Productos a Camion</div>
@@ -74,7 +87,6 @@
                 <asp:DropDownList ID="dd_listVehiculo" Font-Size="Small" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="dd_listVehiculo_SelectedIndexChanged">
                 </asp:DropDownList>
             </div>
-
 
             <div class="row mb-3 col-lg-10">
                 <div class=" col-sm-6 col-md-5 col-lg-6">
@@ -109,7 +121,6 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-
             </div>
 
             <!-- CONTAINER BOTONES  -->
@@ -118,54 +129,70 @@
                     <asp:Button ID="bt_limpiar1" runat="server" class="btn btn-primary" Text="Limpiar" OnClick="bt_limpiar_Click" />
                     <asp:Button ID="bt_buscar1" runat="server" class="btn btn-info" Text="Buscar" Width="100px" OnClick="bt_buscar_Click" />
                     <asp:Button ID="bt_actualizar1" runat="server" class="btn btn-success" Text="Entregado" Width="100px" OnClick="bt_actualizar_Click" />
+                    <!-- NUEVO BOTÓN MODIFICAR -->
+                    <asp:Button ID="bt_modificar1" runat="server" class="btn btn-secondary" Text="Modificar" OnClick="bt_modificar_Click" />
                     <asp:Button ID="bt_verRecibo1" runat="server" class="btn btn-warning" Text="Ver Recibo" OnClick="bt_verRecibo_Click" />
                 </div>
-
             </div>
 
             <div class="col-lg-9">
+                <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="vista1">
+                            <asp:GridView ID="gv_despachos" CssClass="gv_despachos sticky-table"
+                                runat="server" BackColor="White" AutoGenerateColumns="false"
+                                BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="10"
+                                Font-Size="Small" ForeColor="Black" GridLines="Vertical" DataKeyNames="codigo, Vehiculo">
+                                <AlternatingRowStyle BackColor="#CCCCCC" />
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="True" />
+                                    <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" Visible="false"/>
+                                    <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
+                                    <asp:BoundField DataField="horagra" HeaderText="Hora" HtmlEncode="false" />
+                                    <asp:BoundField DataField="detalle" HeaderText="Detalle" HtmlEncode="false" />
+                                    <asp:BoundField DataField="Vehiculo" HeaderText="Vehiculo" HtmlEncode="false" />
+                                    <asp:BoundField DataField="Conductor" HeaderText="Conductor" HtmlEncode="false" />
+                                    <asp:BoundField DataField="estadodespacho" HeaderText="Estado" HtmlEncode="false" />
+                                </Columns>
+                                <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#669900" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
+                            </asp:GridView>
+                        </div>
 
+                        <!-- PANEL POPUP PRUEBA (HOLA MUNDO) -->
+                        <asp:Button ID="btnDummyModal" runat="server" Style="display: none;" />
+                        <asp:ModalPopupExtender ID="mpeModificar" runat="server" 
+                            TargetControlID="btnDummyModal" 
+                            PopupControlID="pnlModificar" 
+                            BackgroundCssClass="modalBackground">
+                        </asp:ModalPopupExtender>
 
-            <asp:UpdatePanel ID="updatePanelDDUpdate" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>
-
-                            <div class="vista1">
-                                <asp:GridView ID="gv_despachos" CssClass="gv_despachos sticky-table"
-                                    runat="server" BackColor="White" AutoGenerateColumns="false"
-                                    BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="10"
-                                    Font-Size="Small" ForeColor="Black" GridLines="Vertical" DataKeyNames="codigo, Vehiculo">
-                                    <AlternatingRowStyle BackColor="#CCCCCC" />
-                                    <Columns>
-                                        <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" Visible="false"/>
-                                        <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
-                                        <asp:BoundField DataField="horagra" HeaderText="Hora" HtmlEncode="false" />
-                                        <asp:BoundField DataField="detalle" HeaderText="Detalle" HtmlEncode="false" />
-                                        <asp:BoundField DataField="Vehiculo" HeaderText="Vehiculo" HtmlEncode="false" />
-                                        <asp:BoundField DataField="Conductor" HeaderText="Conductor" HtmlEncode="false" />
-                                        <asp:BoundField DataField="estadodespacho" HeaderText="Estado" HtmlEncode="false" />
-                                    </Columns>
-                                    <FooterStyle BackColor="#CCCCCC" />
-                                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                    <SelectedRowStyle BackColor="#669900" Font-Bold="True" ForeColor="White" />
-                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                    <SortedAscendingHeaderStyle BackColor="#808080" />
-                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                    <SortedDescendingHeaderStyle BackColor="#383838" />
-                                </asp:GridView>
+                        <asp:Panel ID="pnlModificar" runat="server" CssClass="modalPopup" Style="display: none;">
+                            <div class="modal-header bg-warning text-black mb-3 p-2">
+                                <h5 class="m-0">Modificar Despacho</h5>
                             </div>
-
-                </ContentTemplate>
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
-                </Triggers>
-            </asp:UpdatePanel>
-
-
+                            <div class="modal-body text-center">
+                                <h3>Hola Mundo</h3>
+                                <p>Panel de prueba para modificaciones.</p>
                             </div>
+                            <div class="modal-footer text-end mt-3">
+                                <asp:Button ID="btnCerrarModal" runat="server" class="btn btn-secondary" Text="Cerrar" OnClick="btnCerrarModal_Click" />
+                            </div>
+                        </asp:Panel>
+
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="dd_listVehiculo" EventName="SelectedIndexChanged" />
+                        <asp:AsyncPostBackTrigger ControlID="bt_modificar1" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
         </div>
-
     </div>
-
 </asp:Content>

@@ -14,7 +14,6 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             this.Title = Session["BaseDatos"].ToString();
 
             if (tienePermisoDeIngreso(148) == false)
@@ -28,7 +27,6 @@ namespace jycboliviaASP.net.Presentacion
                 mostrarRegistrosDespachoProductos("", "", "Abierto", 0);
                 cargarVehiculos();
             }
-
         }
 
         private void mostrarRegistrosDespachoProductos(string fechadesde, string fechahasta, string estado, int codVehiculo)
@@ -107,43 +105,62 @@ namespace jycboliviaASP.net.Presentacion
             guardarDatos();
         }
 
+        // NUEVO: EVENTO BOTÓN MODIFICAR
+        protected void bt_modificar_Click(object sender, EventArgs e)
+        {
+            if (gv_despachos.SelectedIndex >= 0)
+            {
+                mpeModificar.Show();
+            }
+            else
+            {
+                showalert("Seleccione un registro de la tabla para modificar.");
+            }
+        }
+
+        // NUEVO: EVENTO CERRAR MODAL
+        protected void btnCerrarModal_Click(object sender, EventArgs e)
+        {
+            mpeModificar.Hide();
+        }
+
         private void guardarDatos()
         {
-            if (gv_despachos.SelectedIndex >= 0) {
+            if (gv_despachos.SelectedIndex >= 0)
+            {
 
                 NA_Responsables Nresp = new NA_Responsables();
                 string usuarioAux = Session["NameUser"].ToString();
                 string passwordAux = Session["passworuser"].ToString();
                 int codUser = Nresp.getCodUsuario(usuarioAux, passwordAux);
 
-                //  string estado = dd_estadoCierre.SelectedItem.Text;
                 string estado = "Cerrado";
                 int codigo = Convert.ToInt32(gv_despachos.DataKeys[gv_despachos.SelectedIndex]["codigo"]);
                 string vehiculo = gv_despachos.DataKeys[gv_despachos.SelectedIndex]["Vehiculo"].ToString();
 
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
                 bool bandera = negocio.update_despachodeproductosCamiones(codigo, estado, codUser);
-                if (bandera) {
+                if (bandera)
+                {
 
                     Registro_RutaPuntosDEntrega_Despacho(codigo, vehiculo);
                     RegistrarAlmacenMovil(codigo);
                     Session["codigoDespacho"] = codigo;
                     Session["ReporteGeneral"] = "Reporte_DespachoProductoCamionEntrega";
                     Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
-                } else
+                }
+                else
                     Response.Write("<script type='text/javascript'> alert('Error: Guardado') </script>");
             }
             else
                 Response.Write("<script type='text/javascript'> alert('Error: Dato') </script>");
         }
 
-
         private void RegistrarAlmacenMovil(int codDespacho)
         {
             try
             {
                 NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
-
 
                 DataSet dsCabecera = negocio.GET_CabeceraRutaParaAlmacen(codDespacho);
 
@@ -162,26 +179,21 @@ namespace jycboliviaASP.net.Presentacion
 
                 if (dsProductos != null && dsProductos.Tables[0].Rows.Count > 0)
                 {
-
                     foreach (DataRow rowProd in dsProductos.Tables[0].Rows)
                     {
                         int codProducto = Convert.ToInt32(rowProd["codproducto"]);
                         string producto = rowProd["producto"].ToString();
-                        //decimal cantidadTotal = Convert.ToDecimal(rowProd["cantidad_total"]);
                         decimal cantidadTotal = rowProd["cantidad_total"] != DBNull.Value
                             ? Convert.ToDecimal(rowProd["cantidad_total"]) : 0;
 
                         string medida = rowProd["medida"].ToString();
 
-                        // Manejo de nulos por si algún producto no tiene fracciones
-                        decimal cantFraccionada = rowProd["cantidad_fraccionada_total"] != DBNull.Value 
+                        decimal cantFraccionada = rowProd["cantidad_fraccionada_total"] != DBNull.Value
                                                 ? Convert.ToDecimal(rowProd["cantidad_fraccionada_total"]) : 0;
                         string medidaFraccionada = rowProd["medida_unidadcontenedorfraccionada"].ToString();
 
-                        int traspaso = 0; 
+                        int traspaso = 0;
 
-                        ///////////////     P2
-                        
                         if (cantidadTotal > 0)
                         {
                             bool result = negocio.POST_RegistroAlmacenMovil(
@@ -196,7 +208,6 @@ namespace jycboliviaASP.net.Presentacion
                             }
                         }
 
-                        
                         if (cantFraccionada > 0)
                         {
                             bool result = negocio.POST_RegistroAlmacenMovil(
@@ -210,34 +221,26 @@ namespace jycboliviaASP.net.Presentacion
                                 showalert($"Error al insertar el producto : {producto}");
                             }
                         }
-
                     }
                 }
             }
             catch (Exception ex)
             {
                 throw;
-                //showalert("Error al registrar almacén móvil: " + ex.Message);
             }
         }
 
-
-        /*  Registrar RUTA Y PUNTOS ENTREGA  */
         private void Registro_RutaPuntosDEntrega_Despacho(int codDespacho, string vehiculo)
         {
             try
             {
                 NCorpal_EntregaSolicitudProducto2 nEntrega = new NCorpal_EntregaSolicitudProducto2();
-                
-                /*DS Clientes*/
+
                 DataSet dsCli = nEntrega.GET_obtenerDatosClienteDespacho(codDespacho);
-                
+
                 if (dsCli.Tables[0].Rows.Count == 0)
                     throw new Exception("No se encontraron datos del cliente.");
-       
-                /*FIN*/
 
-                /*DS datos despacho*/
                 DataSet ds = nEntrega.get_DespachoProductoaCamion(codDespacho);
 
                 if (ds.Tables[0].Rows.Count == 0)
@@ -249,7 +252,6 @@ namespace jycboliviaASP.net.Presentacion
 
                 int codConductor = Convert.ToInt32(row["codConductor"]);
                 string conductor = row["Conductor"].ToString();
-                /* FIN */
 
                 int idRuta = nEntrega.post_RegistroRutaEntrega_despacho(codVehiculo, vehiculo, codConductor, conductor);
 
@@ -259,9 +261,8 @@ namespace jycboliviaASP.net.Presentacion
                     return;
                 }
 
-                // REGISTRO PUNTOS CLIENTES
                 int nOrden = 1;
-                foreach(DataRow rowCli in dsCli.Tables[0].Rows)
+                foreach (DataRow rowCli in dsCli.Tables[0].Rows)
                 {
                     int codCli = Convert.ToInt32(rowCli["codCli"]);
                     string cliente = rowCli["tiendaname"].ToString();
@@ -270,35 +271,37 @@ namespace jycboliviaASP.net.Presentacion
                     string descripcion = "";
 
                     bool resultDet = nEntrega.post_RegistroRutaEntregaPuntos_despacho(
-                                    nOrden, idRuta, codCli, cliente, 
+                                    nOrden, idRuta, codCli, cliente,
                                     codDespacho, descripcion, cliLat, cliLng);
 
                     if (!resultDet)
                     {
-                        showalert("Error al registrar el punto del cliente: "+ cliente);
+                        showalert("Error al registrar el punto del cliente: " + cliente);
                         return;
                     }
                     nOrden++;
                 }
 
-                showalert("ruta y puntos de entrega registrados correctamente.");                 
+                showalert("ruta y puntos de entrega registrados correctamente.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showalert("Error en el metodo de registro ruta y puntos. " + ex.Message);
             }
         }
 
-
-
         protected void bt_verRecibo_Click(object sender, EventArgs e)
         {
-            if (dd_listVehiculo.SelectedIndex >= 0)
+            if (gv_despachos.SelectedIndex >= 0)
             {
-                int codigo = int.Parse(gv_despachos.SelectedRow.Cells[1].Text);                
+                int codigo = Convert.ToInt32(gv_despachos.DataKeys[gv_despachos.SelectedIndex]["codigo"]);
                 Session["codigoDespacho"] = codigo;
                 Session["ReporteGeneral"] = "Reporte_DespachoProductoCamionEntrega";
                 Response.Redirect("../Presentacion/FCorpal_ReporteGeneral.aspx");
+            }
+            else
+            {
+                showalert("Seleccione un registro de la tabla para ver el recibo.");
             }
         }
 
@@ -320,6 +323,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             throw new NotImplementedException();
         }
+
         private void showalert(string mensaje)
         {
             string script = $"alert(' {mensaje.Replace("'", "\\'")}');";

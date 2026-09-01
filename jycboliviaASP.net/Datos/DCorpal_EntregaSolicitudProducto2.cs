@@ -886,67 +886,80 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
-                string consulta2 = @"select 
-                                    dv.`codigo` as 'codDespacho',
-                                    ddv.`codpedido` as 'codSolicitud',
-                                    t1.codOrdenEntrega,
+                string consulta2 =@"
+SELECT
+    dv.codigo AS codDespacho,
+    ddv.codpedido AS codSolicitud,
+    oec.codigo AS codOrdenEntrega,
 
-                                    concat(car.`placa`, ' ', car.`marca`) as 'vehiculo',
-                                    dv.`conductor` as 'conductor',
+    CONCAT(car.placa, ' ', car.marca) AS vehiculo,
+    dv.conductor,
 
-                                    t1.cliente,
-                                    t1.vendedor,
+    oec.cliente,
+    oec.responsable AS vendedor,
 
-                                    ddv.`codprod`,
-                                    p.`producto` as 'producto',
-                                    ddv.`contenedorfraccionado` as fraccionado,
+    ddv.codprod,
+    p.producto,
+    ddv.contenedorfraccionado AS fraccionado,
 
-                                    ddv.`cantentregada`,
-                                    t1.cantidadEntregadaCliente,
+    ddv.cantentregada,
 
-                                    CASE
-                                        WHEN t1.cantidadEntregadaCliente is null or t1.cantidadEntregadaCliente = 0
-                                             then ddv.`cantentregada`
-                                        ELSE ddv.`cantentregada` - t1.cantidadEntregadaCliente
-                                        END as cantidadSobrante,
-                                    t1.fechaentrega 
+    CASE
+        WHEN doec.contenedorfraccionado = 1
+        THEN doec.cant_unidadcontenedorfraccionada
+        ELSE doec.cantidad
+    END AS cantidadEntregadaCliente,
 
-                                    from  
-                                    tbcorpal_despachovehiculo dv 
-                                    left join tbcorpal_detalleproddespacho ddv ON dv.`codigo` = ddv.`coddespacho` 
+    CASE
+        WHEN doec.codigo IS NULL
+        THEN ddv.cantentregada
 
-                                    left join 
-                                    (
+        WHEN
+            (
+                CASE
+                    WHEN doec.contenedorfraccionado = 1
+                    THEN doec.cant_unidadcontenedorfraccionada
+                    ELSE doec.cantidad
+                END
+            ) = 0
+        THEN ddv.cantentregada
 
-                                    select 
-                                    oec.codigo as codOrdenEntrega,
-                                    oec.cliente,
-                                    oec.responsable as 'vendedor',
-                                    doec.`codprod`,
-                                    oec.`cod_despachovehiculo`,
-                                    oec.fechaentrega,
-                                    CASE
-                                        when doec.contenedorfraccionado = 1
-                                           then doec.cant_unidadcontenedorfraccionada
-                                        else doec.cantidad
-                                        end as cantidadEntregadaCliente
-    
-                                    from 
-                                    tbcorpal_ordenentregacliente oec 
-                                    left join tbcorpal_detalleproductoordenentregacliente doec ON oec.`codigo` = doec.`codventa`
-                                    where
-                                    oec.`estado` = 1
+        ELSE
+            ddv.cantentregada -
+            (
+                CASE
+                    WHEN doec.contenedorfraccionado = 1
+                    THEN doec.cant_unidadcontenedorfraccionada
+                    ELSE doec.cantidad
+                END
+            )
+    END AS cantidadSobrante,
 
-                                    ) t1 ON dv.`codigo` = t1.cod_despachovehiculo and ddv.codprod = t1.codprod
+    oec.fechaentrega
 
-                                    inner join tbcorpal_vehiculos car ON dv.`codvehiculo` = car.`codigo` 
+FROM tbcorpal_despachovehiculo dv
 
-                                    inner join tbcorpal_producto p ON ddv.`codprod` = p.`codigo` 
+INNER JOIN tbcorpal_detalleproddespacho ddv
+    ON ddv.coddespacho = dv.codigo
 
-                                    where 
-                                    dv.`estado` = 1 
-                                    and dv.`estadodespacho` = 'Cerrado' 
-                                    and dv.`fechagra` between @fechaIni and @fechaFin  ";
+INNER JOIN tbcorpal_vehiculos car
+    ON car.codigo = dv.codvehiculo
+
+INNER JOIN tbcorpal_producto p
+    ON p.codigo = ddv.codprod
+
+LEFT JOIN tbcorpal_ordenentregacliente oec
+    ON oec.cod_despachovehiculo = dv.codigo
+    AND oec.estado = 1
+
+LEFT JOIN tbcorpal_detalleproductoordenentregacliente doec
+    ON doec.codventa = oec.codigo
+    AND doec.codprod = ddv.codprod
+
+WHERE dv.estado = 1
+  AND dv.estadodespacho = 'Cerrado'
+  AND dv.fechagra >= @fechaIni
+  AND dv.fechagra < DATE_ADD(@fechaFin, INTERVAL 1 DAY)";
 
 
                 var parametros = new List<MySqlParameter>
