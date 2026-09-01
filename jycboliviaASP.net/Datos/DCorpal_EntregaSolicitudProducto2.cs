@@ -1385,5 +1385,236 @@ WHERE dv.estado = 1
             }
         }
 
+        /*  ----   MODIFICAR DESPACHO: EDITAR CANTIDAD / ELIMINAR LINEA   ----*/
+
+        // Detalle de líneas de un despacho, para el modal de Modificar.
+        // Un mismo despacho puede traer varias solicitudes, y una misma pedida en más de una
+        // de ellas -> se trae nroboleta y cliente para que el usuario distinga de qué solicitud
+        // quitar/editar cuando el producto está repetido.
+        internal DataSet GET_DetalleDespachoParaModificar(int codDespacho)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT dv.codigo, dv.codpedido, dv.codprod, dv.cantentregada,
+                           dv.contenedorfraccionado, p.producto, p.medida, p.medidaunidadcontenido,
+                           sep.nroboleta, cli.tiendaname AS cliente
+                    FROM tbcorpal_detalleproddespacho dv
+                    INNER JOIN tbcorpal_producto p ON dv.codprod = p.codigo
+                    LEFT JOIN tbcorpal_solicitudentregaproducto sep ON dv.codpedido = sep.codigo
+                    LEFT JOIN tbcorpal_cliente cli ON dv.codcliente = cli.codigo
+                    WHERE dv.coddespacho = @codDespacho
+                      AND (dv.estadoentrega = 1 OR dv.estadoentrega IS NULL)
+                    ORDER BY sep.nroboleta, p.producto";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el detalle del despacho. " + ex.Message);
+            }
+        }
+
+        // Todas las líneas (uno o más productos) de UNA solicitud dentro de un despacho.
+        // El "Eliminar" del modal borra por solicitud completa, no producto por producto,
+        // porque un despacho puede traer varias solicitudes con productos repetidos.
+        internal DataSet GET_LineasDespachoPorPedido(int codDespacho, int codPedido)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT dv.codigo, dv.coddespacho, dv.codpedido, dv.codprod, dv.cantentregada,
+                           dv.contenedorfraccionado, p.producto, p.medida, p.medidaunidadcontenido,
+                           sep.nroboleta, cli.tiendaname AS cliente
+                    FROM tbcorpal_detalleproddespacho dv
+                    INNER JOIN tbcorpal_producto p ON dv.codprod = p.codigo
+                    LEFT JOIN tbcorpal_solicitudentregaproducto sep ON dv.codpedido = sep.codigo
+                    LEFT JOIN tbcorpal_cliente cli ON dv.codcliente = cli.codigo
+                    WHERE dv.coddespacho = @codDespacho
+                      AND dv.codpedido = @codPedido
+                      AND (dv.estadoentrega = 1 OR dv.estadoentrega IS NULL)";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho),
+                    new MySqlParameter("@codPedido", codPedido)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las líneas de la solicitud en el despacho. " + ex.Message);
+            }
+        }
+
+        // Una sola línea de despacho por su PK, para calcular el delta antes de modificar
+        internal DataSet GET_LineaDespachoPorId(int idDetalle)
+        {
+            try
+            {
+                string consulta = @"
+                    SELECT dv.codigo, dv.coddespacho, dv.codpedido, dv.codprod, dv.cantentregada,
+                           dv.contenedorfraccionado, p.producto, p.medida, p.medidaunidadcontenido
+                    FROM tbcorpal_detalleproddespacho dv
+                    INNER JOIN tbcorpal_producto p ON dv.codprod = p.codigo
+                    WHERE dv.codigo = @idDetalle";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@idDetalle", idDetalle)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la línea del despacho. " + ex.Message);
+            }
+        }
+
+        internal bool UPDATE_CantidadLineaDespacho(int idDetalle, float nuevaCantidad)
+        {
+            try
+            {
+                string consulta = "UPDATE tbcorpal_detalleproddespacho SET cantentregada = @nuevaCantidad WHERE codigo = @idDetalle";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@nuevaCantidad", nuevaCantidad);
+                    cmd.Parameters.AddWithValue("@idDetalle", idDetalle);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la cantidad de la línea de despacho. " + ex.Message);
+            }
+        }
+
+        // Soft-delete: no se borra la fila (queda para auditoría), pero se pone cantentregada = 0
+        // ademas del flag estadoentrega = 0, porque no todas las consultas que suman cantentregada
+        // (get_DespachoProductoaCamion, GET_obtenerDatosClienteDespacho, get_DespachoBoletasProdEntrega)
+        // filtran por estadoentrega -- poniendo la cantidad en 0 queda protegido en cualquier camino.
+        internal bool SoftDelete_LineaDespacho(int idDetalle)
+        {
+            try
+            {
+                string consulta = "UPDATE tbcorpal_detalleproddespacho SET estadoentrega = 0, cantentregada = 0 WHERE codigo = @idDetalle";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@idDetalle", idDetalle);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar la línea de despacho. " + ex.Message);
+            }
+        }
+
+        // cantentregada en tbcorpal_detalle_solicitudproducto es un acumulado entre varios despachos:
+        // se ajusta por delta, nunca se sobreescribe con el valor absoluto nuevo.
+        internal bool UPDATE_SyncCantidadSolicitud(int codSolicitud, int codProducto, bool fraccionado, float delta)
+        {
+            try
+            {
+                string consulta = @"
+                    UPDATE tbcorpal_detalle_solicitudproducto
+                    SET cantentregada = IFNULL(cantentregada, 0) + @delta
+                    WHERE codsolicitud = @codSolicitud
+                      AND codproducto = @codProducto
+                      AND ((@fraccionado = 1 AND contenedorfraccionado = 1)
+                        OR (@fraccionado = 0 AND contenedorfraccionado IS NULL))";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@delta", delta);
+                    cmd.Parameters.AddWithValue("@codSolicitud", codSolicitud);
+                    cmd.Parameters.AddWithValue("@codProducto", codProducto);
+                    cmd.Parameters.AddWithValue("@fraccionado", fraccionado ? 1 : 0);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al sincronizar la cantidad de la solicitud. " + ex.Message);
+            }
+        }
+
+        // tbcorpal_almacenmovil solo existe si el despacho ya está Cerrado, y NO TIENE columna de
+        // estado -- a diferencia de tbcorpal_detalleproddespacho, aquí no hay flag para "ocultar" una
+        // fila. Por eso: si el delta deja la cantidad en 0 (o menos), la fila se BORRA físicamente;
+        // si queda positiva, se actualiza; si no existía fila del tipo (normal/fraccionado) y el delta
+        // es positivo (porque esa cantidad era 0 al cerrar el despacho), se inserta.
+        public bool SincronizarCantidadAlmacenMovil(int codDespacho, int codRuta, int codChofer, int codVehiculo,
+                                                      int codProducto, string producto, string medida, string medidaFraccionada,
+                                                      bool fraccionado, decimal delta)
+        {
+            try
+            {
+                string columnaCantidad = fraccionado ? "cant_unidadcontenedorfraccionada" : "cantidad";
+
+                string consultaSelect = $@"
+                    SELECT codigo, {columnaCantidad} AS cantidadActual
+                    FROM tbcorpal_almacenmovil
+                    WHERE coddespacho = @codDespacho
+                      AND codproducto = @codProducto
+                      AND traspaso = 0
+                      AND {columnaCantidad} > 0
+                    LIMIT 1";
+
+                var parametrosSelect = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@codDespacho", codDespacho),
+                    new MySqlParameter("@codProducto", codProducto)
+                };
+                DataSet dsExistente = conexion.consultaMySqlParametros(consultaSelect, parametrosSelect);
+
+                if (dsExistente != null && dsExistente.Tables[0].Rows.Count > 0)
+                {
+                    DataRow fila = dsExistente.Tables[0].Rows[0];
+                    int idAlmacenMovil = Convert.ToInt32(fila["codigo"]);
+                    decimal cantidadActual = Convert.ToDecimal(fila["cantidadActual"]);
+                    decimal nuevaCantidad = cantidadActual + delta;
+
+                    if (nuevaCantidad <= 0)
+                    {
+                        string consultaDelete = "DELETE FROM tbcorpal_almacenmovil WHERE codigo = @id";
+                        using (MySqlCommand cmd = new MySqlCommand(consultaDelete))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idAlmacenMovil);
+                            return conexion.ejecutarMySql2(cmd);
+                        }
+                    }
+
+                    string consultaUpdate = $"UPDATE tbcorpal_almacenmovil SET {columnaCantidad} = @nuevaCantidad WHERE codigo = @id";
+                    using (MySqlCommand cmd = new MySqlCommand(consultaUpdate))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevaCantidad", nuevaCantidad);
+                        cmd.Parameters.AddWithValue("@id", idAlmacenMovil);
+                        return conexion.ejecutarMySql2(cmd);
+                    }
+                }
+
+                if (delta > 0)
+                {
+                    decimal cantidadNormal = fraccionado ? 0 : delta;
+                    decimal cantidadFraccionada = fraccionado ? delta : 0;
+
+                    return POST_RegistroAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo, codProducto, producto,
+                                                      cantidadNormal, medida, cantidadFraccionada, medidaFraccionada, 0);
+                }
+
+                Console.WriteLine($"Aviso: no se encontró registro en almacenmovil para despacho {codDespacho}, producto {codProducto} al sincronizar un delta negativo.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al sincronizar el almacén móvil. " + ex.Message);
+            }
+        }
+
     }
 }

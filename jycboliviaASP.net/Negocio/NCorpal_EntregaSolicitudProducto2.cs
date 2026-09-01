@@ -319,7 +319,45 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        /*  ----   MODIFICAR DESPACHO: EDITAR CANTIDAD / ELIMINAR LINEA   ----*/
 
+        internal DataSet GET_DetalleDespachoParaModificar(int codDespacho)
+        {
+            return datos.GET_DetalleDespachoParaModificar(codDespacho);
+        }
+
+        internal DataSet GET_LineaDespachoPorId(int idDetalle)
+        {
+            return datos.GET_LineaDespachoPorId(idDetalle);
+        }
+
+        internal DataSet GET_LineasDespachoPorPedido(int codDespacho, int codPedido)
+        {
+            return datos.GET_LineasDespachoPorPedido(codDespacho, codPedido);
+        }
+
+        internal bool UPDATE_CantidadLineaDespacho(int idDetalle, float nuevaCantidad)
+        {
+            return datos.UPDATE_CantidadLineaDespacho(idDetalle, nuevaCantidad);
+        }
+
+        internal bool SoftDelete_LineaDespacho(int idDetalle)
+        {
+            return datos.SoftDelete_LineaDespacho(idDetalle);
+        }
+
+        internal bool UPDATE_SyncCantidadSolicitud(int codSolicitud, int codProducto, bool fraccionado, float delta)
+        {
+            return datos.UPDATE_SyncCantidadSolicitud(codSolicitud, codProducto, fraccionado, delta);
+        }
+
+        public bool SincronizarCantidadAlmacenMovil(int codDespacho, int codRuta, int codChofer, int codVehiculo,
+                                                      int codProducto, string producto, string medida, string medidaFraccionada,
+                                                      bool fraccionado, decimal delta)
+        {
+            return datos.SincronizarCantidadAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo, codProducto,
+                                                           producto, medida, medidaFraccionada, fraccionado, delta);
+        }
 
     }
 }

@@ -146,7 +146,7 @@
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:CommandField ShowSelectButton="True" />
-                                    <asp:BoundField DataField="codigo" HeaderText="Codigo" HtmlEncode="false" Visible="false"/>
+                                    <asp:BoundField DataField="codigo" HeaderText="Cod. Despacho" HtmlEncode="false" />
                                     <asp:BoundField DataField="fecha" HeaderText="Fecha" HtmlEncode="false" />
                                     <asp:BoundField DataField="horagra" HeaderText="Hora" HtmlEncode="false" />
                                     <asp:BoundField DataField="detalle" HeaderText="Detalle" HtmlEncode="false" />
@@ -165,7 +165,7 @@
                             </asp:GridView>
                         </div>
 
-                        <!-- PANEL POPUP PRUEBA (HOLA MUNDO) -->
+                        <!-- MODAL: MODIFICAR / ELIMINAR LINEAS DEL DESPACHO -->
                         <asp:Button ID="btnDummyModal" runat="server" Style="display: none;" />
                         <asp:ModalPopupExtender ID="mpeModificar" runat="server" 
                             TargetControlID="btnDummyModal" 
@@ -173,13 +173,64 @@
                             BackgroundCssClass="modalBackground">
                         </asp:ModalPopupExtender>
 
-                        <asp:Panel ID="pnlModificar" runat="server" CssClass="modalPopup" Style="display: none;">
+                        <asp:Panel ID="pnlModificar" runat="server" CssClass="modalPopup" Style="display: none; width: 900px;">
                             <div class="modal-header bg-warning text-black mb-3 p-2">
                                 <h5 class="m-0">Modificar Despacho</h5>
                             </div>
-                            <div class="modal-body text-center">
-                                <h3>Hola Mundo</h3>
-                                <p>Panel de prueba para modificaciones.</p>
+                            <div class="modal-body">
+                                <asp:HiddenField ID="hf_codDespachoModificar" runat="server" />
+                                <asp:GridView ID="gv_detalleModificar" runat="server" AutoGenerateColumns="false"
+                                    CssClass="table table-striped table-bordered table-sm"
+                                    DataKeyNames="codigo, codpedido"
+                                    OnRowEditing="gv_detalleModificar_RowEditing"
+                                    OnRowCancelingEdit="gv_detalleModificar_RowCancelingEdit"
+                                    OnRowUpdating="gv_detalleModificar_RowUpdating"
+                                    OnRowDeleting="gv_detalleModificar_RowDeleting"
+                                    EmptyDataText="No hay productos en este despacho.">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Boleta">
+                                            <ItemTemplate>
+                                                <%# Eval("nroboleta") %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cliente">
+                                            <ItemTemplate>
+                                                <%# Eval("cliente") %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Producto">
+                                            <ItemTemplate>
+                                                <%# Eval("producto") %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Tipo">
+                                            <ItemTemplate>
+                                                <%# (Eval("contenedorfraccionado") != DBNull.Value && Convert.ToBoolean(Eval("contenedorfraccionado"))) ? "Fraccionado" : "Normal" %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Cantidad">
+                                            <ItemTemplate>
+                                                <%# Eval("cantentregada") %>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:TextBox ID="txtEditCantidad" runat="server" Text='<%# Eval("cantentregada") %>' CssClass="form-control" TextMode="Number" step="0.01"></asp:TextBox>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkEditar" runat="server" CommandName="Edit" CssClass="btn btn-warning btn-sm">Editar</asp:LinkButton>
+                                                <asp:LinkButton ID="lnkEliminar" runat="server" CommandName="Delete" CssClass="btn btn-danger btn-sm"
+                                                    ToolTip="Elimina TODOS los productos de esta solicitud dentro del despacho, no solo este producto"
+                                                    OnClientClick='<%# "return confirm(\"¿Eliminar TODOS los productos de la solicitud (boleta " + Eval("nroboleta") + ") en este despacho? No solo este producto.\");" %>'>Eliminar solicitud</asp:LinkButton>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <asp:LinkButton ID="lnkGuardar" runat="server" CommandName="Update" CssClass="btn btn-success btn-sm">Guardar</asp:LinkButton>
+                                                <asp:LinkButton ID="lnkCancelar" runat="server" CommandName="Cancel" CssClass="btn btn-default btn-sm">Cancelar</asp:LinkButton>
+                                            </EditItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle BackColor="#ff8800" Font-Bold="True" ForeColor="White" />
+                                </asp:GridView>
                             </div>
                             <div class="modal-footer text-end mt-3">
                                 <asp:Button ID="btnCerrarModal" runat="server" class="btn btn-secondary" Text="Cerrar" OnClick="btnCerrarModal_Click" />

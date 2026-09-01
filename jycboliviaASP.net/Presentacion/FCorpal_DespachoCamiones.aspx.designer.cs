@@ -213,6 +213,24 @@ namespace jycboliviaASP.net.Presentacion
         protected global::System.Web.UI.WebControls.Panel pnlModificar;
 
         /// <summary>
+        /// Control hf_codDespachoModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_codDespachoModificar;
+
+        /// <summary>
+        /// Control gv_detalleModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv_detalleModificar;
+
+        /// <summary>
         /// Control btnCerrarModal.
         /// </summary>
         /// <remarks>

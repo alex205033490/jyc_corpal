@@ -110,6 +110,10 @@ namespace jycboliviaASP.net.Presentacion
         {
             if (gv_despachos.SelectedIndex >= 0)
             {
+                int codDespacho = Convert.ToInt32(gv_despachos.DataKeys[gv_despachos.SelectedIndex]["codigo"]);
+                hf_codDespachoModificar.Value = codDespacho.ToString();
+                gv_detalleModificar.EditIndex = -1;
+                CargarDetalleModificar(codDespacho);
                 mpeModificar.Show();
             }
             else
@@ -122,6 +126,246 @@ namespace jycboliviaASP.net.Presentacion
         protected void btnCerrarModal_Click(object sender, EventArgs e)
         {
             mpeModificar.Hide();
+        }
+
+        /*  ----   MODIFICAR DESPACHO: EDITAR CANTIDAD / ELIMINAR LINEA   ----*/
+
+        private void CargarDetalleModificar(int codDespacho)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            DataSet datos = negocio.GET_DetalleDespachoParaModificar(codDespacho);
+            gv_detalleModificar.DataSource = datos;
+            gv_detalleModificar.DataBind();
+        }
+
+        // El ModalPopupExtender se re-renderiza oculto en CADA postback (incluso los "async" del
+        // UpdatePanel), así que hay que volver a invocar Show() al final de todo evento originado
+        // dentro del modal, si no la ventana "se cierra" sola aunque la página no haya recargado.
+        protected void gv_detalleModificar_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gv_detalleModificar.EditIndex = e.NewEditIndex;
+            CargarDetalleModificar(Convert.ToInt32(hf_codDespachoModificar.Value));
+            mpeModificar.Show();
+        }
+
+        protected void gv_detalleModificar_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gv_detalleModificar.EditIndex = -1;
+            CargarDetalleModificar(Convert.ToInt32(hf_codDespachoModificar.Value));
+            mpeModificar.Show();
+        }
+
+        protected void gv_detalleModificar_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                int idDetalle = Convert.ToInt32(gv_detalleModificar.DataKeys[e.RowIndex].Value);
+
+                GridViewRow fila = gv_detalleModificar.Rows[e.RowIndex];
+                TextBox txtCantidad = (TextBox)fila.FindControl("txtEditCantidad");
+
+                if (!float.TryParse(txtCantidad.Text.Replace(",", "."),
+                    System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture,
+                    out float nuevaCantidad) || nuevaCantidad < 0)
+                {
+                    showalert("Ingrese una cantidad válida.");
+                    mpeModificar.Show();
+                    return;
+                }
+
+                bool exito = GuardarModificacionCantidad(idDetalle, nuevaCantidad);
+
+                gv_detalleModificar.EditIndex = -1;
+                CargarDetalleModificar(Convert.ToInt32(hf_codDespachoModificar.Value));
+
+                if (!exito)
+                {
+                    showalert("No se pudo actualizar la cantidad.");
+                }
+
+                mpeModificar.Show();
+            }
+            catch (Exception ex)
+            {
+                showalert("Error al actualizar la cantidad: " + ex.Message);
+                mpeModificar.Show();
+            }
+        }
+
+        // "Eliminar" borra TODOS los productos de la solicitud (boleta) dentro de este despacho,
+        // no solo el producto de la fila donde se hizo clic -- un despacho puede traer varias
+        // solicitudes con productos repetidos, y el usuario quiere quitar la solicitud completa.
+        protected void gv_detalleModificar_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                int codDespacho = Convert.ToInt32(hf_codDespachoModificar.Value);
+                int codPedido = Convert.ToInt32(gv_detalleModificar.DataKeys[e.RowIndex].Values["codpedido"]);
+
+                bool exito = EliminarSolicitudDelDespacho(codDespacho, codPedido);
+
+                CargarDetalleModificar(codDespacho);
+
+                if (!exito)
+                {
+                    showalert("No se pudo eliminar la solicitud del despacho.");
+                }
+
+                mpeModificar.Show();
+            }
+            catch (Exception ex)
+            {
+                showalert("Error al eliminar la solicitud: " + ex.Message);
+                mpeModificar.Show();
+            }
+        }
+
+        // Cambia la cantidad de una línea de despacho y sincroniza por delta la solicitud
+        // original y (si el despacho ya está Cerrado) el almacén móvil. No toca tbcorpal_producto.stock.
+        private bool GuardarModificacionCantidad(int idDetalle, float nuevaCantidad)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+            DataSet dsLinea = negocio.GET_LineaDespachoPorId(idDetalle);
+            if (dsLinea == null || dsLinea.Tables[0].Rows.Count == 0)
+            {
+                showalert("No se encontró la línea de despacho.");
+                return false;
+            }
+
+            DataRow linea = dsLinea.Tables[0].Rows[0];
+            int codDespacho = Convert.ToInt32(linea["coddespacho"]);
+            int codPedido = Convert.ToInt32(linea["codpedido"]);
+            int codProd = Convert.ToInt32(linea["codprod"]);
+            float cantidadActual = Convert.ToSingle(linea["cantentregada"]);
+            bool fraccionado = linea["contenedorfraccionado"] != DBNull.Value && Convert.ToBoolean(linea["contenedorfraccionado"]);
+            string producto = linea["producto"].ToString();
+            string medida = linea["medida"].ToString();
+            string medidaFraccionada = linea["medidaunidadcontenido"].ToString();
+
+            float delta = nuevaCantidad - cantidadActual;
+            if (delta == 0)
+            {
+                return true;
+            }
+
+            if (!negocio.UPDATE_CantidadLineaDespacho(idDetalle, nuevaCantidad))
+            {
+                return false;
+            }
+
+            negocio.UPDATE_SyncCantidadSolicitud(codPedido, codProd, fraccionado, delta);
+
+            SincronizarAlmacenMovilSiCorresponde(negocio, codDespacho, codProd, producto, medida, medidaFraccionada, fraccionado, delta);
+
+            //----------------historial-------------
+            NA_Historial nhistorial = new NA_Historial();
+            nhistorial.insertar(ObtenerCodUserActual(),
+                $"Se modificó la cantidad del despacho {codDespacho}, producto {producto} (pedido {codPedido}), de {cantidadActual} a {nuevaCantidad}.");
+            //--------------------------------------
+
+            return true;
+        }
+
+        // Elimina TODOS los productos de una solicitud dentro de un despacho (no producto por
+        // producto): marca cada línea como eliminada (estadoentrega = 0, cantentregada = 0) y
+        // sincroniza por delta negativo la solicitud original y (si el despacho ya está Cerrado)
+        // el almacén móvil, uno por producto.
+        private bool EliminarSolicitudDelDespacho(int codDespacho, int codPedido)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+
+            DataSet dsLineas = negocio.GET_LineasDespachoPorPedido(codDespacho, codPedido);
+            if (dsLineas == null || dsLineas.Tables[0].Rows.Count == 0)
+            {
+                showalert("No se encontraron productos de esa solicitud en este despacho.");
+                return false;
+            }
+
+            // La cabecera de ruta (si existe) es la señal de que el despacho ya está Cerrado y por
+            // lo tanto tiene datos en almacén móvil -- se consulta una sola vez para todo el pedido.
+            DataSet dsCabecera = negocio.GET_CabeceraRutaParaAlmacen(codDespacho);
+            bool despachoCerrado = dsCabecera != null && dsCabecera.Tables[0].Rows.Count > 0;
+            int codRuta = 0, codChofer = 0, codVehiculo = 0;
+            if (despachoCerrado)
+            {
+                DataRow cabecera = dsCabecera.Tables[0].Rows[0];
+                codRuta = Convert.ToInt32(cabecera["codruta"]);
+                codChofer = Convert.ToInt32(cabecera["codchofer"]);
+                codVehiculo = Convert.ToInt32(cabecera["codvehiculo"]);
+            }
+
+            bool exitoGeneral = true;
+            var detalleHistorial = new System.Text.StringBuilder();
+            string nroboleta = null;
+            string cliente = null;
+
+            foreach (DataRow linea in dsLineas.Tables[0].Rows)
+            {
+                int idDetalle = Convert.ToInt32(linea["codigo"]);
+                int codProd = Convert.ToInt32(linea["codprod"]);
+                float cantidadActual = Convert.ToSingle(linea["cantentregada"]);
+                bool fraccionado = linea["contenedorfraccionado"] != DBNull.Value && Convert.ToBoolean(linea["contenedorfraccionado"]);
+                string producto = linea["producto"].ToString();
+                string medida = linea["medida"].ToString();
+                string medidaFraccionada = linea["medidaunidadcontenido"].ToString();
+                nroboleta = linea["nroboleta"] != DBNull.Value ? linea["nroboleta"].ToString() : nroboleta;
+                cliente = linea["cliente"] != DBNull.Value ? linea["cliente"].ToString() : cliente;
+
+                if (!negocio.SoftDelete_LineaDespacho(idDetalle))
+                {
+                    exitoGeneral = false;
+                    showalert($"No se pudo eliminar el producto {producto}.");
+                    continue;
+                }
+
+                float delta = -cantidadActual;
+                negocio.UPDATE_SyncCantidadSolicitud(codPedido, codProd, fraccionado, delta);
+
+                if (despachoCerrado)
+                {
+                    negocio.SincronizarCantidadAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo,
+                        codProd, producto, medida, medidaFraccionada, fraccionado, (decimal)delta);
+                }
+
+                detalleHistorial.Append($"{producto} ({cantidadActual}); ");
+            }
+
+            //----------------historial-------------
+            NA_Historial nhistorial = new NA_Historial();
+            nhistorial.insertar(ObtenerCodUserActual(),
+                $"Se eliminó la solicitud (boleta {nroboleta}, cliente {cliente}, pedido {codPedido}) del despacho {codDespacho}. Productos: {detalleHistorial}");
+            //--------------------------------------
+
+            return exitoGeneral;
+        }
+
+        private int ObtenerCodUserActual()
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usuarioAux = Session["NameUser"].ToString();
+            string passwordAux = Session["passworuser"].ToString();
+            return Nresp.getCodUsuario(usuarioAux, passwordAux);
+        }
+
+        // tbcorpal_almacenmovil solo tiene datos de un despacho una vez que se cerró (Entregado).
+        // Se usa la existencia de la ruta registrada (GET_CabeceraRutaParaAlmacen) como señal de que ya se cerró.
+        private void SincronizarAlmacenMovilSiCorresponde(NCorpal_EntregaSolicitudProducto2 negocio, int codDespacho,
+            int codProd, string producto, string medida, string medidaFraccionada, bool fraccionado, float delta)
+        {
+            DataSet dsCabecera = negocio.GET_CabeceraRutaParaAlmacen(codDespacho);
+            if (dsCabecera == null || dsCabecera.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+
+            DataRow cabecera = dsCabecera.Tables[0].Rows[0];
+            int codRuta = Convert.ToInt32(cabecera["codruta"]);
+            int codChofer = Convert.ToInt32(cabecera["codchofer"]);
+            int codVehiculo = Convert.ToInt32(cabecera["codvehiculo"]);
+
+            negocio.SincronizarCantidadAlmacenMovil(codDespacho, codRuta, codChofer, codVehiculo,
+                codProd, producto, medida, medidaFraccionada, fraccionado, (decimal)delta);
         }
 
         private void guardarDatos()
