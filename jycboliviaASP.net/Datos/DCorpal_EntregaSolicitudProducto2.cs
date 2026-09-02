@@ -242,6 +242,10 @@ namespace jycboliviaASP.net.Datos
 
         internal DataSet get_despachosdeCamiones(string fechadesde, string fechahasta, string estado, int codVehiculo)
         {
+            // El límite de "últimos 5 días" solo aplica a búsquedas de despachos Abiertos (para no
+            // cargar de más por defecto). Los Cerrados son historial y se pueden buscar sin límite.
+            bool esBusquedaCerrado = estado != null && estado.Equals("Cerrado", StringComparison.OrdinalIgnoreCase);
+
             string consulta = "select  " +
                                " dd.codigo, " +
                                " date_format(dd.fechagra,'%d/%m/%Y') as  'fecha', " +
@@ -252,7 +256,7 @@ namespace jycboliviaASP.net.Datos
                                " from tbcorpal_despachovehiculo dd, " +
                                " tbcorpal_vehiculos vv " +
                                " where " +
-                               " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and " +
+                               (esBusquedaCerrado ? "" : " dd.fechagra >= CURDATE() - INTERVAL 5 DAY and ") +
                                " dd.codvehiculo = vv.codigo and " +
                                " dd.estado = 1 and " +
                                " dd.estadodespacho = '" + estado + "'";
