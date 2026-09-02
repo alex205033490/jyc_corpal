@@ -26,6 +26,12 @@ namespace jycboliviaASP.net.Presentacion
             {
                 mostrarRegistrosDespachoProductos("", "", "Abierto", 0);
                 cargarVehiculos();
+
+                // PERMISO EXCLUSIVO PARA EL BOTON MODIFICAR
+                if (tienePermisoDeIngreso(153) == false)
+                {
+                    bt_modificar1.Enabled = false;
+                }
             }
         }
 
