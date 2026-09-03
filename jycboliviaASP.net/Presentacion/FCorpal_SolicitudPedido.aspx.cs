@@ -409,8 +409,20 @@ namespace jycboliviaASP.net.Presentacion
 
         private bool validarGuardado()
         {
-            int codTipoCliente = Convert.ToInt32(hf_tipoCliente.Value);
-            
+            // Si nunca se verificó una tienda, hf_codCliente/hf_tipoCliente quedan vacíos y
+            // Convert.ToInt32("") tira una excepción no controlada más abajo -- eso hacía que el
+            // postback fallara en silencio, sin mostrar ninguna alerta. Se valida esto primero,
+            // explícito y claro, antes de tocar esos campos.
+            int codClienteValidacion;
+            if (!int.TryParse(hf_codCliente.Value, out codClienteValidacion) || codClienteValidacion <= 0)
+            {
+                showalert("Debe verificar una tienda/cliente válida antes de guardar.");
+                return false;
+            }
+
+            int codTipoCliente;
+            int.TryParse(hf_tipoCliente.Value, out codTipoCliente);
+
             if (codTipoCliente != 7)
             {
                 foreach(GridViewRow row in gv_adicionados.Rows)
@@ -753,7 +765,7 @@ namespace jycboliviaASP.net.Presentacion
                 tx_razonSocial.Text = tuplaCliente.Tables[0].Rows[0][12].ToString();
                 tx_nit.Text = tuplaCliente.Tables[0].Rows[0][13].ToString();
             }else
-                Response.Write("<script type='text/javascript'> alert('Error: Tienda no existe') </script>");
+                showalert("Error: Tienda no existe");
 
         }
         private void limpiarCamposADDProducto()
@@ -882,7 +894,13 @@ namespace jycboliviaASP.net.Presentacion
 
         private void showalert(string mensaje)
         {
-            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            // Apaga el overlay de "Guardando..." ANTES del alert: el overlay se oculta recién en
+            // el evento endRequest de PageRequestManager, que corre DESPUES de que este script se
+            // ejecuta (alert() es bloqueante) -- si no se apaga acá primero, la alerta de
+            // validación queda mostrándose con la pantalla de "Guardando..." todavía encima.
+            string script = "var _ov = document.getElementById('loadingOverlayGuardar'); " +
+                             "if (_ov) { _ov.style.display = 'none'; } " +
+                             $"alert('{mensaje.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
 

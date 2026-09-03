@@ -77,6 +77,11 @@ namespace jycboliviaASP.net.Negocio
             return datos.update_despachodeproductosCamiones(codigo, estado, codresp);
         }
 
+        internal bool AnularDespachoVacio(int codigo, int codResp)
+        {
+            return datos.AnularDespachoVacio(codigo, codResp);
+        }
+
         internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
         {
             return datos.get_DespachoProductoaCamion(codigoDespacho);
@@ -331,20 +336,26 @@ namespace jycboliviaASP.net.Negocio
             return datos.GET_LineaDespachoPorId(idDetalle);
         }
 
+        /* DESHABILITADO A PROPOSITO junto con el botón "Eliminar solicitud" (ver región ELIMINAR
+         * en FCorpal_DespachoCamiones.aspx.cs).
         internal DataSet GET_LineasDespachoPorPedido(int codDespacho, int codPedido)
         {
             return datos.GET_LineasDespachoPorPedido(codDespacho, codPedido);
         }
+        */
 
         internal bool UPDATE_CantidadLineaDespacho(int idDetalle, float nuevaCantidad)
         {
             return datos.UPDATE_CantidadLineaDespacho(idDetalle, nuevaCantidad);
         }
 
+        /* DESHABILITADO A PROPOSITO junto con el botón "Eliminar solicitud" (ver región ELIMINAR
+         * en FCorpal_DespachoCamiones.aspx.cs).
         internal bool SoftDelete_LineaDespacho(int idDetalle)
         {
             return datos.SoftDelete_LineaDespacho(idDetalle);
         }
+        */
 
         internal bool UPDATE_SyncCantidadSolicitud(int codSolicitud, int codProducto, bool fraccionado, float delta)
         {

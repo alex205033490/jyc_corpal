@@ -75,6 +75,14 @@
             padding: 15px;
             width: 400px;
             box-shadow: 0px 0px 10px #000;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modalPopup-body-scroll {
+            overflow-y: auto;
+            overflow-x: auto;
+            max-height: 60vh;
         }
     </style>
 
@@ -177,7 +185,7 @@
                             <div class="modal-header bg-warning text-black mb-3 p-2">
                                 <h5 class="m-0">Modificar Despacho</h5>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body modalPopup-body-scroll">
                                 <asp:HiddenField ID="hf_codDespachoModificar" runat="server" />
                                 <asp:GridView ID="gv_detalleModificar" runat="server" AutoGenerateColumns="false"
                                     CssClass="table table-striped table-bordered table-sm"
@@ -185,8 +193,15 @@
                                     OnRowEditing="gv_detalleModificar_RowEditing"
                                     OnRowCancelingEdit="gv_detalleModificar_RowCancelingEdit"
                                     OnRowUpdating="gv_detalleModificar_RowUpdating"
-                                    OnRowDeleting="gv_detalleModificar_RowDeleting"
                                     EmptyDataText="No hay productos en este despacho.">
+                                    <%--
+                                        DESHABILITADO A PROPOSITO (ver code-behind FCorpal_DespachoCamiones.aspx.cs):
+                                        se quito el boton "Eliminar solicitud" porque una misma solicitud puede
+                                        estar activa en mas de un despacho, y borrarla desde uno solo generaba dudas
+                                        de negocio sin resolver todavia. Por ahora solo se permite EDITAR cantidad
+                                        por producto. Si se retoma la eliminacion, volver a agregar aqui:
+                                        OnRowDeleting="gv_detalleModificar_RowDeleting"
+                                    --%>
                                     <Columns>
                                         <asp:TemplateField HeaderText="Boleta">
                                             <ItemTemplate>
@@ -219,9 +234,13 @@
                                         <asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkEditar" runat="server" CommandName="Edit" CssClass="btn btn-warning btn-sm">Editar</asp:LinkButton>
+                                                <%--
+                                                    DESHABILITADO A PROPOSITO: ver comentario en la etiqueta <asp:GridView>
+                                                    de mas arriba y en FCorpal_DespachoCamiones.aspx.cs (region ELIMINAR).
                                                 <asp:LinkButton ID="lnkEliminar" runat="server" CommandName="Delete" CssClass="btn btn-danger btn-sm"
                                                     ToolTip="Elimina TODOS los productos de esta solicitud dentro del despacho, no solo este producto"
                                                     OnClientClick='<%# "return confirm(\"¿Eliminar TODOS los productos de la solicitud (boleta " + Eval("nroboleta") + ") en este despacho? No solo este producto.\");" %>'>Eliminar solicitud</asp:LinkButton>
+                                                --%>
                                             </ItemTemplate>
                                             <EditItemTemplate>
                                                 <asp:LinkButton ID="lnkGuardar" runat="server" CommandName="Update" CssClass="btn btn-success btn-sm">Guardar</asp:LinkButton>

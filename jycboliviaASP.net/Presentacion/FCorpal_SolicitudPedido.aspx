@@ -108,6 +108,26 @@
             border: 2px solid black;
             box-shadow: 2px 1px 7px 0px #484848;
         }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .loading-overlay .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
     </style>
     <script type="text/javascript">
 
@@ -131,6 +151,13 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Overlay de "Guardando..." para el boton Guardar -- fuera de los UpdatePanel para que
+         no se pierda ni se reinicialice en cada postback parcial. -->
+    <div id="loadingOverlayGuardar" class="loading-overlay">
+        <div class="spinner-border text-light" role="status"></div>
+        <div class="mt-2">Guardando, por favor espere...</div>
+    </div>
 
     <div class="row">
         <div class="col-12">
@@ -541,6 +568,28 @@
                 aplicarReglaFraccionado(tipoCliente);
             }
         })
+
+        // Overlay "Guardando..." + bloqueo de doble clic, acotado solo al boton Guardar (no a
+        // todos los postbacks de la pagina, para no depender de un estado global de
+        // PageRequestManager que si queda "pegado" por cualquier otro request bloquearia
+        // Guardar por completo). Se deshabilita el boton mismo mientras dura su postback.
+        var prmGuardar = Sys.WebForms.PageRequestManager.getInstance();
+
+        prmGuardar.add_beginRequest(function (sender, args) {
+            var postBackElement = args.get_postBackElement();
+            if (postBackElement && postBackElement.id === '<%= bt_guardar.ClientID %>') {
+                postBackElement.disabled = true;
+                document.getElementById("loadingOverlayGuardar").style.display = "flex";
+            }
+        });
+
+        prmGuardar.add_endRequest(function (sender, args) {
+            var btnGuardar = document.getElementById('<%= bt_guardar.ClientID %>');
+            if (btnGuardar) {
+                btnGuardar.disabled = false;
+            }
+            document.getElementById("loadingOverlayGuardar").style.display = "none";
+        });
     </script>
 
 
