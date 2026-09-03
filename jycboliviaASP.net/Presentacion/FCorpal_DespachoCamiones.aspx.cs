@@ -136,12 +136,33 @@ namespace jycboliviaASP.net.Presentacion
 
         /*  ----   MODIFICAR DESPACHO: EDITAR CANTIDAD / ELIMINAR LINEA   ----*/
 
-        private void CargarDetalleModificar(int codDespacho)
+        private DataSet CargarDetalleModificar(int codDespacho)
         {
             NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
             DataSet datos = negocio.GET_DetalleDespachoParaModificar(codDespacho);
             gv_detalleModificar.DataSource = datos;
             gv_detalleModificar.DataBind();
+            return datos;
+        }
+
+        // Un despacho se considera "vacío" cuando ya no tiene ninguna línea activa, o cuando todas
+        // sus líneas activas quedaron en cantidad 0 (a fuerza de editarlas una por una). En ese
+        // caso ya no tiene sentido dejarlo "Abierto" dando vueltas en el sistema.
+        private bool DespachoQuedoVacio(DataSet dsDetalle)
+        {
+            if (dsDetalle == null || dsDetalle.Tables[0].Rows.Count == 0)
+            {
+                return true;
+            }
+
+            foreach (DataRow fila in dsDetalle.Tables[0].Rows)
+            {
+                if (Convert.ToSingle(fila["cantentregada"]) > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         // El ModalPopupExtender se re-renderiza oculto en CADA postback (incluso los "async" del
@@ -179,17 +200,31 @@ namespace jycboliviaASP.net.Presentacion
                     return;
                 }
 
+                int codDespacho = Convert.ToInt32(hf_codDespachoModificar.Value);
                 bool exito = GuardarModificacionCantidad(idDetalle, nuevaCantidad);
 
                 gv_detalleModificar.EditIndex = -1;
-                CargarDetalleModificar(Convert.ToInt32(hf_codDespachoModificar.Value));
+                DataSet dsDetalleActual = CargarDetalleModificar(codDespacho);
 
                 if (!exito)
                 {
                     showalert("No se pudo actualizar la cantidad.");
                 }
 
-                mpeModificar.Show();
+                if (exito && DespachoQuedoVacio(dsDetalleActual))
+                {
+                    // Todas las líneas del despacho quedaron en 0: se anula por completo, no tiene
+                    // sentido dejarlo "Abierto" sin nada que entregar.
+                    AnularDespachoSiQuedoVacio(codDespacho);
+                    string fechadesde = convertidorFecha(tx_fechaDesdeDespacho.Text);
+                    string fechahasta = convertidorFecha(tx_fechaHastaDespacho.Text);
+                    mostrarRegistrosDespachoProductos(fechadesde, fechahasta, dd_estadoCierre.SelectedItem.Text, int.Parse(dd_listVehiculo.SelectedValue));
+                    mpeModificar.Hide();
+                }
+                else
+                {
+                    mpeModificar.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -198,6 +233,34 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
+        /* ====================================================================================
+         * REGION "ELIMINAR" -- DESHABILITADA A PROPOSITO (queda comentada para retomarla a futuro)
+         * ====================================================================================
+         * Motivo: una misma solicitud (pedido) puede estar activa en MAS DE UN despacho a la vez
+         * (entregas parciales / reintentos en otro camión, ver tbcorpal_detalle_solicitudproducto.
+         * cantentregada como acumulado). Eliminar la solicitud desde un solo despacho no corrompe
+         * datos (el borrado ya estaba bien delimitado por coddespacho+codpedido), pero deja una
+         * duda de negocio sin resolver: si se debe avisar/bloquear cuando esa misma solicitud
+         * sigue activa en otro despacho. Se decidió, por ahora, sacar el botón "Eliminar" del
+         * modal y dejar SOLO la edición de cantidad por producto (ver GuardarModificacionCantidad
+         * más abajo, que sí sigue activa y ya actualiza tbcorpal_detalle_solicitudproducto y
+         * tbcorpal_almacenmovil correctamente).
+         *
+         * NOTA: AnularDespachoSiQuedoVacio (y AnularDespachoVacio en Datos/Negocio) siguen ACTIVOS
+         * -- se reutilizan para un caso distinto: cuando se edita la cantidad de TODAS las líneas
+         * a 0 (ver DespachoQuedoVacio / gv_detalleModificar_RowUpdating). No hace falta tocarlos.
+         *
+         * Para reactivar el resto de esta región:
+         * 1) Descomentar el botón "lnkEliminar" y el atributo OnRowDeleting en el GridView, en
+         *    FCorpal_DespachoCamiones.aspx.
+         * 2) Descomentar los métodos de abajo (gv_detalleModificar_RowDeleting,
+         *    EliminarSolicitudDelDespacho).
+         * 3) Descomentar GET_LineasDespachoPorPedido y SoftDelete_LineaDespacho en
+         *    Datos/DCorpal_EntregaSolicitudProducto2.cs y sus wrappers en
+         *    Negocio/NCorpal_EntregaSolicitudProducto2.cs.
+         * 4) Resolver antes la duda de negocio: avisar o bloquear si la solicitud está activa en
+         *    otro despacho (y en tal caso, indicar el número de despacho, como se propuso).
+         *
         // "Eliminar" borra TODOS los productos de la solicitud (boleta) dentro de este despacho,
         // no solo el producto de la fila donde se hizo clic -- un despacho puede traer varias
         // solicitudes con productos repetidos, y el usuario quiere quitar la solicitud completa.
@@ -217,7 +280,20 @@ namespace jycboliviaASP.net.Presentacion
                     showalert("No se pudo eliminar la solicitud del despacho.");
                 }
 
-                mpeModificar.Show();
+                if (gv_detalleModificar.Rows.Count == 0)
+                {
+                    // Ya no quedan productos activos en este despacho: se anula por completo
+                    // (no solo la solicitud) y se cierra el modal, no hay nada más que editar.
+                    AnularDespachoSiQuedoVacio(codDespacho);
+                    string fechadesde = convertidorFecha(tx_fechaDesdeDespacho.Text);
+                    string fechahasta = convertidorFecha(tx_fechaHastaDespacho.Text);
+                    mostrarRegistrosDespachoProductos(fechadesde, fechahasta, dd_estadoCierre.SelectedItem.Text, int.Parse(dd_listVehiculo.SelectedValue));
+                    mpeModificar.Hide();
+                }
+                else
+                {
+                    mpeModificar.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -225,6 +301,7 @@ namespace jycboliviaASP.net.Presentacion
                 mpeModificar.Show();
             }
         }
+        */
 
         // Cambia la cantidad de una línea de despacho y sincroniza por delta la solicitud
         // original y (si el despacho ya está Cerrado) el almacén móvil. No toca tbcorpal_producto.stock.
@@ -273,6 +350,8 @@ namespace jycboliviaASP.net.Presentacion
             return true;
         }
 
+        /* Sigue la región "ELIMINAR" deshabilitada -- ver comentario completo más arriba,
+         * antes de gv_detalleModificar_RowDeleting.
         // Elimina TODOS los productos de una solicitud dentro de un despacho (no producto por
         // producto): marca cada línea como eliminada (estadoentrega = 0, cantentregada = 0) y
         // sincroniza por delta negativo la solicitud original y (si el despacho ya está Cerrado)
@@ -344,6 +423,33 @@ namespace jycboliviaASP.net.Presentacion
             //--------------------------------------
 
             return exitoGeneral;
+        }
+        */
+
+        // Se llama cuando, tras editar una cantidad, el despacho quedó sin ninguna línea activa o
+        // con todas sus líneas activas en cantidad 0: se anula por completo (estado = 0,
+        // estadodespacho = 'Cerrado') porque no tiene sentido dejarlo "Abierto" sin nada que entregar.
+        private void AnularDespachoSiQuedoVacio(int codDespacho)
+        {
+            NCorpal_EntregaSolicitudProducto2 negocio = new NCorpal_EntregaSolicitudProducto2();
+            int codUser = ObtenerCodUserActual();
+
+            bool exito = negocio.AnularDespachoVacio(codDespacho, codUser);
+
+            //----------------historial-------------
+            NA_Historial nhistorial = new NA_Historial();
+            nhistorial.insertar(codUser,
+                $"El despacho {codDespacho} quedó sin cantidades activas (todo en 0) y se anuló automáticamente.");
+            //--------------------------------------
+
+            if (exito)
+            {
+                showalert($"El despacho {codDespacho} se quedó sin productos y fue anulado.");
+            }
+            else
+            {
+                showalert($"El despacho {codDespacho} se quedó sin productos, pero no se pudo anular automáticamente. Revíselo manualmente.");
+            }
         }
 
         private int ObtenerCodUserActual()

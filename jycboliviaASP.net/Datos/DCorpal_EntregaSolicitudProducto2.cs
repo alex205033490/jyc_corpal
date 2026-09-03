@@ -285,6 +285,30 @@ namespace jycboliviaASP.net.Datos
             return conexion.ejecutarMySql(consulta);
         }
 
+        // Despacho que se quedó sin ninguna cantidad activa (todas sus líneas en 0, ya sea porque
+        // se editaron a 0 producto por producto): se anula por completo -- estado = 0 (el flag que
+        // TODAS las consultas del sistema usan para filtrar "activo", desaparece de todo, no solo
+        // de esta pantalla) y además estadodespacho = 'Cerrado' de respaldo. No usa
+        // update_despachodeproductosCamiones porque ese método es para el cierre normal
+        // (Entregado), que no aplica acá: nada se llegó a entregar.
+        internal bool AnularDespachoVacio(int codigo, int codResp)
+        {
+            string consulta = "UPDATE tbcorpal_despachovehiculo SET " +
+                               " estado = 0, " +
+                               " estadodespacho = 'Cerrado', " +
+                               " fechacierre = current_date(), " +
+                               " horacierre = current_time(), " +
+                               " codrespcierre = @codResp " +
+                               " WHERE codigo = @codigo";
+
+            using (MySqlCommand cmd = new MySqlCommand(consulta))
+            {
+                cmd.Parameters.AddWithValue("@codResp", codResp);
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                return conexion.ejecutarMySql2(cmd);
+            }
+        }
+
         /*   internal DataSet get_DespachoProductoaCamion(int codigoDespacho)
            {
                string consulta = "select  " +
@@ -1423,6 +1447,11 @@ WHERE dv.estado = 1
             }
         }
 
+        /* DESHABILITADO A PROPOSITO junto con el botón "Eliminar solicitud" del modal Modificar
+         * (ver el comentario completo en FCorpal_DespachoCamiones.aspx.cs, región ELIMINAR).
+         * Motivo: una misma solicitud puede estar activa en más de un despacho, y quedó pendiente
+         * decidir si avisar o bloquear antes de borrarla desde uno solo. No borrar este código,
+         * es la base para retomarlo.
         // Todas las líneas (uno o más productos) de UNA solicitud dentro de un despacho.
         // El "Eliminar" del modal borra por solicitud completa, no producto por producto,
         // porque un despacho puede traer varias solicitudes con productos repetidos.
@@ -1454,6 +1483,7 @@ WHERE dv.estado = 1
                 throw new Exception("Error al obtener las líneas de la solicitud en el despacho. " + ex.Message);
             }
         }
+        */
 
         // Una sola línea de despacho por su PK, para calcular el delta antes de modificar
         internal DataSet GET_LineaDespachoPorId(int idDetalle)
@@ -1497,6 +1527,8 @@ WHERE dv.estado = 1
             }
         }
 
+        /* DESHABILITADO A PROPOSITO junto con el botón "Eliminar solicitud" (ver región ELIMINAR
+         * en FCorpal_DespachoCamiones.aspx.cs).
         // Soft-delete: no se borra la fila (queda para auditoría), pero se pone cantentregada = 0
         // ademas del flag estadoentrega = 0, porque no todas las consultas que suman cantentregada
         // (get_DespachoProductoaCamion, GET_obtenerDatosClienteDespacho, get_DespachoBoletasProdEntrega)
@@ -1517,6 +1549,7 @@ WHERE dv.estado = 1
                 throw new Exception("Error al eliminar la línea de despacho. " + ex.Message);
             }
         }
+        */
 
         // cantentregada en tbcorpal_detalle_solicitudproducto es un acumulado entre varios despachos:
         // se ajusta por delta, nunca se sobreescribe con el valor absoluto nuevo.
