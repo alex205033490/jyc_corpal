@@ -809,6 +809,47 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet get_listaVendedoresCorpal()
+        {
+            try
+            {
+                string consulta = @"select 
+                                    r.`codigo`,
+                                    r.`nombre`,
+                                    r.`cargoc`
+
+                                    from tb_responsable r 
+                                    left join tb_cargo c on r.`cargoc` = c.`codigo`
+                                    where c.`codigo` = 8
+                                          and r.`estado` = 1
+                                    order by 
+                                     r.`nombre` asc";
+                return cnx.consultaMySql(consulta);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_listaProductosCorpal()
+        {
+            try
+            {
+                string consulta = @"select 
+                                    p.`codigo`,
+                                    p.`producto`
+                                    from tbcorpal_producto p 
+                                    where p.`estado` = 1 
+                                    order by 
+                                    p.`producto` asc";
+                return cnx.consultaMySql(consulta);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al obtener los productos. " + ex.Message);
+            }
+        }
 
 
 

@@ -589,6 +589,7 @@
     <Content Include="Presentacion\FCorpal_GestionarInsumos.aspx" />
     <Content Include="Presentacion\FCorpal_GestionarVehiculos.aspx" />
     <Content Include="Presentacion\FCorpal_GestionExtintores.aspx" />
+    <Content Include="Presentacion\FCorpal_ObjetivoVentasMensualVendedor.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx" />
     <Content Include="Presentacion\FCorpal_ObjetivoVentasProduccionMensual.aspx" />
     <Content Include="Presentacion\FCorpal_OrdenProduccion.aspx" />
@@ -1422,6 +1423,13 @@
     </Compile>
     <Compile Include="Presentacion\FCorpal_GestionExtintores.aspx.designer.cs">
       <DependentUpon>FCorpal_GestionExtintores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasMensualVendedor.aspx.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasMensualVendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FCorpal_ObjetivoVentasMensualVendedor.aspx.designer.cs">
+      <DependentUpon>FCorpal_ObjetivoVentasMensualVendedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FCorpal_ObjetivoVentasProduccion.aspx.cs">
       <DependentUpon>FCorpal_ObjetivoVentasProduccion.aspx</DependentUpon>

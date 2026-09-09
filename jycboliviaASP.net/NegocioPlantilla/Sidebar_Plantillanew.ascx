@@ -40,12 +40,12 @@
           <i class="bi bi-journal-text"></i><span>Tienda</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tienda-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li><a href="../Presentacion/FCorpal_GestionarTiendaPropietario.aspx" id="mn_gestionarTiendaPropietario" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Tienda</span></a></li>       
+            <li><a href="../Presentacion/FCorpal_GestionarTiendaPropietario.aspx" id="mn_gestionarTiendaPropietario" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Tienda</span></a></li>   
             <li><a href="../Presentacion/FCorpal_RutaEntrega.aspx" id="mn_rutaEntrega" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Ruta Entrega</span></a></li>       
             <li><a href="../Presentacion/FCorpal_ReciboIngreso.aspx" id="mn_regiboIngreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Ingreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ReciboEgreso.aspx" id="mn_regiboEgreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Egreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" id="mn_consultaIngresoEgreso" runat="server" ><i class="bi bi-circle"></i><span>Consulta Recibos (Ingreso/Egreso)</span></a></li>
-            
+            <li><a href="../Presentacion/FCorpal_ObjetivoVentasMensualVendedor.aspx" id="mn_objetivoventasmensualvendedor" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas</span></a></li>
             
         </ul>
       </li><!-- End Forms Nav -->
@@ -98,6 +98,7 @@
             <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><i class="bi bi-circle"></i><span>Entrega Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
+            
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
             <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="A5" runat="server"><i class="bi bi-circle"></i><span>Agregar Nuevo Insumo Creado</span></a></li>
               
