@@ -42,6 +42,7 @@ namespace jycboliviaASP.net.Presentacion
 
                 // cargarProductos();
                 dd_mes.SelectedValue = DateTime.Now.Month.ToString();
+                cargarObj();
             }
         }
 

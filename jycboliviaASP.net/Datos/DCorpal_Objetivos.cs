@@ -85,7 +85,7 @@ namespace jycboliviaASP.net.Datos
                     return conexion.ejecutarMySql2(cmd);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("error al registrar. " + ex.Message);
             }
@@ -111,8 +111,8 @@ namespace jycboliviaASP.net.Datos
                 };
                 return conexion.consultaMySqlParametros(consulta, parametros);
 
-             }
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error al obtener datos. " + ex.Message);
             }
@@ -138,13 +138,325 @@ namespace jycboliviaASP.net.Datos
                     return conexion.ejecutarMySql2(cmd);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error al actualizar los datos. " + ex.Message);
             }
         }
 
+        internal DataSet get_objventas_ventasvendedores(int mes, int anio)
+        {
+            try
+            {
+                string consulta = @"/* ============================================================
+                               1. OBJETIVOS + VENTAS
+                               ============================================================ */
 
+                            SELECT
+                                obj.mes,
+                                obj.anio,
+                                obj.codvendedor,
+                                r.nombre AS vendedor,
+                                obj.codproducto,
+                                p.producto,
+                                IFNULL(ven.cantOrden, 0) AS venta,
+                                obj.cantidad AS objetivo
+
+                            FROM tbcorpal_objventasmensual_vendedor obj
+
+                            LEFT JOIN tb_responsable r
+                                ON obj.codvendedor = r.codigo
+
+                            LEFT JOIN tbcorpal_producto p
+                                ON obj.codproducto = p.codigo
+
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  /* LA FECHA DE LA VENTA */
+                                  AND MONTH(oec.fechagra) = @mes
+                                  AND YEAR(oec.fechagra) = @anio
+
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+
+                            WHERE obj.mes = @mes
+                              AND obj.anio = @anio
+
+
+                            UNION
+
+
+                            /* ============================================================
+                               2. VENTAS QUE NO TIENEN OBJETIVO
+                               ============================================================ */
+
+                            SELECT
+                                @mes AS mes,
+                                @anio AS anio,
+                                ven.codvendedor,
+                                r.nombre AS vendedor,
+                                ven.codproducto,
+                                p.producto,
+                                ven.cantOrden AS venta,
+                                0 AS objetivo
+
+                            FROM
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+
+                                  AND dv.estado = 1
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  /* LA FECHA DE LA VENTA */
+                                  AND MONTH(oec.fechagra) = @mes
+                                  AND YEAR(oec.fechagra) = @anio
+
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                            LEFT JOIN tb_responsable r
+                                ON ven.codvendedor = r.codigo
+
+                            LEFT JOIN tbcorpal_producto p
+                                ON ven.codproducto = p.codigo
+
+                            LEFT JOIN tbcorpal_objventasmensual_vendedor obj
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+                                AND obj.mes = @mes
+                                AND obj.anio = @anio
+
+                            WHERE obj.codvendedor IS NULL;";
+
+                string consulta2 = @"/* ============================================================
+                               1. OBJETIVOS + VENTAS
+                               ============================================================ */
+
+                            SELECT
+                                obj.mes,
+                                obj.anio,
+                                obj.codvendedor,
+                                r.`nombre` as vendedor,
+                                obj.codproducto,
+                                p.`producto`,
+                                IFNULL(ven.cantOrden, 0) AS venta, 
+                                obj.cantidad AS objetivo
+
+                            FROM tbcorpal_objventasmensual_vendedor obj
+                            LEFT JOIN tb_responsable r on obj.`codvendedor` = r.`codigo`
+                            LEFT JOIN tbcorpal_producto p ON obj.`codproducto` = p.`codigo`
+
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden,
+                                    sep.`personalsolicitud`
+
+                                    FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+                                  AND dv.estado = 1
+                                  AND dv.fechagra = '2026/09/09'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  AND MONTH(oec.fechagra) = 9
+                                  AND YEAR(oec.fechagra) = 2026
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+
+                            WHERE obj.mes = 9
+                              AND obj.anio = 2026
+
+                            UNION
+
+
+                            /* ============================================================
+                               2. VENTAS QUE NO TIENEN OBJETIVO
+                               ============================================================ */
+
+                            SELECT
+                                11 AS mes,
+                                2027 AS anio,
+                                ven.codvendedor,
+                                r.nombre as vendedor,
+                                ven.codproducto,
+                                p.producto,
+                                ven.cantOrden AS venta,
+                                0 AS objetivo
+    
+    
+                            FROM
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden,
+                                    sep.`personalsolicitud`
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+                                  AND dv.estado = 1
+                                  AND dv.fechagra = '2026/09/09'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  AND MONTH(oec.fechagra) = 9
+                                  AND YEAR(oec.fechagra) = 2026
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                            LEFT JOIN tb_responsable r on ven.codvendedor = r.codigo
+                            LEFT JOIN tbcorpal_producto p ON ven.codproducto = p.codigo
+
+                            LEFT JOIN tbcorpal_objventasmensual_vendedor obj
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+                                AND obj.mes = 9
+                                AND obj.anio = 2026
+
+                            WHERE obj.codvendedor IS NULL;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@mes", mes),
+                    new MySqlParameter("@anio", anio)
+                };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al obtener datos. " + ex.Message);
+            }
+        }
 
 
 

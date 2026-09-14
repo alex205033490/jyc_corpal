@@ -154,6 +154,11 @@ namespace jycboliviaASP.net.Negocio
         {
             return dobjetivo.set_upsert_objMensualVentas_vendedor(mes, anio, codvendedor, codproducto, cantidad);
         }
+        internal DataSet get_objventas_ventasvendedores(int mes, int anio)
+        {
+            return dobjetivo.get_objventas_ventasvendedores(mes, anio);
+        }
+
 
     }
 }
