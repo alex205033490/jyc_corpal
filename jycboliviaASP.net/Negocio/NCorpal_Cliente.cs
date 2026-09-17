@@ -119,7 +119,6 @@ namespace jycboliviaASP.net.Negocio
                 string tiendaname, string tiendadir, string tiendatelefono, string tiendadepartamento, string tiendazona,
                 string propietarioname, string propietarioci, string propietariodir, string propietariocelular, string propietarionit, string propietariocorreo,
                 string facturar_a, string facturar_nit, string facturar_correo, string observacion,
-
                 int codUser, // Este es codrespgra
                 string latitud,
                 string longitud,
@@ -135,13 +134,7 @@ namespace jycboliviaASP.net.Negocio
                     tiendaname, tiendadir, tiendatelefono, tiendadepartamento, tiendazona,
                     propietarioname, propietarioci, propietariodir, propietariocelular, propietarionit, propietariocorreo,
                     facturar_a, facturar_nit, facturar_correo, observacion,
-
-                    codUser, // codrespgra
-                    
-                    latitud,
-                    longitud,
-
-                    id_tipocliente, id_listaprecio
+                    codUser, latitud, longitud, id_tipocliente, id_listaprecio
                 );
             }
             catch (Exception)

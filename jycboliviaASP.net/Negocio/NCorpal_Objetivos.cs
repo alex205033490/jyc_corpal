@@ -1,4 +1,5 @@
-﻿using jycboliviaASP.net.Datos;
+﻿using AjaxControlToolkit;
+using jycboliviaASP.net.Datos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -131,5 +132,33 @@ namespace jycboliviaASP.net.Negocio
             else
                 return 0;
         }
+
+        internal bool set_registroObjMensualVentas(int mes, int anio, int codvendedor, int codproducto, decimal cantidad)
+        {
+            try
+            {
+                return dobjetivo.set_registroObjMensualVentas(mes, anio, codvendedor, codproducto, cantidad);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_obtenerObjVentasMensual(int mes, int anio)
+        {
+            return dobjetivo.get_obtenerObjVentasMensual(mes, anio);
+        }
+
+        internal bool set_upsert_objMensualVentas_vendedor(int mes, int anio, int codvendedor, int codproducto, decimal cantidad)
+        {
+            return dobjetivo.set_upsert_objMensualVentas_vendedor(mes, anio, codvendedor, codproducto, cantidad);
+        }
+        internal DataSet get_objventas_ventasvendedores(int mes, int anio)
+        {
+            return dobjetivo.get_objventas_ventasvendedores(mes, anio);
+        }
+
+
     }
 }

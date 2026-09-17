@@ -32,9 +32,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <asp:UpdatePanel ID="updPanel_Clientes" runat="server">
-        <ContentTemplate>
             
             <div class="card" style="margin: 10px;">
                 <div class="card-header bg-orona text-white">
@@ -55,12 +52,21 @@
                         </div>
                     </div>
 
+                    <asp:UpdatePanel ID="updatepanel_datosCliente" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+
+                        
+
+
                     <div class="row">
                         
                         <div class="col-lg-4 col-md-12">
                             <h5 class="form-section-title">Datos de la Tienda</h5>
                             
                             <div class="form-group mb-2">
+                                <asp:HiddenField ID="hf_latCli" runat="server"/>
+                                <asp:HiddenField ID="hf_lngCli" runat="server" />
+
                                 <label>Nombre Tienda:</label>
                                 <asp:TextBox ID="tx_tiendaname" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
@@ -156,6 +162,34 @@
                         </div>
                     </div>
 
+                        </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="gv_Clientes" EventName="SelectedIndexChanged"/>
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+
+
+
+                    <%-- BOTON UBICACION CLIENTE --%>
+                    <div class="col-12 mb-2">
+                        <asp:Button ID="btn_mostrarDirCliente" runat="server" Text="Mostrar Ubicación" 
+                                    CssClass="btn btn-success" OnClientClick="return mostrarUbiCliente();" />
+
+                        <asp:Button ID="btn_limpiarPunto" runat="server" Text="Limpiar Mapa" 
+                                CssClass="btn btn-danger" OnClientClick="return limpiarMap();" />
+                    </div>
+
+
+                    <div class="col-lg-8" >
+                                <div class="container_maps">
+                                    <div id="divmappp" style="width: 100%; height: 420px; border: 1px solid #ccc;"></div>
+                                </div> 
+ 
+                    </div>
+
+
+
                     <hr />
 
                     <div class="row text-center espacio-botones">
@@ -176,10 +210,10 @@
                 </div>
                 <div class="card-body table-responsive">
                     <asp:GridView ID="gv_Clientes" runat="server" 
-                        AutoGenerateColumns="False" 
-                        DataKeyNames="codigo"
-                        CssClass="table table-striped table-hover table-bordered"
-                        GridLines="None"
+                        AutoGenerateColumns="False"
+                        DataKeyNames="codigo, direccion_lat, direccion_lng"
+                        CssClass="table table-striped table-hover table-bordered gv_Clientes"
+                        GridLines="None" 
                         OnSelectedIndexChanged="gv_Clientes_SelectedIndexChanged"
                         AllowPaging="True" PageSize="10" OnPageIndexChanging="gv_Clientes_PageIndexChanging">
     
@@ -199,6 +233,10 @@
                             <%-- Alias exactos de tu SQL --%>
                             <asp:BoundField DataField="NombreTipoCliente" HeaderText="Tipo Cliente" />
                             <asp:BoundField DataField="NombreListaPrecio" HeaderText="Lista Precio" />
+
+                            <%-- DIRECION TIENDA --%>
+                            <asp:BoundField DataField="direccion_lat" HeaderText="direccion_lat" Visible="false" />
+                            <asp:BoundField DataField="direccion_lng" HeaderText="direccion_lng" Visible="false" />
                         </Columns>
                     </asp:GridView>
                     
@@ -208,10 +246,122 @@
                 </div>
             </div>
 
-        </ContentTemplate>
-        <Triggers>
-             <asp:PostBackTrigger ControlID="bt_excel" />
-        </Triggers>
-    </asp:UpdatePanel>
+    
+        <script type="text/javascript">
+
+            let map;
+            let markerSeleccionado = null;
+            let markerReferencia = null;
+
+            function initMap() {
+
+                const LocationFabrica = {
+                    lat: -17.752107,
+                    lng: -63.132962
+                };
+
+                map = new google.maps.Map(document.getElementById("divmappp"), {
+                    zoom: 13,
+                    center: LocationFabrica
+                });
+
+                map.addListener("click", function (e) {
+                    colocarPunto(e.latLng);
+                });
+            }
+
+
+            // Coloca un único punto
+            function colocarPunto(latLng) {
+
+                // Elimina el anterior
+                if (markerSeleccionado) {
+                    markerSeleccionado.setMap(null);
+                }
+
+                markerSeleccionado = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    draggable: true
+                });
+
+                guardarCoordenadas(latLng);
+
+                markerSeleccionado.addListener("dragend", function () {
+                    guardarCoordenadas(markerSeleccionado.getPosition());
+                });
+            }
+
+
+            // Guarda coordenadas
+            function guardarCoordenadas(latLng) {
+
+                document.getElementById("<%= hf_latCli.ClientID %>").value = latLng.lat();
+            document.getElementById("<%= hf_lngCli.ClientID %>").value = latLng.lng();
+            }
+
+            // CARGAR UBI CLIENTE
+            function mostrarUbiCliente() {
+                var lat = document.getElementById("<%= hf_latCli.ClientID %>").value;
+                var lng = document.getElementById("<%= hf_lngCli.ClientID %>").value;
+
+                if (lat.trim() === "" || lng.trim() === "") {
+                    alert("Los datos de la ubicación están vacíos.");
+                    return false;
+                }
+
+                lat = parseFloat(lat);
+                lng = parseFloat(lng);
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    alert("Las coordenadas no son válidas.");
+                    return false;
+                }
+
+                var posicion = new google.maps.LatLng(lat, lng);
+
+                if (markerSeleccionado) {
+                    markerSeleccionado.setMap(null);
+                }
+
+                markerSeleccionado = new google.maps.Marker({
+                    position: posicion,
+                    map: map,
+                    draggable: true
+                });
+
+                map.setCenter(posicion);
+                map.setZoom(15);
+
+                markerSeleccionado.addListener("dragend", function () {
+                    guardarCoordenadas(markerSeleccionado.getPosition());
+                });
+
+                return false;
+            }
+
+
+            // Limpia el punto
+            function limpiarPunto() {
+
+            if (markerSeleccionado) {
+                    markerSeleccionado.setMap(null);
+                    markerSeleccionado = null;
+                }
+                document.getElementById("<%= hf_latCli.ClientID %>").value = "";
+                document.getElementById("<%= hf_lngCli.ClientID %>").value = "";
+            }
+
+            function limpiarMap() {
+                if (markerSeleccionado) {
+                    markerSeleccionado.setMap(null);
+                    markerSeleccionado = null; 
+                }
+                return false;
+            }
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBadNUlLiF0DBBKZse7AFtt-v2p4Oz1Vp0&callback=initMap" async defer></script>
+
 
 </asp:Content>

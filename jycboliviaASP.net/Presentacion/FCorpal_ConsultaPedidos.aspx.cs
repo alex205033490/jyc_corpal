@@ -12,6 +12,7 @@ using System.Configuration;
 using Microsoft.Reporting.WebForms;
 using System.Globalization;
 using System.Web.UI.DataVisualization.Charting;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -79,25 +80,76 @@ namespace jycboliviaASP.net.Presentacion
                     return;
                 }
                 
-                if(string.IsNullOrWhiteSpace(tx_fdesde.Text) || string.IsNullOrWhiteSpace(tx_fhasta.Text))
-                {
-                    showalert("Debe ingresar las fechas válidas.");
-                    return;
-                }
-
 
                 if (dd_consulta.SelectedIndex == 1)
                 {
+                    if (string.IsNullOrWhiteSpace(tx_fdesde.Text) || string.IsNullOrWhiteSpace(tx_fhasta.Text))
+                    {
+                        showalert("Debe ingresar las fechas válidas.");
+                        return;
+                    }
+
                     get_productosSobrantes_OrdenEntrega();
                 }
                 else if (dd_consulta.SelectedIndex == 2)
                 {
+                    if (string.IsNullOrWhiteSpace(tx_fdesde.Text) || string.IsNullOrWhiteSpace(tx_fhasta.Text))
+                    {
+                        showalert("Debe ingresar las fechas válidas.");
+                        return;
+                    }
+
                     get_tiempoTardanzaEntregaDDespacho_OrdenEntregaCli();
                 }
                 else if (dd_consulta.SelectedIndex == 3)
                 {
+                    if (string.IsNullOrWhiteSpace(tx_fdesde.Text) || string.IsNullOrWhiteSpace(tx_fhasta.Text))
+                    {
+                        showalert("Debe ingresar las fechas válidas.");
+                        return;
+                    }
+
                     // OBTENER PRODUCTOS SALIENTES VENDEDOR
                     obtenerCantTotalProductosSalientesxVendedor();
+                }
+                else if(dd_consulta.SelectedIndex == 4)
+                {
+                    DateTime fechadesde;
+                    DateTime fechahasta;
+
+                    if (!DateTime.TryParseExact(
+                        tx_fdesde.Text,
+                        "dd/MM/yyyy",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out fechadesde))
+                    {
+                        showalert("La fecha desde no es válida.");
+                        return;
+                    } else if (!DateTime.TryParseExact(
+                        tx_fhasta.Text,
+                        "dd/MM/yyyy",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out fechahasta))
+                    {
+                        showalert("La fecha hasta no es válida.");
+                        return;
+                    }
+
+                    int mes = fechadesde.Month;
+                    int anio = fechadesde.Year;
+
+                    int mesh = fechahasta.Month;
+                    int anioh = fechahasta.Year;
+
+                    if(mes != mesh || anio != anioh)
+                    {
+                        showalert("Para este reporte, las fechas deben pertenecer al mismo mes y año.");
+                        return;
+                    }
+
+                    obtenerResultadoObjventas_vs_ventasVendedores(mes, anio);
                 }
                 else
                 {
@@ -270,6 +322,46 @@ namespace jycboliviaASP.net.Presentacion
                 showalert("Error al obtener datos. " + ex.Message);
             }
         }
+
+        private void obtenerResultadoObjventas_vs_ventasVendedores(int mes, int anio)
+        {
+            rw_consultaPedidos.Visible = true;
+
+            LocalReport localreport = rw_consultaPedidos.LocalReport;
+            localreport.ReportPath = "Reportes/Report_OBJventasVSventasMensual_vendedores.rdlc";
+
+            NCorpal_Objetivos nobjetivo = new NCorpal_Objetivos();
+            DataSet dsconsulta = nobjetivo.get_objventas_ventasvendedores(mes, anio);
+
+            if (dsconsulta == null)
+            {
+                showalert("Dataset es null");
+                return;
+            }
+            if(dsconsulta.Tables.Count == 0)
+            {
+                showalert("No existe tablas en el dataset");
+                return;
+            }
+
+            DataTable dtconsulta = dsconsulta.Tables[0];
+
+            if(dtconsulta.Rows.Count == 0)
+            {
+                showalert("no hay datos para mostrar.");
+                return;
+            }
+
+            rw_consultaPedidos.LocalReport.DataSources.Clear();
+
+            ReportDataSource DS_objventas_ventasvendedor = new ReportDataSource("DS_objventas_vs_ventasmensuales", dtconsulta);
+                                                                                 
+            rw_consultaPedidos.LocalReport.DataSources.Add(DS_objventas_ventasvendedor);
+            this.rw_consultaPedidos.LocalReport.Refresh();
+            this.rw_consultaPedidos.DataBind();
+
+        }
+
 
 
         public string convertidorFecha(string fecha)

@@ -1,5 +1,6 @@
 ﻿using jycboliviaASP.net.Negocio;
 using jycboliviaASP.net.Presentacion;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,49 +13,49 @@ namespace jycboliviaASP.net.Datos
     public class DCorpal_Objetivos
     {
         private conexionMySql conexion = new conexionMySql();
-   
-        public  DCorpal_Objetivos() { }
+
+        public DCorpal_Objetivos() { }
 
         internal DataSet get_ListaObjetivoProduccionyVentasAnual(int gestion)
         {
-            string consulta = "SELECT "+
-                             " SUM(CASE WHEN op.`mes` = 1 THEN op.`cantidadprod` ELSE 0 END) as 'Enero-Objetivo', "+
-                             " IFNULL(enero.OrdenProduccion, 0) as 'Enero-OrdenProd', "+
-                             " IFNULL(Enerosolic.cantidad, 0) as 'Enero-SoliProd', "+  
-                             " SUM(CASE WHEN op.`mes` = 2 THEN op.`cantidadprod` ELSE 0 END) as 'Febrero-Objetivo', "+
-                             " IFNULL(febrero.OrdenProduccion, 0) as 'Febrero-OrdenProd', "+
-                             " IFNULL(Febrerosolic.cantidad, 0) as 'Febrero-SoliProd', "+
-                             " SUM(CASE WHEN op.`mes` = 3 THEN op.`cantidadprod` ELSE 0 END) as 'Marzo-Objetivo', "+
-                             " IFNULL(marzo.OrdenProduccion, 0) as 'Marzo-OrdenProd', "+
-                             " IFNULL(Marzosolic.cantidad, 0) as 'Marzo-SoliProd', "+
-                             " SUM(CASE WHEN op.`mes` = 4 THEN op.`cantidadprod` ELSE 0 END) as 'Abril-Objetivo', "+
-                             " IFNULL(abril.OrdenProduccion, 0) as 'Abril-OrdenProd', "+
-                             " IFNULL(Abrilsolic.cantidad, 0) as 'Abril-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 5 THEN op.`cantidadprod` ELSE 0 END) as 'Mayo-Objetivo', "+
-                             " IFNULL(mayo.OrdenProduccion, 0) as 'Mayo-OrdenProd', "+
-                             " IFNULL(Mayosolic.cantidad, 0) as 'Mayo-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 6 THEN op.`cantidadprod` ELSE 0 END) as 'Junio-Objetivo', "+
-                             " IFNULL(junio.OrdenProduccion, 0) as 'Junio-OrdenProd', "+
-                             " IFNULL(Juniosolic.cantidad, 0) as 'Junio-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 7 THEN op.`cantidadprod` ELSE 0 END) as 'Julio-Objetivo', "+
-                             " IFNULL(julio.OrdenProduccion, 0) as 'Julio-OrdenProd', "+
-                             " IFNULL(Juliosolic.cantidad, 0) as 'Julio-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 8 THEN op.`cantidadprod` ELSE 0 END) as 'Agosto-Objetivo', "+
-                             " IFNULL(agosto.OrdenProduccion, 0) as 'Agosto-OrdenProd', "+
-                             " IFNULL(Agostosolic.cantidad, 0) as 'Agosto-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 9 THEN op.`cantidadprod` ELSE 0 END) as 'Septiembre-Objetivo', "+
-                             " IFNULL(septiembre.OrdenProduccion, 0) as 'Septiembre-OrdenProd', "+
-                             " IFNULL(Septiembresolic.cantidad, 0) as 'Septiembre-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 10 THEN op.`cantidadprod` ELSE 0 END) as 'Octubre-Objetivo', "+
-                             " IFNULL(octubre.OrdenProduccion, 0) as 'Octubre-OrdenProd', "+
-                             " IFNULL(Octubresolic.cantidad, 0) as 'Octubre-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 11 THEN op.`cantidadprod` ELSE 0 END) as 'Noviembre-Objetivo', "+
-                             " IFNULL(noviembre.OrdenProduccion, 0) as 'Noviembre-OrdenProd', "+
-                             " IFNULL(Noviembresolic.cantidad, 0) as 'Noviembre-SoliProd', "+ 
-                             " SUM(CASE WHEN op.`mes` = 12 THEN op.`cantidadprod` ELSE 0 END) as 'Diciembre-Objetivo', "+
-                             " IFNULL(diciembre.OrdenProduccion, 0) as 'Diciembre-OrdenProd', "+
-                             " IFNULL(Diciembresolic.cantidad, 0) as 'Diciembre-SoliProd' "+
-                             " FROM    tbcorpal_producto p LEFT JOIN tbcorpal_objetivosproduccionmensual op ON p.`codigo` = op.`codprod` AND op.anio =  " + gestion+"   LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 1    GROUP BY     dsp.`codproducto` ) as Enerosolic ON p.`codigo` = Enerosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 2    GROUP BY     dsp.`codproducto` ) as Febrerosolic  ON p.`codigo` = Febrerosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 3    GROUP BY     dsp.`codproducto` ) as Marzosolic  ON p.`codigo` = Marzosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 4    GROUP BY     dsp.`codproducto` ) as Abrilsolic  ON p.`codigo` = Abrilsolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 5    GROUP BY     dsp.`codproducto` ) as Mayosolic  ON p.`codigo` = Mayosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 6    GROUP BY     dsp.`codproducto` ) as Juniosolic  ON p.`codigo` = Juniosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 7    GROUP BY     dsp.`codproducto` ) as Juliosolic  ON p.`codigo` = Juliosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 8    GROUP BY     dsp.`codproducto` ) as Agostosolic ON p.`codigo` = Agostosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 9   GROUP BY     dsp.`codproducto` ) as Septiembresolic  ON p.`codigo` = Septiembresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 10   GROUP BY     dsp.`codproducto` ) as Octubresolic  ON p.`codigo` = Octubresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 11   GROUP BY     dsp.`codproducto` ) as Noviembresolic  ON p.`codigo` = Noviembresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  "+gestion+" AND     MONTH(sp.`fechaentrega`) = 12   GROUP BY     dsp.`codproducto` ) as diciembresolic ON p.`codigo` = diciembresolic.codigo  ## ENERO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-01-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-02-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-01-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-01-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-02-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-02-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS enero    ON p.codigo = enero.codProducto  ## FEBRERO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-02-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-03-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-02-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-02-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-03-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-03-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS febrero    ON p.codigo = febrero.codProducto  ## MARZO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-03-01')     AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-04-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-03-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-03-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-04-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-04-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS marzo    ON p.codigo = marzo.codProducto    ## ABRIL LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-04-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-05-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-04-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-04-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-05-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-05-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS abril    ON p.codigo = abril.codProducto      ## MAYO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-05-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-06-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-05-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-05-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-06-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-06-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS mayo    ON p.codigo = mayo.codProducto    ## JUNIO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-06-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-07-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-06-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-06-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-07-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-07-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS junio    ON p.codigo = junio.codProducto    ## JULIO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-07-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-08-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-07-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-07-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-08-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-08-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS julio    ON p.codigo = julio.codProducto    ## AGOSTO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-08-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-09-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-08-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-08-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-09-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-09-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS agosto    ON p.codigo = agosto.codProducto      ## SEPTIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-09-01')     AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-10-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-09-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-09-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-10-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-10-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS septiembre    ON p.codigo = septiembre.codProducto    ## OCTUBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-10-01')     AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-11-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-10-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-10-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-11-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-11-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS octubre    ON p.codigo = octubre.codProducto    ## NOVIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-11-01')     AND op.`fechaproduccion` <= CONCAT( "+gestion+",'-12-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-11-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-11-01') AND op.`fechaproduccion` < CONCAT( "+gestion+",'-12-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+",'-12-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS noviembre   ON p.codigo = noviembre.codProducto    ## DICIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( "+gestion+",'-12-01')      AND op.`fechaproduccion` <= CONCAT( "+gestion+"+1,'-01-01')     AND (         (op.`fechaproduccion` = CONCAT( "+gestion+",'-12-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( "+gestion+",'-12-01') AND op.`fechaproduccion` < CONCAT( "+gestion+"+1,'-01-01'))         OR         (op.`fechaproduccion` = CONCAT( "+gestion+"+1,'-01-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS diciembre    ON p.codigo = diciembre.codProducto; ";
+            string consulta = "SELECT " +
+                             " SUM(CASE WHEN op.`mes` = 1 THEN op.`cantidadprod` ELSE 0 END) as 'Enero-Objetivo', " +
+                             " IFNULL(enero.OrdenProduccion, 0) as 'Enero-OrdenProd', " +
+                             " IFNULL(Enerosolic.cantidad, 0) as 'Enero-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 2 THEN op.`cantidadprod` ELSE 0 END) as 'Febrero-Objetivo', " +
+                             " IFNULL(febrero.OrdenProduccion, 0) as 'Febrero-OrdenProd', " +
+                             " IFNULL(Febrerosolic.cantidad, 0) as 'Febrero-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 3 THEN op.`cantidadprod` ELSE 0 END) as 'Marzo-Objetivo', " +
+                             " IFNULL(marzo.OrdenProduccion, 0) as 'Marzo-OrdenProd', " +
+                             " IFNULL(Marzosolic.cantidad, 0) as 'Marzo-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 4 THEN op.`cantidadprod` ELSE 0 END) as 'Abril-Objetivo', " +
+                             " IFNULL(abril.OrdenProduccion, 0) as 'Abril-OrdenProd', " +
+                             " IFNULL(Abrilsolic.cantidad, 0) as 'Abril-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 5 THEN op.`cantidadprod` ELSE 0 END) as 'Mayo-Objetivo', " +
+                             " IFNULL(mayo.OrdenProduccion, 0) as 'Mayo-OrdenProd', " +
+                             " IFNULL(Mayosolic.cantidad, 0) as 'Mayo-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 6 THEN op.`cantidadprod` ELSE 0 END) as 'Junio-Objetivo', " +
+                             " IFNULL(junio.OrdenProduccion, 0) as 'Junio-OrdenProd', " +
+                             " IFNULL(Juniosolic.cantidad, 0) as 'Junio-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 7 THEN op.`cantidadprod` ELSE 0 END) as 'Julio-Objetivo', " +
+                             " IFNULL(julio.OrdenProduccion, 0) as 'Julio-OrdenProd', " +
+                             " IFNULL(Juliosolic.cantidad, 0) as 'Julio-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 8 THEN op.`cantidadprod` ELSE 0 END) as 'Agosto-Objetivo', " +
+                             " IFNULL(agosto.OrdenProduccion, 0) as 'Agosto-OrdenProd', " +
+                             " IFNULL(Agostosolic.cantidad, 0) as 'Agosto-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 9 THEN op.`cantidadprod` ELSE 0 END) as 'Septiembre-Objetivo', " +
+                             " IFNULL(septiembre.OrdenProduccion, 0) as 'Septiembre-OrdenProd', " +
+                             " IFNULL(Septiembresolic.cantidad, 0) as 'Septiembre-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 10 THEN op.`cantidadprod` ELSE 0 END) as 'Octubre-Objetivo', " +
+                             " IFNULL(octubre.OrdenProduccion, 0) as 'Octubre-OrdenProd', " +
+                             " IFNULL(Octubresolic.cantidad, 0) as 'Octubre-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 11 THEN op.`cantidadprod` ELSE 0 END) as 'Noviembre-Objetivo', " +
+                             " IFNULL(noviembre.OrdenProduccion, 0) as 'Noviembre-OrdenProd', " +
+                             " IFNULL(Noviembresolic.cantidad, 0) as 'Noviembre-SoliProd', " +
+                             " SUM(CASE WHEN op.`mes` = 12 THEN op.`cantidadprod` ELSE 0 END) as 'Diciembre-Objetivo', " +
+                             " IFNULL(diciembre.OrdenProduccion, 0) as 'Diciembre-OrdenProd', " +
+                             " IFNULL(Diciembresolic.cantidad, 0) as 'Diciembre-SoliProd' " +
+                             " FROM    tbcorpal_producto p LEFT JOIN tbcorpal_objetivosproduccionmensual op ON p.`codigo` = op.`codprod` AND op.anio =  " + gestion + "   LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 1    GROUP BY     dsp.`codproducto` ) as Enerosolic ON p.`codigo` = Enerosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 2    GROUP BY     dsp.`codproducto` ) as Febrerosolic  ON p.`codigo` = Febrerosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 3    GROUP BY     dsp.`codproducto` ) as Marzosolic  ON p.`codigo` = Marzosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 4    GROUP BY     dsp.`codproducto` ) as Abrilsolic  ON p.`codigo` = Abrilsolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 5    GROUP BY     dsp.`codproducto` ) as Mayosolic  ON p.`codigo` = Mayosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 6    GROUP BY     dsp.`codproducto` ) as Juniosolic  ON p.`codigo` = Juniosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 7    GROUP BY     dsp.`codproducto` ) as Juliosolic  ON p.`codigo` = Juliosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 8    GROUP BY     dsp.`codproducto` ) as Agostosolic ON p.`codigo` = Agostosolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 9   GROUP BY     dsp.`codproducto` ) as Septiembresolic  ON p.`codigo` = Septiembresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 10   GROUP BY     dsp.`codproducto` ) as Octubresolic  ON p.`codigo` = Octubresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 11   GROUP BY     dsp.`codproducto` ) as Noviembresolic  ON p.`codigo` = Noviembresolic.codigo LEFT JOIN  (   SELECT    dsp.`codproducto` AS 'codigo',   sp.`fechaentrega` AS 'fecha',   SUM(dsp.`cantentregada`) AS 'cantidad'   FROM    tbcorpal_solicitudentregaproducto sp   LEFT JOIN tbcorpal_detalle_solicitudproducto dsp ON sp.`codigo` = dsp.`codsolicitud`   WHERE    YEAR(sp.`fechaentrega`) =  " + gestion + " AND     MONTH(sp.`fechaentrega`) = 12   GROUP BY     dsp.`codproducto` ) as diciembresolic ON p.`codigo` = diciembresolic.codigo  ## ENERO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-01-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-02-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-01-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-01-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-02-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-02-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS enero    ON p.codigo = enero.codProducto  ## FEBRERO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-02-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-03-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-02-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-02-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-03-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-03-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS febrero    ON p.codigo = febrero.codProducto  ## MARZO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-03-01')     AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-04-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-03-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-03-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-04-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-04-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS marzo    ON p.codigo = marzo.codProducto    ## ABRIL LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-04-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-05-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-04-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-04-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-05-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-05-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS abril    ON p.codigo = abril.codProducto      ## MAYO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-05-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-06-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-05-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-05-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-06-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-06-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS mayo    ON p.codigo = mayo.codProducto    ## JUNIO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-06-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-07-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-06-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-06-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-07-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-07-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS junio    ON p.codigo = junio.codProducto    ## JULIO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-07-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-08-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-07-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-07-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-08-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-08-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS julio    ON p.codigo = julio.codProducto    ## AGOSTO LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-08-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-09-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-08-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-08-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-09-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-09-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS agosto    ON p.codigo = agosto.codProducto      ## SEPTIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-09-01')     AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-10-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-09-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-09-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-10-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-10-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS septiembre    ON p.codigo = septiembre.codProducto    ## OCTUBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-10-01')     AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-11-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-10-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-10-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-11-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-11-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS octubre    ON p.codigo = octubre.codProducto    ## NOVIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-11-01')     AND op.`fechaproduccion` <= CONCAT( " + gestion + ",'-12-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-11-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-11-01') AND op.`fechaproduccion` < CONCAT( " + gestion + ",'-12-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-12-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS noviembre   ON p.codigo = noviembre.codProducto    ## DICIEMBRE LEFT JOIN   (   SELECT     op.`codProductonax` AS 'codProducto',     op.`productoNax`,     SUM(op.`cantcajasproduccion`)AS 'OrdenProduccion'   FROM tbcorpal_ordenproduccion op   WHERE      op.`fechaproduccion` >= CONCAT( " + gestion + ",'-12-01')      AND op.`fechaproduccion` <= CONCAT( " + gestion + "+1,'-01-01')     AND (         (op.`fechaproduccion` = CONCAT( " + gestion + ",'-12-01') AND op.`horaproduccion` >= '07:00:00')         OR         (op.`fechaproduccion` > CONCAT( " + gestion + ",'-12-01') AND op.`fechaproduccion` < CONCAT( " + gestion + "+1,'-01-01'))         OR         (op.`fechaproduccion` = CONCAT( " + gestion + "+1,'-01-01') AND op.`horaproduccion` < '07:00:00')     )   GROUP BY       op.`codProductonax`   ORDER BY     op.`fechaproduccion`, op.`horaproduccion`   ) AS diciembre    ON p.codigo = diciembre.codProducto; ";
             DataSet dato = conexion.consultaMySql(consulta);
             return dato;
         }
@@ -65,5 +66,400 @@ namespace jycboliviaASP.net.Datos
             DataSet dato = conexion.consultaMySql(consulta);
             return dato;
         }
+
+        internal bool set_registroObjMensualVentas(int mes, int anio, int codvendedor, int codproducto, decimal cantidad)
+        {
+            try
+            {
+                string consulta = @"insert into tbcorpal_objventasmensual_vendedor 
+                                    (fechagra, horagra, mes, anio, codvendedor, codproducto, cantidad) values 
+                                    (current_date, current_time, @mes, @anio, 
+                                    @codvendedor, @codproducto, @cant) ON DUPLICATE KEY UPDATE cantidad = @cant;";
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@mes", mes);
+                    cmd.Parameters.AddWithValue("@anio", anio);
+                    cmd.Parameters.AddWithValue("@codvendedor", codvendedor);
+                    cmd.Parameters.AddWithValue("@codproducto", codproducto);
+                    cmd.Parameters.AddWithValue("@cant", cantidad);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al registrar. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_obtenerObjVentasMensual(int mes, int anio)
+        {
+            try
+            {
+                string consulta = @"
+                                SELECT
+                                    codproducto,
+                                    codvendedor,
+                                    cantidad 
+                                FROM tbcorpal_objventasmensual_vendedor
+                                WHERE mes = @mes
+                                  AND anio = @anio";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@mes", mes),
+                    new MySqlParameter("@anio", anio)
+                };
+                return conexion.consultaMySqlParametros(consulta, parametros);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener datos. " + ex.Message);
+            }
+        }
+
+        internal bool set_upsert_objMensualVentas_vendedor(int mes, int anio, int codvendedor, int codproducto, decimal cantidad)
+        {
+            try
+            {
+                string consulta = @"INSERT INTO tbcorpal_objventasmensual_vendedor
+                                    (
+                                        mes, anio, codproducto, codvendedor, cantidad
+                                    ) VALUES (@mes, @anio, @codproducto, @codvendedor, @cantidad
+                                    ) ON DUPLICATE KEY UPDATE cantidad = @cantidad;";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    cmd.Parameters.AddWithValue("@mes", mes);
+                    cmd.Parameters.AddWithValue("@anio", anio);
+                    cmd.Parameters.AddWithValue("@codvendedor", codvendedor);
+                    cmd.Parameters.AddWithValue("@codproducto", codproducto);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    return conexion.ejecutarMySql2(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar los datos. " + ex.Message);
+            }
+        }
+
+        internal DataSet get_objventas_ventasvendedores(int mes, int anio)
+        {
+            try
+            {
+                string consulta = @"/* ============================================================
+                               1. OBJETIVOS + VENTAS
+                               ============================================================ */
+
+                            SELECT
+                                obj.mes,
+                                obj.anio,
+                                obj.codvendedor,
+                                r.nombre AS vendedor,
+                                obj.codproducto,
+                                p.producto,
+                                IFNULL(ven.cantOrden, 0) AS venta,
+                                obj.cantidad AS objetivo
+
+                            FROM tbcorpal_objventasmensual_vendedor obj
+
+                            LEFT JOIN tb_responsable r
+                                ON obj.codvendedor = r.codigo
+
+                            LEFT JOIN tbcorpal_producto p
+                                ON obj.codproducto = p.codigo
+
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  /* LA FECHA DE LA VENTA */
+                                  AND MONTH(oec.fechagra) = @mes
+                                  AND YEAR(oec.fechagra) = @anio
+
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+
+                            WHERE obj.mes = @mes
+                              AND obj.anio = @anio
+
+
+                            UNION
+
+
+                            /* ============================================================
+                               2. VENTAS QUE NO TIENEN OBJETIVO
+                               ============================================================ */
+
+                            SELECT
+                                @mes AS mes,
+                                @anio AS anio,
+                                ven.codvendedor,
+                                r.nombre AS vendedor,
+                                ven.codproducto,
+                                p.producto,
+                                ven.cantOrden AS venta,
+                                0 AS objetivo
+
+                            FROM
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+
+                                  AND dv.estado = 1
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  /* LA FECHA DE LA VENTA */
+                                  AND MONTH(oec.fechagra) = @mes
+                                  AND YEAR(oec.fechagra) = @anio
+
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                            LEFT JOIN tb_responsable r
+                                ON ven.codvendedor = r.codigo
+
+                            LEFT JOIN tbcorpal_producto p
+                                ON ven.codproducto = p.codigo
+
+                            LEFT JOIN tbcorpal_objventasmensual_vendedor obj
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+                                AND obj.mes = @mes
+                                AND obj.anio = @anio
+
+                            WHERE obj.codvendedor IS NULL;";
+
+                string consulta2 = @"/* ============================================================
+                               1. OBJETIVOS + VENTAS
+                               ============================================================ */
+
+                            SELECT
+                                obj.mes,
+                                obj.anio,
+                                obj.codvendedor,
+                                r.`nombre` as vendedor,
+                                obj.codproducto,
+                                p.`producto`,
+                                IFNULL(ven.cantOrden, 0) AS venta, 
+                                obj.cantidad AS objetivo
+
+                            FROM tbcorpal_objventasmensual_vendedor obj
+                            LEFT JOIN tb_responsable r on obj.`codvendedor` = r.`codigo`
+                            LEFT JOIN tbcorpal_producto p ON obj.`codproducto` = p.`codigo`
+
+                            LEFT JOIN
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden,
+                                    sep.`personalsolicitud`
+
+                                    FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+                                  AND dv.estado = 1
+                                  AND dv.fechagra = '2026/09/09'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  AND MONTH(oec.fechagra) = 9
+                                  AND YEAR(oec.fechagra) = 2026
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+
+                            WHERE obj.mes = 9
+                              AND obj.anio = 2026
+
+                            UNION
+
+
+                            /* ============================================================
+                               2. VENTAS QUE NO TIENEN OBJETIVO
+                               ============================================================ */
+
+                            SELECT
+                                11 AS mes,
+                                2027 AS anio,
+                                ven.codvendedor,
+                                r.nombre as vendedor,
+                                ven.codproducto,
+                                p.producto,
+                                ven.cantOrden AS venta,
+                                0 AS objetivo
+    
+    
+                            FROM
+                            (
+                                SELECT
+                                    sep.codpersolicitante AS codvendedor,
+                                    doe.codprod AS codproducto,
+                                    SUM(doe.cantidad) AS cantOrden,
+                                    sep.`personalsolicitud`
+
+                                FROM tbcorpal_solicitudentregaproducto sep
+
+                                INNER JOIN tbcorpal_detalle_solicitudproducto dsp
+                                    ON sep.codigo = dsp.codsolicitud
+
+                                LEFT JOIN tbcorpal_detalleproddespacho dpv
+                                    ON dsp.codsolicitud = dpv.codpedido
+                                    AND dsp.codproducto = dpv.codprod
+
+                                LEFT JOIN tbcorpal_despachovehiculo dv
+                                    ON dpv.coddespacho = dv.codigo
+
+                                LEFT JOIN tbcorpal_ordenentregacliente oec
+                                    ON dv.codigo = oec.cod_despachovehiculo
+
+                                LEFT JOIN tbcorpal_detalleproductoordenentregacliente doe
+                                    ON oec.codigo = doe.codventa
+                                    AND dpv.codprod = doe.codprod
+
+                                WHERE dv.estadodespacho = 'Cerrado'
+                                  AND dv.estado = 1
+                                  AND dv.fechagra = '2026/09/09'
+
+                                  AND dpv.estadoentrega = 1
+                                  AND dpv.contenedorfraccionado = 0
+
+                                  AND MONTH(oec.fechagra) = 9
+                                  AND YEAR(oec.fechagra) = 2026
+                                  AND oec.estado = 1
+
+                                  AND doe.contenedorfraccionado = 0
+
+                                GROUP BY
+                                    sep.codpersolicitante,
+                                    doe.codprod
+
+                            ) ven
+
+                            LEFT JOIN tb_responsable r on ven.codvendedor = r.codigo
+                            LEFT JOIN tbcorpal_producto p ON ven.codproducto = p.codigo
+
+                            LEFT JOIN tbcorpal_objventasmensual_vendedor obj
+                                ON obj.codvendedor = ven.codvendedor
+                                AND obj.codproducto = ven.codproducto
+                                AND obj.mes = 9
+                                AND obj.anio = 2026
+
+                            WHERE obj.codvendedor IS NULL;";
+
+                var parametros = new List<MySqlParameter>
+                {
+                    new MySqlParameter("@mes", mes),
+                    new MySqlParameter("@anio", anio)
+                };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("error al obtener datos. " + ex.Message);
+            }
+        }
+
+
+
+
     }
 }

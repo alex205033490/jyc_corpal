@@ -153,5 +153,16 @@ namespace jycboliviaASP.net.Negocio
             }
         }
 
+        internal DataSet get_listaVendedoresCorpal()
+        {
+            return dv.get_listaVendedoresCorpal();
+        }
+
+        internal DataSet get_listaProductosCorpal()
+        {
+            return dv.get_listaProductosCorpal();
+        }
+
+
     }
 }

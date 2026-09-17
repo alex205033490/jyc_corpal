@@ -68,6 +68,7 @@
                     <asp:ListItem>Productos sobrantes de despachos</asp:ListItem>
                     <asp:ListItem>Reporte Tiempo de Tardanza Entrega de Productos (Despacho-Orden de Entrega)</asp:ListItem>
                     <asp:ListItem>Reporte Cantidad Total de Productos Vendidos Por Vendedor</asp:ListItem>
+                    <asp:ListItem>Informe De Ventas y Cumplimiento de Objetivos Mensuales</asp:ListItem>
 
                 </asp:DropDownList>
 
