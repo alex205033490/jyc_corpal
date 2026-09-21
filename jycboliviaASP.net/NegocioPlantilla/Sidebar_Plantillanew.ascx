@@ -45,7 +45,7 @@
             <li><a href="../Presentacion/FCorpal_ReciboIngreso.aspx" id="mn_regiboIngreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Ingreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ReciboEgreso.aspx" id="mn_regiboEgreso" runat="server" ><i class="bi bi-circle"></i><span>Recibo Egreso</span></a></li>          
             <li><a href="../Presentacion/FCorpal_ConsultaIngresoEgreso.aspx" id="mn_consultaIngresoEgreso" runat="server" ><i class="bi bi-circle"></i><span>Consulta Recibos (Ingreso/Egreso)</span></a></li>
-            <li><a href="../Presentacion/FCorpal_ObjetivoVentasMensualVendedor.aspx" id="mn_objetivoventasmensualvendedor" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas</span></a></li>
+            
             
         </ul>
       </li><!-- End Forms Nav -->
@@ -64,7 +64,7 @@
                 <li role="separator" class="divider"></li>                                                
                 <li><a href="../Presentacion/FCorpal_DevoluciondeProductoTerminado.aspx" id="mn_devolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Devolucion Productos</span></a></li>                                                 
                 <li><a href="../Presentacion/FCorpal_AprobacionDevolucionProductoTerminado.aspx" id="mn_AprobaciondevolucionProductoTerminado" runat="server"><i class="bi bi-circle"></i><span>Aprobacion Devolucion Productos</span></a></li>                                                 
-                <li><a href="../Presentacion/FCorpal_ConsultaStockVendedores.aspx" id="mn_ConsultaStockVendedores" runat="server"><i class="bi bi-circle"></i><span>Control de Stock por Vendedor</span></a></li>
+                
 
           </ul>
         </li><!-- End Forms Nav -->
@@ -81,6 +81,7 @@
                 <li><a href="../Presentacion/FCorpal_DespachoCamiones.aspx" id="mn_despachoCamion" runat="server"> <i class="bi bi-circle"></i><span>Despacho Vehiculo</span></a></li>
 
               <li><a href="../Presentacion/FCorpal_AsignacionRuta_Camion.aspx" id="mn_asignacionRutaCamion" runat="server"><i class="bi bi-circle"></i><span>Asignación de rutas</span></a></li>
+       <li><a href="../Presentacion/FCorpal_ConsultaStockVendedores.aspx" id="mn_ConsultaStockVendedores" runat="server"><i class="bi bi-circle"></i><span>Control Stock Almacen por Vendedor</span></a></li>              
               <li><a href="../Presentacion/FACorpal_GestionListaPrecio.aspx" id="mn_gestionarLista" runat="server"><i class="bi bi-circle"></i><span>Gestion Lista</span></a></li>
               <li><a href="../Presentacion/FCorpal_GestionarCliente.aspx" id="mn_gestionarCliente" runat="server" ><i class="bi bi-circle"></i><span>Gestionar Cliente</span></a></li>
               <li><a href="../Presentacion/FCorpal_ConsultaPedidos.aspx" id="mn_consultaPedidos" runat="server" ><i class="bi bi-circle"></i><span>Consulta Pedidos</span></a></li>
@@ -98,9 +99,10 @@
             <li><a href="../Presentacion/FCorpal_EntregaProduccion.aspx" id="mn_entregaProduccion" runat="server"><i class="bi bi-circle"></i><span>Entrega Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccion.aspx" id="mn_objetivoProduccion" runat="server"><i class="bi bi-circle"></i><span>Objetivo Ventas Produccion</span></a></li>                                             
             <li><a href="../Presentacion/FCorpal_ObjetivoVentasProduccionMensual.aspx" id="mn_objetivoProduccionMensual" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas Produccion</span></a></li>                                             
-            
+            <li><a href="../Presentacion/FCorpal_ObjetivoVentasMensualVendedor.aspx" id="mn_objetivoventasmensualvendedor" runat="server"><i class="bi bi-circle"></i><span>Objetivo Mensual Ventas por Vendedor</span></a></li>
+
             <li><a href="../Presentacion/FCorpal_ConsutaProduccion.aspx" id="mn_ConsutaProduccion" runat="server"><i class="bi bi-circle"></i><span>Consulta Produccion</span></a></li>
-            <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="A5" runat="server"><i class="bi bi-circle"></i><span>Agregar Nuevo Insumo Creado</span></a></li>
+            
               
 
               
@@ -114,6 +116,7 @@
             <i class="bi bi-layout-text-window-reverse"></i><span>Recetas e Insumos</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="insumos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="A5" runat="server"><i class="bi bi-circle"></i><span>Agregar Nuevo Insumo Creado</span></a></li>
               <li><a href="../Presentacion/FCorpal_GestionarInsumos.aspx" id="mn_Insumos" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo</span></a></li>
               <li><a href="../Presentacion/FCorpal_AgregarInsumoCreado.aspx" id="mn_InsumosCompuesto" runat="server"><i class="bi bi-circle"></i><span>Gestionar Insumo Compuesto</span></a></li>
               <li><a href="../Presentacion/FCorpal_Recetas.aspx" id="mn_recetas" runat="server"><i class="bi bi-circle"></i><span>Gestionar Receta</span></a></li>    

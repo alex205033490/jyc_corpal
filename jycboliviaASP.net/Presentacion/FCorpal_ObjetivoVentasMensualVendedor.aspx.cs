@@ -1,13 +1,15 @@
-﻿using System;
+﻿using jycboliviaASP.net.Negocio;
+using jycboliviaASP.net.NegocioApi;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Net;
-using jycboliviaASP.net.Negocio;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace jycboliviaASP.net.Presentacion
 {
@@ -36,6 +38,12 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
 
+            if (tienePermiso(155) == false)
+            {
+                string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 cargarAnios();
@@ -44,6 +52,17 @@ namespace jycboliviaASP.net.Presentacion
                 dd_mes.SelectedValue = DateTime.Now.Month.ToString();
                 cargarObj();
             }
+        }
+
+        private bool tienePermiso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usu = Session["NameUser"].ToString();
+            string pass = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usu, pass);
+
+            NA_DetallePermiso Nper = new NA_DetallePermiso();
+            return Nper.tienePermisoResponsable(permiso, codUser);
         }
 
         private void crearGridVendedorProducto()

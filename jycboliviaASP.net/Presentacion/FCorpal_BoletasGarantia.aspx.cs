@@ -1,6 +1,7 @@
 ﻿using jycboliviaASP.net.Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -13,12 +14,31 @@ namespace jycboliviaASP.net.Presentacion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Title = Session["BaseDatos"].ToString();
+
+            if (tienePermiso(154) == false)
+            {
+                string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
+                Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 getBoletasGarantia();
 
                 tx_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             }
+        }
+
+        private bool tienePermiso(int permiso)
+        {
+            NA_Responsables Nresp = new NA_Responsables();
+            string usu = Session["NameUser"].ToString();
+            string pass = Session["passworuser"].ToString();
+            int codUser = Nresp.getCodUsuario(usu, pass);
+
+            NA_DetallePermiso Nper = new NA_DetallePermiso();
+            return Nper.tienePermisoResponsable(permiso, codUser);
         }
 
         protected void btn_registrarBoletaGarantia_Click(object sender, EventArgs e)

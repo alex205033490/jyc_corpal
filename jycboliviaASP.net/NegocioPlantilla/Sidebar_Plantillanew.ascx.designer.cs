@@ -87,15 +87,6 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_consultaIngresoEgreso;
 
         /// <summary>
-        /// Control mn_objetivoventasmensualvendedor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_objetivoventasmensualvendedor;
-
-        /// <summary>
         /// Control mn_entregaSolicitudProductoACamion.
         /// </summary>
         /// <remarks>
@@ -130,15 +121,6 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_AprobaciondevolucionProductoTerminado;
-
-        /// <summary>
-        /// Control mn_ConsultaStockVendedores.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaStockVendedores;
 
         /// <summary>
         /// Control mn_solicitudproductos.
@@ -184,6 +166,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_asignacionRutaCamion;
+
+        /// <summary>
+        /// Control mn_ConsultaStockVendedores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaStockVendedores;
 
         /// <summary>
         /// Control mn_gestionarLista.
@@ -247,6 +238,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_objetivoProduccionMensual;
+
+        /// <summary>
+        /// Control mn_objetivoventasmensualvendedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_objetivoventasmensualvendedor;
 
         /// <summary>
         /// Control mn_ConsutaProduccion.
