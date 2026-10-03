@@ -16,7 +16,7 @@ namespace jycboliviaASP.net.Presentacion
         {
             this.Title = Session["BaseDatos"].ToString();
 
-            if (tienePermiso(154) == false)
+            if (tienePermiso(156) == false)
             {
                 string ruta = ConfigurationManager.AppSettings["NombreCarpetaContenedora"];
                 Response.Redirect(ruta + "/Presentacion/FA_Login.aspx");
