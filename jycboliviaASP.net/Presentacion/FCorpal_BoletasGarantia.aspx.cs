@@ -31,7 +31,7 @@ namespace jycboliviaASP.net.Presentacion
             else
             {
                 showalert("Boleta Registrado Correctamente.");
-                limpiarForm();
+                limpiarCampos();
             }
 
 
@@ -247,13 +247,6 @@ namespace jycboliviaASP.net.Presentacion
             }
         }
 
-        private void limpiarForm() {
-            tx_Monto.Text = string.Empty;
-            tx_tipoBoletaGarantia.Text = string.Empty;
-            tx_cliente.Text = string.Empty;
-
-            getBoletasGarantia();
-        }
 
         [System.Web.Services.WebMethod]
         public static List<string> ObtenerTiposBoleta(string prefixText, int count)
@@ -304,6 +297,23 @@ namespace jycboliviaASP.net.Presentacion
                 .ToList();
         }
 
+        protected void btn_limpiarForm_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+        }
+        private void limpiarCampos()
+        {
+            tx_tipoBoletaGarantia.Text = string.Empty;
+            tx_cliente.Text = string.Empty;
+            tx_beneficiario.Text = string.Empty;
+            tx_moneda.Text = string.Empty;
+            tx_fechainicio.Text = string.Empty;
+            tx_objeto.Text = string.Empty;
+            tx_Monto.Text = string.Empty;
+            tx_fechaVencimiento.Text = string.Empty;
+            tx_extenciondObjeto.Text = string.Empty;
 
+            getBoletasGarantia();
+        }
     }
 }

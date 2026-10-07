@@ -133,6 +133,7 @@
             <div class="col-lg-7" style="align-content: end;">
                 <asp:Button ID="btn_registrarBoletaGarantia" runat="server" CssClass="btn btn-success"
                     Text="Registrar" OnClick="btn_registrarBoletaGarantia_Click" />
+                <asp:Button ID="btn_limpiarForm" runat="server" CssClass="btn btn-info" Text="Limpiar" OnClick="btn_limpiarForm_Click" />
             </div>
 
 
@@ -320,8 +321,6 @@
                                     </EditItemTemplate>
                                 </asp:TemplateField>
 
-
-
                                 </Columns>
 
                             </asp:GridView>
@@ -329,19 +328,12 @@
                         </div>
                     </div>
 
-
-
             <br />
-
 
 
         </div>
     </div>
     <script src="../js/mainCorpal.js"></script>
-
-
-
-
 
 
 </asp:Content>
