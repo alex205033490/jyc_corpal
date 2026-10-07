@@ -11,10 +11,13 @@ namespace jycboliviaASP.net.Negocio
     {
         private DCorpal_boletaGarantia datos = new DCorpal_boletaGarantia();
 
-        internal bool set_guardarBoletaGarantia(DateTime fecha, decimal monto, string tipoBoleta,
-                                                    string cliente, string estado, int codresp)
+        internal bool set_guardarBoletaGarantia(DateTime fecha, string moneda, decimal montonumeral, string tipoBoleta,
+                                                    string beneficiario, string cliente, string estado, int codresp,
+                                                    DateTime finicio, DateTime fvencimiento, string obj, string extencionobj)
         {
-            return datos.set_guardarBoletaGarantia(fecha, monto, tipoBoleta, cliente, estado, codresp);
+            return datos.set_guardarBoletaGarantia(fecha, moneda, montonumeral, tipoBoleta, 
+                                                   beneficiario, cliente, estado, codresp, 
+                                                   finicio, fvencimiento, obj, extencionobj);
         }
 
         internal DataSet get_getBoletasGarantia()
@@ -22,10 +25,15 @@ namespace jycboliviaASP.net.Negocio
             return datos.get_getBoletasGarantia();
         }
 
-        internal bool update_datosBoletaGarantia(decimal monto, string tipoBoleta, string cliente,
-                                                    string estado, int id)
+        internal bool update_datosBoletaGarantia(string moneda, decimal monto, string tipoBoleta,
+                                                string beneficiario, string cliente, string estado,
+                                                DateTime finicio, DateTime fvencimiento, string obj,
+                                                string extencionobj, int id)
         {
-            return datos.update_datosBoletaGarantia(monto, tipoBoleta, cliente, estado, id);
+            return datos.update_datosBoletaGarantia(moneda, monto, tipoBoleta,
+                                                beneficiario, cliente, estado,
+                                                finicio, fvencimiento, obj,
+                                                extencionobj, id);
         }
 
     }
