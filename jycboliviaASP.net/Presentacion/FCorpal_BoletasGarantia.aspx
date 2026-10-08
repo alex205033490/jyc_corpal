@@ -41,9 +41,9 @@
 
             <div class="container_camposBoletaGarantia mb-2 col-md-12 col-lg-12 row">
 
-                <div class="row col-lg-4 column1" style="font-size: smaller; ">
+                <div class="row col-lg-4 col-md-6 col-sm-6 col-6 column1" style="font-size: smaller; ">
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <asp:Label runat="server">Tipo Boleta:</asp:Label>
                         <asp:TextBox ID="tx_tipoBoletaGarantia" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                         <ajaxToolkit:AutoCompleteExtender
@@ -54,23 +54,23 @@
                         </ajaxToolkit:AutoCompleteExtender>
 
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Fecha:</asp:Label>
                         <asp:TextBox ID="tx_fecha" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                         <asp:CalendarExtender ID="ce_fecha" runat="server" TargetControlID="tx_fecha" Format="dd/MM/yyyy" />
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Cliente:</asp:Label>
                         <asp:TextBox ID="tx_cliente" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Beneficiario:</asp:Label>
                         <asp:TextBox ID="tx_beneficiario" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Estado:</asp:Label>
                         <asp:DropDownList ID="dd_estadoBoleta" runat="server" CssClass="form-select texto_chico" >
                             <asp:ListItem Text="Abierto" Value="1"></asp:ListItem>
@@ -80,8 +80,8 @@
                 </div>
 
 
-                <div class="col-lg-4 column2 row" style="font-size: smaller;" >
-                    <div class="col-lg-6">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-6 column2 row" style="font-size: smaller;" >
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Moneda:</asp:Label>
                         <asp:TextBox ID="tx_moneda" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                         <ajaxToolkit:AutoCompleteExtender
@@ -92,25 +92,25 @@
                         </ajaxToolkit:AutoCompleteExtender>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Monto Numeral:</asp:Label>
                         <asp:TextBox ID="tx_Monto" runat="server" CssClass="form-control texto_chico" 
                                 oninput="this.value = this.value.replace(/\./g, ',');" ></asp:TextBox>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Fecha De Inicio:</asp:Label>
                         <asp:TextBox ID="tx_fechainicio" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                         <asp:CalendarExtender ID="ce_fechainicio" runat="server" TargetControlID="tx_fechainicio" Format="dd/MM/yyyy" />
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Fecha Vencimiento:</asp:Label>
                         <asp:TextBox ID="tx_fechaVencimiento" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                         <asp:CalendarExtender ID="ce_fechavencimiento" runat="server" TargetControlID="tx_fechaVencimiento" Format="dd/MM/yyyy" />
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Objeto:</asp:Label>
                         <asp:TextBox ID="tx_objeto" runat="server" CssClass="form-control texto_chico"></asp:TextBox>
                             <ajaxToolkit:AutoCompleteExtender
@@ -121,7 +121,7 @@
                             </ajaxToolkit:AutoCompleteExtender>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <asp:Label runat="server">Extencion Del Objeto:</asp:Label>
                         <asp:TextBox ID="tx_extenciondObjeto" runat="server" CssClass="form-control" style="font-size: 0.6rem; height: 55px;"
                              TextMode="MultiLine"></asp:TextBox>
