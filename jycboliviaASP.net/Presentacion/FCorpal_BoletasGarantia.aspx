@@ -203,7 +203,8 @@
                                         <asp:TextBox
                                             ID="tx_tipoBoletaEditar"
                                             runat="server"
-                                            CssClass="control_gv" style="width: 140px;"
+                                            textmode="MultiLine" 
+                                            CssClass="control_gv" style="width: 200px; height: 80px;"
                                             Text='<%# Bind("tipoboleta") %>'>
                                         </asp:TextBox>
                                     </EditItemTemplate>
@@ -234,7 +235,8 @@
                                         <asp:TextBox
                                             ID="tx_clienteEditar"
                                             runat="server"
-                                            CssClass="control_gv" style="width: 100px;"
+                                            textmode="MultiLine"
+                                            CssClass="control_gv" style="width: 100px; height: 80px;"
                                             Text='<%# Bind("cliente") %>'>
                                         </asp:TextBox>
                                     </EditItemTemplate>
