@@ -16,24 +16,35 @@ namespace jycboliviaASP.net.Datos
 
 
 
-        internal bool set_guardarBoletaGarantia(DateTime fecha, decimal monto, string tipoBoleta, 
-                                                    string cliente, string estado, int codresp)
+        internal bool set_guardarBoletaGarantia(DateTime fecha, string moneda, decimal montonumeral, string tipoBoleta, 
+                                                    string beneficiario, string cliente, string estado, int codresp, 
+                                                    DateTime finicio, DateTime fvencimiento, string obj, string extencionobj)
         {
             try
             {
                 string consulta = @"insert into tbcorpal_boletagarantia (
-                                    fechagra, horagra, fecha, monto, tipoboleta, cliente, estado, codrespgra) 
-                                     values (current_date, current_time, @fecha, @monto, @tipoboleta, 
-                                    @cliente, @estado, @codrespgra)";
+                                    fechagra, horagra, fecha, moneda, montonumeral, tipoboleta, 
+                                    beneficiario, cliente, estado, codrespgra, 
+                                    fechainicio, fechavencimiento, objeto, extencionobjeto) 
+                                    values (current_date, current_time, @fecha, @moneda, @montonumeral, @tipoboleta,
+                                    @beneficiario, @cliente, @estado, @codrespgra, 
+                                    @fechainicio, @fechavencimiento, @objeto, @extencionobjeto)";
 
                 using (MySqlCommand cmd = new MySqlCommand(consulta))
                 {
                     cmd.Parameters.AddWithValue("@fecha", fecha);
-                    cmd.Parameters.AddWithValue("@monto", monto);
+                    cmd.Parameters.AddWithValue("@moneda", moneda);
+                    cmd.Parameters.AddWithValue("@montonumeral", montonumeral);
                     cmd.Parameters.AddWithValue("@tipoboleta", tipoBoleta);
+                    cmd.Parameters.AddWithValue("@beneficiario", beneficiario);
                     cmd.Parameters.AddWithValue("@cliente", cliente);
                     cmd.Parameters.AddWithValue("@estado", estado);
                     cmd.Parameters.AddWithValue("@codrespgra", codresp);
+                    cmd.Parameters.AddWithValue("@fechainicio", finicio);
+                    cmd.Parameters.AddWithValue("@fechavencimiento", fvencimiento);
+                    cmd.Parameters.AddWithValue("@objeto", obj);
+                    cmd.Parameters.AddWithValue("@extencionobjeto", extencionobj);
+
 
                     return cnx.ejecutarMySql2(cmd);
                 }
@@ -44,23 +55,32 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
-        internal bool update_datosBoletaGarantia(decimal monto, string tipoBoleta, string cliente, 
-                                                    string estado, int id)
+        internal bool update_datosBoletaGarantia(string moneda, decimal monto, string tipoBoleta, 
+                                                string beneficiario,string cliente, string estado, 
+                                                DateTime finicio, DateTime fvencimiento, string obj, 
+                                                string extencionobj, int id)
         {
             try
             {
                 string consulta = @"update tbcorpal_boletagarantia 
-                                   set monto = @monto,
-                                   tipoboleta = @tipoBoleta,
-                                   cliente = @cliente,
-                                   estado = @estado 
+                                   set 
+                                   moneda = @moneda, montonumeral = @monto, tipoboleta = @tipoBoleta,
+                                   beneficiario = @beneficiario, cliente = @cliente, estado = @estado,
+                                   fechainicio = @finicio, fechavencimiento = @fvencimiento, 
+                                   objeto = @objeto, extencionobjeto = @extencionobjeto 
                                    where id = @id;";
                 using (MySqlCommand cmd = new MySqlCommand(consulta))
                 {
+                    cmd.Parameters.AddWithValue("@moneda", moneda);
                     cmd.Parameters.AddWithValue("@monto", monto);
                     cmd.Parameters.AddWithValue("@tipoboleta", tipoBoleta);
+                    cmd.Parameters.AddWithValue("@beneficiario", beneficiario);
                     cmd.Parameters.AddWithValue("@cliente", cliente);
                     cmd.Parameters.AddWithValue("@estado", estado);
+                    cmd.Parameters.AddWithValue("@finicio", finicio);
+                    cmd.Parameters.AddWithValue("@fvencimiento", fvencimiento);
+                    cmd.Parameters.AddWithValue("@objeto", obj);
+                    cmd.Parameters.AddWithValue("@extencionobjeto", extencionobj);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     return cnx.ejecutarMySql2(cmd);
@@ -80,15 +100,11 @@ namespace jycboliviaASP.net.Datos
             {
                 string consulta = @"
                         SELECT
-                            id,
-                            DATE_FORMAT(fechagra, '%d/%m/%Y') as fechagra,
-                            TIME_FORMAT(horagra, '%H:%i:%s') as horagra,
-                            fecha,
-                            monto,
-                            tipoboleta,
-                            cliente,
-                            estado,
-                            codrespgra
+                            id, DATE_FORMAT(fechagra, '%d/%m/%Y') as fechagra, TIME_FORMAT(horagra, '%H:%i:%s') as horagra,
+                            fecha, moneda, montonumeral, 
+                            tipoboleta, beneficiario, cliente,
+                            estado, codrespgra, date_format(fechainicio, '%d/%m/%Y') as fechainicio, 
+                            date_format(fechavencimiento, '%d/%m/%Y') as fechavencimiento, objeto, extencionobjeto 
                         FROM tbcorpal_boletagarantia
                         ORDER BY id DESC;";
 
