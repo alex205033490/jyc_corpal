@@ -10,7 +10,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AjaxControlToolkit.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/20/2020 10:04:00</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.HtmlEditor.Sanitizer.dll">
       <publishTime>05/20/2020 10:04:02</publishTime>
@@ -199,10 +199,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/26/2026 17:38:58</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.dll">
-      <publishTime>09/18/2026 15:37:28</publishTime>
+      <publishTime>10/13/2026 17:24:49</publishTime>
     </File>
     <File Include="bin/jycboliviaASP.net.pdb">
-      <publishTime>09/18/2026 15:37:28</publishTime>
+      <publishTime>10/13/2026 17:24:49</publishTime>
     </File>
     <File Include="bin/K4os.Compression.LZ4.dll">
       <publishTime>03/17/2024 17:56:16</publishTime>
@@ -394,25 +394,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/15/2022 13:10:38</publishTime>
     </File>
     <File Include="bin/System.Memory.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Numerics.Vectors.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Text.Encodings.Web.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Text.Json.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.Extensions.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.ValueTuple.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>05/26/2026 17:39:00</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -2116,7 +2116,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/26/2026 17:38:41</publishTime>
     </File>
     <File Include="NegocioPlantilla/Sidebar_Plantillanew.ascx">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/18/2026 15:17:00</publishTime>
     </File>
     <File Include="PlantillaNew.Master">
       <publishTime>05/26/2026 17:38:44</publishTime>
@@ -2194,7 +2194,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/26/2026 17:38:44</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_BoletasGarantia.aspx">
-      <publishTime>09/17/2026 11:40:26</publishTime>
+      <publishTime>10/13/2026 17:18:10</publishTime>
     </File>
     <File Include="Presentacion/FCorpal_CargarDocsIndividuales.aspx">
       <publishTime>05/26/2026 17:38:44</publishTime>
@@ -3064,7 +3064,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/26/2026 17:38:55</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/03/2026 17:38:37</publishTime>
+      <publishTime>10/13/2026 17:24:50</publishTime>
     </File>
     <File Include="x64/SqlServerSpatial160.dll">
       <publishTime>05/26/2026 17:38:58</publishTime>
