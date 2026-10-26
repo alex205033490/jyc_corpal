@@ -159,6 +159,9 @@ namespace jycboliviaASP.net.Negocio
             return dobjetivo.get_objventas_ventasvendedores(mes, anio);
         }
 
-
+        internal DataSet get_ObjetivosVentasVendedor()
+        {
+            return dobjetivo.get_ObjetivosVentasVendedor();
+        }
     }
 }

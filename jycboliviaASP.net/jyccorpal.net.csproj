@@ -212,6 +212,7 @@
     <Content Include="DS_Produccion.xss">
       <DependentUpon>DS_Produccion.xsd</DependentUpon>
     </Content>
+    <Content Include="FACorpal_dashboard_Ventas.html" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -557,6 +558,7 @@
     <Content Include="NegocioPlantilla\Sidebar_Plantillanew.ascx" />
     <Content Include="Presentacion\FACorpal_ConsultaGrafica.aspx" />
     <Content Include="Presentacion\FACorpal_ConsultaGeneral.aspx" />
+    <Content Include="Presentacion\FACorpal_dashboard_Ventas.aspx" />
     <Content Include="Presentacion\FACorpal_GestionListaPrecio.aspx" />
     <Content Include="Presentacion\FA_Dashboard.aspx" />
     <Content Include="Presentacion\FA_DescargarArchivoProduccion.aspx" />
@@ -1044,6 +1046,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_Rutas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FACorpal_dashboard_Ventas.html.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FACorpal_dashboard_Ventas.html.designer.cs">
+      <DependentUpon>FACorpal_dashboard_Ventas.html.cs</DependentUpon>
+    </Compile>
     <Compile Include="NegocioApi\J_Compras.cs" />
     <Compile Include="NegocioApi\J_Ventas.cs" />
     <Compile Include="NegocioApi\NA_endpoints.cs" />
@@ -1088,6 +1096,7 @@
     <Compile Include="Negocio\NA_APIReceta.cs" />
     <Compile Include="Negocio\NA_APIventas.cs" />
     <Compile Include="Negocio\NA_SolicitudEntregaProductoACamion.cs" />
+    <Compile Include="Negocio\NA_TipoCambioService.cs" />
     <Compile Include="Negocio\NA_UPONSolicitudPedido.cs" />
     <Compile Include="Negocio\NCorpal_AddInsumoCreado.cs" />
     <Compile Include="Negocio\NA_InventarioAPI.cs" />
@@ -1199,6 +1208,13 @@
     </Compile>
     <Compile Include="Presentacion\FACorpal_ConsultaGeneral.aspx.designer.cs">
       <DependentUpon>FACorpal_ConsultaGeneral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_dashboard_Ventas.aspx.cs">
+      <DependentUpon>FACorpal_dashboard_Ventas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presentacion\FACorpal_dashboard_Ventas.aspx.designer.cs">
+      <DependentUpon>FACorpal_dashboard_Ventas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\FACorpal_GestionListaPrecio.aspx.cs">
       <DependentUpon>FACorpal_GestionListaPrecio.aspx</DependentUpon>

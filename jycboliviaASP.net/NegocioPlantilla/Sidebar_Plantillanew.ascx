@@ -172,6 +172,17 @@
             </ul>
         </li>
 
+               
+        
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#gerencia-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Gerencia</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+            <ul id="gerencia-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">                
+                <li><a href="../Presentacion/FACorpal_dashboard_Ventas.aspx" id="mn_dasboardVentaVendedorProducto" runat="server"><i class="bi bi-circle"></i><span>Dashboard Ventas</span></a></li>                                       
+            </ul>
+        </li>
+
 
         <li class="nav-heading">SGI</li>
         <li class="nav-item">
@@ -186,6 +197,8 @@
                 <li><a href="../Presentacion/FCorpal_agendanegociacion.aspx" id="mn_agendaTrabajo" runat="server"><i class="bi bi-circle"></i><span>Agenda de Trabajo</span></a></li>                                   
                 <li><a href="../Presentacion/FCorpal_ActivosJYC.aspx" id="mn_activosjyc" runat="server"><i class="bi bi-circle"></i><span>Activos JYC</span></a></li>                       
                 <li><a href="../Presentacion/FCorpal_CargarDocsIndividuales.aspx" id="mn_cargaDocsIndividuales" runat="server"><i class="bi bi-circle"></i><span>Carga/Descarga Documentos Individuales</span></a></li>                       
+                <li><a href="../Presentacion/FACorpal_dashboard_Ventas.aspx" id="A21" runat="server"><i class="bi bi-circle"></i><span>Dashboard Prueba</span></a></li>                       
+                
             </ul>
         </li><!-- End Tables Nav -->
 

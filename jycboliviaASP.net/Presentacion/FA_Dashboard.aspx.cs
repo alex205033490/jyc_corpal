@@ -16,9 +16,9 @@ namespace jycboliviaASP.net.Presentacion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                montoTotalObjVentas();
-                montoTotalOrdenProduccion();
-                montoTotalObjSalidasAlmacen();
+             //   montoTotalObjVentas();
+             //   montoTotalOrdenProduccion();
+              //  montoTotalObjSalidasAlmacen();
             }            
         }
 

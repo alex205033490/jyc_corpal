@@ -411,6 +411,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_ConsultaGeneral;
 
         /// <summary>
+        /// Control mn_dasboardVentaVendedorProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_dasboardVentaVendedorProducto;
+
+        /// <summary>
         /// Control mn_agenda.
         /// </summary>
         /// <remarks>
@@ -472,6 +481,15 @@ namespace jycboliviaASP.net.NegocioPlantilla
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor mn_cargaDocsIndividuales;
+
+        /// <summary>
+        /// Control A21.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A21;
 
         /// <summary>
         /// Control mn_vaciadoUponPedido.

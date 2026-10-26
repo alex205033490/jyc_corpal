@@ -30,146 +30,68 @@
          </a>
        </li><!-- End Search Icon-->
 
-       <li class="nav-item dropdown">
+    
+ <li class="nav-item dropdown me-4">
 
-         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-           <i class="bi bi-bell"></i>
-           <span class="badge bg-primary badge-number">4</span>
-         </a><!-- End Notification Icon -->
+    <a class="nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown" >
 
-         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-           <li class="dropdown-header">
-             You have 4 new notifications
-             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-           </li>
-           <li>
-             <hr class="dropdown-divider">
-           </li>
+        <i class="bi bi-currency-exchange fs-5 me-1 text-success" style="color:#39FF14;"></i>
 
-           <li class="notification-item">
-             <i class="bi bi-exclamation-circle text-warning"></i>
-             <div>
-               <h4>Lorem Ipsum</h4>
-               <p>Quae dolorem earum veritatis oditseno</p>
-               <p>30 min. ago</p>
-             </div>
-           </li>
+        <span class="fw-bold" style="color:#39FF14;">
+            TC:
+            <asp:Label ID="lblTipoCambio" runat="server" Text="0.00"></asp:Label>
+        </span>
 
-           <li>
-             <hr class="dropdown-divider">
-           </li>
+    </a>
 
-           <li class="notification-item">
-             <i class="bi bi-x-circle text-danger"></i>
-             <div>
-               <h4>Atque rerum nesciunt</h4>
-               <p>Quae dolorem earum veritatis oditseno</p>
-               <p>1 hr. ago</p>
-             </div>
-           </li>
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 
-           <li>
-             <hr class="dropdown-divider">
-           </li>
+        <li class="dropdown-header">
+            Tipo de Cambio
+        </li>
 
-           <li class="notification-item">
-             <i class="bi bi-check-circle text-success"></i>
-             <div>
-               <h4>Sit rerum fuga</h4>
-               <p>Quae dolorem earum veritatis oditseno</p>
-               <p>2 hrs. ago</p>
-             </div>
-           </li>
+        <li><hr class="dropdown-divider" /></li>
 
-           <li>
-             <hr class="dropdown-divider">
-           </li>
+        <li class="px-3 py-2">
+            <strong>Oficial:</strong>
+            <asp:Label ID="lblOficial" runat="server"></asp:Label>
+        </li>
 
-           <li class="notification-item">
-             <i class="bi bi-info-circle text-primary"></i>
-             <div>
-               <h4>Dicta reprehenderit</h4>
-               <p>Quae dolorem earum veritatis oditseno</p>
-               <p>4 hrs. ago</p>
-             </div>
-           </li>
+        <li class="px-3 py-2">
+            <strong>Blue:</strong>
+            <asp:Label ID="lblBlue" runat="server"></asp:Label>
+        </li>
 
-           <li>
-             <hr class="dropdown-divider">
-           </li>
-           <li class="dropdown-footer">
-             <a href="#">Show all notifications</a>
-           </li>
+        <li class="px-3 py-2">
+            <strong>UFV:</strong>
+            <asp:Label ID="lblUFV" runat="server"></asp:Label>
+        </li>
 
-         </ul><!-- End Notification Dropdown Items -->
+        <li class="px-3 py-2 text-muted">
+            Actualizado:
+            <asp:Label ID="lblFechaTC" runat="server"></asp:Label>
+        </li>
 
-       </li><!-- End Notification Nav -->
+        <li><hr class="dropdown-divider" /></li>
 
-       <li class="nav-item dropdown">
+<li class="px-3 py-2 text-center">
+    <asp:LinkButton 
+        ID="btnActualizarTC" 
+        runat="server" 
+        CssClass="btn btn-sm btn-primary w-100"
+        PostBackUrl="~/Presentacion/FComercial_TipoCambioDolar.aspx">
+        Actualizar Tipo de Cambio
+    </asp:LinkButton>
+</li>
 
-         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-           <i class="bi bi-chat-left-text"></i>
-           <span class="badge bg-success badge-number">3</span>
-         </a><!-- End Messages Icon -->
+    </ul>
 
-         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-           <li class="dropdown-header">
-             You have 3 new messages
-             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-           </li>
-           <li>
-             <hr class="dropdown-divider">
-           </li>
+</li>
 
-           <li class="message-item">
-             <a href="#">
-               <img src="../NegocioPlantilla/assets/img/messages-1.jpg" alt="" class="rounded-circle">
-               <div>
-                 <h4>Maria Hudson</h4>
-                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                 <p>4 hrs. ago</p>
-               </div>
-             </a>
-           </li>
-           <li>
-             <hr class="dropdown-divider">
-           </li>
-
-           <li class="message-item">
-             <a href="#">
-               <img src="../NegocioPlantilla/assets/img/messages-2.jpg" alt="" class="rounded-circle">
-               <div>
-                 <h4>Anna Nelson</h4>
-                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                 <p>6 hrs. ago</p>
-               </div>
-             </a>
-           </li>
-           <li>
-             <hr class="dropdown-divider">
-           </li>
-
-           <li class="message-item">
-             <a href="#">
-               <img src="../NegocioPlantilla/assets/img/messages-3.jpg" alt="" class="rounded-circle">
-               <div>
-                 <h4>David Muldon</h4>
-                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                 <p>8 hrs. ago</p>
-               </div>
-             </a>
-           </li>
-           <li>
-             <hr class="dropdown-divider">
-           </li>
-
-           <li class="dropdown-footer">
-             <a href="#">Show all messages</a>
-           </li>
-
-         </ul><!-- End Messages Dropdown Items -->
-
-       </li><!-- End Messages Nav -->
+       <li class="nav-item">
+    <div class="vr mx-2"></div>
+</li>
+ 
 
        <li class="nav-item dropdown pe-3">
 

@@ -370,5 +370,10 @@ namespace jycboliviaASP.net.Negocio
                                                            producto, medida, medidaFraccionada, fraccionado, delta);
         }
 
+        internal DataSet get_VentasEntregaCliente()
+        {
+            return datos.get_VentasEntregaCliente();
+            
+        }
     }
 }

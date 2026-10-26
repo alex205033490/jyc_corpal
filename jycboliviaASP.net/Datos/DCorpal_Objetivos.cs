@@ -458,8 +458,78 @@ namespace jycboliviaASP.net.Datos
             }
         }
 
+        internal DataSet get_ObjetivosVentasVendedor()
+        {
+            try
+            {
+                string consulta = @"
+            SELECT 
+                r.nombre AS vendedor,
+                obj.anio,
+                obj.mes,
+                COALESCE(p.codupon, '') AS CodProducto,
+                COALESCE(p.producto, 'SIN PRODUCTO') AS NombreProducto,
+                COALESCE(obj.cantidad, 0.00) AS MetaCantidadUnidades,
+                COALESCE(v.cantidad_vendida, 0.00) AS CantidadVendidaUnidades,
+                COALESCE(v.total_vendido, 0.00) AS TotalVendidoBs,
+                CASE 
+                    WHEN COALESCE(obj.cantidad, 0) = 0 THEN 0.00
+                    ELSE ROUND((COALESCE(v.cantidad_vendida, 0.00) / obj.cantidad) * 100, 2) 
+                END AS PorcentajeCumplimiento,
+                CASE 
+                    WHEN COALESCE(v.cantidad_vendida, 0.00) >= COALESCE(obj.cantidad, 0) AND COALESCE(obj.cantidad, 0) > 0 THEN 'CUMPLIÓ'
+                    WHEN COALESCE(obj.cantidad, 0) = 0 THEN 'SIN OBJETIVO'
+                    ELSE 'NO CUMPLIÓ'
+                END AS EstadoCumplimiento
+            FROM 
+                tbcorpal_objventasmensual_vendedor obj
+                INNER JOIN tb_responsable r ON obj.codvendedor = r.codigo
+                INNER JOIN tbcorpal_producto p ON obj.codproducto = p.codigo
+                LEFT JOIN (
+                    -- Subconsulta de ventas reales agrupadas por vendedor, producto, año y mes
+                    SELECT 
+                        COALESCE(ss.personalsolicitud, 'SIN VENDEDOR') AS vendedor,
+                        YEAR(ss.fechaGRA) AS anio,
+                        MONTH(ss.fechaGRA) AS mes,
+                        dd.codproducto,
+                        SUM(COALESCE(dd.precioTotal, 0.00)) AS total_vendido,
+                        SUM(COALESCE(dd.cantentregada, 0.00)) AS cantidad_vendida
+                    FROM 
+                        tbcorpal_solicitudentregaproducto ss
+                        INNER JOIN tbcorpal_detalle_solicitudproducto dd ON ss.codigo = dd.codsolicitud
+                    WHERE 
+                        ss.estadosolicitud = 'Cerrado'
+                    GROUP BY 
+                        vendedor, anio, mes, dd.codproducto
+                ) v ON r.nombre = v.vendedor 
+                   AND obj.anio = v.anio 
+                   AND obj.mes = v.mes 
+                   AND obj.codproducto = v.codproducto
+            ORDER BY 
+                obj.anio DESC, obj.mes DESC, r.nombre ASC, PorcentajeCumplimiento DESC;";
 
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    DataSet ds = new DataSet();
+                    conexionMySql cnn = new conexionMySql();
 
+                    using (MySqlConnection conn = new MySqlConnection(cnn.CadenaDeConexion))
+                    {
+                        cmd.Connection = conn;
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            da.Fill(ds);
+                        }
+                    }
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los objetivos por producto: " + ex.Message);
+            }
+        }
 
     }
 }

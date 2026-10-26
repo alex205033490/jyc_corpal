@@ -1653,5 +1653,68 @@ WHERE dv.estado = 1
             }
         }
 
+        internal DataSet get_VentasEntregaCliente()
+        {
+            try
+            {
+                string consulta = @"
+                SELECT
+                     ss.`codigo`,
+                     ss.`nroboleta` AS 'Nro Trans',    
+                     ss.`fechaGRA` AS 'Fecha',
+                     'Corpal' AS 'Almacen',    
+                     COALESCE(cli.`tiendaname`, '—') AS 'Cliente',
+                     COALESCE(pp.`codupon`, '') AS 'Cod Producto',    
+                     COALESCE(pp.`producto`, 'SIN PRODUCTO') AS 'Nombre Producto',    
+                     COALESCE(dd.`cantentregada`, 0) AS 'Cantidad',
+                     COALESCE(dd.`medida`, '') AS 'UM',
+                     COALESCE(dd.`precio`, 0.00) AS 'Precio',    
+                     0 AS 'Descuento Prod',
+                     COALESCE(dd.`precioTotal`, (COALESCE(dd.`cantentregada`, 0) * COALESCE(dd.`precio`, 0.00))) AS 'Sub Total',    
+                     0 AS 'Cargos',
+                     0 AS 'Descuento',    
+                     COALESCE(dd.`precioTotal`, (COALESCE(dd.`cantentregada`, 0) * COALESCE(dd.`precio`, 0.00))) AS 'Total',
+                     COALESCE(ss.`personalsolicitud`, 'SIN VENDEDOR') AS 'Vendedor',
+                     COALESCE(ss.`codpersolicitante`, '') AS 'Usuario',
+                     'Productos Terminados' AS 'Categoria',
+                     COALESCE(pp.categoriap, '') AS 'Grupo'
+                FROM 
+                     `tbcorpal_solicitudentregaproducto` ss
+                     INNER JOIN `tbcorpal_detalle_solicitudproducto` dd ON ss.`codigo` = dd.`codsolicitud`
+                     INNER JOIN `tbcorpal_producto` pp ON dd.`codproducto` = pp.`codigo`
+                     INNER JOIN `tbcorpal_cliente` cli ON ss.`codcliente` = cli.`codigo`
+                WHERE 
+                     ss.estadosolicitud = 'Cerrado' 
+                     AND ss.`fechaGRA` >= MAKEDATE(YEAR(CURRENT_DATE()), 1)
+                     AND ss.`fechaGRA` <= CURRENT_DATE();";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta))
+                {
+                    DataSet ds = new DataSet();
+
+                    // 1. Instanciamos tu clase de conexión (o usa 'conexion' si ya es una variable global de tu clase)
+                    conexionMySql cnn = new conexionMySql();
+
+                    // 2. Creamos la conexión pasando el string 'CadenaDeConexion'
+                    using (MySqlConnection conn = new MySqlConnection(cnn.CadenaDeConexion))
+                    {
+                        cmd.Connection = conn;
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            da.Fill(ds);
+                        }
+                    }
+
+                    return ds;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las ventas de entrega de cliente. " + ex.Message);
+            }
+        }
+
+
+
     }
 }
