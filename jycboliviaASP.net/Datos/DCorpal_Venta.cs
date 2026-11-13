@@ -632,52 +632,49 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
-                string consulta = @"select 
-                                    p.`codigo`,
-                                    p.`producto`,
-                                    sol1.cod_vendedor,
-                                    sol1.vendedor,
-                                    sol1.cant,
-                                    sol1.cant_fracc
+                string consulta = @"
+            SELECT 
+                p.`codigo`,
+                p.`producto`,
+                sol1.cod_vendedor,
+                sol1.vendedor,
+                sol1.cant,
+                sol1.cant_fracc,
+                sol1.PrecioTotal
+            FROM tbcorpal_producto p    
+            INNER JOIN (
+                       SELECT 
+                           dse.`codproducto`,
+                           SUM(dse.`cant`) AS cant,
+                           SUM(dse.`cant_unidadcontenedorfraccionada`) AS cant_fracc,
+                           SUM(dse.`precioTotal`) AS PrecioTotal,
+                           sep.`codpersolicitante` AS cod_vendedor,
+                           sep.`personalsolicitud` AS vendedor
+                       FROM tbcorpal_solicitudentregaproducto sep
+                       INNER JOIN tbcorpal_detalle_solicitudproducto dse 
+                           ON sep.`codigo` = dse.`codsolicitud`
+                       WHERE sep.`estado` = 1
+                         AND dse.`cantentregada` > 0    
+                         AND sep.`fechaGRA` BETWEEN '2026-10-01' AND '2026-10-31'
+                       GROUP BY 
+                           dse.`codproducto`,
+                           sep.`codpersolicitante`,
+                           sep.`personalsolicitud`
+            ) AS sol1 
+                ON p.`codigo` = sol1.codproducto
+            WHERE p.`estado` = 1
+            ORDER BY p.`producto` ASC;
+        ";
 
-                                    from tbcorpal_producto p     
-
-                                    inner join (
-     
-                                         select 
-                                                dse.`codproducto`,
-                                                SUM(dse.`cant_unidadcontenedorfraccionada`) as cant_fracc,
-                                                SUM(dse.`cant`) as cant,
-                                                sep.`codpersolicitante` as cod_vendedor,
-                                                sep.`personalsolicitud` as vendedor
-     
-                                         from 
-                                         tbcorpal_solicitudentregaproducto sep
-                                         left join tbcorpal_detalle_solicitudproducto dse
-                                              ON sep.`codigo` = dse.`codsolicitud`
-                                         where
-                                              sep.`estado` = 1 and
-                                              sep.`estadosolicitud` = 'Cerrado' and
-                                              sep.`fechacierre` between @fecha1 and @fecha2
-                                         GROUP BY
-                                               dse.`codproducto`,
-                                               sep.`codpersolicitante`
-           
-                                    ) AS sol1
-                                         ON p.`codigo` = sol1.codproducto
-                                    where 
-                                          p.`estado` = 1
-                                    order by 
-                                        p.producto asc
-                                    ";
                 var parametros = new List<MySqlParameter>
-                {
-                    new MySqlParameter("@fecha1", fechaDesde),
-                    new MySqlParameter("@fecha2", fechaHasta)
-                };
+        {
+            new MySqlParameter("@fecha1", fechaDesde),
+            new MySqlParameter("@fecha2", fechaHasta)
+        };
+
                 return cnx.consultaMySqlParametros(consulta, parametros);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error al obtener datos. " + ex.Message);
             }

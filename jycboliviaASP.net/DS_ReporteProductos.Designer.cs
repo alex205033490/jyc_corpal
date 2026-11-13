@@ -790,6 +790,8 @@ namespace jycboliviaASP.net {
             
             private global::System.Data.DataColumn columncant_fracc;
             
+            private global::System.Data.DataColumn columnPrecioTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_ProductosSalientes_cantTotalXVendedorDataTable() {
@@ -873,6 +875,14 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn PrecioTotalColumn {
+                get {
+                    return this.columnPrecioTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -908,7 +918,7 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public DS_ProductosSalientes_cantTotalXVendedorRow AddDS_ProductosSalientes_cantTotalXVendedorRow(string codigo, string producto, string cod_vendedor, string vendedor, string cant, string cant_fracc) {
+            public DS_ProductosSalientes_cantTotalXVendedorRow AddDS_ProductosSalientes_cantTotalXVendedorRow(string codigo, string producto, string cod_vendedor, string vendedor, string cant, string cant_fracc, string PrecioTotal) {
                 DS_ProductosSalientes_cantTotalXVendedorRow rowDS_ProductosSalientes_cantTotalXVendedorRow = ((DS_ProductosSalientes_cantTotalXVendedorRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -916,7 +926,8 @@ namespace jycboliviaASP.net {
                         cod_vendedor,
                         vendedor,
                         cant,
-                        cant_fracc};
+                        cant_fracc,
+                        PrecioTotal};
                 rowDS_ProductosSalientes_cantTotalXVendedorRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDS_ProductosSalientes_cantTotalXVendedorRow);
                 return rowDS_ProductosSalientes_cantTotalXVendedorRow;
@@ -945,6 +956,7 @@ namespace jycboliviaASP.net {
                 this.columnvendedor = base.Columns["vendedor"];
                 this.columncant = base.Columns["cant"];
                 this.columncant_fracc = base.Columns["cant_fracc"];
+                this.columnPrecioTotal = base.Columns["PrecioTotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -962,6 +974,8 @@ namespace jycboliviaASP.net {
                 base.Columns.Add(this.columncant);
                 this.columncant_fracc = new global::System.Data.DataColumn("cant_fracc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncant_fracc);
+                this.columnPrecioTotal = new global::System.Data.DataColumn("PrecioTotal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrecioTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1972,6 +1986,23 @@ namespace jycboliviaASP.net {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string PrecioTotal {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_ProductosSalientes_cantTotalXVendedor.PrecioTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PrecioTotal\' de la tabla \'DS_ProductosSalientes_cantTotal" +
+                                "XVendedor\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_ProductosSalientes_cantTotalXVendedor.PrecioTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.codigoColumn);
             }
@@ -2040,6 +2071,18 @@ namespace jycboliviaASP.net {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setcant_fraccNull() {
                 this[this.tableDS_ProductosSalientes_cantTotalXVendedor.cant_fraccColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPrecioTotalNull() {
+                return this.IsNull(this.tableDS_ProductosSalientes_cantTotalXVendedor.PrecioTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPrecioTotalNull() {
+                this[this.tableDS_ProductosSalientes_cantTotalXVendedor.PrecioTotalColumn] = global::System.Convert.DBNull;
             }
         }
         

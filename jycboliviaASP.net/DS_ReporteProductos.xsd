@@ -41,6 +41,7 @@
               <xs:element name="vendedor" msprop:Generator_ColumnPropNameInTable="vendedorColumn" msprop:Generator_ColumnPropNameInRow="vendedor" msprop:Generator_UserColumnName="vendedor" msprop:Generator_ColumnVarNameInTable="columnvendedor" type="xs:string" minOccurs="0" />
               <xs:element name="cant" msprop:Generator_ColumnPropNameInTable="cantColumn" msprop:Generator_ColumnPropNameInRow="cant" msprop:Generator_UserColumnName="cant" msprop:Generator_ColumnVarNameInTable="columncant" type="xs:string" minOccurs="0" />
               <xs:element name="cant_fracc" msprop:Generator_ColumnPropNameInTable="cant_fraccColumn" msprop:Generator_ColumnPropNameInRow="cant_fracc" msprop:Generator_UserColumnName="cant_fracc" msprop:Generator_ColumnVarNameInTable="columncant_fracc" type="xs:string" minOccurs="0" />
+              <xs:element name="PrecioTotal" msprop:Generator_ColumnPropNameInRow="PrecioTotal" msprop:Generator_ColumnPropNameInTable="PrecioTotalColumn" msprop:Generator_ColumnVarNameInTable="columnPrecioTotal" msprop:Generator_UserColumnName="PrecioTotal" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -53,8 +54,8 @@
               <xs:element name="codproducto" msprop:Generator_ColumnPropNameInTable="codproductoColumn" msprop:Generator_ColumnPropNameInRow="codproducto" msprop:Generator_UserColumnName="codproducto" msprop:Generator_ColumnVarNameInTable="columncodproducto" type="xs:string" minOccurs="0" />
               <xs:element name="objetivo" msprop:Generator_ColumnPropNameInTable="objetivoColumn" msprop:Generator_ColumnPropNameInRow="objetivo" msprop:Generator_UserColumnName="objetivo" msprop:Generator_ColumnVarNameInTable="columnobjetivo" type="xs:string" minOccurs="0" />
               <xs:element name="venta" msprop:Generator_ColumnPropNameInTable="ventaColumn" msprop:Generator_ColumnPropNameInRow="venta" msprop:Generator_UserColumnName="venta" msprop:Generator_ColumnVarNameInTable="columnventa" type="xs:string" minOccurs="0" />
-              <xs:element name="vendedor" msprop:Generator_UserColumnName="vendedor" msprop:Generator_ColumnPropNameInTable="vendedorColumn" msprop:Generator_ColumnPropNameInRow="vendedor" msprop:Generator_ColumnVarNameInTable="columnvendedor" type="xs:string" minOccurs="0" />
-              <xs:element name="producto" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_ColumnVarNameInTable="columnproducto" msprop:Generator_UserColumnName="producto" type="xs:string" minOccurs="0" />
+              <xs:element name="vendedor" msprop:Generator_ColumnPropNameInTable="vendedorColumn" msprop:Generator_ColumnPropNameInRow="vendedor" msprop:Generator_UserColumnName="vendedor" msprop:Generator_ColumnVarNameInTable="columnvendedor" type="xs:string" minOccurs="0" />
+              <xs:element name="producto" msprop:Generator_UserColumnName="producto" msprop:Generator_ColumnPropNameInTable="productoColumn" msprop:Generator_ColumnPropNameInRow="producto" msprop:Generator_ColumnVarNameInTable="columnproducto" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
