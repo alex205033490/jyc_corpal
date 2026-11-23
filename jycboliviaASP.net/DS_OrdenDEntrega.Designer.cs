@@ -28,6 +28,8 @@ namespace jycboliviaASP.net {
         
         private DS_tiempoTardanzaEntregaProdDataTable tableDS_tiempoTardanzaEntregaProd;
         
+        private DS_detalleEntregaProductos_despachov2DataTable tableDS_detalleEntregaProductos_despachov2;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -61,6 +63,9 @@ namespace jycboliviaASP.net {
                 }
                 if ((ds.Tables["DS_tiempoTardanzaEntregaProd"] != null)) {
                     base.Tables.Add(new DS_tiempoTardanzaEntregaProdDataTable(ds.Tables["DS_tiempoTardanzaEntregaProd"]));
+                }
+                if ((ds.Tables["DS_detalleEntregaProductos_despachov2"] != null)) {
+                    base.Tables.Add(new DS_detalleEntregaProductos_despachov2DataTable(ds.Tables["DS_detalleEntregaProductos_despachov2"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -97,6 +102,16 @@ namespace jycboliviaASP.net {
         public DS_tiempoTardanzaEntregaProdDataTable DS_tiempoTardanzaEntregaProd {
             get {
                 return this.tableDS_tiempoTardanzaEntregaProd;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public DS_detalleEntregaProductos_despachov2DataTable DS_detalleEntregaProductos_despachov2 {
+            get {
+                return this.tableDS_detalleEntregaProductos_despachov2;
             }
         }
         
@@ -173,6 +188,9 @@ namespace jycboliviaASP.net {
                 if ((ds.Tables["DS_tiempoTardanzaEntregaProd"] != null)) {
                     base.Tables.Add(new DS_tiempoTardanzaEntregaProdDataTable(ds.Tables["DS_tiempoTardanzaEntregaProd"]));
                 }
+                if ((ds.Tables["DS_detalleEntregaProductos_despachov2"] != null)) {
+                    base.Tables.Add(new DS_detalleEntregaProductos_despachov2DataTable(ds.Tables["DS_detalleEntregaProductos_despachov2"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -218,6 +236,12 @@ namespace jycboliviaASP.net {
                     this.tableDS_tiempoTardanzaEntregaProd.InitVars();
                 }
             }
+            this.tableDS_detalleEntregaProductos_despachov2 = ((DS_detalleEntregaProductos_despachov2DataTable)(base.Tables["DS_detalleEntregaProductos_despachov2"]));
+            if ((initTable == true)) {
+                if ((this.tableDS_detalleEntregaProductos_despachov2 != null)) {
+                    this.tableDS_detalleEntregaProductos_despachov2.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -232,6 +256,8 @@ namespace jycboliviaASP.net {
             base.Tables.Add(this.tableDS_productosSobrantesOrdenEntrega);
             this.tableDS_tiempoTardanzaEntregaProd = new DS_tiempoTardanzaEntregaProdDataTable();
             base.Tables.Add(this.tableDS_tiempoTardanzaEntregaProd);
+            this.tableDS_detalleEntregaProductos_despachov2 = new DS_detalleEntregaProductos_despachov2DataTable();
+            base.Tables.Add(this.tableDS_detalleEntregaProductos_despachov2);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -243,6 +269,12 @@ namespace jycboliviaASP.net {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeDS_tiempoTardanzaEntregaProd() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDS_detalleEntregaProductos_despachov2() {
             return false;
         }
         
@@ -306,6 +338,9 @@ namespace jycboliviaASP.net {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void DS_tiempoTardanzaEntregaProdRowChangeEventHandler(object sender, DS_tiempoTardanzaEntregaProdRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void DS_detalleEntregaProductos_despachov2RowChangeEventHandler(object sender, DS_detalleEntregaProductos_despachov2RowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1125,6 +1160,407 @@ namespace jycboliviaASP.net {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DS_tiempoTardanzaEntregaProdDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class DS_detalleEntregaProductos_despachov2DataTable : global::System.Data.TypedTableBase<DS_detalleEntregaProductos_despachov2Row> {
+            
+            private global::System.Data.DataColumn columncod_despacho;
+            
+            private global::System.Data.DataColumn columncodpedido;
+            
+            private global::System.Data.DataColumn columnnroboleta;
+            
+            private global::System.Data.DataColumn columnplaca;
+            
+            private global::System.Data.DataColumn columnmarca;
+            
+            private global::System.Data.DataColumn columnconductor;
+            
+            private global::System.Data.DataColumn columnfechagra;
+            
+            private global::System.Data.DataColumn columnestadodespacho;
+            
+            private global::System.Data.DataColumn columncodprod;
+            
+            private global::System.Data.DataColumn columnproducto;
+            
+            private global::System.Data.DataColumn columncant_entregadototalprod;
+            
+            private global::System.Data.DataColumn columncontenedorfraccionado;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2DataTable() {
+                this.TableName = "DS_detalleEntregaProductos_despachov2";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_detalleEntregaProductos_despachov2DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected DS_detalleEntregaProductos_despachov2DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cod_despachoColumn {
+                get {
+                    return this.columncod_despacho;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codpedidoColumn {
+                get {
+                    return this.columncodpedido;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn nroboletaColumn {
+                get {
+                    return this.columnnroboleta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn placaColumn {
+                get {
+                    return this.columnplaca;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn marcaColumn {
+                get {
+                    return this.columnmarca;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn conductorColumn {
+                get {
+                    return this.columnconductor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fechagraColumn {
+                get {
+                    return this.columnfechagra;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn estadodespachoColumn {
+                get {
+                    return this.columnestadodespacho;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn codprodColumn {
+                get {
+                    return this.columncodprod;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn productoColumn {
+                get {
+                    return this.columnproducto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cant_entregadototalprodColumn {
+                get {
+                    return this.columncant_entregadototalprod;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn contenedorfraccionadoColumn {
+                get {
+                    return this.columncontenedorfraccionado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2Row this[int index] {
+                get {
+                    return ((DS_detalleEntregaProductos_despachov2Row)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_detalleEntregaProductos_despachov2RowChangeEventHandler DS_detalleEntregaProductos_despachov2RowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_detalleEntregaProductos_despachov2RowChangeEventHandler DS_detalleEntregaProductos_despachov2RowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_detalleEntregaProductos_despachov2RowChangeEventHandler DS_detalleEntregaProductos_despachov2RowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event DS_detalleEntregaProductos_despachov2RowChangeEventHandler DS_detalleEntregaProductos_despachov2RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDS_detalleEntregaProductos_despachov2Row(DS_detalleEntregaProductos_despachov2Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2Row AddDS_detalleEntregaProductos_despachov2Row(string cod_despacho, string codpedido, string nroboleta, string placa, string marca, string conductor, string fechagra, string estadodespacho, string codprod, string producto, string cant_entregadototalprod, string contenedorfraccionado) {
+                DS_detalleEntregaProductos_despachov2Row rowDS_detalleEntregaProductos_despachov2Row = ((DS_detalleEntregaProductos_despachov2Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        cod_despacho,
+                        codpedido,
+                        nroboleta,
+                        placa,
+                        marca,
+                        conductor,
+                        fechagra,
+                        estadodespacho,
+                        codprod,
+                        producto,
+                        cant_entregadototalprod,
+                        contenedorfraccionado};
+                rowDS_detalleEntregaProductos_despachov2Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDS_detalleEntregaProductos_despachov2Row);
+                return rowDS_detalleEntregaProductos_despachov2Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                DS_detalleEntregaProductos_despachov2DataTable cln = ((DS_detalleEntregaProductos_despachov2DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new DS_detalleEntregaProductos_despachov2DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncod_despacho = base.Columns["cod_despacho"];
+                this.columncodpedido = base.Columns["codpedido"];
+                this.columnnroboleta = base.Columns["nroboleta"];
+                this.columnplaca = base.Columns["placa"];
+                this.columnmarca = base.Columns["marca"];
+                this.columnconductor = base.Columns["conductor"];
+                this.columnfechagra = base.Columns["fechagra"];
+                this.columnestadodespacho = base.Columns["estadodespacho"];
+                this.columncodprod = base.Columns["codprod"];
+                this.columnproducto = base.Columns["producto"];
+                this.columncant_entregadototalprod = base.Columns["cant_entregadototalprod"];
+                this.columncontenedorfraccionado = base.Columns["contenedorfraccionado"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncod_despacho = new global::System.Data.DataColumn("cod_despacho", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncod_despacho);
+                this.columncodpedido = new global::System.Data.DataColumn("codpedido", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodpedido);
+                this.columnnroboleta = new global::System.Data.DataColumn("nroboleta", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnroboleta);
+                this.columnplaca = new global::System.Data.DataColumn("placa", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnplaca);
+                this.columnmarca = new global::System.Data.DataColumn("marca", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmarca);
+                this.columnconductor = new global::System.Data.DataColumn("conductor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnconductor);
+                this.columnfechagra = new global::System.Data.DataColumn("fechagra", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfechagra);
+                this.columnestadodespacho = new global::System.Data.DataColumn("estadodespacho", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnestadodespacho);
+                this.columncodprod = new global::System.Data.DataColumn("codprod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncodprod);
+                this.columnproducto = new global::System.Data.DataColumn("producto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproducto);
+                this.columncant_entregadototalprod = new global::System.Data.DataColumn("cant_entregadototalprod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncant_entregadototalprod);
+                this.columncontenedorfraccionado = new global::System.Data.DataColumn("contenedorfraccionado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncontenedorfraccionado);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2Row NewDS_detalleEntregaProductos_despachov2Row() {
+                return ((DS_detalleEntregaProductos_despachov2Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new DS_detalleEntregaProductos_despachov2Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(DS_detalleEntregaProductos_despachov2Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.DS_detalleEntregaProductos_despachov2RowChanged != null)) {
+                    this.DS_detalleEntregaProductos_despachov2RowChanged(this, new DS_detalleEntregaProductos_despachov2RowChangeEvent(((DS_detalleEntregaProductos_despachov2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.DS_detalleEntregaProductos_despachov2RowChanging != null)) {
+                    this.DS_detalleEntregaProductos_despachov2RowChanging(this, new DS_detalleEntregaProductos_despachov2RowChangeEvent(((DS_detalleEntregaProductos_despachov2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.DS_detalleEntregaProductos_despachov2RowDeleted != null)) {
+                    this.DS_detalleEntregaProductos_despachov2RowDeleted(this, new DS_detalleEntregaProductos_despachov2RowChangeEvent(((DS_detalleEntregaProductos_despachov2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.DS_detalleEntregaProductos_despachov2RowDeleting != null)) {
+                    this.DS_detalleEntregaProductos_despachov2RowDeleting(this, new DS_detalleEntregaProductos_despachov2RowChangeEvent(((DS_detalleEntregaProductos_despachov2Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDS_detalleEntregaProductos_despachov2Row(DS_detalleEntregaProductos_despachov2Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DS_OrdenDEntrega ds = new DS_OrdenDEntrega();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "DS_detalleEntregaProductos_despachov2DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2008,6 +2444,369 @@ namespace jycboliviaASP.net {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class DS_detalleEntregaProductos_despachov2Row : global::System.Data.DataRow {
+            
+            private DS_detalleEntregaProductos_despachov2DataTable tableDS_detalleEntregaProductos_despachov2;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal DS_detalleEntregaProductos_despachov2Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDS_detalleEntregaProductos_despachov2 = ((DS_detalleEntregaProductos_despachov2DataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cod_despacho {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.cod_despachoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cod_despacho\' de la tabla \'DS_detalleEntregaProductos_des" +
+                                "pachov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.cod_despachoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codpedido {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.codpedidoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codpedido\' de la tabla \'DS_detalleEntregaProductos_despac" +
+                                "hov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.codpedidoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string nroboleta {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.nroboletaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'nroboleta\' de la tabla \'DS_detalleEntregaProductos_despac" +
+                                "hov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.nroboletaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string placa {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.placaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'placa\' de la tabla \'DS_detalleEntregaProductos_despachov2" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.placaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string marca {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.marcaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'marca\' de la tabla \'DS_detalleEntregaProductos_despachov2" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.marcaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string conductor {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.conductorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'conductor\' de la tabla \'DS_detalleEntregaProductos_despac" +
+                                "hov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.conductorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fechagra {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.fechagraColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'fechagra\' de la tabla \'DS_detalleEntregaProductos_despach" +
+                                "ov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.fechagraColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string estadodespacho {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.estadodespachoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'estadodespacho\' de la tabla \'DS_detalleEntregaProductos_d" +
+                                "espachov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.estadodespachoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string codprod {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.codprodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'codprod\' de la tabla \'DS_detalleEntregaProductos_despacho" +
+                                "v2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.codprodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string producto {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.productoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'producto\' de la tabla \'DS_detalleEntregaProductos_despach" +
+                                "ov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.productoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cant_entregadototalprod {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.cant_entregadototalprodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'cant_entregadototalprod\' de la tabla \'DS_detalleEntregaPr" +
+                                "oductos_despachov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.cant_entregadototalprodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string contenedorfraccionado {
+                get {
+                    try {
+                        return ((string)(this[this.tableDS_detalleEntregaProductos_despachov2.contenedorfraccionadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'contenedorfraccionado\' de la tabla \'DS_detalleEntregaProd" +
+                                "uctos_despachov2\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDS_detalleEntregaProductos_despachov2.contenedorfraccionadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscod_despachoNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.cod_despachoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcod_despachoNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.cod_despachoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodpedidoNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.codpedidoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodpedidoNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.codpedidoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsnroboletaNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.nroboletaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetnroboletaNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.nroboletaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsplacaNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.placaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetplacaNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.placaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsmarcaNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.marcaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetmarcaNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.marcaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsconductorNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.conductorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetconductorNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.conductorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsfechagraNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.fechagraColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetfechagraNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.fechagraColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsestadodespachoNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.estadodespachoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetestadodespachoNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.estadodespachoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscodprodNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.codprodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcodprodNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.codprodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsproductoNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.productoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetproductoNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.productoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Iscant_entregadototalprodNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.cant_entregadototalprodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcant_entregadototalprodNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.cant_entregadototalprodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscontenedorfraccionadoNull() {
+                return this.IsNull(this.tableDS_detalleEntregaProductos_despachov2.contenedorfraccionadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcontenedorfraccionadoNull() {
+                this[this.tableDS_detalleEntregaProductos_despachov2.contenedorfraccionadoColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -2061,6 +2860,40 @@ namespace jycboliviaASP.net {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DS_tiempoTardanzaEntregaProdRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class DS_detalleEntregaProductos_despachov2RowChangeEvent : global::System.EventArgs {
+            
+            private DS_detalleEntregaProductos_despachov2Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2RowChangeEvent(DS_detalleEntregaProductos_despachov2Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public DS_detalleEntregaProductos_despachov2Row Row {
                 get {
                     return this.eventRow;
                 }

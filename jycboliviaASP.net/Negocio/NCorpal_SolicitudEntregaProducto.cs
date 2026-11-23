@@ -211,6 +211,10 @@ namespace jycboliviaASP.net.Negocio
         {
             return dsp.get_detalleEntregaSolicitudProductos(fechadesde, fechahasta);
         }
+        internal DataSet get_detalleEntregaSolicitudProductos_v2(DateTime fechadesde, DateTime fechahasta)
+        {
+            return dsp.get_detalleEntregaSolicitudProductos_v2(fechadesde, fechahasta);
+        }
 
         internal DataSet get_allPedidosParaVaciarUpon(string cliente)
         {
