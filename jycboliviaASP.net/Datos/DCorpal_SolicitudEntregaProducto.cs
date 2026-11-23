@@ -842,6 +842,54 @@ namespace jycboliviaASP.net.Datos
                 throw new Exception("Error en la consulta. " + ex);
             }
         }
+        internal DataSet get_detalleEntregaSolicitudProductos_v2(DateTime fechadesde, DateTime fechahasta)
+        {
+            try
+            {
+                string consulta = @"select 
+                        dv.`codigo` as cod_despacho,
+                        ddv.`codpedido`,
+                        ss.`nroboleta`,
+                        v.`placa`,
+                        v.`marca`,
+                        dv.`conductor`,
+                        dv.`fechagra`,
+                        dv.`estadodespacho`,
+                        ddv.`codprod`,
+                        p.`producto`,
+                        sum(ddv.`cantentregada`) as cant_entregadototalprod,
+                        ddv.`contenedorfraccionado`
+                        from tbcorpal_despachovehiculo dv
+                        left join tbcorpal_detalleproddespacho ddv on dv.`codigo` = ddv.`coddespacho`
+                        left join tbcorpal_producto p on ddv.`codprod` = p.`codigo`
+                        left join tbcorpal_solicitudentregaproducto ss on ddv.`codpedido` = ss.`codigo`
+                        left join tbcorpal_vehiculos v on dv.`codvehiculo` = v.`codigo`
+                        where 
+                        dv.`fechagra` between @fechaIni and @fechaFin
+                        group by 
+                        dv.`codigo`, ddv.`codprod`, ddv.`contenedorfraccionado`
+                        ;";
+                var parametros = new List<MySqlParameter>
+                    {
+                        new MySqlParameter("@fechaIni", MySqlDbType.Date)
+                        {
+                            Value = fechadesde.Date
+                        },
+
+                        new MySqlParameter("@fechaFin", MySqlDbType.Date)
+                        {
+                            Value = fechahasta.Date
+                        }
+                    };
+
+                return conexion.consultaMySqlParametros(consulta, parametros);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la consulta. " + ex);
+            }
+        }
+
 
         internal DataSet get_allPedidosParaVaciarUpon(string cliente)
         {

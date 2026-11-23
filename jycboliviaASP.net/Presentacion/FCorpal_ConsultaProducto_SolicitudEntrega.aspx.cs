@@ -143,6 +143,9 @@ namespace jycboliviaASP.net.Presentacion
                         case 12:
                             get_ReporteSolicitudEntregaProductos_DespachoVenta(Responsable);
                             break;
+                        case 13:
+                            get_detalleEntregaSolicitudProductos_v2();
+                            break;
                         default:
                             showalert("Opción de consulta no válida");
                             break;
@@ -338,6 +341,36 @@ namespace jycboliviaASP.net.Presentacion
                 ReportViewer1.DataBind();
             }
             catch(Exception ex)
+            {
+                showalert("Error en el metodo. " + ex.Message);
+            }
+        }
+
+        private void get_detalleEntregaSolicitudProductos_v2()
+        {
+            try
+            {
+                DateTime fechaDesde = Convert.ToDateTime(tx_desdeFecha.Text);
+                DateTime fechaHasta = Convert.ToDateTime(tx_hastaFecha.Text);
+
+                LocalReport localreport = ReportViewer1.LocalReport;
+                localreport.ReportPath = "Reportes/Report_DetalleEntregaSolicitudProductos_v2.rdlc";
+
+                NCorpal_SolicitudEntregaProducto nss = new NCorpal_SolicitudEntregaProducto();
+                //showalert("FECHAini : " + fechadesde + " fechaFIN: " + fechahasta);
+                DataSet consulta1 = nss.get_detalleEntregaSolicitudProductos_v2(fechaDesde, fechaHasta);
+                ReportDataSource DS_StockProduccto = new ReportDataSource("DS_detalleEntregaProductos_despachov2", consulta1.Tables[0]);
+
+                ReportParameter p_fecha1 = new ReportParameter("p_fechadesde", tx_desdeFecha.Text);
+                ReportParameter p_fecha2 = new ReportParameter("p_fechahasta", tx_hastaFecha.Text);
+
+                ReportViewer1.LocalReport.SetParameters(p_fecha1);
+                ReportViewer1.LocalReport.SetParameters(p_fecha2);
+                ReportViewer1.LocalReport.DataSources.Add(DS_StockProduccto);
+                ReportViewer1.LocalReport.Refresh();
+                ReportViewer1.DataBind();
+            }
+            catch (Exception ex)
             {
                 showalert("Error en el metodo. " + ex.Message);
             }

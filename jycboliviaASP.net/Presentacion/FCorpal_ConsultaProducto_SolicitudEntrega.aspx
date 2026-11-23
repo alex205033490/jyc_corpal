@@ -76,6 +76,7 @@
                                     <asp:ListItem>Calidad Proceso Nacho Sazonadora-Control Sensorial</asp:ListItem>
                                     <asp:ListItem>Calidad Proceso Nacho Envasadora</asp:ListItem>
                                     <asp:ListItem>Productos Solicitado y Entregado</asp:ListItem>
+                                    <asp:ListItem>Despacho de Productos</asp:ListItem>
                                 </asp:DropDownList>
 
                                 <asp:Button ID="bt_buscar" runat="server" class="btn btn-success" Text="Buscar" onclick="bt_buscar_Click" />

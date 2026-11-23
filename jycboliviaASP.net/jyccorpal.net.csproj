@@ -2341,6 +2341,7 @@
     <EmbeddedResource Include="Reportes\Report_ConsultaProductosSalientesSEP_xVendedor.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaProductosSobrantes_ordenEntrega.rdlc" />
     <EmbeddedResource Include="Reportes\Report_consultaTiempoTardanzaEntregaProdaClient.rdlc" />
+    <EmbeddedResource Include="Reportes\Report_DetalleEntregaSolicitudProductos_v2.rdlc" />
     <EmbeddedResource Include="Reportes\Report_Marcacion.rdlc" />
     <EmbeddedResource Include="Reportes\Report_CorrespondeAlmuerzoFichada.rdlc" />
     <EmbeddedResource Include="Reportes\Report_ConsultaEntregaProduccionFechaTurno.rdlc" />
