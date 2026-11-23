@@ -369,8 +369,12 @@ namespace jycboliviaASP.net.Datos
                         vv.placa, 
                         vv.codigo as 'codVehiculo', 
                         dd.codconductor as 'codConductor' 
+                          , pp.codupon
+                          , group_concat(ssp.nroboleta) as 'nroboletas'
+                          , ssp.personalsolicitud
                     FROM tbcorpal_despachovehiculo dd 
                     INNER JOIN tbcorpal_detalleproddespacho dv ON dd.codigo = dv.coddespacho 
+                    LEFT JOIN tbcorpal_solicitudentregaproducto ssp ON dv.codpedido = ssp.codigo
                     LEFT JOIN tbcorpal_producto pp ON dv.codprod = pp.codigo 
                     LEFT JOIN tbcorpal_vehiculos vv ON dd.codvehiculo = vv.codigo 
                     LEFT JOIN tb_responsable res ON dd.codconductor = res.codigo
@@ -914,7 +918,7 @@ namespace jycboliviaASP.net.Datos
         {
             try
             {
-                string consulta2 =@"
+                string consulta2 = @"
 SELECT
     dv.codigo AS codDespacho,
     ddv.codpedido AS codSolicitud,
@@ -963,7 +967,8 @@ SELECT
             )
     END AS cantidadSobrante,
 
-    oec.fechaentrega
+    oec.fechaentrega,
+    p.codupon
 
 FROM tbcorpal_despachovehiculo dv
 

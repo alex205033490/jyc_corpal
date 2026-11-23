@@ -633,43 +633,57 @@ namespace jycboliviaASP.net.Datos
             try
             {
                 string consulta = @"
-            SELECT 
-                p.`codigo`,
-                p.`producto`,
-                sol1.cod_vendedor,
-                sol1.vendedor,
-                sol1.cant,
-                sol1.cant_fracc,
-                sol1.PrecioTotal
-            FROM tbcorpal_producto p    
-            INNER JOIN (
-                       SELECT 
-                           dse.`codproducto`,
-                           SUM(dse.`cant`) AS cant,
-                           SUM(dse.`cant_unidadcontenedorfraccionada`) AS cant_fracc,
-                           SUM(dse.`precioTotal`) AS PrecioTotal,
-                           sep.`codpersolicitante` AS cod_vendedor,
-                           sep.`personalsolicitud` AS vendedor
-                       FROM tbcorpal_solicitudentregaproducto sep
-                       INNER JOIN tbcorpal_detalle_solicitudproducto dse 
-                           ON sep.`codigo` = dse.`codsolicitud`
-                       WHERE sep.`estado` = 1
-                         AND dse.`cantentregada` > 0    
-                         AND sep.`fechaGRA` BETWEEN '2026-10-01' AND '2026-10-31'
-                       GROUP BY 
-                           dse.`codproducto`,
-                           sep.`codpersolicitante`,
-                           sep.`personalsolicitud`
-            ) AS sol1 
-                ON p.`codigo` = sol1.codproducto
-            WHERE p.`estado` = 1
-            ORDER BY p.`producto` ASC;
-        ";
+          SELECT
+    p.codigo,
+    p.producto,
+    sol1.cod_vendedor,
+    sol1.vendedor,
+    sol1.cant,
+    sol1.cant_fracc,
+    sol1.PrecioTotal
+FROM tbcorpal_producto p
+INNER JOIN (
+
+  SELECT
+    dse.codproducto,
+    SUM(
+        CASE WHEN COALESCE(dse.contenedorfraccionado, 0) = 1
+             THEN 0
+             ELSE dse.cantentregada
+        END
+    ) AS cant,
+    SUM(
+        CASE WHEN COALESCE(dse.contenedorfraccionado, 0) = 1
+             THEN dse.cantentregada
+             ELSE 0
+        END
+    ) AS cant_fracc,
+    SUM(dse.precioTotal) AS PrecioTotal,
+    sep.codpersolicitante AS cod_vendedor,
+    sep.personalsolicitud AS vendedor
+FROM tbcorpal_solicitudentregaproducto sep
+INNER JOIN tbcorpal_detalle_solicitudproducto dse
+    ON sep.codigo = dse.codsolicitud
+WHERE sep.estado = 1
+  AND dse.cantentregada > 0
+  AND sep.fechaentrega >= @fecha1
+  AND sep.fechaentrega <=  @fecha2
+GROUP BY
+    dse.codproducto,
+    sep.codpersolicitante,
+    sep.personalsolicitud
+
+        
+) AS sol1
+    ON p.codigo = sol1.codproducto
+WHERE p.estado = 1
+ORDER BY p.producto ASC;
+";
 
                 var parametros = new List<MySqlParameter>
         {
-            new MySqlParameter("@fecha1", fechaDesde),
-            new MySqlParameter("@fecha2", fechaHasta)
+            new MySqlParameter("@fecha1", fechaDesde.Date),
+            new MySqlParameter("@fecha2", fechaHasta.Date.AddDays(1))
         };
 
                 return cnx.consultaMySqlParametros(consulta, parametros);

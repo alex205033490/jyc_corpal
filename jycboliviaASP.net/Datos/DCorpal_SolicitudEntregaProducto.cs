@@ -789,7 +789,7 @@ namespace jycboliviaASP.net.Datos
                                      ss.horaentrega, 
                                      ss.personalsolicitud, 
                                      pp.producto,
-                                     dss.`contenedorfraccionado`,
+                                     dss.contenedorfraccionado,
 
                                      CASE
                                         WHEN IFNULL(dss.contenedorfraccionado,0) = 1
@@ -807,14 +807,17 @@ namespace jycboliviaASP.net.Datos
                                      v.placa,
                                      cli.tiendaname,
                                      pp.codupon
-                                     from tbcorpal_solicitudentregaproducto ss 
+                                     ,dd.coddespacho
+                                     ,dd.cantentregada as 'cantentregadaDesp'
+                                     ,CAST(dd.contenedorfraccionado AS DECIMAL(10,4)) AS contenedorfraccionadoDesp
+                                     from tbcorpal_solicitudentregaproducto ss
                                      left join tbcorpal_detalle_solicitudproducto dss ON ss.`codigo` = dss.`codsolicitud` 
                                      left join tbcorpal_producto pp ON dss.`codproducto` = pp.`codigo`
+                                     left join tbcorpal_detalleproddespacho dd on (ss.codigo = dd.codpedido and pp.codigo = dd.codprod)
                                      left join tbcorpal_vehiculos v ON dss.`codvehiculo` = v.`codigo`
                                      left join tbcorpal_cliente cli ON ss.`codcliente` = cli.`codigo`
                                      where 
-                                     ss.estado = 1 and 
-                                     pp.estado = 1 and 
+                                     ss.estado = 1 and
                                      ss.fechaentrega BETWEEN @fechaIni AND @fechaFin
                                      order by 
                                      ss.fechaentrega asc, 
